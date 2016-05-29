@@ -7,6 +7,7 @@ import java.text.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -102,4 +103,20 @@ public class BasePDFGenerator {
 		String catalinaHome = System.getProperty("catalina.base");
 		return catalinaHome;
 	}
+	
+    protected String getContextPath() {
+        String realPath = "";
+        if ( System.getProperty( "os.name" ).equalsIgnoreCase( "Linux" ) ) {
+            realPath = BelhopatServletContextInfo.getRealPath();
+        }
+        else if ( System.getProperty( "os.name" ).equalsIgnoreCase( "Windows" ) ) {
+            String contextPath = BelhopatServletContextInfo.getContextPath();
+            realPath = getCatalinaBase().concat( "/webapps" ).concat( contextPath );
+        }
+        else {
+            String contextPath = BelhopatServletContextInfo.getContextPath();
+            realPath = getCatalinaBase().concat( "/webapps" ).concat( contextPath );
+        }
+        return realPath;
+    }
 }

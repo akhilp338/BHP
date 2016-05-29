@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.controller;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,8 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
+import com.belhopat.backoffice.service.PDFService;
+import com.itextpdf.text.DocumentException;
 
 /**
  * @author Belhopat dev team
@@ -38,16 +42,23 @@ public class CandidateController {
 
 	@Autowired
 	CandidateService candidateService;
+	
+	@Autowired
+	PDFService pdfService; 
 
 	/**
 	 * @param  datatablesinput
 	 * @return list of candidates
 	 * fetches the datatable output for candidates. List all the candidates
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws DocumentException 
+	 * @throws MalformedURLException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCandidates", method = RequestMethod.GET)
 
-	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
+	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) throws MalformedURLException, DocumentException, IOException, ParseException {
 		return candidateService.getCandidates(input,employee);
 	}
 
