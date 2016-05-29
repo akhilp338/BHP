@@ -22,6 +22,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.MasterTasks;
+import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
@@ -34,6 +35,7 @@ import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.MasterTasksRepository;
+import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
@@ -81,6 +83,9 @@ public class BaseServiceImpl implements BaseService {
 	
 	@Autowired
 	TaskListRepository taskListRepository;
+	
+	@Autowired
+	SalaryGradeRepository salaryGradeRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -269,7 +274,25 @@ public class BaseServiceImpl implements BaseService {
 
 	@Override
 	public ResponseEntity<List<TaskList>> getSalarySplit(SalaryDTO salaryDTO) {
-		// TODO Auto-generated method stub
+		if(salaryDTO.getGrade()!=null && salaryDTO.getAnnualCTC()!=null){
+			Double minFixedSalary = null;
+			Double basicSalary = null;
+			Double minBasicSalary = 7515.20;
+			salaryDTO.setGrossSalary(Double.valueOf(37663)); 
+			SalaryGrade grade = salaryGradeRepository.findByGrade(salaryDTO.getGrade());
+			if(grade.getFixedSalary()>salaryDTO.getGrossSalary()){
+				minFixedSalary = salaryDTO.getGrossSalary();
+				//flexi benefit kit  = grade.getFixedSalary()-salaryDTO.getGrossSalary()
+			}else{
+				minFixedSalary = grade.getFixedSalary();
+			}
+			if(minBasicSalary > minFixedSalary*.6){
+				basicSalary = minFixedSalary*.6;
+			}else{
+				basicSalary = minBasicSalary;
+			}
+			Double hra = basicSalary*0.6;
+		}
 		return null;
 	}
 	

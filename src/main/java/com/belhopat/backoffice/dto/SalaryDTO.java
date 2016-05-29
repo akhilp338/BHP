@@ -4,8 +4,10 @@ public class SalaryDTO {
 	
 	private Double annualCTC;
 	
-	private Double grade;
+	private String grade;
 
+	private Double grossSalary;
+	
 	public Double getAnnualCTC() {
 		return annualCTC;
 	}
@@ -14,12 +16,20 @@ public class SalaryDTO {
 		this.annualCTC = annualCTC;
 	}
 
-	public Double getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(Double grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public Double getGrossSalary() {
+		return grossSalary;
+	}
+
+	public void setGrossSalary(Double grossSalary) {
+		this.grossSalary = grossSalary;
 	}
 	
 
