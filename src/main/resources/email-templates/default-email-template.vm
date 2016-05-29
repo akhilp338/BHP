@@ -1,0 +1,16 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div>
+			<p><strong>
+				Belhopat Admin
+			</strong>
+			</p>
+			<p></p>
+		</div>
+		<div> 
+			$content $!generatedPassword
+		</div>
+	</body>
+</html>
