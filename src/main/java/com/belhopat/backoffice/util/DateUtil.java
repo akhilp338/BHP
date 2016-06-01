@@ -41,6 +41,14 @@ public class DateUtil extends DateTool {
 		return dateString;
 	}
 
+	public static String toMMMMddYYYY(Date date) throws ParseException {
+		DateFormat format = new SimpleDateFormat(Constants.MMMM_DD_YYYY);
+		format.setLenient(false);
+		String dateString = null;
+		dateString = format.format(date);
+		return dateString;
+	}
+
 	public static Date dateStringToDdMmYyyyDate(String dateString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(Constants.DD_MM_YYYY);
 		format.setLenient(false);

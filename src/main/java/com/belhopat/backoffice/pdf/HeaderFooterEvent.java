@@ -7,7 +7,6 @@ import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
@@ -50,7 +49,7 @@ public class HeaderFooterEvent extends PdfPageEventHelper {
 		headerTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		PdfPCell headerCell = new PdfPCell();
 		headerCell.setBorder(Rectangle.NO_BORDER);
-		headerCell.setFixedHeight(100);	
+		headerCell.setFixedHeight(80);	
 		String logoPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.LOGO_JPG;
 		Image logoImage = Image.getInstance(logoPath);
 		headerCell.addElement(logoImage);
@@ -71,9 +70,9 @@ public class HeaderFooterEvent extends PdfPageEventHelper {
 		String address = "#2580, Spandana Building , 27th Main Road, 13th Cross, HSR Layout – 1st Sector, "
 				+ "Bangalore, Karnataka 560102,India (Behind Pizza Hut). ";
 		Phrase addressPhrase = new Phrase(address,normalFont10);
-		String phone = "Phone: +91 99005 62575, +91 8049570935";
+		String phone = "Tel: +91 99005 62575, +91 8049570935";
 		Phrase phonePhrase = new Phrase(phone,boldFont10);
-		String website =  "website: ";
+		String website =  "Web: ";
 		Phrase websitePhrase = new Phrase(website,boldFont10);
 		String websiteRef =  "www.belhopat.com";
 		Phrase websiteRefPhrase = new Phrase(websiteRef,boldBlueFont10);

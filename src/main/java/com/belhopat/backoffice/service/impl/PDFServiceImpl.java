@@ -54,7 +54,7 @@ public class PDFServiceImpl implements PDFService {
 	private void getGeneratedPDFTest(String fileName, BasePDFGenerator pdfGenerator)
 			throws DocumentException, MalformedURLException, IOException, ParseException {
 		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
-		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
+		Document document = new Document(PageSize.A4,50f,50f,90f,60f);
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.setBoxSize("art", PageSize.A4);
 		HeaderFooterEvent event = new HeaderFooterEvent();

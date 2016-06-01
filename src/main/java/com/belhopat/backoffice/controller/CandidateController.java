@@ -59,6 +59,7 @@ public class CandidateController {
 	@RequestMapping(value = "/getCandidates", method = RequestMethod.GET)
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) throws MalformedURLException, DocumentException, IOException, ParseException {
+//		pdfService.generateOfferLetterPDF();
 		return candidateService.getCandidates(input,employee);
 	}
 
@@ -66,6 +67,10 @@ public class CandidateController {
 	 * @param requestObject
 	 * @return Candidate
 	 * For edit candidate , gets the id and fetches the candidate from database
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws DocumentException 
+	 * @throws MalformedURLException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getCandidate", method = RequestMethod.POST)
