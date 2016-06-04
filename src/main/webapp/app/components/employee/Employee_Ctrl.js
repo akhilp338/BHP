@@ -1,10 +1,23 @@
 (function () {
-    var Employee_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service) {
+    var Employee_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service,Core_ModalService) {
         var vm = this;
         $rootScope.active = 'employee';
         vm.addEmployee = function(){
         	$state.go("coreuser.employee.add");
         }
+        vm.getEmployee = function(id){
+        	vm.getEmployeeUrl = "api/employee/getAnEmployee";
+            Core_Service.getCandidateImpl(vm.getEmployeeUrl,id)
+            .then( function(response) {
+               vm.viewEmployee(response.data);
+            },function(error){
+            	
+            });
+        };
+        vm.viewEmployee = function (data) {
+            Core_ModalService.openViewEmployeeModal(data);
+        };
+
         angular.element(document).ready(function () {
             var oTable = angular.element('#employeeList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "employee/getEmployee",
@@ -50,6 +63,9 @@
                         }
                     }]
             });
+            $('#employeeList').on('click', '.action-view', function () {
+                vm.getEmployee(this.getAttribute('value'));
+            });
             $('#employeeList').on('click', '.action-edit', function () {
                 $rootScope.showLoader = true;
                 $rootScope.id = this.getAttribute('value');
@@ -70,7 +86,7 @@
         Core_Service.calculateSidebarHeight();
          };
 
-    Employee_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'urlConfig', 'Core_Service'];
+    Employee_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'urlConfig', 'Core_Service','Core_ModalService'];
     angular.module('coreModule')
             .controller('Employee_Ctrl', Employee_Ctrl);
 })();

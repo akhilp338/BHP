@@ -23,6 +23,8 @@
         	vm.registration.joiningDate=res.data.joiningDate;
         	vm.registration.workLocation=res.data.workLocation;
         	vm.registration.timeZone=res.data.timeZone;
+        	console.log("edit");
+        	console.log(vm.registration);
             }, function (err) {
                 vm.registration = {};
             });
@@ -52,8 +54,9 @@
             vm.registration.employeeMasterId=vm.candId ;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
+                    	   $state.go("coreuser.employee")
                     }, function (error) {
-
+                    	   $state.go("coreuser.employee")
                     });
         };
      
