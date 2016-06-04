@@ -9,7 +9,7 @@
 	</button>
     </div>
     <table id="candidatesList" class="display"></table>
-    <div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">{{vm.Employeetemplate}}
+    <div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-class="{init:vm.isInit}">{{vm.Employeetemplate}}
     </div>
     <div class="bottom-button-liner">        
         <button ng-click="vm.addEmployeeNextStep(candidateId)"

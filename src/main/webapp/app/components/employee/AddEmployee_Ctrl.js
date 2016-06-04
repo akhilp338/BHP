@@ -5,6 +5,7 @@ var addEmployeeTable
         $rootScope.showLoader = true;
         vm.registration = {};
         vm.employeeSummary = {};
+        vm.isInit = true;
         vm.Employeetemplate = 'Please select a candidate from the above table.';
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/employee/getAnEmployee", $stateParams.id).then(function (res) {
@@ -88,6 +89,7 @@ var addEmployeeTable
             });
             $("#candidatesList").on('click',' tbody tr', function (){
                 vm.Employeetemplate = "";
+                $(".candidate-summary").removeClass("init")
                 var data = addEmployeeTable.data()[$(this).index()];
                 vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
                 vm.employeeSummary["Candidate Id"] = data.candidateId;
@@ -101,7 +103,7 @@ var addEmployeeTable
                 for (var key in vm.employeeSummary){
                     vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">'+  
                                 '<label class="item-label">'+ key +
-                                ' : </label><p class="item-label-desc">'+ vm.employeeSummary[key] +
+                                '</label><p class="item-label-desc"> :   '+ vm.employeeSummary[key] +
                                 '</p></div>';
                 }
                $(".candidate-summary").html(vm.Employeetemplate);

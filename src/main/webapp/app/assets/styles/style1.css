@@ -981,12 +981,25 @@ button{
     width:8%;
     outline: none;
 }
+.bottom-button-liner {
+    margin: 20px 0;
+    position: relative;
+    float: left;
+    width: 100%;
+}
 
 .next-btn{
    margin-top: 2px!important;
 }
 .top-main-head{
     margin-bottom: 3px;
+}
+.candidate-summary.init{
+    text-align: center;
+    color: red;
+}
+.item-label{
+    min-width: 100px;
 }
 .cat-row {
     border: 1px solid #067373;
