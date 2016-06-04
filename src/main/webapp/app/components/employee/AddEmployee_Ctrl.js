@@ -49,7 +49,8 @@ var addEmployeeTable
                 bDestroy: true,
                 processing: true,
                 responsive: true,
-                sScrollX: '100%',                
+                sScrollX: '100%', 
+                iDisplayLength: 3,
                 fnDrawCallback: function (settings, ajax) {
                     
                 },
