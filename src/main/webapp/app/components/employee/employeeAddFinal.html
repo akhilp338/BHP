@@ -1,9 +1,28 @@
+<div class="top-main-head pull-left width-100">
+        <h4 class="pull-left">Fill Employee Details</h4>
+	<button ng-click="vm.back()"
+		class="logout-button pull-right add-button" title="Add Employee">
+		<span class="fa-stack fa-lg pull-left"><i
+			class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                        <span class="text">Back</span>              
+	</button>
+    </div>
+<div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+        <label class="item-label">Candidate Id : </label>
+        <p class="item-label-desc">{{vm.display.candidateId}}</p>
+    </div>
+    <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+        <label class="item-label">Name : </label>
+        <p class="item-label-desc">{{vm.display.name}}</p>
+    </div>
+</div>
 <div class="employee-add form-horizontal col-md-12 col-lg-12 col-sm-12 col-xs-12" name="reg_form">
     <form name="regForm" id="form_0" novalidate>
         <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Basic Information</legend>
+            <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">                
+                <header class="data-main-container-header">Basic Information</header>
+                <div class="data-main-container">                    
                     <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
                         <label class="control-label" >Candidate  Id</label>
                         <div class="controls">
@@ -113,7 +132,7 @@
                                    validation="required:alt=Required field" />
                         </div>
                     </div>
-                </fieldset>
+                </div>
             </div>
         </div>
     </form>

@@ -339,7 +339,16 @@ button.link-btn {
     width: 100%;
     overflow-x: hidden;
 }
-
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    width: 80%;
+}
+.dataTables_scrollBody{
+    border-radius: 0 0 7px 7px;
+}
+.dataTables_scrollHead{
+    border-radius: 7px 7px 0 0;
+}
 .xyz {
     min-width: 360px;
 }
@@ -690,7 +699,7 @@ span.user-list-head {
 
 .form-horizontal form{
     background-color: white;
-    padding-top: 50px;
+    padding-top: 10px;
     border: 1px solid #DDDDDD;
 
 }
@@ -707,10 +716,10 @@ span.user-list-head {
 }
 
 .add-button{
-    margin-right: 2%!important;
+   margin-right: 20px;
     border-radius: 6px;
     padding: 0;
-    width: 7%;
+    width: 78px;
     height: 26px;
 }
 .add-button span.fa-stack {
@@ -936,7 +945,7 @@ div#clientList_length select{
 }
 
 .top-main-head h4{
-    margin: 0 1.8%;
+    margin: 0 20px;
     line-height: 26px;
 }
 .employee-add .control-group{
@@ -960,26 +969,42 @@ button{
   height: 35px!important;
 }
 .confirm-btn{
-    width: 20%;
+    width: 180px;
+    margin-right: 0!important;
 }
 
 .candidate-summary {
     border: 1px solid #EBE9DB;
-    width: 95%;
-    margin: 0 2.5%;
+    width: 97%;
+    margin: 0 1.5%;
     position: relative;
     display: block;
     float: left;
-    background-color: #FFF4DE;    
+    border-radius: 7px;
+    background-color: #FFF4DE;
+    padding: 10px;
 }
+
+.data-main-container-header {
+    background-color: #E7EDEC;
+    padding: 5px 15px;
+    font-weight: 600;
+}
+
+.data-outer {
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+    padding: 0;
+}
+
 
 .item-label-desc{
     display: inline-block;
 }
 
 .next-btn{
-    width:8%;
-    outline: none;
+    width: 110px!important;
+    outline: none!important;
 }
 .bottom-button-liner {
     margin: 20px 0;
@@ -992,15 +1017,13 @@ button{
    margin-top: 2px!important;
 }
 .top-main-head{
-    margin-bottom: 3px;
+    margin-bottom: 10px;
 }
 .candidate-summary.init{
     text-align: center;
     color: red;
 }
-.item-label{
-    min-width: 100px;
-}
+
 .cat-row {
     border: 1px solid #067373;
     position: relative;

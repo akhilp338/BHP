@@ -121,8 +121,10 @@ var addEmployeeTable
                     addEmployeeTable.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
-                $rootScope.selectedCandId = addEmployeeTable.row($('tr.selected').index()).data().id;
-                localStorage["selectedCandidate"] = addEmployeeTable.row($('tr.selected').index()).data().candidateId;
+                var data = addEmployeeTable.row($('tr.selected').index()).data();
+                $rootScope.selectedCandId = data.id;
+                localStorage["selectedCandidate"] = data.candidateId;
+                localStorage["selectedCandidateName"] = data.firstName + " " + data.lastName;
                 localStorage["selectedCandidateId"] =  $rootScope.selectedCandId ;
             } );
             

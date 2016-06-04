@@ -6,28 +6,32 @@
         console.log($stateParams.id); 
         vm.candidateId = localStorage["selectedCandidate"];
         vm.candId = localStorage["selectedCandidateId"];
+        vm.display = {};
+        vm.display.name = localStorage["selectedCandidateName"];
+        vm.display.candidateId = vm.candidateId;
         vm.registration = {};
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/employee/getAnEmployee", $stateParams.id).then(function (res) {
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
-                vm.setFields(res.data);
+                vm.registration.id=res.data.employeeId;
+        	vm.registration.employeeMasterId=res.data.employeeMaster;
+        	vm.registration.hrManager=res.data.hrManager;
+        	vm.registration.accountManager=res.data.accountManager;
+        	vm.registration.businessUnit=res.data.businessUnit;
+        	vm.registration.joiningDate=res.data.joiningDate;
+        	vm.registration.workLocation=res.data.workLocation;
+        	vm.registration.timeZone=res.data.timeZone;
             }, function (err) {
                 vm.registration = {};
             });
         }
-        vm.setFields = function(editObj){
-        	vm.registration.id=editObj.employeeId;
-        	vm.registration.employeeMasterId=editObj.employeeMaster;
-        	vm.registration.hrManager=editObj.hrManager;
-        	vm.registration.accountManager=editObj.accountManager;
-        	vm.registration.businessUnit=editObj.businessUnit;
-        	vm.registration.joiningDate=editObj.joiningDate
-        	vm.registration.workLocation=editObj.workLocation;
-        	vm.registration.timeZone=editObj.timeZone;
-        	
-        }
+                
+        vm.back = function (){
+            $state.go('coreuser.employee.add');
+        };
+        
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
         };	
