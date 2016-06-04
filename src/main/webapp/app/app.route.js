@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     var Core_Routes = function ($stateProvider, $locationProvider, $urlRouterProvider,urlConfig) {
-//$locationProvider.html5Mode(true);
-//        $urlRouterProvider.otherwise(function () {
-//            window.location = urlConfig.root_path;
-//        });
+    $locationProvider.html5Mode(true);
+        $urlRouterProvider.otherwise(function () {
+        window.location = urlConfig.root_path;
+    });
 
         $stateProvider
                 .state('coreuser', {
@@ -59,7 +59,9 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.candidate', {
+        })   
+        //Candidate States Routing
+        .state('coreuser.candidate', {
             url: urlConfig.root_path+'candidate',
             views: {
                 'content@': {
@@ -92,7 +94,9 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.employee', {
+        })    
+        //Employee States Routing
+        .state('coreuser.employee', {
             url: urlConfig.root_path+'employee',
             views: {
                 'content@': {
@@ -125,7 +129,18 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.client', {
+        }).state('coreuser.employee.nextStep', {
+            url: urlConfig.root_path+'addEmployeeFinal/:id:candId',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.html',
+                    controller: 'AddEmployee_Ctrl_Final',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        //Client States Routing        
+        .state('coreuser.client', {
             url: urlConfig.root_path+'client',
             views: {
                 'content@': {
@@ -152,7 +167,9 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.opportunity', {
+        })
+        //Oppurtunity States Routing
+        .state('coreuser.opportunity', {
             url: urlConfig.root_path+'opportunity',
             views: {
                 'content@': {
@@ -170,12 +187,16 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.employee.nextStep', {
-            url: urlConfig.root_path+'addEmployeeFinal/:id:candId',
+        })
+        
+        //offerletter states
+        //Oppurtunity States Routing
+        .state('coreuser.offerletter', {
+            url: urlConfig.root_path+'offerletter',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.html',
-                    controller: 'AddEmployee_Ctrl_Final',
+                    templateUrl: '/BelhopatBackOffice/app/components/opportunity/opportunity.html',
+                    controller: 'Opp_Ctrl',
                     controllerAs: 'vm'
                 }
             }

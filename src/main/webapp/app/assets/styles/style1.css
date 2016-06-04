@@ -707,11 +707,20 @@ span.user-list-head {
 }
 
 .add-button{
-    margin-left: 3%!important;
-    font-size: 20px;
+    margin-right: 2%!important;
+    border-radius: 6px;
     padding: 0;
+    width: 7%;
+    height: 26px;
 }
-
+.add-button span.fa-stack {
+    line-height: 1.5em;
+    height: inherit;
+}
+.add-button span.text{
+    margin-top: 4px!important;
+    float: left;
+    }
 .page-side-bar {
     position: fixed; 
     margin-top: 70px;
@@ -895,18 +904,18 @@ input[type="search"] {
     background-image: url("../images/search.png");
     background-position: 4%center;
     background-repeat: no-repeat;
-    background-size: 24px;
-    border-radius: 27px;
-    border: 1px solid #CC2727;
+    background-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #B1B1B1;
     background-color: white!important;
-    padding-left: 40px;
-    height: 36px;
+    padding-left: 28px;
+    height: 26px;
+    width: 50%;    
 }
 
 div#candidatesList_length,
 div#employeeList_length,
 div#clientList_length{
-    color: #CC2727;
     margin-top: 10px;
 }
 
@@ -915,18 +924,70 @@ div#employeeList_length select,
 div#clientList_length select{
     width: 70px;
     height: 25px;
-    border: 1px solid #CC2727;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
-    color: #CC2727!important;  
+    color: #9E9E9E!important;
 }
 
 .cat-row span {
     float: left;
 }
 
+.top-main-head h4{
+    margin: 0 1.8%;
+    line-height: 26px;
+}
+.employee-add .control-group{
+    min-height: 79px;
+}
+
+.employee-add.form-horizontal form{
+    border: none;
+}
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
+    outline: none!important;
+}
+.input-group{
+    width: 100%;
+}
+button{
+    outline: none !important;
+}
+#candidatesList tbody tr{
+  cursor: pointer;
+  height: 35px!important;
+}
+.confirm-btn{
+    width: 20%;
+}
+
+.candidate-summary {
+    border: 1px solid #EBE9DB;
+    width: 95%;
+    margin: 0 2.5%;
+    position: relative;
+    display: block;
+    float: left;
+    background-color: #FFF4DE;    
+}
+
+.item-label-desc{
+    display: inline-block;
+}
+
+.next-btn{
+    width:8%;
+    outline: none;
+}
+
+.next-btn{
+   margin-top: 2px!important;
+}
+.top-main-head{
+    margin-bottom: 3px;
+}
 .cat-row {
     border: 1px solid #067373;
     position: relative;

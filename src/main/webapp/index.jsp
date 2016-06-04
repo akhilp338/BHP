@@ -10,7 +10,6 @@
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/angular-material.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/sweetalert.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
-<!--<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style.css">-->
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
 <link rel="stylesheet" ng-href="/BealhopatBackOffice/app/assets/libs/css/jquery.datepick.css">
@@ -25,7 +24,7 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-ui.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.plugin.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.datepick.js"></script>
-<!-- <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script> -->
+<script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
 <script src="/BelhopatBackOffice/app/assets/libs/js/underscore.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.1.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/sweetalert.js"></script>
