@@ -55,13 +55,14 @@ var addEmployeeTable
                     
                 },
                 language: {
-                	zeroRecords: 'No data to dispay',
+                    zeroRecords: 'No data to dispay',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',
                     infoFiltered:''
                 },
                 order: [[ 0, "desc" ]],
+                sDom: '<"search-box"r>lftip',
                 aoColumns: [ {
                     	data: 'id',
                     	visible : false
