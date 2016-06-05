@@ -12,7 +12,9 @@
         vm.subSelectedSkillList = [];
         vm.deSelectedSkills = [];
         vm.registration.skillSet = [];
-        
+        vm.back = function (){
+            $state.go('coreuser.candidate');
+        };
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/candidate/getCandidate", $stateParams.id).then(function (res) {
                 vm.registration = res.data;

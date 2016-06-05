@@ -1017,13 +1017,29 @@ button{
    margin-top: 2px!important;
 }
 .top-main-head{
-    margin-bottom: 10px;
+        margin-bottom: 10px;
 }
 .candidate-summary.init{
     text-align: center;
     color: red;
 }
-
+.emp-cand-table-wrapper .dataTables_length,
+.emp-cand-table-wrapper .dataTables_paginate,
+.emp-cand-table-wrapper .dataTables_info{
+    display: none;
+}
+.emp-cand-table-wrapper #candidatesList_filter{
+    float: left;
+    margin-left: -7px;
+}
+.candidate-form.form-horizontal form{
+  border: none;
+}
+.emp-cand-table-wrapper .dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    height: 35px;
+    border: 1px solid #FF9800;
+}
 .cat-row {
     border: 1px solid #067373;
     position: relative;
@@ -1141,28 +1157,6 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-image: linear-gradient(to bottom, #ffb76b 0%, #ff7f04 100%);
 }
 
-.nav-tabs,
-.theme4 .nav>li>a:focus{
-    /* IE10+ */ 
-    background-image: -ms-linear-gradient(top, #FCEABB 0%, #F8B500 100%);
-
-    /* Mozilla Firefox */ 
-    background-image: -moz-linear-gradient(top, #FCEABB 0%, #F8B500 100%);
-
-    /* Opera */ 
-    background-image: -o-linear-gradient(top, #FCEABB 0%, #F8B500 100%);
-
-    /* Webkit (Safari/Chrome 10) */ 
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FCEABB), color-stop(100, #F8B500));
-
-    /* Webkit (Chrome 11+) */ 
-    background-image: -webkit-linear-gradient(top, #FCEABB 0%, #F8B500 100%);
-
-    /* W3C Markup */ 
-    background-image: linear-gradient(to bottom, #FCEABB 0%, #F8B500 100%);
-
-}
-
 .nav-tabs .active a,
 .navbar-nav li.active a{
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffb76b), color-stop(100, #ff7f04));
@@ -1170,12 +1164,12 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-image: linear-gradient(to bottom, #ffb76b 0%, #ff7f04 100%);
 }
 
-.theme4 .nav-pills>li.active>a,
-.theme4 .nav-pills>li.active>a:hover,
-.theme4 .nav-pills>li.active>a:focus,
-.theme4 .navbar-nav li.active a,
-.theme4 .navbar-nav li.active a:hover,
-.theme4 .navbar-nav li.active a:focus{
+.theme4 button.active>a,
+.theme4  button.active>a:hover,
+.theme4  button.active>a:focus,
+.theme4  button.active a,
+.theme4  button.active a:hover,
+.theme4  button.active a:focus{
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffb76b), color-stop(100, #ff7f04));
     background-image: -webkit-linear-gradient(top, #ffb76b 0%, #ff7f04 100%);
     background-image: linear-gradient(to bottom, #ffb76b 0%, #ff7f04 100%);
@@ -1322,8 +1316,57 @@ fieldset.scheduler-border legend{
 .nav-tabs li,
 .nav-tabs{
     padding: 0;
+    border-bottom: none;
+}
+.single-section .data-main-container{
+  width: 99%!important;
+}
+.last-step {
+    margin-right: 13px!important;
 }
 
+.previous-btn, .nextStep-btn {
+    width: 138px;
+}
+.nextStep-btn {
+    padding-left: 25px;
+}
+.tab-btn{
+    padding: 0;
+    border: none;
+    margin-right: 20px;
+    border-radius: 6px;
+}
+.tab-btn a{
+    width: 100%;
+    position: relative;
+    float: left;
+    padding: 3px;
+    border-radius: 6px;
+    color:#929091!important;
+    font-weight: bold;
+    text-decoration: none;
+}
+.candidate-form .data-outer{
+     border-radius: 0;
+    border: none;
+}
+.candidate-form .data-main-container{
+    width: 98%;
+    margin: 10px auto;
+    border-radius: 7px;
+    border: 1px solid #DDDDDD;
+    float: left;
+}
+.candidate-form .pager{
+    margin: 0;
+}
+.candidate-form .add-button {
+    margin-right: 12px;
+}
+.candidate-form .data-main-container-header{
+   border-radius: 7px 7px 0 0; 
+}
 fieldset.scheduler-border {
     border: 1px groove #ddd !important;
     padding: 0 1.4em .5em 1.4em !important;
