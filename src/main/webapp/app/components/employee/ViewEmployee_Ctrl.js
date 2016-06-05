@@ -1,5 +1,5 @@
 (function () {
-    var ViewCandidate_Ctrl = function ($scope, $uibModalInstance, CANDIDATE, Core_Service, candidateDetails) {
+    var ViewEmployee_Ctrl = function ($scope, $uibModalInstance, CANDIDATE, Core_Service, candidateDetails) {
         var vm = this,
                 fields = CANDIDATE.fieldMapping;
         vm.template = "<div class = 'candidate-details-wrapper'>"
@@ -47,7 +47,7 @@
 
 
     };
-    ViewCandidate_Ctrl.$inject = ["$scope", '$uibModalInstance', 'CANDIDATE', 'Core_Service', 'candidateDetails'];
+    ViewEmployee_Ctrl.$inject = ["$scope", '$uibModalInstance', 'CANDIDATE', 'Core_Service', 'candidateDetails'];
     angular.module('coreModule')
-            .controller('ViewCandidate_Ctrl', ViewCandidate_Ctrl);
+            .controller('ViewEmployee_Ctrl', ViewEmployee_Ctrl);
 })();

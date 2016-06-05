@@ -68,7 +68,7 @@
 <script src="/BelhopatBackOffice/app/components/client/AddClient_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/holiday/Holiday_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/opportunity/Opp_Ctrl.js"></script>
-<script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
 
 
 <style>
