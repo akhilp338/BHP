@@ -69,7 +69,7 @@
 <script src="/BelhopatBackOffice/app/components/holiday/Holiday_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/opportunity/Opp_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
-
+<script src="/BelhopatBackOffice/app/components/candidate/Offerletter_Ctrl.js"></script>
 
 <style>
 [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

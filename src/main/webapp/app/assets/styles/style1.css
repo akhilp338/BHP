@@ -27,7 +27,71 @@ body {
     width: 0;
     clear: right;
 }
-
+.proccess-button {
+    width: 163px!important;
+}
+.offer-letter-template .data-main-container{
+    float: left;
+    border-radius: 6px;
+    border: 1px solid #EBE9DB;
+    margin-top: 10px;
+    padding: 0;
+}
+.offer-letter-template input[type=text]:focus, textarea:focus{
+    margin: 5px 0 0 0;
+}
+.offer-letter-template .inner-wrapper{
+    padding: 0;
+    margin-top: 12px;
+}
+.request-btn,
+.download-btn,
+.generate-btn{
+    width: 200px!important
+}
+.heading-sub {
+    padding-left: 0;
+    font-weight: bolder;
+    border-bottom: 1px solid black;
+    width: 97%;
+    margin-bottom: 10px;
+}
+.earnings-total-container {
+    width: 97%;
+    margin-bottom: 10px;
+}
+.deductions .inline{
+    padding-right: 0;
+}
+.takeHome-total-container{
+    margin-bottom: 30px;
+}
+.total-container .item-label, .total-container .item-label-desc {
+    padding: 24px;
+}
+.total-container{
+    height: 75px;
+    border: 1px solid #EBE9DB;
+    border-radius: 6px;
+    margin-top: 10px;
+    background-color: #FCD15D;
+}
+.inline .control-label {
+    padding: 10px 0 0 0;
+}
+.inline {
+    padding-left: 0;
+}
+.error-container {
+    display: block;
+    float: left;
+    width: 96.5%;
+    border: 1px solid red;
+    margin: 0 19px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #FFC4C4;
+}
 .header-image {
     color: #ccc;
     text-align: center;

@@ -1,0 +1,218 @@
+<div class="offer-letter-template"><div class="top-main-head pull-left width-100">
+        <h4 class="pull-left">Generate Offer Letter</h4>  
+    </div>
+    <div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <label class="item-label">Candidate Id : </label>
+            <p class="item-label-desc">{{vm.offerletter.candidateId}}</p>
+        </div>
+        <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <label class="item-label">Name : </label>
+            <p class="item-label-desc">{{vm.offerletter.display.name}}</p>
+        </div>
+    </div>
+    <div class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="inner-wrapper col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="fixed">Fixed :</label>
+                <input type="text" name="fixed" id="fixed"
+                       ng-model="vm.offerletter.fixed"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="flexi">Flexi Benefit Kit :</label>
+                <input type="text" name="flexi" id="flexi"
+                       ng-model="vm.offerletter.flexi"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+        </div>
+        <div class=" total-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Total : </label>
+            <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.earnings.total}}</p>
+        </div>
+    </div>
+    <div class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="inner-wrapper col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="heading-sub col-md-12 col-lg-12 col-sm-12 col-xs-12">Earnings</div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="basicSal">Basic salary :</label>
+                <input type="text" name="basicSal" id="basicSal"
+                       ng-model="vm.offerletter.earnings.basicSal"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="hra">House Rent Allowance :</label>
+                <input type="text" name="hra" id="hra"
+                       ng-model="vm.offerletter.earnings.hra"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="medical">Medical Allowance :</label>
+                <input type="text" name="medical" id="medical"
+                       ng-model="vm.offerletter.earnings.medical"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="conveyance">Conveyance Allowance :</label>
+                <input type="text" name="conveyance" id="conveyance"
+                       ng-model="vm.offerletter.earnings.conveyance"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="telephone">Telephone allowance :</label>
+                <input type="text" name="telephone" id="telephone"
+                       ng-model="vm.offerletter.earnings.telephone"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="specialAllow">Special allowance :</label>
+                <input type="text" name="specialAllow" id="specialAllow"
+                       ng-model="vm.offerletter.earnings.specialAllow"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="personalAllow">Personal Dev. Allowance :</label>
+                <input type="text" name="personalAllow" id="personalAllow"
+                       ng-model="vm.offerletter.earnings.personalAllow"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="lta">Leave Travel allowance :</label>
+                <input type="text" name="fixed" id="lta"
+                       ng-model="vm.offerletter.earnings.lta"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="fbk">Flexi Benifit Kit :</label>
+                <input type="text" name="fbk" id="fbk"
+                       ng-model="vm.offerletter.earnings.fbk"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="incentive">Incentive :</label>
+                <input type="text" name="incentive" id="incentive"
+                       ng-model="vm.offerletter.earnings.incentive"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="statutory">Statutory Bonus :</label>
+                <input type="text" name="statutory" id="statutory"
+                       ng-model="vm.offerletter.earnings.statutory"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="earnings-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Gross Salary : </label>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.earnings.total}}</p>
+            </div>
+        </div>
+        <div class="inner-wrapper deductions col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="heading-sub col-md-12 col-lg-12 col-sm-12 col-xs-12">Deductions</div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="proTax">Professional Tax :</label>
+                <input type="text" name="proTax" id="proTax"
+                       ng-model="vm.offerletter.deductions.proTax"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="pfEmployer">PF Contribution by employer :</label>
+                <input type="text" name="pfEmployer" id="pfEmployer"
+                       ng-model="vm.offerletter.deductions.pfEmployer"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="pfEmployee">PF Contribution by employee :</label>
+                <input type="text" name="pfEmployee" id="pfEmployee"
+                       ng-model="vm.offerletter.deductions.pfEmployee"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="ESIEmployer">ESI Contribution by employer :</label>
+                <input type="text" name="ESIEmployer" id="ESIEmployer"
+                       ng-model="vm.offerletter.deductions.ESIEmployer"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="ESIEmployee">ESI Contribution by employee :</label>
+                <input type="text" name="ESIEmployee" id="ESIEmployee"
+                       ng-model="vm.offerletter.deductions.ESIEmployee"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployer">EPF Contribution by employer :</label>
+                <input type="text" name="epfEmployer" id="pfEmployer"
+                       ng-model="vm.offerletter.deductions.epfEmployer"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployee">EPF Contribution by employee :</label>
+                <input type="text" name="epfEmployee" id="epfEmployee"
+                       ng-model="vm.offerletter.deductions.epfEmployee"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="leaveEncash">Leave Encashment :</label>
+                <input type="text" name="leaveEncash" id="leaveEncash"
+                       ng-model="vm.offerletter.deductions.leaveEncash"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployer">Insurance :</label>
+                <input type="text" name="insurance" id="insurance"
+                       ng-model="vm.offerletter.deductions.insurance"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="gratuity">Gratuity :</label>
+                <input type="text" name="gratuity" id="gratuity"
+                       ng-model="vm.offerletter.deductions.gratuity"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployee">Total Deductions :</label>
+                <input type="text" name="deductions" id="deductions"
+                       ng-model="vm.offerletter.deductions.deductions"
+                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
+            </div>
+            <div class="deductions-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Gross CTC : </label>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.grossCTC}}</p>
+            </div> 
+        </div>
+        <div class="takeHome-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Net Take Home Before TDS : </label>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.takeHome.total}}</p>
+        </div>
+    </div>
+    <div class="bottom-button-liner">        
+        <button ng-click="vm.verifyOfferLetter()"
+		class="logout-button pull-right add-button verify-btn" title="verify">
+		<span class="fa-stack fa-lg pull-left"><i
+			class="fa fa-check" aria-hidden="true"></i></span>
+                        <span class="text">Verify</span>              
+	</button>
+        </div>
+</div>

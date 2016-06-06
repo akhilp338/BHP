@@ -94,7 +94,26 @@
                     controllerAs: 'vm'
                 }
             }
-        })    
+        }).state('coreuser.candidate.offerletter', {
+            url: '/offerletter/:id',
+            views: {               
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/candidate/offerletter.html',
+                    controller: 'Offerletter_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.candidate.offerletter.verify', {
+            url: '/offerletter/:id',
+            views: {               
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/candidate/offerVerify.html',
+                    controller: 'Offerletter_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })        
+        
         //Employee States Routing
         .state('coreuser.employee', {
             url: urlConfig.root_path+'employee',
