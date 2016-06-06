@@ -62,10 +62,4 @@ public class BaseController {
 		return baseService.createOfferLetter(requestObject);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.POST)
-	public ResponseEntity<List<TaskList>> getSalarySplit(@RequestBody SalaryDTO salaryDTO) {
-		return baseService.getSalarySplit(salaryDTO);
-	}
-
 }

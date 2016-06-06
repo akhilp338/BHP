@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -58,8 +60,11 @@ public class CandidateController {
 	@ResponseBody
 	@RequestMapping(value = "/getCandidates", method = RequestMethod.GET)
 
-	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) throws MalformedURLException, DocumentException, IOException, ParseException {
-//		pdfService.generateOfferLetterPDF();
+	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
+		SalaryDTO salaryDTO = new SalaryDTO();
+		salaryDTO.setGrade("L4");
+		salaryDTO.setGrossSalary(Double.valueOf(35600));
+		baseService.getSalarySplit(salaryDTO);
 		return candidateService.getCandidates(input,employee);
 	}
 
@@ -138,4 +143,9 @@ public class CandidateController {
 		return baseService.getCandidateDropDownData();
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.POST)
+	public ResponseEntity<List<TaskList>> getSalarySplit(@RequestBody SalaryDTO salaryDTO) {
+		return baseService.getSalarySplit(salaryDTO);
+	}
 }
