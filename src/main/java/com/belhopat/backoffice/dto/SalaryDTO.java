@@ -8,6 +8,8 @@ public class SalaryDTO {
 
 	private Double grossSalary;
 	
+	private String fixed;
+	
 	public Double getAnnualCTC() {
 		return annualCTC;
 	}
@@ -30,6 +32,14 @@ public class SalaryDTO {
 
 	public void setGrossSalary(Double grossSalary) {
 		this.grossSalary = grossSalary;
+	}
+
+	public String getFixed() {
+		return fixed;
+	}
+
+	public void setFixed(String fixed) {
+		this.fixed = fixed;
 	}
 	
 

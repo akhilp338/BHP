@@ -145,7 +145,8 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.POST)
-	public ResponseEntity<List<TaskList>> getSalarySplit(@RequestBody SalaryDTO salaryDTO) {
+	public ResponseEntity<List<TaskList>> getSalarySplit(@RequestBody String fixed) {
+		SalaryDTO salaryDTO = new SalaryDTO();
 		return baseService.getSalarySplit(salaryDTO);
 	}
 }

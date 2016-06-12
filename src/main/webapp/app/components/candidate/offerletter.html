@@ -16,9 +16,9 @@
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="fixed">Fixed :</label>
                 <input type="text" name="fixed" id="fixed"
-                       ng-model="vm.offerletter.fixed"
+                       ng-model="vm.SalaryDTO.fixed"
                        class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
-                       validation="numeric:alt=Number only | required:alt=Required field" />
+                       validation="numeric:alt=Number only | required:alt=Required field" ng-change="vm.getSalarySplits(this)"/>
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="flexi">Flexi Benefit Kit :</label>
