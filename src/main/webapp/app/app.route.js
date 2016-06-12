@@ -197,7 +197,9 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.holiday', {
+        })
+        //holiday states routing
+        .state('coreuser.holiday', {
             url: urlConfig.root_path+'holiday',
             views: {
                 'content@': {
@@ -208,14 +210,13 @@
             }
         })
         
-        //offerletter states
-        //Oppurtunity States Routing
-        .state('coreuser.offerletter', {
-            url: urlConfig.root_path+'offerletter',
+        //Events States Routing
+        .state('coreuser.event', {
+            url: urlConfig.root_path+'event',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/opportunity/opportunity.html',
-                    controller: 'Opp_Ctrl',
+                    templateUrl: '/BelhopatBackOffice/app/components/event/event.html',
+                    controller: 'EventManagement_Ctrl',
                     controllerAs: 'vm'
                 }
             }

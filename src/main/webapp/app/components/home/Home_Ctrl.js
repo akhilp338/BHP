@@ -7,6 +7,7 @@
             {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"},
             {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"},
             {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletter"},
+            {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"},
             {name:"opportunity",label: "Opportunity Management", icon: "fa-gift",state:"coreuser.opportunity"},
             {name:"holiday",label: "Holiday Management", icon: "fa-paper-plane",state:"coreuser.holiday"}
         ];
