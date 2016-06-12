@@ -22,6 +22,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.MasterTasks;
+import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
@@ -34,6 +35,7 @@ import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.MasterTasksRepository;
+import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
@@ -81,6 +83,9 @@ public class BaseServiceImpl implements BaseService {
 	
 	@Autowired
 	TaskListRepository taskListRepository;
+	
+	@Autowired
+	SalaryGradeRepository salaryGradeRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -269,7 +274,29 @@ public class BaseServiceImpl implements BaseService {
 
 	@Override
 	public ResponseEntity<List<TaskList>> getSalarySplit(SalaryDTO salaryDTO) {
-		// TODO Auto-generated method stub
+		if(salaryDTO.getGrade()!=null && salaryDTO.getGrossSalary()!=null){
+			Double minBasicSalary = 7515.20;
+			salaryDTO.setGrossSalary(Double.valueOf(37663)); 
+			SalaryGrade grade = salaryGradeRepository.findByGrade(salaryDTO.getGrade());
+			Double minFixedSalary = grade.getFixedSalary() > salaryDTO.getGrossSalary() ? 
+					salaryDTO.getGrossSalary() : grade.getFixedSalary();
+			Double basicSalary = minBasicSalary < minFixedSalary * .6 ? minFixedSalary * .6 : minBasicSalary;
+			Double hra = (minFixedSalary - basicSalary) > basicSalary * 0.05 ? basicSalary * 0.05 : minFixedSalary - basicSalary;
+			Double medicalAllowance = minFixedSalary -(basicSalary + hra) > minFixedSalary * 0.05 ? 
+					minFixedSalary * 0.05 : minFixedSalary - (basicSalary + hra);
+			Long medicalAllowanceLong = medicalAllowance < 0 ? 0 : Math.round(medicalAllowance);
+			Double conveyanceAllowance = minFixedSalary - (basicSalary + hra + medicalAllowanceLong);
+			Long conveyanceAllowanceLong = conveyanceAllowance < 0 ? 0 : Math.round(conveyanceAllowance);
+			int profTax = salaryDTO.getGrossSalary() < 1000 ? 0 : (salaryDTO.getGrossSalary() < 15000 ? 150 : 200);
+			Long pfEmpContrbtn = Math.round(basicSalary < 15000 ? basicSalary * 0.6 : 15000 * 0.6);
+			Long esiByEmplyr = Math.round(salaryDTO.getGrossSalary() < 15000?salaryDTO.getGrossSalary() * 0.0475 : 0);
+			Long esiByEmplye = Math.round(salaryDTO.getGrossSalary() < 15000?salaryDTO.getGrossSalary() * 0.0175 : 0);
+			Long leaveEncash = Math.round(basicSalary/22 * 15/12);
+			Long gratuity = Math.round(basicSalary/26 * 15/12);
+			Long tatalDeductions = profTax + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
+			Long flexyBenKit = Math.round(salaryDTO.getGrossSalary() - minFixedSalary);
+			Long grossCTC = Math.round(basicSalary + hra + medicalAllowanceLong +  conveyanceAllowanceLong + flexyBenKit ); 
+		}
 		return null;
 	}
 	

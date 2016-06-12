@@ -77,6 +77,8 @@
 <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/event/EventManagement_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/candidate/Offerletter_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
+
 
 <style>
 [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
