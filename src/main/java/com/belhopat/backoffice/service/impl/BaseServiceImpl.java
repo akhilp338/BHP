@@ -319,9 +319,7 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-			HitController jj = new HitController();
-			jj.doExample();
-			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+                        return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}

@@ -112,8 +112,7 @@ var candidatesListTable;
             var index = $("#candidatesList tbody tr.selected").index();
             var data = candidatesListTable.data()[index];
             if(data && data.id){
-              vm.errorAlert = false;
-              vm.getSalaryGrades();
+              vm.errorAlert = false;              
               $state.go("coreuser.candidate.offerletter",{id:data.id});  
             }
             else{
@@ -219,18 +218,7 @@ var candidatesListTable;
             },function(error){
             	
             });
-        };
-        
-        vm.getSalaryGrades = function(){
-        	vm.getSalaryGradesUrl = "api/candidate/getSalaryGrades";
-            Core_Service.getSalaryGradesUrl(vm.getSalaryGradesUrl)
-            .then( function(response) {
-               console.log(response);
-//               vm.SalaryDTO.grades = response.data;
-            },function(error){
-            	
-            });
-        };
+        }; 
         
         vm.candidateDelete = function(id){
         	vm.deleteUrl = "api/candidate/deleteCandidate";
