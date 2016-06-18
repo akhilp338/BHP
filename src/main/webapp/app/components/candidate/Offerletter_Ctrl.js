@@ -43,10 +43,7 @@
         
         vm.getSalarySplits = function(){
             vm.url = "api/candidate/getSalarySplit";
-            var salaryDto={};
-            salaryDto.salary=vm.offerletter.grossSalary;
-            salaryDto.grade=vm.offerletter.grade;
-            Core_Service.getSalaryDetails(vm.url,this.offerletter.grossSalary)
+            Core_Service.getSalaryDetails(vm.url,vm.offerletter.grossSalary,vm.offerletter.selectedGrade)
                     .then(function (response) {  
                     for(var key in response.data){                        
                         vm.offerletter[key] = response.data[key] ? response.data[key] : 0;

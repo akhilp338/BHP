@@ -21,12 +21,12 @@
                 <input type="text" name="grossSalary" id="grossSalary"
                        ng-model="vm.offerletter.grossSalary"
                        class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
-                       validation="numeric:alt=Number only | required:alt=Required field" ng-blur="vm.getSalarySplits()"/>
+                       validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="grossSalary">Grade :</label>
-                    <select name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
-                            class="form-input col-md-6 col-lg-6 col-sm-12 col-xs-12" ng-options="gradeList.id as (gradeList.grade) for gradeList in vm.offerletter.grades">                   
+                    <select ng-change="vm.getSalarySplits()" name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
+                            class="form-input col-md-6 col-lg-6 col-sm-12 col-xs-12" ng-options="gradeList.grade as (gradeList.grade) for gradeList in vm.offerletter.grades">                   
                         <option style="display:none" value="">...</option>
                     </select>
             </div>

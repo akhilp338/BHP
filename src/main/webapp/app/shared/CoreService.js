@@ -239,9 +239,10 @@
             return returnDate;
         };
         
-        service.getSalaryDetails = function (url, postData) {
+        service.getSalaryDetails = function (url, fixed, grade) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url, postData)
+          url=url+'?fixed='+fixed+'&grade='+grade
+            Core_HttpRequest.get(url)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {

@@ -1,5 +1,8 @@
 package com.belhopat.backoffice.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class SalaryDTO {
 	
 	private Double annualCTC;
