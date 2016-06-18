@@ -322,7 +322,7 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+                        return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}
@@ -339,6 +339,4 @@ public class BaseServiceImpl implements BaseService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 }
