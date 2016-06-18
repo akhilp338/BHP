@@ -102,25 +102,28 @@
                             </select>
                         </div>
                     </div>
-                    <div
+                     <div
                         class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
                         <label class="control-label" for="dob">Reporting Manager</label>
                         <div class="controls">
                             <select name="bloodGroup"
-                                    ng-model="vm.registration.reportingManager"
+                                    ng-model="vm.registration.workLocation"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
                     </div>
-                    <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="workLocation">Work Location</label>
+                    <div
+                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+                        <label class="control-label" for="dob">Work Location</label>
                         <div class="controls">
-                            <input type="text" name="workLocation" id="workLocation"
-                                   ng-model="vm.registration.workLocation"
-                                   class="form-input width-100" placeholder="Work Location"
-                                   validation="required:alt=Required field" />
+                            <select name="bloodGroup"
+                                    ng-model="vm.registration.reportingManager"
+                                    validation="required:alt=required" class="form-input width-100"
+                                    ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+                                <option style="display: none" value="">...</option>
+                            </select>
                         </div>
                     </div>
                     <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">

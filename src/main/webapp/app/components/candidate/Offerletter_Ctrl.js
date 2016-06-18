@@ -52,6 +52,18 @@
         vm.verifyOfferLetter = function(){
            $state.go("coreuser.candidate.offerletter.verify") 
         };
+        
+        vm.getSalarySplits = function(){
+            vm.url = "api/candidate/getSalarySplit";
+            Core_Service.getSalaryDetails(vm.url,this.offerletter.grossSalary)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Done!",response.Message,"success","coreuser.candidate");  
+                        console.log(response)
+                    }, function (error) {
+                        console.log(error)
+                    });
+        }
+        
         vm.back = function (){
           $state.go("coreuser.candidate.offerletter")   
         };

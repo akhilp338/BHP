@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -58,8 +61,8 @@ public class CandidateController {
 	@ResponseBody
 	@RequestMapping(value = "/getCandidates", method = RequestMethod.GET)
 
-	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) throws MalformedURLException, DocumentException, IOException, ParseException {
-//		pdfService.generateOfferLetterPDF();
+	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
+		SalaryDTO salaryDTO = new SalaryDTO();
 		return candidateService.getCandidates(input,employee);
 	}
 
@@ -138,4 +141,22 @@ public class CandidateController {
 		return baseService.getCandidateDropDownData();
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestBody String fixed) {
+		SalaryDTO salaryDTO = new SalaryDTO();
+		return baseService.getSalarySplit(salaryDTO);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getSalaryGrades", method = RequestMethod.POST)
+	public List<SalaryGrade> getSalaryGrades() {
+		return candidateService.getSalaryGrades();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
+		return baseService.saveSalaryAndOfferLetter(employeeSalary);
+	}
 }

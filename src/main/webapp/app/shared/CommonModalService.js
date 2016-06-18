@@ -10,6 +10,9 @@
         service.opendeleteCandidateModal = function (data) {
             return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/candidate/deleteCandidate.html', 'DeleteCandidate_Ctrl', 'vm', data);
         };
+        service.openViewEmployeeModal = function (data) {
+            return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/employee/viewEmployee.html', 'ViewEmployee_Ctrl', 'vm', data);
+        };
     };
     angular.module('app.common')
         .service('Core_ModalService', Core_ModalService);

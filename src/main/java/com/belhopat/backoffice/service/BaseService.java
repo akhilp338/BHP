@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.City;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
@@ -32,6 +33,8 @@ public interface BaseService {
 
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject);
 
-	public ResponseEntity<List<TaskList>> getSalarySplit(SalaryDTO salaryDTO);
+	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO);
+
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary);
 
 }

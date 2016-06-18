@@ -113,6 +113,7 @@ var candidatesListTable;
             var data = candidatesListTable.data()[index];
             if(data && data.id){
               vm.errorAlert = false;
+              vm.getSalaryGrades();
               $state.go("coreuser.candidate.offerletter",{id:data.id});  
             }
             else{
@@ -120,6 +121,7 @@ var candidatesListTable;
               vm.errorMessage = "Please select one candidate from table";
             }            
         };
+        
         vm.getSelectedCandidate = function (event) {
             console.log(event);
         };
@@ -214,6 +216,17 @@ var candidatesListTable;
             Core_Service.getCandidateImpl(vm.getCandidateUrl,id)
             .then( function(response) {
                vm.viewCandidate(response.data);
+            },function(error){
+            	
+            });
+        };
+        
+        vm.getSalaryGrades = function(){
+        	vm.getSalaryGradesUrl = "api/candidate/getSalaryGrades";
+            Core_Service.getSalaryGradesUrl(vm.getSalaryGradesUrl)
+            .then( function(response) {
+               console.log(response);
+//               vm.SalaryDTO.grades = response.data;
             },function(error){
             	
             });
