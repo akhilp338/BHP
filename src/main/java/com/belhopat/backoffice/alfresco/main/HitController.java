@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Folder;
+import org.springframework.stereotype.Component;
 
 /**
  * Shows how to use CMIS to create a document using the Alfresco Public API.
@@ -13,6 +14,7 @@ import org.apache.chemistry.opencmis.client.api.Folder;
  * @author jpotts
  *
  */
+@Component
 public class HitController extends BaseCloudFns {
 
     public static void main(String[] args) {

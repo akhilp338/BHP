@@ -93,6 +93,9 @@ public class BaseServiceImpl implements BaseService {
 	@Autowired
 	EmployeeSalaryRepository employeeSalaryRepository;
 
+	@Autowired
+	HitController controller;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -319,8 +322,6 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-			HitController jj = new HitController();
-			jj.doExample();
 			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
@@ -331,7 +332,8 @@ public class BaseServiceImpl implements BaseService {
 		if(employeeSalary!=null){
 			EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 			HitController jj = new HitController();
-			jj.doExample();
+			
+			controller.doExample();
 			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		// TODO Auto-generated method stub
