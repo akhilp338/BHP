@@ -26,10 +26,13 @@ import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
+import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
@@ -51,6 +54,9 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	@Autowired
 	SalaryGradeRepository salaryGradeRepository;
+	
+	@Autowired
+	EmployeeSalaryRepository employeeSalaryRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -412,6 +418,21 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<SalaryGrade> getSalaryGrades() {
 		List<SalaryGrade> grades = salaryGradeRepository.findAll();
 		return grades;
+	}
+
+	@Override
+	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input) {
+			Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
+				@Override
+				public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
+						CriteriaBuilder criteriaBuilder) {
+					Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
+					return criteriaBuilder.and(isNotDeleted);
+				}
+			};
+			DataTablesOutput<EmployeeSalary> dataTablesOutput = employeeSalaryRepository.findAll(input/*, specification*/);
+			return dataTablesOutput;
+
 	}
 
 }

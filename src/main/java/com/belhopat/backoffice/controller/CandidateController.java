@@ -24,8 +24,10 @@ import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
+import com.belhopat.backoffice.pdf.OfferLetterPDF;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -158,5 +160,12 @@ public class CandidateController {
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
 		return baseService.saveSalaryAndOfferLetter(employeeSalary);
+	}
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/getOfferLetters", method = RequestMethod.GET)
+	public DataTablesOutput<EmployeeSalary> getEmployee(@Valid DataTablesInput input) {
+		return candidateService.getOfferLetters(input);
 	}
 }
