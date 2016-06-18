@@ -1259,6 +1259,7 @@ button {
 
 .item-label-desc {
 	display: inline-block;
+        font-weight: bold!important;
 }
 
 .next-btn {
@@ -1711,4 +1712,8 @@ tr.selected {
 	text-decoration: underline;
 	color: #CC2727;
 	cursor: pointer;
+}
+.candidate-summary  .item-label,
+.total-container .item-label {
+    font-weight: normal!important;
 }

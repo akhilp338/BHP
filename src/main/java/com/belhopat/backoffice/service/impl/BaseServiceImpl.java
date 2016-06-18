@@ -339,6 +339,4 @@ public class BaseServiceImpl implements BaseService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 }
