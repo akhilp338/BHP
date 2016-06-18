@@ -283,7 +283,7 @@ public class BaseServiceImpl implements BaseService {
 
 	@Override
 	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO) {
-		salaryDTO.setGrade("L4");
+		salaryDTO.setGrade(salaryDTO.getGrade());
 		salaryDTO.setGrossSalary(Double.valueOf(356663));
 		if(salaryDTO.getGrade()!=null && salaryDTO.getGrossSalary()!=null){
 			Double minBasicSalary = 7515.20;

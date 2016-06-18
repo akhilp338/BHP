@@ -55,6 +55,9 @@
         
         vm.getSalarySplits = function(){
             vm.url = "api/candidate/getSalarySplit";
+            var salaryDto={};
+            salaryDto.salary=vm.offerletter.grossSalary;
+            salaryDto.grade=vm.offerletter.grade;
             Core_Service.getSalaryDetails(vm.url,this.offerletter.grossSalary)
                     .then(function (response) {
                     	Core_Service.sweetAlert("Done!",response.Message,"success","coreuser.candidate");  
