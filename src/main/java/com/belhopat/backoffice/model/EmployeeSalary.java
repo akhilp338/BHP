@@ -10,15 +10,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Employee_Salary")
-public class EmployeeSalary {
+public class EmployeeSalary  extends BaseEntity{
 	
 	
-	@Id
+	/*@Id
 	@GeneratedValue
 	@Column( name = "ID")
-	private Long id;
+	private Long id;*/
 	@OneToOne(fetch=FetchType.EAGER)
-	private  Employee employee ;
+	private  Candidate candidate ;
 	private Double minBasicSalary ;
 	@OneToOne(fetch=FetchType.EAGER)
 	private  SalaryGrade grade ;
@@ -36,22 +36,9 @@ public class EmployeeSalary {
 	private Long totalDeductions ; 
 	private Long flexyBenKit ;
 	private Long grossCTC ;
+	private String status;
 	
 	
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 	public Long getTotalDeductions() {
 		return totalDeductions;
 	}
@@ -75,6 +62,12 @@ public class EmployeeSalary {
 	}
 	public Double getBasicSalary() {
 		return basicSalary;
+	}
+	public Candidate getCandidate() {
+		return candidate;
+	}
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 	public void setBasicSalary(Double basicSalary) {
 		this.basicSalary = basicSalary;
@@ -147,6 +140,12 @@ public class EmployeeSalary {
 	}
 	public void setGrossCTC(Long grossCTC) {
 		this.grossCTC = grossCTC;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	} 
 
 }

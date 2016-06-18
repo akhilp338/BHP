@@ -94,6 +94,15 @@
                     controllerAs: 'vm'
                 }
             }
+        }).state('coreuser.offerletterhome', {
+            url: urlConfig.root_path+'offerletterhome',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.html',
+                    controller: 'Offer_Letter_Home_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
         }).state('coreuser.candidate.offerletter', {
             url: '/offerletter/:id',
             views: {               
