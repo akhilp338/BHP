@@ -13,10 +13,10 @@ import org.apache.chemistry.opencmis.client.api.Folder;
  * @author jpotts
  *
  */
-public class hitController extends BaseCloudFns {
+public class HitController extends BaseCloudFns {
 
     public static void main(String[] args) {
-        hitController le = new hitController();
+        HitController le = new HitController();
         try {
             le.doExample();
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class hitController extends BaseCloudFns {
 
             // Like the folder
 //            like(subFolder.getId());
-            File file = new File("///home/shinto/Downloads/Collection-2.pdf");
+            File file = new File("///home/shinto/Downloads/Collect.pdf");
             Document doc = createDocument(subFolder, file, getLocalFileType());
 
         } catch (IOException ioe) {

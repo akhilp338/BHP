@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.belhopat.backoffice.alfresco.main.HitController;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
@@ -19,6 +20,7 @@ import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.ClientSequence;
 import com.belhopat.backoffice.model.Country;
 import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.MasterTasks;
@@ -32,6 +34,7 @@ import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
+import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.MasterTasksRepository;
@@ -86,6 +89,9 @@ public class BaseServiceImpl implements BaseService {
 	
 	@Autowired
 	SalaryGradeRepository salaryGradeRepository;
+	
+	@Autowired
+	EmployeeSalaryRepository employeeSalaryRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -273,11 +279,12 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<List<TaskList>> getSalarySplit(SalaryDTO salaryDTO) {
+	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO) {
 		salaryDTO.setGrade("L4");
 		salaryDTO.setGrossSalary(Double.valueOf(356663));
 		if(salaryDTO.getGrade()!=null && salaryDTO.getGrossSalary()!=null){
 			Double minBasicSalary = 7515.20;
+			EmployeeSalary empSal = new EmployeeSalary();
 			salaryDTO.setGrossSalary(Double.valueOf(37663)); 
 			SalaryGrade grade = salaryGradeRepository.findByGrade(salaryDTO.getGrade());
 			Double minFixedSalary = grade.getFixedSalary() > salaryDTO.getGrossSalary() ? 
@@ -295,10 +302,39 @@ public class BaseServiceImpl implements BaseService {
 			Long esiByEmplye = Math.round(salaryDTO.getGrossSalary() < 15000?salaryDTO.getGrossSalary() * 0.0175 : 0);
 			Long leaveEncash = Math.round(basicSalary/22 * 15/12);
 			Long gratuity = Math.round(basicSalary/26 * 15/12);
-			Long tatalDeductions = profTax + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
+			Long totalDeductions = profTax + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
 			Long flexyBenKit = Math.round(salaryDTO.getGrossSalary() - minFixedSalary);
 			Long grossCTC = Math.round(basicSalary + hra + medicalAllowanceLong +  conveyanceAllowanceLong + flexyBenKit ); 
+			empSal.setBasicSalary(basicSalary);
+			empSal.setMinFixedSalary(minFixedSalary);
+			empSal.setHra(hra);
+			empSal.setMedicalAllowance(medicalAllowanceLong);
+			empSal.setConveyanceAllowance(conveyanceAllowanceLong);
+			empSal.setProfTax(profTax);
+			empSal.setEsiByEmplye(esiByEmplye);
+			empSal.setEsiByEmplyr(esiByEmplyr);
+			empSal.setPfEmpContrbtn(pfEmpContrbtn);
+			empSal.setGratuity(gratuity);
+			empSal.setLeaveEncash(leaveEncash);
+			empSal.setTotalDeductions(totalDeductions);
+			empSal.setFlexyBenKit(flexyBenKit);
+			empSal.setGrossCTC(grossCTC);
+			HitController jj = new HitController();
+			jj.doExample();
+			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
+		if(employeeSalary!=null){
+			EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+			HitController jj = new HitController();
+			jj.doExample();
+			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+		}
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

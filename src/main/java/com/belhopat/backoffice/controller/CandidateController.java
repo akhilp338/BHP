@@ -24,7 +24,8 @@ import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -62,9 +63,6 @@ public class CandidateController {
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
 		SalaryDTO salaryDTO = new SalaryDTO();
-		salaryDTO.setGrade("L4");
-		salaryDTO.setGrossSalary(Double.valueOf(35600));
-		baseService.getSalarySplit(salaryDTO);
 		return candidateService.getCandidates(input,employee);
 	}
 
@@ -145,8 +143,20 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.POST)
-	public ResponseEntity<List<TaskList>> getSalarySplit(@RequestBody String fixed) {
+	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestBody String fixed) {
 		SalaryDTO salaryDTO = new SalaryDTO();
 		return baseService.getSalarySplit(salaryDTO);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getSalaryGrades", method = RequestMethod.POST)
+	public List<SalaryGrade> getSalaryGrades() {
+		return candidateService.getSalaryGrades();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
+		return baseService.saveSalaryAndOfferLetter(employeeSalary);
 	}
 }

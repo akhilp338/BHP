@@ -26,9 +26,11 @@ import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
+import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -46,6 +48,9 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	CandidateRepository candidateRepository;
+	
+	@Autowired
+	SalaryGradeRepository salaryGradeRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -401,6 +406,12 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		return new ResponseEntity<ResponseObject>(new ResponseObject(true, "Oops..error while deleting!"),
 				HttpStatus.OK);
+	}
+
+	@Override
+	public List<SalaryGrade> getSalaryGrades() {
+		List<SalaryGrade> grades = salaryGradeRepository.findAll();
+		return grades;
 	}
 
 }

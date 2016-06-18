@@ -14,18 +14,20 @@
     <div class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="inner-wrapper col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="fixed">Fixed :</label>
-                <input type="text" name="fixed" id="fixed"
-                       ng-model="vm.SalaryDTO.fixed"
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="grossSalary">Gross Salary :</label>
+                <input type="text" name="grossSalary" id="grossSalary"
+                       ng-model="vm.offerletter.grossSalary"
                        class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
-                       validation="numeric:alt=Number only | required:alt=Required field" ng-change="vm.getSalarySplits(this)"/>
+                       validation="numeric:alt=Number only | required:alt=Required field" ng-blur="vm.getSalarySplits()"/>
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="flexi">Flexi Benefit Kit :</label>
-                <input type="text" name="flexi" id="flexi"
-                       ng-model="vm.offerletter.flexi"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
-                       validation="numeric:alt=Number only | required:alt=Required field" />
+                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="grade">Grade :</label>
+                    <div class="controls">
+                       <select name="grade" ng-model="vm.SalaryDTO.grades" validation="required:alt=required"
+                            class="form-input width-100" ng-options="grade.id as (grade.grade) for grade in vm.SalaryDTO.grades">                   
+                               <option style="display:none" value="">...</option>
+                       </select>
+                    </div>
             </div>
         </div>
         <div class=" total-container col-md-6 col-lg-6 col-sm-12 col-xs-12">

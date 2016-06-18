@@ -164,10 +164,21 @@
                     });
             return deferred.promise;
         };
+        
+        service.getSalaryGradesUrl = function (url) {
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url, data)
+            Core_HttpRequest.post(url)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
