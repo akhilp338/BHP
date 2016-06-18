@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 
 @Service
@@ -30,5 +31,7 @@ public interface CandidateService {
 	public ResponseEntity<CandidateViewDTO> getCandidateView(Long id) throws ParseException;
 
 	public List<SalaryGrade> getSalaryGrades();
+
+	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input);
 
 }
