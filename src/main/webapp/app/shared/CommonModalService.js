@@ -13,6 +13,9 @@
         service.openViewEmployeeModal = function (data) {
             return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/employee/viewEmployee.html', 'ViewEmployee_Ctrl', 'vm', data);
         };
+        service.openAddEventModal = function (data) {
+            return Core_Modal.modalOpen('event-modal', '/BelhopatBackOffice/app/components/event/addEvent.html', 'AddEvent_Ctrl', 'vm', data);
+        };
     };
     angular.module('app.common')
         .service('Core_ModalService', Core_ModalService);

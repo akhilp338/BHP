@@ -72,6 +72,7 @@
 <script src="/BelhopatBackOffice/app/components/employee/AddEmployee_Ctrl_Final.js"></script>
 <script src="/BelhopatBackOffice/app/components/client/Client_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/client/AddClient_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/event/AddEvent_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/holiday/Holiday_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/opportunity/Opp_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
