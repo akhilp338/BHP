@@ -112,8 +112,8 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.candidate.offerletter.verify', {
-            url: '/offerletter/:id',
+        }).state('coreuser.candidate.verify', {
+            url: '/offerletter/verify/:verifyId',
             views: {               
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/candidate/offerVerify.html',

@@ -1717,3 +1717,27 @@ tr.selected {
 .total-container .item-label {
     font-weight: normal!important;
 }
+.sal-annual .item-label,
+.sal-month .item-label{
+    padding-left: 0;
+    font-weight: normal;
+}
+.sal-month {
+    float: right;
+    margin-right: 20px;
+}
+.sal-annual {
+  float: left;
+  margin-left: 20px;  
+}
+
+.salary.bottom-button-liner{
+    text-align:center;
+}
+
+.events.sub-content {
+    padding-left: 15px;
+}
+#calendar {
+    height: 300px;
+}

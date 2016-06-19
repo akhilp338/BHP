@@ -13,7 +13,6 @@
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
-<link rel="stylesheet" ng-href="/BealhopatBackOffice/app/assets/libs/css/jquery.datepick.css">
 	<!-- Libraries -->
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
