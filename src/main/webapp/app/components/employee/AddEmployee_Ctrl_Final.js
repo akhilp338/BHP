@@ -19,7 +19,7 @@
         	vm.registration.employeeMasterId=res.data.employeeMaster;
         	vm.registration.hrManager=res.data.hrManager;
         	vm.registration.accountManager=res.data.accountManager;
-        	vm.registration.businessUnit=res.data.businessUnit;
+        	vm.registration.businessUnit= res.data.businessUnit ? res.data.businessUnit.id : "";
         	vm.registration.joiningDate=res.data.joiningDate;
         	vm.registration.workLocation=res.data.workLocation;
         	vm.registration.timeZone=res.data.timeZone;

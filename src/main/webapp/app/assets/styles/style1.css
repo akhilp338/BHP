@@ -297,10 +297,11 @@ left:-15px;
 }
 
 .logout.link {
-	margin-top: 19px;
-	color: white;
-	float: left;
-	margin-left: 30px;
+    margin-top: 19px;
+    color: white!important;
+    float: left;
+    margin-left: 30px;
+    font-size: 16px;
 }
 
 .header-divx:not(.login-page)
@@ -1284,8 +1285,8 @@ table.dataTable tbody th, table.dataTable tbody td {
 /*.theme4 body:not(.login-page){
     background-color: rgba(224, 242, 241, 0.3)
 }*/
-.theme4 .form-input, .theme4 input[type="search"] {
-	background-color: rgba(175, 193, 192, 0.3);
+.login-page .page-side-bar {
+    display: none;
 }
 
 .theme4 .nav>li>a:hover {
@@ -1462,12 +1463,15 @@ fieldset.scheduler-border legend {
 	text-decoration: none;
 }
 
-.candidate-form .data-outer {
+.candidate-form .data-outer,
+.client-form .data-outer,
+.client-form {
 	border-radius: 0;
-	border: none;
+	border: none!important;
 }
 
-.candidate-form .data-main-container {
+.candidate-form .data-main-container,
+.client-form .data-main-container {
 	width: 98%;
 	margin: 10px auto;
 	border-radius: 7px;
@@ -1482,6 +1486,7 @@ fieldset.scheduler-border legend {
 .candidate-form .add-button {
 	margin-right: 12px;
 }
+
 
 .candidate-form .data-main-container-header {
 	border-radius: 7px 7px 0 0;
@@ -1558,6 +1563,27 @@ tr.selected {
 }
 .offer-letter-template .item-label-desc {
     padding-left: 0;
+}
+a.md-default-theme:not(.md-button), a:not(.md-button) {
+    color: rgb(204, 39, 39)!important;
+}
+.file-control-group {
+    padding: 18px 0 0 15px;
+}
+.file-control-group .file-input-wrapper{
+    width: 95%;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+span.upload-label {
+    padding-left: 10px;
+}
+@media screen and (max-width: 768px) {
+   .loginForm {
+    margin-top: 200px;
+} 
 }
 /*dashboard styles*/
 .panelSubTitle {
@@ -1650,3 +1676,57 @@ tr.selected {
     }
 }
 /*End dashboard styles*/
+
+
+/*Event styles*/
+.fc-event{
+    border: 1px solid #FF5722!important;
+    background-color: #FF9800!important;
+}
+.events .top-main-head h4{
+    margin-left:0;
+}
+
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
+    border-color: #ff9126!important;
+    color: white!important;
+}
+
+.fc-unthemed .fc-divider, .fc-unthemed .fc-popover .fc-header {
+    background: #fdab5b!important;
+}
+.fc-ltr .fc-popover .fc-header .fc-title, .fc-rtl .fc-popover .fc-header .fc-close {
+    color: white!important;
+}
+
+.fc-button-group .fc-state-default,
+.fc-button-group .fc-toolbar .ui-state-active,
+.fc-state-default,
+.fc-button-group button.fc-today-button.fc-button.fc-state-default{
+    border: 1px solid!important;
+    background-color: #CC2727!important;
+    color: white!important;
+    background-image:none!important;
+    text-shadow:none!important;
+    box-shadow:none!important;
+}
+a.link.logout i {
+    padding-left: 10px;
+}
+.fc-more-popover .fc-event-container {
+    background-color: rgba(255, 159, 62, 0.56)!important;
+}
+td.fc-widget-content {
+    cursor: pointer!important;
+}
+.fc-button-group .fc-state-active {
+    border: 1px solid!important;
+    background-color: #E91E63!important;
+    color: white!important;
+    background-image:none!important;
+    text-shadow:none!important;
+    box-shadow:none!important;
+}
+.fc-view-container{
+    background-color: #fcd15c!important;
+}

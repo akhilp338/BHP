@@ -68,9 +68,12 @@
             }
         ],
         dayClick: function(date, jsEvent, view) {
-        $('#calendar').fullCalendar('rerenderEvents');        
-        alert('Clicked on: ' + date.format());
-    }
+        //$('#calendar').fullCalendar('rerenderEvents');               
+        //alert('Clicked on: ' + date.format());
+    },
+    eventResize: function (event, dayDelta, minuteDelta) {
+                 console.log(event)
+             }
         });
        
     }

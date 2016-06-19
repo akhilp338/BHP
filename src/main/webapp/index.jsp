@@ -25,6 +25,7 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/ngstorage.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.dataTables.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-ui.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/bootstrap-filestyle.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.plugin.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.datepick.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/calendar.js"></script>

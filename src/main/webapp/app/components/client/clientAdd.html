@@ -1,286 +1,290 @@
 <div class="form-horizontal" name="client_reg_form">
-	<form name="regForm" id="form_1" novalidate>
-		<div class="row">
-			<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-				<fieldset class="scheduler-border">
-					<legend class="scheduler-border">Basic Information</legend>
+    <form name="regForm" class="client-form" id="form_1" novalidate>
+        <div class="row">
+            <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
+                <div class="data-main-container">
+                    <header class="data-main-container-header">Basic Information</header>
 
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="clientName">Client Name</label>
-						<div class="controls">
-							<input type="text" name="clientName" id="clientName"
-								ng-model="vm.registration.clientName"
-								class="form-input width-100" placeholder="Client Name"
-								validation="required:alt=Required field" />
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="revenue">Revenue (%)</label>
-						<div class="controls">
-							<input type="text" name="revenue" id="revenue"
-								ng-model="vm.registration.revenue" class="form-input width-100"
-								placeholder="Revenue (in %)"
-								validation="required:alt=Required field" />
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="contactNo">Contact no
-							(with Ext. code)</label>
-						<div class="controls">
-							<input type="text" name="contactNo" id="contactNo"
-								ng-model="vm.registration.contactNo"
-								class="form-input width-100"
-								placeholder="Contact No (with Ext.)"
-								validation="required:alt=Required field" />
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="email">Email</label>
-						<div class="controls">
-							<input type="text" name="email" id="email"
-								ng-model="vm.registration.email" class="form-input width-100"
-								placeholder="Email" validation="required:alt=Required field" />
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="webUrl">Website URL</label>
-						<div class="controls">
-							<input type="text" name="webUrl" id="webUrl"
-								ng-model="vm.registration.webUrl" class="form-input width-100"
-								placeholder="Website URL"
-								validation="required:alt=Required field" />
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="clientStatus">Client
-							Status</label>
-						<div class="controls">
-							<select name="clientStatus"
-								ng-model="vm.registration.clientStatus.id"
-								class="form-input width-100"
-								ng-options="clientStatus.id as (clientStatus.description) for clientStatus in vm.lookups.CLSTATS"
-								validation="required:alt=required">
-								<option style="display: none" value="">...</option>
-							</select>
-						</div>
-					</div>
-				</fieldset>
-			</div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="clientName">Client Name</label>
+                        <div class="controls">
+                            <input type="text" name="clientName" id="clientName"
+                                   ng-model="vm.registration.clientName"
+                                   class="form-input width-100" placeholder="Client Name"
+                                   validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="revenue">Revenue (%)</label>
+                        <div class="controls">
+                            <input type="text" name="revenue" id="revenue"
+                                   ng-model="vm.registration.revenue" class="form-input width-100"
+                                   placeholder="Revenue (in %)"
+                                   validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="contactNo">Contact no
+                            (with Ext. code)</label>
+                        <div class="controls">
+                            <input type="text" name="contactNo" id="contactNo"
+                                   ng-model="vm.registration.contactNo"
+                                   class="form-input width-100"
+                                   placeholder="Contact No (with Ext.)"
+                                   validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input type="text" name="email" id="email"
+                                   ng-model="vm.registration.email" class="form-input width-100"
+                                   placeholder="Email" validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="webUrl">Website URL</label>
+                        <div class="controls">
+                            <input type="text" name="webUrl" id="webUrl"
+                                   ng-model="vm.registration.webUrl" class="form-input width-100"
+                                   placeholder="Website URL"
+                                   validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="clientStatus">Client
+                            Status</label>
+                        <div class="controls">
+                            <select name="clientStatus"
+                                    ng-model="vm.registration.clientStatus.id"
+                                    class="form-input width-100"
+                                    ng-options="clientStatus.id as (clientStatus.description) for clientStatus in vm.lookups.CLSTATS"
+                                    validation="required:alt=required">
+                                <option style="display: none" value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-				<fieldset class="scheduler-border">
-					<legend class="scheduler-border">Belhopat Management
-						Details</legend>
+            <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
+                <div class="data-main-container">   
+                    <header class="data-main-container-header">Belhopat Management
+                        Details</header>
 
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="division">Business Unit</label>
-						<div class="controls">
-							<select name="division" ng-model="vm.registration.division.id"
-								class="form-input width-100"
-								ng-options="division.id as (division.description) for division in vm.lookups.DIV"
-								validation="required:alt=required">
-								<option style="display: none" value="">...</option>
-							</select>
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="dob">Business Unit Head</label>
-						<div class="controls">
-							<select name="businessUnitHead"
-								ng-model="vm.registration.bussUnitHead.id"
-								validation="required:alt=required" class="form-input width-100"
-								ng-options="business.id as (business.description) for business in vm.lookups.buh">
-								<option style="display: none" value="">...</option>
-							</select>
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="dob">Account Manager</label>
-						<div class="controls">
-							<select name="accountManager"
-								ng-model="vm.registration.accountManager.id"
-								validation="required:alt=required" class="form-input width-100"
-								ng-options="accounts.id as (accounts.description) for accounts in vm.lookups.am">
-								<option style="display: none" value="">...</option>
-							</select>
-						</div>
-					</div>
-					<div
-						class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-						<label class="control-label" for="bussDManager">Business
-							Dev Manager</label>
-						<div class="controls">
-							<select name="accountManager"
-								ng-model="vm.registration.bussDManager.id"
-								validation="required:alt=required" class="form-input width-100"
-								ng-options="bussDManager.id as (bussDManager.description) for bussDManager in vm.lookups.bdm">
-								<option style="display: none" value="">...</option>
-							</select>
-						</div>
-					</div>
-				</fieldset>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-					<fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Address Details</legend> 
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="clientAddress_address_line1">Address
-                                    Line 1</label>
-                                <div class="controls">
-                                    <input type="text" name="clientAddress_address_line1" id="address_line1"
-                                           ng-model="vm.registration.clientAddress.address1"
-                                           class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required field" />
-                                </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="division">Business Unit</label>
+                        <div class="controls">
+                            <select name="division" ng-model="vm.registration.division.id"
+                                    class="form-input width-100"
+                                    ng-options="division.id as (division.description) for division in vm.lookups.DIV"
+                                    validation="required:alt=required">
+                                <option style="display: none" value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="dob">Business Unit Head</label>
+                        <div class="controls">
+                            <select name="businessUnitHead"
+                                    ng-model="vm.registration.bussUnitHead.id"
+                                    validation="required:alt=required" class="form-input width-100"
+                                    ng-options="business.id as (business.description) for business in vm.lookups.buh">
+                                <option style="display: none" value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="dob">Account Manager</label>
+                        <div class="controls">
+                            <select name="accountManager"
+                                    ng-model="vm.registration.accountManager.id"
+                                    validation="required:alt=required" class="form-input width-100"
+                                    ng-options="accounts.id as (accounts.description) for accounts in vm.lookups.am">
+                                <option style="display: none" value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="bussDManager">Business
+                            Dev Manager</label>
+                        <div class="controls">
+                            <select name="accountManager"
+                                    ng-model="vm.registration.bussDManager.id"
+                                    validation="required:alt=required" class="form-input width-100"
+                                    ng-options="bussDManager.id as (bussDManager.description) for bussDManager in vm.lookups.bdm">
+                                <option style="display: none" value="">...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
+                    <div class="data-main-container">   
+                        <header class="data-main-container-header">Address Details</header> 
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="clientAddress_address_line1">Address
+                                Line 1</label>
+                            <div class="controls">
+                                <input type="text" name="clientAddress_address_line1" id="address_line1"
+                                       ng-model="vm.registration.clientAddress.address1"
+                                       class="form-input width-100" placeholder="Address Line 1"
+                                       validation="required:alt=Required field" />
                             </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="address_line2">Address
-                                    Line 2</label>
-                                <div class="controls">
-                                    <input type="text" name="clientAddress_address_line2" id="address_line1"
-                                           ng-model="vm.registration.clientAddress.address2"
-                                           class="form-input width-100" placeholder="Address Line 2"
-                                           ng-change="vm.checkAddress()" />
-                                </div>
+                        </div>
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="address_line2">Address
+                                Line 2</label>
+                            <div class="controls">
+                                <input type="text" name="clientAddress_address_line2" id="address_line1"
+                                       ng-model="vm.registration.clientAddress.address2"
+                                       class="form-input width-100" placeholder="Address Line 2"
+                                       ng-change="vm.checkAddress()" />
                             </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="clientAddress_country">Country</label>
-                                <div class="controls">
-                                    <select name="clientAddress_country" ng-model="vm.registration.clientAddress.city.state.country.id"
-                                        ng-change="vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id,'client')"
+                        </div>
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="clientAddress_country">Country</label>
+                            <div class="controls">
+                                <select name="clientAddress_country" ng-model="vm.registration.clientAddress.city.state.country.id"
+                                        ng-change="vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id, 'client')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         validation="required:alt=required">
-                                        <option style="display:none" value="">...</option>
-                                    </select>                                   
-                                </div>
+                                    <option style="display:none" value="">...</option>
+                                </select>                                   
                             </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="clientAddress_state">State</label>
-                                <div class="controls">
-                                    <select name="clientAddress_state" ng-model="vm.registration.clientAddress.city.state.id"
-                                        ng-change="vm.getCitiesByStates(vm.registration.clientAddress.city.state.id,'client')"
+                        </div>
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="clientAddress_state">State</label>
+                            <div class="controls">
+                                <select name="clientAddress_state" ng-model="vm.registration.clientAddress.city.state.id"
+                                        ng-change="vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, 'client')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
                                         validation="required:alt=required">
-                                 <option style="display:none" value="">...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="clientAddress_city">City</label>
-                                <div class="controls">
-                                    <select name="clientAddress_city" ng-model="vm.registration.clientAddress.city.id"
-                                        class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
-                                     <option style="display:none" value="">...</option>   
-                                </select> 
-                                    
-                                </div>
-                            </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="zip_code">ZIP Code</label>
-                                <div class="controls">
-                                    <input type="text" name="clientAddress_zip_code" id="zip_code"
-                                           ng-model="vm.registration.clientAddress.zipCode"
-                                           class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required field"
-                                           ng-change="vm.checkAddress()" />                                    
-                                </div>
-                            </div>
-                        </fieldset>
-				</div>
-				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-					<fieldset class="scheduler-border poc-section-wrapper">
-						<legend class="scheduler-border">Point Of Contact Details</legend>
-						<div class="poc-section">
-						<div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="pocName">POC Name</label>
-							<div class="controls">
-								<input type="text" name="pocName" id="pocName"
-									ng-model="vm.registration.poc.pocName"
-									class="form-input width-100" placeholder="POC Name"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						<div 
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                            <label class="control-label" for="designation">Designation</label>
-                            <div class="controls">
-                                <select name="designation" ng-model="vm.registration.poc.designation.id"
-                                    class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
-                                    validation="required:alt=required">
-                            <option style="display:none" value="">...</option>
+                                    <option style="display:none" value="">...</option>
                                 </select>
                             </div>
                         </div>
-						<div 
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                            <label class="control-label" for="country">Country</label>
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="clientAddress_city">City</label>
                             <div class="controls">
-                                <select name="onsiteAddress_country" ng-model="vm.registration.poc.country.id"
-                                    ng-change="vm.getStatesByCountry(vm.registration.poc.country.id,'onsite')"
-                                    class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                    validation="required:alt=required">
-                            <option style="display:none" value="">...</option>
+                                <select name="clientAddress_city" ng-model="vm.registration.clientAddress.city.id"
+                                        class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
+                                    <option style="display:none" value="">...</option>   
                                 </select> 
+
                             </div>
                         </div>
-                        <div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="contactNo">Contact no
-								(with Ext. code)</label>
-							<div class="controls">
-								<input type="text" name="poc.contactNo" id="poc.contactNo"
-									ng-model="vm.registration.poc.contactNo"
-									class="form-input width-100"
-									placeholder="Contact No (with Ext.)"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						<div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="contactNo">Mobile no</label>
-							<div class="controls">
-								<input type="text" name="poc.mobNo" id="poc.mobNo"
-									ng-model="vm.registration.poc.mobNo"
-									class="form-input width-100"
-									placeholder="Mobile No"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						<div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="areaOfWork">Area Of Work</label>
-							<div class="controls">
-								<input type="text" name="areaOfWork" id="areaOfWork"
-									ng-model="vm.registration.poc.areaOfWork"
-									class="form-input width-100"
-									placeholder="Area Of Work"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						</div>
-						<label class="control-label col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left add-poc" 
-						for="addPoc" ng-click="vm.createPocSection()">+ Add POC</label>
-					</fieldset>
-				</div>
-			</div>
+                        <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <label class="control-label" for="zip_code">ZIP Code</label>
+                            <div class="controls">
+                                <input type="text" name="clientAddress_zip_code" id="zip_code"
+                                       ng-model="vm.registration.clientAddress.zipCode"
+                                       class="form-input width-100" placeholder="ZIP Code"
+                                       validation="digits:6:alt=Must be 6 digits|required:alt=Required field"
+                                       ng-change="vm.checkAddress()" />                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
+                    <div class="data-main-container">   
+                        <header class="data-main-container-header">Point Of Contact Details</header>
+                        <div class="poc-section">
+                            <div
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="pocName">POC Name</label>
+                                <div class="controls">
+                                    <input type="text" name="pocName" id="pocName"
+                                           ng-model="vm.registration.poc.pocName"
+                                           class="form-input width-100" placeholder="POC Name"
+                                           validation="required:alt=Required field" />
+                                </div>
+                            </div>
+                            <div 
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="designation">Designation</label>
+                                <div class="controls">
+                                    <select name="designation" ng-model="vm.registration.poc.designation.id"
+                                            class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
+                                            validation="required:alt=required">
+                                        <option style="display:none" value="">...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div 
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="country">Country</label>
+                                <div class="controls">
+                                    <select name="onsiteAddress_country" ng-model="vm.registration.poc.country.id"
+                                            ng-change="vm.getStatesByCountry(vm.registration.poc.country.id, 'onsite')"
+                                            class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                            validation="required:alt=required">
+                                        <option style="display:none" value="">...</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="contactNo">Contact no
+                                    (with Ext. code)</label>
+                                <div class="controls">
+                                    <input type="text" name="poc.contactNo" id="poc.contactNo"
+                                           ng-model="vm.registration.poc.contactNo"
+                                           class="form-input width-100"
+                                           placeholder="Contact No (with Ext.)"
+                                           validation="required:alt=Required field" />
+                                </div>
+                            </div>
+                            <div
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="contactNo">Mobile no</label>
+                                <div class="controls">
+                                    <input type="text" name="poc.mobNo" id="poc.mobNo"
+                                           ng-model="vm.registration.poc.mobNo"
+                                           class="form-input width-100"
+                                           placeholder="Mobile No"
+                                           validation="required:alt=Required field" />
+                                </div>
+                            </div>
+                            <div
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="areaOfWork">Area Of Work</label>
+                                <div class="controls">
+                                    <input type="text" name="areaOfWork" id="areaOfWork"
+                                           ng-model="vm.registration.poc.areaOfWork"
+                                           class="form-input width-100"
+                                           placeholder="Area Of Work"
+                                           validation="required:alt=Required field" />
+                                </div>
+                            </div>
+                        </div>
+                        <label class="control-label col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left add-poc" 
+                               for="addPoc" ng-click="vm.createPocSection()">+ Add POC</label>
+                    </div>
+                </div>
+            </div>
 
-		</div>
-	</form>
-	    <div class="pull-right">
-        <button style="margin: 20px 0;" class="logout-button"
-                ng-click="vm.clientRegister()">Confirm and Register</button>
-    </div>
+        </div>
+    </form>
+     <div class="bottom-button-liner">        
+        <button ng-click="vm.clientRegister()"
+		class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
+		<span class="fa-stack fa-lg pull-left"><i
+			class="fa fa-check" aria-hidden="true"></i></span>
+                        <span class="text">Confirm and Register</span>              
+	</button>
+        </div>
 </div>
 
 

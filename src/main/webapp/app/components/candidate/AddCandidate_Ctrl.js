@@ -1,6 +1,7 @@
 (function () {
-    var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
+    var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, $timeout, validationService) {
         var vm = this;
+        vm.isFileInput=  false;
         $rootScope.showLoader = true;
         var countryType = ["permenant", "current", "onsite", "bank"];
         vm.setDpOpenStatus = function (id) {
@@ -60,7 +61,6 @@
             vm.removeFromSelectedListArray(vm.getIndexesToRemove(vm.mainSelectedSkillList, vm.deSelectedSkills));
         };
 
-
         $scope.steps = [
             'Personal',
             'Employment',
@@ -75,9 +75,12 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-            if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+            //if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
                 $scope.selection = $scope.steps[index];
-            }
+                $timeout(function(){angular.element('input[type=file]').bootstrapFileInput()
+                    vm.isFileInput = $scope.steps[index] == "Official" ? true : false;},500)
+                
+            //}
         };
 
         $scope.hasNextStep = function () {
@@ -193,7 +196,7 @@
             }
             return  indexes;
         };
-
+        
         vm.removeFromSelectedListArray = function (indexes) {
             var selected = [];
             for (var i = indexes.length - 1; i >= 0; i--)
@@ -276,14 +279,12 @@
                     });
         };
 
-    };
+    };   
 
-
-    AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];
+    AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService'];
     angular.module('coreModule')
             .controller('AddCandidate_Ctrl', AddCandidate_Ctrl);
 })();
-
 
 
 

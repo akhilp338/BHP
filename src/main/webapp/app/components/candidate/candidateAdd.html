@@ -3,7 +3,7 @@
         <h4 class="pull-left">Fill Candidate Details</h4>	
     </div>
     <div><div class="nav nav-tabs col-md-8 col-lg-8 col-sm-12 col-xs-12">
-        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-md-3 col-lg-3 col-sm-6 col-xs-12"
+        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-2 col-xs-2"
             ng-class="{active: $index == getCurrentStepIndex()}"><a
                 href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
         
@@ -618,6 +618,9 @@
                                            validation="required:alt=Required field" />
                                 </div>
                             </div>
+                            <div ng-show="vm.isFileInput" class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">   
+                                <input name="passbook-file" data-filename-placement="inside" type="file" title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload Passbook' class='upload-label'>upload passbook</span>" class="filestyle" data-input="false" data-buttonText="passbook" data-iconName="glyphicon glyphicon-inbox">
+                            </div>
                         </div>
                     </div>
 
@@ -762,6 +765,9 @@
                                     </span>
                                 </p>    
                                 </div>
+                            </div>
+                            <div ng-show="vm.isFileInput" class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">   
+                                <input name="passport-file" data-filename-placement="inside" type="file" title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload passport' class='upload-label'>upload passport</span>" class="filestyle" data-input="false" data-buttonText="passbook" data-iconName="glyphicon glyphicon-inbox">
                             </div>
                         </div>
                     </div>
@@ -914,7 +920,7 @@
             <button ng-click="incrementStep()"
 		class="logout-button pull-right add-button nextStep-btn">
                 <span class="text">Next Step</span> 
-		<span class="fa-stack fa-lg pull-left"><i
+		<span class="fa-stack fa-lg pull-right"><i
 			class="fa fa-chevron-right" aria-hidden="true"></i></span>
                                      
 	</button>
@@ -943,5 +949,5 @@
                         <span class="text">Confirm and Register</span>              
 	</button>
     </div>
-    <div class="clearfix"></div>
+    <div class="clearfix"></div>   
 </div>
