@@ -1556,7 +1556,9 @@ tr.selected {
 #calendar {
     height: 300px;
 }
-
+.offer-letter-template .item-label-desc {
+    padding-left: 0;
+}
 /*dashboard styles*/
 .panelSubTitle {
 	font-weight: bold;

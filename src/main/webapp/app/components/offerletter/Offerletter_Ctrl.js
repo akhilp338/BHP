@@ -161,7 +161,10 @@
                 vm.employeeSummary["Passport"] = data.passport.passportNo;;
                 vm.employeeSummary["Email Id"] = data.personalEmail;
                 vm.employeeSummary["Contact No"] = data.personalContactNo;
-                vm.employeeSummary["Skillset"] = data.skillSet.join(", ");
+                vm.employeeSummary["Skillset"] = [];
+                for(var j=0; j<data.skillSet.length; j++){
+                    vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)
+                }
                 for (var key in vm.employeeSummary) {
                     vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                             '<label class="item-label">' + key +
