@@ -5,212 +5,205 @@
     </div>
     <div class='emp-cand-table-wrapper'><table id="candidatesList" class="display"></table></div>
     <div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">
-        <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
-            <label class="item-label">Candidate Id : </label>
-            <p class="item-label-desc">{{vm.offerletter.display.candidateId}}</p>
-        </div>
-        <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
-            <label class="item-label">Name : </label>
-            <p class="item-label-desc">{{vm.offerletter.display.name}}</p>
-        </div>
+        <p>Please select atleast one candidate</p>
     </div>
-    <div class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div ng-if="vm.isCandidateSelected" class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="inner-wrapper col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="grossSalary">Gross Salary :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="grossSalary">Gross Salary :</label>
                 <input type="text" name="grossSalary" id="grossSalary"
                        ng-model="vm.offerletter.grossSalary"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
-                       validation="numeric:alt=Number only | required:alt=Required field" ng-blur="vm.getSalarySplits()"/>
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
+                       validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="grossSalary">Grade :</label>
-                    <select name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
-                            class="form-input col-md-6 col-lg-6 col-sm-12 col-xs-12" ng-options="gradeList.id as (gradeList.grade) for gradeList in vm.offerletter.grades">                   
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="grossSalary">Grade :</label>
+                    <select ng-change="vm.getSalarySplits()" name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
+                            class="form-input col-md-6 col-lg-6 col-sm-6 col-xs-6" ng-options="gradeList.grade as (gradeList.grade) for gradeList in vm.offerletter.grades">                   
                         <option style="display:none" value="">...</option>
                     </select>
             </div>
         </div>
         <div class=" total-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
-            <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Total : </label>
-            <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.total}}</p>
+            <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Total : </label>
+            <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.total}}</p>
         </div>
     </div>
-    <div class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div ng-if="vm.isCandidateSelected" class="outer-wrapper col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="inner-wrapper col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="heading-sub col-md-12 col-lg-12 col-sm-12 col-xs-12">Earnings</div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="basicSalary">Basic salary :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="basicSalary">Basic salary :</label>
                 <input type="text" name="basicSalary" id="basicSalary"
                        ng-model="vm.offerletter.basicSalary"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="hra">House Rent Allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="hra">House Rent Allowance :</label>
                 <input type="text" name="hra" id="hra"
                        ng-model="vm.offerletter.hra"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="medicalAllowance">Medical Allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="medicalAllowance">Medical Allowance :</label>
                 <input type="text" name="medicalAllowance" id="medicalAllowance"
                        ng-model="vm.offerletter.medicalAllowance"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="conveyanceAllowance">Conveyance Allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="conveyanceAllowance">Conveyance Allowance :</label>
                 <input type="text" name="conveyanceAllowance" id="conveyanceAllowance"
                        ng-model="vm.offerletter.conveyanceAllowance"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="telephone">Telephone allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="telephone">Telephone allowance :</label>
                 <input type="text" name="telephone" id="telephone"
                        ng-model="vm.offerletter.telephone"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="specialAllow">Special allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="specialAllow">Special allowance :</label>
                 <input type="text" name="specialAllow" id="specialAllow"
                        ng-model="vm.offerletter.specialAllow"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="personalAllow">Personal Dev. Allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="personalAllow">Personal Dev. Allowance :</label>
                 <input type="text" name="personalAllow" id="personalAllow"
                        ng-model="vm.offerletter.personalAllow"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="leaveEncash">Leave Travel allowance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="leaveEncash">Leave Travel allowance :</label>
                 <input type="text" name="leaveEncash" id="leaveEncash"
                        ng-model="vm.offerletter.leaveEncash"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="flexyBenKit">Flexi Benifit Kit :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="flexyBenKit">Flexi Benifit Kit :</label>
                 <input type="text" name="flexyBenKit" id="flexyBenKit"
                        ng-model="vm.offerletter.flexyBenKit"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="incentive">Incentive :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="incentive">Incentive :</label>
                 <input type="text" name="incentive" id="incentive"
                        ng-model="vm.offerletter.incentive"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="statutory">Statutory Bonus :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="statutory">Statutory Bonus :</label>
                 <input type="text" name="statutory" id="statutory"
                        ng-model="vm.offerletter.statutory"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="earnings-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Gross Salary : </label>
-                <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.grossCTC}}</p>
+                <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Gross Salary : </label>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.grossCTC}}</p>
             </div>
         </div>
         <div class="inner-wrapper deductions col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="heading-sub col-md-12 col-lg-12 col-sm-12 col-xs-12">Deductions</div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="proTax">Professional Tax :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="proTax">Professional Tax :</label>
                 <input type="text" name="proTax" id="proTax"
                        ng-model="vm.offerletter.proTax"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="pfCompContrbtn">PF Contribution by employer :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="pfCompContrbtn">PF Contribution by employer :</label>
                 <input type="text" name="pfCompContrbtn" id="pfCompContrbtn"
                        ng-model="vm.offerletter.pfCompContrbtn"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="pfEmpContrbtn">PF Contribution by employee :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="pfEmpContrbtn">PF Contribution by employee :</label>
                 <input type="text" name="pfEmpContrbtn" id="pfEmpContrbtn"
                        ng-model="vm.offerletter.pfEmpContrbtn"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="esiByEmplye">ESI Contribution by employer :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="esiByEmplye">ESI Contribution by employer :</label>
                 <input type="text" name="esiByEmplye" id="esiByEmplye"
                        ng-model="vm.offerletter.esiByEmplye"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="esiByEmplyr">ESI Contribution by employee :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="esiByEmplyr">ESI Contribution by employee :</label>
                 <input type="text" name="esiByEmplyr" id="esiByEmplyr"
                        ng-model="vm.offerletter.esiByEmplyr"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployer">EPF Contribution by employer :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="epfEmployer">EPF Contribution by employer :</label>
                 <input type="text" name="epfEmployer" id="pfEmployer"
                        ng-model="vm.offerletter.epfEmployer"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployee">EPF Contribution by employee :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="epfEmployee">EPF Contribution by employee :</label>
                 <input type="text" name="epfEmployee" id="epfEmployee"
                        ng-model="vm.offerletter.epfEmployee"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="leaveEncash">Leave Encashment :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="leaveEncash">Leave Encashment :</label>
                 <input type="text" name="leaveEncash" id="leaveEncash"
                        ng-model="vm.offerletter.leaveEncash"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="epfEmployer">Insurance :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="epfEmployer">Insurance :</label>
                 <input type="text" name="insurance" id="insurance"
                        ng-model="vm.offerletter.insurance"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="gratuity">Gratuity :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="gratuity">Gratuity :</label>
                 <input type="text" name="gratuity" id="gratuity"
                        ng-model="vm.offerletter.gratuity"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-6 col-lg-6 col-sm-12 col-xs-12" for="totalDeductions">Total Deductions :</label>
+                <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="totalDeductions">Total Deductions :</label>
                 <input type="text" name="totalDeductions" id="totalDeductions"
                        ng-model="vm.offerletter.totalDeductions"
-                       class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-input" placeholder="Amount"
+                       class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
             <div class="deductions-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Gross CTC : </label>
-                <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.grossCTC}}</p>
+                <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Gross CTC : </label>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.grossCTC}}</p>
             </div> 
         </div>
         <div class="takeHome-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <label class="item-label col-md-6 col-lg-6 col-sm-12 col-xs-12">Net Take Home Before TDS : </label>
-            <p class="item-label-desc col-md-6 col-lg-6 col-sm-12 col-xs-12">{{vm.offerletter.takeHome.total}}</p>
+            <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Net Take Home Before TDS : </label>
+            <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.takeHome.total}}</p>
         </div>
     </div>
-    <div class="bottom-button-liner">        
+    <div ng-if="vm.isCandidateSelected" class="bottom-button-liner">        
         <button ng-click="vm.verifyOfferLetter()"
                 class="logout-button pull-right add-button verify-btn" title="verify">
             <span class="fa-stack fa-lg pull-left"><i

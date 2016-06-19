@@ -12,7 +12,7 @@
 	background-color: #ACF7C3;
 }
 
-body {
+body, html {
 	background-color: #FFFFFF;
 }
 
@@ -241,124 +241,33 @@ body {
 	padding-left: 0;
 }
 
-@
--moz-keyframes wrong-log { 0%, 100% {
+@-moz-keyframes wrong-log { 0%, 100% {
 	left: 0px;
 }
-
-20%
-,
-60%
-{
-left
-
-
-:
-
- 
-
-15
-px
-
-
-;
+20%,
+60%{
+left:15px;
 }
-40%
-,
-80%
-{
-left
-
-
-:
-
- 
-
--15
-px
-
-
-;
+40%,80%{
+left:-15px;}
 }
-}
-@
--webkit-keyframes wrong-log { 0%, 100% {
+@-webkit-keyframes wrong-log { 0%, 100% {
 	left: 0px;
 }
-
-20%
-,
-60%
-{
-left
-
-
-:
-
- 
-
-15
-px
-
-
-;
+20%,60%{
+left:15px;}
+40%,80%{
+left:-15px;}
 }
-40%
-,
-80%
-{
-left
-
-
-:
-
- 
-
--15
-px
-
-
-;
-}
-}
-@
-keyframes wrong-log { 0%, 100% {
+@keyframes wrong-log { 0%, 100% {
 	left: 0px;
 }
-
-20%
-,
-60%
+20%,60%
 {
-left
-
-
-:
-
- 
-
-15
-px
-
-
-;
+left:15px;
 }
-40%
-,
-80%
-{
-left
-
-
-:
-
- 
-
--15
-px
-
-
-;
+40%,80%{
+left:-15px;
 }
 }
 
@@ -394,36 +303,10 @@ px
 	margin-left: 30px;
 }
 
-.header-div
- 
-x
-:not
- 
-(
-.login-page
- 
-)
+.header-divx:not(.login-page)
 {
-height
-:
- 
-80
-px
-;
-
-	
-border-bottom
-:
- 
-1
-px
- 
-solid
- 
-gray
-;
-
-
+height:80px;	
+border-bottom:1px solid gray;
 }
 .user-logo {
 	border: 1px solid #ccc;
@@ -833,58 +716,10 @@ span.sub-section {
 	background-color: #F1F1F1;
 }
 
-#candidatesList
- 
-tbody
- 
-tr
- 
-td
-:not
- 
-(
-:last-child
- 
-),
-#candidatesList
- 
-thead
- 
-tr
- 
-th
-:not
-
-	
-(
-:last-child
- 
-),
-#candidatesList
- 
-tfoot
- 
-tr
- 
-th
-:not
- 
-(
-:last-child
- 
-){
-border-right
-:
- 
-1
-px
- 
-solid
- 
-#DDD
-;
-
-
+#candidatesList tbody tr td:not(:last-child),
+#candidatesList thead tr th :not(:last-child),
+#candidatesList tfoot tr th :not(:last-child){
+border-right:1px solid #DDD;
 }
 table.dataTable thead th, table.dataTable tfoot th {
 	color: #666;
@@ -1071,29 +906,9 @@ input[type=text]:focus, textarea:focus {
 	padding-left: 10px !important;
 }
 
-.dataTable
- 
-thead
- 
-th
-:not
- 
-(
-:last-child
- 
-){
-border-right
-:
- 
-1
-px
- 
-solid
- 
-#DDDDDD
-;
-
-
+.dataTable thead th
+:not(:last-child){
+border-right:1px solid #DDDDDD;
 }
 .copyright.text-center {
 	color: white;
@@ -1741,3 +1556,95 @@ tr.selected {
 #calendar {
     height: 300px;
 }
+
+/*dashboard styles*/
+.panelSubTitle {
+	font-weight: bold;
+	color: #099ff4;
+	margin-top: 10px;
+}
+.create-button{
+	margin-bottom: 10px;
+}
+.panel-body {
+	box-shadow: 5px 5px 5px #888888;
+	border-radius: 15px;
+}
+.glyphicon-plus{
+	margin-right: 5px;
+}
+.panel{
+	border-radius: 15px;
+	margin: 0px;
+}
+.exampleInputEmail{
+	margin: 20px 0px;
+	padding: 0px 5px;
+}
+.card-wrap{
+	position: relative;
+    overflow: auto;
+    clear: both;
+    margin: 20px 0px;
+}
+.panel-body.green-card {
+	background-color: #38e5a5;
+	padding: 0;
+	border-radius: 15px;
+}
+.panel-body.orange-card {
+	background-color: #ffe083;
+	padding: 0;
+	border-radius: 15px;
+}
+.card-font {
+	font-size: 90px;
+	font-weight: 900;
+	color: white;
+	text-align: center;
+	margin: 0;
+}
+.card-font-top {
+	font-size: 18px;
+	text-align: center;
+	color: white;
+	margin: 0;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 0;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+.card-font-bottom {
+	height: 80px;
+	border-radius: 0;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+.projectPipeline{
+	overflow: hidden;
+	clear: both;
+}
+.pipeline-font {
+	display: inline-block;
+	float: left;
+	color: #099ff4;
+}
+@media screen and (min-width: 1024px) {
+    .card-wrap.number-card{
+    	width: 50%;
+    	float: left;
+    	clear: none;
+    	margin-top: 0;
+    }
+    .card-wrap.pipeline-card{
+    	width: 50%;
+    	float: right;
+    	clear: none;
+    	margin-top: 0;
+    }
+    .card-wrap.pipeline-card .panel-body{
+    	height: 240px;
+    }
+}
+/*End dashboard styles*/

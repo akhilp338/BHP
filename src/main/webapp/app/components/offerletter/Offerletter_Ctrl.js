@@ -4,12 +4,12 @@
         vs = new validationService({
             controllerAs: vm
         });
-
+        vm.isCandidateSelected = false;
         vm.offerletter = {};
         $rootScope.salaryCreds = {};
-        vm.offerletter.earnings = {};
-        vm.offerletter.deductions = {};
+        vm.employeeSummary = {};
         vm.offerletter.display = {};
+        vm.offerletter.id = $rootScope.selectedCandId ;
         vs.setGlobalOptions({
             debounce: 1500,
             scope: $scope,
@@ -17,19 +17,21 @@
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-
-        if ($stateParams.id) {
-            Core_Service.getCandidateImpl("api/candidate/getCandidate", $stateParams.id).then(function (res) {
+        
+            Core_Service.getCandidateImpl("api/candidate/getCandidate", $rootScope.selectedCandId).then(function (res) {
                 vm.getSalaryGrades();
                 vm.offerletter.display.candidateId = res.data.candidateId;
                 vm.offerletter.display.name = res.data.firstName + " " + res.data.lastName;
             }, function (err) {
                 vm.registration = {};
             });
-        }
-
+        
         vm.verifyOfferLetter = function () {
-            $state.go("coreuser.candidate.verify", {verifyId: $stateParams.id})
+            $rootScope.verifyParams = {
+                fixed:vm.offerletter.grossSalary,
+                grade:vm.offerletter.selectedGrade
+            };
+            $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandId})
         };
 
         vm.getSalaryGrades = function () {
@@ -42,22 +44,27 @@
                     });
         };
 
-        vm.getSalarySplits = function () {
+        vm.getSalarySplits = function (params) {
             vm.url = "api/candidate/getSalarySplit";
-            Core_Service.getSalaryDetails(vm.url, this.offerletter.grossSalary)
-                    .then(function (response) {                           
-                            if($stateParams.id)
-                              vm.offerletter = response.data;
-                            else if($stateParams.verifyId)
-                            
+            if(!params){
+                params = {
+                    fixed:vm.offerletter.grossSalary,
+                    grade:vm.offerletter.selectedGrade
+                }
+            }
+            Core_Service.getSalaryDetails(vm.url,params)
+                    .then(function (response) {    
+                        angular.extend(vm.offerletter,params);
+                        angular.extend(vm.offerletter,response.data);
                     }, function (error) {
                         console.log(error)
                     });
         };
-
+        ($stateParams.verifyId && $rootScope.verifyParams) ? vm.getSalarySplits($rootScope.verifyParams) : $state.go("coreuser.offerletter");
         vm.back = function () {
-            $state.go("coreuser.candidate.offerletter")
+            $state.go("coreuser.offerletter");
         };
+        $rootScope.active = 'offerletter';
         angular.element(document).ready(function () {
             addEmployeeTable = angular.element('#candidatesList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getCandidates?employee=true",
@@ -109,23 +116,7 @@
                 vm.Employeetemplate = "";
                 $(".candidate-summary").removeClass("init")
                 var data = addEmployeeTable.data()[$(this).index()];
-                vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
-                vm.employeeSummary["Candidate Id"] = data.candidateId;
-                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
-                vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
-                vm.employeeSummary["Designation"] = data.designation.description;
-                vm.employeeSummary["Passport"] = data.passport.passportNo;
-                ;
-                vm.employeeSummary["Email Id"] = data.personalEmail;
-                vm.employeeSummary["Contact No"] = data.personalContactNo;
-                vm.employeeSummary["Skillset"] = data.skillSet.join(", ");
-                for (var key in vm.employeeSummary) {
-                    vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
-                            '<label class="item-label">' + key +
-                            '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
-                            '</p></div>';
-                }
-                $(".candidate-summary").html(vm.Employeetemplate);
+                vm.getEmployeeSummary(data)
             });
 
             $('#candidatesList').on('click', '.action-view', function () {
@@ -133,6 +124,8 @@
                 vm.getCandidate(this.getAttribute('value'));
             });
             $('#candidatesList tbody').on('click', 'tr', function () {
+                vm.isCandidateSelected = true;
+                $scope.$apply()
                 if ($(this).hasClass('selected')) {
                     $(this).removeClass('selected');
                 } else {
@@ -159,6 +152,24 @@
                 });
             }
 
+        vm.getEmployeeSummary = function(data){
+                vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
+                vm.employeeSummary["Candidate Id"] = data.candidateId;
+                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+                vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
+                vm.employeeSummary["Designation"] = data.designation.description;
+                vm.employeeSummary["Passport"] = data.passport.passportNo;;
+                vm.employeeSummary["Email Id"] = data.personalEmail;
+                vm.employeeSummary["Contact No"] = data.personalContactNo;
+                vm.employeeSummary["Skillset"] = data.skillSet.join(", ");
+                for (var key in vm.employeeSummary) {
+                    vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                            '<label class="item-label">' + key +
+                            '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
+                            '</p></div>';
+                }
+                $(".candidate-summary").html(vm.Employeetemplate);
+        }
         });
 
     };

@@ -6,7 +6,7 @@
             {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"},
             {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"},
             {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"},
-            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome"},
+            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletter"},
             {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
         ];
         $rootScope.isLogin = false;

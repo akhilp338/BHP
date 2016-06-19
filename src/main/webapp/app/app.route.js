@@ -94,29 +94,23 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.offerletterhome', {
-            url: urlConfig.root_path+'offerletterhome',
+        })
+        
+        //offerletter processing
+        .state('coreuser.offerletter', {
+            url: urlConfig.root_path+'offerletter',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.html',
-                    controller: 'Offer_Letter_Home_Ctrl',
-                    controllerAs: 'vm'
-                }
-            }
-        }).state('coreuser.candidate.offerletter', {
-            url: '/offerletter/:id',
-            views: {               
-                'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/candidate/offerletter.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletter.html',
                     controller: 'Offerletter_Ctrl',
                     controllerAs: 'vm'
                 }
             }
-        }).state('coreuser.candidate.verify', {
+        }).state('coreuser.offerletter.verify', {
             url: '/offerletter/verify/:verifyId',
             views: {               
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/candidate/offerVerify.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',
                     controller: 'Offerletter_Ctrl',
                     controllerAs: 'vm'
                 }

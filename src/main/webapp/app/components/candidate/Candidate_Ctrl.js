@@ -113,7 +113,7 @@ var candidatesListTable;
             var data = candidatesListTable.data()[index];
             if(data && data.id){
               vm.errorAlert = false;              
-              $state.go("coreuser.candidate.offerletter",{id:data.id});  
+              $state.go("coreuser.offerletter",{id:data.id});  
             }
             else{
               vm.errorAlert = true;

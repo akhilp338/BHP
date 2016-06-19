@@ -75,9 +75,8 @@
 <script src="/BelhopatBackOffice/app/components/opportunity/Opp_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/event/EventManagement_Ctrl.js"></script>
-<script src="/BelhopatBackOffice/app/components/candidate/Offerletter_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/offerletter/Offerletter_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
-<script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
 
 
 <style>

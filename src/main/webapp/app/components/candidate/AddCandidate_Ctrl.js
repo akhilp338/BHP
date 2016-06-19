@@ -5,8 +5,7 @@
         var countryType = ["permenant", "current", "onsite", "bank"];
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
-        };
-
+        };         
         vm.registration = {};
         vm.mainSelectedSkillList = [];
         vm.subSelectedSkillList = [];

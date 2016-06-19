@@ -1,6 +1,6 @@
 (function () {
-    var EventManagement_Ctrl = function ($scope, uiCalendarConfig, $rootScope, Core_Service,urlConfig, $stateParams, Core_HttpRequest, validationService) {
-        var vm = this;
+    var EventManagement_Ctrl = function ($scope, $rootscope, uiCalendarConfig, $rootScope, Core_Service,urlConfig, $stateParams, Core_HttpRequest, validationService) {
+        var vm = this;        
         vm.calander = angular.element("#calendar").fullCalendar({
     header: {
             left: 'prev,next today',
@@ -68,11 +68,11 @@
             }
         ],
         dayClick: function(date, jsEvent, view) {
-        $('#calendar').fullCalendar('rerenderEvents');
+        $('#calendar').fullCalendar('rerenderEvents');        
         alert('Clicked on: ' + date.format());
     }
-        })
-console.log(vm.calander)
+        });
+       
     }
     EventManagement_Ctrl.$inject = ["$scope", 'uiCalendarConfig', '$rootScope', 'Core_Service','urlConfig', '$stateParams', 'Core_HttpRequest', 'validationService'];
     angular.module('coreModule')
