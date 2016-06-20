@@ -1,30 +1,109 @@
 package com.belhopat.backoffice.pdf;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
 
 import com.belhopat.backoffice.util.DateUtil;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfCopy;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class OfferLetterPDF extends BasePDFGenerator {
-	public void getPDFContents(Document document)
-			throws MalformedURLException, IOException, DocumentException, ParseException {
+	public byte[] getPDFContents() throws MalformedURLException, IOException, DocumentException, ParseException {
+		String fileName = "OfferLetter.pdf";
+		// ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
+		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
+		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+		writer.setBoxSize("art", PageSize.A4);
+		HeaderFooterEvent event = new HeaderFooterEvent();
+		writer.setPageEvent(event);
+		addContentToDocument(document);
+		// PdfCopy pdfCopy = new PdfSmartCopy(document, outputStream);
+		// String annexureAPath = getContextPath() + PDFConstants.PDF_RES_PATH +
+		// PDFConstants.ANEX_A;
+		// InputStream anexA = new FileInputStream(annexureAPath);
+		// PdfReader annexureAReader = new PdfReader(anexA);
+		// int pages = annexureAReader.getNumberOfPages();
+		// PdfImportedPage annexureAPage =
+		// writer.getImportedPage(annexureAReader, pages);
+		// String annexureBPath = getContextPath() + PDFConstants.PDF_RES_PATH +
+		// PDFConstants.ANEX_B;
+		// InputStream anexB = new FileInputStream(annexureBPath);
+		// PdfReader annexureBReader = new PdfReader(anexB);
+		// PdfImportedPage annexureBPage =
+		// writer.getImportedPage(annexureBReader, pages);
+		// pdfCopy.addPage(annexureAPage);
+		// pdfCopy.addPage(annexureBPage);
+		// annexureAReader.close();
+		// annexureBReader.close();
+		document.close();
+		outputStream.close();
+		// return utputStream.toByteArray();
+		return null;
+	}
+
+	public void testPdf() throws DocumentException, IOException {
+
+		String annexureBPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.ANEX_B;
+		String annexureAPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.ANEX_A;
+		String[] files = { annexureAPath, annexureBPath };
+		// step 1
+		Document document = new Document();
+		// step 2
+		PdfCopy copy = new PdfCopy(document, new FileOutputStream("/home/sujith/Desktop/a.pdf"));
+		// step 3
+		document.open();
+		// step 4
+		PdfReader reader;
+		int n;
+		// loop over the documents you want to concatenate
+		for (int i = 0; i < files.length; i++) {
+			reader = new PdfReader(files[i]);
+			// loop over the pages in that document
+			n = reader.getNumberOfPages();
+			for (int page = 0; page < n;) {
+				copy.addPage(copy.getImportedPage(reader, ++page));
+			}
+			copy.freeReader(reader);
+		}
+		// step 5
+		document.close();
+	}
+
+	private void addContentToDocument(Document document)
+			throws DocumentException, ParseException, MalformedURLException, IOException {
+		document.open();
 		document.add(getHeading());
 		document.add(getHeadingContent());
 		document.add(getAcceptanceAndCommencementContent());
 		document.add(getConfidentialityContent());
-		document.add(getCompensationContent()); 
-		document.add(getProbationContent()); 
+		document.add(getCompensationContent());
+		document.add(getProbationContent());
 		document.add(getWorkingHoursContent());
-		}
+		document.newPage();
+		document.add(getCodeOfConductContent());
+		document.add(getEndingContent());
+		document.add(getAcknowledgementContent());
+		document.newPage();
+		document.add(getCompensationStructureTable());
+	}
 
 	private PdfPTable getAcceptanceAndCommencementContent() {
 		PdfPTable acceptanceAndCommencementContent = new PdfPTable(1);
@@ -34,7 +113,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		acceptanceAndCommencementContent.addCell(getAcceptanceAndCommencementParagraph());
 		return acceptanceAndCommencementContent;
 	}
-	
+
 	private PdfPTable getConfidentialityContent() {
 		PdfPTable confidentialityContent = new PdfPTable(1);
 		confidentialityContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
@@ -43,7 +122,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		confidentialityContent.addCell(getConfidentialityParagraph());
 		return confidentialityContent;
 	}
-	
+
 	private PdfPTable getCompensationContent() {
 		PdfPTable compensationContent = new PdfPTable(1);
 		compensationContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
@@ -52,7 +131,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		compensationContent.addCell(getCompensationParagraph());
 		return compensationContent;
 	}
-	
+
 	private PdfPTable getProbationContent() {
 		PdfPTable probationContent = new PdfPTable(1);
 		probationContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
@@ -71,6 +150,34 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return workingHoursContent;
 	}
 
+	private PdfPTable getCodeOfConductContent() {
+		PdfPTable codeOfConductContent = new PdfPTable(1);
+		codeOfConductContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		codeOfConductContent.setWidthPercentage(100f);
+		codeOfConductContent.addCell(getParagraphHeading("Code of Conduct"));
+		codeOfConductContent.addCell(getCodeOfConductParagraph());
+		return codeOfConductContent;
+	}
+
+	private PdfPTable getEndingContent() throws BadElementException, MalformedURLException, IOException {
+		PdfPTable endContent = new PdfPTable(1);
+		endContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		endContent.setWidthPercentage(100f);
+		endContent.addCell(getEndingParagraph());
+		endContent.addCell(getSignAndSeal());
+		endContent.addCell(getHRDetails());
+		return endContent;
+	}
+
+	private PdfPTable getAcknowledgementContent() {
+		PdfPTable acceptanceAndCommencementContent = new PdfPTable(1);
+		acceptanceAndCommencementContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		acceptanceAndCommencementContent.setWidthPercentage(100f);
+		acceptanceAndCommencementContent.addCell(getAcknoledgementHeading());
+		acceptanceAndCommencementContent.addCell(getAcknoledgementParagraph());
+		return acceptanceAndCommencementContent;
+	}
+
 	private Paragraph getAcceptanceAndCommencementParagraph() {
 		Paragraph aAndCPara = new Paragraph();
 		Chunk part1 = new Chunk("Your appointment will be effective from ", normal10Font);
@@ -84,37 +191,44 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		aAndCPara.add(part2);
 		return aAndCPara;
 	}
-	
+
 	private Paragraph getConfidentialityParagraph() {
 		Paragraph confidentialityPara = new Paragraph();
-		Chunk content = new Chunk("Sharing the details of your offer with others would imply a breach of confidentiality"
-				+ " and could invite suitable disciplinary action. This is a very private and confidential document. "
-				+ "Please maintain the confidentiality and ensure that the details of your offer are not shared"
-				+ " with anyone outside the Human Resource Team of Belhopat.", normal10Font);
+		Chunk content = new Chunk(
+				"Sharing the details of your offer with others would imply a breach of confidentiality"
+						+ " and could invite suitable disciplinary action. This is a very private and confidential document. "
+						+ "Please maintain the confidentiality and ensure that the details of your offer are not shared"
+						+ " with anyone outside the Human Resource Team of Belhopat.",
+				normal10Font);
 		confidentialityPara.add(content);
 		return confidentialityPara;
 	}
-	
+
 	private Paragraph getCompensationParagraph() {
 		Paragraph compensationPara = new Paragraph();
-		Chunk part1 = new Chunk("Your Annual Gross Cost To The Company, hereafter referred to as Annual Gross CTC will be ", normal10Font);
+		Chunk part1 = new Chunk(
+				"Your Annual Gross Cost To The Company, hereafter referred to as Annual Gross CTC will be ",
+				normal10Font);
 		Chunk salaryAmount = new Chunk("INR 6,50,000/- (Six Lakhs and Fifty Thousand Indian Rupees Only).", bold10Font);
-		Chunk part2 = new Chunk(" The deductions as per the company policies and the government norms would be applicable . "
-				+ "Your compensation and benefits may be amended at the sole discretion of the company.", normal10Font);
+		Chunk part2 = new Chunk(
+				" The deductions as per the company policies and the government norms would be applicable . "
+						+ "Your compensation and benefits may be amended at the sole discretion of the company.",
+				normal10Font);
 		compensationPara.add(part1);
 		compensationPara.add(salaryAmount);
 		compensationPara.add(part2);
 		return compensationPara;
 	}
-	
+
 	private Paragraph getProbationParagraph() {
 		Paragraph probationPara = new Paragraph();
-		Chunk content = new Chunk("The first 6 months from your date of joining would be "
-				+ "considered as the probationary period.", normal10Font);
+		Chunk content = new Chunk(
+				"The first 6 months from your date of joining would be " + "considered as the probationary period.",
+				normal10Font);
 		probationPara.add(content);
 		return probationPara;
 	}
-	
+
 	private Paragraph getWorkingHoursParagraph() {
 		Paragraph WorkingHoursPara = new Paragraph();
 		Chunk content = new Chunk("The general work timing at Belhopat is from 9 AM to 6:30 PM. "
@@ -122,6 +236,97 @@ public class OfferLetterPDF extends BasePDFGenerator {
 				+ "We presently have a five-day (Monday to Friday) work week.", normal10Font);
 		WorkingHoursPara.add(content);
 		return WorkingHoursPara;
+	}
+
+	private PdfPTable getCodeOfConductParagraph() {
+		PdfPTable codeOfCunductPara = new PdfPTable(new float[] { 1, 12 });
+		codeOfCunductPara.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		String[] listItems = {
+				"You shall be governed by the Company’s rules and regulations that may be promulgated from time to time.",
+				"You shall take up any assignment that may be offered to you by the company.",
+				"You shall be expected to abide by the rules and regulations of the company, be courteous, "
+						+ "honest and professional within the company or with its clients/customers, "
+						+ "and maintain and represent the Company’s high standards of professional Services at all times, "
+						+ "whether in the Company or at its client’s site(s).",
+				"You shall be responsible for all company properties and material that are in your possession, like telephones, "
+						+ "computers, and projectors etc. that have been provided to you.",
+				"You shall not publicly criticize, defame or misrepresent the Company and shall not, knowingly or unknowingly "
+						+ "commit any such actions which may result in the Company’s image or business being adversely affected.",
+				"During the course of your employment with the Company and 2 years after that, "
+						+ "you will not solicit business of any nature, either directly or indirectly, "
+						+ "for yourself, or for any other party, from the Company’s clients and / or customers." };
+		Phrase bullet = new Phrase(String.valueOf((char) 108), zapfdingbats);
+		for (String item : listItems) {
+			codeOfCunductPara.addCell(bullet);
+			codeOfCunductPara.addCell(new Phrase(item + " ", normal10Font));
+		}
+		return codeOfCunductPara;
+	}
+
+	private Paragraph getEndingParagraph() {
+		Paragraph endingPara = new Paragraph();
+		Chunk part1 = new Chunk(
+				"We hope your association with us will be mutually beneficial, pleasant and fulfilling. "
+						+ "Please return the duplicate copy of this letter, duly signed, in token of your acceptance.",
+				normal10Font);
+		Chunk regards = new Chunk("Warm Regards,", normal10Font);
+		Chunk companyName = new Chunk("For Belhopat Global Services Pvt. Ltd.", bold10Font);
+		endingPara.add(part1);
+		endingPara.add(Chunk.NEWLINE);
+		endingPara.add(Chunk.NEWLINE);
+		endingPara.add(Chunk.NEWLINE);
+		endingPara.add(regards);
+		endingPara.add(Chunk.NEWLINE);
+		endingPara.add(Chunk.NEWLINE);
+		endingPara.add(companyName);
+		return endingPara;
+	}
+
+	protected PdfPTable getSignAndSeal() throws BadElementException, MalformedURLException, IOException {
+		PdfPTable signAndSealTable = new PdfPTable(4);
+		signAndSealTable.setTotalWidth(PageSize.A4.getWidth());
+		signAndSealTable.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		signAndSealTable.getDefaultCell().setFixedHeight(80);
+		String signPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.HR_SIGN;
+		Image signImage = Image.getInstance(signPath);
+		String sealPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.BHP_SEAL;
+		Image sealImage = Image.getInstance(sealPath);
+		signAndSealTable.addCell(signImage);
+		signAndSealTable.addCell(sealImage);
+		signAndSealTable.completeRow();
+		return signAndSealTable;
+	}
+
+	private Phrase getHRDetails() {
+		Phrase HRPhrase = new Phrase();
+		Chunk name = new Chunk("Pallavi Mutagekar", bold10Font);
+		Chunk designation = new Chunk("Asst. HR Manager", bold10Font);
+		HRPhrase.add(Chunk.NEWLINE);
+		HRPhrase.add(name);
+		HRPhrase.add(Chunk.NEWLINE);
+		HRPhrase.add(designation);
+		HRPhrase.add(Chunk.NEWLINE);
+		return HRPhrase;
+	}
+
+	private Paragraph getAcknoledgementParagraph() {
+		Paragraph acknoledgementPara = new Paragraph();
+		Chunk para = new Chunk("I have read and understood the above terms and conditions of "
+				+ "employment and the implication thereof. I hereby accept the aforesaid terms and conditions "
+				+ "and agree to abide by the same.", normal10Font);
+		Chunk name = new Chunk("Name:", normal10Font);
+		Chunk sign = new Chunk("Signature:", normal10Font);
+		Chunk date = new Chunk("                                                                    " + "Date:",
+				normal10Font);
+		acknoledgementPara.add(para);
+		acknoledgementPara.add(Chunk.NEWLINE);
+		acknoledgementPara.add(Chunk.NEWLINE);
+		acknoledgementPara.add(name);
+		acknoledgementPara.add(Chunk.NEWLINE);
+		acknoledgementPara.add(Chunk.NEWLINE);
+		acknoledgementPara.add(sign);
+		acknoledgementPara.add(date);
+		return acknoledgementPara;
 	}
 
 	private Phrase getParagraphHeading(String headingText) {
@@ -132,6 +337,19 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		heading.add(Chunk.NEWLINE);
 		heading.add(Chunk.NEWLINE);
 		return heading;
+	}
+
+	private PdfPCell getAcknoledgementHeading() {
+		Phrase heading = new Phrase();
+		Chunk headingChunk = new Chunk("ACKNOWLEDGEMENT & ACCEPTANCE", underlined10Font);
+		heading.add(Chunk.NEWLINE);
+		heading.add(headingChunk);
+		heading.add(Chunk.NEWLINE);
+		heading.add(Chunk.NEWLINE);
+		PdfPCell headingCell = new PdfPCell(heading);
+		headingCell.setHorizontalAlignment(Rectangle.ALIGN_CENTER);
+		headingCell.setBorder(Rectangle.NO_BORDER);
+		return headingCell;
 	}
 
 	private PdfPTable getHeading() throws ParseException {
@@ -182,7 +400,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 
 	private Phrase getRefernceNumberCell() {
 		Phrase referenceNumberPhrase = new Phrase();
-		Chunk referenceNumberLabel = new Chunk("Your Belhopat Reference Number: ", bold10Font);
+		Chunk referenceNumberLabel = new Chunk("Your Belhopat Reference Number: ", normal10Font);
 		Chunk referenceNumber = new Chunk("CSOL-1602-01", bold10Font);
 		referenceNumberPhrase.add(Chunk.NEWLINE);
 		referenceNumberPhrase.add(referenceNumberLabel);
@@ -252,5 +470,92 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		companyPhrase.add(Chunk.NEWLINE);
 		companyPhrase.add(Chunk.NEWLINE);
 		return companyPhrase;
+	}
+
+	private PdfPTable getCompensationStructureTable() {
+		PdfPTable compensationStructure = new PdfPTable(1);
+		compensationStructure.setWidthPercentage(100f);
+		compensationStructure.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		compensationStructure.addCell(getPageHeading("Compensation Structure"));
+		compensationStructure.addCell(getNameAndDesignation());
+		compensationStructure.addCell(getCompensationStructureContent());
+		return compensationStructure;
+	}
+
+	private PdfPTable getCompensationStructureContent() {
+		PdfPTable CSContent = new PdfPTable(new float[] { 2, 1, 1 });
+		CSContent.setWidthPercentage(100f);
+		CSContent.addCell(getCellContent("Components", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("Per Month (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("Per Annum (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("Basic Salary"));
+		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("2,52,000", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("House Rent Allowance"));
+		CSContent.addCell(getCellContent("10,500", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("1,26,000", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Medical Allowance"));
+		CSContent.addCell(getCellContent("1,750", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Conveyance Allowance"));
+		CSContent.addCell(getCellContent("1,750", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Flexi Benefits Kit"));
+		CSContent.addCell(getCellContent("15,163", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("1,81,956", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Statutory Bonus"));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent("Gross Salary", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("50,163", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("6,01,956", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent("EPF Contribution by Belhopat"));
+		CSContent.addCell(getCellContent("1,800", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("21,600", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("ESI Contribution by Belhopat"));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Leave Encashment"));
+		CSContent.addCell(getCellContent("1,193", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("14,320", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Medical Insurance"));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("Gratuity"));
+		CSContent.addCell(getCellContent("1,010", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent("12,124", Rectangle.ALIGN_RIGHT));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent(""));
+		CSContent.addCell(getCellContent("Gross CTC", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("54,166", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+		CSContent.addCell(getCellContent("6,50,000", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+		return CSContent;
+	}
+
+	private PdfPTable getNameAndDesignation() {
+		PdfPTable nameAndDesig = new PdfPTable(2);
+		nameAndDesig.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		nameAndDesig.setSpacingAfter(30f);
+		nameAndDesig.addCell(new Phrase("Name", normal10Font));
+		nameAndDesig.addCell(new Phrase("-  Mr. Akhil Prakash", bold10Font));
+		nameAndDesig.addCell(new Phrase("Designation", normal10Font));
+		nameAndDesig.addCell(new Phrase("-  Senior Software Engineer", bold10Font));
+		return nameAndDesig;
+	}
+
+	private PdfPCell getPageHeading(String headingText) {
+		Phrase heading = new Phrase(headingText, bold12Font);
+		PdfPCell headingCell = new PdfPCell(heading);
+		headingCell.setBorder(Rectangle.NO_BORDER);
+		headingCell.setHorizontalAlignment(Rectangle.ALIGN_CENTER);
+		headingCell.setPaddingBottom(50f);
+		return headingCell;
 	}
 }

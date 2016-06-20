@@ -11,10 +11,8 @@ import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -26,15 +24,19 @@ public class BasePDFGenerator {
 
 	@Value("#{pdfConfiguration['pdf.resources.root']}")
 	private String pdfResourceRootPath;
-	
+
 	public Font italicGray10Font = new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC, BaseColor.GRAY);
 	public Font boldItalicGray10Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLDITALIC, BaseColor.GRAY);
 	public Font bold10Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
+	public Font underlined10Font = new Font(Font.FontFamily.HELVETICA, 10, Font.UNDERLINE);
 	public Font normal10Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
-	public void getPDFContents(Document document)
+	public Font bold12Font = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+	public Font zapfdingbats = new Font(Font.FontFamily.ZAPFDINGBATS, 8);
+
+	public byte[] getPDFContents()
 			throws MalformedURLException, IOException, DocumentException, ParseException {
-		document.add(new PdfPTable(1));
+		return null;
 	}
 
 	protected PdfPCell getDefaultContentCell() {
@@ -76,20 +78,50 @@ public class BasePDFGenerator {
 		return closingScriptTable;
 	}
 
-	protected PdfPCell getDetailNameCell(String detailName) {
-		Phrase detailNamePhrase = new Phrase(detailName);
-		detailNamePhrase.setFont(normal10Font);
-		PdfPCell detailNameCell = new PdfPCell(detailNamePhrase);
-		detailNameCell.setHorizontalAlignment(Rectangle.ALIGN_LEFT);
-		detailNameCell.setFixedHeight(20f);
-		return detailNameCell;
+	protected PdfPCell getCellContent(String content) {
+		Phrase valuePhrase = new Phrase(content);
+		valuePhrase.setFont(normal10Font);
+		PdfPCell valueCell = new PdfPCell(valuePhrase);
+		valueCell.setHorizontalAlignment(Rectangle.ALIGN_LEFT);
+		valueCell.setFixedHeight(20f);
+		return valueCell;
 	}
 
-	protected PdfPCell getDetailValueCell(String detailValue) {
-		Phrase detailValuePhrase = new Phrase(detailValue);
-		PdfPCell detailValueCell = new PdfPCell(detailValuePhrase);
-		detailValueCell.setHorizontalAlignment(Rectangle.ALIGN_RIGHT);
-		return detailValueCell;
+	protected PdfPCell getCellContent(String content, int horizontalAlignment) {
+		Phrase contentPhrase = new Phrase(content);
+		contentPhrase.setFont(normal10Font);
+		PdfPCell contentCell = new PdfPCell(contentPhrase);
+		contentCell.setHorizontalAlignment(horizontalAlignment);
+		contentCell.setFixedHeight(20f);
+		return contentCell;
+	}
+	
+	protected PdfPCell getCellContent(String content, int horizontalAlignment, Font font) {
+		Phrase contentPhrase = new Phrase(content);
+		contentPhrase.setFont(font);
+		PdfPCell contentCell = new PdfPCell(contentPhrase);
+		contentCell.setHorizontalAlignment(horizontalAlignment);
+		contentCell.setFixedHeight(20f);
+		return contentCell;
+	}
+
+	protected PdfPCell getCellContent(String content, int horizontalAlignment, BaseColor backgroundColor) {
+		Phrase contentPhrase = new Phrase(content);
+		contentPhrase.setFont(normal10Font);
+		PdfPCell contentCell = new PdfPCell(contentPhrase);
+		contentCell.setHorizontalAlignment(horizontalAlignment);
+		contentCell.setBackgroundColor(backgroundColor);
+		contentCell.setFixedHeight(20f);
+		return contentCell;
+	}
+	
+	protected PdfPCell getCellContent(String content, int horizontalAlignment,Font font, BaseColor backgroundColor) {
+		Phrase contentPhrase = new Phrase(content);
+		contentPhrase.setFont(font);
+		PdfPCell contentCell = new PdfPCell(contentPhrase);
+		contentCell.setHorizontalAlignment(horizontalAlignment);
+		contentCell.setBackgroundColor(backgroundColor);
+		return contentCell;
 	}
 
 	protected Anchor getAnchorElement(String text, String referenceUrl) {
@@ -98,9 +130,9 @@ public class BasePDFGenerator {
 		anchor.setReference(referenceUrl);
 		return anchor;
 	}
-	
+
 	protected Chunk getBelhopatWebLink() {
-		Chunk websiteRefChunk = new Chunk("www.belhopat.com",italicGray10Font);
+		Chunk websiteRefChunk = new Chunk("www.belhopat.com", italicGray10Font);
 		Anchor anchor = new Anchor(websiteRefChunk);
 		anchor.setReference("www.belhopat.com");
 		return websiteRefChunk;
@@ -110,20 +142,18 @@ public class BasePDFGenerator {
 		String catalinaHome = System.getProperty("catalina.base");
 		return catalinaHome;
 	}
-	
-    protected String getContextPath() {
-        String realPath = "";
-        if ( System.getProperty( "os.name" ).equalsIgnoreCase( "Linux" ) ) {
-            realPath = BelhopatServletContextInfo.getRealPath();
-        }
-        else if ( System.getProperty( "os.name" ).equalsIgnoreCase( "Windows" ) ) {
-            String contextPath = BelhopatServletContextInfo.getContextPath();
-            realPath = getCatalinaBase().concat( "/webapps" ).concat( contextPath );
-        }
-        else {
-            String contextPath = BelhopatServletContextInfo.getContextPath();
-            realPath = getCatalinaBase().concat( "/webapps" ).concat( contextPath );
-        }
-        return realPath;
-    }
+
+	protected String getContextPath() {
+		String realPath = "";
+		if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			realPath = BelhopatServletContextInfo.getRealPath();
+		} else if (System.getProperty("os.name").equalsIgnoreCase("Windows")) {
+			String contextPath = BelhopatServletContextInfo.getContextPath();
+			realPath = getCatalinaBase().concat("/webapps").concat(contextPath);
+		} else {
+			String contextPath = BelhopatServletContextInfo.getContextPath();
+			realPath = getCatalinaBase().concat("/webapps").concat(contextPath);
+		}
+		return realPath;
+	}
 }
