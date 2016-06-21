@@ -1,6 +1,11 @@
 (function () {
-    var EventManagement_Ctrl = function ($scope, uiCalendarConfig, $rootScope, Core_ModalService) {
-        var vm = this;        
+    var EventManagement_Ctrl = function ($scope, Core_Service, uiCalendarConfig, $rootScope, Core_ModalService) {
+        var vm = this;   
+        Core_Service.getAllEvents("api/event/getEvents").then(function (res){
+            console.log(res)
+        },function (err){
+            onsole.log(err)
+        });
         vm.calander = angular.element("#calendar").fullCalendar({
     header: {
             left: 'prev,next today',
@@ -73,12 +78,12 @@
         //alert('Clicked on: ' + date.format());
     },
     eventResize: function (event, dayDelta, minuteDelta) {
-                 
+                 console.log(event)
              }
         });
        
     }
-    EventManagement_Ctrl.$inject = ["$scope", 'uiCalendarConfig', '$rootScope', 'Core_ModalService'];
+    EventManagement_Ctrl.$inject = ["$scope", 'Core_Service','uiCalendarConfig', '$rootScope', 'Core_ModalService'];
     angular.module('coreModule')
             .controller('EventManagement_Ctrl', EventManagement_Ctrl);
 })();
