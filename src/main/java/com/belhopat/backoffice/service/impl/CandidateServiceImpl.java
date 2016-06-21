@@ -26,7 +26,6 @@ import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
-import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
@@ -51,10 +50,10 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	CandidateRepository candidateRepository;
-	
+
 	@Autowired
 	SalaryGradeRepository salaryGradeRepository;
-	
+
 	@Autowired
 	EmployeeSalaryRepository employeeSalaryRepository;
 
@@ -79,7 +78,7 @@ public class CandidateServiceImpl implements CandidateService {
 				if (employee) {
 					Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
 					return criteriaBuilder.and(isNotDeleted, employeeStatus);
-					
+
 				}
 				return criteriaBuilder.and(isNotDeleted);
 			}
@@ -422,16 +421,17 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input) {
-			Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
-				@Override
-				public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
-						CriteriaBuilder criteriaBuilder) {
-					Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
-					return criteriaBuilder.and(isNotDeleted);
-				}
-			};
-			DataTablesOutput<EmployeeSalary> dataTablesOutput = employeeSalaryRepository.findAll(input/*, specification*/);
-			return dataTablesOutput;
+		Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
+			@Override
+			public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
+					CriteriaBuilder criteriaBuilder) {
+				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
+				return criteriaBuilder.and(isNotDeleted);
+			}
+		};
+		DataTablesOutput<EmployeeSalary> dataTablesOutput = employeeSalaryRepository
+				.findAll(input/* , specification */);
+		return dataTablesOutput;
 
 	}
 
