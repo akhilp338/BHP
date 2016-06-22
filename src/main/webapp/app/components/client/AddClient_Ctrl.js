@@ -23,10 +23,10 @@
                 });
 
         $rootScope.active = 'client';
-        vm.createPocSection = function(){
-        	vm.template = "<div class = 'candidate-details-wrapper'>"
+//        vm.createPocSection = function(){
+//        	vm.template = "<div class = 'candidate-details-wrapper'>"
 //        	alert('heres');
-        }
+//        }
         
 //        vm.cancelRegisteration = function (){
 //            $state.go("coreuser.client")
