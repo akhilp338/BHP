@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Event")
 public class Event extends BaseEntity {
@@ -20,32 +22,45 @@ public class Event extends BaseEntity {
 	@Column( name = "[end]")
 	private Date end;
 
+	@JsonIgnore
 	private String url;
 
+	@JsonIgnore
 	private String className;
 
+	@JsonIgnore
 	private boolean editable;
 
+	@JsonIgnore
 	private boolean startEditable;
 
+	@JsonIgnore
 	private boolean durationEditable;
 
+	@JsonIgnore
 	private String rendering;
 
+	@JsonIgnore
 	private boolean overlap;
 
+	@JsonIgnore
 	@Column( name = "[constraint]")
 	private Long constraint;
 
+	@JsonIgnore
 	@Column( name = "[source]")
 	private String source;
 
+	@JsonIgnore
 	private String color;
 
+	@JsonIgnore
 	private String backgroundColor;
 
+	@JsonIgnore
 	private String borderColor;
 
+	@JsonIgnore
 	private String textColor;
 
 	private String description;
