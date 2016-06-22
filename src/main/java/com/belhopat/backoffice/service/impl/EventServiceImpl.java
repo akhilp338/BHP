@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.EventRepository;
 import com.belhopat.backoffice.service.EventService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.DateUtil;
 
 /**
  * @author BHP_DEV Service layer to implement event and reminders business
@@ -27,6 +29,7 @@ public class EventServiceImpl implements EventService {
 	public ResponseEntity<List<Event>> getEvents() {
 		User loggedInUser = SessionManager.getCurrentUser();
 		List<Event> events = eventRepository.getEvents(loggedInUser.getId());
+//		insertSampleEvents();
 		if (events != null) {
 			return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
 		}
@@ -57,6 +60,16 @@ public class EventServiceImpl implements EventService {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		}
 		return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+	}
+	
+	private void insertSampleEvents(){
+		User loggedInUser = SessionManager.getCurrentUser();
+		Event event = new Event();
+		event.setTitle("First Event");
+		event.setStart(new Date());
+		event.setEnd(DateUtil.addDays(new Date(), 1));
+		event.setBaseAttributes(loggedInUser);
+		eventRepository.save(event);
 	}
 	
 	

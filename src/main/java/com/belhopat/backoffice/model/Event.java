@@ -2,19 +2,22 @@ package com.belhopat.backoffice.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "Event")
 public class Event extends BaseEntity {
 
 	private String title;
 
 	private boolean allDay;
 
+	@Column( name = "[start]")
 	private Date start;
 
+	@Column( name = "[end]")
 	private Date end;
 
 	private String url;
@@ -31,8 +34,10 @@ public class Event extends BaseEntity {
 
 	private boolean overlap;
 
+	@Column( name = "[constraint]")
 	private Long constraint;
 
+	@Column( name = "[source]")
 	private String source;
 
 	private String color;
