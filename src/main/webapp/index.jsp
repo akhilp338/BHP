@@ -10,9 +10,27 @@
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/angular-material.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/sweetalert.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/fullcalendar.css">
+<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/nv.d3.css">
+<link href="/BelhopatBackOffice/app/assets/libs/css/sb-admin.css" rel="stylesheet">
+      <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
-<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
+
+
+
+<!--            <link href='/BelhopatBackOffice/app/assets/libs/css/demo.css' rel='stylesheet' type='text/css'> -->
+
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/boxplot.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bullet.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/candlestick.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/forceDirectedGraph.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/pie.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/scatter.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/tooltip.css" rel="stylesheet">
+
 	<!-- Libraries -->
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
@@ -43,8 +61,15 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-validation.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.spring-friendly.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-idle.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/d3.v3.min.js" charset="utf-8"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/nv.d3.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-nvd3.js"></script>
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.2.js"></script>
+    <script src="/BelhopatBackOffice/app/assets/libs/js/angular-carousel.js"></script>
+       <script src="/BelhopatBackOffice/app/assets/libs/js/scroll.js"></script>
 
 <!-- AngularJS custom codes -->
 

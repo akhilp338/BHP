@@ -1,59 +1,190 @@
-<div class="sub-content">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="card-wrap">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3 class="panelSubTitle">New Job Site</h3>
-                        <input type="email" class="form-control exampleInputEmail" placeholder="Enter an address">
-                        <button type="button" class="btn btn-success create-button">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Create Job Site
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-wrap number-card">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="panel panel-default">
-                    <div class="panel-body green-card">
-                        <h3 class="card-font-top">To be scheduled</h3>
-                        <h1 class="card-font">6</h1>
-                        <h3 class="card-font-top card-font-bottom">KEEP UP THE GOOD WORK!</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="panel panel-default">
-                    <div class="panel-body orange-card">
-                        <h3 class="card-font-top">On Hold</h3>
-                        <h1 class="card-font">2</h1>
-                        <h3 class="card-font-top card-font-bottom">LETS GET THIS IN GREEN</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-wrap pipeline-card">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3 class="panelSubTitle">Project Pipeline</h3>
-                        <div class="projectPipeline">
-                            <h1 class="card-font pipeline-font">18</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-wrap">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3 class="panelSubTitle">Completed Jobs YTD</h3>
+<div class="sub-content dashboard">
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div></div>
+	<div class="row">
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-comments fa-5x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="huge">26</div>
+							<div>New Tasks!</div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left">View Details</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-green">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-tasks fa-5x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="huge">12</div>
+							<div>New Tasks!</div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left">View Details</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-yellow">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-shopping-cart fa-5x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="huge">124</div>
+							<div>New Orders!</div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left">View Details</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-6">
+			<div class="panel panel-red">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-support fa-5x"></i>
+						</div>
+						<div class="col-xs-9 text-right">
+							<div class="huge">13</div>
+							<div>Support Tickets!</div>
+						</div>
+					</div>
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left">View Details</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+
+	<div class="row">
+		<div class=" col-lg-12">
+			<div class="tasklist panel panel-default">
+				<div class=" panel-body">
+					<div>
+						<div class="carousel-demo">
+							<ul rn-carousel rn-carousel-index="carouselIndex3"
+								rn-carousel-transition="hexagon" rn-carousel-buffered
+								class="carousel3">
+								<li ng-repeat="slide in slides3 track by slide.id">
+									<div class="slider col-lg-3 col-md-6">
+										<div class="panel panel-primary">
+											<div class="panel-heading">
+												<div class="row">
+													<div class="col-xs-3">
+														<i class="fa fa fa-indent fa-5x"></i>
+													</div>
+													<div class="col-xs-9 text-right">
+														<div class="huge">LEAVE REQUEST</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-xs-6">
+														<div>Dummy Text One</div>
+													</div>
+													<div class="col-xs-6 text-right">
+														<div>Dummy Text Two</div>
+													</div>
+												</div>
+											</div>
+											<a href="#">
+												<div class="gototask panel-footer">
+													<span class="pull-left">Go to Task</span> <span
+														class="pull-right"><i
+														class="fa fa-arrow-circle-right"></i></span>
+													<div class="clearfix"></div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart
+					</h3>
+				</div>
+				<div class="panel-body">
+					<nvd3 options="vm.options" data="vm.data"></nvd3>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<md-button class="md-primary md-raised" ng-click="showPrompt($event)">
+			Broadcast a message </md-button>
+			<div class="well well-sm">
+				<div class="row">
+					<div class="col-sm-12">
+						<input type="number" class="form-control" ng-model="selectedItem"
+							placeholder="Search for news">
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default" ng-init="vm.itemsss()">
+				<div class="panel-heading">
+					<span>News Feed and Brodcasts</span>
+				</div>
+				<div id="scroll-test-container" class="panel-body"
+					style="max-height: 400px; overflow-y: auto;">
+					<div ng-repeat="item in items" scroll-when="selectedItem === item"
+						scroll-watch-enabled="true"
+						scroll-container="#scroll-test-container" scroll-offset="200"
+						scroll-speed="100" class="item-container"
+						ng-class="{'active': selectedItem === item}">
+						<span>{{item}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+</div>
 

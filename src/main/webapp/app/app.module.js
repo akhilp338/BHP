@@ -16,16 +16,19 @@
         'ngStorage',
         'ngAria',
         'ngMaterial',
-        'ngIdle'
+        'ngIdle',
+        'nvd3',
+        'angular-carousel',
+        'bb.scrollWhen'
     ]);
     window.app.config(['$locationProvider','KeepaliveProvider', 'IdleProvider', function ($locationProvider,KeepaliveProvider, IdleProvider) {
             $locationProvider.html5Mode({
                 enabled: true,
                 requireBase: false
             });
-            IdleProvider.idle(300);
-            IdleProvider.timeout(300);
-            KeepaliveProvider.interval(300);
+            IdleProvider.idle(2400);
+            IdleProvider.timeout(2400);
+            KeepaliveProvider.interval(2400);
         }]);
 
 })();
