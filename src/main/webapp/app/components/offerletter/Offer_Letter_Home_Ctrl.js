@@ -11,7 +11,7 @@
             var index = $("#candidatesList tbody tr.selected").index();
             var data = [];
             data.id=1;
-              $state.go("coreuser.candidate.offerletter",{id:data.id});  
+              $state.go("coreuser.offerletter");  
         };
         angular.element(document).ready(function () {
             var oTable = angular.element('#offerLetterList').DataTable({
