@@ -164,10 +164,21 @@
                     });
             return deferred.promise;
         };
+        
+        service.getSalaryGradesUrl = function (url) {
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url, data)
+            Core_HttpRequest.post(url)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -227,6 +238,29 @@
             var returnDate = yyyy + '-' + mm + '-' + dd;
             return returnDate;
         };
+        
+        service.getSalaryDetails = function (url,params) {
+            var deferred = $q.defer();
+                url=url+'?fixed='+params.fixed+'&grade='+params.grade;
+            Core_HttpRequest.get(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
+        
+        service.getAllEvents = function(url){
+            var deferred = $q.defer();
+            Core_HttpRequest.get(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        }
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')

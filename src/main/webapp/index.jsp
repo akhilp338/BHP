@@ -9,13 +9,15 @@
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/awesome-checkbox.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/angular-material.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/sweetalert.css">
+<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/fullcalendar.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
-<!--<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style.css">-->
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
-<link rel="stylesheet" ng-href="/BealhopatBackOffice/app/assets/libs/css/jquery.datepick.css">
 	<!-- Libraries -->
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
+<script src="/BelhopatBackOffice/app/assets/libs/js/fullcalendar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.3/gcal.js"></script>
 <script src="/BelhopatBackOffice/app/components/common/sidebar.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-ui-router.js"></script>
@@ -23,9 +25,10 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/ngstorage.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.dataTables.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-ui.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/bootstrap-filestyle.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.plugin.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.datepick.js"></script>
-<!-- <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script> -->
+<script src="/BelhopatBackOffice/app/assets/libs/js/calendar.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/underscore.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.1.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/sweetalert.js"></script>
@@ -40,6 +43,8 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-validation.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.spring-friendly.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-idle.js"></script>
+
+
 
 <!-- AngularJS custom codes -->
 
@@ -67,9 +72,13 @@
 <script src="/BelhopatBackOffice/app/components/employee/AddEmployee_Ctrl_Final.js"></script>
 <script src="/BelhopatBackOffice/app/components/client/Client_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/client/AddClient_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/event/AddEvent_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/holiday/Holiday_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/opportunity/Opp_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/event/EventManagement_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/offerletter/Offerletter_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
 
 
 <style>

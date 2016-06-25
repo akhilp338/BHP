@@ -1,12 +1,14 @@
+var candidatesListTable;
 (function () {
     var Candidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
-        $rootScope.showLoader = true;
+        $rootScope.showLoader = true;        
         var vm = this,
                 vs = new validationService({
                     controllerAs: vm
                 });
 
         vm.registration = {};
+        vm.errorAlert = false;
         vs.setGlobalOptions({
             debounce: 1500,
             scope: $scope,
@@ -106,7 +108,19 @@
         vm.addCandidate = function () {
             $state.go("coreuser.candidate.add");
         };
-
+        vm.processOfferLetter = function () {
+            var index = $("#candidatesList tbody tr.selected").index();
+            var data = candidatesListTable.data()[index];
+            if(data && data.id){
+              vm.errorAlert = false;              
+              $state.go("coreuser.offerletter",{id:data.id});  
+            }
+            else{
+              vm.errorAlert = true;
+              vm.errorMessage = "Please select one candidate from table";
+            }            
+        };
+        
         vm.getSelectedCandidate = function (event) {
             console.log(event);
         };
@@ -120,7 +134,7 @@
         };
         
         angular.element(document).ready(function () {
-            var oTable = angular.element('#candidatesList').DataTable({
+                candidatesListTable = angular.element('#candidatesList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getCandidates?employee=false",
                 serverSide: true,
                 bDestroy: true,
@@ -189,7 +203,7 @@
                     $(this).removeClass('selected');
                 }
                 else {
-                	oTable.$('tr.selected').removeClass('selected');
+                    candidatesListTable.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
             } );
@@ -204,7 +218,7 @@
             },function(error){
             	
             });
-        };
+        }; 
         
         vm.candidateDelete = function(id){
         	vm.deleteUrl = "api/candidate/deleteCandidate";

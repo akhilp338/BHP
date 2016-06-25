@@ -26,6 +26,11 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.showLoader = true;
+            var parts = toState.name.split(".");
+            if(toState.name == "coreuser.offerletter.verify" && fromState.name == ""){                
+                $state.go("coreuser.offerletter")
+            }
+            $rootScope.active = parts[1];
         });
         $rootScope.$on('IdleTimeout', function() {
           $state.go("login");

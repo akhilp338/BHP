@@ -4,6 +4,9 @@ var addEmployeeTable
         var vm = this;
         $rootScope.showLoader = true;
         vm.registration = {};
+        vm.employeeSummary = {};
+        vm.isInit = true;
+        vm.Employeetemplate = 'Please select a candidate from the above table.';
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/employee/getAnEmployee", $stateParams.id).then(function (res) {
                 vm.registration = res.data;               
@@ -14,6 +17,10 @@ var addEmployeeTable
                 vm.registration = {};
             });
         }
+        vm.back = function (){
+            $state.go('coreuser.employee');
+        };
+        
         vm.urlForLookups = "api/employee/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
@@ -42,18 +49,20 @@ var addEmployeeTable
                 bDestroy: true,
                 processing: true,
                 responsive: true,
-                sScrollX: '100%',                
+                sScrollX: '100%', 
+                iDisplayLength: 3,
                 fnDrawCallback: function (settings, ajax) {
                     
                 },
                 language: {
-                	zeroRecords: 'No data to dispay',
+                    zeroRecords: 'No data to dispay',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',
                     infoFiltered:''
                 },
                 order: [[ 0, "desc" ]],
+                sDom: '<"search-box"r>lftip',
                 aoColumns: [ {
                     	data: 'id',
                     	visible : false
@@ -78,19 +87,30 @@ var addEmployeeTable
                     }, {
                         title: "Employment Status",
                         data: 'employmentStatus.description',
-                    },{
-                        data: 'id',
-                        bSortable: false,
-                        sClass: "button-column",
-                        render: function (data) {
-                            $rootScope.showLoader = false;
-                            return '<div class="action-buttons">' +
-                                    '<span  value="' + data + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'+
-                                    '<i class="fa fa-eye" aria-hidden="true"></i></span>' +
-                                    '</div>'
-                        }
                     }]
             });
+            $("#candidatesList").on('click',' tbody tr', function (){
+                vm.Employeetemplate = "";
+                $(".candidate-summary").removeClass("init")
+                var data = addEmployeeTable.data()[$(this).index()];
+                vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
+                vm.employeeSummary["Candidate Id"] = data.candidateId;
+                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+                vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
+                vm.employeeSummary["Designation"] = data.designation.description;
+                vm.employeeSummary["Passport"] = data.passport.passportNo;;
+                vm.employeeSummary["Email Id"]= data.personalEmail;
+                vm.employeeSummary["Contact No"] = data.personalContactNo;
+                vm.employeeSummary["Skillset"] = data.skillSet.join(", ");                
+                for (var key in vm.employeeSummary){
+                    vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">'+  
+                                '<label class="item-label">'+ key +
+                                '</label><p class="item-label-desc"> :   '+ vm.employeeSummary[key] +
+                                '</p></div>';
+                }
+               $(".candidate-summary").html(vm.Employeetemplate);
+            });
+            
             $('#candidatesList').on('click', '.action-view', function () {
             	console.log(this.getAttribute('value'));
                 vm.getCandidate(this.getAttribute('value'));
@@ -103,8 +123,10 @@ var addEmployeeTable
                     addEmployeeTable.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
-                $rootScope.selectedCandId = addEmployeeTable.row($('tr.selected').index()).data().id;
-                localStorage["selectedCandidate"] = addEmployeeTable.row($('tr.selected').index()).data().candidateId;
+                var data = addEmployeeTable.row($('tr.selected').index()).data();
+                $rootScope.selectedCandId = data.id;
+                localStorage["selectedCandidate"] = data.candidateId;
+                localStorage["selectedCandidateName"] = data.firstName + " " + data.lastName;
                 localStorage["selectedCandidateId"] =  $rootScope.selectedCandId ;
             } );
             

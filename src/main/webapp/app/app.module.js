@@ -4,6 +4,7 @@
     angular.module('app.constants', []);
     window.app = angular.module('coreModule', [
         'ui.router',
+        'ui.calendar',
         'ngAnimate',
         'ui.bootstrap',
         'app.constants',

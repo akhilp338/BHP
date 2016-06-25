@@ -1,14 +1,8 @@
 package com.belhopat.backoffice.controller;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.mail.MessagingException;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
-import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EventService;
@@ -37,32 +30,20 @@ public class EventController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getEvents", method = RequestMethod.GET)
-
-	public DataTablesOutput<Event> getEvents(@Valid DataTablesInput input) {
-		return eventService.getEvents(input);
+	public ResponseEntity<List<Event>> getEvents() {
+		return eventService.getEvents();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getEvent", method = RequestMethod.POST)
-
-	public ResponseEntity<Event> getEvent(@RequestBody RequestObject requestObject) {
-		return eventService.getEvent(requestObject.getId());
+	@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+	public ResponseEntity<Event> addEvent(@RequestBody Event event) {
+		return eventService.addEvent(event);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/saveOrUpdateCandidate", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, String>> saveOrUpdateCandidate(@RequestBody Event event) throws MessagingException {
-		return eventService.saveOrUpdateEvent(event);
-	}
-
-	/**
-	 * @return Map of dropdown data gets a key value pair list of drop down data
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
-
-	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
-		return baseService.getCandidateDropDownData();
+	@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
+	public ResponseEntity<Event> updateEvent(@RequestBody Event event) {
+		return eventService.updateEvent(event);
 	}
 
 }

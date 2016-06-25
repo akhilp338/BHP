@@ -6,7 +6,6 @@ import java.text.ParseException;
 
 import org.springframework.stereotype.Component;
 
-import com.belhopat.backoffice.pdf.BasePDFGenerator;
 import com.belhopat.backoffice.pdf.OfferLetterPDF;
 import com.belhopat.backoffice.service.PDFService;
 import com.itextpdf.text.DocumentException;

@@ -6,17 +6,16 @@
             {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"},
             {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"},
             {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"},
-            {name:"opportunity",label: "Opportunity Management", icon: "fa-gift",state:"coreuser.opportunity"},
-            {name:"holiday",label: "Holiday Management", icon: "fa-paper-plane",state:"coreuser.holiday"}
+            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletter"},
+            {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
         ];
         $rootScope.isLogin = false;
         vm.showMenu = function (e) {
            $(".collapse").slideToggle("1000");            
         };
         vm.menuClick = function (e) {
-            angular.element('.sidebar-nav li').removeClass("active");
-            angular.element(e.currentTarget).addClass("active"); 
-                     
+            angular.element('.navbar-nav li').removeClass("active");
+            angular.element(e.currentTarget).addClass("active");                     
         };
     };
 
