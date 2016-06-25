@@ -5,6 +5,8 @@
        /* vm.addOfferLetter = function(){
         	$state.go("coreuser.employee.add");
         }*/
+        
+        
         vm.processOfferLetter = function () {
             var index = $("#candidatesList tbody tr.selected").index();
             var data = [];
