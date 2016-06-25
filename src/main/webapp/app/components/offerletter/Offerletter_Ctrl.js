@@ -153,26 +153,38 @@
             }
 
         vm.getEmployeeSummary = function(data){
-                vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
-                vm.employeeSummary["Candidate Id"] = data.candidateId;
-                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
-                vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
-                vm.employeeSummary["Designation"] = data.designation.description;
-                vm.employeeSummary["Passport"] = data.passport.passportNo;;
-                vm.employeeSummary["Email Id"] = data.personalEmail;
-                vm.employeeSummary["Contact No"] = data.personalContactNo;
-                vm.employeeSummary["Skillset"] = [];
-                for(var j=0; j<data.skillSet.length; j++){
-                    vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)
-                }
-                for (var key in vm.employeeSummary) {
-                    vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
-                            '<label class="item-label">' + key +
-                            '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
-                            '</p></div>';
-                }
-                $(".candidate-summary").html(vm.Employeetemplate);
+            vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
+            vm.employeeSummary["Candidate Id"] = data.candidateId;
+            vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+            vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
+            vm.employeeSummary["Designation"] = data.designation.description;
+            vm.employeeSummary["Passport"] = data.passport.passportNo;;
+            vm.employeeSummary["Email Id"] = data.personalEmail;
+            vm.employeeSummary["Contact No"] = data.personalContactNo;
+            vm.employeeSummary["Skillset"] = [];
+            for(var j=0; j<data.skillSet.length; j++){
+                vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)
+            }
+            for (var key in vm.employeeSummary) {
+                vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                        '<label class="item-label">' + key +
+                        '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
+                        '</p></div>';
+            }
+            $(".candidate-summary").html(vm.Employeetemplate);
         }
+        
+        vm.generateOfferLetter = function () {
+            vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
+            Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl,vm.offerletter)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Done!",response.data.data,"success","coreuser.offerletter");  
+                    }, function (error) {
+
+                    });
+        };
+        
+        
         });
 
     };
