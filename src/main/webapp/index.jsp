@@ -104,6 +104,7 @@
 <script src="/BelhopatBackOffice/app/components/event/EventManagement_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/offerletter/Offerletter_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
 
 
 <style>

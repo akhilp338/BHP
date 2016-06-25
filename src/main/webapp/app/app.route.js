@@ -95,12 +95,22 @@
                 }
             }
         
-        }).state('coreuser.offerletterhome', {
-            url: urlConfig.root_path+'offerletterhome',
+        }).state('coreuser.offerletter', {
+            url: urlConfig.root_path+'offerletter',
             views: {
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletter.html',
                     controller: 'Offerletter_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        .state('coreuser.offerletterhome', {
+            url: urlConfig.root_path+'offerletterhome',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.html',
+                    controller: 'Offer_Letter_Home_Ctrl',
                     controllerAs: 'vm'
                 }
             }
