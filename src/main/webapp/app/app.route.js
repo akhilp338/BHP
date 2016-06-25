@@ -94,6 +94,7 @@
                     controllerAs: 'vm'
                 }
             }
+        
         }).state('coreuser.offerletterhome', {
             url: urlConfig.root_path+'offerletterhome',
             views: {
