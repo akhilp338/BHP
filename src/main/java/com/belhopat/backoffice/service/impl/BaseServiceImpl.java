@@ -331,9 +331,9 @@ public class BaseServiceImpl implements BaseService {
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
 		if(employeeSalary!=null){
 			EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-			HitController jj = new HitController();
+//			HitController jj = new HitController();
 			
-			controller.doExample();
+//			controller.doExample();
 			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		// TODO Auto-generated method stub
