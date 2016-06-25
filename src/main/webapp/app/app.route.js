@@ -94,11 +94,9 @@
                     controllerAs: 'vm'
                 }
             }
-        })
         
-        //offerletter processing
-        .state('coreuser.offerletter', {
-            url: urlConfig.root_path+'offerletter',
+        }).state('coreuser.offerletterhome', {
+            url: urlConfig.root_path+'offerletterhome',
             views: {
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletter.html',
