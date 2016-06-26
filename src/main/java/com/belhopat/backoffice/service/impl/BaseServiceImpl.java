@@ -312,7 +312,7 @@ public class BaseServiceImpl implements BaseService {
 			Long gratuity = Math.round(basicSalary/26 * 15/12);
 			Long totalDeductions = profTax + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
 			Long flexyBenKit = Math.round(grossSalary - minFixedSalary);
-			Long grossCTC = Math.round(grossSalary + pfEmpContrbtn + esiByEmplyr +  leaveEncash  ); 
+			Long grossCTC = Math.round(grossSalary + pfEmpContrbtn + esiByEmplyr +  leaveEncash + gratuity ); 
 			Long netTakeHomeBeforeTDS = grossCTC - totalDeductions;
 			empSal.setGrossSalary(grossSalary);
 			empSal.setBasicSalary(basicSalary);
