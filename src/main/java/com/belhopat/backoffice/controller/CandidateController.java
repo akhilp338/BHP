@@ -63,9 +63,9 @@ public class CandidateController {
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		Employee employeeDTO = new Employee();
-		pdfService.generateOfferLetterPDF(employeeDTO);
-		SalaryDTO salaryDTO = new SalaryDTO();
+//		Employee employeeDTO = new Employee();
+//		pdfService.generateOfferLetterPDF(employeeDTO);
+//		SalaryDTO salaryDTO = new SalaryDTO();
 		return candidateService.getCandidates(input, employee);
 	}
 
