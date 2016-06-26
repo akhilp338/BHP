@@ -435,4 +435,25 @@ public class CandidateServiceImpl implements CandidateService {
 
 	}
 
+	@Override
+	public DataTablesOutput<Candidate> getUnProcessedCandidates(DataTablesInput input, boolean employee) {
+		Specification<Candidate> specification = new Specification<Candidate>() {
+			@Override
+			public Predicate toPredicate(Root<Candidate> root, CriteriaQuery<?> criteriaQuery,
+					CriteriaBuilder criteriaBuilder) {
+				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
+//				if (employee) {
+					Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
+//					Predicate salaryNotProcessed = criteriaBuilder.notEqual(root.get("salary"), null);
+					return criteriaBuilder.and(isNotDeleted, employeeStatus);
+
+//				}
+			}
+		};
+		DataTablesOutput<Candidate> dataTablesOutput = candidateRepository.findAll(input, specification);
+		return dataTablesOutput;
+	}
+	
+	
+
 }

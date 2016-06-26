@@ -68,7 +68,7 @@
         $rootScope.active = 'offerletter';
         angular.element(document).ready(function () {
             addEmployeeTable = angular.element('#candidatesList').DataTable({
-                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getCandidates?employee=true",
+                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getUnProcessedCandidates?employee=true",
                 serverSide: true,
                 bDestroy: true,
                 processing: true,
