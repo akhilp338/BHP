@@ -124,7 +124,7 @@
             
             vm.itemsss= function () {
               for (var i = 1; i <= 1000; i++) {
-                $scope.items.push(i);
+                $scope.items.push("News "+i);
               }
             
           }
@@ -210,6 +210,36 @@
 				}
 			}
 		}
+		$('#demo').waterbubble({
+
+			  // bubble size
+			  radius: 100,
+
+			  // border width
+			  lineWidth: undefined,
+
+			  // data to present
+			  data: 0.5,
+
+			  // color of the water bubble
+			  waterColor: 'rgba(25, 139, 201, 1)',
+
+			  // text color
+			  textColor: 'rgba(06, 85, 128, 0.8)',
+
+			  // custom font family
+			  font: '',
+
+			  // show wave
+			  wave: true,
+
+			  // custom text displayed inside the water bubble
+			  txt:"50%",
+
+			  // enable water fill animation
+			  animation: true
+			  
+			});
 
 	};
 

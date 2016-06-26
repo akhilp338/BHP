@@ -26,6 +26,7 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.showLoader = true;
+            $rootScope.spinnerActive =true;
             var parts = toState.name.split(".");
             if(toState.name == "coreuser.offerletter.verify" && fromState.name == ""){                
                 $state.go("coreuser.offerletter")
@@ -41,6 +42,7 @@
                                   toState.name == "coreuser.candidate.edit" ||
                                   toState.name == "coreuser.employee.edit") ? true : false;
                            //$rootScope.showLoader = false;
+            $rootScope.spinnerActive =false;
         });
     };
     angular.module('coreModule')
