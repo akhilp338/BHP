@@ -42,7 +42,7 @@
                         title: "Candidate Name",
                         data: 'candidate.firstName',
                     },  {
-                        title: "Offer Letter Status",
+                        title: "Status",
                         data: 'status',
                     },{
                         title: "Gross CTC",
