@@ -9,6 +9,7 @@
         $rootScope.salaryCreds = {};
         vm.employeeSummary = {};
         vm.offerletter.display = {};
+        vm.offerletter.candidate ='';
         vm.offerletter.id = $rootScope.selectedCandId ;
         vs.setGlobalOptions({
             debounce: 1500,
@@ -31,7 +32,7 @@
                 fixed:vm.offerletter.grossSalary,
                 grade:vm.offerletter.selectedGrade
             };
-            $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandId})
+            $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandidate})
         };
 
         vm.getSalaryGrades = function () {
@@ -153,7 +154,7 @@
             }
 
         vm.getEmployeeSummary = function(data){
-        	vm.offerletter.candidateId = data.id;
+        	$rootScope.selectedCandidate=data;
             vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
             vm.employeeSummary["Candidate Id"] = data.candidateId;
             vm.employeeSummary["Country"] = data.countryOfOrigin.description;
@@ -176,6 +177,7 @@
         }
         
         vm.generateOfferLetter = function () {
+        	vm.offerletter.candidate=$rootScope.selectedCandidate;
             vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
             Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl,vm.offerletter)
                     .then(function (response) {
