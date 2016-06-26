@@ -42,8 +42,23 @@
                         title: "Candidate Name",
                         data: 'candidate.firstName',
                     },  {
-                        title: "Status",
+                        title: "Offer Letter Status",
                         data: 'status',
+                    },{
+                        title: "Gross CTC",
+                        data: 'grossCTC',
+                    },{
+                        title: "Grade",
+                        data: 'grade',
+                    },{
+                        title: "Created Date",
+                        data: 'createdDate',
+                    },{
+                        title: "Modified Date",
+                        data: 'updatedDate',
+                    },{
+                        title: "Modified/Approved By",
+                        data: 'updatedBy.username',
                     },{
                         data: 'id',
                         bSortable: false,
@@ -51,8 +66,6 @@
                         render: function (data) {
                             $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
-                                    '<span  value="' + data + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'+
-                                    '<i class="fa fa-eye" aria-hidden="true"></i></span>' +
                                     '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
                                     '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
                         }

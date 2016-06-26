@@ -17,7 +17,7 @@ body, html {
 }
 
 .main {
-	margin-top: 19px;
+	margin-top: 85px;
 	width: 81.5%;
 	float: right;
 }
@@ -569,7 +569,7 @@ button.link-btn {
 	border-radius: 4px;
 }
 
-#candidatesList, #employeeList, #clientList {
+#candidatesList, #employeeList, #clientList ,#offerLetterList{
 	border-collapse: separate;
 	border: 1px solid #ddd;
 	margin: 0;
@@ -799,7 +799,7 @@ span.user-list-head {
 
 .page-side-bar {
 	position: fixed;
-	margin-top: 20px;
+	margin-top: 71px;
 	height: 100%;
 	z-index: 10;
 }
