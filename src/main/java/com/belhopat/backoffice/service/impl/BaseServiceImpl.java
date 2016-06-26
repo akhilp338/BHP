@@ -334,10 +334,8 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
 		if(employeeSalary!=null){
-			if(employeeSalary.getId()!=null){
-				Candidate candidate = candidateRepository.findById(employeeSalary.getId());
-				employeeSalary.setId(null);
-				employeeSalary.setCandidate(candidate);
+			if(employeeSalary.getCandidate()!=null){
+				employeeSalary.setStatus(Constants.GENERATED);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
