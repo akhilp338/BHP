@@ -43,6 +43,7 @@ import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
@@ -99,6 +100,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	HitController controller;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	/*
 	 * (non-Javadoc)
@@ -325,7 +329,7 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-                        return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+            return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}
@@ -345,5 +349,26 @@ public class BaseServiceImpl implements BaseService {
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+		User currentUser = SessionManager.getCurrentUserAsEntity();
+		List<String> userRoles = getAllUserRoles(currentUser.getId());
+		if(userRoles.isEmpty()){
+			List<TaskList> taskLists = taskListRepository.findByTaskOwner(currentUser.getRoles());
+			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
+		}
+		return null;
+	}
+
+	private List<String> getAllUserRoles(Long id) {
+		User user = userRepository.findById(id);
+		List<String> userRoles = new ArrayList<String>();
+		if(!user.getRoles().isEmpty()){
+			user.getRoles().forEach(p->System.out.println(p.getRoleName()));
+			user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
+		}
+		return userRoles;
 	}
 }

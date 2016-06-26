@@ -21,6 +21,10 @@ public class MasterTasks {
 	
 	private Long nextTaskId;
 	
+	private String taskDesc;
+	
+	private String taskOwnerRole;
+	
 	public String getTaskKey() {
 		return taskKey;
 	}
@@ -52,10 +56,5 @@ public class MasterTasks {
 	public void setNextTaskId(Long nextTaskId) {
 		this.nextTaskId = nextTaskId;
 	}
-
-	private String taskDesc;
-	
-	private String taskOwnerRole;
-	
 	
 }

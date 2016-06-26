@@ -36,5 +36,7 @@ public interface BaseService {
 	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO);
 
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary);
+	
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
 
 }
