@@ -1,10 +1,7 @@
 package com.belhopat.backoffice.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +18,7 @@ public class EmployeeSalary  extends BaseEntity{
 	private  Candidate candidate ;
 	private Double minBasicSalary ;
 	@OneToOne(fetch=FetchType.EAGER)
-	private  SalaryGrade grade ;
+	private  SalaryGrade selectedGrade ;
 	private Double minFixedSalary ;
 	private  Double basicSalary ;
 	private  Double hra ;
@@ -36,8 +33,7 @@ public class EmployeeSalary  extends BaseEntity{
 	private Long totalDeductions ; 
 	private Long flexyBenKit ;
 	private Long grossCTC ;
-	private String status;
-	
+	private String status ;
 	
 	public Long getTotalDeductions() {
 		return totalDeductions;
@@ -49,10 +45,10 @@ public class EmployeeSalary  extends BaseEntity{
 		this.minBasicSalary = minBasicSalary;
 	}
 	public SalaryGrade getGrade() {
-		return grade;
+		return selectedGrade;
 	}
 	public void setGrade(SalaryGrade grade) {
-		this.grade = grade;
+		this.selectedGrade = grade;
 	}
 	public Double getMinFixedSalary() {
 		return minFixedSalary;
@@ -146,6 +142,6 @@ public class EmployeeSalary  extends BaseEntity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	} 
+	}
 
 }
