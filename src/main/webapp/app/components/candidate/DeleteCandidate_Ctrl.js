@@ -9,7 +9,7 @@
         };
     };
 
-    DeleteCandidate_Ctrl.$inject = ["$scope", '$uibModalInstance', 'Core_Service', 'candidateDetails'];
+    DeleteCandidate_Ctrl.$inject = ["$scope", '$modalInstance', 'Core_Service', 'candidateDetails'];
     angular.module('coreModule')
             .controller('DeleteCandidate_Ctrl', DeleteCandidate_Ctrl);
 })();
