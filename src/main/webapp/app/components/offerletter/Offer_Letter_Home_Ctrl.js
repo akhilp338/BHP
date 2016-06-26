@@ -53,9 +53,15 @@
                     },{
                         title: "Created Date",
                         data: 'createdDate',
+                        "render": function(data) {
+                            return vm.getFormattedDate(data)
+                        }
                     },{
-                        title: "Modified Date",
+                    	title: "Modified Date",
                         data: 'updatedDate',
+                        "render": function(data) {
+                            return vm.getFormattedDate(data)
+                        }
                     },{
                         title: "Modified/Approved By",
                         data: 'updatedBy.username',
@@ -71,6 +77,11 @@
                         }
                     }]
             });
+            
+            vm.getFormattedDate = function(data){
+            	var today = new Date(data);
+        	    return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+            }
             
             $('#offerLetterList tbody').on( 'click', 'tr', function () {
             	

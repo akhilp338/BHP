@@ -34,6 +34,8 @@ public class EmployeeSalary  extends BaseEntity{
 	private Long flexyBenKit ;
 	private Long grossCTC ;
 	private String status ;
+	@OneToOne
+	private TaskList currentTask;
 	
 	public Long getTotalDeductions() {
 		return totalDeductions;
@@ -142,6 +144,12 @@ public class EmployeeSalary  extends BaseEntity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public TaskList getCurrentTask() {
+		return currentTask;
+	}
+	public void setCurrentTask(TaskList currentTask) {
+		this.currentTask = currentTask;
 	}
 
 }
