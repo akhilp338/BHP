@@ -35,7 +35,7 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
 <script src="/BelhopatBackOffice/app/assets/libs/js/fullcalendar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.3/gcal.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/gcal.js"></script>
 <script src="/BelhopatBackOffice/app/components/common/sidebar.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-ui-router.js"></script>
@@ -64,10 +64,14 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/d3.v3.min.js" charset="utf-8"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/nv.d3.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-nvd3.js"></script>
+  <script type="text/javascript" src="/BelhopatBackOffice/app/assets/libs/js/spin.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-spinner.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-loading-spinner.js"></script>
 
+<script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js"></script>
-<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.2.js"></script>
+    <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-0.13.2.js"></script>
     <script src="/BelhopatBackOffice/app/assets/libs/js/angular-carousel.js"></script>
        <script src="/BelhopatBackOffice/app/assets/libs/js/scroll.js"></script>
 
@@ -120,6 +124,7 @@ display: none !important;
 <div class="response-loader" ng-class="{show: showLoader}"></div>
 <img src="/BelhopatBackOffice/app/assets/images/loader-img.gif" class="loader-img loader-language" ng-if="languageSwitching" alt="loader">
     <header ui-view="header" class="header-div"></header>
+     <span us-spinner="{radius:30, width:8, length: 16}"></span>
     <div ui-view="sidebar" class="page-side-bar"></div>
     <div ui-view="content" class="main"></div>
     <footer ui-view="footer" class="footer-div"></footer>

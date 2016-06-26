@@ -115,7 +115,7 @@
                 }
             }
         }).state('coreuser.offerletter.verify', {
-            url: '/offerletter/verify/:verifyId',
+            url: '/offerletter/verify/:verifyId/:grade',
             views: {               
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',
