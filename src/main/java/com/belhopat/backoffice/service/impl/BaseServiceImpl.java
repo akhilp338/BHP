@@ -29,6 +29,7 @@ import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
@@ -62,6 +63,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	CandidateRepository candidateRepository;
 
 	@Autowired
 	StateRepository stateRepository;
@@ -330,11 +334,13 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
 		if(employeeSalary!=null){
-			EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-//			HitController jj = new HitController();
-			
-//			controller.doExample();
-			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			if(employeeSalary.getId()!=null){
+				Candidate candidate = candidateRepository.findById(employeeSalary.getId());
+				employeeSalary.setId(null);
+				employeeSalary.setCandidate(candidate);
+				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			}
 		}
 		// TODO Auto-generated method stub
 		return null;
