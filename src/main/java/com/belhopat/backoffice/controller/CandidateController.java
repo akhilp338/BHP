@@ -147,10 +147,7 @@ public class CandidateController {
 	@ResponseBody
 	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.GET)
 	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestParam String fixed,@RequestParam String grade) {
-		SalaryDTO salaryDTO = new SalaryDTO();
-		salaryDTO.setFixed(fixed);
-		salaryDTO.setGrade(grade);
-		return baseService.getSalarySplit(salaryDTO);
+		return baseService.getSalarySplit(Double.valueOf(fixed),grade);
 	}
 	
 	@ResponseBody

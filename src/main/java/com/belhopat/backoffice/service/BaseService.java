@@ -33,10 +33,10 @@ public interface BaseService {
 
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject);
 
-	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO);
-
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary);
 	
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
+
+	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade);
 
 }

@@ -16,24 +16,48 @@ public class EmployeeSalary  extends BaseEntity{
 	private Long id;*/
 	@OneToOne(fetch=FetchType.EAGER)
 	private  Candidate candidate ;
+	
 	private Double minBasicSalary ;
+	
 	@OneToOne(fetch=FetchType.EAGER)
 	private  SalaryGrade selectedGrade ;
+	
+	private Double grossSalary;
+	
 	private Double minFixedSalary ;
+	
 	private  Double basicSalary ;
+	
 	private  Double hra ;
+	
 	private Long medicalAllowance ;
+	
 	private Long conveyanceAllowance ;
+	
 	private int profTax ;
+	
 	private Long pfEmpContrbtn ;
+	
+	private Long pfCompContrbtn ;
+	
 	private Long esiByEmplyr  ;
+	
 	private Long esiByEmplye  ;
+	
 	private Long leaveEncash ;
+	
 	private Long gratuity ;
+	
 	private Long totalDeductions ; 
+	
 	private Long flexyBenKit ;
+	
 	private Long grossCTC ;
+	
+	private Long netTakeHomeBeforeTDS;
+	
 	private String status ;
+	
 	@OneToOne
 	private TaskList currentTask;
 	
@@ -156,6 +180,24 @@ public class EmployeeSalary  extends BaseEntity{
 	}
 	public void setSelectedGrade(SalaryGrade selectedGrade) {
 		this.selectedGrade = selectedGrade;
+	}
+	public Long getPfCompContrbtn() {
+		return pfCompContrbtn;
+	}
+	public void setPfCompContrbtn(Long pfCompContrbtn) {
+		this.pfCompContrbtn = pfCompContrbtn;
+	}
+	public Double getGrossSalary() {
+		return grossSalary;
+	}
+	public void setGrossSalary(Double grossSalary) {
+		this.grossSalary = grossSalary;
+	}
+	public Long getNetTakeHomeBeforeTDS() {
+		return netTakeHomeBeforeTDS;
+	}
+	public void setNetTakeHomeBeforeTDS(Long netTakeHomeBeforeTDS) {
+		this.netTakeHomeBeforeTDS = netTakeHomeBeforeTDS;
 	}
 
 }
