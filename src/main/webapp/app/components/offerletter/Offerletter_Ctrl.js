@@ -153,6 +153,7 @@
             }
 
         vm.getEmployeeSummary = function(data){
+        	vm.offerletter.candidateId = data.id;
             vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
             vm.employeeSummary["Candidate Id"] = data.candidateId;
             vm.employeeSummary["Country"] = data.countryOfOrigin.description;
