@@ -23,5 +23,5 @@ public interface TaskListRepository extends JpaRepository<TaskList, Long>, DataT
 	public TaskList findByTask(MasterTasks masterTasks);
 
 	@Query( "select tl from TaskList tl where tl.completed!=1 and tl.task.taskOwnerRole IN(:roles)" )
-	public List<TaskList> findByTaskOwner(@Param( "roles" )Set<MasterRoles> roles);
+	public List<TaskList> findByTaskOwner(@Param( "roles" )List<String> userRoles);
 }

@@ -174,10 +174,15 @@ public class CandidateController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/getUnProcessedCandidates", method = RequestMethod.GET)
-
 	public DataTablesOutput<Candidate> getUnProcessedCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
-		ResponseEntity<List<TaskList>> tskk= baseService.getCurrentUserTasks();
 		return candidateService.getUnProcessedCandidates(input,employee);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.POST)
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+		ResponseEntity<List<TaskList>> tasks= baseService.getCurrentUserTasks();
+		return tasks;
 	}
 
 }

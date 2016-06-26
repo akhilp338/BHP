@@ -23,6 +23,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
+import com.belhopat.backoffice.model.MasterRoles;
 import com.belhopat.backoffice.model.MasterTasks;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
@@ -355,8 +356,8 @@ public class BaseServiceImpl implements BaseService {
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		List<String> userRoles = getAllUserRoles(currentUser.getId());
-		if(userRoles.isEmpty()){
-			List<TaskList> taskLists = taskListRepository.findByTaskOwner(currentUser.getRoles());
+		if(!userRoles.isEmpty()){
+			List<TaskList> taskLists = taskListRepository.findByTaskOwner(userRoles);
 			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
 		}
 		return null;
@@ -366,8 +367,10 @@ public class BaseServiceImpl implements BaseService {
 		User user = userRepository.findById(id);
 		List<String> userRoles = new ArrayList<String>();
 		if(!user.getRoles().isEmpty()){
-			user.getRoles().forEach(p->System.out.println(p.getRoleName()));
-			user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
+			for(MasterRoles role : user.getRoles()){
+				userRoles.add(role.getRoleName());
+			}
+			//user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
 		}
 		return userRoles;
 	}
