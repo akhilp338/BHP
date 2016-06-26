@@ -42,12 +42,13 @@
                         title: "Candidate Name",
                         data: 'candidate.firstName',
                     },  {
-                        title: "Offer Letter Status",
+                        title: "Status",
                         data: 'status',
                     },{
                         title: "Gross CTC",
                         data: 'grossCTC',
                     },{
+                        title: "Modified Date",
                         title: "Grade",
                         data: 'grade.grade',
                     },{
@@ -63,7 +64,7 @@
                             return vm.getFormattedDate(data)
                         }
                     },{
-                        title: "Modified/Approved By",
+                        title: "Approved By",
                         data: 'updatedBy.username',
                     },{
                         data: 'id',
