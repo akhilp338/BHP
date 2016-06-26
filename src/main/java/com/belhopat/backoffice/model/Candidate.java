@@ -52,6 +52,9 @@ public class Candidate extends BaseEntity {
 	private String fathersName;
 	
 	private String mothersName;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private EmployeeSalary salary;
 
 	@OneToMany
 	@JsonIgnore

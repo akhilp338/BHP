@@ -339,6 +339,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setId(null);
 				employeeSalary.setCandidate(candidate);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+				createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}

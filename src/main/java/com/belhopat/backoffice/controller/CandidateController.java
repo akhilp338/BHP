@@ -170,4 +170,12 @@ public class CandidateController {
 	public DataTablesOutput<EmployeeSalary> getEmployee(@Valid DataTablesInput input) {
 		return candidateService.getOfferLetters(input);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUnProcessedCandidates", method = RequestMethod.GET)
+
+	public DataTablesOutput<Candidate> getUnProcessedCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
+		return candidateService.getUnProcessedCandidates(input,employee);
+	}
+
 }
