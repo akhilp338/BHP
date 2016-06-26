@@ -103,7 +103,7 @@
 								class="carousel3">
 								<li ng-repeat="slide in slides3 track by slide.id">
 									<div class="slider col-lg-3 col-md-6">
-										<div class="panel panel-primary">
+										<div class="panel panel-task">
 											<div class="panel-heading">
 												<div class="row">
 													<div class="col-xs-3">
@@ -143,71 +143,87 @@
 	<!-- /.row -->
 
 	<div class="row">
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart
-					</h3>
-				</div>
-				<div class="panel-body">
-					<nvd3 options="vm.options" data="vm.data"></nvd3>
+		<div class="col-lg-6">
+			<div class="row taskstats">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-bar-chart fa-fw"></i> Task Statitics
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row pending">
+							<div class="col-lg-8">
+								<h3>Pending Task Stats</h3>
+							</div>
+							<div class="col-lg-4">
+								<canvas id="pending"></canvas>
+							</div>
+
+						</div>
+						<div class="row completed">
+							<div class="col-lg-8">
+								<h3>Completed task Stats</h3>
+							</div>
+							<div class="col-lg-4">
+								<canvas id="completed"></canvas>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="fa fa-long-arrow-right fa-fw"></i>  
-					</h3>
-				</div>
-				<div class="panel-body">
-					<nvd3 options="vm.options" data="vm.data"></nvd3>
+			</div>
+			<div class="col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-bar-chart fa-fw"></i> Company Statitics
+						</h3>
+					</div>
+					<div class="panel-body">
+						<nvd3 options="vm.options" data="vm.data"></nvd3>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-4">
-		
-		<div class="panel panel-default">
+
+	</div>
+	<div class="news row">
+		<div class="col-lg-12">
+
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="fa fa-wpforms fa-fw"></i> News and Broadcasts
 					</h3>
 				</div>
 				<div class="panel-body">
-					<md-button class="md-primary md-raised md-news" ng-click="showPrompt($event)">
-			Broadcast a message </md-button>
-			<div class="well well-sm">
-				<div class="row">
-					<div class="col-sm-12">
-						<input type="number" class="form-control" ng-model="selectedItem"
-							placeholder="Search for news">
+					<md-button class="md-primary md-raised md-news"
+						ng-click="showPrompt($event)"> Broadcast a message </md-button>
+					<div class="well well-sm">
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="number" class="form-control"
+									ng-model="selectedItem" placeholder="Search for a broadcast">
+							</div>
+						</div>
+					</div>
+						<div id="scroll-test-container" class="panel-body" ng-init="vm.itemsss()">
+							<div ng-repeat="item in items"
+								scroll-when="selectedItem === item" scroll-watch-enabled="true"
+								scroll-container="#scroll-test-container" scroll-offset="200"
+								scroll-speed="100" class="item-container"
+								ng-class="{'active': selectedItem === item}">
+								<span>{{item}}</span>
+							</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default" ng-init="vm.itemsss()">
-				<div class="panel-heading">
-					<span>News Feed and Brodcasts</span>
-				</div>
-				<div id="scroll-test-container" class="panel-body">
-					<div ng-repeat="item in items" scroll-when="selectedItem === item"
-						scroll-watch-enabled="true"
-						scroll-container="#scroll-test-container" scroll-offset="200"
-						scroll-speed="100" class="item-container"
-						ng-class="{'active': selectedItem === item}">
-						<span>{{item}}</span>
-					</div>
-				</div>
-			</div>
-				</div>
-			</div>
-			
-			<canvas id="demo"></canvas>
-			
-			
+
 		</div>
 	</div>
+
+</div>
 
 </div>
 

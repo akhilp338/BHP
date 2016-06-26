@@ -48,12 +48,6 @@
                         title: "Gross CTC",
                         data: 'grossCTC',
                     },{
-                        title: "Grade",
-                        data: 'grade',
-                    },{
-                        title: "Created Date",
-                        data: 'createdDate',
-                    },{
                         title: "Modified Date",
                         data: 'updatedDate',
                     },{

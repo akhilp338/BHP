@@ -124,7 +124,7 @@
             
             vm.itemsss= function () {
               for (var i = 1; i <= 1000; i++) {
-                $scope.items.push("News "+i);
+                $scope.items.push("Message "+i);
               }
             
           }
@@ -164,68 +164,61 @@
             
         }
 
-		vm.data = [ {
-			key : "One",
-			y : 5
-		}, {
-			key : "Two",
-			y : 2
-		}, {
-			key : "Three",
-			y : 9
-		}, {
-			key : "Four",
-			y : 7
-		}, {
-			key : "Five",
-			y : 4
-		}, {
-			key : "Six",
-			y : 3
-		}, {
-			key : "Seven",
-			y : 9
-		} ];
-		vm.options = {
-			"chart" : {
-				"type" : "pieChart",
-				"height" : 450,
-				"donut" : true,
-				"showLabels" : true,
-				"pie" : {},
-				"x" : function(d) {
-					return d.key;
-				},
-				"y" : function(d) {
-					return d.y;
-				},
-				"duration" : 500,
-				"legend" : {
-					"margin" : {
-						"top" : 5,
-						"right" : 140,
-						"bottom" : 5,
-						"left" : 0
-					}
-				}
-			}
-		}
-		$('#demo').waterbubble({
+       vm.data = [{
+    	    key: "Cumulative Return",
+    	    values: [
+    	        { "label" : "A" , "value" : -29.765957771107 },
+    	        { "label" : "B" , "value" : 0 },
+    	        { "label" : "C" , "value" : 32.807804682612 },
+    	        { "label" : "D" , "value" : 196.45946739256 },
+    	        { "label" : "E" , "value" : 0.19434030906893 },
+    	        { "label" : "F" , "value" : -98.079782601442 },
+    	        { "label" : "G" , "value" : -13.925743130903 },
+    	        { "label" : "H" , "value" : -5.1387322875705 }
+    	    ]
+    	}];
+       vm.options = {
+    		    chart: {
+    		        type: 'discreteBarChart',
+    		        height: 218,
+    		        margin : {
+    		            top: 20,
+    		            right: 20,
+    		            bottom: 60,
+    		            left: 55
+    		        },
+    		        x: function(d){ return d.label; },
+    		        y: function(d){ return d.value; },
+    		        showValues: true,
+    		        valueFormat: function(d){
+    		            return d3.format(',.4f')(d);
+    		        },
+    		        transitionDuration: 500,
+    		        xAxis: {
+    		            axisLabel: 'X Axis'
+    		        },
+    		        yAxis: {
+    		            axisLabel: 'Y Axis',
+    		            axisLabelDistance: 30
+    		        }
+    		    }
+    		};
+		$('#pending').waterbubble({
 
 			  // bubble size
-			  radius: 100,
+			  radius: 50,
 
 			  // border width
 			  lineWidth: undefined,
 
 			  // data to present
-			  data: 0.5,
+			  data: 0.3,
 
 			  // color of the water bubble
-			  waterColor: 'rgba(25, 139, 201, 1)',
+			  waterColor: 'red',
 
 			  // text color
-			  textColor: 'rgba(06, 85, 128, 0.8)',
+			  textColor: '#f6f6f6',
 
 			  // custom font family
 			  font: '',
@@ -234,7 +227,37 @@
 			  wave: true,
 
 			  // custom text displayed inside the water bubble
-			  txt:"50%",
+			  txt:"30%",
+
+			  // enable water fill animation
+			  animation: true
+			  
+			});
+		$('#completed').waterbubble({
+
+			  // bubble size
+			  radius:50,
+
+			  // border width
+			  lineWidth: undefined,
+
+			  // data to present
+			  data: 0.7,
+
+			  // color of the water bubble
+			  waterColor: 'green',
+
+			  // text color
+			  textColor: '#f6f6f6',
+
+			  // custom font family
+			  font: '',
+
+			  // show wave
+			  wave: true,
+
+			  // custom text displayed inside the water bubble
+			  txt:"70%",
 
 			  // enable water fill animation
 			  animation: true
