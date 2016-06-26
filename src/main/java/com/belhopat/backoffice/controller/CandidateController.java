@@ -24,6 +24,7 @@ import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.service.BaseService;
@@ -62,7 +63,8 @@ public class CandidateController {
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		pdfService.generateOfferLetterPDF();
+		Employee employeeDTO = new Employee();
+		pdfService.generateOfferLetterPDF(employeeDTO);
 		SalaryDTO salaryDTO = new SalaryDTO();
 		return candidateService.getCandidates(input, employee);
 	}

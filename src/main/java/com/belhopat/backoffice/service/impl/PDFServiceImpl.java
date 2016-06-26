@@ -6,6 +6,7 @@ import java.text.ParseException;
 
 import org.springframework.stereotype.Component;
 
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.pdf.OfferLetterPDF;
 import com.belhopat.backoffice.service.PDFService;
 import com.itextpdf.text.DocumentException;
@@ -18,10 +19,10 @@ import com.itextpdf.text.DocumentException;
 public class PDFServiceImpl implements PDFService {
 
 	@Override
-	public byte[] generateOfferLetterPDF()
+	public byte[] generateOfferLetterPDF(Employee employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		OfferLetterPDF pdfGenerator = new OfferLetterPDF();
-		pdfGenerator.getPDFContents();
+		pdfGenerator.getPDFContents(employee);
 		byte[] pdfByte = null;
 		return pdfByte;
 	}
