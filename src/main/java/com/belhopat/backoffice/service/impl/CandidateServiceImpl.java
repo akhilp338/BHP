@@ -442,12 +442,9 @@ public class CandidateServiceImpl implements CandidateService {
 			public Predicate toPredicate(Root<Candidate> root, CriteriaQuery<?> criteriaQuery,
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
-//				if (employee) {
-					Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
-//					Predicate salaryNotProcessed = criteriaBuilder.notEqual(root.get("salary"), null);
-					return criteriaBuilder.and(isNotDeleted, employeeStatus);
-
-//				}
+				Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
+				Predicate salaryNotProcessed = criteriaBuilder.isNull(root.get("salary"));
+				return criteriaBuilder.and(isNotDeleted, employeeStatus,salaryNotProcessed);
 			}
 		};
 		DataTablesOutput<Candidate> dataTablesOutput = candidateRepository.findAll(input, specification);

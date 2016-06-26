@@ -151,5 +151,11 @@ public class EmployeeSalary  extends BaseEntity{
 	public void setCurrentTask(TaskList currentTask) {
 		this.currentTask = currentTask;
 	}
+	public SalaryGrade getSelectedGrade() {
+		return selectedGrade;
+	}
+	public void setSelectedGrade(SalaryGrade selectedGrade) {
+		this.selectedGrade = selectedGrade;
+	}
 
 }

@@ -49,7 +49,7 @@
                         data: 'grossCTC',
                     },{
                         title: "Grade",
-                        data: 'grade',
+                        data: 'grade.grade',
                     },{
                         title: "Created Date",
                         data: 'createdDate',
