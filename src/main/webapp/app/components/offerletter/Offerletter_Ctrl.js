@@ -54,8 +54,10 @@
             }
             Core_Service.getSalaryDetails(vm.url,params)
                     .then(function (response) {    
+                    	response.data.selectedGrade=vm.offerletter.selectedGrade;
                         angular.extend(vm.offerletter,params);
                         angular.extend(vm.offerletter,response.data);
+                        
                     }, function (error) {
                         console.log(error)
                     });
