@@ -49,9 +49,22 @@
                         data: 'grossCTC',
                     },{
                         title: "Modified Date",
-                        data: 'updatedDate',
+                        title: "Grade",
+                        data: 'grade.grade',
                     },{
-                        title: "Modified/Approved By",
+                        title: "Created Date",
+                        data: 'createdDate',
+                        "render": function(data) {
+                            return vm.getFormattedDate(data)
+                        }
+                    },{
+                    	title: "Modified Date",
+                        data: 'updatedDate',
+                        "render": function(data) {
+                            return vm.getFormattedDate(data)
+                        }
+                    },{
+                        title: "Approved By",
                         data: 'updatedBy.username',
                     },{
                         data: 'id',
@@ -65,6 +78,11 @@
                         }
                     }]
             });
+            
+            vm.getFormattedDate = function(data){
+            	var today = new Date(data);
+        	    return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+            }
             
             $('#offerLetterList tbody').on( 'click', 'tr', function () {
             	

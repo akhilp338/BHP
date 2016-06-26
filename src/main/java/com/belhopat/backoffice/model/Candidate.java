@@ -53,8 +53,8 @@ public class Candidate extends BaseEntity {
 	
 	private String mothersName;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	private List<EmployeeSalary> salary;
+	@OneToOne(fetch=FetchType.EAGER)
+	private EmployeeSalary salary;
 
 	@OneToMany
 	@JsonIgnore
@@ -438,14 +438,13 @@ public class Candidate extends BaseEntity {
 	public void setUnselectedSkillSet(List<Skill> unselectedSkillSet) {
 		this.unselectedSkillSet = unselectedSkillSet;
 	}
-	
-	public List<EmployeeSalary> getSalary() {
+
+	public EmployeeSalary getSalary() {
 		return salary;
 	}
 
-	public void setSalary(List<EmployeeSalary> salary) {
+	public void setSalary(EmployeeSalary salary) {
 		this.salary = salary;
 	}
-
-
+	
 }

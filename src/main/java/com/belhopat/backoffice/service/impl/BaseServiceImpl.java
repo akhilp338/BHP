@@ -43,6 +43,7 @@ import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
@@ -99,6 +100,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	HitController controller;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	/*
 	 * (non-Javadoc)
@@ -246,26 +250,25 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject) {
 		/*offer letter transaction part*/
-		List<TaskList> tasks= createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		TaskList newTask= createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 		return null;
 	}
 
-	private List<TaskList> createNewTaskList(String taskName) {
+	private TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
-		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
-		List<TaskList> newTasks = new ArrayList<TaskList>();
 		TaskList currentTaskRow = new TaskList();
 		TaskList newTaskRow = new TaskList();
+		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
 		currentTaskRow.setCompleted((byte)1);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
-		newTaskRow.setTask(currentTaskRow.getNextTask());
+		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
+		newTaskRow.setTask(nextTask);
 		newTaskRow.setBaseAttributes(currentUser);
-		newTasks.add(currentTaskRow);
-		newTasks.add(newTaskRow);
-		taskListRepository.save(newTasks);
-		return null;
+		taskListRepository.save(currentTaskRow);
+		newTaskRow = taskListRepository.save(newTaskRow);
+		return newTaskRow;
 	}
 	
 	private List<TaskList> updateTaskList(String taskName) {
@@ -276,8 +279,8 @@ public class BaseServiceImpl implements BaseService {
 		TaskList newTaskRow = new TaskList();
 		taskList.setUpdateAttributes(currentUser);
 		taskList.setCompleted((byte)1);
-		taskList.setStatus(TaskConstants.CREATED);
-		newTaskRow.setTask(taskList.getNextTask());
+		taskList.setStatus(TaskConstants.CREATED);//status to be chnaged
+//		newTaskRow.setTask(taskList.getNextTask());
 		newTaskRow.setBaseAttributes(currentUser);
 		newTasks.add(taskList);
 		newTasks.add(newTaskRow);
@@ -326,7 +329,7 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-                        return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+            return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}
@@ -335,13 +338,37 @@ public class BaseServiceImpl implements BaseService {
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
 		if(employeeSalary!=null){
 			if(employeeSalary.getCandidate()!=null){
+				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
+				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+				employeeSalary.setCurrentTask(currentTask);
+				employeeSalary.setBaseAttributes(currentUser);
+				employeeSalary.setUpdateAttributes(currentUser);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-				createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+		User currentUser = SessionManager.getCurrentUserAsEntity();
+		List<String> userRoles = getAllUserRoles(currentUser.getId());
+		if(userRoles.isEmpty()){
+			List<TaskList> taskLists = taskListRepository.findByTaskOwner(currentUser.getRoles());
+			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
+		}
+		return null;
+	}
+
+	private List<String> getAllUserRoles(Long id) {
+		User user = userRepository.findById(id);
+		List<String> userRoles = new ArrayList<String>();
+		if(!user.getRoles().isEmpty()){
+			user.getRoles().forEach(p->System.out.println(p.getRoleName()));
+			user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
+		}
+		return userRoles;
 	}
 }
