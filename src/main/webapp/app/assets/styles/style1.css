@@ -1730,3 +1730,21 @@ td.fc-widget-content {
 .fc-view-container{
     background-color: #fcd15c!important;
 }
+.generate-button {
+	margin-right: 20px;
+	border-radius: 6px;
+	padding: 0;
+	width: 78px;
+	height: 26px;
+}
+.generate-button span.fa-stack {
+	line-height: 1.5em;
+	height: inherit;
+}
+.generate-button span.text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 4px !important;
+	float: left;
+}

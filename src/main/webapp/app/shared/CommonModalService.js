@@ -16,6 +16,9 @@
         service.openAddEventModal = function (data) {
             return Core_Modal.modalOpen('event-modal', '/BelhopatBackOffice/app/components/event/addEvent.html', 'AddEvent_Ctrl', 'vm', data);
         };
+        service.openGenerateCredentialsModal = function (data) {
+            return Core_Modal.modalOpen('generate-credentials-modal', '/BelhopatBackOffice/app/components/employee/generateCredentials.html', 'GenerateCredentials_Ctrl', 'vm', data);
+        };
     };
     angular.module('app.common')
         .service('Core_ModalService', Core_ModalService);

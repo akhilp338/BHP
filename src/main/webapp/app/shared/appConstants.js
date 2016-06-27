@@ -10,6 +10,7 @@
             .constant('CANDIDATE', {
                 "fieldMapping": {
                     "id":"ID",
+                    "employeeId":"Employee ID",
                     "createdDate":"Created Date",
                     "updatedDate":"Updated Date",
                     "deletedDate":"Deleted Date",

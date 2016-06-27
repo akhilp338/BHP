@@ -1,16 +1,18 @@
+<!DOCTYPE html>
 <html>
 	<head>
 	</head>
 	<body>
+		<a style="cursor: default;"><img alt="Belhopat Logo" src="cid:templateLogo" width="75%" style="cursor: default;"></a>
 		<div>
 			<p><strong>
-				Belhopat Admin
+				Belhopat Global Services
 			</strong>
 			</p>
 			<p></p>
 		</div>
 		<div> 
-			$content $!generatedPassword
+			$content
 		</div>
 	</body>
 </html>

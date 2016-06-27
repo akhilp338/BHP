@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+		<a style="cursor: default;"><img alt="Belhopat Logo" src="cid:templateLogo" width="75%" style="cursor: default;"></a>
+<br />
+<br />
+<h3>Candidate Details:</h3>
+<br />
+<div style="width:100%; margin:auto; overflow: auto; border: 1px solid #eee; margin-left: 0px;">
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">Trade ID:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$tradeId</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em; ">Trade Date:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$tradeDate</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em; ">Offer ID:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$offers</div>
+	</div>
+		<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">Physical Collection date:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$physicalCollectionDate</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em; ">Metal:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$metal</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em; ">Quantity Type:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$qtyType</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em; ">Quantity:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$quantity</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;  border-bottom: none; font-size: 1.0em; ">Purity:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$purity</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;  border-bottom: none; font-size: 1.0em;">Premium ($/Ounce):</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$premium</div>
+	</div>
+		<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;  border-bottom: none; font-size: 1.0em;">Net Premium ($):</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$netPremium</div>
+	</div>
+	<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;  border-bottom: none; font-size: 1.0em;">Currency:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; border-bottom: none; font-size: 1.0em;">$currency</div>
+	</div>
+		<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; font-size: 1.0em;">Freight Company:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; font-size: 1.0em;">$freightCompanyName</div>
+	</div>
+	</div>
+		<div style="overflow: auto; clear: both;">
+		<div style="width:35%; display: inline-block; float: left; text-align: left; border: 1px solid #000; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; font-size: 1.0em;">Release Date:</div>
+		<div style="width:35%; display: inline-block; float: left; text-align: right; border: 1px solid #000; border-left: none; padding:8px  2px; box-sizing:border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; font-size: 1.0em;">$releaseDate</div>
+	</div>
+	
+</div>
+	<br />
+	<br />
+	$releaseInstruction
+	<br />
+	You may find the details of the trade <a href=" $emailLink ">here</a>
+	<br />
+Thank you,
+<br />
+Belhopat Global Services
+</body>
+</html>

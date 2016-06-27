@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 
 public interface MailService {
 
 	public void sendMail(MailMessageObject mailObj);
 
-	public void sendPasswordResetMail(String userEmail, String emailBody) throws MessagingException;
+	public void sendPasswordResetMail( User user, String emailBody) throws MessagingException;
 
 	public void sendCandidateRegMail(String userEmail, String emailBody) throws MessagingException;
 

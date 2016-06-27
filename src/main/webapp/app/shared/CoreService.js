@@ -63,7 +63,6 @@
             }, function (error) {
                 deferred.reject(error);
             });
-            console.log("here4");
             return deferred.promise;
         };
         service.SetCredentials = function (username, password) {
