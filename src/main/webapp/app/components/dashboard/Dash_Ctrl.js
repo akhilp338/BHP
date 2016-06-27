@@ -16,7 +16,14 @@
                 odd: (i % 2 === 0)
             };
         }
-
+        vm.getUserTasks = function () {
+            Core_Service.getUserTasks("api/candidate/getCurrentUserTasks" ).then(function (res) {
+                vm.tasks = res.data;
+                $rootScope.showLoader = false;
+            }, function (err) {
+                vm.tasks = {};
+            });
+        }
         function addSlide(target, style) {
             target.push(getSlide(target, style));
         };
