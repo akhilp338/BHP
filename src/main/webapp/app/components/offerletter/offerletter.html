@@ -111,7 +111,7 @@
             </div>
             <div class="earnings-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Gross Salary : </label>
-                <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.grossCTC}}</p>
+                <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.grossSalary}}</p>
             </div>
         </div>
         <div class="inner-wrapper deductions col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -119,7 +119,7 @@
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="proTax">Professional Tax :</label>
                 <input type="text" name="proTax" id="proTax"
-                       ng-model="vm.offerletter.proTax"
+                       ng-model="vm.offerletter.profTax"
                        class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
                        validation="numeric:alt=Number only | required:alt=Required field" />
             </div>
@@ -200,7 +200,7 @@
         </div>
         <div class="takeHome-total-container total-container col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <label class="item-label col-md-6 col-lg-6 col-sm-6 col-xs-6">Net Take Home Before TDS : </label>
-            <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.takeHome.total}}</p>
+            <p class="item-label-desc col-md-6 col-lg-6 col-sm-6 col-xs-6">{{vm.offerletter.netTakeHomeBeforeTDS}}</p>
         </div>
     </div>
     <div ng-if="vm.isCandidateSelected" class="bottom-button-liner">        

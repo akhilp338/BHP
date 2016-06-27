@@ -31,7 +31,7 @@
                 fixed:vm.offerletter.grossSalary,
                 grade:vm.offerletter.selectedGrade
             };
-            $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandId})
+            $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandidate,grade:vm.offerletter.selectedGrade})
         };
 
         vm.getSalaryGrades = function () {
@@ -54,8 +54,12 @@
             }
             Core_Service.getSalaryDetails(vm.url,params)
                     .then(function (response) {    
+                    	response.data.selectedGrade=vm.offerletter.selectedGrade;
+                    	response.data.grade=params.grade;
+                    	vm.offerletter.grade=params.grade;
                         angular.extend(vm.offerletter,params);
                         angular.extend(vm.offerletter,response.data);
+                        
                     }, function (error) {
                         console.log(error)
                     });
@@ -67,7 +71,7 @@
         $rootScope.active = 'offerletter';
         angular.element(document).ready(function () {
             addEmployeeTable = angular.element('#candidatesList').DataTable({
-                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getCandidates?employee=true",
+                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "candidate/getUnProcessedCandidates?employee=true",
                 serverSide: true,
                 bDestroy: true,
                 processing: true,
@@ -153,26 +157,47 @@
             }
 
         vm.getEmployeeSummary = function(data){
-                vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
-                vm.employeeSummary["Candidate Id"] = data.candidateId;
-                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
-                vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
-                vm.employeeSummary["Designation"] = data.designation.description;
-                vm.employeeSummary["Passport"] = data.passport.passportNo;;
-                vm.employeeSummary["Email Id"] = data.personalEmail;
-                vm.employeeSummary["Contact No"] = data.personalContactNo;
-                vm.employeeSummary["Skillset"] = [];
-                for(var j=0; j<data.skillSet.length; j++){
-                    vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)
-                }
-                for (var key in vm.employeeSummary) {
-                    vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
-                            '<label class="item-label">' + key +
-                            '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
-                            '</p></div>';
-                }
-                $(".candidate-summary").html(vm.Employeetemplate);
+        	$rootScope.selectedCandidate=data;
+            vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
+            vm.employeeSummary["Candidate Id"] = data.candidateId;
+            vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+            vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
+            vm.employeeSummary["Designation"] = data.designation.description;
+            vm.employeeSummary["Passport"] = data.passport.passportNo;;
+            vm.employeeSummary["Email Id"] = data.personalEmail;
+            vm.employeeSummary["Contact No"] = data.personalContactNo;
+            vm.employeeSummary["Skillset"] = [];
+            for(var j=0; j<data.skillSet.length; j++){
+                vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)
+            }
+            for (var key in vm.employeeSummary) {
+                vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                        '<label class="item-label">' + key +
+                        '</label><p class="item-label-desc"> :   ' + vm.employeeSummary[key] +
+                        '</p></div>';
+            }
+            $(".candidate-summary").html(vm.Employeetemplate);
         }
+        
+        vm.generateOfferLetter = function () {
+        	vm.offerletter.candidate=$rootScope.selectedCandidate;
+        	vm.offerletter.grade=vm.getGrade($stateParams.grade,vm.offerletter.grades);
+            vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
+            Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl,vm.offerletter)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Done!",response.data.data,"success","coreuser.offerletter");  
+                    }, function (error) {
+
+                    });
+        };
+        vm.getGrade = function(grade,gradeList){
+        	for(var i=0;i<gradeList.length;i++){
+        		if(grade==gradeList[i].grade)
+        			return gradeList[i];
+        		}
+        }
+        
+        
         });
 
     };

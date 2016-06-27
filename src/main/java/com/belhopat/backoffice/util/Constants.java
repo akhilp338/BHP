@@ -62,5 +62,7 @@ public class Constants {
 	public static final String WEEKLY_REPEAT = "WEEKLY_REPEAT";
 	public static final String MONTHLY_REPEAT = "MONTHLY_REPEAT";
 	public static final String YEARLY_REPEAT = "YEARLY_REPEAT";
+	public static final String CREATED = "CREATED";
+	public static final String GENERATED = "GENERATED";
 
 }

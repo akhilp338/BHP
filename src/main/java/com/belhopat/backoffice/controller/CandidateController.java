@@ -27,6 +27,7 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
+import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.pdf.OfferLetterPDF;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
@@ -146,10 +147,7 @@ public class CandidateController {
 	@ResponseBody
 	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.GET)
 	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestParam String fixed,@RequestParam String grade) {
-		SalaryDTO salaryDTO = new SalaryDTO();
-		salaryDTO.setFixed(fixed);
-		salaryDTO.setGrade(grade);
-		return baseService.getSalarySplit(salaryDTO);
+		return baseService.getSalarySplit(Double.valueOf(fixed),grade);
 	}
 	
 	@ResponseBody
@@ -170,4 +168,18 @@ public class CandidateController {
 	public DataTablesOutput<EmployeeSalary> getEmployee(@Valid DataTablesInput input) {
 		return candidateService.getOfferLetters(input);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUnProcessedCandidates", method = RequestMethod.GET)
+	public DataTablesOutput<Candidate> getUnProcessedCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
+		return candidateService.getUnProcessedCandidates(input,employee);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.POST)
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+		ResponseEntity<List<TaskList>> tasks= baseService.getCurrentUserTasks();
+		return tasks;
+	}
+
 }

@@ -34,4 +34,6 @@ public interface CandidateService {
 
 	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input);
 
+	public DataTablesOutput<Candidate> getUnProcessedCandidates(DataTablesInput input, boolean employee);
+
 }
