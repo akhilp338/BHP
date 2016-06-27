@@ -47,7 +47,7 @@
 
 
     };
-    ViewEmployee_Ctrl.$inject = ["$scope", '$uibModalInstance', 'CANDIDATE', 'Core_Service', 'candidateDetails'];
+    ViewEmployee_Ctrl.$inject = ["$scope", '$modalInstance', 'CANDIDATE', 'Core_Service', 'candidateDetails'];
     angular.module('coreModule')
             .controller('ViewEmployee_Ctrl', ViewEmployee_Ctrl);
 })();

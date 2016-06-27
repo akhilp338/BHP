@@ -52,6 +52,9 @@ public class Candidate extends BaseEntity {
 	private String fathersName;
 	
 	private String mothersName;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private EmployeeSalary salary;
 
 	@OneToMany
 	@JsonIgnore
@@ -436,4 +439,12 @@ public class Candidate extends BaseEntity {
 		this.unselectedSkillSet = unselectedSkillSet;
 	}
 
+	public EmployeeSalary getSalary() {
+		return salary;
+	}
+
+	public void setSalary(EmployeeSalary salary) {
+		this.salary = salary;
+	}
+	
 }

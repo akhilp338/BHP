@@ -15,6 +15,8 @@ public interface MasterTasksRepository extends JpaRepository<MasterTasks, Long>,
 
 	MasterTasks findByTaskKey(String taskName);
 
+	MasterTasks findById(Long nextTaskId);
+
 
 
 }

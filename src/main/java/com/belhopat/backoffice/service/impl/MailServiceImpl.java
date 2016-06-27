@@ -2,8 +2,8 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 
@@ -18,6 +18,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.pdf.PDFConstants;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 import com.belhopat.backoffice.util.Constants;
@@ -77,14 +79,18 @@ public class MailServiceImpl implements MailService {
 	 * sends reseted password
 	 */
 	@Override
-	public void sendPasswordResetMail(String userEmail, String generatedPassword) throws MessagingException {
+	public void sendPasswordResetMail(User user, String generatedPassword) throws MessagingException {
 
 		Map<String, Object> model = new HashMap < String, Object > ();
-		model.put( Constants.CONTENT, "Your new password is: " );
 		model.put( Constants.GENERATED_PASSWORD, generatedPassword );
-        String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.DEFAULT_EMAIL_TEMPLATE, model );
-		MailMessageObject mailObject = new MailMessageObject(userEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
-				emailHtmlBody, mailSender);
+		model.put( Constants.USERNAME, user.getUsername());
+		
+        String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.PASSWORD_RESET_TEMPLATE, model );
+        
+        String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+        
+		MailMessageObject mailObject = new MailMessageObject(user.getEmail(), MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
+				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 //		velocityEngine.setApplicationAttribute("javax.servlet.ServletContext", servletContext);
 	}
@@ -97,7 +103,7 @@ public class MailServiceImpl implements MailService {
 	 */
 	private String generateEmailBodyFromVelocityTemplate( String templateName, Map<String, Object> model ) {
 		String emailHtmlBody = VelocityEngineUtils.mergeTemplateIntoString(
-                velocityEngine, Constants.DEFAULT_EMAIL_TEMPLATE, Constants.UTF_8, model);
+                velocityEngine, templateName, Constants.UTF_8, model);
 		return emailHtmlBody;
 	}
 

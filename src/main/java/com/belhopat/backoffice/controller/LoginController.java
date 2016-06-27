@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.controller;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,17 +16,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.RoleTab;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.LoginService;
 import com.belhopat.backoffice.service.UserService;
 import com.belhopat.backoffice.util.Constants;
 
 /**
- * @author BHP DEV TEAM
- * Handler for login and logout functionality
+ * @author BHP DEV TEAM Handler for login and logout functionality
  *
  */
 @Controller
@@ -36,11 +39,9 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
-	
+
 	/**
-	 * @return
-	 * Loads the index page
-	 * heart of the application
+	 * @return Loads the index page heart of the application
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String getIndexPage() {
@@ -66,8 +67,7 @@ public class LoginController {
 	}
 
 	/**
-	 * @return
-	 * Once the log in is success , returns a view with user name
+	 * @return Once the log in is success , returns a view with user name
 	 */
 	@RequestMapping(value = "/loginSuccess")
 	public ModelAndView loginSuccess() {
@@ -83,7 +83,7 @@ public class LoginController {
 	/**
 	 * @param request
 	 * @throws ServletException
-	 * Log outs and kills the current session
+	 *             Log outs and kills the current session
 	 */
 	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
@@ -93,8 +93,7 @@ public class LoginController {
 
 	/**
 	 * @param request
-	 * @return username
-	 * get the username for current logged in user
+	 * @return username get the username for current logged in user
 	 */
 	@RequestMapping(value = "api/getUserName", method = RequestMethod.POST)
 	public String getUserName(HttpServletRequest request) {
@@ -105,7 +104,8 @@ public class LoginController {
 	 * @param user
 	 * @return
 	 * @throws MessagingException
-	 * Generates a password and sends that password to users e mail id
+	 *             Generates a password and sends that password to users e mail
+	 *             id
 	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException {
@@ -116,6 +116,13 @@ public class LoginController {
 		else
 			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_FAIL_MSG),
 					HttpStatus.OK);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "api/getUserTabs", method = RequestMethod.POST)
+	public List<RoleTab> getUserTabs() {
+		List<RoleTab> userTabs = loginService.getUserTabs();
+		return userTabs;
 	}
 
 }

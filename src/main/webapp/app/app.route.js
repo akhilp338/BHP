@@ -94,10 +94,8 @@
                     controllerAs: 'vm'
                 }
             }
-        })
         
-        //offerletter processing
-        .state('coreuser.offerletter', {
+        }).state('coreuser.offerletter', {
             url: urlConfig.root_path+'offerletter',
             views: {
                 'content@': {
@@ -106,8 +104,18 @@
                     controllerAs: 'vm'
                 }
             }
+        })
+        .state('coreuser.offerletterhome', {
+            url: urlConfig.root_path+'offerletterhome',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.html',
+                    controller: 'Offer_Letter_Home_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
         }).state('coreuser.offerletter.verify', {
-            url: '/offerletter/verify/:verifyId',
+            url: '/offerletter/verify/:verifyId/:grade',
             views: {               
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',

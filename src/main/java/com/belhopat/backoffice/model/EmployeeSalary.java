@@ -1,10 +1,7 @@
 package com.belhopat.backoffice.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,25 +16,50 @@ public class EmployeeSalary  extends BaseEntity{
 	private Long id;*/
 	@OneToOne(fetch=FetchType.EAGER)
 	private  Candidate candidate ;
-	private Double minBasicSalary ;
-	@OneToOne(fetch=FetchType.EAGER)
-	private  SalaryGrade grade ;
-	private Double minFixedSalary ;
-	private  Double basicSalary ;
-	private  Double hra ;
-	private Long medicalAllowance ;
-	private Long conveyanceAllowance ;
-	private int profTax ;
-	private Long pfEmpContrbtn ;
-	private Long esiByEmplyr  ;
-	private Long esiByEmplye  ;
-	private Long leaveEncash ;
-	private Long gratuity ;
-	private Long totalDeductions ; 
-	private Long flexyBenKit ;
-	private Long grossCTC ;
-	private String status;
 	
+	private Double minBasicSalary ;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private  SalaryGrade selectedGrade ;
+	
+	private Double grossSalary;
+	
+	private Double minFixedSalary ;
+	
+	private  Double basicSalary ;
+	
+	private  Double hra ;
+	
+	private Long medicalAllowance ;
+	
+	private Long conveyanceAllowance ;
+	
+	private int profTax ;
+	
+	private Long pfEmpContrbtn ;
+	
+	private Long pfCompContrbtn ;
+	
+	private Long esiByEmplyr  ;
+	
+	private Long esiByEmplye  ;
+	
+	private Long leaveEncash ;
+	
+	private Long gratuity ;
+	
+	private Long totalDeductions ; 
+	
+	private Long flexyBenKit ;
+	
+	private Long grossCTC ;
+	
+	private Long netTakeHomeBeforeTDS;
+	
+	private String status ;
+	
+	@OneToOne
+	private TaskList currentTask;
 	
 	public Long getTotalDeductions() {
 		return totalDeductions;
@@ -49,10 +71,10 @@ public class EmployeeSalary  extends BaseEntity{
 		this.minBasicSalary = minBasicSalary;
 	}
 	public SalaryGrade getGrade() {
-		return grade;
+		return selectedGrade;
 	}
 	public void setGrade(SalaryGrade grade) {
-		this.grade = grade;
+		this.selectedGrade = grade;
 	}
 	public Double getMinFixedSalary() {
 		return minFixedSalary;
@@ -146,6 +168,36 @@ public class EmployeeSalary  extends BaseEntity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	} 
+	}
+	public TaskList getCurrentTask() {
+		return currentTask;
+	}
+	public void setCurrentTask(TaskList currentTask) {
+		this.currentTask = currentTask;
+	}
+	public SalaryGrade getSelectedGrade() {
+		return selectedGrade;
+	}
+	public void setSelectedGrade(SalaryGrade selectedGrade) {
+		this.selectedGrade = selectedGrade;
+	}
+	public Long getPfCompContrbtn() {
+		return pfCompContrbtn;
+	}
+	public void setPfCompContrbtn(Long pfCompContrbtn) {
+		this.pfCompContrbtn = pfCompContrbtn;
+	}
+	public Double getGrossSalary() {
+		return grossSalary;
+	}
+	public void setGrossSalary(Double grossSalary) {
+		this.grossSalary = grossSalary;
+	}
+	public Long getNetTakeHomeBeforeTDS() {
+		return netTakeHomeBeforeTDS;
+	}
+	public void setNetTakeHomeBeforeTDS(Long netTakeHomeBeforeTDS) {
+		this.netTakeHomeBeforeTDS = netTakeHomeBeforeTDS;
+	}
 
 }

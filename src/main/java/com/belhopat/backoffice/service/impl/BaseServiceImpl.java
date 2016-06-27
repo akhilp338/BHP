@@ -23,12 +23,14 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
+import com.belhopat.backoffice.model.MasterRoles;
 import com.belhopat.backoffice.model.MasterTasks;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
@@ -42,6 +44,7 @@ import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
@@ -62,6 +65,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	CandidateRepository candidateRepository;
 
 	@Autowired
 	StateRepository stateRepository;
@@ -95,6 +101,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	HitController controller;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	/*
 	 * (non-Javadoc)
@@ -242,26 +251,25 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject) {
 		/*offer letter transaction part*/
-		List<TaskList> tasks= createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		TaskList newTask= createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 		return null;
 	}
 
-	private List<TaskList> createNewTaskList(String taskName) {
+	private TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
-		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
-		List<TaskList> newTasks = new ArrayList<TaskList>();
 		TaskList currentTaskRow = new TaskList();
 		TaskList newTaskRow = new TaskList();
+		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
 		currentTaskRow.setCompleted((byte)1);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
-		newTaskRow.setTask(currentTaskRow.getNextTask());
+		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
+		newTaskRow.setTask(nextTask);
 		newTaskRow.setBaseAttributes(currentUser);
-		newTasks.add(currentTaskRow);
-		newTasks.add(newTaskRow);
-		taskListRepository.save(newTasks);
-		return null;
+		taskListRepository.save(currentTaskRow);
+		newTaskRow = taskListRepository.save(newTaskRow);
+		return newTaskRow;
 	}
 	
 	private List<TaskList> updateTaskList(String taskName) {
@@ -272,8 +280,8 @@ public class BaseServiceImpl implements BaseService {
 		TaskList newTaskRow = new TaskList();
 		taskList.setUpdateAttributes(currentUser);
 		taskList.setCompleted((byte)1);
-		taskList.setStatus(TaskConstants.CREATED);
-		newTaskRow.setTask(taskList.getNextTask());
+		taskList.setStatus(TaskConstants.CREATED);//status to be chnaged
+//		newTaskRow.setTask(taskList.getNextTask());
 		newTaskRow.setBaseAttributes(currentUser);
 		newTasks.add(taskList);
 		newTasks.add(newTaskRow);
@@ -282,16 +290,13 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> getSalarySplit(SalaryDTO salaryDTO) {
-		salaryDTO.setGrade(salaryDTO.getGrade());
-		salaryDTO.setGrossSalary(Double.valueOf(356663));
-		if(salaryDTO.getGrade()!=null && salaryDTO.getGrossSalary()!=null){
+	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade){
+		if(grade!=null && grossSalary!=null){
 			Double minBasicSalary = 7515.20;
 			EmployeeSalary empSal = new EmployeeSalary();
-			salaryDTO.setGrossSalary(Double.valueOf(37663)); 
-			SalaryGrade grade = salaryGradeRepository.findByGrade(salaryDTO.getGrade());
-			Double minFixedSalary = grade.getFixedSalary() > salaryDTO.getGrossSalary() ? 
-					salaryDTO.getGrossSalary() : grade.getFixedSalary();
+			SalaryGrade gradeEntity = salaryGradeRepository.findByGrade(grade);
+			Double minFixedSalary = gradeEntity.getFixedSalary() > grossSalary ? 
+					grossSalary : gradeEntity.getFixedSalary();
 			Double basicSalary = minBasicSalary < minFixedSalary * .6 ? minFixedSalary * .6 : minBasicSalary;
 			Double hra = (minFixedSalary - basicSalary) > basicSalary * 0.05 ? basicSalary * 0.05 : minFixedSalary - basicSalary;
 			Double medicalAllowance = minFixedSalary -(basicSalary + hra) > minFixedSalary * 0.05 ? 
@@ -299,15 +304,17 @@ public class BaseServiceImpl implements BaseService {
 			Long medicalAllowanceLong = medicalAllowance < 0 ? 0 : Math.round(medicalAllowance);
 			Double conveyanceAllowance = minFixedSalary - (basicSalary + hra + medicalAllowanceLong);
 			Long conveyanceAllowanceLong = conveyanceAllowance < 0 ? 0 : Math.round(conveyanceAllowance);
-			int profTax = salaryDTO.getGrossSalary() < 1000 ? 0 : (salaryDTO.getGrossSalary() < 15000 ? 150 : 200);
-			Long pfEmpContrbtn = Math.round(basicSalary < 15000 ? basicSalary * 0.6 : 15000 * 0.6);
-			Long esiByEmplyr = Math.round(salaryDTO.getGrossSalary() < 15000?salaryDTO.getGrossSalary() * 0.0475 : 0);
-			Long esiByEmplye = Math.round(salaryDTO.getGrossSalary() < 15000?salaryDTO.getGrossSalary() * 0.0175 : 0);
+			int profTax = grossSalary < 1000 ? 0 : (grossSalary < 15000 ? 150 : 200);
+			Long pfEmpContrbtn = Math.round(basicSalary < 15000 ? basicSalary * 0.12 : 15000 * 0.12);
+			Long esiByEmplyr = Math.round(grossSalary < 15000?grossSalary * 0.0475 : 0);
+			Long esiByEmplye = Math.round(grossSalary < 15000?grossSalary * 0.0175 : 0);
 			Long leaveEncash = Math.round(basicSalary/22 * 15/12);
 			Long gratuity = Math.round(basicSalary/26 * 15/12);
-			Long totalDeductions = profTax + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
-			Long flexyBenKit = Math.round(salaryDTO.getGrossSalary() - minFixedSalary);
-			Long grossCTC = Math.round(basicSalary + hra + medicalAllowanceLong +  conveyanceAllowanceLong + flexyBenKit ); 
+			Long totalDeductions = profTax + pfEmpContrbtn +pfEmpContrbtn+ esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
+			Long flexyBenKit = Math.round(grossSalary - minFixedSalary);
+			Long grossCTC = Math.round(grossSalary + pfEmpContrbtn + esiByEmplyr +  leaveEncash + gratuity ); 
+			Long netTakeHomeBeforeTDS = grossCTC - totalDeductions;
+			empSal.setGrossSalary(grossSalary);
 			empSal.setBasicSalary(basicSalary);
 			empSal.setMinFixedSalary(minFixedSalary);
 			empSal.setHra(hra);
@@ -317,12 +324,14 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setEsiByEmplye(esiByEmplye);
 			empSal.setEsiByEmplyr(esiByEmplyr);
 			empSal.setPfEmpContrbtn(pfEmpContrbtn);
+			empSal.setPfCompContrbtn(pfEmpContrbtn);
 			empSal.setGratuity(gratuity);
 			empSal.setLeaveEncash(leaveEncash);
 			empSal.setTotalDeductions(totalDeductions);
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
-                        return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			empSal.setNetTakeHomeBeforeTDS(netTakeHomeBeforeTDS);
+            return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}
@@ -330,13 +339,40 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
 		if(employeeSalary!=null){
-			EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-			HitController jj = new HitController();
-			
-			controller.doExample();
-			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			if(employeeSalary.getCandidate()!=null){
+				User currentUser = SessionManager.getCurrentUserAsEntity();
+				employeeSalary.setStatus(Constants.GENERATED);
+				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+				employeeSalary.setCurrentTask(currentTask);
+				employeeSalary.setBaseAttributes(currentUser);
+				employeeSalary.setUpdateAttributes(currentUser);
+				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			}
 		}
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+		User currentUser = SessionManager.getCurrentUserAsEntity();
+		List<String> userRoles = getAllUserRoles(currentUser.getId());
+		if(!userRoles.isEmpty()){
+			List<TaskList> taskLists = taskListRepository.findByTaskOwner(userRoles);
+			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
+		}
+		return null;
+	}
+
+	private List<String> getAllUserRoles(Long id) {
+		User user = userRepository.findById(id);
+		List<String> userRoles = new ArrayList<String>();
+		if(!user.getRoles().isEmpty()){
+			for(MasterRoles role : user.getRoles()){
+				userRoles.add(role.getRoleName());
+			}
+			//user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
+		}
+		return userRoles;
 	}
 }

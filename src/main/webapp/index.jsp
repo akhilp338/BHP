@@ -10,14 +10,32 @@
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/angular-material.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/sweetalert.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/fullcalendar.css">
+<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/nv.d3.css">
+<link href="/BelhopatBackOffice/app/assets/libs/css/sb-admin.css" rel="stylesheet">
+      <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
 <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
-<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
+
+
+
+<!--            <link href='/BelhopatBackOffice/app/assets/libs/css/demo.css' rel='stylesheet' type='text/css'> -->
+
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/boxplot.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bullet.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/candlestick.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/forceDirectedGraph.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/pie.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/scatter.css" rel="stylesheet">
+<link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/tooltip.css" rel="stylesheet">
+
 	<!-- Libraries -->
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
 <script src="/BelhopatBackOffice/app/assets/libs/js/fullcalendar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.3/gcal.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/gcal.js"></script>
 <script src="/BelhopatBackOffice/app/components/common/sidebar.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-ui-router.js"></script>
@@ -43,8 +61,19 @@
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-validation.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.spring-friendly.min.js"></script>
 <script src="/BelhopatBackOffice/app/assets/libs/js/angular-idle.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/d3.v3.min.js" charset="utf-8"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/nv.d3.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-nvd3.js"></script>
+  <script type="text/javascript" src="/BelhopatBackOffice/app/assets/libs/js/spin.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-spinner.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/angular-loading-spinner.js"></script>
 
+<script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
 
+    <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
+<script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-0.13.2.js"></script>
+    <script src="/BelhopatBackOffice/app/assets/libs/js/angular-carousel.js"></script>
+       <script src="/BelhopatBackOffice/app/assets/libs/js/scroll.js"></script>
 
 <!-- AngularJS custom codes -->
 
@@ -79,6 +108,8 @@
 <script src="/BelhopatBackOffice/app/components/event/EventManagement_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/offerletter/Offerletter_Ctrl.js"></script>
 <script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/employee/GenerateCredentials_Ctrl.js"></script>
+<script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
 
 
 <style>
@@ -94,6 +125,7 @@ display: none !important;
 <div class="response-loader" ng-class="{show: showLoader}"></div>
 <img src="/BelhopatBackOffice/app/assets/images/loader-img.gif" class="loader-img loader-language" ng-if="languageSwitching" alt="loader">
     <header ui-view="header" class="header-div"></header>
+     <span us-spinner="{radius:30, width:8, length: 16}"></span>
     <div ui-view="sidebar" class="page-side-bar"></div>
     <div ui-view="content" class="main"></div>
     <footer ui-view="footer" class="footer-div"></footer>

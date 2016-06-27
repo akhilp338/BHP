@@ -13,7 +13,7 @@
         });
         vm.submit = function () {
             if (vs.checkFormValidity($scope)) { 
-                var data = {"email":vm.forgot.email}
+               var data = {"email":vm.forgot.email}
                Core_Service.sendPassword(data).then(function(res){
                   $uibModalInstance.close(res); 
                },
@@ -27,7 +27,7 @@
             $uibModalInstance.dismiss('cancel');
         };
     };
-    Forgotpassword_Ctrl.$inject = ["$scope", '$uibModalInstance', 'validationService', 'Core_Service'];
+    Forgotpassword_Ctrl.$inject = ["$scope", '$modalInstance', 'validationService', 'Core_Service'];
     angular.module('coreModule')
             .controller('Forgotpassword_Ctrl', Forgotpassword_Ctrl);
 })();

@@ -5,9 +5,9 @@ public class TaskConstants {
 	
 	
 	/*offer letter constants*/
-	public static final String OFFER_LETTER_CREATION = "OFFER_LETTER_CREATION";
-	public static final String OFFER_LETTER_AH_APPROVAL = "OFFER_LETTER_AH_APPROVAL";
-	public static final String OFFER_LETTER_HRM_APPROVAL = "OFFER_LETTER_HRM_APPROVAL";
+	public static final String OFFER_LETTER_CREATION = "OFR_LTR_CREATN";
+	public static final String OFFER_LETTER_AH_APPROVAL = "OFR_LTR_AH_APPRVL";
+	public static final String OFFER_LETTER_HRM_APPROVAL = "OFR_LTR_HRM_APPRVL";
 	
 	/*salary process constants*/
 	public static final String BLOOD_GROUP = "BG";

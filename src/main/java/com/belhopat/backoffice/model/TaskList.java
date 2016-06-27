@@ -31,24 +31,12 @@ public class TaskList extends BaseEntity {
 	@Column(name = "status")
 	private String status;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "nextTaskId")
-	private MasterTasks nextTask;
-
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public MasterTasks getNextTask() {
-		return nextTask;
-	}
-
-	public void setNextTask(MasterTasks nextTask) {
-		this.nextTask = nextTask;
 	}
 
 	public MasterTasks getTask() {

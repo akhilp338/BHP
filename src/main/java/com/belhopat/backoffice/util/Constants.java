@@ -17,15 +17,17 @@ public class Constants {
 
 	/* mail constants */
 	public static final String UTF_8 = "ascii";
-	public static final String PASS_RESET_MAIL_SUB = "Password Reset Mail";
+	public static final String PASS_RESET_MAIL_SUB = "Belhopat Employee Portal Password Reset Request";
 	public static final String CAND_REG_SUCC_MAIL_SUB = "Welcome to Belhopat Global Services";
 	
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
-
+	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
+	
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
+	public static final String USERNAME = "username";
 	
 	/* data constants */
 	public static final String DD_MM_YYYY_HH_MM_SS = "dd-MM-yyyy HH:mm:ss";
@@ -60,5 +62,7 @@ public class Constants {
 	public static final String WEEKLY_REPEAT = "WEEKLY_REPEAT";
 	public static final String MONTHLY_REPEAT = "MONTHLY_REPEAT";
 	public static final String YEARLY_REPEAT = "YEARLY_REPEAT";
+	public static final String CREATED = "CREATED";
+	public static final String GENERATED = "GENERATED";
 
 }

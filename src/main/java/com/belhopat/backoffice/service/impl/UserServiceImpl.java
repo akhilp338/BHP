@@ -100,9 +100,8 @@ public class UserServiceImpl implements UserService{
 	public boolean generatePasswordResetLink( String userEmail ) throws MessagingException {
 		User user = userRepo.findByEmail( userEmail );
 		if ( user != null ){
-			
 			String generatedPassword = randomPasswordGenerator.nextSessionId();
-			mailService.sendPasswordResetMail( userEmail, generatedPassword );
+			mailService.sendPasswordResetMail( user, generatedPassword );
 			user.setPassword( generatedPassword );
 			userRepo.saveAndFlush( user );
 			return true;
