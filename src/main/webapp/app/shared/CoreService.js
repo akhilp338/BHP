@@ -275,7 +275,7 @@
         };
         service.getUserTasks = function (url) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url)
+            Core_HttpRequest.get(url)
                     .then(function (response) {
                         console.log(response);
                         deferred.resolve(response)
