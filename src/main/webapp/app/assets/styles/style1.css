@@ -1972,25 +1972,6 @@ td.fc-widget-content {
 	background-color: #fcd15c !important;
 }
 
-.generate-button {
-	margin-right: 20px;
-	border-radius: 6px;
-	padding: 0;
-	width: 78px;
-	height: 26px;
-}
-.generate-button span.fa-stack {
-	line-height: 1.5em;
-	height: inherit;
-}
-.generate-button span.text {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	margin-top: 4px !important;
-	float: left;
-
-
 .dashboard .panel {
 	border-radius: 3px;
 	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
@@ -2171,5 +2152,4 @@ md-dialog-actions .md-button:focus, .md-button:hover {
 .panel-task{
 	background:#006064;
 	color:white;
->>>>>>> dashboard-ui
 }

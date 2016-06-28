@@ -14,11 +14,6 @@
 <link href="/BelhopatBackOffice/app/assets/libs/css/sb-admin.css" rel="stylesheet">
       <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
-<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
-<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
-
-
-
 <!--            <link href='/BelhopatBackOffice/app/assets/libs/css/demo.css' rel='stylesheet' type='text/css'> -->
 
 <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
@@ -30,6 +25,8 @@
 <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/pie.css" rel="stylesheet">
 <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/scatter.css" rel="stylesheet">
 <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/tooltip.css" rel="stylesheet">
+<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
+<link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
 
 	<!-- Libraries -->
 <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>

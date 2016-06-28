@@ -171,7 +171,7 @@ public class CandidateController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.POST)
+	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.GET)
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
 		ResponseEntity<List<TaskList>> tasks= baseService.getCurrentUserTasks();
 		return tasks;
