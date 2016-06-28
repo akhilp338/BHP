@@ -220,12 +220,12 @@
                     });
         };
         
-        service.tab.dashboard = {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard"}
-        service.tab.candidate = {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"}
-        service.tab.employee = {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"}
-        service.tab.client =  {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"}
-        service.tab.offerletter = {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome"}
-        service.tab.offerletter = {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
+//        service.tab.dashboard = {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard"}
+//        service.tab.candidate = {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"}
+//        service.tab.employee = {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"}
+//        service.tab.client =  {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"}
+//        service.tab.offerletter = {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome"}
+//        service.tab.offerletter = {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
         
         service.recall = function () {
             setTimeout(function () {
