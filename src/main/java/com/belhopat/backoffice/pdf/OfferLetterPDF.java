@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.util.DateUtil;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -544,64 +545,83 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		compensationStructure.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		compensationStructure.addCell(getPageHeading("Compensation Structure"));
 		compensationStructure.addCell(getNameAndDesignation(employee));
-		compensationStructure.addCell(getCompensationStructureContent());
+		compensationStructure.addCell(getCompensationStructureContent(employee));
 		return compensationStructure;
 	}
 
-	private PdfPTable getCompensationStructureContent() {
+	private PdfPTable getCompensationStructureContent(Employee employee) {
 		PdfPTable CSContent = new PdfPTable(new float[] { 2, 1, 1 });
 		CSContent.setWidthPercentage(100f);
-		CSContent.addCell(getCellContent("Components", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("Per Month (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("Per Annum (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("Basic Salary"));
-		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("2,52,000", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("House Rent Allowance"));
-		CSContent.addCell(getCellContent("10,500", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("1,26,000", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Medical Allowance"));
-		CSContent.addCell(getCellContent("1,750", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Conveyance Allowance"));
-		CSContent.addCell(getCellContent("1,750", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("21,000", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Flexi Benefits Kit"));
-		CSContent.addCell(getCellContent("15,163", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("1,81,956", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Statutory Bonus"));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent("Gross Salary", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("50,163", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("6,01,956", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent("EPF Contribution by Belhopat"));
-		CSContent.addCell(getCellContent("1,800", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("21,600", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("ESI Contribution by Belhopat"));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Leave Encashment"));
-		CSContent.addCell(getCellContent("1,193", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("14,320", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Medical Insurance"));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("Gratuity"));
-		CSContent.addCell(getCellContent("1,010", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent("12,124", Rectangle.ALIGN_RIGHT));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent(""));
-		CSContent.addCell(getCellContent("Gross CTC", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("54,166", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
-		CSContent.addCell(getCellContent("6,50,000", Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+		EmployeeSalary salary = employee.getEmployeeMaster().getSalary();
+		if (salary != null) {
+			CSContent.addCell(getCellContent("Components", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent("Per Month (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent("Per Annum (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent("Basic Salary"));
+			CSContent.addCell(getCellContent(salary.getBasicSalary().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualBasic = salary.getBasicSalary() * 12D;
+			CSContent.addCell(getCellContent(annualBasic.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("House Rent Allowance"));
+			CSContent.addCell(getCellContent(salary.getHra().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualHRA = salary.getHra() * 12D;
+			CSContent.addCell(getCellContent(annualHRA.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Medical Allowance"));
+			CSContent.addCell(getCellContent(salary.getMedicalAllowance().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualMedicalAllowence = salary.getHra() * 12D;
+			CSContent.addCell(getCellContent(annualMedicalAllowence.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Conveyance Allowance"));
+			CSContent.addCell(getCellContent(salary.getConveyanceAllowance().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualConveyanceAllowance = salary.getConveyanceAllowance() * 12D;
+			CSContent.addCell(getCellContent(annualConveyanceAllowance.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Flexi Benefits Kit"));
+			CSContent.addCell(getCellContent(salary.getFlexyBenKit().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualFlexyBenKit = salary.getFlexyBenKit() * 12D;
+			CSContent.addCell(getCellContent(annualFlexyBenKit.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Statutory Bonus"));
+			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent("Gross Salary", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent(salary.getGrossSalary().toString(), Rectangle.ALIGN_RIGHT, bold10Font,
+					BaseColor.GRAY));
+			Double annualGrossSalary = salary.getGrossSalary() * 12D;
+			CSContent.addCell(
+					getCellContent(annualGrossSalary.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent("EPF Contribution by Belhopat"));
+			CSContent.addCell(getCellContent(salary.getPfCompContrbtn().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualPfCompContrbtn = salary.getPfCompContrbtn() * 12D;
+			CSContent.addCell(getCellContent(annualPfCompContrbtn.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("ESI Contribution by Belhopat"));
+			CSContent.addCell(getCellContent(salary.getEsiByEmplyr().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualEsiByEmplyr = salary.getPfCompContrbtn() * 12D;
+			CSContent.addCell(getCellContent(annualEsiByEmplyr.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Leave Encashment"));
+			CSContent.addCell(getCellContent(salary.getLeaveEncash().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualLeaveEncash = salary.getLeaveEncash() * 12D;
+			CSContent.addCell(getCellContent(annualLeaveEncash.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Medical Insurance"));
+			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent("Gratuity"));
+			CSContent.addCell(getCellContent(salary.getGratuity().toString(), Rectangle.ALIGN_RIGHT));
+			Double annualGratuity = salary.getGratuity() * 12D;
+			CSContent.addCell(getCellContent(annualGratuity.toString(), Rectangle.ALIGN_RIGHT));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent(""));
+			CSContent.addCell(getCellContent("Gross CTC", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(
+					getCellContent(salary.getGrossCTC().toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+			Double annualGrossCTC = salary.getGrossCTC() * 12D;
+			CSContent.addCell(
+					getCellContent(annualGrossCTC.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+
+		}
 		return CSContent;
 	}
 
