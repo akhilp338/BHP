@@ -5,6 +5,18 @@
 		vm.addClient = function() {
 			$state.go("coreuser.client.add");
 		}
+		vm.getClient = function(id){
+        	vm.getClientUrl = "api/client/getClient";
+            Core_Service.getCandidateImpl(vm.getClientUrl,id)
+            .then( function(response) {
+               vm.viewClient(response.data);
+            },function(error){
+            	
+            });
+        }; 
+        vm.viewClient = function (data) {
+            Core_ModalService.openViewClientModal(data);
+        };
 		angular.element(document).ready(
 		function() {
 	                    var oTable = angular.element('#clientList').DataTable({
@@ -66,6 +78,9 @@
                 $rootScope.showLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.client.edit', {id: $rootScope.id});
+            });
+            $('#clientList').on('click', '.action-view', function () {
+                vm.getClient(this.getAttribute('value'));
             });
 
 		})

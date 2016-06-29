@@ -59,6 +59,32 @@
                     "esino":"ESI No.",
                     "pfno":"PF No."
                 }
+            })
+            .constant('CLIENT', {
+                "fieldMapping": {
+                    "id":"ID",
+                    "clientId":"Client ID",
+                    "createdDate":"Created Date",
+                    "updatedDate":"Updated Date",
+                    "deletedDate":"Deleted Date",
+                    "createdBy":"Created By",
+                    "updatedBy":"Updated By",
+                    "deletedBy":"Deleted By",
+                    "deleted":"Deleted",
+                    "clientName":"Client Name",
+                    "revenue":"Revenue",
+                    "clientAddress":"Client Address", 
+                    "contactNo":"Contact No",
+                    "emailId":"Email Id",
+                    "webUrl":"Web URL",
+                    "mobNo":"Mobile No",
+                    "areaOfWork":"Area Of Work", 
+                    "pocCountry":"POC Country",
+                    "pocDesignation":"POC Designation",
+                    "clientStatus":"Client Status",
+                    "businessUnit":"Business Unit",
+                }
+            
             });
     ;
 })();
