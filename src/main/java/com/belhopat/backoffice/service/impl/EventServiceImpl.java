@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class EventServiceImpl implements EventService {
 	public ResponseEntity<List<Event>> getEvents() {
 		User loggedInUser = SessionManager.getCurrentUser();
 		List<Event> events = eventRepository.getEvents(loggedInUser.getId());
-//		insertSampleEvents();
+		insertSampleEvents();
 		if (events != null) {
 			return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
 		}
@@ -64,12 +65,26 @@ public class EventServiceImpl implements EventService {
 	
 	private void insertSampleEvents(){
 		User loggedInUser = SessionManager.getCurrentUser();
-		Event event = new Event();
-		event.setTitle("First Event");
-		event.setStart(new Date());
-		event.setEnd(DateUtil.addDays(new Date(), 1));
-		event.setBaseAttributes(loggedInUser);
-		eventRepository.save(event);
+		List<Event> events = new ArrayList<>();
+		Event event1 = new Event();
+		event1.setTitle("First Event");
+		event1.setStart(new Date());
+		event1.setEnd(DateUtil.addDays(new Date(), 1));
+		event1.setBaseAttributes(loggedInUser);
+		events.add(event1);
+		Event event2 = new Event();
+		event2.setTitle("Second Event");
+		event2.setStart(DateUtil.addDays(new Date(), 5));
+		event2.setEnd(DateUtil.addDays(new Date(), 6));
+		event2.setBaseAttributes(loggedInUser);
+		events.add(event2);
+		Event event3 = new Event();
+		event3.setTitle("third Event");
+		event3.setStart(DateUtil.addDays(new Date(), 7));
+		event3.setEnd(DateUtil.addDays(new Date(), 8));
+		event3.setBaseAttributes(loggedInUser);
+		events.add(event3);
+		eventRepository.save(events);
 	}
 	
 	
