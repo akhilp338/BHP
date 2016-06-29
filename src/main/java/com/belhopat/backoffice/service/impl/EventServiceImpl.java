@@ -30,7 +30,7 @@ public class EventServiceImpl implements EventService {
 	public ResponseEntity<List<Event>> getEvents() {
 		User loggedInUser = SessionManager.getCurrentUser();
 		List<Event> events = eventRepository.getEvents(loggedInUser.getId());
-		insertSampleEvents();
+//		insertSampleEvents();
 		if (events != null) {
 			return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
 		}
