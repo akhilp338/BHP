@@ -1,8 +1,8 @@
 package com.belhopat.backoffice.pdf;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
@@ -32,8 +32,8 @@ public class OfferLetterPDF extends BasePDFGenerator {
 			throws MalformedURLException, IOException, DocumentException, ParseException {
 
 		String fileName = "OfferLetter.pdf";
-		// ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
 		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.setBoxSize("art", PageSize.A4);
@@ -63,8 +63,8 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		// annexureBReader.close();
 		document.close();
 		outputStream.close();
-		// return utputStream.toByteArray();
-		return null;
+		return outputStream.toByteArray();
+//		return null;
 	}
 
 	private void setSampleEmployee(Employee employee) {
