@@ -1,5 +1,5 @@
 (function () {
-    var EventManagement_Ctrl = function ($scope, Core_Service, uiCalendarConfig, $rootScope, Core_ModalService) {
+    var EventManagement_Ctrl = function ($state, Core_Service, uiCalendarConfig, $rootScope, Core_ModalService) {
         var vm = this;   
         Core_Service.getAllEvents("api/event/getEvents").then(function (res){
             vm.calander = angular.element("#calendar").fullCalendar({
@@ -16,7 +16,8 @@
     events: res.data,
         dayClick: function(date, jsEvent, view) {
             Core_ModalService.openAddEventModal(date).result.then(function(response){
-                console.log(response)
+                if(response)
+                    $state.reload();
             });
         //$('#calendar').fullCalendar('rerenderEvents');               
         //alert('Clicked on: ' + date.format());
@@ -31,7 +32,7 @@
         
        
     }
-    EventManagement_Ctrl.$inject = ["$scope", 'Core_Service','uiCalendarConfig', '$rootScope', 'Core_ModalService'];
+    EventManagement_Ctrl.$inject = ["$state", 'Core_Service','uiCalendarConfig', '$rootScope', 'Core_ModalService'];
     angular.module('coreModule')
             .controller('EventManagement_Ctrl', EventManagement_Ctrl);
 })();

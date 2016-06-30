@@ -11,8 +11,8 @@
         vm.addEvent = function () {
             var url = "api/event/addEvent";
             Core_Service.addEventDetails(url,vm.addEventData).then(function(response){
-               console.log(response) 
-               //$uibModalInstance.close();
+                if(response.data)
+               $uibModalInstance.close(response.data);
             },
             function(error){
                console.log(error) 
