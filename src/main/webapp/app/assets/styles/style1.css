@@ -487,10 +487,10 @@ button.link-btn {
 /* Toggle Styles */
 #wrapper {
 	padding-left: 0;
-	-webkit-transition: all 0.5s ease;
+/*	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+	transition: all 0.5s ease;*/
 	overflow: hidden;
 }
 
@@ -626,10 +626,10 @@ button.link-btn {
 	#page-content-wrapper {
 		padding: 20px;
 		position: relative;
-		-webkit-transition: all 0.5s ease;
+/*		-webkit-transition: all 0.5s ease;
 		-moz-transition: all 0.5s ease;
 		-o-transition: all 0.5s ease;
-		transition: all 0.5s ease;
+		transition: all 0.5s ease;*/
 	}
 	#wrapper.toggled #page-content-wrapper {
 		position: relative;
@@ -640,10 +640,10 @@ button.link-btn {
 		position: relative;
 		margin-right: 0;
 		margin-left: -200px;
-		-webkit-transition: all 0.5s ease;
+/*		-webkit-transition: all 0.5s ease;
 		-moz-transition: all 0.5s ease;
 		-o-transition: all 0.5s ease;
-		transition: all 0.5s ease;
+		transition: all 0.5s ease;*/
 		width: auto;
 	}
 }
@@ -1033,11 +1033,11 @@ margin: 10px;
 }
 
 input[type=text], textarea {
-	-webkit-transition: all 0.30s ease-in-out;
+/*	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
 	-ms-transition: all 0.30s ease-in-out;
 	-o-transition: all 0.30s ease-in-out;
-	outline: none;
+	outline: none;*/
 	border: 1px solid #DDDDDD;
 }
 
@@ -1911,6 +1911,11 @@ span.upload-label {
 /*End dashboard styles*/
 
 /*Event styles*/
+.event-modal .modal-body {
+    max-height: none;
+    overflow-y: auto;
+} 
+
 .fc-event {
 	border: 1px solid #FF5722 !important;
 	background-color: #FF9800 !important;

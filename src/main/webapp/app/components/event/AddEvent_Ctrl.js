@@ -1,6 +1,10 @@
 (function () {
     var AddEvent_Ctrl = function ($scope, $uibModalInstance, CANDIDATE, Core_Service, candidateDetails) {
         var vm = this;
+        vm.datePickerOpen = false;
+        vm.setDpOpenStatus = function (id) {
+            vm[id] = true;
+        };
         vm.addEvent = function () {
             $uibModalInstance.dismiss('cancel');
         };

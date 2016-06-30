@@ -1,9 +1,90 @@
 <div class="modal-header">
-<span id='close' ng-click="vm.close()">x</span>
+    <span id='close' ng-click="vm.close()">x</span>
     <h3 class="modal-title">Add Event</h3>
 </div>
 <div class="modal-body" >
-    
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="title">Title</label>
+        <div class="controls">
+            <input type="text" name="title" id="timeZone"
+                   ng-model="vm.addEvent.title"
+                   class="form-input width-100" placeholder="Title"
+                   validation="required:alt=Required" />
+        </div>
+    </div>
+    <div class="control-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="start_date">Start Date</label>
+        <div class="controls">
+            <p class="input-group">
+                <input type="text"
+                       name="start_date"
+                       show-button-bar ="false"
+                       class="form-input date-form"                                           
+                       ng-model="vm.addevent.start_date"
+                       is-open="vm.isDobPickerOpen"
+                       uib-datepicker-popup="yyyy-MM-dd"
+                       validation="required:alt=Required"
+                       readonly/>
+                <span class="input-group-btn custom-datepick">
+                    <button type="button" 
+                            class="btn btn-default" 
+                            ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="control-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="end_date">End Date</label>
+        <div class="controls">
+            <p class="input-group">
+                <input type="text"
+                       name="end_date"
+                       show-button-bar ="false"
+                       class="form-input date-form"                                           
+                       ng-model="vm.event.end_date"
+                       is-open="vm.isDobPickerOpen"
+                       uib-datepicker-popup="yyyy-MM-dd"
+                       validation="required:alt=Required"
+                       readonly/>
+                <span class="input-group-btn custom-datepick">
+                    <button type="button" 
+                            class="btn btn-default" 
+                            ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="desc">Description</label>
+        <div class="controls">
+            <input type="text" name="desc" id="timeZone"
+                   ng-model="vm.addEvent.desc"
+                   class="form-input width-100" placeholder="Description"
+                   validation="required:alt=Required" />
+        </div>
+    </div>
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="location">Location</label>
+        <div class="controls">
+            <input type="text" name="location" id="location"
+                   ng-model="vm.addEvent.location"
+                   class="form-input width-100" placeholder="Location"
+                   validation="required:alt=Required field" />
+        </div>
+    </div>
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="timeZone">Time Zone</label>
+        <div class="controls">
+            <input type="text" name="timeZone" id="timeZone"
+                   ng-model="vm.addEvent.timeZone"
+                   class="form-input width-100" placeholder="Time Zone"
+                   validation="required:alt=Required field" />
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="logout-button btn-formsubmit" type="button" ng-click="vm.addEvent()">Add event</button>

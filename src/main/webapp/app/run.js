@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var Core_Run = function ($rootScope, $state, $cookieStore, $window, Core_Service, $http,Idle) {
+    var Core_Run = function ($rootScope, $state, $cookieStore, $timeout, Core_Service, $http,Idle) {
         $rootScope.globals = $cookieStore.get('globals') || {};
         $rootScope.showLoader = false;
         Idle.watch();
@@ -21,10 +21,10 @@
         });
 
         $rootScope.$on('moduleRunLoaded', function (e) {
-
+             alert("sda run")
         });
 
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {            
             $rootScope.showLoader = true;
             $rootScope.spinnerActive =true;
             var parts = toState.name.split(".");
@@ -43,6 +43,9 @@
                                   toState.name == "coreuser.employee.edit") ? true : false;
                            //$rootScope.showLoader = false;
             $rootScope.spinnerActive =false;
+           $timeout(function(){
+               //$rootScope.showLoader = false;
+           },500);            
         });
     };
     angular.module('coreModule')
