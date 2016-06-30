@@ -22,8 +22,8 @@ public class PDFServiceImpl implements PDFService {
 	public byte[] generateOfferLetterPDF(Employee employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		OfferLetterPDF pdfGenerator = new OfferLetterPDF();
-		pdfGenerator.getPDFContents(employee);
-		byte[] pdfByte = null;
+		byte[] pdfByte =  pdfGenerator.getPDFContents(employee);
+//		byte[] pdfByte = null;
 		return pdfByte;
 	}
 }
