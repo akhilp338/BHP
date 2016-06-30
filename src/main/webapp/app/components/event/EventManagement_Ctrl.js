@@ -15,7 +15,9 @@
     eventLimit: true, // allow "more" link when too many events
     events: res.data,
         dayClick: function(date, jsEvent, view) {
-            Core_ModalService.openAddEventModal(date);
+            Core_ModalService.openAddEventModal(date).result.then(function(response){
+                console.log(response)
+            });
         //$('#calendar').fullCalendar('rerenderEvents');               
         //alert('Clicked on: ' + date.format());
     },

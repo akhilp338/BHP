@@ -7,7 +7,7 @@
         <label class="control-label" for="title">Title</label>
         <div class="controls">
             <input type="text" name="title" id="timeZone"
-                   ng-model="vm.addEvent.title"
+                   ng-model="vm.addEventData.title"
                    class="form-input width-100" placeholder="Title"
                    validation="required:alt=Required" />
         </div>
@@ -20,15 +20,15 @@
                        name="start_date"
                        show-button-bar ="false"
                        class="form-input date-form"                                           
-                       ng-model="vm.addevent.start_date"
-                       is-open="vm.isDobPickerOpen"
+                       ng-model="vm.addEventData.start"
+                       is-open="vm.isStartDatePickerOpen"
                        uib-datepicker-popup="yyyy-MM-dd"
                        validation="required:alt=Required"
                        readonly/>
                 <span class="input-group-btn custom-datepick">
                     <button type="button" 
                             class="btn btn-default" 
-                            ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                            ng-click="vm.setDpOpenStatus('isStartDatePickerOpen')">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
                 </span>
@@ -43,15 +43,15 @@
                        name="end_date"
                        show-button-bar ="false"
                        class="form-input date-form"                                           
-                       ng-model="vm.event.end_date"
-                       is-open="vm.isDobPickerOpen"
+                       ng-model="vm.addEventData.end"
+                       is-open="vm.isEndDatePickerOpen"
                        uib-datepicker-popup="yyyy-MM-dd"
                        validation="required:alt=Required"
                        readonly/>
                 <span class="input-group-btn custom-datepick">
                     <button type="button" 
                             class="btn btn-default" 
-                            ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                            ng-click="vm.setDpOpenStatus('isEndDatePickerOpen')">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
                 </span>
@@ -62,7 +62,7 @@
         <label class="control-label" for="desc">Description</label>
         <div class="controls">
             <input type="text" name="desc" id="timeZone"
-                   ng-model="vm.addEvent.desc"
+                   ng-model="vm.addEventData.description"
                    class="form-input width-100" placeholder="Description"
                    validation="required:alt=Required" />
         </div>
@@ -71,7 +71,7 @@
         <label class="control-label" for="location">Location</label>
         <div class="controls">
             <input type="text" name="location" id="location"
-                   ng-model="vm.addEvent.location"
+                   ng-model="vm.addEventData.location"
                    class="form-input width-100" placeholder="Location"
                    validation="required:alt=Required field" />
         </div>
@@ -79,10 +79,9 @@
     <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
         <label class="control-label" for="timeZone">Time Zone</label>
         <div class="controls">
-            <input type="text" name="timeZone" id="timeZone"
-                   ng-model="vm.addEvent.timeZone"
-                   class="form-input width-100" placeholder="Time Zone"
-                   validation="required:alt=Required field" />
+            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
+                   class="styled" > <label for="checkbox1">
+                All day Event</label>
         </div>
     </div>
 </div>

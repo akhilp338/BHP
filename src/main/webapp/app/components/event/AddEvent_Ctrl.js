@@ -1,16 +1,28 @@
 (function () {
     var AddEvent_Ctrl = function ($scope, $uibModalInstance, CANDIDATE, Core_Service, candidateDetails) {
         var vm = this;
-        vm.datePickerOpen = false;
+        vm.isStartDatePickerOpen = false;
+        vm.isEndDatePickerOpen = false;  
+        vm.addEventData = {};
+        vm.addEventData.allDay = false;
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
         vm.addEvent = function () {
-            $uibModalInstance.dismiss('cancel');
+            var url = "api/event/addEvent";
+            Core_Service.addEventDetails(url,vm.addEventData).then(function(response){
+               console.log(response) 
+               //$uibModalInstance.close();
+            },
+            function(error){
+               console.log(error) 
+            });
+           
         };
         vm.close = function () {
             $uibModalInstance.dismiss('cancel');
         };
+        
     };
     AddEvent_Ctrl.$inject = ["$scope", '$uibModalInstance', 'CANDIDATE', 'Core_Service', 'candidateDetails'];
     angular.module('coreModule')
