@@ -255,6 +255,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
 		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
 		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
+		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_BDM));
 		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
 		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
 		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());

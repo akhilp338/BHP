@@ -26,10 +26,6 @@
                 });
 
         $rootScope.active = 'client';
-//        vm.createPocSection = function(){
-//        	vm.template = "<div class = 'candidate-details-wrapper'>"
-//        	alert('heres');
-//        }
         
         vm.clientRegister = function () {
             vm.registerUrl = "api/client/saveOrUpdateClient";
@@ -38,13 +34,14 @@
             vm.registration.pointOfContactList = pointOfContactList;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
+                    	Core_Service.sweetAlert("Done!","Client Added successfully","success","coreuser.client");
                     }, function (error) {
-
+                    	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
+                    			"error","coreuser.client");
                     });
         };
         vm.getPocList=function(poc){
         	var array = [];
-//        	for(var key in poc){
         		var obj={},
         		countryObj={},
         		desgnObj = {};
@@ -57,7 +54,6 @@
         		obj.mobNo=poc.mobNo;
         		obj.areaOfWork=poc.areaOfWork;
         		array.push(obj);
-//        	}
         	return array;
         }
         
