@@ -68,7 +68,7 @@ public class EmployeeController {
 		return employeeService.getAnEmployee(requestObject.getId());
 	}
 	@ResponseBody
-	@RequestMapping(value = "/getEmployeeDropdowns", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
 	public Map<String, List<?>> getEmployeeDropdowns() {
 		return baseService.getEmployeeDropdowns();
 	}
