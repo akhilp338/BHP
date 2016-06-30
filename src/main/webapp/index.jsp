@@ -45,7 +45,6 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.datepick.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/calendar.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/underscore.js"></script>
-        <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.1.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/sweetalert.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/sweet-alert.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-animate.min.js"></script>
@@ -68,7 +67,8 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
 
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
-        <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-0.13.2.js"></script>
+         <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-1.3.3.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.3.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-carousel.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/scroll.js"></script>
 

@@ -25,7 +25,7 @@
             }
         };        
     };
-    Core_Modal.$inject = ['$modal'];
+    Core_Modal.$inject = ['$uibModal'];
     angular.module('app.common')
             .service('Core_Modal', Core_Modal);
 })();
