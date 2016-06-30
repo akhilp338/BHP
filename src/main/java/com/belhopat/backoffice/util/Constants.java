@@ -50,6 +50,7 @@ public class Constants {
 	public static final String EMP_DESIG_HRR = "HRR";
 	public static final String EMP_DESIG_FM = "FM";
 	public static final String EMP_DESIG_CEO = "CEO";
+	public static final String EMP_DESIG_BDM = "BDM";
 	public static final String EMP_STS_INACTIVE = "INACTIVE";
 	
 	/*	AOP CONSTANTS */

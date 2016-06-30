@@ -133,7 +133,7 @@
                             <select name="accountManager"
                                     ng-model="vm.registration.bussDManager.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="bussDManager.id as (bussDManager.description) for bussDManager in vm.lookups.BDM">
+                                    ng-options="bussDManager.id as (accounts.employeeId) for accounts in vm.lookups.BDM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
