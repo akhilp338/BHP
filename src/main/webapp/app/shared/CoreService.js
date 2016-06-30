@@ -177,7 +177,7 @@
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url)
+            Core_HttpRequest.post(url,data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
