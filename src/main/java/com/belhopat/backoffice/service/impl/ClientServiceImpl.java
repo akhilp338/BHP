@@ -97,7 +97,7 @@ public class ClientServiceImpl implements ClientService {
 			newClient = updateClient(loggedInUser, clientObj);
 		}
 		if (newClient != null) {
-			responseMap.put("Message ", newClient.getClientName() + " has been saved.");
+			responseMap.put("message ", "Client - " + newClient.getClientName() + " has been added successfully.");
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);

@@ -238,7 +238,6 @@
                                 <label class="control-label" for="country">Country</label>
                                 <div class="controls">
                                     <select name="onsiteAddress_country" ng-model="vm.registration.poc.country.id"
-                                            ng-change="vm.getStatesByCountry(vm.registration.poc.country.id, 'onsite')"
                                             class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                             validation="required:alt=required">
                                         <option style="display:none" value="">...</option>
