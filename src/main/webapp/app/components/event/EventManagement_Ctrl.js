@@ -33,10 +33,8 @@
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: res.data,
-                dayClick: function (date, jsEvent, view) {
-                    date = new Date(date.format())
-                    date = new Date(date.getTime() + date.getTimezoneOffset() * 60000)
-                    Core_ModalService.openAddEventModal(date).result.then(function (response) {
+                dayClick: function (date, jsEvent, view) {                    
+                    Core_ModalService.openAddEventModal().result.then(function (response) {
                         if (response)
                             $state.reload();
                     });

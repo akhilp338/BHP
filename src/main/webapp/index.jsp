@@ -42,7 +42,7 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-ui.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/bootstrap-filestyle.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.plugin.js"></script>
-        <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.datepick.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/dateTimePicker.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/calendar.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/underscore.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/sweetalert.js"></script>

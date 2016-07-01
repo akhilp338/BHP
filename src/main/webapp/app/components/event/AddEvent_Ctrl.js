@@ -8,28 +8,40 @@
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
-        if (typeof candidateDetails != "object") {
-            vm.addEventData.start = candidateDetails;
-            vm.addEventData.end = candidateDetails;
-        } else {
-            var start,end;
-            if(candidateDetails.start){
-              start = candidateDetails.start ? new Date(candidateDetails.start.format()) : "",
-              start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
-        }
-        if(candidateDetails.start){
-              end = candidateDetails.end ? new Date(candidateDetails.end.format()) : "",
-              end = candidateDetails.end ? new Date(candidateDetails.end.format()) : "";
-        }               
-            vm.addEventData.id = candidateDetails.id;
-            vm.addEventData.start = start.getTime();
-            vm.addEventData.end = end.getTime();
+        vm.picker6 = {
+            date: new Date()
+        };
+        vm.picker7 = {
+            date: new Date()
+        };
+
+        vm.openCalendar = function (e, picker) {
+            vm[picker].open = true;
+        };
+
+        if (candidateDetails) {            
+            var start, end;
+            if (candidateDetails.start) {
+                start = new Date(candidateDetails.start.format()),
+                start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
+                vm.addEventData.start = start.getTime();
+                vm.picker7.date = start.getTime();
+            }
+            if (candidateDetails.end) {
+                end = new Date(candidateDetails.end.format()),
+                end = new Date(end.getTime() + end.getTimezoneOffset() * 60000);
+                vm.addEventData.end = end.getTime();
+                vm.picker6.date = end.getTime();
+            }
+            vm.addEventData.id = candidateDetails.id;  
             vm.addEventData.title = candidateDetails.title;
             vm.addEventData.description = candidateDetails.description;
             vm.addEventData.location = candidateDetails.location;
             vm.addEventData.allDay = candidateDetails.allDay;
         }
         vm.addEvent = function () {
+            vm.addEventData.start = vm.picker7.date;
+            vm.addEventData.end = vm.picker6.date
             var url = "api/event/addEvent";
             Core_Service.addEventDetails(url, vm.addEventData).then(function (response) {
                 if (response.data)
