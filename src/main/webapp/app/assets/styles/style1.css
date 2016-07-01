@@ -2158,3 +2158,10 @@ md-dialog-actions .md-button:focus, .md-button:hover {
 	background:#006064;
 	color:white;
 }
+
+#allDay_label:after {
+    display: none;
+}
+#allDay_label{
+    cursor:pointer;
+}
