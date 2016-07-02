@@ -41,6 +41,7 @@ public class Constants {
 	public static final String CITY = "CITY";
 	public static final String STATE = "STATE";
 	public static final String SKILL = "SKILL";
+	public static final String EMPLOYEES = "EMPLOYEES";
 
 	/* lookup detail code */
 	public static final String EMP_DESIG_HRM = "HRM";

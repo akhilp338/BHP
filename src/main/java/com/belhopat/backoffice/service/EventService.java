@@ -1,6 +1,7 @@
 package com.belhopat.backoffice.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,4 +16,6 @@ public interface EventService {
 	ResponseEntity<Event> addEvent(Event event);
 
 	ResponseEntity<Event> updateEvent(Event event);
+
+	ResponseEntity<Map<String, List<?>>> getEmployeesDropDownData();
 }
