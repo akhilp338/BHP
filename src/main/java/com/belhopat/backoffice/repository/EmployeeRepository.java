@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Employee;
 
 /**
@@ -26,5 +27,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 
 	@Query("select e from Employee e where e.employeeMaster.designation.code=:designation")
 	List<Employee> findByDesignation(@Param("designation") String designation);
+
+	@Query("select e.id,CONCAT(e.employeeMaster.firstName,' , ' ,e.officialEmail) as data " + "from Employee e")
+	List<ResponseObject> getEmployeeNameAndEmailData();
 
 }
