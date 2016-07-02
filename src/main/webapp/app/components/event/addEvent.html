@@ -1,8 +1,66 @@
 <div class="modal-header">
-<span id='close' ng-click="vm.close()">x</span>
+    <span id='close' ng-click="vm.close()">x</span>
     <h3 class="modal-title">Add Event</h3>
 </div>
 <div class="modal-body" >
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="title">Title</label>
+        <div class="controls">
+            <input type="text" name="title" id="timeZone"
+                   ng-model="vm.addEventData.title"
+                   class="form-input width-100" placeholder="Title"
+                   validation="required:alt=Required" />
+        </div>
+    </div>
+    <div class="control-group checkbox-input col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <div class="controls">
+            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
+                   class="styled" > <label for="checkbox1">
+                All day Event</label>
+        </div>
+    </div>
+        
+    <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="start_date">Start Date</label>
+        <div class="controls">
+             <p class="input-group">
+                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker7.date" is-open="vm.picker7.open" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker7')"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+        </div>
+    </div>
+    <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="end_date">End Date</label>
+        <div class="controls">                       
+              <p class="input-group">
+                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker6.date" is-open="vm.picker6.open" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker6')"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+
+        </div>
+    </div>
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="desc">Description</label>
+        <div class="controls">
+            <input type="text" name="desc" id="timeZone"
+                   ng-model="vm.addEventData.description"
+                   class="form-input width-100" placeholder="Description"
+                   validation="required:alt=Required" />
+        </div>
+    </div>
+    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="location">Location</label>
+        <div class="controls">
+            <input type="text" name="location" id="location"
+                   ng-model="vm.addEventData.location"
+                   class="form-input width-100" placeholder="Location"
+                   validation="required:alt=Required field" />
+        </div>
+    </div>
     
 </div>
 <div class="modal-footer">

@@ -1100,9 +1100,8 @@ md-datepicker {
 }
 
 .response-loader {
-    display: none;
     height: 100%;
-    opacity: 0.5;
+    opacity: 1;
     position: fixed;
     width: 100%;
     background: #fff url("../images/loader-img.gif") no-repeat 50% 50%;

@@ -177,7 +177,7 @@
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url)
+            Core_HttpRequest.post(url,data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -270,6 +270,28 @@
         service.getAllEvents = function(url){
             var deferred = $q.defer();
             Core_HttpRequest.get(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
+        
+        service.addEventDetails = function(url,data){
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url,data)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        }
+        
+        service.updateEventDetails = function(url,data){
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url,data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {

@@ -37,7 +37,7 @@
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
         };	
-        vm.urlForLookups = "api/employee/getEmployeeDropdowns";
+        vm.urlForLookups = "api/employee/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;

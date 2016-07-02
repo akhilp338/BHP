@@ -53,7 +53,7 @@
 		};
 
 	};
-	ViewClient_Ctrl.$inject = [ "$scope", '$modalInstance', 'CLIENT',
+	ViewClient_Ctrl.$inject = [ "$scope", '$uibModalInstance', 'CLIENT',
 			'Core_Service', 'candidateDetails' ];
 	angular.module('coreModule').controller('ViewClient_Ctrl', ViewClient_Ctrl);
 })();

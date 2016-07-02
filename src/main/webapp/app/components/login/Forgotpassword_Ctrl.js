@@ -27,7 +27,7 @@
             $uibModalInstance.dismiss('cancel');
         };
     };
-    Forgotpassword_Ctrl.$inject = ["$scope", '$modalInstance', 'validationService', 'Core_Service'];
+    Forgotpassword_Ctrl.$inject = ["$scope", '$uibModalInstance', 'validationService', 'Core_Service'];
     angular.module('coreModule')
             .controller('Forgotpassword_Ctrl', Forgotpassword_Ctrl);
 })();

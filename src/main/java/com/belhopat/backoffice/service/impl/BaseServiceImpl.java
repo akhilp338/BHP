@@ -31,6 +31,7 @@ import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
@@ -46,6 +47,7 @@ import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PDFService;
@@ -111,6 +113,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	PDFService pdfService;
+	
+	@Autowired
+	TimeZoneRepository timezoneRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -158,6 +163,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
+		List<TimeZone> timezones = timezoneRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
 		dropDownMap.put(Constants.DIVISION, divisions);
 		dropDownMap.put(Constants.DESIGNATION, designations);
@@ -167,6 +173,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.FAMILY_MEMBER, familyMembers);
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
+		dropDownMap.put(Constants.TIMEZONE, timezones);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -248,8 +255,10 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
 		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
 		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
+		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_BDM));
 		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
 		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
+		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());
 		dropDownMap.put(Constants.DESIGNATION, lookupDetailRepository.findByLookupKey(Constants.DESIGNATION));
 		dropDownMap.put(Constants.DIVISION, lookupDetailRepository.findByLookupKey(Constants.DIVISION));
 		return dropDownMap;

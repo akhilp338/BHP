@@ -129,10 +129,12 @@
                     <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
                         <label class="control-label" for="timeZone">Time Zone</label>
                         <div class="controls">
-                            <input type="text" name="timeZone" id="timeZone"
-                                   ng-model="vm.registration.timeZone"
-                                   class="form-input width-100" placeholder="Time Zone"
-                                   validation="required:alt=Required field" />
+                            <select name="bloodGroup"
+                                    ng-model="vm.registration.timeZone"
+                                    validation="required:alt=required" class="form-input width-100"
+                                    ng-options="timezone.id as (timezone.offsetCode) for timezone in vm.lookups.TIMEZONE">
+                                <option style="display: none" value="">...</option>
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,7 @@
                                     <input type="text" name="firstName" id="firstName"
                                            ng-model="vm.registration.firstName"
                                            class="form-input width-100" placeholder="First Name"
-                                           validation="alpha:alt=Only alphabets allowed|required:alt=Required field" />
+                                           validation="alpha:alt=Only alphabets allowed|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -47,7 +47,7 @@
                                     <input type="text" name="lastName" id="lastName"
                                            ng-model="vm.registration.lastName"
                                            class="form-input width-100" placeholder="Last Name"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -61,7 +61,7 @@
                                            ng-model="vm.registration.dob"
                                            is-open="vm.isDobPickerOpen"
                                            uib-datepicker-popup="yyyy-MM-dd"
-                                           validation="required:alt=Required field"
+                                           validation="required:alt=Required"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -78,7 +78,7 @@
                                 <div class="controls">
                                     <input type="text" name="gender" id="gender"
                                            ng-model="vm.registration.gender" class="form-input width-100"
-                                           placeholder="Gender" validation="required:alt=Required field" />
+                                           placeholder="Gender" validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
@@ -123,7 +123,7 @@
                                     <input type="text" name="personal_contact" id="personal_contact"
                                            ng-model="vm.registration.personalContactNo"
                                            class="form-input width-100" placeholder="Personal Contact No"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required field" />
+                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
@@ -133,7 +133,7 @@
                                     <input type="text" name="email" id="email"
                                            ng-model="vm.registration.personalEmail"
                                            class="form-input width-100" placeholder="Personal Email Id"
-                                           validation="email:alt=email id not valid|required:alt=Required field" />
+                                           validation="email:alt=email id not valid|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
@@ -143,7 +143,7 @@
                                     <input type="text" name="ofc_email" id="ofc_email"
                                            ng-model="vm.registration.officialEmail"
                                            class="form-input width-100" placeholder="Official Email Id"
-                                           validation="email:alt=email id not valid|required:alt=Required field" />
+                                           validation="email:alt=email id not valid|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
@@ -163,7 +163,7 @@
                                     <input type="text" name="ofc_contact" id="ofc_contact"
                                            ng-model="vm.registration.officialContactNo"
                                            class="form-input width-100" placeholder="Official Contact"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required field" />
+                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                                     <input type="text" name="permanentAddress_address_line1" id="address_line1"
                                            ng-model="vm.registration.permanentAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -232,7 +232,7 @@
                                     <input type="text" name="permanentAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.permanentAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required field"
+                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
                                            ng-change="vm.checkAddress()" />                                    
                                 </div>
                             </div>
@@ -256,7 +256,7 @@
                                     <input type="text" name="currentAddress_address_line1" id="address_line1"
                                            ng-model="vm.registration.currentAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -305,7 +305,7 @@
                                     <input type="text" name="currentAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.currentAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required field" />
+                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required" />
                                 </div>
                             </div>
                     </div>
@@ -328,7 +328,7 @@
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.experience"
                                            class="form-input width-100" placeholder="Experience"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-3 col-xs-3 pull-left">
@@ -337,7 +337,7 @@
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.experience"
                                            class="form-input width-100" placeholder="Experience"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -474,7 +474,7 @@
                                     <input type="text" name="address_line1" id="address_line1"
                                            ng-model="vm.registration.onsiteAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required field"
+                                           validation="required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -524,7 +524,7 @@
                                     <input type="text" name="zip_code" id="zip_code"
                                            ng-model="vm.registration.onsiteAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required field"
+                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -556,7 +556,7 @@
                                     <input type="text" name="onsiteContactNo" id="onsiteContactNo"
                                            ng-model="vm.registration.onsiteContactNo"
                                            class="form-input width-100" placeholder="Onsite Mobile No"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required field" />
+                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
                                 </div>
                             </div>
                         </div>
@@ -578,7 +578,7 @@
                                     <input type="text" name="bankAccount" id="bankAccount"
                                            ng-model="vm.registration.bankAccount.accountNo"
                                            class="form-input width-100" placeholder="Bank Acc. No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -587,7 +587,7 @@
                                     <input type="text" name="IFSCCode" id="IFSCCode"
                                            ng-model="vm.registration.bankAccount.IFSCCode"
                                            class="form-input width-100" placeholder="IFSC Code" 
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field"/>
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -597,7 +597,7 @@
                                     <input type="text" name="nameAsPerBank" id="nameAsPerBank"
                                            ng-model="vm.registration.bankAccount.accountHolderName"
                                            class="form-input width-100" placeholder="Name as per bank"
-                                           validation="alpha_spaces:alt=Invalid Charecter|required:alt=Required field" />
+                                           validation="alpha_spaces:alt=Invalid Charecter|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -606,7 +606,7 @@
                                     <input type="text" name="bankName" id="bankName"
                                            ng-model="vm.registration.bankAccount.bankName"
                                            class="form-input width-100" placeholder="Bank Name"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -615,7 +615,7 @@
                                     <input type="text" name="branch" id="branch"
                                            ng-model="vm.registration.bankAccount.branch"
                                            class="form-input width-100" placeholder="Bank Branch"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div ng-show="vm.isFileInput" class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">   
@@ -634,7 +634,7 @@
                                     <input type="text" name="bankAddress_address_line1" id="address_line1"
                                            ng-model="vm.registration.bankAccount.bankAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required field"
+                                           validation="required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -685,7 +685,7 @@
                                     <input type="text" name="bankAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.bankAccount.bankAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required field"
+                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -702,7 +702,7 @@
                                     <input type="text" name="passportNo" id="passportNo"
                                            ng-model="vm.registration.passport.passportNo"
                                            class="form-input width-100" placeholder="Passport No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -729,7 +729,7 @@
                                            ng-model="vm.registration.passport.issueDate"
                                            is-open="vm.isIssueDatePickerOpen" 
                                            uib-datepicker-popup="yyyy-MM-dd"
-                                           validation="required:alt=Required field"
+                                           validation="required:alt=Required"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -754,7 +754,7 @@
                                            ng-model="vm.registration.passport.expiryDate"
                                            is-open="vm.isExpiryDatePickerOpen"
                                            uib-datepicker-popup="yyyy-MM-dd"
-                                           validation="required:alt=Required field"
+                                           validation="required:alt=Required"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -782,7 +782,7 @@
                                     <input type="text" name="PANNo" id="PANNo"
                                            ng-model="vm.registration.officialDetails.PANNo"
                                            class="form-input width-100" placeholder="PAN No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -792,7 +792,7 @@
                                     <input type="text" name="drivingLicenceNo" id="drivingLicenceNo"
                                            ng-model="vm.registration.officialDetails.drivingLicenceNo"
                                            class="form-input width-100" placeholder="Driving License No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field"
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required"
                                            />
                                 </div>
                             </div>
@@ -802,7 +802,7 @@
                                     <input type="text" name="ESINo" id="ESINo"
                                            ng-model="vm.registration.officialDetails.ESINo"
                                            class="form-input width-100" placeholder="ESI No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -811,7 +811,7 @@
                                     <input type="text" name="PFNo" id="PFNo"
                                            ng-model="vm.registration.officialDetails.PFNo"
                                            class="form-input width-100" placeholder="PF No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
 
@@ -821,7 +821,7 @@
                                     <input type="text" name="forexCardNo" id="forexCardNo"
                                            ng-model="vm.registration.officialDetails.forexCardNo"
                                            class="form-input width-100" placeholder="Forex Card No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required field" />
+                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -832,7 +832,7 @@
                                            ng-model="vm.registration.officialDetails.forexCardAgency"
                                            class="form-input width-100"
                                            placeholder="Forex Card - Bank/Agency"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                         </div>
@@ -868,7 +868,7 @@
                                     <input type="text" name="fathersName" id="fathersName"
                                            ng-model="vm.registration.fathersName"
                                            class="form-input width-100" placeholder="Father's Name"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -877,7 +877,7 @@
                                     <input type="text" name="mothersName" id="mothersName"
                                            ng-model="vm.registration.mothersName"
                                            class="form-input width-100" placeholder=" Mother's Name"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
 
@@ -888,7 +888,7 @@
                                     <input type="text" name="familyContact_1" id="familyContact1"
                                            ng-model="vm.registration.familyContact1"
                                            class="form-input width-100" placeholder="Family Contact 1"
-                                           validation="required:alt=Required field" />
+                                           validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">

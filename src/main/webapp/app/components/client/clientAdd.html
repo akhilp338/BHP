@@ -108,7 +108,7 @@
                             <select name="businessUnitHead"
                                     ng-model="vm.registration.bussUnitHead.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="business.id as (business.description) for business in vm.lookups.buh">
+                                    ng-options="business.id as (accounts.employeeId) for accounts in vm.lookups.BUH">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -120,7 +120,7 @@
                             <select name="accountManager"
                                     ng-model="vm.registration.accountManager.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.description) for accounts in vm.lookups.am">
+                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.AM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -133,7 +133,7 @@
                             <select name="accountManager"
                                     ng-model="vm.registration.bussDManager.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="bussDManager.id as (bussDManager.description) for bussDManager in vm.lookups.bdm">
+                                    ng-options="bussDManager.id as (accounts.employeeId) for accounts in vm.lookups.BDM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -280,43 +280,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="contactNo">Contact no
-								(with Ext. code)</label>
-							<div class="controls">
-								<input type="text" name="poc.contactNo" id="poc.contactNo"
-									ng-model="vm.registration.poc.contactNo"
-									class="form-input width-100"
-									placeholder="Contact No (with Ext.)"
-									validation="required:alt=Required field" />
-							</div>
 						</div>
-						<div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="contactNo">Mobile no</label>
-							<div class="controls">
-								<input type="text" name="poc.mobNo" id="poc.mobNo"
-									ng-model="vm.registration.poc.mobNo"
-									class="form-input width-100"
-									placeholder="Mobile No"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						<div
-							class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-							<label class="control-label" for="areaOfWork">Area Of Work</label>
-							<div class="controls">
-								<input type="text" name="areaOfWork" id="areaOfWork"
-									ng-model="vm.registration.poc.areaOfWork"
-									class="form-input width-100"
-									placeholder="Area Of Work"
-									validation="required:alt=Required field" />
-							</div>
-						</div>
-						</div>
-<!-- 						<label class="control-label col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left add-poc"  -->
-<!-- 						for="addPoc" ng-click="vm.createPocSection()">+ Add POC</label> -->
 					</fieldset>
 				</div>
 			</div>

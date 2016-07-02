@@ -7,6 +7,7 @@
         'ui.calendar',
         'ngAnimate',
         'ui.bootstrap',
+        'ui.bootstrap.datetimepicker',
         'app.constants',
         'app.common',
         'pascalprecht.translate',

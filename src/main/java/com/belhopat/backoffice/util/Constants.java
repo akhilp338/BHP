@@ -42,6 +42,7 @@ public class Constants {
 	public static final String STATE = "STATE";
 	public static final String SKILL = "SKILL";
 	public static final String EMPLOYEES = "EMPLOYEES";
+	public static final String TIMEZONE = "TIMEZONE";
 
 	/* lookup detail code */
 	public static final String EMP_DESIG_HRM = "HRM";
@@ -50,6 +51,7 @@ public class Constants {
 	public static final String EMP_DESIG_HRR = "HRR";
 	public static final String EMP_DESIG_FM = "FM";
 	public static final String EMP_DESIG_CEO = "CEO";
+	public static final String EMP_DESIG_BDM = "BDM";
 	public static final String EMP_STS_INACTIVE = "INACTIVE";
 	
 	/*	AOP CONSTANTS */
