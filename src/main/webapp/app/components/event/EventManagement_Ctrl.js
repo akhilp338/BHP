@@ -16,10 +16,14 @@
                 if (response)
                     console.log(response)
             },
-            function (error) {
-                console.log(error)
-            });
+                    function (error) {
+                        console.log(error)
+                    });
         };
+        Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
+            console.log(res)
+        });
+
         Core_Service.getAllEvents("api/event/getEvents").then(function (res) {
             vm.calander = angular.element("#calendar").fullCalendar({
                 header: {
@@ -34,21 +38,23 @@
                 eventLimit: true, // allow "more" link when too many events
                 events: res.data,
                 dayClick: function (date, jsEvent, view) {
-                    date = new Date(date.format())
-                    date = moment(date.getTime() + date.getTimezoneOffset() * 60000);                    
-                    Core_ModalService.openAddEventModal(date).result.then(function (response) {
-                        if (response)
-                            $state.reload();
-                    });
+                    if (!date.isBefore(moment())) {
+                        date = new Date(date.format())
+                        date = moment(date.getTime() + date.getTimezoneOffset() * 60000);
+                        Core_ModalService.openAddEventModal(date).result.then(function (response) {
+                            if (response)
+                                $state.reload();
+                        });
+                    }
                 },
                 eventResize: function (event, dayDelta, minuteDelta) {
-                     vm.updateEvents(event);
+                    vm.updateEvents(event);
                 },
                 eventDrop: function (event, dayDelta, minuteDelta) {
-                     vm.updateEvents(event);
+                    vm.updateEvents(event);
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                   Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
+                    Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
                         if (response)
                             $state.reload();
                     });
