@@ -55,9 +55,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
-		/*Employee hrManager = employeeRepository.findOne(employeeDto.getHrManager());
+		Employee hrManager = employeeRepository.findOne(employeeDto.getHrManager());
 		Employee accountManager = employeeRepository.findOne(employeeDto.getAccountManager());
-		LookupDetail businessUnit = lookupDetailRepository.findOne(employeeDto.getBusinessUnit());*/
+		LookupDetail businessUnit = lookupDetailRepository.findOne(employeeDto.getBusinessUnit());
 		Candidate employeeMaster = candidateRepository.findOne(employeeDto.getEmployeeMasterId());
 		Employee employee = null;
 		if (employeeDto.getId() == null) {
@@ -71,10 +71,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee.setUpdateAttributes(loggedInUser);
 		}
 
-//		employee.setAccountManager(accountManager);
-//		employee.setBusinessUnit(businessUnit);
+		employee.setAccountManager(accountManager);
+		employee.setBusinessUnit(businessUnit);
 		employee.setEmployeeMaster(employeeMaster);
-//		employee.setHrManager(hrManager);
+		employee.setHrManager(hrManager);
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
 		if (employee != null) {
