@@ -27,14 +27,16 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                defaultDate: '2016-05-12',
                 buttonIcons: false, // show the prev/next text
                 weekNumbers: true,
+                timezone: "UTC",
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: res.data,
-                dayClick: function (date, jsEvent, view) {                    
-                    Core_ModalService.openAddEventModal().result.then(function (response) {
+                dayClick: function (date, jsEvent, view) {
+                    date = new Date(date.format())
+                    date = moment(date.getTime() + date.getTimezoneOffset() * 60000);                    
+                    Core_ModalService.openAddEventModal(date).result.then(function (response) {
                         if (response)
                             $state.reload();
                     });

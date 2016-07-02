@@ -25,13 +25,19 @@
                 start = new Date(candidateDetails.start.format()),
                 start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
                 vm.addEventData.start = start.getTime();
-                vm.picker7.date = start.getTime();
+                vm.picker7.date = start;
+            }
+            else if(candidateDetails._d){
+                 vm.picker7.date = candidateDetails._d;
             }
             if (candidateDetails.end) {
                 end = new Date(candidateDetails.end.format()),
                 end = new Date(end.getTime() + end.getTimezoneOffset() * 60000);
                 vm.addEventData.end = end.getTime();
-                vm.picker6.date = end.getTime();
+                vm.picker6.date = end;
+            }
+            else if(candidateDetails._d){
+                 vm.picker6.date = candidateDetails._d;
             }
             vm.addEventData.id = candidateDetails.id;  
             vm.addEventData.title = candidateDetails.title;
