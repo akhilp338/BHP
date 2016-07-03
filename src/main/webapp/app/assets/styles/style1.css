@@ -2217,6 +2217,9 @@ md-dialog-actions .md-button:focus, .md-button:hover {
     cursor:pointer;
 }
 
+.checkbox-input .controls label:after{
+    display:none!important;
+
 .dataTables_wrapper .dataTables_scroll{
 	    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
