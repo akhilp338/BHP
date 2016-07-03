@@ -2202,3 +2202,6 @@ md-dialog-actions .md-button:focus, .md-button:hover {
     cursor:pointer;
 }
 
+.checkbox-input .controls label:after{
+    display:none!important;
+}
