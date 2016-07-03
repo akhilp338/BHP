@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -35,6 +36,7 @@ import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
+import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.DateUtil;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
@@ -56,6 +58,9 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	EmployeeSalaryRepository employeeSalaryRepository;
+	
+	@Autowired
+	MailService mailService;
 
 	/*
 	 * (non-Javadoc)
@@ -369,6 +374,13 @@ public class CandidateServiceImpl implements CandidateService {
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
 		candidate.setCandidateId(candidateId);
 		Candidate persisted = candidateRepository.save(candidate);
+		//TODO make this generic
+		
+		try{
+			mailService.sendCandidateRegMail( persisted, false );
+		}catch(MessagingException e){
+			e.printStackTrace();
+		}
 		return persisted;
 	}
 

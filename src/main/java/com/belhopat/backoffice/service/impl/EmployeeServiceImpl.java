@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import javax.mail.MessagingException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -27,6 +28,7 @@ import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
+import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
@@ -54,6 +56,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
+	
+	@Autowired
+	MailService mailService;
 
 	/*
 	 * (non-Javadoc)
@@ -63,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * belhopat.backoffice.model.Employee) saves the employee to the db
 	 */
 	@Override
-	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) {
+	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) throws MessagingException {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Employee hrr = employeeRepository.findOne(employeeDto.getHrRecruiter());
 		Employee reportingMngr = employeeRepository.findOne(employeeDto.getReportingManager());
@@ -101,6 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (candidate != null) {
 				String employeeName = employee.getEmployeeMaster().getFirstName() + " "
 						+ employee.getEmployeeMaster().getLastName();
+				mailService.sendCandidateRegMail( candidate, true );
 				return new ResponseEntity<String>(employeeName, HttpStatus.OK);
 			}
 		}
