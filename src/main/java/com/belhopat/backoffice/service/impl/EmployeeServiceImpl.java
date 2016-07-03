@@ -15,12 +15,16 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.LookupDetail;
+import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
+import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
+import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -43,6 +47,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	CandidateRepository candidateRepository;
 
 	@Autowired
+	CityRepository cityRepository;
+	
+	@Autowired
+	TimeZoneRepository timeZoneRepository;
+	
+	@Autowired
 	LookupDetailRepository lookupDetailRepository;
 
 	/*
@@ -55,10 +65,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Employee hrr = employeeRepository.findOne(employeeDto.getHrRecruiter());
+		Employee reportingMngr = employeeRepository.findOne(employeeDto.getReportingManager());
 		Employee hrManager = employeeRepository.findOne(employeeDto.getHrManager());
 		Employee accountManager = employeeRepository.findOne(employeeDto.getAccountManager());
 		LookupDetail businessUnit = lookupDetailRepository.findOne(employeeDto.getBusinessUnit());
 		Candidate employeeMaster = candidateRepository.findOne(employeeDto.getEmployeeMasterId());
+		TimeZone timeZone=timeZoneRepository.findOne(employeeDto.getTimeZone());
+		City workLocation=cityRepository.findOne(employeeDto.getWorkLocation());
 		Employee employee = null;
 		if (employeeDto.getId() == null) {
 			employee = new Employee();
@@ -70,7 +84,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee = employeeRepository.findOne(employeeDto.getId());
 			employee.setUpdateAttributes(loggedInUser);
 		}
-
+		employee.setWorkLocation(workLocation);
+		employee.setHrRecruiter(hrr);
+		employee.setReportingManager(reportingMngr);
+		employee.setTimeZone(timeZone);
 		employee.setAccountManager(accountManager);
 		employee.setBusinessUnit(businessUnit);
 		employee.setEmployeeMaster(employeeMaster);

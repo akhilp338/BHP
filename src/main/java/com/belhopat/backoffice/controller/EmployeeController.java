@@ -67,6 +67,12 @@ public class EmployeeController {
 	public Employee getAnEmployee(@RequestBody RequestObject requestObject) {
 		return employeeService.getAnEmployee(requestObject.getId());
 	}
+	
+	/**
+	 * @param requestObject
+	 * @return employeeEntity
+	 * gets dropdown data
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
 	public Map<String, List<?>> getEmployeeDropdowns() {

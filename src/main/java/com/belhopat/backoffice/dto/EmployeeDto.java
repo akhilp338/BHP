@@ -10,15 +10,36 @@ public class EmployeeDto {
 	
 	private Long hrManager;
 	
+	private Long hrRecruiter;
+	
+	private Long workLocation;
+	
+	private Long timeZone;
+	
+	private Long reportingManager;
+	
 	private Long accountManager;
 	
 	private Long businessUnit;
 	
 	private Date joiningDate;
 	
-	private Long workLocation;
-	
-	private Long timeZone;
+
+	public Long getHrRecruiter() {
+		return hrRecruiter;
+	}
+
+	public void setHrRecruiter(Long hrRecruiter) {
+		this.hrRecruiter = hrRecruiter;
+	}
+
+	public Long getReportingManager() {
+		return reportingManager;
+	}
+
+	public void setReportingManager(Long reportingManager) {
+		this.reportingManager = reportingManager;
+	}
 
 	public Long getId() {
 		return id;
