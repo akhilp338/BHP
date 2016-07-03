@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.alfresco.main.HitController;
 import com.belhopat.backoffice.dto.RequestObject;
-import com.belhopat.backoffice.dto.SalaryDTO;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.CandidateSequence;
 import com.belhopat.backoffice.model.City;
@@ -347,6 +347,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+				controller.doExample();
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
