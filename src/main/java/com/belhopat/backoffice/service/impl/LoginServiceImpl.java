@@ -14,9 +14,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import com.belhopat.backoffice.model.RoleTab;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.repository.RoleTabRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.LoginService;
+import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.session.SessionUser;
 
 /**
@@ -27,6 +30,9 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 
 	@Autowired
 	UserRepository userRepo;
+
+	@Autowired
+	RoleTabRepository roleTabRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -54,8 +60,8 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 	 * loadUserByUsername(java.lang.String) builds the userauthentication
 	 */
 	private SessionUser buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-		return new SessionUser(user.getId(), user.getRoles().iterator().next().getRoleName(), user.getUsername(), user.getPassword(), user.getEmail(),
-				authorities);
+		return new SessionUser(user.getId(), user.getRoles().iterator().next().getRoleName(), user.getUsername(),
+				user.getPassword(), user.getEmail(), authorities);
 	}
 
 	/*
@@ -69,6 +75,14 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 		setAuths.add(new SimpleGrantedAuthority("ROLE_" + role));
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 		return Result;
+	}
+
+	@Override
+	public List<RoleTab> getUserTabs() {
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Long roleId = loggedInUser.getPrimaryRole().getId();
+		List<RoleTab> userTabs = roleTabRepository.getUserTabsByRole(roleId);
+		return userTabs;
 	}
 
 }

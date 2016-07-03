@@ -36,6 +36,7 @@
 		<maven-war-plugin.version>2.4</maven-war-plugin.version>
 		<maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+		<maven-filtering.version>1.3</maven-filtering.version>
 		<cargo-maven2-plugin.version>1.4.8</cargo-maven2-plugin.version>
 		<jersey.version>2.9</jersey.version>
 
@@ -462,6 +463,13 @@
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>${maven-resources-plugin.version}</version>
+					<dependencies>
+			            <dependency>
+			                <groupId>org.apache.maven.shared</groupId>
+			                <artifactId>maven-filtering</artifactId>
+			                <version>${maven-filtering.version}</version>
+			            </dependency>
+		            </dependencies>
 					<executions>
 						<execution>
 							<id>copy-resources</id>

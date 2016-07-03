@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,8 @@ public class TimeZone {
 	@Id
 	private Long id;
 	
-	private String timeZoneCode;
+	@Column( name = "UTC_OFFSET")
+	private String offsetCode;
 
 	public Long getId() {
 		return id;
@@ -20,13 +22,13 @@ public class TimeZone {
 		this.id = id;
 	}
 
-	public String getTimeZoneCode() {
-		return timeZoneCode;
+	public String getOffsetCode() {
+		return offsetCode;
 	}
 
-	public void setTimeZoneCode(String timeZoneCode) {
-		this.timeZoneCode = timeZoneCode;
+	public void setOffsetCode(String offsetCode) {
+		this.offsetCode = offsetCode;
 	}
 	
-
 }
+

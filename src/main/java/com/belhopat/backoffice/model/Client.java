@@ -1,14 +1,11 @@
 package com.belhopat.backoffice.model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -69,12 +66,12 @@ public class Client extends BaseEntity {
 
 //	@JsonIgnore
 //    @NotNull
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinTable( name="CLNT_POC", 
 //    joinColumns=@JoinColumn ( name = "CLNT_ID" ), 
 //    inverseJoinColumns=@JoinColumn( name = "POC_ID" ) ) 
 	@JoinColumn( name = "POC_ID" )
-	private List < PointOfContact > pointOfContactList;
+	private PointOfContact pointOfContact;
 
 	public String getClientId() {
 		return clientId;
@@ -164,12 +161,12 @@ public class Client extends BaseEntity {
 		this.clientStatus = clientStatus;
 	}
 
-	public List<PointOfContact> getPointOfContactList() {
-		return pointOfContactList;
+	public PointOfContact getPointOfContact() {
+		return pointOfContact;
 	}
 
-	public void setPointOfContactList(List<PointOfContact> pointOfContactList) {
-		this.pointOfContactList = pointOfContactList;
+	public void setPointOfContact( PointOfContact pointOfContact) {
+		this.pointOfContact = pointOfContact;
 	}
 	
 	public LookupDetail getBusinessUnit() {

@@ -1,6 +1,8 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,7 @@ import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
@@ -44,11 +47,14 @@ import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
+import com.itextpdf.text.DocumentException;
 
 /**
  * @author BHP_DEV service implementation for general functionalities
@@ -65,7 +71,7 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	CandidateRepository candidateRepository;
 
@@ -86,25 +92,31 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ClientSequenceRepository clientSequenceRepository;
-	
+
 	@Autowired
 	MasterTasksRepository masterTasksRepository;
-	
+
 	@Autowired
 	TaskListRepository taskListRepository;
-	
+
 	@Autowired
 	SalaryGradeRepository salaryGradeRepository;
-	
+
 	@Autowired
 	EmployeeSalaryRepository employeeSalaryRepository;
 
 	@Autowired
 	HitController controller;
-	
+
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	PDFService pdfService;
 	
+	@Autowired
+	TimeZoneRepository timezoneRepository;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -151,6 +163,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
+		List<TimeZone> timezones = timezoneRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
 		dropDownMap.put(Constants.DIVISION, divisions);
 		dropDownMap.put(Constants.DESIGNATION, designations);
@@ -160,6 +173,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.FAMILY_MEMBER, familyMembers);
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
+		dropDownMap.put(Constants.TIMEZONE, timezones);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -241,17 +255,22 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
 		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
 		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
+		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_BDM));
 		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
 		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
+		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());
 		dropDownMap.put(Constants.DESIGNATION, lookupDetailRepository.findByLookupKey(Constants.DESIGNATION));
 		dropDownMap.put(Constants.DIVISION, lookupDetailRepository.findByLookupKey(Constants.DIVISION));
 		return dropDownMap;
 	}
 
 	@Override
-	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject) {
-		/*offer letter transaction part*/
-		TaskList newTask= createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
+			throws MalformedURLException, DocumentException, IOException, ParseException {
+		/* offer letter transaction part */
+		TaskList newTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		Employee employee = employeeRepository.findById(requestObject.getId());
+		pdfService.generateOfferLetterPDF(employee);
 		return null;
 	}
 
@@ -261,7 +280,7 @@ public class BaseServiceImpl implements BaseService {
 		TaskList newTaskRow = new TaskList();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
-		currentTaskRow.setCompleted((byte)1);
+		currentTaskRow.setCompleted((byte) 1);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
 		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
@@ -271,7 +290,7 @@ public class BaseServiceImpl implements BaseService {
 		newTaskRow = taskListRepository.save(newTaskRow);
 		return newTaskRow;
 	}
-	
+
 	private List<TaskList> updateTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
@@ -279,9 +298,9 @@ public class BaseServiceImpl implements BaseService {
 		List<TaskList> newTasks = new ArrayList<TaskList>();
 		TaskList newTaskRow = new TaskList();
 		taskList.setUpdateAttributes(currentUser);
-		taskList.setCompleted((byte)1);
-		taskList.setStatus(TaskConstants.CREATED);//status to be chnaged
-//		newTaskRow.setTask(taskList.getNextTask());
+		taskList.setCompleted((byte) 1);
+		taskList.setStatus(TaskConstants.CREATED);// status to be chnaged
+		// newTaskRow.setTask(taskList.getNextTask());
 		newTaskRow.setBaseAttributes(currentUser);
 		newTasks.add(taskList);
 		newTasks.add(newTaskRow);
@@ -290,29 +309,31 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade){
-		if(grade!=null && grossSalary!=null){
+	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade) {
+		if (grade != null && grossSalary != null) {
 			Double minBasicSalary = 7515.20;
 			EmployeeSalary empSal = new EmployeeSalary();
 			SalaryGrade gradeEntity = salaryGradeRepository.findByGrade(grade);
-			Double minFixedSalary = gradeEntity.getFixedSalary() > grossSalary ? 
-					grossSalary : gradeEntity.getFixedSalary();
+			Double minFixedSalary = gradeEntity.getFixedSalary() > grossSalary ? grossSalary
+					: gradeEntity.getFixedSalary();
 			Double basicSalary = minBasicSalary < minFixedSalary * .6 ? minFixedSalary * .6 : minBasicSalary;
-			Double hra = (minFixedSalary - basicSalary) > basicSalary * 0.05 ? basicSalary * 0.05 : minFixedSalary - basicSalary;
-			Double medicalAllowance = minFixedSalary -(basicSalary + hra) > minFixedSalary * 0.05 ? 
-					minFixedSalary * 0.05 : minFixedSalary - (basicSalary + hra);
+			Double hra = (minFixedSalary - basicSalary) > basicSalary * 0.05 ? basicSalary * 0.05
+					: minFixedSalary - basicSalary;
+			Double medicalAllowance = minFixedSalary - (basicSalary + hra) > minFixedSalary * 0.05
+					? minFixedSalary * 0.05 : minFixedSalary - (basicSalary + hra);
 			Long medicalAllowanceLong = medicalAllowance < 0 ? 0 : Math.round(medicalAllowance);
 			Double conveyanceAllowance = minFixedSalary - (basicSalary + hra + medicalAllowanceLong);
 			Long conveyanceAllowanceLong = conveyanceAllowance < 0 ? 0 : Math.round(conveyanceAllowance);
 			int profTax = grossSalary < 1000 ? 0 : (grossSalary < 15000 ? 150 : 200);
 			Long pfEmpContrbtn = Math.round(basicSalary < 15000 ? basicSalary * 0.12 : 15000 * 0.12);
-			Long esiByEmplyr = Math.round(grossSalary < 15000?grossSalary * 0.0475 : 0);
-			Long esiByEmplye = Math.round(grossSalary < 15000?grossSalary * 0.0175 : 0);
-			Long leaveEncash = Math.round(basicSalary/22 * 15/12);
-			Long gratuity = Math.round(basicSalary/26 * 15/12);
-			Long totalDeductions = profTax + pfEmpContrbtn +pfEmpContrbtn+ esiByEmplyr + esiByEmplye + leaveEncash + gratuity ; 
+			Long esiByEmplyr = Math.round(grossSalary < 15000 ? grossSalary * 0.0475 : 0);
+			Long esiByEmplye = Math.round(grossSalary < 15000 ? grossSalary * 0.0175 : 0);
+			Long leaveEncash = Math.round(basicSalary / 22 * 15 / 12);
+			Long gratuity = Math.round(basicSalary / 26 * 15 / 12);
+			Long totalDeductions = profTax + pfEmpContrbtn + pfEmpContrbtn + esiByEmplyr + esiByEmplye + leaveEncash
+					+ gratuity;
 			Long flexyBenKit = Math.round(grossSalary - minFixedSalary);
-			Long grossCTC = Math.round(grossSalary + pfEmpContrbtn + esiByEmplyr +  leaveEncash + gratuity ); 
+			Long grossCTC = Math.round(grossSalary + pfEmpContrbtn + esiByEmplyr + leaveEncash + gratuity);
 			Long netTakeHomeBeforeTDS = grossCTC - totalDeductions;
 			empSal.setGrossSalary(grossSalary);
 			empSal.setBasicSalary(basicSalary);
@@ -331,15 +352,15 @@ public class BaseServiceImpl implements BaseService {
 			empSal.setFlexyBenKit(flexyBenKit);
 			empSal.setGrossCTC(grossCTC);
 			empSal.setNetTakeHomeBeforeTDS(netTakeHomeBeforeTDS);
-            return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+			return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 		}
 		return null;
 	}
 
 	@Override
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
-		if(employeeSalary!=null){
-			if(employeeSalary.getCandidate()!=null){
+		if (employeeSalary != null) {
+			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
 				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
@@ -353,12 +374,12 @@ public class BaseServiceImpl implements BaseService {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		List<String> userRoles = getAllUserRoles(currentUser.getId());
-		if(!userRoles.isEmpty()){
+		if (!userRoles.isEmpty()) {
 			List<TaskList> taskLists = taskListRepository.findByTaskOwner(userRoles);
 			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
 		}
@@ -368,11 +389,11 @@ public class BaseServiceImpl implements BaseService {
 	private List<String> getAllUserRoles(Long id) {
 		User user = userRepository.findById(id);
 		List<String> userRoles = new ArrayList<String>();
-		if(!user.getRoles().isEmpty()){
-			for(MasterRoles role : user.getRoles()){
+		if (!user.getRoles().isEmpty()) {
+			for (MasterRoles role : user.getRoles()) {
 				userRoles.add(role.getRoleName());
 			}
-			//user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
+			// user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
 		}
 		return userRoles;
 	}

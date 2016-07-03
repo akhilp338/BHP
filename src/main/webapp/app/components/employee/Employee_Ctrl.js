@@ -5,11 +5,15 @@
         vm.addEmployee = function(){
         	$state.go("coreuser.employee.add");
         }
-        vm.getEmployee = function(id){
+        vm.getEmployee = function(id, actionType){
         	vm.getEmployeeUrl = "api/employee/getAnEmployee";
             Core_Service.getCandidateImpl(vm.getEmployeeUrl,id)
             .then( function(response) {
-               vm.viewEmployee(response.data);
+            	if(actionType=='action-view'){
+            		vm.viewEmployee(response.data);
+            	}else if(actionType=='generate-credentials' ){
+            		vm.generateCredentials(response.data);
+            	}
             },function(error){
             	
             });
@@ -17,6 +21,9 @@
         vm.viewEmployee = function (data) {
             Core_ModalService.openViewEmployeeModal(data);
         };
+        vm.generateCredentials = function(data){
+        	Core_ModalService.openGenerateCredentialsModal(data);
+        }
 
         angular.element(document).ready(function () {
             var oTable = angular.element('#employeeList').DataTable({
@@ -43,10 +50,14 @@
                 	},{
                         title: "Employee ID",
                         data: 'employeeId',
+                        
                     }, {
-                        title: "Name",
+                        title: "First Name",
                         data: 'employeeMaster.firstName',
                     },  {
+                        title: "Last Name",
+                        data: 'employeeMaster.lastName',
+                    }, {
                         title: "Employment Status",
                         data: 'employeeMaster.employmentStatus.description',
                     },{
@@ -64,7 +75,7 @@
                     }]
             });
             $('#employeeList').on('click', '.action-view', function () {
-                vm.getEmployee(this.getAttribute('value'));
+                vm.getEmployee(this.getAttribute('value'),'action-view');
             });
             $('#employeeList').on('click', '.action-edit', function () {
                 $rootScope.showLoader = true;
@@ -81,7 +92,15 @@
                     $(this).addClass('selected');
                 }
             } );
-         
+            $("#generateCredentials").on('click',function () {
+            	var selectedEmployee =$('#employeeList tbody .selected .action-view')[0];
+            	if( selectedEmployee != undefined ){
+            		$rootScope.id = selectedEmployee.getAttribute('value');
+            		vm.getEmployee($rootScope.id,'generate-credentials');
+            	}
+            	$rootScope.showLoader = true;
+            	
+            });
         })
         Core_Service.calculateSidebarHeight();
          };

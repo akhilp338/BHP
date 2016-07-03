@@ -5,6 +5,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
@@ -24,6 +25,22 @@ public class MailMessageObject {
 
 	public void setMimeMessage(MimeMessage mimeMessage) {
 		this.mimeMessage = mimeMessage;
+	}
+	/**
+	 * sets the email object
+	 *
+	 */
+	public MailMessageObject( String emailTo, String emailFrom, String subject, String emailBody, 
+			String resourcePath, JavaMailSender mailSender )
+			throws MessagingException{ 
+		ClassPathResource res = new ClassPathResource( resourcePath );
+		this.mimeMessage = mailSender.createMimeMessage();
+		this.helper = new MimeMessageHelper( this.mimeMessage, true );
+		this.helper.setTo( emailTo );
+		this.helper.setFrom( new InternetAddress ( emailFrom ) );
+		this.helper.setSubject( subject );
+		this.helper.setText ( emailBody, true );
+		this.helper.addInline( "templateLogo", res );
 	}
 	/**
 	 * sets the email object

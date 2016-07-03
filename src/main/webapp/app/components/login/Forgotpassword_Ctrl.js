@@ -13,7 +13,7 @@
         });
         vm.submit = function () {
             if (vs.checkFormValidity($scope)) { 
-                var data = {"email":vm.forgot.email}
+               var data = {"email":vm.forgot.email}
                Core_Service.sendPassword(data).then(function(res){
                   $uibModalInstance.close(res); 
                },

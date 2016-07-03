@@ -18,5 +18,5 @@ public interface LookupDetailRepository extends JpaRepository<LookupDetail, Long
 
 	@Query("select l from LookupDetail l where l.lookup.lookupKey=:lookupKey ")
 	List<LookupDetail> findByLookupKey(@Param("lookupKey") String lookupKey);
-
+	
 }

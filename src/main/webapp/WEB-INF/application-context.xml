@@ -35,6 +35,7 @@
 				<value>classpath:email.properties</value>
 				<value>classpath:velocity.properties</value>
 				<value>classpath:pdf.properties</value>
+				<value>classpath:config.properties</value>
 			</list>
 		</property>
 	</bean>

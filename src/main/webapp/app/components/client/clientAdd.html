@@ -1,4 +1,15 @@
 <div class="form-horizontal" name="client_reg_form">
+    <div class="top-main-head pull-left width-100">
+        <h4 class="pull-left">Fill Client Details</h4>	
+    </div>
+	<div>
+	<button ng-click="vm.back()"
+			class="logout-button pull-right add-button" title="Back Button">
+			<span class="fa-stack fa-lg pull-left"><i
+				class="fa fa-arrow-left" aria-hidden="true"></i></span>
+	                        <span class="text">Back</span>              
+		</button>
+	</div>
     <form name="regForm" class="client-form" id="form_1" novalidate>
         <div class="row">
             <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
@@ -97,7 +108,7 @@
                             <select name="businessUnitHead"
                                     ng-model="vm.registration.bussUnitHead.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="business.id as (business.description) for business in vm.lookups.buh">
+                                    ng-options="business.id as (accounts.employeeId) for accounts in vm.lookups.BUH">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -109,7 +120,7 @@
                             <select name="accountManager"
                                     ng-model="vm.registration.accountManager.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.description) for accounts in vm.lookups.am">
+                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.AM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -122,7 +133,7 @@
                             <select name="accountManager"
                                     ng-model="vm.registration.bussDManager.id"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="bussDManager.id as (bussDManager.description) for bussDManager in vm.lookups.bdm">
+                                    ng-options="bussDManager.id as (accounts.employeeId) for accounts in vm.lookups.BDM">
                                 <option style="display: none" value="">...</option>
                             </select>
                         </div>
@@ -269,11 +280,10 @@
                                 </div>
                             </div>
                         </div>
-                        <label class="control-label col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left add-poc" 
-                               for="addPoc" ng-click="vm.createPocSection()">+ Add POC</label>
-                    </div>
-                </div>
-            </div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
 
         </div>
     </form>

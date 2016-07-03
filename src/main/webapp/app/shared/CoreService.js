@@ -63,7 +63,6 @@
             }, function (error) {
                 deferred.reject(error);
             });
-            console.log("here4");
             return deferred.promise;
         };
         service.SetCredentials = function (username, password) {
@@ -178,7 +177,7 @@
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url)
+            Core_HttpRequest.post(url,data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -211,6 +210,23 @@
                         return error;
                     });
         };
+        
+        service.getRoleTabs = function () {
+            Core_HttpRequest.post('api/getRoleTabs')
+                    .then(function (response) {
+                        return response;
+                    }, function (error) {
+                        return error;
+                    });
+        };
+        
+//        service.tab.dashboard = {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard"}
+//        service.tab.candidate = {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"}
+//        service.tab.employee = {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"}
+//        service.tab.client =  {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"}
+//        service.tab.offerletter = {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome"}
+//        service.tab.offerletter = {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
+        
         service.recall = function () {
             setTimeout(function () {
                 if (document.createEvent) { // W3C
@@ -260,6 +276,39 @@
                         deferred.reject(error)
                     });
             return deferred.promise;
+        };
+        
+        service.getAllGuests = function(url){
+            var deferred = $q.defer();
+            Core_HttpRequest.get(url)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        }
+        
+        service.addEventDetails = function(url,data){
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url,data)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        } 
+        
+        service.updateEventDetails = function(url,data){
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url,data)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
         }
         
         service.generateOfferLetterImpl = function (url, postData) {
@@ -274,6 +323,19 @@
                     });
             return deferred.promise;
         };
+        service.getUserTasks = function (url) {
+            var deferred = $q.defer();
+            Core_HttpRequest.get(url)
+                    .then(function (response) {
+                        console.log(response);
+                        deferred.resolve(response)
+                    }, function (error) {
+                        console.log(error);
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
+        
         
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];

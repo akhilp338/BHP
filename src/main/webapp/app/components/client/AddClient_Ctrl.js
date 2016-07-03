@@ -3,16 +3,19 @@
         var vm = this;
         $rootScope.showLoader = true;
         vm.registration = {};
-//        if ($stateParams.id) {
-//            Core_Service.getClientImpl("api/client/getClient", $stateParams.id).then(function (res) {
-//                vm.registration = res.data;               
-//                vm.isCheckboxEnable = true;
-//                vm.isChecked = true;
-//                $rootScope.showLoader = false;
-//            }, function (err) {
-//                vm.registration = {};
-//            });
-//        }
+        if ($stateParams.id) {
+            Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
+                vm.registration = res.data;               
+                vm.isCheckboxEnable = true;
+                vm.isChecked = true;
+                $rootScope.showLoader = false;
+            }, function (err) {
+                vm.registration = {};
+            });
+        }
+        vm.back = function (){
+            $state.go('coreuser.client');
+        };
         vm.urlForLookups = "api/client/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
@@ -23,17 +26,7 @@
                 });
 
         $rootScope.active = 'client';
-        vm.createPocSection = function(){
-        	vm.template = "<div class = 'candidate-details-wrapper'>"
-//        	alert('heres');
-        }
         
-//        vm.cancelRegisteration = function (){
-//            $state.go("coreuser.client")
-//        };
-//        vm.addClient = function () {
-//            $state.go("coreuser.client.add");
-//        };
         vm.clientRegister = function () {
             vm.registerUrl = "api/client/saveOrUpdateClient";
             console.log(vm.registration);
@@ -41,13 +34,14 @@
             vm.registration.pointOfContactList = pointOfContactList;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
+                    	Core_Service.sweetAlert("Done!","Client Added successfully","success","coreuser.client");
                     }, function (error) {
-
+                    	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
+                    			"error","coreuser.client");
                     });
         };
         vm.getPocList=function(poc){
         	var array = [];
-//        	for(var key in poc){
         		var obj={},
         		countryObj={},
         		desgnObj = {};
@@ -60,7 +54,6 @@
         		obj.mobNo=poc.mobNo;
         		obj.areaOfWork=poc.areaOfWork;
         		array.push(obj);
-//        	}
         	return array;
         }
         
