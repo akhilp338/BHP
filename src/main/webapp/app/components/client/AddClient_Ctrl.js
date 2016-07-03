@@ -5,7 +5,7 @@
         vm.registration = {};
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
-                vm.registration = res.data;               
+                vm.registration = res.data;
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;

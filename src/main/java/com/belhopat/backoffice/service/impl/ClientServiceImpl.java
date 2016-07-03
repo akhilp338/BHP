@@ -111,7 +111,7 @@ public class ClientServiceImpl implements ClientService {
 	private Client registerNewClient(User loggedInUser, Client clientObj) {
 		clientObj.setBaseAttributes(loggedInUser);
 		Long increment = baseService.getSequenceIncrement(Client.class);
-		String clientId = SequenceGenerator.generateCandidateId(increment);
+		String clientId = SequenceGenerator.generateClientId( increment );
 		clientObj.setClientId(clientId);
 		Client persisted = clientRepository.save(clientObj);
 		return persisted;
@@ -142,8 +142,8 @@ public class ClientServiceImpl implements ClientService {
 		if (clientObj.getContactNo() != null) {
 			clientToUpdate.setContactNo(clientObj.getContactNo());
 		}
-		if (clientObj.getEmailId() != null) {
-			clientToUpdate.setEmailId(clientObj.getEmailId());
+		if (clientObj.getEmail() != null) {
+			clientToUpdate.setEmail(clientObj.getEmail());
 		}
 		if (clientObj.getRevenue() != null) {
 			clientToUpdate.setRevenue(clientObj.getRevenue());
