@@ -1,6 +1,7 @@
 package com.belhopat.backoffice.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,12 @@ public class EventController {
 	@RequestMapping(value = "/updateEvent", method = RequestMethod.POST)
 	public ResponseEntity<Event> updateEvent(@RequestBody Event event) {
 		return eventService.updateEvent(event);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getEmployeesDropDownData", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, List<?>>> getEmployeesDropDownData() {
+		return eventService.getEmployeesDropDownData();
 	}
 
 }

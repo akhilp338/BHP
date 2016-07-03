@@ -50,10 +50,14 @@
                 	},{
                         title: "Employee ID",
                         data: 'employeeId',
+                        
                     }, {
-                        title: "Name",
+                        title: "First Name",
                         data: 'employeeMaster.firstName',
                     },  {
+                        title: "Last Name",
+                        data: 'employeeMaster.lastName',
+                    }, {
                         title: "Employment Status",
                         data: 'employeeMaster.employmentStatus.description',
                     },{

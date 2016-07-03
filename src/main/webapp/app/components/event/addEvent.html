@@ -12,50 +12,35 @@
                    validation="required:alt=Required" />
         </div>
     </div>
-    <div class="control-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
-        <label class="control-label" for="start_date">Start Date</label>
+    <div class="control-group checkbox-input col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
         <div class="controls">
-            <p class="input-group">
-                <input type="text"
-                       name="start_date"
-                       show-button-bar ="false"
-                       class="form-input date-form"                                           
-                       ng-model="vm.addEventData.start"
-                       is-open="vm.isStartDatePickerOpen"
-                       uib-datepicker-popup="yyyy-MM-dd"
-                       validation="required:alt=Required"
-                       readonly/>
-                <span class="input-group-btn custom-datepick">
-                    <button type="button" 
-                            class="btn btn-default" 
-                            ng-click="vm.setDpOpenStatus('isStartDatePickerOpen')">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </span>
-            </p>
+            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
+                   class="styled" > <label for="checkbox1">
+                All day Event</label>
         </div>
     </div>
-    <div class="control-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
-        <label class="control-label" for="end_date">End Date</label>
+        
+    <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="start_date">Start Date</label>
         <div class="controls">
-            <p class="input-group">
-                <input type="text"
-                       name="end_date"
-                       show-button-bar ="false"
-                       class="form-input date-form"                                           
-                       ng-model="vm.addEventData.end"
-                       is-open="vm.isEndDatePickerOpen"
-                       uib-datepicker-popup="yyyy-MM-dd"
-                       validation="required:alt=Required"
-                       readonly/>
-                <span class="input-group-btn custom-datepick">
-                    <button type="button" 
-                            class="btn btn-default" 
-                            ng-click="vm.setDpOpenStatus('isEndDatePickerOpen')">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </button>
-                </span>
-            </p>
+             <p class="input-group">
+                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker7.date" is-open="vm.picker7.open" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker7')"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+        </div>
+    </div>
+    <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="end_date">End Date</label>
+        <div class="controls">                       
+              <p class="input-group">
+                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker6.date" is-open="vm.picker6.open" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker6')"><i class="fa fa-calendar"></i></button>
+              </span>
+              </p>
+
         </div>
     </div>
     <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
@@ -76,14 +61,7 @@
                    validation="required:alt=Required field" />
         </div>
     </div>
-    <div class="control-group col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
-        <label class="control-label" for="timeZone">Time Zone</label>
-        <div class="controls">
-            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
-                   class="styled" > <label for="checkbox1">
-                All day Event</label>
-        </div>
-    </div>
+    
 </div>
 <div class="modal-footer">
     <button class="logout-button btn-formsubmit" type="button" ng-click="vm.addEvent()">Add event</button>
