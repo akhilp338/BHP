@@ -1,19 +1,18 @@
 <div class="form-horizontal candidate-form col-md-12 col-lg-12 col-sm-12 col-xs-12" name="reg_form">
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left">Fill Candidate Details</h4>	
-    </div>
-    <div><div class="nav nav-tabs col-md-8 col-lg-8 col-sm-12 col-xs-12">
-        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-2 col-xs-2"
-            ng-class="{active: $index == getCurrentStepIndex()}"><a
-                href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
-        
-    </div>
-    <button ng-click="vm.back()"
+        <h4 class="pull-left">Fill Candidate Details</h4>
+        <button ng-click="vm.back()"
 		class="logout-button pull-right add-button" title="Add Employee">
 		<span class="fa-stack fa-lg pull-left"><i
 			class="fa fa-arrow-left" aria-hidden="true"></i></span>
                         <span class="text">Back</span>              
 	</button>
+        <div class="nav nav-tabs col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-4 col-xs-4"
+            ng-class="{active: $index == getCurrentStepIndex()}"><a
+                href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
+        
+    </div>
     </div>
     <form name="regForm" id="form_0" novalidate>
         <div ng-switch on="selection">

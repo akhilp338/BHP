@@ -1843,6 +1843,7 @@ a
     overflow: hidden;
     word-wrap: break-word;
     text-overflow: ellipsis;
+    color: rgb(204, 39, 39);
 }
 
 span.upload-label {
@@ -2224,4 +2225,12 @@ md-dialog-actions .md-button:focus, .md-button:hover {
 	    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.client-add .top-main-head h4{
+    margin-left:0;
+}
+
+.nav-tabs button {
+    margin-top: 20px!important;
 }
