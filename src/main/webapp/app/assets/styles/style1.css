@@ -2231,6 +2231,6 @@ md-dialog-actions .md-button:focus, .md-button:hover {
     margin-left:0;
 }
 
-.nav-tabs button {
+.nav-tabs .tab-btn {
     margin-top: 20px!important;
 }
