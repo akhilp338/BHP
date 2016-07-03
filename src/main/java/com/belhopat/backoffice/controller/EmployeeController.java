@@ -3,6 +3,7 @@ package com.belhopat.backoffice.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,11 @@ public class EmployeeController {
 	 * @param employee
 	 * @return response string
 	 * Adds and edits the employee . Calls the service layer for persistence
+	 * @throws MessagingException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateEmployee", method = RequestMethod.POST)
-	public ResponseEntity<String> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) {
+	public ResponseEntity<String> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) throws MessagingException {
 		return employeeService.saveOrUpdateEmployee(employeeDto);
 	}
 	

@@ -18,6 +18,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
@@ -154,6 +155,37 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendEventInvitaionMail(List<String> guestEmails, String emailBody) throws MessagingException {
 		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.belhopat.backoffice.service.MailService#sendCandidateRegMail
+	 * (com.belhopat.backoffice.model.Candidate, java.lang.Boolean)
+	 * sends Mail on candidate and employee registration based on value of isEmployee status flag
+	 */
+	@Override
+	public void sendCandidateRegMail( Candidate candidate, Boolean isEmployee ) throws MessagingException {
+		
+		MailMessageObject mailObject = null;
+		String mailSubject = null;
+		String mailTemplate = null;
+		Map<String, Object> model = new HashMap < String, Object > ();
+		if(!isEmployee){
+			model.put( Constants.CANDIDATE, candidate );
+			mailSubject = Constants.CAND_REG_SUCC_MAIL_SUB;
+			mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
+
+		}else{
+			model.put( Constants.EMPLOYEES, candidate );
+			mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
+			mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
+			String employeeName = candidate.getFirstName() + " "
+					+ candidate.getLastName();
+		}
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
+		mailObject = new MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
+				MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		sendMail(mailObject);
 		
 	}
 

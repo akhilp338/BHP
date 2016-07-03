@@ -19,19 +19,29 @@ public class Constants {
 	public static final String UTF_8 = "ascii";
 	public static final String TEMP_EMAIL_ACCOUNT_FOR_TESTING = "bhptestreceiver@gmail.com";
 	public static final String PASS_RESET_MAIL_SUB = "Belhopat Employee Portal Password Reset Request";
-	public static final String CAND_REG_SUCC_MAIL_SUB = "Welcome to Belhopat Global Services";
+	public static final String CAND_REG_SUCC_MAIL_SUB = "New Candidate has been added.";
 	public static final String CLIENT_REG_SUCC_MAIL_SUB = "New Client has been added.";
+	public static final String EMP_REG_SUCC_MAIL_SUB = "New Employee has been added.";
+	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
 	
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
 	public static final String CLIENT_REG_EMAIL_TEMPLATE = "/client-reg-email-template.vm";
+	public static final String EMP_REG_EMAIL_TEMPLATE = "/employee-reg-email-template.vm";
+	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
+	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
 	
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
 	public static final String USERNAME = "username";
 	public static final String CLIENT = "client";
+	public static final String EMPLOYEE = "employee";
+	public static final String CANDIDATE = "candidate";
+	public static final String EVENT = "event";
+	public static final String EVENT_START = "eventStart";
+	public static final String EVENT_END = "eventEnd";
 	public static final String POC = "poc";
 	
 	/* data constants */
