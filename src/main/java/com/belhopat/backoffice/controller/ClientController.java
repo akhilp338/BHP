@@ -3,6 +3,7 @@ package com.belhopat.backoffice.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,11 @@ public class ClientController {
 	 * @param client
 	 * @return ResponseEntity
 	 * Saves or updates client and returns status message of request.
+	 * @throws MessagingException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateClient", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, String>> saveOrUpdateClient(@RequestBody Client client) {
+	public ResponseEntity<Map<String, String>> saveOrUpdateClient(@RequestBody Client client) throws MessagingException {
 		return clientService.saveOrUpdateClient(client);
 	}
 	

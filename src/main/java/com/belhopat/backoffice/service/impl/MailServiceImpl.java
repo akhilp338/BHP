@@ -18,6 +18,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
 import com.belhopat.backoffice.service.MailService;
@@ -126,6 +127,29 @@ public class MailServiceImpl implements MailService {
 		sendMail(mailObject);
 
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.belhopat.backoffice.service.MailService#sendClientRegMail(java.
+	 * lang.String, java.lang.String)
+	 * sends mail on client registration success
+	 */
+	@Override
+	public void sendClientRegMail( Client client ) throws MessagingException {
+
+		Map<String, Object> model = new HashMap < String, Object > ();
+		model.put( Constants.CLIENT, client );
+		model.put( Constants.POC, client.getPoc() );
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
+		MailMessageObject mailObject = new MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
+				MAIL_FROM, Constants.CLIENT_REG_SUCC_MAIL_SUB,
+				emailHtmlBody, mailSender);
+		sendMail(mailObject);
+
+	}
+	
 
 	@Override
 	public void sendEventInvitaionMail(List<String> guestEmails, String emailBody) throws MessagingException {
