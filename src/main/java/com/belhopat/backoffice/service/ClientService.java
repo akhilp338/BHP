@@ -2,6 +2,8 @@ package com.belhopat.backoffice.service;
 
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,6 @@ public interface ClientService {
 
 	ResponseEntity < Client > getClient( Long clientId );
 
-	ResponseEntity < Map < String, String > > saveOrUpdateClient( Client clientObj );
+	ResponseEntity < Map < String, String > > saveOrUpdateClient( Client clientObj ) throws MessagingException;
 
 }
