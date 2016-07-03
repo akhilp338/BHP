@@ -127,7 +127,7 @@ body, html {
 }
 
 .login-form {
-    width: 350px;
+    width: 369px;
     padding: 0 30px;
     background: rgba(0, 0, 0, .7);
     -moz-border-radius: 4px;
@@ -959,7 +959,7 @@ span.user-list-head {
 }
 
 .form-horizontal form {
-    background-color: white;
+    background-color: #f6f6f6;
     padding-top: 10px;
     border: 1px solid #DDDDDD;
 }
@@ -1016,7 +1016,9 @@ span.user-list-head {
     border: 0;
     border-radius: 0;
 }
-
+#generateCredentials {
+    width: 312px;
+}
 .modal-header {
     color: white;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffb76b),
@@ -1295,6 +1297,7 @@ button {
     border-radius: 7px;
     border: 1px solid #DDDDDD;
     padding: 0;
+   
 }
 
 .item-label-desc {
@@ -1575,7 +1578,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     color: white;
 }
 
-.theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd,
+.theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd, .theme4 #employeeList tbody tr.odd, .theme4 #offerLetterList tbody tr.odd,
 .theme4 #clientList tbody tr.odd {
     background-color: #FBDF92;
 }
@@ -1621,8 +1624,16 @@ fieldset.scheduler-border legend {
 }
 
 .theme4 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0;
+   padding: 0;
     border-radius: 0;
+    background: #fbdf92;
+    margin: 5px;
+    color: white;
+    height: 24px;
+    padding: 1px;
+    border-radius: 4px;
+        padding-right: 8px;
+    padding-left: 7px;
 }
 
 .theme4 .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
@@ -1693,12 +1704,15 @@ fieldset.scheduler-border legend {
 }
 
 .candidate-form .data-main-container, .client-form .data-main-container
-{
-    width: 98%;
+{    width: 98%;
     margin: 10px auto;
     border-radius: 7px;
     border: 1px solid #DDDDDD;
     float: left;
+    background: white;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 }
 
 .candidate-form .pager {
@@ -1986,6 +2000,7 @@ span.upload-label {
     background-image: none !important;
     text-shadow: none !important;
     box-shadow: none !important;
+        text-transform: uppercase;
 }
 
 a.link.logout i {
@@ -2010,7 +2025,7 @@ td.fc-widget-content {
 }
 
 .fc-view-container {
-    background-color: #fcd15c !important;
+    background-color: rgba(0,0,0,0.54) !important;
 }
 
 .dashboard .panel {
@@ -2204,4 +2219,9 @@ md-dialog-actions .md-button:focus, .md-button:hover {
 
 .checkbox-input .controls label:after{
     display:none!important;
+
+.dataTables_wrapper .dataTables_scroll{
+	    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 }
