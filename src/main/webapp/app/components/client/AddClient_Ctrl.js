@@ -5,7 +5,7 @@
         vm.registration = {};
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
-                vm.registration = res.data;               
+                vm.registration = res.data;
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
@@ -30,11 +30,9 @@
         vm.clientRegister = function () {
             vm.registerUrl = "api/client/saveOrUpdateClient";
             console.log(vm.registration);
-            var pointOfContactList = vm.getPocList(vm.registration.poc);
-            vm.registration.pointOfContactList = pointOfContactList;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                    	Core_Service.sweetAlert("Done!","Client Added successfully","success","coreuser.client");
+                    	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.client");
                     }, function (error) {
                     	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
                     			"error","coreuser.client");

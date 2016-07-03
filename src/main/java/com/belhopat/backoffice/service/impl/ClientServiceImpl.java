@@ -3,6 +3,7 @@ package com.belhopat.backoffice.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -21,6 +22,7 @@ import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.ClientRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.ClientService;
+import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.PointOfContactService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
@@ -41,6 +43,9 @@ public class ClientServiceImpl implements ClientService {
 	@Autowired
 	PointOfContactService pointOfContactService;
 
+	@Autowired
+	MailService mailService;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -74,6 +79,7 @@ public class ClientServiceImpl implements ClientService {
 	public ResponseEntity<Client> getClient(Long clientId) {
 		Client client = clientRepository.findOne(clientId);
 		if (client == null) {
+			
 			return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
@@ -87,7 +93,7 @@ public class ClientServiceImpl implements ClientService {
 	 * database.
 	 */
 	@Override
-	public ResponseEntity<Map<String, String>> saveOrUpdateClient(Client clientObj) {
+	public ResponseEntity<Map<String, String>> saveOrUpdateClient(Client clientObj) throws MessagingException {
 		Map<String, String> responseMap = new HashMap<>();
 		Client newClient = null;
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
@@ -97,7 +103,7 @@ public class ClientServiceImpl implements ClientService {
 			newClient = updateClient(loggedInUser, clientObj);
 		}
 		if (newClient != null) {
-			responseMap.put("Message ", newClient.getClientName() + " has been saved.");
+			responseMap.put("message ", "Client - " + newClient.getClientName() + " has been added successfully.");
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);
@@ -107,13 +113,22 @@ public class ClientServiceImpl implements ClientService {
 	 * @param loggedInUser
 	 * @param clientObj
 	 * @return Newly persisted Client object.
+	 * @throws MessagingException 
 	 */
-	private Client registerNewClient(User loggedInUser, Client clientObj) {
+	private Client registerNewClient(User loggedInUser, Client clientObj) throws MessagingException {
 		clientObj.setBaseAttributes(loggedInUser);
 		Long increment = baseService.getSequenceIncrement(Client.class);
-		String clientId = SequenceGenerator.generateCandidateId(increment);
+		String clientId = SequenceGenerator.generateClientId( increment );
 		clientObj.setClientId(clientId);
 		Client persisted = clientRepository.save(clientObj);
+		
+		//TODO make this generic
+		
+		try{
+			mailService.sendClientRegMail( persisted );
+		}catch(MessagingException e){
+			e.printStackTrace();
+		}
 		return persisted;
 	}
 
@@ -142,8 +157,8 @@ public class ClientServiceImpl implements ClientService {
 		if (clientObj.getContactNo() != null) {
 			clientToUpdate.setContactNo(clientObj.getContactNo());
 		}
-		if (clientObj.getEmailId() != null) {
-			clientToUpdate.setEmailId(clientObj.getEmailId());
+		if (clientObj.getEmail() != null) {
+			clientToUpdate.setEmail(clientObj.getEmail());
 		}
 		if (clientObj.getRevenue() != null) {
 			clientToUpdate.setRevenue(clientObj.getRevenue());

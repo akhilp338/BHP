@@ -327,6 +327,8 @@ public class CandidateServiceImpl implements CandidateService {
 		newCandidate.setOnsiteContactNo(candidateObj.getOnsiteContactNo());
 		newCandidate.setFathersName(candidateObj.getFathersName());
 		newCandidate.setMothersName(candidateObj.getMothersName());
+		newCandidate.setSpouseName(candidateObj.getSpouseName());
+		newCandidate.setChildName(candidateObj.getChildName());
 		newCandidate.setPriorExperienceMonth(candidateObj.getPriorExperienceMonth());
 		newCandidate.setPriorExperienceYear(candidateObj.getPriorExperienceYear());
 		newCandidate.setClient(candidateObj.getClient());

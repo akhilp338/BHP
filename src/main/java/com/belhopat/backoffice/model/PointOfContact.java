@@ -82,13 +82,13 @@ public class PointOfContact {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-
-	public String getMobnO() {
+	
+	public String getMobNo() {
 		return mobNo;
 	}
 
-	public void setMobnO(String mobnO) {
-		this.mobNo = mobnO;
+	public void setMobNo(String mobNo) {
+		this.mobNo = mobNo;
 	}
 
 	public String getAreaOfWork() {

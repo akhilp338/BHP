@@ -23,6 +23,8 @@
         	vm.registration.joiningDate=res.data.joiningDate;
         	vm.registration.workLocation=res.data.workLocation;
         	vm.registration.timeZone=res.data.timeZone;
+        	vm.registration.hrRecruiter=res.data.hrRecruiter;
+        	vm.registration.reportingManager=res.data.reportingManager;
         	console.log("edit");
         	console.log(vm.registration);
             }, function (err) {

@@ -91,7 +91,7 @@
                         class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                         <label class="control-label" for="division">Business Unit</label>
                         <div class="controls">
-                            <select name="division" ng-model="vm.registration.division.id"
+                            <select name="division" ng-model="vm.registration.businessUnit.id"
                                     class="form-input width-100"
                                     ng-options="division.id as (division.description) for division in vm.lookups.DIV"
                                     validation="required:alt=required">
@@ -104,7 +104,7 @@
                         <label class="control-label" for="dob">Business Unit Head</label>
                         <div class="controls">
                             <select name="businessUnitHead"
-                                    ng-model="vm.registration.bussUnitHead.id"
+                                    ng-model="vm.registration.bussDManager.id"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="business.id as (accounts.employeeId) for accounts in vm.lookups.BUH">
                                 <option style="display: none" value="">...</option>
@@ -224,7 +224,7 @@
                                 class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="designation">Designation</label>
                                 <div class="controls">
-                                    <select name="designation" ng-model="vm.registration.poc.designation.id"
+                                    <select name="designation" ng-model="vm.registration.poc.pocDesignation.id"
                                             class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
                                             validation="required:alt=required">
                                         <option style="display:none" value="">...</option>
@@ -235,8 +235,7 @@
                                 class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="country">Country</label>
                                 <div class="controls">
-                                    <select name="onsiteAddress_country" ng-model="vm.registration.poc.country.id"
-                                            ng-change="vm.getStatesByCountry(vm.registration.poc.country.id, 'onsite')"
+                                    <select name="onsiteAddress_country" ng-model="vm.registration.poc.pocCountry.id"
                                             class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                             validation="required:alt=required">
                                         <option style="display:none" value="">...</option>

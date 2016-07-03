@@ -172,7 +172,7 @@
                 <div class="row">
                      <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
                         <div class="data-main-container">     
-                            <header class="data-main-container-header">Permenant Address</header>
+                            <header class="data-main-container-header">Permanent Address</header>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="permanentAddress_address_line1">Address
                                     Line 1</label>
@@ -325,7 +325,7 @@
                                 <label class="control-label" for="experience">Experience</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
-                                           ng-model="vm.registration.experience"
+                                           ng-model="vm.registration.priorExperienceYear"
                                            class="form-input width-100" placeholder="Experience"
                                            validation="required:alt=Required" />
                                 </div>
@@ -334,7 +334,7 @@
                                 <label class="control-label" for="experience">Experience</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
-                                           ng-model="vm.registration.experience"
+                                           ng-model="vm.registration.priorExperienceMonth"
                                            class="form-input width-100" placeholder="Experience"
                                            validation="required:alt=Required" />
                                 </div>
@@ -584,7 +584,7 @@
                                 <label class="control-label" for="ifscCode">IFSC Code</label>
                                 <div class="controls">
                                     <input type="text" name="IFSCCode" id="IFSCCode"
-                                           ng-model="vm.registration.bankAccount.IFSCCode"
+                                           ng-model="vm.registration.bankAccount.ifsccode"
                                            class="form-input width-100" placeholder="IFSC Code" 
                                            validation="alpha_num:alt=Alpha numeric only|required:alt=Required"/>
                                 </div>
@@ -779,7 +779,7 @@
                                 <label class="control-label" for="firstName">PAN No</label>
                                 <div class="controls">
                                     <input type="text" name="PANNo" id="PANNo"
-                                           ng-model="vm.registration.officialDetails.PANNo"
+                                           ng-model="vm.registration.officialDetails.panno"
                                            class="form-input width-100" placeholder="PAN No"
                                            validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
@@ -799,7 +799,7 @@
                                 <label class="control-label" for="lastName">ESI No</label>
                                 <div class="controls">
                                     <input type="text" name="ESINo" id="ESINo"
-                                           ng-model="vm.registration.officialDetails.ESINo"
+                                           ng-model="vm.registration.officialDetails.esino"
                                            class="form-input width-100" placeholder="ESI No"
                                            validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
@@ -808,7 +808,7 @@
                                 <label class="control-label" for="dob">PF No</label>
                                 <div class="controls">
                                     <input type="text" name="PFNo" id="PFNo"
-                                           ng-model="vm.registration.officialDetails.PFNo"
+                                           ng-model="vm.registration.officialDetails.pfno"
                                            class="form-input width-100" placeholder="PF No"
                                            validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
                                 </div>
@@ -850,14 +850,14 @@
                                     Name</label>
                                 <div class="controls">
                                     <input type="text" name="spouse" id="spouse"
-                                           ng-model="vm.registration.familyMembers.name1"
+                                           ng-model="vm.registration.spouseName"
                                            class="form-input width-100" placeholder="Spouse's Name"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="middleName">Children</label>
                                 <div class="controls">
-                                    <input type="text" name="" id="children" ng-model="vm.registration.familyMembers.name"
+                                    <input type="text" name="" id="children" ng-model="vm.registration.childName"
                                            class="form-input width-100" placeholder="Children" />
                                 </div>
                             </div>

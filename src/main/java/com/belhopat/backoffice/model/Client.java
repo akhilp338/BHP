@@ -50,7 +50,7 @@ public class Client extends BaseEntity {
 
 //	@NotNull
 	@Column( name = "EML_ID" )
-	private String emailId;
+	private String email;
 
 //	@NotNull
 	@Column( name = "WEB_URL" )
@@ -71,7 +71,7 @@ public class Client extends BaseEntity {
 //    joinColumns=@JoinColumn ( name = "CLNT_ID" ), 
 //    inverseJoinColumns=@JoinColumn( name = "POC_ID" ) ) 
 	@JoinColumn( name = "POC_ID" )
-	private PointOfContact pointOfContact;
+	private PointOfContact poc;
 
 	public String getClientId() {
 		return clientId;
@@ -137,12 +137,12 @@ public class Client extends BaseEntity {
 		this.contactNo = contactNo;
 	}
 
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getWebUrl() {
@@ -160,15 +160,15 @@ public class Client extends BaseEntity {
 	public void setClientStatus(LookupDetail clientStatus) {
 		this.clientStatus = clientStatus;
 	}
-
-	public PointOfContact getPointOfContact() {
-		return pointOfContact;
-	}
-
-	public void setPointOfContact( PointOfContact pointOfContact) {
-		this.pointOfContact = pointOfContact;
-	}
 	
+	public PointOfContact getPoc() {
+		return poc;
+	}
+
+	public void setPoc(PointOfContact poc) {
+		this.poc = poc;
+	}
+
 	public LookupDetail getBusinessUnit() {
 		return businessUnit;
 	}

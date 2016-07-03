@@ -53,6 +53,10 @@ public class Candidate extends BaseEntity {
 	
 	private String mothersName;
 	
+	private String childName;
+	
+	private String spouseName;
+	
 	@OneToOne(fetch=FetchType.EAGER)
 	private EmployeeSalary salary;
 
@@ -255,6 +259,22 @@ public class Candidate extends BaseEntity {
 		this.mothersName = motersName;
 	}
 	
+	public String getChildName() {
+		return childName;
+	}
+
+	public void setChildName(String childName) {
+		this.childName = childName;
+	}
+
+	public String getSpouseName() {
+		return spouseName;
+	}
+
+	public void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
+	}
+
 	public List<FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}
