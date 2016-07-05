@@ -48,7 +48,9 @@
                     }
                 },
                 eventResize: function (event, dayDelta, minuteDelta) {
-                    vm.updateEvents(event);
+                    if (!event.end.isBefore(moment())) {
+                        vm.updateEvents(event);
+                    }
                 },
                 eventDrop: function (event, dayDelta, minuteDelta) {
                     vm.updateEvents(event);
