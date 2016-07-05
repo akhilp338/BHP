@@ -58,7 +58,16 @@
                     });
 
         };
-
+        vm.cancelEvent = function(){
+            var url = "api/event/deleteEvent";
+            Core_Service.addEventDetails(url, vm.addEventData.id).then(function (response) {
+                if (response.data)
+                    $uibModalInstance.close(response.data);
+            },
+            function (error) {
+                 console.log(error)
+            });
+        };
         vm.close = function () {
             $uibModalInstance.dismiss('cancel');
         };
