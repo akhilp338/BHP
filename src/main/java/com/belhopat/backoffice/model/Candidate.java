@@ -28,7 +28,8 @@ public class Candidate extends BaseEntity {
 
 	private Date dob;
 
-	private String gender;
+	@ManyToOne
+	private LookupDetail gender;
 
 	@ManyToOne
 	private LookupDetail bloodGroup;
@@ -163,11 +164,11 @@ public class Candidate extends BaseEntity {
 		this.dob = dob;
 	}
 
-	public String getGender() {
+	public LookupDetail getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(LookupDetail gender) {
 		this.gender = gender;
 	}
 

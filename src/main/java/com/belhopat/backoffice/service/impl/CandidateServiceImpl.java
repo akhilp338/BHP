@@ -162,7 +162,7 @@ public class CandidateServiceImpl implements CandidateService {
 		personalInfo.setMiddleName(candidate.getMiddleName());
 		personalInfo.setLastName(candidate.getLastName());
 		personalInfo.setDob(DateUtil.toDdMmYyyy(candidate.getDob()));
-		personalInfo.setGender(candidate.getGender());
+		personalInfo.setGender(candidate.getGender().getCode());
 		personalInfo.setBloodGroup(candidate.getBloodGroup().getCode());
 		personalInfo.setCountryOfOrigin(candidate.getCountryOfOrigin().getDescription());
 		personalInfo.setPersonalContactNo(candidate.getPersonalContactNo());

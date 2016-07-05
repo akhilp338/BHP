@@ -10,7 +10,8 @@ public class Constants {
 	public static final String EMPLOYMENT_STATUS = "ESTATS";
 	public static final String FAMILY_MEMBER = "FAMMEM";
 	public static final String CLIENT_STATUS = "CLSTATS";
-
+	public static final String GENDER = "GENDER";
+	
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";
 	public static final String PASS_RESET_FAIL_MSG = "User account does not exist. Please contact administrator.";
@@ -82,5 +83,6 @@ public class Constants {
 	public static final String YEARLY_REPEAT = "YEARLY_REPEAT";
 	public static final String CREATED = "CREATED";
 	public static final String GENERATED = "GENERATED";
+	
 
 }

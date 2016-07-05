@@ -164,7 +164,7 @@
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
                 var skillSet = vm.getUpdatedSkillSet(vm.registration.skillSet);
-                vm.registration.skillSet = skillSet;
+//                vm.registration.skillSet = skillSet;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
                         	Core_Service.sweetAlert("Done!",response.Message,"success","coreuser.candidate");  
