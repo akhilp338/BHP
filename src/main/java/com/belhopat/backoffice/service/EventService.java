@@ -18,4 +18,6 @@ public interface EventService {
 	ResponseEntity<Event> updateEvent(Event event);
 
 	ResponseEntity<Map<String, List<?>>> getEmployeesDropDownData();
+
+	ResponseEntity<Event> deleteEvent(Long eventId);
 }
