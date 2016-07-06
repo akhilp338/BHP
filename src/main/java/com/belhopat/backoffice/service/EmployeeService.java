@@ -17,6 +17,6 @@ public interface EmployeeService {
 
 	public DataTablesOutput<Employee> getEmployee(DataTablesInput input);
 
-	public Employee getAnEmployee(Long id);
+	public EmployeeDto getAnEmployee(Long id);
 
 }

@@ -24,6 +24,16 @@ public class EmployeeDto {
 	
 	private Date joiningDate;
 	
+	private String employeeId;
+	
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 
 	public Long getHrRecruiter() {
 		return hrRecruiter;

@@ -66,7 +66,7 @@ public class EmployeeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getAnEmployee", method = RequestMethod.POST)
-	public Employee getAnEmployee(@RequestBody RequestObject requestObject) {
+	public EmployeeDto getAnEmployee(@RequestBody RequestObject requestObject) {
 		return employeeService.getAnEmployee(requestObject.getId());
 	}
 	

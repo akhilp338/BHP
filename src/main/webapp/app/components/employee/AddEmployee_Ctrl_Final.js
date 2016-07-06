@@ -15,16 +15,18 @@
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
-                vm.registration.id=res.data.employeeId;
-        	vm.registration.employeeMasterId=res.data.employeeMaster;
-        	vm.registration.hrManager=res.data.hrManager.id;
-        	vm.registration.accountManager=res.data.accountManager.id;
-        	vm.registration.businessUnit= res.data.businessUnit ? res.data.businessUnit.id : "";
-        	vm.registration.joiningDate=res.data.joiningDate;
-        	vm.registration.workLocation=res.data.workLocation.id;
-        	vm.registration.timeZone=res.data.timeZone.id;
-        	vm.registration.hrRecruiter=res.data.hrRecruiter.id;
-        	vm.registration.reportingManager=res.data.reportingManager.id;
+                vm.registration.id=res.data.id;
+                vm.registration.hrManager=res.data.hrManager;
+                vm.registration.accountManager=res.data.accountManager;
+                vm.registration.businessUnit= res.data.businessUnit;
+                vm.registration.joiningDate=res.data.joiningDate;
+                vm.registration.workLocation= res.data.workLocation;
+                vm.registration.timeZone=res.data.timeZone;
+                vm.registration.hrRecruiter= res.data.hrRecruiter;
+                vm.registration.reportingManager= 	res.data.reportingManager;
+                
+//                $scope.$apply();
+                
         	console.log("edit");
         	console.log(vm.registration);
             }, function (err) {
@@ -33,7 +35,7 @@
         }
                 
         vm.back = function (){
-            $state.go('coreuser.employee.add');
+            $state.go('coreuser.employee');
         };
         
         vm.setDpOpenStatus = function (id) {

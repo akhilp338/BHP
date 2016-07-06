@@ -142,8 +142,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * Long) gets an employee from datatase
 	 */
 	@Override
-	public Employee getAnEmployee(Long id) {
-		return employeeRepository.findById(id);
+	public EmployeeDto getAnEmployee(Long id) {
+		Employee employeeObj = employeeRepository.findById(id);
+		EmployeeDto outputObj = new EmployeeDto();
+		outputObj.setAccountManager( employeeObj.getAccountManager() != null ? employeeObj.getAccountManager().getId() : -999 );
+		outputObj.setHrManager( employeeObj.getHrManager() != null ? employeeObj.getHrManager().getId() : -999 );
+		outputObj.setHrRecruiter( employeeObj.getHrRecruiter() != null ? employeeObj.getHrRecruiter().getId() : -999 );
+		outputObj.setReportingManager(employeeObj.getReportingManager() != null ? employeeObj.getReportingManager().getId() : -999 );
+		outputObj.setId( employeeObj.getId() );
+		outputObj.setEmployeeId( employeeObj.getEmployeeId() );
+		outputObj.setTimeZone( employeeObj.getTimeZone() != null ? employeeObj.getTimeZone().getId() : -999 );
+		outputObj.setWorkLocation( employeeObj.getWorkLocation() != null ? employeeObj.getWorkLocation().getId() : -999 );
+		outputObj.setBusinessUnit( employeeObj.getBusinessUnit() != null ? employeeObj.getBusinessUnit().getId() : -999 );
+		outputObj.setJoiningDate( employeeObj.getJoiningDate() );
+		return outputObj;
 	}
 
 }

@@ -31,19 +31,19 @@ public class Employee extends BaseEntity{
 	@ManyToOne
 	private LookupDetail businessUnit;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee accountManager;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee hrRecruiter;
 
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee hrManager;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Employee reportingManager;
 	
