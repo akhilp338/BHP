@@ -17,7 +17,7 @@
 		    login-page="/login" 
 		   always-use-default-target="true" authentication-failure-url="/loginerror"
 			default-target-url="/dashboard" />
-		<logout logout-success-url="/"/>
+		<logout logout-success-url="/" delete-cookies="JSESSIONID" />
 		
 		<csrf disabled="true"/>
 	</http>

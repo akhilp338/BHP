@@ -20,13 +20,11 @@
                 vm.registration.accountManager=res.data.accountManager;
                 vm.registration.businessUnit= res.data.businessUnit;
                 vm.registration.joiningDate=res.data.joiningDate;
+                vm.registration.employeeMasterId=res.data.employeeMasterId;
                 vm.registration.workLocation= res.data.workLocation;
                 vm.registration.timeZone=res.data.timeZone;
                 vm.registration.hrRecruiter= res.data.hrRecruiter;
-                vm.registration.reportingManager= 	res.data.reportingManager;
-                
-//                $scope.$apply();
-                
+                vm.registration.reportingManager=res.data.reportingManager;
         	console.log("edit");
         	console.log(vm.registration);
             }, function (err) {
@@ -55,7 +53,7 @@
         };
         vm.employeeRegister = function () {
             vm.registerUrl = "api/employee/saveOrUpdateEmployee";
-            vm.registration.employeeMasterId=vm.candId ;
+//            vm.registration.employeeMasterId=vm.candId ;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
                     	   $state.go("coreuser.employee")

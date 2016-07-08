@@ -176,11 +176,12 @@ public class MailServiceImpl implements MailService {
 			mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
 
 		}else{
-			model.put( Constants.EMPLOYEES, candidate );
-			mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
-			mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 			String employeeName = candidate.getFirstName() + " "
 					+ candidate.getLastName();
+			mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
+			mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
+			model.put( Constants.EMPLOYEES, candidate );
+			model.put( Constants.EMPLOYEE_NAME, employeeName );
 		}
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
 		mailObject = new MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
