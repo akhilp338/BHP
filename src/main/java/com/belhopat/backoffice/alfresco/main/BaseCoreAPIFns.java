@@ -254,7 +254,8 @@ abstract public class BaseCoreAPIFns {
     }
 
     public String getSite() {
-        return Config.getConfig().getProperty("site");
+    	Config config = new Config();
+        return config.getSite();
     }
 
     public String getFolderName() {

@@ -184,10 +184,12 @@ public class BaseCloudFns extends BaseCoreAPIFns {
     }
 
     public static String getAPIKey() {
-        return Config.getConfig().getProperty("api_key");
+    	Config config = new Config();
+        return config.getAPIKey();
     }
 
     public static String getAPISecret() {
-        return Config.getConfig().getProperty("api_secret");
+    	Config config = new Config();
+        return config.getAPISecretKey();
     }
 }

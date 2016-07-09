@@ -38,5 +38,6 @@
 	</bean>
 	
 	<util:properties id="emailConfiguration" location="classpath:email.properties" />
+	<util:properties id="uploadConfiguration" location="classpath:config.properties" />
 
 </beans>
