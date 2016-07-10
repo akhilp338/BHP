@@ -85,7 +85,7 @@ public class LoginController {
 	 * @throws ServletException
 	 *             Log outs and kills the current session
 	 */
-	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
 		request.getSession().invalidate();
 		request.logout();
