@@ -164,7 +164,7 @@ public class MailServiceImpl implements MailService {
 	 * sends Mail on candidate and employee registration based on value of isEmployee status flag
 	 */
 	@Override
-	public void sendCandidateRegMail( Candidate candidate, Boolean isEmployee ) throws MessagingException {
+	public void sendCandidateRegMail( Candidate candidate, Boolean isEmployee, String employeeId ) throws MessagingException {
 		
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
@@ -180,7 +180,7 @@ public class MailServiceImpl implements MailService {
 					+ candidate.getLastName();
 			mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
 			mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
-			model.put( Constants.EMPLOYEES, candidate );
+			model.put( Constants.EMPLOYEES, employeeId );
 			model.put( Constants.EMPLOYEE_NAME, employeeName );
 		}
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);

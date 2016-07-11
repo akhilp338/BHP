@@ -377,7 +377,7 @@ public class CandidateServiceImpl implements CandidateService {
 		//TODO make this generic
 		
 		try{
-			mailService.sendCandidateRegMail( persisted, false );
+			mailService.sendCandidateRegMail( persisted, false, "" );
 		}catch(MessagingException e){
 			e.printStackTrace();
 		}

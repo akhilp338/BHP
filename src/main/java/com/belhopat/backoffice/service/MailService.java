@@ -21,6 +21,6 @@ public interface MailService {
 
 	public void sendClientRegMail( Client client ) throws MessagingException;
 
-	public void sendCandidateRegMail( Candidate candidate, Boolean isEmployee ) throws MessagingException;
+	public void sendCandidateRegMail(Candidate candidate, Boolean isEmployee, String employeeId) throws MessagingException;
 
 }

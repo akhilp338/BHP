@@ -45,6 +45,7 @@ public class Constants {
 	public static final String EVENT_END = "eventEnd";
 	public static final String POC = "poc";
 	public static final String EMPLOYEE_NAME = "employeeName";
+	public static final String EMPLOYEE_ID = "employeeId";
 	
 	/* data constants */
 	public static final String DD_MM_YYYY_HH_MM_SS = "dd-MM-yyyy HH:mm:ss";
