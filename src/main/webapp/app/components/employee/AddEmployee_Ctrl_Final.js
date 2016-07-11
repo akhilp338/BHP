@@ -53,7 +53,7 @@
         };
         vm.employeeRegister = function () {
             vm.registerUrl = "api/employee/saveOrUpdateEmployee";
-//            vm.registration.employeeMasterId=vm.candId ;
+            vm.registration.employeeMasterId=vm.candId ;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
                     	   $state.go("coreuser.employee")
