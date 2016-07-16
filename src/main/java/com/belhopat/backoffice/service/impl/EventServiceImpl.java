@@ -1,7 +1,5 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +17,6 @@ import com.belhopat.backoffice.repository.EventRepository;
 import com.belhopat.backoffice.service.EventService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
-import com.belhopat.backoffice.util.DateUtil;
 
 /**
  * @author BHP_DEV Service layer to implement event and reminders business
