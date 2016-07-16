@@ -20,4 +20,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long>, Dat
 
 	List<Candidate> findByIdIn(List<Long> candidateIds);
 
+	Candidate findByPersonalEmail(String userEmail);
+
 }

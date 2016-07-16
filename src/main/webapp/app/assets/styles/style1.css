@@ -49,9 +49,9 @@ body, html {
     margin-top: 12px;
 }
 
-.request-btn, .download-btn, .generate-btn {
-    width: 200px !important
-}
+/* .request-btn, .download-btn, .generate-btn { */
+/*     width: 200px !important */
+/* } */
 
 .heading-sub {
     padding-left: 0;
