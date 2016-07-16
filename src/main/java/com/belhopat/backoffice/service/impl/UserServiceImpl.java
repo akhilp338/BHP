@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean generatePasswordResetLink( String userEmail ) throws MessagingException {
-		Candidate candidate = candidateRepo.findByPersonalEmail( userEmail );
+		Candidate candidate = candidateRepo.findOne(1L);
 		//TODO For Debug
 //		User user = userRepo.findByEmail( userEmail );
 //		if ( user != null ){

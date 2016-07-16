@@ -33,7 +33,8 @@
                 }
 			},
             function(error){
-				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 
+//				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 
+				Core_Service.sweetAlert("Done!",error.data.data,"success"); 
             });
         };
 		

@@ -113,6 +113,7 @@ public class MailServiceImpl implements MailService {
         forDebugList.add( 
         		new InternetAddress("akhilp338@gmail.com"));
         InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
+        forDebugEmail = forDebugList.toArray( forDebugEmail );
         
         MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
 				emailHtmlBody, logoResourcePath, mailSender);
@@ -161,6 +162,7 @@ public class MailServiceImpl implements MailService {
         forDebugList.add( 
         		new InternetAddress("akhilp338@gmail.com"));
         InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
+        forDebugEmail = forDebugList.toArray( forDebugEmail );
 		
         MailMessageObject mailObject = new MailMessageObject( forDebugEmail, MAIL_FROM, Constants.CAND_REG_SUCC_MAIL_SUB,
 				emailHtmlBody, mailSender);
@@ -202,6 +204,7 @@ public class MailServiceImpl implements MailService {
         forDebugList.add( 
         		new InternetAddress("akhilp338@gmail.com"));
         InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
+        forDebugEmail = forDebugList.toArray( forDebugEmail );
 		
 		
 		MailMessageObject mailObject = new MailMessageObject( forDebugEmail,
@@ -259,6 +262,7 @@ public class MailServiceImpl implements MailService {
         forDebugList.add( 
         		new InternetAddress("akhilp338@gmail.com"));
         InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
+        forDebugEmail = forDebugList.toArray( forDebugEmail );
 		
 		
 		
