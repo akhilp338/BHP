@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.UserService;
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	CandidateRepository candidateRepo;
 	
 	@Autowired
 	RandomPasswordGenerator randomPasswordGenerator;
@@ -98,15 +103,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean generatePasswordResetLink( String userEmail ) throws MessagingException {
-		User user = userRepo.findByEmail( userEmail );
-		if ( user != null ){
+		Candidate candidate = candidateRepo.findByPersonalEmail( userEmail );
+		//TODO For Debug
+//		User user = userRepo.findByEmail( userEmail );
+//		if ( user != null ){
 			String generatedPassword = randomPasswordGenerator.nextSessionId();
-			mailService.sendPasswordResetMail( user, generatedPassword );
-			user.setPassword( generatedPassword );
-			userRepo.saveAndFlush( user );
+			mailService.sendPasswordResetMail( candidate, generatedPassword );
+//			user.setPassword( generatedPassword );
+//			userRepo.saveAndFlush( user );
 			return true;
-		}
-		return false;
+//		}
+//		return false;
 	}
 
 }

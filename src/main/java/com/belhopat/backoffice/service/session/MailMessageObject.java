@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.service.session;
 
+import java.util.List;
+
 import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -95,6 +97,19 @@ public class MailMessageObject {
 		this.helper.setSubject( subject );
 		this.helper.setText ( emailBody, true );
 		this.helper.addAttachment( "Replace with file name", attachment );
+	}
+
+	public MailMessageObject(
+			InternetAddress[] emailToList, String emailFrom, String subject, String emailBody, 
+			String resourcePath, JavaMailSender mailSender) throws MessagingException {
+		ClassPathResource res = new ClassPathResource( resourcePath );
+		this.mimeMessage = mailSender.createMimeMessage();
+		this.helper = new MimeMessageHelper( this.mimeMessage, true );
+		this.helper.setTo( emailToList );
+		this.helper.setFrom( new InternetAddress ( emailFrom ) );
+		this.helper.setSubject( subject );
+		this.helper.setText ( emailBody, true );
+		this.helper.addInline( "templateLogo", res );
 	}
 
 }

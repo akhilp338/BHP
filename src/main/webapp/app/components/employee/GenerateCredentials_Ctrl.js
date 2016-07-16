@@ -11,17 +11,19 @@
 					+ " </span><span class='cat-value'>"
 					+ employeeId + "</span></div>";
 		
-		vm.employeeMasterObject = candidateDetails[ 'employeeMaster' ];
-		vm.officialEmail = vm.employeeMasterObject[ 'officialEmail' ] || '-';
+		vm.mail = candidateDetails[ 'mail' ];
+		if( vm.mail == "-999"){
+			Core_Service.sweetAlert("Oops!","Please update personal email of the candidate before continuing.","error"); 
+		}
 		
 		vm.template += "<div class='cat-row'><span class = 'catagory'>" 
-					+ fields[ 'officialEmail' ]
+					+ fields[ 'personalEmail' ]
 					+ " </span><span class='cat-value'>"
-					+ vm.officialEmail + "</span></div>";
+					+ vm.mail + "</span></div>";
 		vm.template += "</div>";
 		
 		vm.submitGenerateCredentialsRequest = function( ){
-			var data = {"email":vm.officialEmail }
+			var data = {"email":vm.mail }
 			Core_Service.sendPassword(data).then(function(res){
 				if(res.data.success){
 	                  Core_Service.sweetAlert("Done!",res.data.data,"success");  

@@ -156,6 +156,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		outputObj.setWorkLocation( employeeObj.getWorkLocation() != null ? employeeObj.getWorkLocation().getId() : -999 );
 		outputObj.setBusinessUnit( employeeObj.getBusinessUnit() != null ? employeeObj.getBusinessUnit().getId() : -999 );
 		outputObj.setJoiningDate( employeeObj.getJoiningDate() );
+		outputObj.setMail( employeeObj.getEmployeeMaster().getPersonalEmail() != null ? employeeObj.getEmployeeMaster().getPersonalEmail() : "-999" );
 		return outputObj;
 	}
 
