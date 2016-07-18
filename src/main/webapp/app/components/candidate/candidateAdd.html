@@ -77,7 +77,7 @@
                                 <div class="controls">
                                     <select name="gender" ng-model="vm.registration.gender.id" validation="required:alt=required"
                                         class="form-input width-100" ng-options="gender.id as (gender.code) for gender in vm.lookups.GENDER">                   
-                                           <option style="display:none" value="">...</option>
+                                           <option value="">--SELECT--</option>
                                    </select>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                 <div class="controls">
                                    <select name="bloodGroup" ng-model="vm.registration.bloodGroup.id" validation="required:alt=required"
                                         class="form-input width-100" ng-options="bloodGroup.id as (bloodGroup.code) for bloodGroup in vm.lookups.BG">                   
-                                           <option style="display:none" value="">...</option>
+                                           <option value="">--SELECT--</option>
                                    </select>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <select name="countryOfOrigin" ng-model="vm.registration.countryOfOrigin.id"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                          validation="required:alt=required">
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                     <select name="personal_country_code" ng-model="vm.registration.personal_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                                     <select name="ofc_contact_country_code" ng-model="vm.registration.ofc_contact_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                         ng-change="vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id,'permenant')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         validation="required:alt=required">
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                   
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                         ng-change="vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id,'permenant')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
                                         validation="required:alt=required">
-                                 <option style="display:none" value="">...</option>
+                                 <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                                 <div class="controls">
                                     <select name="permanentAddress_city" ng-model="vm.registration.permanentAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
-                                     <option style="display:none" value="">...</option>   
+                                     <option value="">--SELECT--</option>   
                                 </select> 
                                     
                                 </div>
@@ -277,7 +277,7 @@
                                         ng-change="vm.getStatesByCountry(vm.registration.currentAddress.city.state.country.id,'current')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -288,7 +288,7 @@
                                         ng-change="vm.getCitiesByStates(vm.registration.currentAddress.city.state.id,'current')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesCurnt"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -297,7 +297,7 @@
                                 <div class="controls">
                                     <select name="currentAddress_city" ng-model="vm.registration.currentAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesCurnt">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -372,7 +372,7 @@
                                     <select name="division" ng-model="vm.registration.division.id"
                                         class="form-input width-100" ng-options="division.id as (division.description) for division in vm.lookups.DIV"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -382,7 +382,7 @@
                                     <select name="designation" ng-model="vm.registration.designation.id"
                                         class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
                                 <div class="controls">
                                     <select name="employmentStatus" ng-model="vm.registration.employmentStatus.id"
                                         class="form-input width-100" ng-options="employmentStatus.id as (employmentStatus.description) for employmentStatus in vm.lookups.ESTATS">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -402,7 +402,7 @@
                                 <div class="controls">
                                     <select name="purpose" ng-model="vm.registration.purpose.id"
                                         class="form-input width-100" ng-options="purpose.id as (purpose.description) for purpose in vm.lookups.PURPO">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -494,7 +494,7 @@
                                     <select name="onsiteAddress_country" ng-model="vm.registration.onsiteAddress.city.state.country.id"
                                         ng-change="vm.getStatesByCountry(vm.registration.onsiteAddress.city.state.country.id,'onsite')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -504,7 +504,7 @@
                                     <select name="onsiteAddress_state" ng-model="vm.registration.onsiteAddress.city.state.id"
                                         ng-change="vm.getCitiesByStates(vm.registration.onsiteAddress.city.state.id,'onsite')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesOnsite">
-                                <option style="display:none" value="">...</option></select> 
+                                <option value="">--SELECT--</option></select> 
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -512,7 +512,7 @@
                                 <div class="controls">
                                     <select name="onsiteAddress_city" ng-model="vm.registration.onsiteAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesOnsite">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -532,7 +532,7 @@
                                 <div class="controls">
                                     <select name="countryToVisit" ng-model="vm.registration.countryToVisit.id"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -542,7 +542,7 @@
                                     <select name="onsite_country_code" ng-model="vm.registration.onsite_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -650,7 +650,7 @@
                                     <select name="bankAccount_country" ng-model="vm.registration.bankAccount.bankAddress.city.state.country.id"
                                         ng-change="vm.getStatesByCountry(vm.registration.bankAccount.bankAddress.city.state.country.id,'bank')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -660,7 +660,7 @@
                                     <select name="bankAccount_state" ng-model="vm.registration.bankAccount.bankAddress.city.state.id"
                                         ng-change="vm.getCitiesByStates(vm.registration.bankAccount.bankAddress.city.state.id,'bank')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesBank">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -669,7 +669,7 @@
                                 <div class="controls">
                                      <select name="bankAccount_city" ng-model="vm.registration.bankAccount.bankAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesBank">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                      </select>
                                 </div>
                             </div>
@@ -705,7 +705,7 @@
                                 <div class="controls">
                                     <select name="passport_country" ng-model="vm.registration.passport.country.id"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -875,7 +875,7 @@
                                     <select name="family_contact1_code" ng-model="vm.registration.family_contact1_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -898,7 +898,7 @@
                                     <select name="family_contact2_code" ng-model="vm.registration.family_contact2_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>

@@ -41,7 +41,7 @@
                                        class="form-input date-form"                                           
                                        ng-model="vm.registration.joiningDate"
                                        is-open="vm.isDobPickerOpen"
-                                       uib-datepicker-popup="yyyy-MM-dd"
+                                       uib-datepicker-popup="dd-MMM-yyyy"
                                        validation="required:alt=Required field"
                                        readonly/>
                                 <span class="input-group-btn custom-datepick">
@@ -62,7 +62,7 @@
                                     ng-model="vm.registration.businessUnit"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="business.id as (business.description) for business in vm.lookups.DIV">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                     ng-model="vm.registration.accountManager"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.AM">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                     ng-model="vm.registration.hrRecruiter"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRR">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                     ng-model="vm.registration.hrManager"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRM">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                     ng-model="vm.registration.reportingManager"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRM">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                                     ng-model="vm.registration.workLocation"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                                     ng-model="vm.registration.timeZone"
                                     validation="required:alt=required" class="form-input width-100"
                                     ng-options="timezone.id as (timezone.offsetCode) for timezone in vm.lookups.TIMEZONE">
-                                <option style="display: none" value="">...</option>
+                                <option value="">--SELECT--</option>
                             </select>
                         </div>
                     </div>

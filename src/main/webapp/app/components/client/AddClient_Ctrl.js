@@ -3,6 +3,18 @@
         var vm = this;
         $rootScope.showLoader = true;
         vm.registration = {};
+        
+        vs = new validationService({
+            controllerAs: vm
+        });
+        vs.setGlobalOptions({
+            debounce: 1500,
+            scope: $scope,
+            isolatedScope: $scope,
+            preValidateFormElements: false,
+            displayOnlyLastErrorMsg: true
+        });
+        
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
                 vm.registration = res.data;

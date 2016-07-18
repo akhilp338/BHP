@@ -35,6 +35,14 @@
         vs = new validationService({
             controllerAs: vm
         });
+        vs.setGlobalOptions({
+            debounce: 1500,
+            scope: $scope,
+            isolatedScope: $scope,
+            preValidateFormElements: false,
+            displayOnlyLastErrorMsg: true
+        });
+        
         vm.isCheckboxEnable = false;
         vm.urlForLookups = "api/candidate/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
@@ -43,16 +51,8 @@
             if (!$stateParams.id)
                     vm.mainSkillList = vm.lookups.SKILL;
                 }, function (error) {
-                });
+                });      
         
-        vs.setGlobalOptions({
-            debounce: 1500,
-            scope: $scope,
-            isolatedScope: $scope,
-            preValidateFormElements: false,
-            displayOnlyLastErrorMsg: true
-        });
-
         vm.addSkills = function () {
             vm.mainSelectedSkillList = vm.mainSelectedSkillList.concat(vm.subSelectedSkillList);
             vm.removeFromMainListArray(vm.getIndexesToRemove(vm.mainSkillList, vm.subSelectedSkillList));
