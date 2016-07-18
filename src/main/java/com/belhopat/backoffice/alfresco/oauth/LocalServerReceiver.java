@@ -48,12 +48,12 @@ public final class LocalServerReceiver implements VerificationCodeReceiver {
 
   @Override
   public String getRedirectUri() throws Exception {
-    server = new Server(PORT);
-    for (Connector c : server.getConnectors()) {
-      c.setHost(LOCALHOST);
-    }
-    server.addHandler(new CallbackHandler());
-    server.start();
+//    server = new Server(PORT);
+//    for (Connector c : server.getConnectors()) {
+//      c.setHost(LOCALHOST);
+//    }
+//    server.addHandler(new CallbackHandler());
+//    server.start();
     return "http://" + LOCALHOST + ":" + PORT + CALLBACK_PATH;
   }
 
