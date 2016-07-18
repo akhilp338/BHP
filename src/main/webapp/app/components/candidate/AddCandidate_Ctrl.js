@@ -76,7 +76,7 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-            if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+           if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
                 $scope.selection = $scope.steps[index];
                 $timeout(function(){angular.element('input[type=file]').bootstrapFileInput()
                     vm.isFileInput = $scope.steps[index] == "Official" ? true : false;},500)

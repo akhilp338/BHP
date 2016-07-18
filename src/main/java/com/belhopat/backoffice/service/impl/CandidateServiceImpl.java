@@ -350,7 +350,8 @@ public class CandidateServiceImpl implements CandidateService {
 	 * @return Candidate sets the account details
 	 */
 	private Candidate setBankAccountInDetail(BankAccount bankAccount, Candidate newCandidate) {
-		if (newCandidate.getBankAccount() != null) {
+		if (newCandidate.getBankAccount() == null) {
+			newCandidate.setBankAccount(bankAccount);
 			newCandidate.getBankAccount().setAccountHolderName(bankAccount.getAccountHolderName());
 			newCandidate.getBankAccount().setAccountNo(bankAccount.getAccountNo());
 			newCandidate.getBankAccount().setBankAddress(bankAccount.getBankAddress());
@@ -358,7 +359,7 @@ public class CandidateServiceImpl implements CandidateService {
 			newCandidate.getBankAccount().setBranch(bankAccount.getBranch());
 			newCandidate.getBankAccount().setIFSCCode(bankAccount.getIFSCCode());
 		} else {
-
+			newCandidate.setBankAccount(bankAccount);
 		}
 		return newCandidate;
 	}
