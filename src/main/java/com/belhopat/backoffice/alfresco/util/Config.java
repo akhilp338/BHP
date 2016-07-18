@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
+
 public class Config {
 
     private static Properties config;
@@ -12,7 +14,7 @@ public class Config {
         if (config == null) {
             config = new Properties();
             try {
-                   config.load(new FileInputStream("config.properties"));
+                   config.load(new FileInputStream(BelhopatServletContextInfo.getRealPath()+"WEB-INF/classes/"+"alfresco-config.properties"));
                } catch (IOException ioe) {
                    ioe.printStackTrace();
             }
