@@ -416,17 +416,15 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public void getFileByNameAndCategory(Long empSalId,HttpServletResponse response) throws IOException{
 		EmployeeSalary empSal = employeeSalaryRepository.findById(empSalId);
-		File downLoadedFile = controller.getFileByNameAndCategory(Constants.OFFER_LETTERS,empSal.getOfferLetterFileName());
-		generateDownloadLink(downLoadedFile,response);
+		byte[] fileBytes = controller.getBytesByNameAndCategory(Constants.OFFER_LETTERS,empSal.getOfferLetterFileName());
+		generateDownloadLink(fileBytes,empSal.getOfferLetterFileName(),response);
 	}
 	
-	public void generateDownloadLink(File downLoadedFile, HttpServletResponse response) throws IOException {
+	public void generateDownloadLink(byte[] fileBytes, String fileName, HttpServletResponse response) throws IOException {
 		OutputStream output = response.getOutputStream();
 		response.setContentType(Constants.PDF_CONTENT_TYPE);
-		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + downLoadedFile.getName());
-//		output.write(downLoadedFile);
-//		Path path = downLoadedFile.getPath();
-//		Files.copy(downLoadedFile.getPath(), output);
+		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + fileName);
+		output.write(fileBytes);
 		output.flush();
 		response.flushBuffer();
 		output.close();
