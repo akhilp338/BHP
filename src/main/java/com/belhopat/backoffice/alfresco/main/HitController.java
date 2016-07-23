@@ -17,31 +17,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class HitController extends BaseCloudFns {
 
-    public static void main(String[] args) {
-        HitController le = new HitController();
-        try {
-            le.doExample();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public static void main(String[] args) {
+		HitController le = new HitController();
+		try {
+			le.doExample();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void doExample() {
-        try {
-            // Find the root folder of our target site
-            String rootFolderId = getRootFolderId(getSite());
+	public void doExample() {
+		try {
+			// Find the root folder of our target site
+			String rootFolderId = getRootFolderId(getSite());
 
-            // Create a new folder in the root folder
-            Folder subFolder = createFolder(rootFolderId, getFolderName());
+			// Create a new folder in the root folder
+			Folder subFolder = createFolder(rootFolderId, getFolderName());
 
-            // Like the folder
-//            like(subFolder.getId());
-            File file = new File("///home/shinto/Downloads/Collect.pdf");
-            Document doc = createDocument(subFolder, file, getLocalFileType());
+			// Like the folder
+			// like(subFolder.getId());
+			File file = new File("///home/shinto/Downloads/Collect.pdf");
+			Document doc = createDocument(subFolder, file, getLocalFileType());
 
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
 
 }

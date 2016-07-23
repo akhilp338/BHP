@@ -409,9 +409,11 @@
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="client">Client</label>
                                 <div class="controls">
-                                    <input type="text" name="client" id="client"
-                                           ng-model="vm.registration.client" class="form-input width-100"
-                                           placeholder="Client"/>
+                                    <select name="client" ng-model="vm.registration.client.id"
+                                        class="form-input width-100" ng-options="client.id as (client.data) for client in vm.lookups.CLIENT"
+                                        validation="required:alt=required">
+                                <option value="">--SELECT--</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
