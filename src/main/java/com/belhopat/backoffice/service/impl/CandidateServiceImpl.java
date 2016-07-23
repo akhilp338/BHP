@@ -30,6 +30,7 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
+import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
@@ -39,6 +40,7 @@ import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.DateUtil;
+import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
@@ -191,9 +193,9 @@ public class CandidateServiceImpl implements CandidateService {
 		employmentInfo.setDesignation(candidate.getDesignation().getDescription());
 		employmentInfo.setEmploymentStatus(candidate.getEmploymentStatus().getDescription());
 		employmentInfo.setPurpose(candidate.getPurpose().getDescription());
-		employmentInfo.setClient(candidate.getClient());
+		employmentInfo.setClient(candidate.getClient().getClientId());
 		employmentInfo.setPartner(candidate.getPartner());
-		employmentInfo.setSourcedBy(candidate.getSourcedBy());
+		employmentInfo.setSourcedBy(candidate.getSourcedBy().getClientId());
 		employmentInfo.setOnsiteAddress(onsiteAddress);
 		// TODO set skill set as a string :)
 		return employmentInfo;
@@ -464,6 +466,14 @@ public class CandidateServiceImpl implements CandidateService {
 		};
 		DataTablesOutput<Candidate> dataTablesOutput = candidateRepository.findAll(input, specification);
 		return dataTablesOutput;
+	}
+
+	@Override
+	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary) {
+		TaskList currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		employeeSalary.setCurrentTask(currentTask);
+		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
 	
 	

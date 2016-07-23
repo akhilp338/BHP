@@ -15,7 +15,6 @@
         <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
         <link href='/BelhopatBackOffice/app/assets/libs/css/jquery.datepick.css' rel='stylesheet' type='text/css'> 
-
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/boxplot.css" rel="stylesheet">
@@ -27,7 +26,17 @@
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/tooltip.css" rel="stylesheet">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
-
+        <style type="text/css">
+            .custom-chip md-chip {
+    background: rgb(255, 173, 88);
+    color: rgb(255, 255, 255);
+        }
+        .custom-chip md-chip.md-focused {
+        background: rgb(255, 136, 21);
+        }
+        .custom-chip md-chip md-icon{
+            color: rgb(255, 255, 255);
+        }</style>
         <!-- Libraries -->
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
@@ -63,9 +72,7 @@
         <script type="text/javascript" src="/BelhopatBackOffice/app/assets/libs/js/spin.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-spinner.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-loading-spinner.js"></script>
-
         <script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
-
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
          <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-1.3.3.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.3.min.js"></script>
@@ -79,6 +86,7 @@
         <script src="/BelhopatBackOffice/app/shared/encode-util.js"></script>
         <script src="/BelhopatBackOffice/app/run.js"></script>
         <script src="/BelhopatBackOffice/app/shared/appConstants.js"></script>
+        <script src="/BelhopatBackOffice/app/directives/digitDirective.js"></script>
         <script src="/BelhopatBackOffice/app/shared/HttpRequest.js"></script>
         <script src="/BelhopatBackOffice/app/shared/CoreService.js"></script>
         <script src="/BelhopatBackOffice/app/shared/Core_Modal.js"></script>

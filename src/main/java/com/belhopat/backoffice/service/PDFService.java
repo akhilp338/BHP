@@ -6,12 +6,13 @@ import java.text.ParseException;
 
 import org.springframework.stereotype.Service;
 
-import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.EmployeeSalary;
 import com.itextpdf.text.DocumentException;
 
 @Service
 public interface PDFService {
 
-	public byte[] generateOfferLetterPDF(Employee employee) throws MalformedURLException, DocumentException, IOException, ParseException;
+	public byte[] generateOfferLetterPDF(EmployeeSalary employeeSalary)
+			throws MalformedURLException, DocumentException, IOException, ParseException;
 
 }

@@ -62,9 +62,8 @@ public class CandidateController {
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-//		Employee employeeDTO = new Employee();
-//		pdfService.generateOfferLetterPDF(employeeDTO);
-//		SalaryDTO salaryDTO = new SalaryDTO();
+		EmployeeSalary salary = new EmployeeSalary();
+		pdfService.generateOfferLetterPDF(salary);
 		return candidateService.getCandidates(input, employee);
 	}
 
@@ -142,8 +141,8 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getSalarySplit", method = RequestMethod.GET)
-	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestParam String fixed,@RequestParam String grade) {
-		return baseService.getSalarySplit(Double.valueOf(fixed),grade);
+	public ResponseEntity<EmployeeSalary> getSalarySplit(@RequestParam String fixed, @RequestParam String grade) {
+		return baseService.getSalarySplit(Double.valueOf(fixed), grade);
 	}
 
 	@ResponseBody
@@ -151,10 +150,16 @@ public class CandidateController {
 	public List<SalaryGrade> getSalaryGrades() {
 		return candidateService.getSalaryGrades();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/requestForApproval", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
+		return candidateService.requestForApproval(employeeSalary);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.saveSalaryAndOfferLetter(employeeSalary);
 	}
 
@@ -163,17 +168,18 @@ public class CandidateController {
 	public DataTablesOutput<EmployeeSalary> getEmployee(@Valid DataTablesInput input) {
 		return candidateService.getOfferLetters(input);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getUnProcessedCandidates", method = RequestMethod.GET)
-	public DataTablesOutput<Candidate> getUnProcessedCandidates(@Valid DataTablesInput input, @RequestParam boolean employee) {
-		return candidateService.getUnProcessedCandidates(input,employee);
+	public DataTablesOutput<Candidate> getUnProcessedCandidates(@Valid DataTablesInput input,
+			@RequestParam boolean employee) {
+		return candidateService.getUnProcessedCandidates(input, employee);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.GET)
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
-		ResponseEntity<List<TaskList>> tasks= baseService.getCurrentUserTasks();
+		ResponseEntity<List<TaskList>> tasks = baseService.getCurrentUserTasks();
 		return tasks;
 	}
 

@@ -58,6 +58,8 @@ public class EmployeeSalary  extends BaseEntity{
 	
 	private String status ;
 	
+	private String offerLetterFileName ;
+	
 	@OneToOne
 	private TaskList currentTask;
 	
@@ -198,6 +200,12 @@ public class EmployeeSalary  extends BaseEntity{
 	}
 	public void setNetTakeHomeBeforeTDS(Long netTakeHomeBeforeTDS) {
 		this.netTakeHomeBeforeTDS = netTakeHomeBeforeTDS;
+	}
+	public String getOfferLetterFileName() {
+		return offerLetterFileName;
+	}
+	public void setOfferLetterFileName(String offerLetterFileName) {
+		this.offerLetterFileName = offerLetterFileName;
 	}
 
 }

@@ -36,4 +36,6 @@ public interface CandidateService {
 
 	public DataTablesOutput<Candidate> getUnProcessedCandidates(DataTablesInput input, boolean employee);
 
+	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary);
+
 }
