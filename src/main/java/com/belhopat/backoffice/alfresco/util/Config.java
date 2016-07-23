@@ -9,6 +9,7 @@ import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 public class Config {
 
     private static Properties config;
+    private static final String RELATIVE_PATH_TO_PROPERTIES = "config.properties";
 
     public static Properties getConfig() {
         if (config == null) {

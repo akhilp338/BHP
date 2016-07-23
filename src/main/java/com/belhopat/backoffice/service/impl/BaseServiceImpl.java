@@ -371,6 +371,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setUpdateAttributes(currentUser);
 				controller.doExample();
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+				controller.doExample();
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
