@@ -8,6 +8,10 @@
     font-family: Verdana, Geneva, sans-serif;
 }
 
+md-content {
+    padding-left: 0!important;
+}
+
 .login-page {
     background-color: #ACF7C3;
 }
@@ -2244,3 +2248,9 @@ md-dialog-actions .md-button:focus, .md-button:hover {
 .view-modal{
     overflow:hidden;
 }
+
+
+md-chips-wrap.md-chips {
+    width: 100%!important;
+}
+
