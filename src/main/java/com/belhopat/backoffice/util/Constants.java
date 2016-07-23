@@ -87,5 +87,10 @@ public class Constants {
 	public static final String CREATED = "CREATED";
 	public static final String GENERATED = "GENERATED";
 	
+	
+	/*Alfresco Folder Names */
+	public static final String OFFER_LETTERS = "OFFER_LETTERS";
+	
+	
 
 }

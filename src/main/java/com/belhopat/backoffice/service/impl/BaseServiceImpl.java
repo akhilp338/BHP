@@ -281,7 +281,8 @@ public class BaseServiceImpl implements BaseService {
 		return null;
 	}
 
-	private TaskList createNewTaskList(String taskName) {
+	@Override
+	public TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		TaskList currentTaskRow = new TaskList();
 		TaskList newTaskRow = new TaskList();
@@ -298,22 +299,23 @@ public class BaseServiceImpl implements BaseService {
 		return newTaskRow;
 	}
 
-//	private List<TaskList> updateTaskList(String taskName) {
-//		User currentUser = SessionManager.getCurrentUserAsEntity();
-//		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
-//		TaskList taskList = taskListRepository.findByTask(currentTask);
-//		List<TaskList> newTasks = new ArrayList<TaskList>();
-//		TaskList newTaskRow = new TaskList();
-//		taskList.setUpdateAttributes(currentUser);
-//		taskList.setCompleted((byte) 1);
-//		taskList.setStatus(TaskConstants.CREATED);// status to be chnaged
-//		// newTaskRow.setTask(taskList.getNextTask());
-//		newTaskRow.setBaseAttributes(currentUser);
-//		newTasks.add(taskList);
-//		newTasks.add(newTaskRow);
-//		taskListRepository.save(newTasks);
-//		return null;
-//	}
+	@Override
+	public List<TaskList> updateTaskList(String taskName) {
+		User currentUser = SessionManager.getCurrentUserAsEntity();
+		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
+		TaskList taskList = taskListRepository.findByTask(currentTask);
+		List<TaskList> newTasks = new ArrayList<TaskList>();
+		TaskList newTaskRow = new TaskList();
+		taskList.setUpdateAttributes(currentUser);
+		taskList.setCompleted((byte) 1);
+		taskList.setStatus(TaskConstants.CREATED);// status to be chnaged
+		// newTaskRow.setTask(taskList.getNextTask());
+		newTaskRow.setBaseAttributes(currentUser);
+		newTasks.add(taskList);
+		newTasks.add(newTaskRow);
+		taskListRepository.save(newTasks);
+		return null;
+	}
 
 	@Override
 	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade) {
@@ -365,18 +367,16 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
-				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-				employeeSalary.setCurrentTask(currentTask);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				controller.doExample();
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-				controller.doExample();
+				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+				controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}

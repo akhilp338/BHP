@@ -150,10 +150,16 @@ public class CandidateController {
 	public List<SalaryGrade> getSalaryGrades() {
 		return candidateService.getSalaryGrades();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/requestForApproval", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
+		return candidateService.requestForApproval(employeeSalary);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.saveSalaryAndOfferLetter(employeeSalary);
 	}
 
