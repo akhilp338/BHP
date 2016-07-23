@@ -11,7 +11,7 @@ public class Constants {
 	public static final String FAMILY_MEMBER = "FAMMEM";
 	public static final String CLIENT_STATUS = "CLSTATS";
 	public static final String GENDER = "GENDER";
-	
+
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";
 	public static final String PASS_RESET_FAIL_MSG = "User account does not exist. Please contact administrator.";
@@ -24,7 +24,7 @@ public class Constants {
 	public static final String CLIENT_REG_SUCC_MAIL_SUB = "New Client has been added.";
 	public static final String EMP_REG_SUCC_MAIL_SUB = "New Employee has been added.";
 	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
-	
+
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
@@ -32,7 +32,7 @@ public class Constants {
 	public static final String EMP_REG_EMAIL_TEMPLATE = "/employee-reg-email-template.vm";
 	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
 	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
-	
+
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
@@ -46,7 +46,7 @@ public class Constants {
 	public static final String POC = "poc";
 	public static final String EMPLOYEE_NAME = "employeeName";
 	public static final String EMPLOYEE_ID = "employeeId";
-	
+
 	/* data constants */
 	public static final String DD_MM_YYYY_HH_MM_SS = "dd-MM-yyyy HH:mm:ss";
 	public static final String DD_MM_YYYY_HH_MM = "dd-MM-yyyy HH:mm";
@@ -72,8 +72,8 @@ public class Constants {
 	public static final String EMP_DESIG_CEO = "CEO";
 	public static final String EMP_DESIG_BDM = "BDM";
 	public static final String EMP_STS_INACTIVE = "INACTIVE";
-	
-	/*	AOP CONSTANTS */
+
+	/* AOP CONSTANTS */
 	public static final String WEBSERVICE_MODULE = "Controller";
 	public static final String SERVICE_MODULE = "Service";
 	public static final String PERSISTENCE_MODULE = "Repository";
@@ -86,11 +86,13 @@ public class Constants {
 	public static final String YEARLY_REPEAT = "YEARLY_REPEAT";
 	public static final String CREATED = "CREATED";
 	public static final String GENERATED = "GENERATED";
-	
-	
-	/*Alfresco Folder Names */
+
+	/* Alfresco Folder Names */
 	public static final String OFFER_LETTERS = "OFFER_LETTERS";
-	
-	
+
+	/* File type constants */
+	public static final String PDF_CONTENT_TYPE = "application/pdf";
+	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+	public static final String ATTACHMENT = "attachment; filename=";
 
 }

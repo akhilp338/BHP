@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,7 @@ public interface BaseService {
 	public List<TaskList> updateTaskList(String taskName) ;
 	
 	public TaskList createNewTaskList(String taskName);
+
+	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
 }

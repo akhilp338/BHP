@@ -1,19 +1,24 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.belhopat.backoffice.alfresco.main.HitController;
+import com.belhopat.backoffice.alfresco.main.AlfrescoUploadService;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
@@ -56,6 +61,7 @@ import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
+import com.google.common.io.Files;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -108,7 +114,7 @@ public class BaseServiceImpl implements BaseService {
 	EmployeeSalaryRepository employeeSalaryRepository;
 
 	@Autowired
-	HitController controller;
+	AlfrescoUploadService controller;
 
 	@Autowired
 	UserRepository userRepository;
@@ -374,9 +380,10 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-				controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				String document = controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				employeeSalary.setOfferLetterFileName(document);
+				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
@@ -405,4 +412,25 @@ public class BaseServiceImpl implements BaseService {
 		}
 		return userRoles;
 	}
+	
+	@Override
+	public void getFileByNameAndCategory(Long empSalId,HttpServletResponse response) throws IOException{
+		EmployeeSalary empSal = employeeSalaryRepository.findById(empSalId);
+		File downLoadedFile = controller.getFileByNameAndCategory(Constants.OFFER_LETTERS,empSal.getOfferLetterFileName());
+		generateDownloadLink(downLoadedFile,response);
+	}
+	
+	public void generateDownloadLink(File downLoadedFile, HttpServletResponse response) throws IOException {
+		OutputStream output = response.getOutputStream();
+		response.setContentType(Constants.PDF_CONTENT_TYPE);
+		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + downLoadedFile.getName());
+//		output.write(downLoadedFile);
+//		Path path = downLoadedFile.getPath();
+//		Files.copy(downLoadedFile.getPath(), output);
+		output.flush();
+		response.flushBuffer();
+		output.close();
+	}
+	 
+	 
 }
