@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.alfresco.main.HitController;
 import com.belhopat.backoffice.dto.RequestObject;
+import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.CandidateSequence;
 import com.belhopat.backoffice.model.City;
@@ -36,6 +37,7 @@ import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
+import com.belhopat.backoffice.repository.ClientRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
@@ -113,9 +115,12 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	PDFService pdfService;
-	
+
 	@Autowired
 	TimeZoneRepository timezoneRepository;
+
+	@Autowired
+	ClientRepository clientRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -133,6 +138,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
+		List<ResponseObject> clients = clientRepository.getClientDropdownData();
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
@@ -145,6 +151,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
 		dropDownMap.put(Constants.GENDER, gender);
+		dropDownMap.put(Constants.CLIENTS, clients);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -269,10 +276,8 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		/* offer letter transaction part */
-		TaskList newTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-		Employee employee = employeeRepository.findById(requestObject.getId());
-		pdfService.generateOfferLetterPDF(employee);
+		EmployeeSalary employeeSalary = new EmployeeSalary();
+		pdfService.generateOfferLetterPDF(employeeSalary);
 		return null;
 	}
 

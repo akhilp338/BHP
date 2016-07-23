@@ -61,6 +61,7 @@ public class Constants {
 	public static final String SKILL = "SKILL";
 	public static final String EMPLOYEES = "EMPLOYEES";
 	public static final String TIMEZONE = "TIMEZONE";
+	public static final String CLIENTS = "CLIENT";
 
 	/* lookup detail code */
 	public static final String EMP_DESIG_HRM = "HRM";
