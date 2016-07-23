@@ -61,6 +61,7 @@ abstract public class BaseCoreAPIFns {
         try {
             // Making an assumption here that you probably wouldn't normally do
             subFolder = (Folder) cmisSession.getObjectByPath(rootFolder.getPath() + "/" + folderName);
+            subFolder.getChildren().getPage(0);
             System.out.println("Folder already existed!");
         } catch (CmisObjectNotFoundException onfe) {
             Map<String, Object> props = new HashMap<String, Object>();
@@ -71,6 +72,18 @@ abstract public class BaseCoreAPIFns {
             System.out.println("Created new folder: " + subFolderId);
         }
 
+        return subFolder;
+    }
+    
+    public Folder getFolder(String parentFolderId, String folderName) {
+        Session cmisSession = getCmisSession();
+        Folder rootFolder = (Folder) cmisSession.getObject(parentFolderId);
+        Folder subFolder = null;
+        try {
+            subFolder = (Folder) cmisSession.getObjectByPath(rootFolder.getPath() + "/" + folderName);
+        } catch (CmisObjectNotFoundException onfe) {
+            System.out.println("No folder found!");
+        }
         return subFolder;
     }
 
@@ -273,4 +286,18 @@ abstract public class BaseCoreAPIFns {
     abstract public String getAlfrescoAPIUrl();
     abstract public Session getCmisSession();
     abstract public HttpRequestFactory getRequestFactory();
+    
+    
+    public Document getFileByName(Folder parentFolder,String fileName){
+        Document document = null;
+        try {
+        	Session cmisSession = getCmisSession();
+        	 document = (Document) cmisSession.getObjectByPath(parentFolder.getPath() + "/" + fileName);
+        } catch (CmisContentAlreadyExistsException ccaee) {
+            System.out.println("Document doesnot exists: " + fileName);
+        }
+
+        return document;
+    
+    }
 }

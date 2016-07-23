@@ -87,7 +87,11 @@ public class Candidate extends BaseEntity {
 	@ManyToOne
 	private Country countryToVisit;
 
-	private String client;
+	@ManyToOne
+	private Client client;
+	
+	@ManyToOne
+	private Client sourcedBy;
 
 	private String partner;
 
@@ -117,8 +121,6 @@ public class Candidate extends BaseEntity {
 	@ManyToOne
 	private LookupDetail registrationStatus;
 
-	private String sourcedBy;
-	
 	private boolean employee;
 	
 	@Transient
@@ -348,11 +350,11 @@ public class Candidate extends BaseEntity {
 		this.countryToVisit = countryToVisit;
 	}
 
-	public String getClient() {
+	public Client getClient() {
 		return client;
 	}
 
-	public void setClient(String client) {
+	public void setClient(Client client) {
 		this.client = client;
 	}
 
@@ -436,11 +438,11 @@ public class Candidate extends BaseEntity {
 		this.registrationStatus = registrationStatus;
 	}
 
-	public String getSourcedBy() {
+	public Client getSourcedBy() {
 		return sourcedBy;
 	}
 
-	public void setSourcedBy(String sourcedBy) {
+	public void setSourcedBy(Client sourcedBy) {
 		this.sourcedBy = sourcedBy;
 	}
 	

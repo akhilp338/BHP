@@ -1,9 +1,12 @@
 package com.belhopat.backoffice.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.RequestObject;
@@ -65,5 +69,12 @@ public class BaseController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.createOfferLetter(requestObject);
 	}
-
+	
+	
+	@RequestMapping(value = "/downloadDocument", method = RequestMethod.GET)
+	@ResponseBody
+	public void downloadDocument(@RequestParam Long empSalId, HttpServletResponse response) throws IOException {
+		baseService.getFileByNameAndCategory(empSalId,response);
+	}
+	 
 }
