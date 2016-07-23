@@ -71,6 +71,12 @@ public class BaseController {
 	}
 	
 	
+	/**
+	 * Method to download document from cloud
+	 * @param requestObject
+	 * @return responseEntity Returns the document from cloud
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/downloadDocument", method = RequestMethod.GET)
 	@ResponseBody
 	public void downloadDocument(@RequestParam Long empSalId, HttpServletResponse response) throws IOException {
