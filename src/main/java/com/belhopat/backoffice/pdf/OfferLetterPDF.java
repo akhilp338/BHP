@@ -1,11 +1,11 @@
 package com.belhopat.backoffice.pdf;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
@@ -20,10 +20,8 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class OfferLetterPDF extends BasePDFGenerator {
@@ -41,58 +39,10 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		HeaderFooterEvent event = new HeaderFooterEvent();
 		writer.setPageEvent(event);
 		addContentToDocument(document, employeeSalary);
-		// PdfCopy pdfCopy = new PdfSmartCopy(document, outputStream);
-		// String annexureAPath = getContextPath() +
-		// PDFConstants.PDF_RES_PATH +
-		// PDFConstants.ANEX_A;
-		// InputStream anexA = new FileInputStream(annexureAPath);
-		// PdfReader annexureAReader = new PdfReader(anexA);
-		// int pages = annexureAReader.getNumberOfPages();
-		// PdfImportedPage annexureAPage =
-		// writer.getImportedPage(annexureAReader, pages);
-		// String annexureBPath = getContextPath() +
-		// PDFConstants.PDF_RES_PATH +
-		// PDFConstants.ANEX_B;
-		// InputStream anexB = new FileInputStream(annexureBPath);
-		// PdfReader annexureBReader = new PdfReader(anexB);
-		// PdfImportedPage annexureBPage =
-		// writer.getImportedPage(annexureBReader, pages);
-		// pdfCopy.addPage(annexureAPage);
-		// pdfCopy.addPage(annexureBPage);
-		// annexureAReader.close();
-		// annexureBReader.close();
 		document.close();
 		outputStream.close();
 		return outputStream.toByteArray();
 		// return null;
-	}
-
-	public void testPdf() throws DocumentException, IOException {
-
-		String annexureBPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.ANEX_B;
-		String annexureAPath = getContextPath() + PDFConstants.PDF_RES_PATH + PDFConstants.ANEX_A;
-		String[] files = { annexureAPath, annexureBPath };
-		// step 1
-		Document document = new Document();
-		// step 2
-		PdfCopy copy = new PdfCopy(document, new FileOutputStream("/home/sujith/Desktop/a.pdf"));
-		// step 3
-		document.open();
-		// step 4
-		PdfReader reader;
-		int n;
-		// loop over the documents you want to concatenate
-		for (int i = 0; i < files.length; i++) {
-			reader = new PdfReader(files[i]);
-			// loop over the pages in that document
-			n = reader.getNumberOfPages();
-			for (int page = 0; page < n;) {
-				copy.addPage(copy.getImportedPage(reader, ++page));
-			}
-			copy.freeReader(reader);
-		}
-		// step 5
-		document.close();
 	}
 
 	private void addContentToDocument(Document document, EmployeeSalary employeeSalary)
@@ -111,6 +61,11 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		document.add(getAcknowledgementContent());
 		document.newPage();
 		document.add(getCompensationStructureTable(employeeSalary));
+		document.newPage();
+		document.add(getAnnexureA());
+		document.newPage();
+		document.add(getAnnexureB());
+
 	}
 
 	private PdfPTable getAcceptanceAndCommencementContent(Candidate candidate) throws ParseException {
@@ -633,4 +588,148 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		headingCell.setPaddingBottom(50f);
 		return headingCell;
 	}
+
+	private PdfPTable getAnnexureA() {
+		PdfPTable annexureA = new PdfPTable(1);
+		annexureA.setWidthPercentage(100f);
+		annexureA.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		annexureA.addCell(getPageHeading("Annexure A"));
+		annexureA.addCell(getParagraphHeading("Description of Compensation Components"));
+		annexureA.addCell(getAnnexureADetailsTable());
+		return annexureA;
+
+	}
+	
+	private PdfPTable getAnnexureB() {
+		PdfPTable annexureB = new PdfPTable(1);
+		annexureB.setWidthPercentage(100f);
+		annexureB.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		annexureB.addCell(getPageHeading("Annexure B"));
+		annexureB.addCell(getParagraphHeading("Joining Formalities"));
+		annexureB.addCell(getJoiningFormalities());
+		return annexureB;
+	}
+
+	private PdfPTable getAnnexureADetailsTable() {
+		PdfPTable annexureADetails = new PdfPTable(new float[] { 1f, 2.3f });
+		annexureADetails.getDefaultCell().setPadding(5f);
+		annexureADetails.setWidthPercentage(100f);
+		Phrase leftHeading = new Phrase();
+		Chunk leftHeadingChunk = new Chunk("Compensation Components", bold10Font);
+		leftHeading.add(leftHeadingChunk);
+		Phrase rightHeading = new Phrase();
+		Chunk rightHeadingChunk = new Chunk("Description", bold10Font);
+		rightHeading.add(rightHeadingChunk);
+		annexureADetails.addCell(leftHeading);
+		annexureADetails.addCell(rightHeading);
+		String annexureAString = getAnnexureADetails();
+		if (annexureAString != null) {
+			for (String eachRow : annexureAString.split("\\|\\|")) {
+				for (String eachCell : eachRow.split("\\|")) {
+					annexureADetails.addCell(new Phrase(eachCell, normal10Font));
+				}
+			}
+		}
+		return annexureADetails;
+	}
+
+	private PdfPTable getJoiningFormalities() {
+		PdfPTable joiningFormalitiesPara = new PdfPTable(new float[] { 1, 12 });
+		joiningFormalitiesPara.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+		String firstContent = "Sharing the details of your offer with others would imply a breach of confidentiality"
+				+ " and could invite suitable disciplinary action. This is a very private and confidential document. "
+				+ "Please maintain the confidentiality and ensure that the details of your offer are not shared"
+				+ " with anyone outside the Human Resource Team of Belhopat.";
+		String secondContent = "Submit the following documents as well for the Income Tax computation of current Financial Year.";
+		String thirdContent = "Notes:";
+		setTitleContent(firstContent, joiningFormalitiesPara);
+		setListItems("GENERAL", joiningFormalitiesPara);
+		setTitleContent(secondContent, joiningFormalitiesPara);
+		setListItems("TAX", joiningFormalitiesPara);
+		setTitleContent(thirdContent, joiningFormalitiesPara);
+		setListItems("NOTES", joiningFormalitiesPara);
+		return joiningFormalitiesPara;
+	}
+
+	private void setTitleContent(String string, PdfPTable table) {
+		PdfPCell pdfPCell = new PdfPCell();
+		pdfPCell.setColspan(2);
+		pdfPCell.setBorder(Rectangle.NO_BORDER);
+		Paragraph para = new Paragraph();
+		Chunk chunk = new Chunk(string, normal10Font);
+		para.add(chunk);
+		pdfPCell.addElement(para);
+		table.addCell(pdfPCell);
+		table.addCell(new Phrase(Chunk.NEWLINE));
+		table.addCell(new Phrase(Chunk.NEWLINE));
+	}
+
+	private void setListItems(String key, PdfPTable table) {
+		Phrase bullet = new Phrase("      " + String.valueOf((char) 108), zapfdingbats);
+		String[] items = getJoiningFormalityListItems(key);
+		for (String item : items) {
+			table.addCell(bullet);
+			table.addCell(new Phrase(item + " ", normal10Font));
+		}
+		table.addCell(new Phrase(Chunk.NEWLINE));
+		table.addCell(new Phrase(Chunk.NEWLINE));
+	};
+
+	private String[] getJoiningFormalityListItems(String key) {
+		HashMap<String, String[]> map = new HashMap<>();
+		String[] generalItems = { "Employee Details Form", "Passport", "PAN Card",
+				"Educational Certificates (Mark sheets and Certificates- SSC, HSC, Degree, PG)",
+				"Experience Certificates (Documents from all previous employers - Offer Letter, Appointment Letter,"
+						+ "Appraisal Letter, Relieving Letter/Experience Letter)",
+				"Pay slips for last 3 months received from the previous employer",
+				"Relieving certificate from the previous employers, if any", "Claimed Offer Letter, if any",
+				"Cancelled Cheque Leaf/ Bank Statement for verification", "Passport size photograph (2 No’s)",
+				"The Full and Final Settlement document from the previous organization",
+				"Form 16 for the previous Financial Year" };
+		String[] taxItems = { "Income Tax Declaration Form",
+				"Form 12B or Salary Certificate for the current Financial Year", "Income Tax Investment proofs" };
+		String[] notes = { "Suffix the file name of all the documents with your name",
+				"Keep the size of each scanned document in Kilo Bytes (KB) and NOT in Mega Bytes (MB)",
+				"Attach all the documents in a SINGLE email" };
+
+		map.put("GENERAL", generalItems);
+		map.put("TAX", taxItems);
+		map.put("NOTES", notes);
+		return map.get(key);
+	}
+
+	private String getAnnexureADetails() {
+		String annexureAString = "Basic Salary|"
+				+ "The fundamental salary component to which other components will be linked.||"
+				+ "House Rent Allowance|"
+				+ "50% of Basic Salary is provided towards house rent. It will have a tax benefit "
+				+ "based on the prevailing Income Tax rules.||" + "Medical Allowance|"
+				+ "It is provided for the purpose of meeting the medical expenses of employee "
+				+ "and will have a maximum tax benefit of 15,000/- per annum||" + "Conveyance Allowance|"
+				+ "It is provided for the purpose of meeting the travelling expenses to and from "
+				+ "office to the residence of the employee and will have a maximum tax benefit "
+				+ "of 1,600/- per month||" + "Flexi Benefits Kit|"
+				+ "The Flexi Benefits Kit will allow the employees to choose a benefit pack to suit "
+				+ "their needs. Certain elements will have tax benefit as per prevailing tax rules.||"
+				+ "Statutory Bonus|"
+				+ "All employees having less than INR 10,000/- basic salary will be eligible for the "
+				+ "Statutory Bonus @ 8.33% of their basic salary subject to a maximum of INR "
+				+ "292/- per month and the same may be paid on a quarterly basis.||" + "EPF Contribution by Belhopat|"
+				+ "12% of the Basic Salary will be contributed to the Employee's Provident Fund "
+				+ "Account by Belhopat subject to a maximum of INR 1,800/- per month||"
+				+ "ESI Contribution by Belhopat|"
+				+ "Employees having less than INR 15,000/- as their Gross Salary will be covered "
+				+ "under the ESI Act and Belhopat will make a contribution @ 4.75% of the Gross "
+				+ "Salary towards ESI.||" + "Gratuity|"
+				+ "Gratuity is a lump sum amount that is received by an employee from his/her"
+				+ "employer in gratitude for the services offered by the employee in the "
+				+ "company. It is a retiral benefit which will be paid to the employee at the time"
+				+ "of retirement after a continuous employment of at least 5 years with Belhopat.||"
+				+ "Annual Gross Cost to the Company (CTC)|"
+				+ "It is Company’s total cost for an employee per annum. CTC includes all the "
+				+ "facilities an employee avails during the employment period. The Actual salary "
+				+ "of an employee is a part of his/her CTC.";
+		return annexureAString;
+	}
+
 }
