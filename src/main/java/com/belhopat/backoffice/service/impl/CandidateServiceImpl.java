@@ -30,6 +30,7 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
+import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
@@ -39,6 +40,7 @@ import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.DateUtil;
+import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
@@ -103,8 +105,6 @@ public class CandidateServiceImpl implements CandidateService {
 	public ResponseEntity<Candidate> getCandidate(Long candidateId) {
 		Candidate candidate = candidateRepository.findById(candidateId);
 		if (candidate != null) {
-			List<Skill> unselectedSkillSet = baseService.getUnselectedSkillSet(candidate.getSkillSet());
-			candidate.setUnselectedSkillSet(unselectedSkillSet);
 			return new ResponseEntity<Candidate>(candidate, HttpStatus.OK);
 		}
 		return new ResponseEntity<Candidate>(HttpStatus.NO_CONTENT);
@@ -191,9 +191,9 @@ public class CandidateServiceImpl implements CandidateService {
 		employmentInfo.setDesignation(candidate.getDesignation().getDescription());
 		employmentInfo.setEmploymentStatus(candidate.getEmploymentStatus().getDescription());
 		employmentInfo.setPurpose(candidate.getPurpose().getDescription());
-		employmentInfo.setClient(candidate.getClient());
+		employmentInfo.setClient(candidate.getClient().getClientId());
 		employmentInfo.setPartner(candidate.getPartner());
-		employmentInfo.setSourcedBy(candidate.getSourcedBy());
+		employmentInfo.setSourcedBy(candidate.getSourcedBy().getClientId());
 		employmentInfo.setOnsiteAddress(onsiteAddress);
 		// TODO set skill set as a string :)
 		return employmentInfo;
@@ -237,15 +237,15 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public ResponseEntity<Map<String, String>> saveOrUpdateCandidate(Candidate candidateObj) {
 		Map<String, String> responseMap = new HashMap<>();
-		Candidate newCandidate = null;
+		Candidate candidate = null;
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		if (candidateObj.getId() == null) {
-			newCandidate = registerNewCandidate(loggedInUser, candidateObj);
+			candidate = addCandidate(loggedInUser, candidateObj);
 		} else {
-			newCandidate = updateCandidate(loggedInUser, candidateObj);
+			candidate = updateCandidate(loggedInUser, candidateObj);
 		}
-		if (newCandidate != null) {
-			responseMap.put("Message", newCandidate.getFirstName() + " " + newCandidate.getLastName());
+		if (candidate != null) {
+			responseMap.put("Message", candidate.getFirstName() + " " + candidate.getLastName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);
@@ -282,9 +282,6 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		if (candidateObj.getEmploymentStatus() != null) {
 			newCandidate.setEmploymentStatus(candidateObj.getEmploymentStatus());
-		}
-		if (candidateObj.getFamilyMembers() != null && !candidateObj.getFamilyMembers().isEmpty()) {
-			newCandidate.setFamilyMembers(candidateObj.getFamilyMembers());
 		}
 		if (candidateObj.getOfficialDetails() != null) {
 			newCandidate.setOfficialDetails(candidateObj.getOfficialDetails());
@@ -369,7 +366,7 @@ public class CandidateServiceImpl implements CandidateService {
 	 * @param candidate
 	 * @return Candidate saves a new candidate to database
 	 */
-	private Candidate registerNewCandidate(User loggedInUser, Candidate candidate) {
+	private Candidate addCandidate(User loggedInUser, Candidate candidate) {
 		candidate.setBaseAttributes(loggedInUser);
 		Long increment = baseService.getSequenceIncrement(Candidate.class);
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
@@ -464,6 +461,14 @@ public class CandidateServiceImpl implements CandidateService {
 		};
 		DataTablesOutput<Candidate> dataTablesOutput = candidateRepository.findAll(input, specification);
 		return dataTablesOutput;
+	}
+
+	@Override
+	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary) {
+		TaskList currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		employeeSalary.setCurrentTask(currentTask);
+		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
 	
 	

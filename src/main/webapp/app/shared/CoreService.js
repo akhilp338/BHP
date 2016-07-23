@@ -335,6 +335,16 @@
             return deferred.promise;
         };
         
+        service.requestForApproval = function (url,employeeSalary) {
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url,employeeSalary)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
         
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];

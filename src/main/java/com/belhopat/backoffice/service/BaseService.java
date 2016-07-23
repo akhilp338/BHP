@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -37,10 +39,16 @@ public interface BaseService {
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException;
 
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary);
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException;
 
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
 
 	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade);
+	
+	public List<TaskList> updateTaskList(String taskName) ;
+	
+	public TaskList createNewTaskList(String taskName);
+
+	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
 }

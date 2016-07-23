@@ -34,7 +34,7 @@
             };
             $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandidate.id, grade: vm.offerletter.selectedGrade})
         };
-
+        
         vm.getSalaryGrades = function () {
             vm.getSalaryGradesUrl = "api/candidate/getSalaryGrades";
             Core_Service.getSalaryGradesUrl(vm.getSalaryGradesUrl)
@@ -64,7 +64,7 @@
                             vm.offerletter.grade = params.grade;
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
-                            vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2)
+                            vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
                         }, function (error) {
                             console.log(error)
                         });
@@ -102,24 +102,45 @@
                     }, {
                         title: "Candidate ID",
                         data: 'candidateId',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Name",
                         data: 'firstName',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Contact No",
                         data: 'officialContactNo',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Country To Visit",
                         data: 'countryToVisit.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Division",
                         data: 'division.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Designation",
                         data: 'designation.code',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Employment Status",
                         data: 'employmentStatus.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }]
             });
             $("#candidatesList").on('click', ' tbody tr', function () {
@@ -204,8 +225,25 @@
                 }
             }
 
-
+        vm.getGrade = function(grade,gradeList){
+        	for(var i=0;i<gradeList.length;i++){
+        		if(grade==gradeList[i].grade)
+        			return gradeList[i];
+    		}
+        }
         });
+        
+        vm.requestForApproval = function(){
+        	vm.offerletter.candidate=$rootScope.selectedCandidate;
+        	vm.offerletter.grade=vm.getGrade($stateParams.grade,vm.offerletter.grades);
+            vm.requestForApprovalUrl = "api/candidate/requestForApproval";
+            Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Request sent for approval!",response.data.data,"success","coreuser.offerletter"); 
+                    }, function (error) {
+
+                    });
+        }
 
     };
     Offerletter_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService'];

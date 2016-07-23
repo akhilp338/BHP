@@ -1,20 +1,26 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.belhopat.backoffice.alfresco.main.HitController;
+import com.belhopat.backoffice.alfresco.main.AlfrescoUploadService;
 import com.belhopat.backoffice.dto.RequestObject;
+import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.CandidateSequence;
 import com.belhopat.backoffice.model.City;
@@ -36,6 +42,7 @@ import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
+import com.belhopat.backoffice.repository.ClientRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
@@ -54,6 +61,7 @@ import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
+import com.google.common.io.Files;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -106,16 +114,19 @@ public class BaseServiceImpl implements BaseService {
 	EmployeeSalaryRepository employeeSalaryRepository;
 
 	@Autowired
-	HitController controller;
+	AlfrescoUploadService controller;
 
 	@Autowired
 	UserRepository userRepository;
 
 	@Autowired
 	PDFService pdfService;
-	
+
 	@Autowired
 	TimeZoneRepository timezoneRepository;
+
+	@Autowired
+	ClientRepository clientRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -133,6 +144,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
+		List<ResponseObject> clients = clientRepository.getClientDropdownData();
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
@@ -145,6 +157,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
 		dropDownMap.put(Constants.GENDER, gender);
+		dropDownMap.put(Constants.CLIENTS, clients);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -269,14 +282,13 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		/* offer letter transaction part */
-		TaskList newTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-		Employee employee = employeeRepository.findById(requestObject.getId());
-		pdfService.generateOfferLetterPDF(employee);
+		EmployeeSalary employeeSalary = new EmployeeSalary();
+		pdfService.generateOfferLetterPDF(employeeSalary);
 		return null;
 	}
 
-	private TaskList createNewTaskList(String taskName) {
+	@Override
+	public TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		TaskList currentTaskRow = new TaskList();
 		TaskList newTaskRow = new TaskList();
@@ -293,7 +305,8 @@ public class BaseServiceImpl implements BaseService {
 		return newTaskRow;
 	}
 
-	private List<TaskList> updateTaskList(String taskName) {
+	@Override
+	public List<TaskList> updateTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		TaskList taskList = taskListRepository.findByTask(currentTask);
@@ -360,18 +373,17 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
-				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-				employeeSalary.setCurrentTask(currentTask);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				controller.doExample();
+				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+				String document = controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				employeeSalary.setOfferLetterFileName(document);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-				controller.doExample();
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
@@ -400,4 +412,23 @@ public class BaseServiceImpl implements BaseService {
 		}
 		return userRoles;
 	}
+	
+	@Override
+	public void getFileByNameAndCategory(Long empSalId,HttpServletResponse response) throws IOException{
+		EmployeeSalary empSal = employeeSalaryRepository.findById(empSalId);
+		byte[] fileBytes = controller.getBytesByNameAndCategory(Constants.OFFER_LETTERS,empSal.getOfferLetterFileName());
+		generateDownloadLink(fileBytes,empSal.getOfferLetterFileName(),response);
+	}
+	
+	public void generateDownloadLink(byte[] fileBytes, String fileName, HttpServletResponse response) throws IOException {
+		OutputStream output = response.getOutputStream();
+		response.setContentType(Constants.PDF_CONTENT_TYPE);
+		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + fileName);
+		output.write(fileBytes);
+		output.flush();
+		response.flushBuffer();
+		output.close();
+	}
+	 
+	 
 }

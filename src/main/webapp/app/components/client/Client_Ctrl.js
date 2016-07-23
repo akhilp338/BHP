@@ -46,14 +46,23 @@
 								{
 									title : "Client ID",
 									data : 'clientId',
+									render: function (data) {
+			                        	return data == null? "":data;
+			                        }
 								},
 								{
 									title : "Name",
 									data : 'clientName',
+									render: function (data) {
+			                        	return data == null? "":data;
+			                        }
 								},
 								{
 									title : "Revenue",
 									data : 'revenue',
+									render: function (data) {
+			                        	return data == null? "":data;
+			                        }
 								},
 								{
 									data : 'id',

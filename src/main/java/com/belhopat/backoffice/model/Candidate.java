@@ -61,10 +61,6 @@ public class Candidate extends BaseEntity {
 	@OneToOne(fetch=FetchType.EAGER)
 	private EmployeeSalary salary;
 
-	@OneToMany
-	@JsonIgnore
-	private List<FamilyMember> familyMembers;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address currentAddress;
 
@@ -74,7 +70,7 @@ public class Candidate extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address onsiteAddress;
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Skill> skillSet;
 
 	private Integer priorExperienceYear;
@@ -87,7 +83,11 @@ public class Candidate extends BaseEntity {
 	@ManyToOne
 	private Country countryToVisit;
 
-	private String client;
+	@ManyToOne
+	private Client client;
+	
+	@ManyToOne
+	private Client sourcedBy;
 
 	private String partner;
 
@@ -117,12 +117,7 @@ public class Candidate extends BaseEntity {
 	@ManyToOne
 	private LookupDetail registrationStatus;
 
-	private String sourcedBy;
-	
 	private boolean employee;
-	
-	@Transient
-	private List<Skill> unselectedSkillSet;
 
 	public String getCandidateId() {
 		return candidateId;
@@ -256,10 +251,10 @@ public class Candidate extends BaseEntity {
 		return mothersName;
 	}
 
-	public void setMothersName(String motersName) {
-		this.mothersName = motersName;
+	public void setMothersName(String mothersName) {
+		this.mothersName = mothersName;
 	}
-	
+
 	public String getChildName() {
 		return childName;
 	}
@@ -276,12 +271,12 @@ public class Candidate extends BaseEntity {
 		this.spouseName = spouseName;
 	}
 
-	public List<FamilyMember> getFamilyMembers() {
-		return familyMembers;
+	public EmployeeSalary getSalary() {
+		return salary;
 	}
 
-	public void setFamilyMembers(List<FamilyMember> familyMembers) {
-		this.familyMembers = familyMembers;
+	public void setSalary(EmployeeSalary salary) {
+		this.salary = salary;
 	}
 
 	public Address getCurrentAddress() {
@@ -348,12 +343,20 @@ public class Candidate extends BaseEntity {
 		this.countryToVisit = countryToVisit;
 	}
 
-	public String getClient() {
+	public Client getClient() {
 		return client;
 	}
 
-	public void setClient(String client) {
+	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Client getSourcedBy() {
+		return sourcedBy;
+	}
+
+	public void setSourcedBy(Client sourcedBy) {
+		this.sourcedBy = sourcedBy;
 	}
 
 	public String getPartner() {
@@ -436,14 +439,6 @@ public class Candidate extends BaseEntity {
 		this.registrationStatus = registrationStatus;
 	}
 
-	public String getSourcedBy() {
-		return sourcedBy;
-	}
-
-	public void setSourcedBy(String sourcedBy) {
-		this.sourcedBy = sourcedBy;
-	}
-	
 	public boolean isEmployee() {
 		return employee;
 	}
@@ -452,20 +447,23 @@ public class Candidate extends BaseEntity {
 		this.employee = employee;
 	}
 
-	public List<Skill> getUnselectedSkillSet() {
-		return unselectedSkillSet;
-	}
-
-	public void setUnselectedSkillSet(List<Skill> unselectedSkillSet) {
-		this.unselectedSkillSet = unselectedSkillSet;
-	}
-
-	public EmployeeSalary getSalary() {
-		return salary;
-	}
-
-	public void setSalary(EmployeeSalary salary) {
-		this.salary = salary;
+	@Override
+	public String toString() {
+		return "Candidate [candidateId=" + candidateId + ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender + ", bloodGroup=" + bloodGroup
+				+ ", personalEmail=" + personalEmail + ", personalContactNo=" + personalContactNo + ", officialEmail="
+				+ officialEmail + ", officialContactNo=" + officialContactNo + ", familyContact1=" + familyContact1
+				+ ", familyContact2=" + familyContact2 + ", familyEmail=" + familyEmail + ", onsiteContactNo="
+				+ onsiteContactNo + ", fathersName=" + fathersName + ", mothersName=" + mothersName + ", childName="
+				+ childName + ", spouseName=" + spouseName + ", salary=" + salary + ", currentAddress=" + currentAddress
+				+ ", permanentAddress=" + permanentAddress + ", onsiteAddress=" + onsiteAddress + ", skillSet="
+				+ skillSet + ", priorExperienceYear=" + priorExperienceYear + ", priorExperienceMonth="
+				+ priorExperienceMonth + ", countryOfOrigin=" + countryOfOrigin + ", countryToVisit=" + countryToVisit
+				+ ", client=" + client + ", sourcedBy=" + sourcedBy + ", partner=" + partner + ", bankAccount="
+				+ bankAccount + ", passport=" + passport + ", officialDetails=" + officialDetails + ", doj=" + doj
+				+ ", division=" + division + ", designation=" + designation + ", purpose=" + purpose
+				+ ", employmentStatus=" + employmentStatus + ", registrationStatus=" + registrationStatus
+				+ ", employee=" + employee + "]";
 	}
 	
 }

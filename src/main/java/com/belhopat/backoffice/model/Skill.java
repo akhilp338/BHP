@@ -14,10 +14,11 @@ public class Skill {
 	@GeneratedValue
 	private Long id;
 	
-	@ManyToOne
-	private LookupDetail type;
-	
 	private String skillName;
+	
+	public Long experienceYear;
+	
+	public Long experiencemonth;
 
 	public Long getId() {
 		return id;
@@ -25,14 +26,6 @@ public class Skill {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public LookupDetail getType() {
-		return type;
-	}
-
-	public void setType(LookupDetail type) {
-		this.type = type;
 	}
 
 	public String getSkillName() {
@@ -43,9 +36,26 @@ public class Skill {
 		this.skillName = skillName;
 	}
 
+	public Long getExperienceYear() {
+		return experienceYear;
+	}
+
+	public void setExperienceYear(Long experienceYear) {
+		this.experienceYear = experienceYear;
+	}
+
+	public Long getExperiencemonth() {
+		return experiencemonth;
+	}
+
+	public void setExperiencemonth(Long experiencemonth) {
+		this.experiencemonth = experiencemonth;
+	}
+
 	@Override
 	public String toString() {
-		return "Skill [id=" + id + ", type=" + type + ", skillName=" + skillName + "]";
+		return "Skill [id=" + id + ", skillName=" + skillName + ", experienceYear=" + experienceYear
+				+ ", experiencemonth=" + experiencemonth + "]";
 	}
 	
 }
