@@ -1,5 +1,5 @@
 (function () {
-    var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, $timeout, validationService) {
+    var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, $timeout, validationService, $mdConstant) {
         var vm = this;
         vm.isFileInput=  false;
         $rootScope.showLoader = true;
@@ -22,6 +22,7 @@
                     vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id, countryType[i]);
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
                 }
+                console.log(res.data.unselectedSkillSe)
                 vm.mainSkillList = res.data.unselectedSkillSet;
                 vm.mainSelectedSkillList = res.data.skillSet;
                 vm.isCheckboxEnable = true;
@@ -43,6 +44,15 @@
             displayOnlyLastErrorMsg: true
         });
         
+        
+        vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
+    vm.skillList = [];
+    // Any key code can be used to create a custom separator
+    var semicolon = 186;
+    vm.customKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA, semicolon];
+    vm.contacts = ['test@example.com'];
+    
+    
         vm.isCheckboxEnable = false;
         vm.urlForLookups = "api/candidate/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
@@ -50,6 +60,7 @@
                     vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response.data);
             if (!$stateParams.id)
                     vm.mainSkillList = vm.lookups.SKILL;
+                vm.allContacts = loadContacts(vm.mainSkillList);
                 }, function (error) {
                 });      
         
@@ -76,14 +87,45 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-           if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+          // if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
                 $scope.selection = $scope.steps[index];
                 $timeout(function(){angular.element('input[type=file]').bootstrapFileInput()
                     vm.isFileInput = $scope.steps[index] == "Official" ? true : false;},500)
                 
-            }
+            //}
         };
 
+            vm.querySearch = querySearch;            
+            vm.contacts = [];
+            vm.filterSelected = true;
+            
+            function querySearch (query) {
+               var results = query ?
+               vm.allContacts.filter(createFilterFor(query)) : [];
+               return results;
+            }
+
+            function createFilterFor(query) {
+               var lowercaseQuery = angular.lowercase(query);
+               return function filterFn(contact) {
+                  return (contact._lowername.indexOf(lowercaseQuery) != -1);;
+               };
+            }
+            
+            function loadContacts(skills) {
+               var contacts = skills;               
+               return contacts.map(function (c, index) {
+                     c = c.skillName;
+                     var contact = {
+                        name: c
+                     };
+                     contact._lowername = contact.name.toLowerCase();
+                     return contact;
+               });
+            }
+
+                
+                
         $scope.hasNextStep = function () {
             var stepIndex = $scope.getCurrentStepIndex();
             var nextStep = stepIndex + 1;
@@ -163,7 +205,7 @@
         vm.candidateRegister = function () {
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
-                var skillSet = vm.getUpdatedSkillSet(vm.registration.skillSet);
+                var skillSet = vm.skillList;
 //                vm.registration.skillSet = skillSet;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
@@ -282,7 +324,7 @@
 
     };   
 
-    AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService'];
+    AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService', '$mdConstant'];
     angular.module('coreModule')
             .controller('AddCandidate_Ctrl', AddCandidate_Ctrl);
 })();

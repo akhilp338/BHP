@@ -4,6 +4,7 @@ package com.belhopat.backoffice.dto;
  * @author BHP_DEV Generic response object
  *
  */
+
 public class ResponseObject {
 
 	private Long id;
@@ -47,6 +48,11 @@ public class ResponseObject {
 	public ResponseObject(Long id, boolean success, String data) {
 		this.id = id;
 		this.success = success;
+		this.data = data;
+	}
+
+	public ResponseObject(Long id, String data) {
+		this.id = id;
 		this.data = data;
 	}
 

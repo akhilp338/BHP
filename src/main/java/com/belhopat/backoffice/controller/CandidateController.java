@@ -45,9 +45,6 @@ public class CandidateController {
 	@Autowired
 	CandidateService candidateService;
 
-	@Autowired
-	PDFService pdfService;
-
 	/**
 	 * @param datatablesinput
 	 * @return list of candidates fetches the datatable output for candidates.

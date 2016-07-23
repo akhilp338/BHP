@@ -151,7 +151,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
 		dropDownMap.put(Constants.GENDER, gender);
-		dropDownMap.put(Constants.CLIENT, clients);
+		dropDownMap.put(Constants.CLIENTS, clients);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
