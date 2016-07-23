@@ -276,10 +276,8 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		/* offer letter transaction part */
-		//TaskList newTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-		Employee employee = employeeRepository.findById(requestObject.getId());
-		pdfService.generateOfferLetterPDF(employee);
+		EmployeeSalary employeeSalary = new EmployeeSalary();
+		pdfService.generateOfferLetterPDF(employeeSalary);
 		return null;
 	}
 

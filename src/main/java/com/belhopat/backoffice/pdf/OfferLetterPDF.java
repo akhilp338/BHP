@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
 
-import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.util.DateUtil;
 import com.itextpdf.text.BadElementException;
@@ -28,19 +28,19 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class OfferLetterPDF extends BasePDFGenerator {
 
-	public byte[] getPDFContents(Employee employee)
+	public byte[] getPDFContents(EmployeeSalary employeeSalary)
 			throws MalformedURLException, IOException, DocumentException, ParseException {
 
 		String fileName = "OfferLetter.pdf";
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
+		// OutputStream outputStream = new
+		// FileOutputStream("/home/sujith/Desktop/" + fileName);
 		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.setBoxSize("art", PageSize.A4);
 		HeaderFooterEvent event = new HeaderFooterEvent();
 		writer.setPageEvent(event);
-		setSampleEmployee(employee);
-		addContentToDocument(document, employee);
+		addContentToDocument(document, employeeSalary);
 		// PdfCopy pdfCopy = new PdfSmartCopy(document, outputStream);
 		// String annexureAPath = getContextPath() +
 		// PDFConstants.PDF_RES_PATH +
@@ -64,13 +64,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		document.close();
 		outputStream.close();
 		return outputStream.toByteArray();
-//		return null;
-	}
-
-	private void setSampleEmployee(Employee employee) {
-		employee.getEmployeeMaster().setFirstName("Akhil");
-		employee.getEmployeeMaster().setFirstName(" ");
-		employee.getEmployeeMaster().setLastName("Prakash");
+		// return null;
 	}
 
 	public void testPdf() throws DocumentException, IOException {
@@ -101,30 +95,30 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		document.close();
 	}
 
-	private void addContentToDocument(Document document, Employee employee)
+	private void addContentToDocument(Document document, EmployeeSalary employeeSalary)
 			throws DocumentException, ParseException, MalformedURLException, IOException {
 		document.open();
-		document.add(getHeading(employee));
-		document.add(getHeadingContent(employee));
-		document.add(getAcceptanceAndCommencementContent(employee));
+		document.add(getHeading(employeeSalary.getCandidate()));
+		document.add(getHeadingContent(employeeSalary.getCandidate()));
+		document.add(getAcceptanceAndCommencementContent(employeeSalary.getCandidate()));
 		document.add(getConfidentialityContent());
 		document.add(getCompensationContent());
 		document.add(getProbationContent());
 		document.add(getWorkingHoursContent());
 		document.newPage();
 		document.add(getCodeOfConductContent());
-		document.add(getEndingContent(employee));
+		document.add(getEndingContent(employeeSalary.getCandidate()));
 		document.add(getAcknowledgementContent());
 		document.newPage();
-		document.add(getCompensationStructureTable(employee));
+		document.add(getCompensationStructureTable(employeeSalary));
 	}
 
-	private PdfPTable getAcceptanceAndCommencementContent(Employee employee) throws ParseException {
+	private PdfPTable getAcceptanceAndCommencementContent(Candidate candidate) throws ParseException {
 		PdfPTable acceptanceAndCommencementContent = new PdfPTable(1);
 		acceptanceAndCommencementContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		acceptanceAndCommencementContent.setWidthPercentage(100f);
 		acceptanceAndCommencementContent.addCell(getParagraphHeading("Acceptance and Commencement"));
-		acceptanceAndCommencementContent.addCell(getAcceptanceAndCommencementParagraph(employee));
+		acceptanceAndCommencementContent.addCell(getAcceptanceAndCommencementParagraph(candidate));
 		return acceptanceAndCommencementContent;
 	}
 
@@ -173,14 +167,14 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return codeOfConductContent;
 	}
 
-	private PdfPTable getEndingContent(Employee employee)
+	private PdfPTable getEndingContent(Candidate candidate)
 			throws BadElementException, MalformedURLException, IOException {
 		PdfPTable endContent = new PdfPTable(1);
 		endContent.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		endContent.setWidthPercentage(100f);
 		endContent.addCell(getEndingParagraph());
 		endContent.addCell(getSignAndSeal());
-		endContent.addCell(getHRDetails(employee));
+		endContent.addCell(getHRDetails(candidate));
 		return endContent;
 	}
 
@@ -193,11 +187,10 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return acceptanceAndCommencementContent;
 	}
 
-	private Paragraph getAcceptanceAndCommencementParagraph(Employee employee) throws ParseException {
+	private Paragraph getAcceptanceAndCommencementParagraph(Candidate candidate) throws ParseException {
 		Paragraph aAndCPara = new Paragraph();
 		Chunk part1 = new Chunk("Your appointment will be effective from ", normal10Font);
-		Chunk appoinmentDate = new Chunk(
-				employee.getJoiningDate() == null ? "" : DateUtil.toDdMmYyyy(employee.getJoiningDate()), bold10Font);
+		Chunk appoinmentDate = new Chunk(DateUtil.toDdMmYyyy(new Date()), bold10Font);
 		Chunk part2 = new Chunk(". Please contact us immediately if you require an alternative joiningdate. "
 				+ "If you do not confirm your acceptance or if we are unable to set an alternative date, "
 				+ "this offer will be withdrawn. This offer is valid only if you acknowledge and confirm that you’re joining, "
@@ -313,21 +306,26 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return signAndSealTable;
 	}
 
-	private Phrase getHRDetails(Employee employee) {
+	private Phrase getHRDetails(Candidate candidate) {
 		Phrase HRPhrase = new Phrase();
-		String firstName = employee.getHrManager().getEmployeeMaster() == null ? ""
-				: employee.getHrManager().getEmployeeMaster().getFirstName() == null ? ""
-						: employee.getHrManager().getEmployeeMaster().getFirstName();
-		String middleName = employee.getHrManager().getEmployeeMaster() == null ? ""
-				: employee.getHrManager().getEmployeeMaster().getMiddleName() == null ? ""
-						: employee.getHrManager().getEmployeeMaster().getMiddleName();
-		String lastName = employee.getHrManager().getEmployeeMaster() == null ? ""
-				: employee.getHrManager().getEmployeeMaster().getLastName() == null ? ""
-						: employee.getHrManager().getEmployeeMaster().getLastName() + ",";
-		String hrName = firstName + middleName + lastName;
-		Chunk name = new Chunk(hrName, bold10Font);
-		Chunk designation = new Chunk(employee.getHrManager().getEmployeeMaster().getDesignation().getDescription(),
-				bold10Font);
+		// String firstName = candidate.getHrManager().getCandidateMaster() ==
+		// null ? ""
+		// : candidate.getHrManager().getCandidateMaster().getFirstName() ==
+		// null ? ""
+		// : candidate.getHrManager().getCandidateMaster().getFirstName();
+		// String middleName = candidate.getHrManager().getCandidateMaster() ==
+		// null ? ""
+		// : candidate.getHrManager().getCandidateMaster().getMiddleName() ==
+		// null ? ""
+		// : candidate.getHrManager().getCandidateMaster().getMiddleName();
+		// String lastName = candidate.getHrManager().getCandidateMaster() ==
+		// null ? ""
+		// : candidate.getHrManager().getCandidateMaster().getLastName() == null
+		// ? ""
+		// : candidate.getHrManager().getCandidateMaster().getLastName() + ",";
+		// String hrName = firstName + middleName + lastName;
+		Chunk name = new Chunk("Pallavi Mutagekar", bold10Font);
+		Chunk designation = new Chunk("Asst. HR Manager", bold10Font);
 		HRPhrase.add(Chunk.NEWLINE);
 		HRPhrase.add(name);
 		HRPhrase.add(Chunk.NEWLINE);
@@ -379,51 +377,45 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return headingCell;
 	}
 
-	private PdfPTable getHeading(Employee employee) throws ParseException {
+	private PdfPTable getHeading(Candidate candidate) throws ParseException {
 		PdfPTable heading = new PdfPTable(new float[] { 2, 1 });
 		heading.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		heading.setWidthPercentage(100f);
 		heading.addCell(new Phrase(DateUtil.toMMMMddYYYY(new Date()), bold10Font));
 		heading.addCell(getCompanyNameAndCode());
-		heading.addCell(getEmployeeAddress(employee));
+		heading.addCell(getCandidateAddress(candidate));
 		heading.addCell(getCompanyAddress());
 		return heading;
 	}
 
-	private PdfPTable getHeadingContent(Employee employee) throws ParseException {
+	private PdfPTable getHeadingContent(Candidate candidate) throws ParseException {
 		PdfPTable headingPara = new PdfPTable(1);
 		headingPara.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		headingPara.setWidthPercentage(100f);
-		headingPara.addCell(getRefernceNumberCell(employee));
-		headingPara.addCell(getHeadingParagraph(employee));
+		headingPara.addCell(getRefernceNumberCell(candidate));
+		headingPara.addCell(getHeadingParagraph(candidate));
 		return headingPara;
 	}
 
-	private Paragraph getHeadingParagraph(Employee employee) {
+	private Paragraph getHeadingParagraph(Candidate candidate) {
 		Paragraph headingPara = new Paragraph();
-		String firstName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getFirstName() == null ? ""
-						: employee.getEmployeeMaster().getFirstName();
-		String middleName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getMiddleName() == null ? ""
-						: employee.getEmployeeMaster().getMiddleName();
-		String lastName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getLastName() == null ? ""
-						: employee.getEmployeeMaster().getLastName() + ",";
+		String firstName = candidate == null ? "" : candidate.getFirstName() == null ? "" : candidate.getFirstName();
+		String middleName = candidate == null ? "" : candidate.getMiddleName() == null ? "" : candidate.getMiddleName();
+		String lastName = candidate == null ? "" : candidate.getLastName() == null ? "" : candidate.getLastName() + ",";
 		String name = firstName + middleName + lastName;
 		Chunk dear = new Chunk("Dear ", normal10Font);
-		Chunk employeeName = new Chunk(name + ",", bold10Font);
+		Chunk candidateName = new Chunk(name + ",", bold10Font);
 		Chunk firstPara = new Chunk("At Belhopat, we intent to revolutionize the world and benefit humanity "
 				+ "with continuous inventions and innovations of our products and services. "
 				+ "We are starting our journey by providing excellent quality "
 				+ "Information Technology services to our esteemed customers.", normal10Font);
 		Chunk secondPara1 = new Chunk("We are pleased to confirm our offer of employment to you as ", normal10Font);
-		String designationText = employee.getEmployeeMaster().getDesignation().getDescription();
+		String designationText = candidate.getDesignation().getDescription();
 		Chunk designation = new Chunk(designationText, bold10Font);
 		Chunk secondPara2 = new Chunk(
 				" with Belhopat Global services Pvt.Ltd. (The Company), as per the details given below.", normal10Font);
 		headingPara.add(dear);
-		headingPara.add(employeeName);
+		headingPara.add(candidateName);
 		headingPara.add(Chunk.NEWLINE);
 		headingPara.add(Chunk.NEWLINE);
 		headingPara.add(firstPara);
@@ -436,10 +428,10 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return headingPara;
 	}
 
-	private Phrase getRefernceNumberCell(Employee employee) {
+	private Phrase getRefernceNumberCell(Candidate candidate) {
 		Phrase referenceNumberPhrase = new Phrase();
 		Chunk referenceNumberLabel = new Chunk("Your Belhopat Reference Number: ", normal10Font);
-		Chunk referenceNumber = new Chunk(employee.getEmployeeId(), bold10Font);
+		Chunk referenceNumber = new Chunk(candidate.getCandidateId(), bold10Font);
 		referenceNumberPhrase.add(Chunk.NEWLINE);
 		referenceNumberPhrase.add(referenceNumberLabel);
 		referenceNumberPhrase.add(referenceNumber);
@@ -473,37 +465,30 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return addressPhrase;
 	}
 
-	private Phrase getEmployeeAddress(Employee employee) {
+	private Phrase getCandidateAddress(Candidate candidate) {
 		Phrase addressPhrase = new Phrase();
-		String firstName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getFirstName() == null ? ""
-						: employee.getEmployeeMaster().getFirstName();
-		String middleName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getMiddleName() == null ? ""
-						: employee.getEmployeeMaster().getMiddleName();
-		String lastName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getLastName() == null ? ""
-						: employee.getEmployeeMaster().getLastName() + ",";
-		String address1Text = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getAddress1() == null ? ""
-						: employee.getEmployeeMaster().getPermanentAddress().getAddress1() + ",";
+		String firstName = candidate == null ? "" : candidate.getFirstName() == null ? "" : candidate.getFirstName();
+		String middleName = candidate == null ? "" : candidate.getMiddleName() == null ? "" : candidate.getMiddleName();
+		String lastName = candidate == null ? "" : candidate.getLastName() == null ? "" : candidate.getLastName() + ",";
+		String address1Text = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getAddress1() == null ? ""
+						: candidate.getPermanentAddress().getAddress1() + ",";
 
-		String address2Text = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getAddress2() == null ? ""
-						: employee.getEmployeeMaster().getPermanentAddress().getAddress2() + ",";
-		String streetText = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getStreet() == null ? ""
-						: employee.getEmployeeMaster().getPermanentAddress().getStreet() + ",";
-		String cityText = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getCity().getDescription() == null ? ""
-						: employee.getEmployeeMaster().getPermanentAddress().getCity().getDescription() + ",";
-		String stateText = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getCity().getState().getDescription() == null ? ""
-						: employee.getEmployeeMaster().getPermanentAddress().getCity().getState().getDescription()
-								+ ",";
-		String zipCodeText = employee.getEmployeeMaster().getPermanentAddress() == null ? ""
-				: employee.getEmployeeMaster().getPermanentAddress().getZipCode() == null ? ""
-						: "-" + employee.getEmployeeMaster().getPermanentAddress().getZipCode().toString();
+		String address2Text = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getAddress2() == null ? ""
+						: candidate.getPermanentAddress().getAddress2() + ",";
+		String streetText = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getStreet() == null ? ""
+						: candidate.getPermanentAddress().getStreet() + ",";
+		String cityText = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getCity().getDescription() == null ? ""
+						: candidate.getPermanentAddress().getCity().getDescription() + ",";
+		String stateText = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getCity().getState().getDescription() == null ? ""
+						: candidate.getPermanentAddress().getCity().getState().getDescription() + ",";
+		String zipCodeText = candidate.getPermanentAddress() == null ? ""
+				: candidate.getPermanentAddress().getZipCode() == null ? ""
+						: "-" + candidate.getPermanentAddress().getZipCode().toString();
 		Chunk address = new Chunk(firstName + middleName + lastName, bold10Font);
 		Chunk address1 = new Chunk(address1Text, normal10Font);
 		Chunk address2 = new Chunk(address2Text, normal10Font);
@@ -539,20 +524,19 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return companyPhrase;
 	}
 
-	private PdfPTable getCompensationStructureTable(Employee employee) {
+	private PdfPTable getCompensationStructureTable(EmployeeSalary employeeSalary) {
 		PdfPTable compensationStructure = new PdfPTable(1);
 		compensationStructure.setWidthPercentage(100f);
 		compensationStructure.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		compensationStructure.addCell(getPageHeading("Compensation Structure"));
-		compensationStructure.addCell(getNameAndDesignation(employee));
-		compensationStructure.addCell(getCompensationStructureContent(employee));
+		compensationStructure.addCell(getNameAndDesignation(employeeSalary.getCandidate()));
+		compensationStructure.addCell(getCompensationStructureContent(employeeSalary));
 		return compensationStructure;
 	}
 
-	private PdfPTable getCompensationStructureContent(Employee employee) {
+	private PdfPTable getCompensationStructureContent(EmployeeSalary salary) {
 		PdfPTable CSContent = new PdfPTable(new float[] { 2, 1, 1 });
 		CSContent.setWidthPercentage(100f);
-		EmployeeSalary salary = employee.getEmployeeMaster().getSalary();
 		if (salary != null) {
 			CSContent.addCell(getCellContent("Components", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
 			CSContent.addCell(getCellContent("Per Month (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
@@ -625,19 +609,13 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return CSContent;
 	}
 
-	private PdfPTable getNameAndDesignation(Employee employee) {
+	private PdfPTable getNameAndDesignation(Candidate candidate) {
 		PdfPTable nameAndDesig = new PdfPTable(2);
-		String firstName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getFirstName() == null ? ""
-						: employee.getEmployeeMaster().getFirstName();
-		String middleName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getMiddleName() == null ? ""
-						: employee.getEmployeeMaster().getMiddleName();
-		String lastName = employee.getEmployeeMaster() == null ? ""
-				: employee.getEmployeeMaster().getLastName() == null ? ""
-						: employee.getEmployeeMaster().getLastName() + ",";
+		String firstName = candidate == null ? "" : candidate.getFirstName() == null ? "" : candidate.getFirstName();
+		String middleName = candidate == null ? "" : candidate.getMiddleName() == null ? "" : candidate.getMiddleName();
+		String lastName = candidate == null ? "" : candidate.getLastName() == null ? "" : candidate.getLastName() + ",";
 		String name = firstName + middleName + lastName;
-		String designationText = employee.getEmployeeMaster().getDesignation().getDescription();
+		String designationText = candidate.getDesignation().getDescription();
 		nameAndDesig.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 		nameAndDesig.setSpacingAfter(30f);
 		nameAndDesig.addCell(new Phrase("Name", normal10Font));
