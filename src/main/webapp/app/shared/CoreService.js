@@ -82,7 +82,7 @@
         service.ClearCredentials = function () {
             var deferred = $q.defer();
             $rootScope.globals = {};
-            Core_HttpRequest.post("api/logout")
+            Core_HttpRequest.post("/logout")
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);
@@ -99,7 +99,6 @@
             var deferred = $q.defer();
             Core_HttpRequest.post(url)
                     .then(function (response) {
-                        console.log(response);
                         deferred.resolve(response)
                     }, function (error) {
                         deferred.reject(error)

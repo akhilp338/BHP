@@ -13,7 +13,8 @@
             },function(error){
             	
             });
-        }; 
+        };        
+        
         vm.viewClient = function (data) {
             Core_ModalService.openViewClientModal(data);
         };

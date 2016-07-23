@@ -46,6 +46,13 @@ public class EventController {
 	public ResponseEntity<Event> updateEvent(@RequestBody Event event) {
 		return eventService.updateEvent(event);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteEvent", method = RequestMethod.POST)
+	public ResponseEntity<Event> deleteEvent(@RequestBody Long eventId) {
+		return eventService.deleteEvent(eventId);
+	}
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/getEmployeesDropDownData", method = RequestMethod.GET)

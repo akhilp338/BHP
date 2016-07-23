@@ -1,9 +1,11 @@
 package com.belhopat.backoffice.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -66,6 +68,10 @@ public class Event extends BaseEntity {
 	private String description;
 
 	private String location;
+	
+	@JsonIgnore
+	@OneToMany
+	private List<Employee> guestList;
 
 	public String getTitle() {
 		return title;
@@ -217,6 +223,22 @@ public class Event extends BaseEntity {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public List<Employee> getGuestList() {
+		return guestList;
+	}
+
+	public void setGuestList(List<Employee> guestList) {
+		this.guestList = guestList;
+	}
+	
+	public void addGuest(Employee guest ){
+		this.guestList.add(guest);
+	}
+
+	public void removeGuest(Employee guest ){
+		this.guestList.remove(guest);
 	}
 
 }

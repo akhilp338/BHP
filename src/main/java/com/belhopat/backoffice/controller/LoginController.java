@@ -85,7 +85,7 @@ public class LoginController {
 	 * @throws ServletException
 	 *             Log outs and kills the current session
 	 */
-	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
 		request.getSession().invalidate();
 		request.logout();
@@ -109,9 +109,14 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException {
+//		
 		boolean userStatus = userService.generatePasswordResetLink(user.getEmail());
-		if (userStatus)
-			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_SUCC_MSG),
+//		if (userStatus)
+		
+		//TODO
+		//For debug
+		if (true)
+			return new ResponseEntity<ResponseObject>(new ResponseObject(true, Constants.PASS_RESET_SUCC_MSG),
 					HttpStatus.OK);
 		else
 			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_FAIL_MSG),

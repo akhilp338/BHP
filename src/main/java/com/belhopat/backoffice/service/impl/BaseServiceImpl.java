@@ -132,6 +132,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> bloodGroups = lookupDetailRepository.findByLookupKey(Constants.BLOOD_GROUP);
 		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
+		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
@@ -143,6 +144,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.FAMILY_MEMBER, familyMembers);
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
+		dropDownMap.put(Constants.GENDER, gender);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -367,6 +369,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setCurrentTask(currentTask);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
+				controller.doExample();
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				controller.doExample();
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);

@@ -28,7 +28,8 @@ public class Candidate extends BaseEntity {
 
 	private Date dob;
 
-	private String gender;
+	@ManyToOne
+	private LookupDetail gender;
 
 	@ManyToOne
 	private LookupDetail bloodGroup;
@@ -52,6 +53,10 @@ public class Candidate extends BaseEntity {
 	private String fathersName;
 	
 	private String mothersName;
+	
+	private String childName;
+	
+	private String spouseName;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	private EmployeeSalary salary;
@@ -159,11 +164,11 @@ public class Candidate extends BaseEntity {
 		this.dob = dob;
 	}
 
-	public String getGender() {
+	public LookupDetail getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(LookupDetail gender) {
 		this.gender = gender;
 	}
 
@@ -255,6 +260,22 @@ public class Candidate extends BaseEntity {
 		this.mothersName = motersName;
 	}
 	
+	public String getChildName() {
+		return childName;
+	}
+
+	public void setChildName(String childName) {
+		this.childName = childName;
+	}
+
+	public String getSpouseName() {
+		return spouseName;
+	}
+
+	public void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
+	}
+
 	public List<FamilyMember> getFamilyMembers() {
 		return familyMembers;
 	}

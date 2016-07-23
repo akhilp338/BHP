@@ -1,19 +1,18 @@
 <div class="form-horizontal candidate-form col-md-12 col-lg-12 col-sm-12 col-xs-12" name="reg_form">
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left">Fill Candidate Details</h4>	
-    </div>
-    <div><div class="nav nav-tabs col-md-8 col-lg-8 col-sm-12 col-xs-12">
-        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-2 col-xs-2"
-            ng-class="{active: $index == getCurrentStepIndex()}"><a
-                href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
-        
-    </div>
-    <button ng-click="vm.back()"
+        <h4 class="pull-left">Fill Candidate Details</h4>
+        <button ng-click="vm.back()"
 		class="logout-button pull-right add-button" title="Add Employee">
 		<span class="fa-stack fa-lg pull-left"><i
 			class="fa fa-arrow-left" aria-hidden="true"></i></span>
                         <span class="text">Back</span>              
 	</button>
+        <div class="nav nav-tabs col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-4 col-xs-4"
+            ng-class="{active: $index == getCurrentStepIndex()}"><a
+                href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
+        
+    </div>
     </div>
     <form name="regForm" id="form_0" novalidate>
         <div ng-switch on="selection">
@@ -29,14 +28,14 @@
                                     <input type="text" name="firstName" id="firstName"
                                            ng-model="vm.registration.firstName"
                                            class="form-input width-100" placeholder="First Name"
-                                           validation="alpha:alt=Only alphabets allowed|required:alt=Required" />
+                                           validation="alpha:alt=Alphabets only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="middleName">Middle Name</label>
                                 <div class="controls">
                                     <input type="text" name="middleName" id="middleName"
-                                           validation="alpha:alt=Only alphabets allowed"
+                                           validation="alpha:alt=Alphabets only"
                                            ng-model="vm.registration.middleName"
                                            class="form-input width-100" placeholder="Middle Name" />
                                 </div>
@@ -60,7 +59,7 @@
                                            class="form-input date-form"                                           
                                            ng-model="vm.registration.dob"
                                            is-open="vm.isDobPickerOpen"
-                                           uib-datepicker-popup="yyyy-MM-dd"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            validation="required:alt=Required"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
@@ -76,9 +75,10 @@
                             <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="gender">Gender</label>
                                 <div class="controls">
-                                    <input type="text" name="gender" id="gender"
-                                           ng-model="vm.registration.gender" class="form-input width-100"
-                                           placeholder="Gender" validation="required:alt=Required" />
+                                    <select name="gender" ng-model="vm.registration.gender.id" validation="required:alt=required"
+                                        class="form-input width-100" ng-options="gender.id as (gender.code) for gender in vm.lookups.GENDER">                   
+                                           <option value="">--SELECT--</option>
+                                   </select>
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
@@ -86,7 +86,7 @@
                                 <div class="controls">
                                    <select name="bloodGroup" ng-model="vm.registration.bloodGroup.id" validation="required:alt=required"
                                         class="form-input width-100" ng-options="bloodGroup.id as (bloodGroup.code) for bloodGroup in vm.lookups.BG">                   
-                                           <option style="display:none" value="">...</option>
+                                           <option value="">--SELECT--</option>
                                    </select>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <select name="countryOfOrigin" ng-model="vm.registration.countryOfOrigin.id"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                          validation="required:alt=required">
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                     <select name="personal_country_code" ng-model="vm.registration.personal_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -123,7 +123,8 @@
                                     <input type="text" name="personal_contact" id="personal_contact"
                                            ng-model="vm.registration.personalContactNo"
                                            class="form-input width-100" placeholder="Personal Contact No"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
+                                           maxlength="10"
+                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
@@ -143,7 +144,7 @@
                                     <input type="text" name="ofc_email" id="ofc_email"
                                            ng-model="vm.registration.officialEmail"
                                            class="form-input width-100" placeholder="Official Email Id"
-                                           validation="email:alt=email id not valid|required:alt=Required" />
+                                           validation="email:alt=email id not valid" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
@@ -152,7 +153,7 @@
                                     <select name="ofc_contact_country_code" ng-model="vm.registration.ofc_contact_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -163,7 +164,8 @@
                                     <input type="text" name="ofc_contact" id="ofc_contact"
                                            ng-model="vm.registration.officialContactNo"
                                            class="form-input width-100" placeholder="Official Contact"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
+                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
+                                           maxlength="10"/>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +175,7 @@
                 <div class="row">
                      <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
                         <div class="data-main-container">     
-                            <header class="data-main-container-header">Permenant Address</header>
+                            <header class="data-main-container-header">Permanent Address</header>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="permanentAddress_address_line1">Address
                                     Line 1</label>
@@ -201,7 +203,7 @@
                                         ng-change="vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id,'permenant')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         validation="required:alt=required">
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                   
                                 </div>
                             </div>
@@ -212,7 +214,7 @@
                                         ng-change="vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id,'permenant')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
                                         validation="required:alt=required">
-                                 <option style="display:none" value="">...</option>
+                                 <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -221,7 +223,7 @@
                                 <div class="controls">
                                     <select name="permanentAddress_city" ng-model="vm.registration.permanentAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
-                                     <option style="display:none" value="">...</option>   
+                                     <option value="">--SELECT--</option>   
                                 </select> 
                                     
                                 </div>
@@ -232,8 +234,8 @@
                                     <input type="text" name="permanentAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.permanentAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
-                                           ng-change="vm.checkAddress()" />                                    
+                                           validation="max_len:7:alt=max. 7 digits|numeric:alt=Number only|required:alt=Required"
+                                           ng-change="vm.checkAddress()" maxlength="7"/>                                    
                                 </div>
                             </div>
                         </div>
@@ -275,7 +277,7 @@
                                         ng-change="vm.getStatesByCountry(vm.registration.currentAddress.city.state.country.id,'current')"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -286,7 +288,7 @@
                                         ng-change="vm.getCitiesByStates(vm.registration.currentAddress.city.state.id,'current')"
                                         class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesCurnt"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -295,7 +297,7 @@
                                 <div class="controls">
                                     <select name="currentAddress_city" ng-model="vm.registration.currentAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesCurnt">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -305,7 +307,8 @@
                                     <input type="text" name="currentAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.currentAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required" />
+                                           validation="max_len:7:alt=max. 7 digits|numeric:alt=Number only|required:alt=Required" 
+                                           maxlength="7"/>
                                 </div>
                             </div>
                     </div>
@@ -323,19 +326,19 @@
                         <div class="data-main-container">     
                             <header class="data-main-container-header">Basic Information</header>
                             <div class="control-group col-lg-2 col-md-2 col-sm-3 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Experience</label>
+                                <label class="control-label" for="experience">Exp.(Yrs)</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
-                                           ng-model="vm.registration.experience"
+                                           ng-model="vm.registration.priorExperienceYear"
                                            class="form-input width-100" placeholder="Experience"
                                            validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-2 col-sm-3 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Experience</label>
+                                <label class="control-label" for="experience">Exp.(Mnnths)</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
-                                           ng-model="vm.registration.experience"
+                                           ng-model="vm.registration.priorExperienceMonth"
                                            class="form-input width-100" placeholder="Experience"
                                            validation="required:alt=Required" />
                                 </div>
@@ -348,10 +351,10 @@
                                            name="doj"
                                            show-button-bar ="false"
                                            class="form-input date-form" 
-                                           uib-datepicker-popup="yyyy-MM-dd"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            ng-model="vm.registration.doj"
                                            is-open="vm.isDojPickerOpen"
-                                           uib-datepicker-popup="yyyy-MM-dd"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -369,7 +372,7 @@
                                     <select name="division" ng-model="vm.registration.division.id"
                                         class="form-input width-100" ng-options="division.id as (division.description) for division in vm.lookups.DIV"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -379,7 +382,7 @@
                                     <select name="designation" ng-model="vm.registration.designation.id"
                                         class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
                                         validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -389,9 +392,8 @@
                                     Status</label>
                                 <div class="controls">
                                     <select name="employmentStatus" ng-model="vm.registration.employmentStatus.id"
-                                        class="form-input width-100" ng-options="employmentStatus.id as (employmentStatus.description) for employmentStatus in vm.lookups.ESTATS"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="employmentStatus.id as (employmentStatus.description) for employmentStatus in vm.lookups.ESTATS">
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -399,9 +401,8 @@
                                 <label class="control-label" for="purpose">Purpose</label>
                                 <div class="controls">
                                     <select name="purpose" ng-model="vm.registration.purpose.id"
-                                        class="form-input width-100" ng-options="purpose.id as (purpose.description) for purpose in vm.lookups.PURPO"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="purpose.id as (purpose.description) for purpose in vm.lookups.PURPO">
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -474,7 +475,6 @@
                                     <input type="text" name="address_line1" id="address_line1"
                                            ng-model="vm.registration.onsiteAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -493,9 +493,8 @@
                                 <div class="controls">
                                     <select name="onsiteAddress_country" ng-model="vm.registration.onsiteAddress.city.state.country.id"
                                         ng-change="vm.getStatesByCountry(vm.registration.onsiteAddress.city.state.country.id,'onsite')"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -504,9 +503,8 @@
                                 <div class="controls">
                                     <select name="onsiteAddress_state" ng-model="vm.registration.onsiteAddress.city.state.id"
                                         ng-change="vm.getCitiesByStates(vm.registration.onsiteAddress.city.state.id,'onsite')"
-                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesOnsite"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option></select> 
+                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesOnsite">
+                                <option value="">--SELECT--</option></select> 
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -514,7 +512,7 @@
                                 <div class="controls">
                                     <select name="onsiteAddress_city" ng-model="vm.registration.onsiteAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesOnsite">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -524,7 +522,7 @@
                                     <input type="text" name="zip_code" id="zip_code"
                                            ng-model="vm.registration.onsiteAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
+                                           validation="max_len:7:alt=max. 7 digits|numeric:alt=Number only"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -533,9 +531,8 @@
                                     To Visit</label>
                                 <div class="controls">
                                     <select name="countryToVisit" ng-model="vm.registration.countryToVisit.id"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -545,7 +542,7 @@
                                     <select name="onsite_country_code" ng-model="vm.registration.onsite_country_code"
                                         class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                         >
-                                        <option style="display:none" value="">...</option>
+                                        <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -556,7 +553,8 @@
                                     <input type="text" name="onsiteContactNo" id="onsiteContactNo"
                                            ng-model="vm.registration.onsiteContactNo"
                                            class="form-input width-100" placeholder="Onsite Mobile No"
-                                           validation="digits:10:alt=Must be 10 digits|required:alt=Required" />
+                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
+                                           maxlength="10"/>
                                 </div>
                             </div>
                         </div>
@@ -578,16 +576,17 @@
                                     <input type="text" name="bankAccount" id="bankAccount"
                                            ng-model="vm.registration.bankAccount.accountNo"
                                            class="form-input width-100" placeholder="Bank Acc. No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="ifscCode">IFSC Code</label>
                                 <div class="controls">
                                     <input type="text" name="IFSCCode" id="IFSCCode"
-                                           ng-model="vm.registration.bankAccount.IFSCCode"
+                                           ng-model="vm.registration.bankAccount.ifsccode"
                                            class="form-input width-100" placeholder="IFSC Code" 
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required"/>
+                                           validation="max_len:11:alt=max. 11 Chars|alpha_num:alt=Alpha numeric only"
+                                           maxlength="11"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -597,7 +596,7 @@
                                     <input type="text" name="nameAsPerBank" id="nameAsPerBank"
                                            ng-model="vm.registration.bankAccount.accountHolderName"
                                            class="form-input width-100" placeholder="Name as per bank"
-                                           validation="alpha_spaces:alt=Invalid Charecter|required:alt=Required" />
+                                           validation="alpha_spaces:alt=Invalid Charecter" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -605,8 +604,7 @@
                                 <div class="controls">
                                     <input type="text" name="bankName" id="bankName"
                                            ng-model="vm.registration.bankAccount.bankName"
-                                           class="form-input width-100" placeholder="Bank Name"
-                                           validation="required:alt=Required" />
+                                           class="form-input width-100" placeholder="Bank Name"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -614,12 +612,11 @@
                                 <div class="controls">
                                     <input type="text" name="branch" id="branch"
                                            ng-model="vm.registration.bankAccount.branch"
-                                           class="form-input width-100" placeholder="Bank Branch"
-                                           validation="required:alt=Required" />
+                                           class="form-input width-100" placeholder="Bank Branch"/>
                                 </div>
                             </div>
                             <div ng-show="vm.isFileInput" class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">   
-                                <input name="passbook-file" data-filename-placement="inside" type="file" title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload Passbook' class='upload-label'>upload passbook</span>" class="filestyle" data-input="false" data-buttonText="passbook" data-iconName="glyphicon glyphicon-inbox">
+                                <input name="passbook-file" data-filename-placement="inside" type="file" title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload Bank Docs.' class='upload-label'>Upload Bank Docs.</span>" class="filestyle" data-input="false" data-buttonText="passbook" data-iconName="glyphicon glyphicon-inbox">
                             </div>
                         </div>
                     </div>
@@ -634,7 +631,6 @@
                                     <input type="text" name="bankAddress_address_line1" id="address_line1"
                                            ng-model="vm.registration.bankAccount.bankAddress.address1"
                                            class="form-input width-100" placeholder="Address Line 1"
-                                           validation="required:alt=Required"
                                            ng-change="vm.checkAddress()" />
                                 </div>
                             </div>
@@ -653,9 +649,8 @@
                                 <div class="controls">
                                     <select name="bankAccount_country" ng-model="vm.registration.bankAccount.bankAddress.city.state.country.id"
                                         ng-change="vm.getStatesByCountry(vm.registration.bankAccount.bankAddress.city.state.country.id,'bank')"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+                                <option value="">--SELECT--</option>
                                     </select> 
                                 </div>
                             </div>
@@ -664,9 +659,8 @@
                                 <div class="controls">
                                     <select name="bankAccount_state" ng-model="vm.registration.bankAccount.bankAddress.city.state.id"
                                         ng-change="vm.getCitiesByStates(vm.registration.bankAccount.bankAddress.city.state.id,'bank')"
-                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesBank"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesBank">
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -675,7 +669,7 @@
                                 <div class="controls">
                                      <select name="bankAccount_city" ng-model="vm.registration.bankAccount.bankAddress.city.id"
                                         class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesBank">
-                                <option style="display:none" value="">...</option>
+                                <option value="">--SELECT--</option>
                                      </select>
                                 </div>
                             </div>
@@ -685,8 +679,8 @@
                                     <input type="text" name="bankAddress_zip_code" id="zip_code"
                                            ng-model="vm.registration.bankAccount.bankAddress.zipCode"
                                            class="form-input width-100" placeholder="ZIP Code"
-                                           validation="digits:6:alt=Must be 6 digits|required:alt=Required"
-                                           ng-change="vm.checkAddress()" />
+                                           validation="max_len:7:alt=max. 7 digits|numeric:alt=Number only"
+                                           ng-change="vm.checkAddress();" maxlength="7"/>
                                 </div>
                             </div>
                         </div>
@@ -702,7 +696,7 @@
                                     <input type="text" name="passportNo" id="passportNo"
                                            ng-model="vm.registration.passport.passportNo"
                                            class="form-input width-100" placeholder="Passport No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -710,9 +704,8 @@
                                     Country</label>
                                 <div class="controls">
                                     <select name="passport_country" ng-model="vm.registration.passport.country.id"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                        validation="required:alt=required">
-                                <option style="display:none" value="">...</option>
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+                                <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -725,11 +718,9 @@
                                            name="issueDate"
                                            show-button-bar ="false"
                                            class="form-input date-form" 
-                                           uib-datepicker-popup="yyyy-MM-dd"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            ng-model="vm.registration.passport.issueDate"
                                            is-open="vm.isIssueDatePickerOpen" 
-                                           uib-datepicker-popup="yyyy-MM-dd"
-                                           validation="required:alt=Required"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -750,11 +741,10 @@
                                            name="expiryDate"
                                            show-button-bar ="false"
                                            class="form-input date-form" 
-                                           uib-datepicker-popup="yyyy-MM-dd"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            ng-model="vm.registration.passport.expiryDate"
                                            is-open="vm.isExpiryDatePickerOpen"
-                                           uib-datepicker-popup="yyyy-MM-dd"
-                                           validation="required:alt=Required"
+                                           uib-datepicker-popup="dd-MMM-yyyy"
                                            readonly/>
                                     <span class="input-group-btn custom-datepick">
                                         <button type="button" 
@@ -780,9 +770,9 @@
                                 <label class="control-label" for="firstName">PAN No</label>
                                 <div class="controls">
                                     <input type="text" name="PANNo" id="PANNo"
-                                           ng-model="vm.registration.officialDetails.PANNo"
+                                           ng-model="vm.registration.officialDetails.panno"
                                            class="form-input width-100" placeholder="PAN No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -792,7 +782,7 @@
                                     <input type="text" name="drivingLicenceNo" id="drivingLicenceNo"
                                            ng-model="vm.registration.officialDetails.drivingLicenceNo"
                                            class="form-input width-100" placeholder="Driving License No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required"
+                                           validation="alpha_num:alt=Alpha numeric only"
                                            />
                                 </div>
                             </div>
@@ -800,18 +790,18 @@
                                 <label class="control-label" for="lastName">ESI No</label>
                                 <div class="controls">
                                     <input type="text" name="ESINo" id="ESINo"
-                                           ng-model="vm.registration.officialDetails.ESINo"
+                                           ng-model="vm.registration.officialDetails.esino"
                                            class="form-input width-100" placeholder="ESI No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="dob">PF No</label>
                                 <div class="controls">
                                     <input type="text" name="PFNo" id="PFNo"
-                                           ng-model="vm.registration.officialDetails.PFNo"
+                                           ng-model="vm.registration.officialDetails.pfno"
                                            class="form-input width-100" placeholder="PF No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only" />
                                 </div>
                             </div>
 
@@ -821,7 +811,7 @@
                                     <input type="text" name="forexCardNo" id="forexCardNo"
                                            ng-model="vm.registration.officialDetails.forexCardNo"
                                            class="form-input width-100" placeholder="Forex Card No"
-                                           validation="alpha_num:alt=Alpha numeric only|required:alt=Required" />
+                                           validation="alpha_num:alt=Alpha numeric only"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -832,7 +822,7 @@
                                            ng-model="vm.registration.officialDetails.forexCardAgency"
                                            class="form-input width-100"
                                            placeholder="Forex Card - Bank/Agency"
-                                           validation="required:alt=Required" />
+                                           validation="alpha:alt=Alphabets only"/>
                                 </div>
                             </div>
                         </div>
@@ -851,14 +841,14 @@
                                     Name</label>
                                 <div class="controls">
                                     <input type="text" name="spouse" id="spouse"
-                                           ng-model="vm.registration.familyMembers.name1"
+                                           ng-model="vm.registration.spouseName"
                                            class="form-input width-100" placeholder="Spouse's Name"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="middleName">Children</label>
                                 <div class="controls">
-                                    <input type="text" name="" id="children" ng-model="vm.registration.familyMembers.name"
+                                    <input type="text" name="" id="children" ng-model="vm.registration.childName"
                                            class="form-input width-100" placeholder="Children" />
                                 </div>
                             </div>
@@ -867,8 +857,7 @@
                                 <div class="controls">
                                     <input type="text" name="fathersName" id="fathersName"
                                            ng-model="vm.registration.fathersName"
-                                           class="form-input width-100" placeholder="Father's Name"
-                                           validation="required:alt=Required" />
+                                           class="form-input width-100" placeholder="Father's Name" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -876,28 +865,53 @@
                                 <div class="controls">
                                     <input type="text" name="mothersName" id="mothersName"
                                            ng-model="vm.registration.mothersName"
-                                           class="form-input width-100" placeholder=" Mother's Name"
-                                           validation="required:alt=Required" />
+                                           class="form-input width-100" placeholder=" Mother's Name"/>
                                 </div>
                             </div>
 
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            <div class="control-group col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left">
+                            <label class="control-label" for="family_contact1_code">Code</label>
+                                <div class="controls">
+                                    <select name="family_contact1_code" ng-model="vm.registration.family_contact1_code"
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                        >
+                                        <option value="">--SELECT--</option>
+                                    </select>                                    
+                                </div>
+                            </div>
+                            
+                            <div class="control-group col-lg-3 col-md-3 col-sm-5 col-xs-5 pull-left">
                                 <label class="control-label" for="gender">Family Contact
                                     1</label>
                                 <div class="controls">
                                     <input type="text" name="familyContact_1" id="familyContact1"
                                            ng-model="vm.registration.familyContact1"
                                            class="form-input width-100" placeholder="Family Contact 1"
-                                           validation="required:alt=Required" />
+                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
+                                           maxlength="10"/>
                                 </div>
                             </div>
-                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                            
+                            <div class="control-group col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left">
+                            <label class="control-label" for="family_contact2_code">Code</label>
+                                <div class="controls">
+                                    <select name="family_contact2_code" ng-model="vm.registration.family_contact2_code"
+                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                        >
+                                        <option value="">--SELECT--</option>
+                                    </select>                                    
+                                </div>
+                            </div>
+                            
+                            <div class="control-group col-lg-3 col-md-3 col-sm-5 col-xs-5 pull-left">
                                 <label class="control-label" for="familyContact1">Family
                                     Contact 2</label>
                                 <div class="controls">
                                     <input type="text" name="familyContact1" id="familyContact1"
                                            ng-model="vm.registration.familyContact2"
-                                           class="form-input width-100" placeholder="Family Contact 2" />
+                                           class="form-input width-100" placeholder="Family Contact 2"
+                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
+                                           maxlength="10"/>
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
@@ -905,7 +919,8 @@
                                 <div class="controls">
                                     <input type="text" name="familyEmail" id="familyEmail"
                                            ng-model="vm.registration.familyEmail"
-                                           class="form-input width-100" placeholder="Family Email"/>
+                                           class="form-input width-100" placeholder="Family Email"
+                                           validation="email:alt=email id not valid"/>
                                 </div>
                             </div>
                         </div>

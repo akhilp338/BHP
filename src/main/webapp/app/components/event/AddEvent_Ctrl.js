@@ -4,6 +4,8 @@
         vm.isStartDatePickerOpen = false;
         vm.isEndDatePickerOpen = false;
         vm.addEventData = {};
+        vm.isEdit = false;
+        vm.buttonText = "Add Event"
         vm.addEventData.allDay = false;
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
@@ -19,27 +21,33 @@
             vm[picker].open = true;
         };
 
-        if (candidateDetails) {            
+        if (candidateDetails) {
             var start, end;
             if (candidateDetails.start) {
-                start = new Date(candidateDetails.start.format()),
+                start = new Date(candidateDetails.start.format());
                 start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
                 vm.addEventData.start = start.getTime();
                 vm.picker7.date = start;
-            }
-            else if(candidateDetails._d){
-                 vm.picker7.date = candidateDetails._d;
+                vm.buttonText = "Edit Event";
+                vm.isEdit = true;
+            } else if (candidateDetails._d) {
+                vm.picker7.date = candidateDetails._d;
+                vm.buttonText = "Add Event";
+                vm.isEdit = false;
             }
             if (candidateDetails.end) {
-                end = new Date(candidateDetails.end.format()),
+                end = new Date(candidateDetails.end.format());
                 end = new Date(end.getTime() + end.getTimezoneOffset() * 60000);
                 vm.addEventData.end = end.getTime();
                 vm.picker6.date = end;
+                vm.buttonText = "Edit Event";
+                vm.isEdit = true;
+            } else if (candidateDetails._d) {
+                vm.picker6.date = candidateDetails._d;
+                vm.buttonText = "Add Event";
+                vm.isEdit = false;
             }
-            else if(candidateDetails._d){
-                 vm.picker6.date = candidateDetails._d;
-            }
-            vm.addEventData.id = candidateDetails.id;  
+            vm.addEventData.id = candidateDetails.id;
             vm.addEventData.title = candidateDetails.title;
             vm.addEventData.description = candidateDetails.description;
             vm.addEventData.location = candidateDetails.location;
@@ -58,7 +66,16 @@
                     });
 
         };
-
+        vm.cancelEvent = function () {
+            var url = "api/event/deleteEvent";
+            Core_Service.addEventDetails(url, vm.addEventData.id).then(function (response) {
+                if (response.data)
+                    $uibModalInstance.close(response.data);
+            },
+                    function (error) {
+                        console.log(error)
+                    });
+        };
         vm.close = function () {
             $uibModalInstance.dismiss('cancel');
         };

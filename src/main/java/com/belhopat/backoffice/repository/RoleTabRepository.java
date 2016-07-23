@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.RoleTab;
 
 /**
@@ -17,8 +16,7 @@ import com.belhopat.backoffice.model.RoleTab;
 @Repository
 public interface RoleTabRepository extends JpaRepository<RoleTab, Long> {
 
-	
 	@Query("select r from RoleTab r where r.masterRole.id=:roleId ")
-	List<RoleTab> getUserTabsByRole(@Param("roleId")Long roleId);
+	List<RoleTab> getUserTabsByRole(@Param("roleId") Long roleId);
 
 }

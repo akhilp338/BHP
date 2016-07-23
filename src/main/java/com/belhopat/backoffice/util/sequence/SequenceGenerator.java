@@ -40,7 +40,7 @@ public class SequenceGenerator {
     /**
      * @param increment
      * @return Client-ID
-     * Generates sequence for listing of Employees
+     * Generates sequence for listing of Cients
      */
     public static String generateClientId( Long increment ) {
 

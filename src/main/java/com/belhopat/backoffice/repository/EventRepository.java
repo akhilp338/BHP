@@ -21,7 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, DataTablesR
 
 	List<Event> findByIdIn(List<Long> eventIds);
 
-	@Query("select e from Event e where e.createdBy.id=:userId")
+	@Query("select e from Event e " + "where e.createdBy.id=:userId and e.deleted = false")
 	List<Event> getEvents(@Param("userId") Long userId);
 
 }

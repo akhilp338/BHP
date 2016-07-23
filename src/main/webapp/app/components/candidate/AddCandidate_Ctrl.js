@@ -23,6 +23,7 @@
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
                 }
                 vm.mainSkillList = res.data.unselectedSkillSet;
+                vm.mainSelectedSkillList = res.data.skillSet;
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
@@ -34,6 +35,14 @@
         vs = new validationService({
             controllerAs: vm
         });
+        vs.setGlobalOptions({
+            debounce: 1500,
+            scope: $scope,
+            isolatedScope: $scope,
+            preValidateFormElements: false,
+            displayOnlyLastErrorMsg: true
+        });
+        
         vm.isCheckboxEnable = false;
         vm.urlForLookups = "api/candidate/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
@@ -42,16 +51,8 @@
             if (!$stateParams.id)
                     vm.mainSkillList = vm.lookups.SKILL;
                 }, function (error) {
-                });
+                });      
         
-        vs.setGlobalOptions({
-            debounce: 1500,
-            scope: $scope,
-            isolatedScope: $scope,
-            preValidateFormElements: false,
-            displayOnlyLastErrorMsg: true
-        });
-
         vm.addSkills = function () {
             vm.mainSelectedSkillList = vm.mainSelectedSkillList.concat(vm.subSelectedSkillList);
             vm.removeFromMainListArray(vm.getIndexesToRemove(vm.mainSkillList, vm.subSelectedSkillList));
@@ -75,12 +76,12 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-            //if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+           if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
                 $scope.selection = $scope.steps[index];
                 $timeout(function(){angular.element('input[type=file]').bootstrapFileInput()
                     vm.isFileInput = $scope.steps[index] == "Official" ? true : false;},500)
                 
-            //}
+            }
         };
 
         $scope.hasNextStep = function () {
@@ -163,7 +164,7 @@
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
                 var skillSet = vm.getUpdatedSkillSet(vm.registration.skillSet);
-                vm.registration.skillSet = skillSet;
+//                vm.registration.skillSet = skillSet;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
                         	Core_Service.sweetAlert("Done!",response.Message,"success","coreuser.candidate");  
