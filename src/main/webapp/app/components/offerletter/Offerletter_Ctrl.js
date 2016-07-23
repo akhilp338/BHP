@@ -64,7 +64,7 @@
                             vm.offerletter.grade = params.grade;
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
-                            vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2)
+                            vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
                         }, function (error) {
                             console.log(error)
                         });

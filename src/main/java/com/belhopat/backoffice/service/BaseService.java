@@ -37,7 +37,7 @@ public interface BaseService {
 	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException;
 
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary);
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException;
 
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
 

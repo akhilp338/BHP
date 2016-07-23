@@ -367,17 +367,16 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
-				employeeSalary.setCurrentTask(null);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-//				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-//				controller.doExample(offerLetter);
+				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+				controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}

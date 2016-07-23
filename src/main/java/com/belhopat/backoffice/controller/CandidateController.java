@@ -157,7 +157,7 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.saveSalaryAndOfferLetter(employeeSalary);
 	}
 
