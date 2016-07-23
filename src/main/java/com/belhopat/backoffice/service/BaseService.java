@@ -42,5 +42,9 @@ public interface BaseService {
 	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
 
 	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade);
+	
+	public List<TaskList> updateTaskList(String taskName) ;
+	
+	public TaskList createNewTaskList(String taskName);
 
 }

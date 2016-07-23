@@ -39,7 +39,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		writer.setBoxSize("art", PageSize.A4);
 		HeaderFooterEvent event = new HeaderFooterEvent();
 		writer.setPageEvent(event);
-		setSampleEmployee(employee);
+//		setSampleEmployee(employee);
 		addContentToDocument(document, employee);
 		// PdfCopy pdfCopy = new PdfSmartCopy(document, outputStream);
 		// String annexureAPath = getContextPath() +

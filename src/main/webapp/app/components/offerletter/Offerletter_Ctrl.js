@@ -33,7 +33,7 @@
             };
             $state.go("coreuser.offerletter.verify", {verifyId: $rootScope.selectedCandidate,grade:vm.offerletter.selectedGrade})
         };
-
+        
         vm.getSalaryGrades = function () {
             vm.getSalaryGradesUrl = "api/candidate/getSalaryGrades";
             Core_Service.getSalaryGradesUrl(vm.getSalaryGradesUrl)
@@ -194,9 +194,20 @@
         	for(var i=0;i<gradeList.length;i++){
         		if(grade==gradeList[i].grade)
         			return gradeList[i];
-        		}
+    		}
         }
         
+        vm.requestForApproval = function(){
+        	vm.offerletter.candidate=$rootScope.selectedCandidate;
+        	vm.offerletter.grade=vm.getGrade($stateParams.grade,vm.offerletter.grades);
+            vm.requestForApprovalUrl = "api/candidate/requestForApproval";
+            Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Request sent for approval!",response.data.data,"success","coreuser.offerletter"); 
+                    }, function (error) {
+
+                    });
+        }
         
         });
 

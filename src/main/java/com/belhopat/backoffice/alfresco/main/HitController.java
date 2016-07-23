@@ -17,16 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HitController extends BaseCloudFns {
 
-    public static void main(String[] args) {
-        HitController le = new HitController();
-        try {
-            le.doExample();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doExample() {
+    public void doExample(byte[] offerLetter) {
         try {
             // Find the root folder of our target site
             String rootFolderId = getRootFolderId(getSite());

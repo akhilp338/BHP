@@ -276,7 +276,8 @@ public class BaseServiceImpl implements BaseService {
 		return null;
 	}
 
-	private TaskList createNewTaskList(String taskName) {
+	@Override
+	public TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		TaskList currentTaskRow = new TaskList();
 		TaskList newTaskRow = new TaskList();
@@ -293,7 +294,8 @@ public class BaseServiceImpl implements BaseService {
 		return newTaskRow;
 	}
 
-	private List<TaskList> updateTaskList(String taskName) {
+	@Override
+	public List<TaskList> updateTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		TaskList taskList = taskListRepository.findByTask(currentTask);
@@ -365,13 +367,12 @@ public class BaseServiceImpl implements BaseService {
 			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
-				TaskList currentTask = createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
-				employeeSalary.setCurrentTask(currentTask);
+				employeeSalary.setCurrentTask(null);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				controller.doExample();
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
-				controller.doExample();
+//				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+//				controller.doExample(offerLetter);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
 		}
