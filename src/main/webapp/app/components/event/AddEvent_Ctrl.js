@@ -7,6 +7,7 @@
         vm.isEdit = false;
         vm.buttonText = "Add Event"
         vm.addEventData.allDay = false;
+        vm.addEventData.guests = [];
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
@@ -21,37 +22,66 @@
             vm[picker].open = true;
         };
 
-        if (candidateDetails) {
+        vm.processObjecToArray = function(obj){
+            var guestObjArray = [];
+            for(var i=0; i<obj.length; i++){
+                var guestObj = [];
+                guestObj[i][0] = guestObj.id;
+                guestObj[i][1] = guestObj.text;
+                guestObjArray.push(guestObj);
+            }
+            return guestObjArray;
+        };
+        vm.removeSelectedGuest = function(parentObjArray, objToRemove){
+            if(objToRemove){
+            vm.addEventData.guests.push(objToRemove);
+            for(var i=0; i<parentObjArray.length; i++){
+                if(parentObjArray[i] && (parentObjArray[i].id == objToRemove.id)){
+                    parentObjArray.splice(i,1);
+                }
+            }
+            vm.eventguests = parentObjArray;
+        }
+        };        
+        
+        vm.guestRemove = function(chipInfo){
+            vm.eventguests.push(chipInfo);
+        };
+        
+        if (candidateDetails.date) {
             var start, end;
-            if (candidateDetails.start) {
-                start = new Date(candidateDetails.start.format());
+            if (candidateDetails.date.start) {
+                start = new Date(candidateDetails.date.start.format());
                 start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
                 vm.addEventData.start = start.getTime();
                 vm.picker7.date = start;
                 vm.buttonText = "Edit Event";
                 vm.isEdit = true;
-            } else if (candidateDetails._d) {
-                vm.picker7.date = candidateDetails._d;
+            } else if (candidateDetails.date._d) {
+                vm.picker7.date = candidateDetails.date._d;
                 vm.buttonText = "Add Event";
                 vm.isEdit = false;
             }
-            if (candidateDetails.end) {
-                end = new Date(candidateDetails.end.format());
+            if (candidateDetails.date.end) {
+                end = new Date(candidateDetails.date.end.format());
                 end = new Date(end.getTime() + end.getTimezoneOffset() * 60000);
                 vm.addEventData.end = end.getTime();
                 vm.picker6.date = end;
                 vm.buttonText = "Edit Event";
                 vm.isEdit = true;
-            } else if (candidateDetails._d) {
-                vm.picker6.date = candidateDetails._d;
+            } else if (candidateDetails.date._d) {
+                vm.picker6.date = candidateDetails.date._d;
                 vm.buttonText = "Add Event";
                 vm.isEdit = false;
             }
-            vm.addEventData.id = candidateDetails.id;
-            vm.addEventData.title = candidateDetails.title;
-            vm.addEventData.description = candidateDetails.description;
-            vm.addEventData.location = candidateDetails.location;
-            vm.addEventData.allDay = candidateDetails.allDay;
+            vm.addEventData.id = candidateDetails.date.id;
+            vm.addEventData.title = candidateDetails.date.title;
+            vm.addEventData.description = candidateDetails.date.description;
+            vm.addEventData.location = candidateDetails.date.location;
+            vm.addEventData.allDay = candidateDetails.date.allDay;
+        }
+        if(candidateDetails.guestList){
+            vm.eventguests = candidateDetails.guestList;
         }
         vm.addEvent = function () {
             vm.addEventData.start = vm.picker7.date;
@@ -66,6 +96,7 @@
                     });
 
         };
+        
         vm.cancelEvent = function () {
             var url = "api/event/deleteEvent";
             Core_Service.addEventDetails(url, vm.addEventData.id).then(function (response) {

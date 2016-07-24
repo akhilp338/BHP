@@ -326,7 +326,7 @@
                         <div class="data-main-container">     
                             <header class="data-main-container-header">Basic Information</header>
                             <div class="control-group col-lg-2 col-md-4 col-sm-4 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Exp.</label>
+                                <label class="control-label" for="experience">Exp.Yrs</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.priorExperienceYear"
@@ -335,7 +335,7 @@
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-4 col-sm-4 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Exp.</label>
+                                <label class="control-label" for="experience">Exp.Months</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.priorExperienceMonth"
@@ -445,7 +445,7 @@
                             </div>
 
                             <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="expYr">Exp.</label>
+                                <label class="control-label" for="expYr">Exp.Yr</label>
                                 <div class="controls">
                                     <input type="text" name="expYr" id="experience"
                                            ng-model="vm.add.expYr"
@@ -454,7 +454,7 @@
                             </div>
 
                             <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="expMnth">Exp</label>
+                                <label class="control-label" for="expMnth">Exp.Months</label>
                                 <div class="controls">
                                     <input type="text" name="expMnth" id="experience"
                                            ng-model="vm.add.expMnth"
@@ -470,7 +470,7 @@
                                     <span class="text">Add skill</span>              
                                 </button>
                             </div>
-                            <div class="control-group col-lg-12 col-md-12 col-sm-6 col-xs-6 pull-left">
+                            <div ng-if="vm.registration.skillSet.length" class="control-group col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
                                 <label class="control-label" for="selectedSkillSet">Skill set</label>
                                 <div class="controls">
                                     <md-content class="md-padding col-lg-12 col-md-12 col-sm-12 col-xs-12" layout="column">                                        
@@ -479,8 +479,7 @@
                                                   md-separator-keys="vm.keys"
                                                   md-input-name="skillList"
                                                   md-input-minlength="1"
-                                                  md-on-remove="vm.removeChip($chip)"
-                                                  placeholder="eg: Java(2 yrs)"> 
+                                                  > 
                                             <md-chip-template>
                                                 <span>
                                                     <em>{{$chip.chipString}}</em>

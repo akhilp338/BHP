@@ -17,7 +17,7 @@ public class Skill {
 
 	public Long experienceYear;
 
-	public Long experiencemonth;
+	public Long experienceMonth;
 
 	public Long getId() {
 		return id;
@@ -43,18 +43,18 @@ public class Skill {
 		this.experienceYear = experienceYear;
 	}
 
-	public Long getExperiencemonth() {
-		return experiencemonth;
+	public Long getExperienceMonth() {
+		return experienceMonth;
 	}
 
-	public void setExperiencemonth(Long experiencemonth) {
-		this.experiencemonth = experiencemonth;
+	public void setExperienceMonth(Long experienceMonth) {
+		this.experienceMonth = experienceMonth;
 	}
 
 	@Override
 	public String toString() {
 		return "Skill [id=" + id + ", skillName=" + skillName + ", experienceYear=" + experienceYear
-				+ ", experiencemonth=" + experiencemonth + "]";
+				+ ", experienceMonth=" + experienceMonth + "]";
 	}
 
 }

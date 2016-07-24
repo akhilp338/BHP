@@ -1,6 +1,7 @@
 (function () {
     var EventManagement_Ctrl = function ($state, Core_Service, $rootScope, Core_ModalService) {
         var vm = this;
+        vm.eventData = {};
         vm.updateEvents = function (event) {
             var start = new Date(event.start.format()),
                     end = new Date(event.end.format()),
@@ -20,8 +21,19 @@
                         console.log(error)
                     });
         };
+        vm.processArrayToObject = function(list){
+            var guestObjArray = [];
+            for(var i=0; i<list.length; i++){
+                var guestObj = {};
+                guestObj.id = list[i][0];
+                guestObj.text = list[i][1];
+                guestObjArray.push(guestObj);
+            }
+            return guestObjArray;
+        };
+        
         Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
-            console.log(res)
+            vm.eventData.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
         });
 
         Core_Service.getAllEvents("api/event/getEvents").then(function (res) {
@@ -41,7 +53,8 @@
                     if (!date.isBefore(moment())) {
                         date = new Date(date.format())
                         date = moment(date.getTime() + date.getTimezoneOffset() * 60000);
-                        Core_ModalService.openAddEventModal(date).result.then(function (response) {
+                        vm.eventData.date = date;
+                        Core_ModalService.openAddEventModal(vm.eventData).result.then(function (response) {
                             if (response)
                                 $state.reload();
                         });

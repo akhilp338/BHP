@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 	-- create temporary table
 	
 	CREATE TABLE IF NOT EXISTS `belhopat_backoffice`.`country_test` (
