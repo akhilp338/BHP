@@ -109,13 +109,8 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
 	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException {
-//		
 		boolean userStatus = userService.generatePasswordResetLink(user.getEmail());
-//		if (userStatus)
-		
-		//TODO
-		//For debug
-		if (true)
+		if (userStatus)
 			return new ResponseEntity<ResponseObject>(new ResponseObject(true, Constants.PASS_RESET_SUCC_MSG),
 					HttpStatus.OK);
 		else

@@ -106,7 +106,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (candidate != null) {
 				String employeeName = employee.getEmployeeMaster().getFirstName() + " "
 						+ employee.getEmployeeMaster().getLastName();
-				mailService.sendCandidateRegMail( candidate, true, "" );
+				try{
+					mailService.sendEmployeeRegMail( employee );
+				}catch(MessagingException e){
+					e.printStackTrace();
+				}
 				return new ResponseEntity<String>(employeeName, HttpStatus.OK);
 			}
 		}

@@ -372,10 +372,8 @@ public class CandidateServiceImpl implements CandidateService {
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
 		candidate.setCandidateId(candidateId);
 		Candidate persisted = candidateRepository.save(candidate);
-		//TODO make this generic
-		
 		try{
-			mailService.sendCandidateRegMail( persisted, false, "" );
+			mailService.sendCandidateRegMail( persisted );
 		}catch(MessagingException e){
 			e.printStackTrace();
 		}

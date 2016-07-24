@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 import org.apache.velocity.tools.generic.DateTool;
 
 /**
- * @author BHP_DEV An util file for date format conversion
+ * @author BHP_DEV A util file for date format conversion
  *
  */
 public class DateUtil extends DateTool {
