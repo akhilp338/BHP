@@ -2049,3 +2049,8 @@ md-chips-wrap.md-chips {
 .control-btn {
     margin-top: 22px;
 }
+
+.skill-btn span.text{
+    margin-left: 0;
+    padding: 0;
+}
