@@ -51,4 +51,6 @@ public interface BaseService {
 
 	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
+	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException;
+
 }
