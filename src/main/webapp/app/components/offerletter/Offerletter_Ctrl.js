@@ -47,7 +47,7 @@
 
         vm.getSalarySplits = function (isSalField, params) {
             vm.url = "api/candidate/getSalarySplit";
-            if (isSalField)
+            if (!isSalField && !vm.offerletter.selectedGrade)
                 vm.offerletter.selectedGrade = "L1"
             var fixed = vm.offerletter.grossSalary ? vm.offerletter.grossSalary : 0;
             if (!params) {
@@ -102,24 +102,45 @@
                     }, {
                         title: "Candidate ID",
                         data: 'candidateId',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Name",
                         data: 'firstName',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Contact No",
                         data: 'officialContactNo',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Country To Visit",
                         data: 'countryToVisit.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Division",
                         data: 'division.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Designation",
                         data: 'designation.code',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Employment Status",
                         data: 'employmentStatus.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }]
             });
             $("#candidatesList").on('click', ' tbody tr', function () {

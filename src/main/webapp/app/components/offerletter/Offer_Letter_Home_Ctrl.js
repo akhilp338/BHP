@@ -38,19 +38,33 @@
                 	},{
                         title: "Candidate Id",
                         data: 'candidate.candidateId',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         title: "Candidate Name",
                         data: 'candidate.firstName',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },  {
                         title: "Status",
                         data: 'status',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         title: "Gross CTC",
                         data: 'grossCTC',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
-                        title: "Modified Date",
                         title: "Grade",
                         data: 'grade.grade',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         title: "Created Date",
                         data: 'createdDate',
@@ -66,6 +80,9 @@
                     },{
                         title: "Approved By",
                         data: 'updatedBy.username',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         data: 'id',
                         bSortable: false,
