@@ -166,7 +166,7 @@ public class DateUtil extends DateTool {
 		cal.add(Calendar.DATE, -days);
 		return cal.getTime();
 	}
-	
+
 	/**
 	 * add months to date in java
 	 * 
@@ -193,6 +193,39 @@ public class DateUtil extends DateTool {
 		cal.setTime(date);
 		cal.add(Calendar.MONTH, -months);
 		return cal.getTime();
+	}
+
+	public static int getDayOfMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		return day;
+	}
+
+	public static int getMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		return month;
+	}
+
+	public static int getYear(Date date) {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		return year;
+	}
+
+	public static boolean isToday(Date date) {
+		if (getDayOfMonth(date) == getDayOfMonth(new Date()) && getMonth(date) == getMonth(new Date())
+				&& getYear(date) == getYear(new Date())) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isPreviousMonth(Date date) {
+		if ((getYear(date) < getYear(new Date())) || getMonth(date) < getMonth(new Date())) {
+			return true;
+		}
+		return true;
 	}
 
 }
