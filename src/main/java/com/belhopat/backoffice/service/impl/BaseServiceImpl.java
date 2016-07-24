@@ -114,7 +114,7 @@ public class BaseServiceImpl implements BaseService {
 	EmployeeSalaryRepository employeeSalaryRepository;
 
 	@Autowired
-	AlfrescoUploadService controller;
+	AlfrescoUploadService alfrescoUploadService;
 
 	@Autowired
 	UserRepository userRepository;
@@ -373,7 +373,8 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary)
+			throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
 				User currentUser = SessionManager.getCurrentUserAsEntity();
@@ -381,7 +382,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-				String document = controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				String document = alfrescoUploadService.uploadFileByCategory(offerLetter, employeeSalary, Constants.OFFER_LETTERS);
 				employeeSalary.setOfferLetterFileName(document);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
@@ -412,15 +413,17 @@ public class BaseServiceImpl implements BaseService {
 		}
 		return userRoles;
 	}
-	
+
 	@Override
-	public void getFileByNameAndCategory(Long empSalId,HttpServletResponse response) throws IOException{
+	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException {
 		EmployeeSalary empSal = employeeSalaryRepository.findById(empSalId);
-		byte[] fileBytes = controller.getBytesByNameAndCategory(Constants.OFFER_LETTERS,empSal.getOfferLetterFileName());
-		generateDownloadLink(fileBytes,empSal.getOfferLetterFileName(),response);
+		byte[] fileBytes = alfrescoUploadService.getBytesByNameAndCategory(Constants.OFFER_LETTERS,
+				empSal.getOfferLetterFileName());
+		generateDownloadLink(fileBytes, empSal.getOfferLetterFileName(), response);
 	}
-	
-	public void generateDownloadLink(byte[] fileBytes, String fileName, HttpServletResponse response) throws IOException {
+
+	public void generateDownloadLink(byte[] fileBytes, String fileName, HttpServletResponse response)
+			throws IOException {
 		OutputStream output = response.getOutputStream();
 		response.setContentType(Constants.PDF_CONTENT_TYPE);
 		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + fileName);
@@ -429,6 +432,5 @@ public class BaseServiceImpl implements BaseService {
 		response.flushBuffer();
 		output.close();
 	}
-	 
-	 
+
 }
