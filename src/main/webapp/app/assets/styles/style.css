@@ -1137,3 +1137,6 @@ input.date-form{
     border-radius: 0!important;
 }
 
+.control-btn {
+    margin-top: 22px;
+}
