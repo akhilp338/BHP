@@ -380,7 +380,7 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+				byte[] offerLetter = new byte[100];//pdfService.generateOfferLetterPDF(employeeSalary);
 				String document = controller.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 				employeeSalary.setOfferLetterFileName(document);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
