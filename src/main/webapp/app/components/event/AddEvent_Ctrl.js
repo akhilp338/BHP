@@ -25,10 +25,9 @@
         vm.processObjecToArray = function(obj){
             var guestObjArray = [];
             for(var i=0; i<obj.length; i++){
-                var guestObj = [];
-                guestObj[i][0] = guestObj.id;
-                guestObj[i][1] = guestObj.text;
-                guestObjArray.push(guestObj);
+            	var tempobj = {};
+            	tempobj.id = obj[i]["id"]
+                guestObjArray.push(tempobj);
             }
             return guestObjArray;
         };
@@ -85,7 +84,9 @@
         }
         vm.addEvent = function () {
             vm.addEventData.start = vm.picker7.date;
-            vm.addEventData.end = vm.picker6.date
+            vm.addEventData.end = vm.picker6.date;
+            vm.addEventData.guestList = vm.processObjecToArray(vm.addEventData.guests);
+            debugger;
             var url = "api/event/addEvent";
             Core_Service.addEventDetails(url, vm.addEventData).then(function (response) {
                 if (response.data)
