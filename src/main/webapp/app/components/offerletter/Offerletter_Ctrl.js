@@ -1,5 +1,5 @@
 (function () {
-    var Offerletter_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService) {
+    var Offerletter_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService, Core_HttpRequest) {
         var vm = this;
         vs = new validationService({
             controllerAs: vm
@@ -211,9 +211,16 @@
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
                         .then(function (response) {
-                            Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
-                                console.log("fgg");
-                            });
+                        	 if(response.data.candidate.id){
+                                 vm.offerletter.id = response.data.candidate.id;
+                                 Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
+                                	 var url = "api/previewOfferLetter?empSalId="+vm.offerletter.id;
+                                	 url = Core_HttpRequest.getUrl(url);
+                                	 var win = window.open(url,"_blank");
+                                	 win.focus();
+                                 });      
+                               }
+                               
                         }, function (error) {
 
                         });
@@ -246,17 +253,13 @@
         }
         
         vm.downloadOfferLetter = function(){
-            vm.downloadOfferLetterUrl = "api/downloadDocument";
-            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,vm.offerletter.id)
-                    .then(function (response) {
-                    	Core_Service.sweetAlert("download in progress!",response.data.data,"success","coreuser.offerletter"); 
-                    }, function (error) {
-
-                    });
+            vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
+            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(url);
+            Core_Service.downloadOfferLetter("http://www.khazanah.com.my/khazanah/files/20/200f21f3-07ff-4903-ab99-7c0cb557eb51.pdf","offer-letter"+vm.offerletter.id);                    
         }
 
     };
-    Offerletter_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService'];
+    Offerletter_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
     angular.module('coreModule')
             .controller('Offerletter_Ctrl', Offerletter_Ctrl);
 })();
