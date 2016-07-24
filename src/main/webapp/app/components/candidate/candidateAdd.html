@@ -470,7 +470,7 @@
                                     <span class="text">Add skill</span>              
                                 </button>
                             </div>
-                            <div class="control-group col-lg-12 col-md-12 col-sm-6 col-xs-6 pull-left">
+                            <div ng-if="vm.registration.skillSet.length" class="control-group col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
                                 <label class="control-label" for="selectedSkillSet">Skill set</label>
                                 <div class="controls">
                                     <md-content class="md-padding col-lg-12 col-md-12 col-sm-12 col-xs-12" layout="column">                                        
@@ -479,8 +479,7 @@
                                                   md-separator-keys="vm.keys"
                                                   md-input-name="skillList"
                                                   md-input-minlength="1"
-                                                  md-on-remove="vm.removeChip($chip)"
-                                                  placeholder="eg: Java(2 yrs)"> 
+                                                  > 
                                             <md-chip-template>
                                                 <span>
                                                     <em>{{$chip.chipString}}</em>

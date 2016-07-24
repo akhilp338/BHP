@@ -211,7 +211,9 @@
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
                         .then(function (response) {
-                            Core_Service.sweetAlert("Done!", response.data.data, "success", "coreuser.offerletter");
+                            Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
+                                console.log("fgg");
+                            });
                         }, function (error) {
 
                         });
@@ -221,14 +223,14 @@
                     if (grade == gradeList[i].grade)
                         return gradeList[i];
                 }
-            }
+            };
 
         vm.getGrade = function(grade,gradeList){
         	for(var i=0;i<gradeList.length;i++){
         		if(grade==gradeList[i].grade)
         			return gradeList[i];
     		}
-        }
+        };
         });
         
         vm.requestForApproval = function(){
