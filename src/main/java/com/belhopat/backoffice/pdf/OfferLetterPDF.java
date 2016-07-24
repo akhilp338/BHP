@@ -29,7 +29,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 	public byte[] getPDFContents(EmployeeSalary employeeSalary)
 			throws MalformedURLException, IOException, DocumentException, ParseException {
 
-		String fileName = "OfferLetter.pdf";
+		// String fileName = "OfferLetter.pdf";
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		// OutputStream outputStream = new
 		// FileOutputStream("/home/sujith/Desktop/" + fileName);
@@ -599,7 +599,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		return annexureA;
 
 	}
-	
+
 	private PdfPTable getAnnexureB() {
 		PdfPTable annexureB = new PdfPTable(1);
 		annexureB.setWidthPercentage(100f);

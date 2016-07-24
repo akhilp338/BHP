@@ -109,9 +109,9 @@
                                 <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                                     <label class="control-label" for="coo">Code</label>
                                     <div class="controls">
-                                        <select name="personal_country_code" ng-model="vm.registration.personal_country_code"
-                                                class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                                >
+                                        <select name="personal_country_code" ng-model="vm.registration.personalContactNo.country.id"
+                                                class="form-input width-100" ng-options="country.id as ('+' + country.phoneCode + ' - ' + country.description) for country in vm.lookups.COUNTRY"
+                                                onselect = "country.id as (country.phoneCode)">
                                             <option value="">--SELECT--</option>
                                         </select>                                    
                                     </div>
@@ -121,7 +121,7 @@
                                         Contact No</label>
                                     <div class="controls">
                                         <input type="text" only-digits name="personal_contact" id="personal_contact"
-                                               ng-model="vm.registration.personalContactNo"
+                                               ng-model="vm.registration.personalContactNo.number"
                                                class="form-input width-100" placeholder="Personal Contact No"
                                                maxlength="10"
                                                validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required" />
@@ -150,8 +150,8 @@
                                 <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                                     <label class="control-label" for="coo">Code</label>
                                     <div class="controls">
-                                        <select name="ofc_contact_country_code" ng-model="vm.registration.ofc_contact_country_code"
-                                                class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                        <select name="ofc_contact_country_code" ng-model="vm.registration.officialContactNo.country.id"
+                                                class="form-input width-100" ng-options="country.id as ('+' + country.phoneCode + ' - ' + country.description) for country in vm.lookups.COUNTRY"
                                                 >
                                             <option value="">--SELECT--</option>
                                         </select>                                    
@@ -162,7 +162,7 @@
                                         Contact</label>
                                     <div class="controls">
                                         <input type="text" name="ofc_contact" id="ofc_contact"
-                                               ng-model="vm.registration.officialContactNo"
+                                               ng-model="vm.registration.officialContactNo.number"
                                                class="form-input width-100" placeholder="Official Contact"
                                                validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
                                                maxlength="10"/>
@@ -554,21 +554,18 @@
                             <div class="control-group col-lg-2 col-lg-offset-2 col-md-offset-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                                 <label class="control-label" for="coo">Code</label>
                                 <div class="controls">
-                                    <select name="onsite_country_code" ng-model="vm.registration.onsite_country_code"
-                                            class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                    <select name="onsite_country_code" ng-model="vm.registration.onsiteContactNo.country.id"
+                                            class="form-input width-100" ng-options="country.id as ('+' + country.phoneCode + ' - ' + country.description) for country in vm.lookups.COUNTRY"
                                             >
                                         <option value="">--SELECT--</option>
                                     </select>                                    
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="partner">Onsite Mobile
-                                    No</label>
+                                <label class="control-label" for="partner">Onsite Mobile No</label>
                                 <div class="controls">
-                                    <input type="text" name="onsiteContactNo" id="onsiteContactNo"
-                                           ng-model="vm.registration.onsiteContactNo"
-                                           class="form-input width-100" placeholder="Onsite Mobile No"
-                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
+                                    <input type="text" name="onsiteContactNo" id="onsiteContactNo" ng-model="vm.registration.onsiteContactNo.number"
+                                           class="form-input width-100" placeholder="Onsite Mobile No"  validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
                                            maxlength="10"/>
                                 </div>
                             </div>
@@ -887,8 +884,8 @@
                             <div class="control-group col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left">
                                 <label class="control-label" for="family_contact1_code">Code</label>
                                 <div class="controls">
-                                    <select name="family_contact1_code" ng-model="vm.registration.family_contact1_code"
-                                            class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                    <select name="family_contact1_code" ng-model="vm.registration.familyContact1.country.id"
+                                            class="form-input width-100" ng-options="country.id as ('+' + country.phoneCode + ' - ' + country.description) for country in vm.lookups.COUNTRY"
                                             >
                                         <option value="">--SELECT--</option>
                                     </select>                                    
@@ -900,7 +897,7 @@
                                     1</label>
                                 <div class="controls">
                                     <input type="text" name="familyContact_1" id="familyContact1"
-                                           ng-model="vm.registration.familyContact1"
+                                           ng-model="vm.registration.familyContact1.number"
                                            class="form-input width-100" placeholder="Family Contact 1"
                                            validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
                                            maxlength="10"/>
@@ -910,8 +907,8 @@
                             <div class="control-group col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-left">
                                 <label class="control-label" for="family_contact2_code">Code</label>
                                 <div class="controls">
-                                    <select name="family_contact2_code" ng-model="vm.registration.family_contact2_code"
-                                            class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                    <select name="family_contact2_code" ng-model="vm.registration.familyContact2.country.id"
+                                            class="form-input width-100" ng-options="country.id as ('+' + country.phoneCode + ' - ' + country.description) for country in vm.lookups.COUNTRY"
                                             >
                                         <option value="">--SELECT--</option>
                                     </select>                                    
@@ -923,7 +920,7 @@
                                     Contact 2</label>
                                 <div class="controls">
                                     <input type="text" name="familyContact1" id="familyContact1"
-                                           ng-model="vm.registration.familyContact2"
+                                           ng-model="vm.registration.familyContact2.number"
                                            class="form-input width-100" placeholder="Family Contact 2"
                                            validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only"
                                            maxlength="10"/>

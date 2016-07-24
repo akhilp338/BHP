@@ -20,10 +20,10 @@ public interface MailService {
 
 	public void sendEventInvitaionMail( List<String> guestEmails, String emailBody ) throws MessagingException;
 
-	public void sendClientRegMail( Client client ) throws MessagingException;
-
 	public void sendCandidateRegMail( Candidate candidate ) throws MessagingException;
 	
 	public void sendEmployeeRegMail( Employee employee ) throws MessagingException;
+	
+	public void sendClientRegMail(Client client) throws MessagingException;
 
 }

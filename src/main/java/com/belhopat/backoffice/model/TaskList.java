@@ -6,7 +6,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.NotAudited;
@@ -21,16 +20,15 @@ public class TaskList extends BaseEntity {
 
 	@Column(name = "completed")
 	byte completed;
-	
+
 	@Lob
 	@NotAudited
 	@Column(name = "comment")
 	private String comment;
-	
-	
+
 	@Column(name = "status")
 	private String status;
-	
+
 	public String getStatus() {
 		return status;
 	}

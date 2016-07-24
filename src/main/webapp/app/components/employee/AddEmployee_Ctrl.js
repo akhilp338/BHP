@@ -69,24 +69,46 @@ var addEmployeeTable
                 	},{
                         title: "Candidate ID",
                         data: 'candidateId',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
+                        
                     }, {
                         title: "Name",
                         data: 'firstName',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Contact No",
-                        data: 'officialContactNo',
+                        data: 'officialContactNo.number',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Country To Visit",
                         data: 'countryToVisit.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Division",
                         data: 'division.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Designation",
                         data: 'designation.code',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }, {
                         title: "Employment Status",
                         data: 'employmentStatus.description',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     }]
             });
             $("#candidatesList").on('click',' tbody tr', function (){

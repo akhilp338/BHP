@@ -169,7 +169,7 @@ var candidatesListTable;
                         }
                     }, {
                         title: "Contact No",
-                        data: 'officialContactNo',
+                        data: 'officialContactNo.number',
                         render: function (data) {
                         	return data == null? "":data;
                         }

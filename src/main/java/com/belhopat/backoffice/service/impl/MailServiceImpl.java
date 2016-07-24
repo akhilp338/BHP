@@ -136,14 +136,7 @@ public class MailServiceImpl implements MailService {
 		model.put(Constants.CLIENT, client);
 		model.put(Constants.POC, client.getPoc());
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
-
-		// MailMessageObject mailObject = new
-		// MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
-		// MAIL_FROM, Constants.CLIENT_REG_SUCC_MAIL_SUB,
-		// emailHtmlBody, mailSender);
-
 		InternetAddress[] forDebugEmail = getTempEmailMailingList();
-
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
 				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
 		sendMail(mailObject);
@@ -166,13 +159,7 @@ public class MailServiceImpl implements MailService {
 		mailSubject = Constants.CAND_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
-
-		// mailObject = new
-		// MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
-		// MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
-		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList();
-
 		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
@@ -191,10 +178,7 @@ public class MailServiceImpl implements MailService {
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
 		model.put(Constants.EMPLOYEES, employeeId);
 		model.put(Constants.EMPLOYEE_NAME, employeeName);
-		
-		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList();
-		
 		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
