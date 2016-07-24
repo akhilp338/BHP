@@ -101,6 +101,7 @@ public class BaseCloudFns extends BaseCoreAPIFns {
             VerificationCodeReceiver receiver = new LocalServerReceiver();
             try {
                 String redirectUri = receiver.getRedirectUri();
+//                redirectUri+"?employee=true";
                 launchInBrowser("google-chrome", redirectUri, BaseCloudFns.getAPIKey(), SCOPE);
                 this.credential = authorize(receiver, redirectUri);
 

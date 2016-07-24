@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +18,15 @@ public class Country {
 	
 	private String description;
 	
+	@Column(name = "iso3")
+	private String iso3Code;
+
+	@Column(name = "phonecode")
+	private Integer phoneCode;
+	
+	@Column(name = "numcode")
+	private Integer numberCode;
+
 	public Long getId() {
 		return id;
 	}
@@ -41,9 +51,34 @@ public class Country {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Country [id=" + id + ", code=" + code + ", description=" + description + "]";
+	public String getIso3Code() {
+		return iso3Code;
 	}
 
+	public void setIso3Code(String iso3Code) {
+		this.iso3Code = iso3Code;
+	}
+
+	public Integer getPhoneCode() {
+		return phoneCode;
+	}
+
+	public void setPhoneCode(Integer phoneCode) {
+		this.phoneCode = phoneCode;
+	}
+
+	public Integer getNumberCode() {
+		return numberCode;
+	}
+
+	public void setNumberCode(Integer numberCode) {
+		this.numberCode = numberCode;
+	}
+
+	@Override
+	public String toString() {
+		return "Country [id=" + id + ", code=" + code + ", description=" + description + ", iso3Code=" + iso3Code
+				+ ", phoneCode=" + phoneCode + ", numberCode=" + numberCode + "]";
+	}
+	
 }
