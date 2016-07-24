@@ -81,5 +81,20 @@ public class BaseController {
 	public void downloadDocument(@RequestParam Long empSalId, HttpServletResponse response) throws IOException {
 		baseService.getFileByNameAndCategory(empSalId, response);
 	}
+	
+	
+	/**
+	 * Method to preview document from 
+	 * @param requestObject
+	 * @return responseEntity Returns the document from cloud
+	 * @throws IOException
+	 * @throws ParseException 
+	 * @throws DocumentException 
+	 */
+	@RequestMapping(value = "/previewOfferLetter", method = RequestMethod.GET)
+	@ResponseBody
+	public void previewOfferLetter(@RequestParam Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException {
+		baseService.previewOfferLetter(empSalId, response);
+	}
 
 }

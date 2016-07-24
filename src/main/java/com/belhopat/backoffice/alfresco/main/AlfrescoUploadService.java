@@ -28,17 +28,14 @@ public class AlfrescoUploadService extends BaseCloudFns {
 			// Folder subFolder = createFolder(rootFolderId, getFolderName());
 			Folder subFolder = createFolder(rootFolderId, category);
 			// RefNo_Belhopat Offer Letter_CandidateNo_Name
-			File tempFile = File.createTempFile(
-					employeeSalary.getCandidate().getCandidateId() + "_Belhopat Offer Letter_",
+			File offerLetterPDF = new File(employeeSalary.getCandidate().getId().toString() + "_Belhopat Offer Letter_"+
 					employeeSalary.getCandidate().getCandidateId() + "_" + employeeSalary.getCandidate().getFirstName()
-							+ employeeSalary.getCandidate().getMiddleName()
-							+ employeeSalary.getCandidate().getLastName(),
-					null);
-			FileOutputStream fos = new FileOutputStream(tempFile);
+					+ employeeSalary.getCandidate().getMiddleName()
+					+ employeeSalary.getCandidate().getLastName()+".pdf");
+			FileOutputStream fos = new FileOutputStream(offerLetterPDF);
 			fos.write(offerLetter);
 			fos.close();
-			tempFile.deleteOnExit();
-			Document doc = createDocument(subFolder, tempFile, getLocalFileType());
+			Document doc = createDocument(subFolder, offerLetterPDF, getLocalFileType());
 			docName = doc.getName();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
