@@ -1,7 +1,8 @@
 package com.belhopat.backoffice.pdf;
 
-import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
@@ -29,10 +30,9 @@ public class OfferLetterPDF extends BasePDFGenerator {
 	public byte[] getPDFContents(EmployeeSalary employeeSalary)
 			throws MalformedURLException, IOException, DocumentException, ParseException {
 
-		// String fileName = "OfferLetter.pdf";
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		// OutputStream outputStream = new
-		// FileOutputStream("/home/sujith/Desktop/" + fileName);
+		String fileName = "OfferLetter.pdf";
+		// ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
 		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.setBoxSize("art", PageSize.A4);
@@ -41,8 +41,8 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		addContentToDocument(document, employeeSalary);
 		document.close();
 		outputStream.close();
-		return outputStream.toByteArray();
-		// return null;
+		// return outputStream.toByteArray();
+		return null;
 	}
 
 	private void addContentToDocument(Document document, EmployeeSalary employeeSalary)
@@ -497,25 +497,25 @@ public class OfferLetterPDF extends BasePDFGenerator {
 			CSContent.addCell(getCellContent("Per Month (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
 			CSContent.addCell(getCellContent("Per Annum (In INR)", Rectangle.ALIGN_CENTER, bold10Font, BaseColor.GRAY));
 			CSContent.addCell(getCellContent("Basic Salary"));
+			Float monthlyBasic = new Float(Math.round((salary.getBasicSalary() / 12D)));
+			CSContent.addCell(getCellContent(monthlyBasic.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getBasicSalary().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualBasic = salary.getBasicSalary() * 12D;
-			CSContent.addCell(getCellContent(annualBasic.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("House Rent Allowance"));
+			Float monthlyHRA = new Float(Math.round((salary.getHra() / 12D)));
+			CSContent.addCell(getCellContent(monthlyHRA.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getHra().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualHRA = salary.getHra() * 12D;
-			CSContent.addCell(getCellContent(annualHRA.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Medical Allowance"));
+			Float monthlyMedicalAllowence = new Float(Math.round((salary.getMedicalAllowance() / 12D)));
+			CSContent.addCell(getCellContent(monthlyMedicalAllowence.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getMedicalAllowance().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualMedicalAllowence = salary.getHra() * 12D;
-			CSContent.addCell(getCellContent(annualMedicalAllowence.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Conveyance Allowance"));
+			Float monthlyConveyanceAllowance = new Float(Math.round((salary.getConveyanceAllowance() / 12D)));
+			CSContent.addCell(getCellContent(monthlyConveyanceAllowance.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getConveyanceAllowance().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualConveyanceAllowance = salary.getConveyanceAllowance() * 12D;
-			CSContent.addCell(getCellContent(annualConveyanceAllowance.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Flexi Benefits Kit"));
+			Float monthlyFlexyBenKit = new Float(Math.round((salary.getFlexyBenKit() / 12D)));
+			CSContent.addCell(getCellContent(monthlyFlexyBenKit.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getFlexyBenKit().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualFlexyBenKit = salary.getFlexyBenKit() * 12D;
-			CSContent.addCell(getCellContent(annualFlexyBenKit.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Statutory Bonus"));
 			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
@@ -523,42 +523,40 @@ public class OfferLetterPDF extends BasePDFGenerator {
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent("Gross Salary", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
-			CSContent.addCell(getCellContent(salary.getGrossSalary().toString(), Rectangle.ALIGN_RIGHT, bold10Font,
-					BaseColor.GRAY));
-			Double annualGrossSalary = salary.getGrossSalary() * 12D;
-			CSContent.addCell(
-					getCellContent(annualGrossSalary.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+			Float monthlyGrossSalary = new Float(Math.round((salary.getGrossSalary() / 12D)));
+			CSContent.addCell(getCellContent(monthlyGrossSalary.toString(), Rectangle.ALIGN_RIGHT, bold10Font,BaseColor.GRAY));
+			CSContent.addCell(getCellContent(salary.getGrossSalary().toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent("EPF Contribution by Belhopat"));
+			Float monthlyPfCompContrbtn = new Float(Math.round((salary.getPfCompContrbtn() / 12D)));
+			CSContent.addCell(getCellContent(monthlyPfCompContrbtn.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getPfCompContrbtn().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualPfCompContrbtn = salary.getPfCompContrbtn() * 12D;
-			CSContent.addCell(getCellContent(annualPfCompContrbtn.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("ESI Contribution by Belhopat"));
+			Float monthlyEsiByEmplyr = new Float(Math.round((salary.getEsiByEmplyr() / 12D)));
+			CSContent.addCell(getCellContent(monthlyEsiByEmplyr.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getEsiByEmplyr().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualEsiByEmplyr = salary.getPfCompContrbtn() * 12D;
-			CSContent.addCell(getCellContent(annualEsiByEmplyr.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Leave Encashment"));
+			Float monthlyLeaveEncash = new Float(Math.round((salary.getLeaveEncash() / 12)));
+			CSContent.addCell(getCellContent(monthlyLeaveEncash.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getLeaveEncash().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualLeaveEncash = salary.getLeaveEncash() * 12D;
-			CSContent.addCell(getCellContent(annualLeaveEncash.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Medical Insurance"));
 			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("-", Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent("Gratuity"));
+			Float monthlyGratuity = new Float(Math.round((salary.getGratuity() / 12D)));
+			CSContent.addCell(getCellContent(monthlyGratuity.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(salary.getGratuity().toString(), Rectangle.ALIGN_RIGHT));
-			Double annualGratuity = salary.getGratuity() * 12D;
-			CSContent.addCell(getCellContent(annualGratuity.toString(), Rectangle.ALIGN_RIGHT));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent("Gross CTC", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
+			Float monthlyGrossCTC = new Float(Math.round((salary.getGrossCTC() / 12D)));
+			CSContent.addCell(
+					getCellContent(monthlyGrossCTC.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
 			CSContent.addCell(
 					getCellContent(salary.getGrossCTC().toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
-			Double annualGrossCTC = salary.getGrossCTC() * 12D;
-			CSContent.addCell(
-					getCellContent(annualGrossCTC.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
 
 		}
 		return CSContent;

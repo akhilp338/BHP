@@ -360,9 +360,9 @@
             return deferred.promise;
         };
 
-        service.downloadOfferLetter = function (url) {
+        service.downloadOfferLetter = function (url,id) {
             var deferred = $q.defer();
-            url = url + '?empSalId=' + 1;
+            url=url+'?empSalId='+id;
             Core_HttpRequest.get(url)
                     .then(function (response) {
                         deferred.resolve(response)

@@ -247,7 +247,7 @@
         
         vm.downloadOfferLetter = function(){
             vm.downloadOfferLetterUrl = "api/downloadDocument";
-            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl)
+            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,vm.offerletter.id)
                     .then(function (response) {
                     	Core_Service.sweetAlert("download in progress!",response.data.data,"success","coreuser.offerletter"); 
                     }, function (error) {

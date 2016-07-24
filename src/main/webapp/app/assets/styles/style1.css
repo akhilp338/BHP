@@ -2063,4 +2063,6 @@ md-chips-wrap.md-chips {
     float: left;
     max-width: 100%;
 }
-
+.theme4 .logout-button[disabled="disabled"] {
+    opacity: .5;
+}
