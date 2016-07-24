@@ -59,7 +59,7 @@
                         .then(function (response) {
                             response.data.selectedGrade = vm.offerletter.selectedGrade;
                             response.data.grade = params.grade;
-                            vm.offerletter.grade = params.grade;
+                            vm.offerletter.gradeUi = params.grade;
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
                             vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
@@ -207,6 +207,7 @@
             vm.generateOfferLetter = function () {
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
+                vm.offerletter.gradeUi = vm.offerletter.grade.grade;
                 vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
@@ -242,7 +243,8 @@
         
         vm.requestForApproval = function(){
         	vm.offerletter.candidate=$rootScope.selectedCandidate;
-        	vm.offerletter.grade=vm.getGrade($stateParams.grade,vm.offerletter.grades);
+        	vm.offerletter.grade = vm.getGrade($stateParams.grade,vm.offerletter.grades);
+        	vm.offerletter.gradeUi = vm.offerletter.grade.grade;
             vm.requestForApprovalUrl = "api/candidate/requestForApproval";
             Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
                     .then(function (response) {
@@ -255,7 +257,7 @@
         vm.downloadOfferLetter = function(){
             vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
             vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(url);
-            Core_Service.downloadOfferLetter("http://www.khazanah.com.my/khazanah/files/20/200f21f3-07ff-4903-ab99-7c0cb557eb51.pdf","offer-letter"+vm.offerletter.id);                    
+            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,"offer-letter"+vm.offerletter.id);                    
         }
 
     };
