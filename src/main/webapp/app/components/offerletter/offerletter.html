@@ -19,7 +19,7 @@
             </div>
             <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="grossSalary">Grade :</label>
-                    <select ng-change="vm.getSalarySplits(true)" name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
+                    <select ng-change="vm.getSalarySplits()" name="grades" ng-model="vm.offerletter.selectedGrade" validation="required:alt=required"
                             class="form-input col-md-6 col-lg-6 col-sm-6 col-xs-6" ng-options="gradeList.grade as (gradeList.grade) for gradeList in vm.offerletter.grades">                   
                         <option value="">--SELECT--</option>
                     </select>

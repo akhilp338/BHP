@@ -45,19 +45,16 @@
                     });
         };
 
-        vm.getSalarySplits = function (isSalField, params) {
+        vm.getSalarySplits = function (params) {
             vm.url = "api/candidate/getSalarySplit";
-            if (isSalField)
-//            if (!isSalField && !vm.offerletter.selectedGrade)
-                vm.offerletter.selectedGrade = "L1"
-            var fixed = vm.offerletter.grossSalary ? vm.offerletter.grossSalary : 0;
+            vm.offerletter.grossSalary = vm.offerletter.grossSalary ? vm.offerletter.grossSalary : 0,
+            vm.offerletter.selectedGrade = vm.offerletter.selectedGrade ? vm.offerletter.selectedGrade : "L1";
             if (!params) {
                 params = {
-                    fixed: fixed,
+                    fixed: vm.offerletter.grossSalary,
                     grade: vm.offerletter.selectedGrade
                 }
             }
-            if (vm.offerletter.selectedGrade) {
                 Core_Service.getSalaryDetails(vm.url, params)
                         .then(function (response) {
                             response.data.selectedGrade = vm.offerletter.selectedGrade;
@@ -69,9 +66,8 @@
                         }, function (error) {
                             console.log(error)
                         });
-            }
         };
-        ($stateParams.verifyId && $rootScope.verifyParams) ? vm.getSalarySplits(false, $rootScope.verifyParams) : $state.go("coreuser.offerletter");
+        ($stateParams.verifyId && $rootScope.verifyParams) ? vm.getSalarySplits($rootScope.verifyParams) : $state.go("coreuser.offerletter");
         vm.back = function () {
             $state.go("coreuser.offerletter");
         };
@@ -212,6 +208,7 @@
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
                 vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
+                delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
                         .then(function (response) {
                             Core_Service.sweetAlert("Done!", response.data.data, "success", "coreuser.offerletter");
