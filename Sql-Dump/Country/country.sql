@@ -1,4 +1,4 @@
--- create temporary table
+
 
 CREATE TABLE IF NOT EXISTS `belhopat_backoffice`.`country_test` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `belhopat_backoffice`.`country_test` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
---insert values into temperory table
+
 
 INSERT INTO `belhopat_backoffice`.`country_test` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phonecode`) VALUES
 (1, 'AF', 'AFGHANISTAN', 'Afghanistan', 'AFG', 4, 93),
@@ -256,13 +256,11 @@ INSERT INTO `belhopat_backoffice`.`country_test` (`id`, `iso`, `name`, `nicename
 
 
 
---alter current country table 
 ALTER TABLE `belhopat_backoffice`.`Country` 
 ADD COLUMN `phonecode` INT(5) NULL AFTER `description`,
 ADD COLUMN `numcode` INT(5) NULL AFTER `phonecode`,
 ADD COLUMN `iso3` VARCHAR(10) NULL AFTER `numcode`;
 
---update country table with updated values
 SET SQL_SAFE_UPDATES = 0;
 UPDATE
     belhopat_backoffice.Country C ,
@@ -274,7 +272,6 @@ SET
 WHERE
     C.`code` = CT.iso
   
---country codes that are not in the temporary table
 UPDATE belhopat_backoffice.Country SET phonecode = 670 WHERE code = 'TP';
 UPDATE belhopat_backoffice.Country SET phonecode = 672 WHERE code = 'XA';
 UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XU';
@@ -285,5 +282,4 @@ UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XG';
 UPDATE belhopat_backoffice.Country SET phonecode = 211 WHERE code = 'SS';
 UPDATE belhopat_backoffice.Country SET phonecode = 38 WHERE code = 'YU';
 
---drop temporary table    
 DROP TABLE IF EXISTS `belhopat_backoffice`.`country_test`;
