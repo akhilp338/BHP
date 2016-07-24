@@ -47,7 +47,8 @@
 
         vm.getSalarySplits = function (isSalField, params) {
             vm.url = "api/candidate/getSalarySplit";
-            if (!isSalField && !vm.offerletter.selectedGrade)
+            if (isSalField)
+//            if (!isSalField && !vm.offerletter.selectedGrade)
                 vm.offerletter.selectedGrade = "L1"
             var fixed = vm.offerletter.grossSalary ? vm.offerletter.grossSalary : 0;
             if (!params) {

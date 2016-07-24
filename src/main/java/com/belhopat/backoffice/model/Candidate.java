@@ -10,9 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -36,29 +33,34 @@ public class Candidate extends BaseEntity {
 
 	private String personalEmail;
 
-	private String personalContactNo;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Phone personalContactNo;
 
 	private String officialEmail;
 
-	private String officialContactNo;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Phone officialContactNo;
 
-	private String familyContact1;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Phone familyContact1;
 
-	private String familyContact2;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Phone familyContact2;
 
 	private String familyEmail;
 
-	private String onsiteContactNo;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Phone onsiteContactNo;
+
 	private String fathersName;
-	
+
 	private String mothersName;
-	
+
 	private String childName;
-	
+
 	private String spouseName;
-	
-	@OneToOne(fetch=FetchType.EAGER)
+
+	@OneToOne(fetch = FetchType.EAGER)
 	private EmployeeSalary salary;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -70,7 +72,7 @@ public class Candidate extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address onsiteAddress;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Skill> skillSet;
 
 	private Integer priorExperienceYear;
@@ -85,7 +87,7 @@ public class Candidate extends BaseEntity {
 
 	@ManyToOne
 	private Client client;
-	
+
 	@ManyToOne
 	private Client sourcedBy;
 
@@ -183,11 +185,11 @@ public class Candidate extends BaseEntity {
 		this.personalEmail = personalEmail;
 	}
 
-	public String getPersonalContactNo() {
+	public Phone getPersonalContactNo() {
 		return personalContactNo;
 	}
 
-	public void setPersonalContactNo(String personalContactNo) {
+	public void setPersonalContactNo(Phone personalContactNo) {
 		this.personalContactNo = personalContactNo;
 	}
 
@@ -199,27 +201,27 @@ public class Candidate extends BaseEntity {
 		this.officialEmail = officialEmail;
 	}
 
-	public String getOfficialContactNo() {
+	public Phone getOfficialContactNo() {
 		return officialContactNo;
 	}
 
-	public void setOfficialContactNo(String officialContactNo) {
+	public void setOfficialContactNo(Phone officialContactNo) {
 		this.officialContactNo = officialContactNo;
 	}
 
-	public String getFamilyContact1() {
+	public Phone getFamilyContact1() {
 		return familyContact1;
 	}
 
-	public void setFamilyContact1(String familyContact1) {
+	public void setFamilyContact1(Phone familyContact1) {
 		this.familyContact1 = familyContact1;
 	}
 
-	public String getFamilyContact2() {
+	public Phone getFamilyContact2() {
 		return familyContact2;
 	}
 
-	public void setFamilyContact2(String familyContact2) {
+	public void setFamilyContact2(Phone familyContact2) {
 		this.familyContact2 = familyContact2;
 	}
 
@@ -231,11 +233,11 @@ public class Candidate extends BaseEntity {
 		this.familyEmail = familyEmail;
 	}
 
-	public String getOnsiteContactNo() {
+	public Phone getOnsiteContactNo() {
 		return onsiteContactNo;
 	}
 
-	public void setOnsiteContactNo(String onsiteContactNo) {
+	public void setOnsiteContactNo(Phone onsiteContactNo) {
 		this.onsiteContactNo = onsiteContactNo;
 	}
 
@@ -465,5 +467,5 @@ public class Candidate extends BaseEntity {
 				+ ", employmentStatus=" + employmentStatus + ", registrationStatus=" + registrationStatus
 				+ ", employee=" + employee + "]";
 	}
-	
+
 }

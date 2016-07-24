@@ -348,7 +348,7 @@
         
         service.downloadOfferLetter = function (url) {
             var deferred = $q.defer();
-            url=url+'?empSalId='+17;
+            url=url+'?empSalId='+1;
             Core_HttpRequest.get(url)
                     .then(function (response) {
                         deferred.resolve(response)

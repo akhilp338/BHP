@@ -3,7 +3,6 @@ package com.belhopat.backoffice.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,11 +12,11 @@ public class Skill {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String skillName;
-	
+
 	public Long experienceYear;
-	
+
 	public Long experiencemonth;
 
 	public Long getId() {
@@ -57,5 +56,5 @@ public class Skill {
 		return "Skill [id=" + id + ", skillName=" + skillName + ", experienceYear=" + experienceYear
 				+ ", experiencemonth=" + experiencemonth + "]";
 	}
-	
+
 }
