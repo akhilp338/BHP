@@ -1,18 +1,16 @@
 (function () {
     var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, $timeout, validationService, $mdConstant) {
         var vm = this;
-        vm.isFileInput=  false;
+        vm.isFileInput = false;
         $rootScope.showLoader = true;
         var countryType = ["permenant", "current", "onsite", "bank"];
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
-        };         
+        };
+        vm.add = {};
         vm.registration = {};
-        vm.mainSelectedSkillList = [];
-        vm.subSelectedSkillList = [];
-        vm.deSelectedSkills = [];
         vm.registration.skillSet = [];
-        vm.back = function (){
+        vm.back = function () {
             $state.go('coreuser.candidate');
         };
         if ($stateParams.id) {
@@ -22,9 +20,12 @@
                     vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id, countryType[i]);
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
                 }
-                console.log(res.data.unselectedSkillSe)
-                vm.mainSkillList = res.data.unselectedSkillSet;
-                vm.mainSelectedSkillList = res.data.skillSet;
+                if(res.data.skillSet){
+                    vm.registration.skillSet = [{id:1,"skillName":"Java","years":3,"month":3},{id:2,"skillName":"HTML","years":2,"month":4},{id:3,"skillName":"Python","years":1,"month":5},{id:4,"skillName":"JS","years":2,"month":6}];
+                    for(var m=0; m<vm.registration.skillSet.length; m++){
+                            vm.registration.skillSet[m].chipString = vm.registration.skillSet[m].skillName + "(" + vm.registration.skillSet[m].years + " yrs " + vm.registration.skillSet[m].month + " months)";
+                    }
+                }
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
@@ -43,35 +44,25 @@
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-        
-        
-        vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
-    vm.skillList = [];
-    // Any key code can be used to create a custom separator
-    var semicolon = 186;
-    vm.customKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA, semicolon];
-    vm.contacts = ['test@example.com'];
-    
-    
+
+
+        vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];        
+        // Any key code can be used to create a custom separator
+        var semicolon = 186;
+        vm.customKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA, semicolon];
+        vm.contacts = ['test@example.com'];
+
+
         vm.isCheckboxEnable = false;
         vm.urlForLookups = "api/candidate/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response.data);
-            if (!$stateParams.id)
-                    vm.mainSkillList = vm.lookups.SKILL;
-                vm.allContacts = loadContacts(vm.mainSkillList);
+                    if (!$stateParams.id)
+                        vm.mainSkillList = vm.lookups.SKILL;
                 }, function (error) {
-                });      
-        
-        vm.addSkills = function () {
-            vm.mainSelectedSkillList = vm.mainSelectedSkillList.concat(vm.subSelectedSkillList);
-            vm.removeFromMainListArray(vm.getIndexesToRemove(vm.mainSkillList, vm.subSelectedSkillList));
-        };
-        vm.removeSkills = function () {
-            vm.mainSkillList = vm.mainSkillList.concat(vm.deSelectedSkills);
-            vm.removeFromSelectedListArray(vm.getIndexesToRemove(vm.mainSelectedSkillList, vm.deSelectedSkills));
-        };
+                });
+
 
         $scope.steps = [
             'Personal',
@@ -87,45 +78,45 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-          // if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
-                $scope.selection = $scope.steps[index];
-                $timeout(function(){angular.element('input[type=file]').bootstrapFileInput()
-                    vm.isFileInput = $scope.steps[index] == "Official" ? true : false;},500)
-                
+            // if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+            $scope.selection = $scope.steps[index];
+            $timeout(function () {
+                angular.element('input[type=file]').bootstrapFileInput()
+                vm.isFileInput = $scope.steps[index] == "Official" ? true : false;
+            }, 500)
+
             //}
         };
 
-            vm.querySearch = querySearch;            
-            vm.contacts = [];
-            vm.filterSelected = true;
-            
-            function querySearch (query) {
-               var results = query ?
-               vm.allContacts.filter(createFilterFor(query)) : [];
-               return results;
-            }
+        vm.contacts = [];
+        vm.filterSelected = true;
 
-            function createFilterFor(query) {
-               var lowercaseQuery = angular.lowercase(query);
-               return function filterFn(contact) {
-                  return (contact._lowername.indexOf(lowercaseQuery) != -1);;
-               };
-            }
-            
-            function loadContacts(skills) {
-               var contacts = skills;               
-               return contacts.map(function (c, index) {
-                     c = c.skillName;
-                     var contact = {
-                        name: c
-                     };
-                     contact._lowername = contact.name.toLowerCase();
-                     return contact;
-               });
-            }
 
-                
-                
+        vm.addSkill = function () {
+            var chipString = "";
+            if (vm.add.skill && vm.add.expYr && vm.add.expMnth) {
+                chipString = vm.add.skill + "(" + vm.add.expYr + " yrs " + vm.add.expMnth + "months)";
+            }
+            else if (vm.add.skill && vm.add.expYr){
+                 chipString = vm.add.skill + "(" + vm.add.expYr + " yrs " +"0 months)";
+            }
+            if(chipString){      
+            vm.registration.skillSet.push({
+              skillName:vm.add.skill,
+              year:vm.add.expYr,
+              month:vm.add.expMnth,
+              chipString: chipString
+            });
+            vm.add.skill = "";
+            vm.add.expYr = "";
+            vm.add.expMnth = "";
+        }
+        };
+
+        vm.removeChip = function(chipInfo){
+            console.log(chipInfo)
+        };
+        
         $scope.hasNextStep = function () {
             var stepIndex = $scope.getCurrentStepIndex();
             var nextStep = stepIndex + 1;
@@ -199,67 +190,22 @@
             $state.go("coreuser.candidate.add");
         };
 
-        vm.cancelRegisteration = function (){
+        vm.cancelRegisteration = function () {
             $state.go("coreuser.candidate")
         };
         vm.candidateRegister = function () {
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
-                var skillSet = vm.skillList;
-//                vm.registration.skillSet = skillSet;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
-                        	Core_Service.sweetAlert("Done!",response.Message,"success","coreuser.candidate");  
+                            Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
                             console.log(response)
                         }, function (error) {
                             console.log(error)
                         });
             }
         };
-        
-        vm.getUpdatedSkillSet = function(param){
-        	var array=[];
-        	for(var key in param){
-        		var skillSet = {};
-        		skillSet.id =param[key];
-        		skillSet.skillName =param[key]; 
-        		array.push(skillSet);
-        	}
-        	return array;
-        }
-        
-        vm.getIndexesToRemove = function (array, data) {
-            var indexes = [];
-            for (var i = 0; i < data.length; i++) {
-                for (var j = 0; j < array.length; j++) {
-                    if (data[i].id == array[j].id) {
-                        indexes.push(j);
-                    }
-                }
-            }
-            return  indexes;
-        };
-        
-        vm.removeFromSelectedListArray = function (indexes) {
-            var selected = [];
-            for (var i = indexes.length - 1; i >= 0; i--)
-                vm.mainSelectedSkillList.splice(indexes[i], 1);
-            vm.deSelectedSkills = [];
-            for (var j = 0; j < vm.mainSelectedSkillList.length; j++) {
-                selected.push(vm.mainSelectedSkillList[j].id)
-            }
-            vm.registration.skillSet = selected;
-        };
-        vm.removeFromMainListArray = function (indexes) {
-            var selected = [];
-            for (var i = indexes.length - 1; i >= 0; i--)
-                vm.mainSkillList.splice(indexes[i], 1);
-            vm.subSelectedSkillList = [];
-            for (var j = 0; j < vm.mainSelectedSkillList.length; j++) {
-                selected.push(vm.mainSelectedSkillList[j].id)
-            }
-            vm.registration.skillSet = selected;
-        };
+
         //To Do(move these methods to base controller)
         vm.getStatesByCountry = function (countryId, flag) {
             var data = {"id": countryId};
@@ -322,7 +268,7 @@
                     });
         };
 
-    };   
+    };
 
     AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService', '$mdConstant'];
     angular.module('coreModule')

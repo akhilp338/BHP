@@ -326,20 +326,20 @@
                         <div class="data-main-container">     
                             <header class="data-main-container-header">Basic Information</header>
                             <div class="control-group col-lg-2 col-md-4 col-sm-4 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Exp.(Yrs)</label>
+                                <label class="control-label" for="experience">Exp.</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.priorExperienceYear"
-                                           class="form-input width-100" placeholder="Experience"
+                                           class="form-input width-100" placeholder="Years"
                                            validation="required:alt=Required" />
                                 </div>
                             </div>
                             <div class="control-group col-lg-2 col-md-4 col-sm-4 col-xs-3 pull-left">
-                                <label class="control-label" for="experience">Exp.(Mnnths)</label>
+                                <label class="control-label" for="experience">Exp.</label>
                                 <div class="controls">
                                     <input type="text" name="experience" id="experience"
                                            ng-model="vm.registration.priorExperienceMonth"
-                                           class="form-input width-100" placeholder="Experience"
+                                           class="form-input width-100" placeholder="Months"
                                            validation="required:alt=Required" />
                                 </div>
                             </div>
@@ -410,9 +410,9 @@
                                 <label class="control-label" for="client">Client</label>
                                 <div class="controls">
                                     <select name="client" ng-model="vm.registration.client.id"
-                                        class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
-                                        validation="required:alt=required">
-                                <option value="">--SELECT--</option>
+                                            class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
+                                            validation="required:alt=required">
+                                        <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
@@ -428,52 +428,65 @@
                                 <label class="control-label" for="partner">Sourced By</label>
                                 <div class="controls">
                                     <select name="sourcedBy" ng-model="vm.registration.sourcedBy.id"
-                                        class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
-                                        validation="required:alt=required">
-                                <option value="">--SELECT--</option>
+                                            class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
+                                            validation="required:alt=required">
+                                        <option value="">--SELECT--</option>
                                     </select>
                                 </div>
                             </div>
-                            <!--                            <div class="control-group group-select col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                                            <label class="control-label" for="skillSetList">Skill Set
-                                                                List</label>
-                                                            <div class="controls">
-                                                                <select name="skills_main" class="skills" size="5" id="skillList" multiple
-                                                                        ng-multiple="true" ng-model="vm.subSelectedSkillList"
-                                                                    ng-options="skill.skillName for skill in vm.mainSkillList">
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="control-group group-select col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                                            <div class="add-remove-controls">
-                                                                <button type="button" ng-click="vm.addSkills()"
-                                                                        title="Add Skills" id="addSkills" class="logout-button">>></button>
-                                                                <button type="button" ng-click="vm.removeSkills()"
-                                                                        title="Remove Skills" id="removeSkills" class="logout-button"><<</button>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="control-group group-select col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                                            <label class="control-label" for="selectedSkillSet">Selected
-                                                                Skill Sets</label>
-                                                            <div class="controls">
-                                                                <select name="skills_selected" class="skills" size="5" id="skillsSelected" multiple
-                                                                        ng-multiple="true" ng-model="vm.deSelectedSkills"
-                                                                    ng-options="skill.skillName for skill in vm.mainSelectedSkillList">
-                                                                </select>
-                                                            </div>
-                                                        </div>-->
-                            <div class="control-group col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+
+                            <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="experience">Skill</label>
+                                <div class="controls">
+                                    <input type="text" name="skill" id="experience"
+                                           ng-model="vm.add.skill"
+                                           class="form-input width-100" placeholder="skill name"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="expYr">Exp.</label>
+                                <div class="controls">
+                                    <input type="text" name="expYr" id="experience"
+                                           ng-model="vm.add.expYr"
+                                           class="form-input width-100" placeholder="Years"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-lg-2 col-md-2 col-sm-6 col-xs-6 pull-left">
+                                <label class="control-label" for="expMnth">Exp</label>
+                                <div class="controls">
+                                    <input type="text" name="expMnth" id="experience"
+                                           ng-model="vm.add.expMnth"
+                                           class="form-input width-100" placeholder="Months"/>
+                                </div>
+                            </div>
+
+                            <div class="control-btn col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <button ng-click="vm.addSkill()"
+                                        class="logout-button skill-btn add-button" title="add skill">
+                                    <span class="fa-stack fa-lg pull-left"><i
+                                            class="fa fa-plus" aria-hidden="true"></i></span>
+                                    <span class="text">Add skill</span>              
+                                </button>
+                            </div>
+                            <div class="control-group col-lg-12 col-md-12 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="selectedSkillSet">Skill set</label>
                                 <div class="controls">
                                     <md-content class="md-padding col-lg-12 col-md-12 col-sm-12 col-xs-12" layout="column">                                        
                                         <md-chips style="padding-left: 0;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-chip"
-                                                  ng-model="vm.skillList"
+                                                  ng-model="vm.registration.skillSet"
                                                   md-separator-keys="vm.keys"
                                                   md-input-name="skillList"
                                                   md-input-minlength="1"
-                                                  placeholder="eg: Java(2 yrs)"></md-chips>
+                                                  md-on-remove="vm.removeChip($chip)"
+                                                  placeholder="eg: Java(2 yrs)"> 
+                                            <md-chip-template>
+                                                <span>
+                                                    <em>{{$chip.chipString}}</em>
+                                                </span>
+                                            </md-chip-template>
+                                        </md-chips>
                                         <br/>
                                     </md-content>                                  
                                 </div></div>
