@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,7 @@ import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
+import com.belhopat.backoffice.util.DateUtil;
 import com.belhopat.backoffice.util.TaskConstants;
 import com.itextpdf.text.DocumentException;
 
@@ -249,6 +251,11 @@ public class BaseServiceImpl implements BaseService {
 			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
 			increment = candidateSequence.getId();
 		} else if (clazz.equals(Employee.class)) {
+//			Date latestDate = employeeSequenceRepository.getLatestDate();
+//			if ((DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate))
+//					|| DateUtil.isPreviousMonth(latestDate)) {
+//				employeeSequenceRepository.truncate();
+//			}
 			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
 		} else if (clazz.equals(Client.class)) {
@@ -379,8 +386,9 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
-//				employeeSalary.setOfferLetterFileName(document);
+				// String document =
+				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				// employeeSalary.setOfferLetterFileName(document);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}

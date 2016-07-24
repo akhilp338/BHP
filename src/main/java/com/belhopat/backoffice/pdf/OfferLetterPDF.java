@@ -1,8 +1,7 @@
 package com.belhopat.backoffice.pdf;
 
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Date;
@@ -30,9 +29,10 @@ public class OfferLetterPDF extends BasePDFGenerator {
 	public byte[] getPDFContents(EmployeeSalary employeeSalary)
 			throws MalformedURLException, IOException, DocumentException, ParseException {
 
-		String fileName = "OfferLetter.pdf";
-		// ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		OutputStream outputStream = new FileOutputStream("/home/sujith/Desktop/" + fileName);
+		// String fileName = "OfferLetter.pdf";
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		// OutputStream outputStream = new
+		// FileOutputStream("/home/sujith/Desktop/" + fileName);
 		Document document = new Document(PageSize.A4, 50f, 50f, 150f, 60f);
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.setBoxSize("art", PageSize.A4);
@@ -41,8 +41,8 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		addContentToDocument(document, employeeSalary);
 		document.close();
 		outputStream.close();
-		// return outputStream.toByteArray();
-		return null;
+		return outputStream.toByteArray();
+		// return null;
 	}
 
 	private void addContentToDocument(Document document, EmployeeSalary employeeSalary)
@@ -524,8 +524,10 @@ public class OfferLetterPDF extends BasePDFGenerator {
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent("Gross Salary", Rectangle.ALIGN_LEFT, bold10Font, BaseColor.GRAY));
 			Float monthlyGrossSalary = new Float(Math.round((salary.getGrossSalary() / 12D)));
-			CSContent.addCell(getCellContent(monthlyGrossSalary.toString(), Rectangle.ALIGN_RIGHT, bold10Font,BaseColor.GRAY));
-			CSContent.addCell(getCellContent(salary.getGrossSalary().toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(
+					getCellContent(monthlyGrossSalary.toString(), Rectangle.ALIGN_RIGHT, bold10Font, BaseColor.GRAY));
+			CSContent.addCell(getCellContent(salary.getGrossSalary().toString(), Rectangle.ALIGN_RIGHT, bold10Font,
+					BaseColor.GRAY));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
 			CSContent.addCell(getCellContent(""));
