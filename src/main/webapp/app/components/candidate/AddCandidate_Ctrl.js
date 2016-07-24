@@ -21,9 +21,9 @@
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
                 }
                 if(res.data.skillSet){
-                    vm.registration.skillSet = [{id:1,"skillName":"Java","years":3,"month":3},{id:2,"skillName":"HTML","years":2,"month":4},{id:3,"skillName":"Python","years":1,"month":5},{id:4,"skillName":"JS","years":2,"month":6}];
+                    //vm.registration.skillSet = [{id:1,"skillName":"Java","years":3,"month":3},{id:2,"skillName":"HTML","years":2,"month":4},{id:3,"skillName":"Python","years":1,"month":5},{id:4,"skillName":"JS","years":2,"month":6}];
                     for(var m=0; m<vm.registration.skillSet.length; m++){
-                            vm.registration.skillSet[m].chipString = vm.registration.skillSet[m].skillName + "(" + vm.registration.skillSet[m].years + " yrs " + vm.registration.skillSet[m].month + " months)";
+                            vm.registration.skillSet[m].chipString = vm.registration.skillSet[m].skillName + "(" + vm.registration.skillSet[m].experienceYear + " yrs " + vm.registration.skillSet[m].experienceMonth + " months)";
                     }
                 }
                 vm.isCheckboxEnable = true;
@@ -103,8 +103,8 @@
             if(chipString){      
             vm.registration.skillSet.push({
               skillName:vm.add.skill,
-              year:vm.add.expYr,
-              month:vm.add.expMnth,
+              experienceYear:vm.add.expYr,
+              experienceMonth:vm.add.expMnth,
               chipString: chipString
             });
             vm.add.skill = "";
