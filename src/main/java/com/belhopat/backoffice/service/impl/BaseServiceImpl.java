@@ -1,10 +1,8 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
-import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +59,6 @@ import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
-import com.google.common.io.Files;
 import com.itextpdf.text.DocumentException;
 
 /**

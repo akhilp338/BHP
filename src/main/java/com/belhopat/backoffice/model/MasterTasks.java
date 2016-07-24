@@ -1,30 +1,26 @@
 package com.belhopat.backoffice.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Mst_Tasks")
 public class MasterTasks {
 
-	
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String taskKey;
-	
+
 	private Long nextTaskId;
-	
+
 	private String taskDesc;
-	
+
 	private String taskOwnerRole;
-	
+
 	public String getTaskKey() {
 		return taskKey;
 	}
@@ -56,5 +52,5 @@ public class MasterTasks {
 	public void setNextTaskId(Long nextTaskId) {
 		this.nextTaskId = nextTaskId;
 	}
-	
+
 }

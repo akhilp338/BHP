@@ -1,6 +1,5 @@
 package com.belhopat.backoffice.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
@@ -80,7 +79,7 @@ public class BaseController {
 	@RequestMapping(value = "/downloadDocument", method = RequestMethod.GET)
 	@ResponseBody
 	public void downloadDocument(@RequestParam Long empSalId, HttpServletResponse response) throws IOException {
-		baseService.getFileByNameAndCategory(empSalId,response);
+		baseService.getFileByNameAndCategory(empSalId, response);
 	}
-	 
+
 }

@@ -8,20 +8,21 @@ import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 
 public class Config {
 
-    private static Properties config;
-    private static final String RELATIVE_PATH_TO_PROPERTIES = "config.properties";
+	private static Properties config;
+	private static final String RELATIVE_PATH_TO_PROPERTIES = "config.properties";
 
-    public static Properties getConfig() {
-        if (config == null) {
-            config = new Properties();
-            try {
-                   config.load(new FileInputStream(BelhopatServletContextInfo.getRealPath()+"WEB-INF/classes/"+"alfresco-config.properties"));
-               } catch (IOException ioe) {
-                   ioe.printStackTrace();
-            }
+	public static Properties getConfig() {
+		if (config == null) {
+			config = new Properties();
+			try {
+				config.load(new FileInputStream(
+						BelhopatServletContextInfo.getRealPath() + "WEB-INF/classes/" + "alfresco-config.properties"));
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
 
-        }
-        return config;
-    }
+		}
+		return config;
+	}
 
 }

@@ -29,7 +29,6 @@ import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
-import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
@@ -60,7 +59,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	EmployeeSalaryRepository employeeSalaryRepository;
-	
+
 	@Autowired
 	MailService mailService;
 
@@ -165,11 +164,11 @@ public class CandidateServiceImpl implements CandidateService {
 		personalInfo.setGender(candidate.getGender().getCode());
 		personalInfo.setBloodGroup(candidate.getBloodGroup().getCode());
 		personalInfo.setCountryOfOrigin(candidate.getCountryOfOrigin().getDescription());
-		personalInfo.setPersonalContactNo(candidate.getPersonalContactNo());
+		personalInfo.setPersonalContactNo(candidate.getPersonalContactNo().getNumber());
 		personalInfo.setPersonalEmailId(candidate.getPersonalEmail());
-		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo());
+		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo().getNumber());
 		personalInfo.setOfficialEmailId(candidate.getOfficialEmail());
-		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo());
+		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo().getNumber());
 		personalInfo.setPermenantAddress(permenantAddress);
 		personalInfo.setCurrentAddress(currentAddress);
 		return personalInfo;
@@ -372,11 +371,11 @@ public class CandidateServiceImpl implements CandidateService {
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
 		candidate.setCandidateId(candidateId);
 		Candidate persisted = candidateRepository.save(candidate);
-		//TODO make this generic
-		
-		try{
-			mailService.sendCandidateRegMail( persisted, false, "" );
-		}catch(MessagingException e){
+		// TODO make this generic
+
+		try {
+			mailService.sendCandidateRegMail(persisted, false, "");
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		return persisted;
@@ -456,7 +455,7 @@ public class CandidateServiceImpl implements CandidateService {
 				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
 				Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
 				Predicate salaryNotProcessed = criteriaBuilder.isNull(root.get("salary"));
-				return criteriaBuilder.and(isNotDeleted, employeeStatus,salaryNotProcessed);
+				return criteriaBuilder.and(isNotDeleted, employeeStatus, salaryNotProcessed);
 			}
 		};
 		DataTablesOutput<Candidate> dataTablesOutput = candidateRepository.findAll(input, specification);
@@ -470,7 +469,5 @@ public class CandidateServiceImpl implements CandidateService {
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
-	
-	
 
 }

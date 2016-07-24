@@ -22,7 +22,6 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
-import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
@@ -41,21 +40,20 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	JavaMailSender mailSender;
-	
+
 	@Autowired
 	ThreadPoolTaskExecutor threadExecutor;
 
 	@Autowired
-    private VelocityEngine velocityEngine;
-	
+	private VelocityEngine velocityEngine;
+
 	protected static final Logger LOGGER = Logger.getLogger(MailServiceImpl.class.getName());
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.belhopat.backoffice.service.MailService#sendMail(com.belhopat.
-	 * backoffice.service.session.MailMessageObject)
-	 * sends mail in a thread
+	 * backoffice.service.session.MailMessageObject) sends mail in a thread
 	 */
 	@Async
 	@Override
@@ -79,57 +77,53 @@ public class MailServiceImpl implements MailService {
 	 * 
 	 * @see
 	 * com.belhopat.backoffice.service.MailService#sendPasswordResetMail(java.
-	 * lang.String, java.lang.String)
-	 * sends reseted password
+	 * lang.String, java.lang.String) sends reseted password
 	 */
 	@Override
-//	public void sendPasswordResetMail(User user, String generatedPassword) throws MessagingException {
+	// public void sendPasswordResetMail(User user, String generatedPassword)
+	// throws MessagingException {
 
 	public void sendPasswordResetMail(Candidate candidate, String generatedPassword) throws MessagingException {
-		Map<String, Object> model = new HashMap < String, Object > ();
-		model.put( Constants.GENERATED_PASSWORD, generatedPassword );
-		
-		
-//		model.put( Constants.USERNAME, user.getUsername());
-		
-		model.put( Constants.USERNAME, candidate.getFirstName());
-		
-		
-		
-        String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.PASSWORD_RESET_TEMPLATE, model );
-        
-        String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
-        
-//		MailMessageObject mailObject = new MailMessageObject(user.getEmail(), MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
-//				emailHtmlBody, logoResourcePath, mailSender);
-        
-        List< InternetAddress > forDebugList = new ArrayList< InternetAddress >();
-        forDebugList.add( 
-        		new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
-        forDebugList.add(  
-        		new InternetAddress("sreekesh@belhopat.com"));
-        forDebugList.add( 		
-        		new InternetAddress("akhil@belhopat.com"));
-        forDebugList.add( 
-        		new InternetAddress("akhilp338@gmail.com"));
-        InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
-        forDebugEmail = forDebugList.toArray( forDebugEmail );
-        
-        MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put(Constants.GENERATED_PASSWORD, generatedPassword);
+
+		// model.put( Constants.USERNAME, user.getUsername());
+
+		model.put(Constants.USERNAME, candidate.getFirstName());
+
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.PASSWORD_RESET_TEMPLATE, model);
+
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+
+		// MailMessageObject mailObject = new MailMessageObject(user.getEmail(),
+		// MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
+		// emailHtmlBody, logoResourcePath, mailSender);
+
+		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
+		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
+		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhilp338@gmail.com"));
+		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
+		forDebugEmail = forDebugList.toArray(forDebugEmail);
+
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
 				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
-//		velocityEngine.setApplicationAttribute("javax.servlet.ServletContext", servletContext);
+		// velocityEngine.setApplicationAttribute("javax.servlet.ServletContext",
+		// servletContext);
 	}
 
 	/**
 	 * @param passwordResetTemplate
 	 * @param model
-	 * @return htmlEmailBody
-	 * Accepts a velocity template name and model map containing objects to be merged with the template and merges them into a string
+	 * @return htmlEmailBody Accepts a velocity template name and model map
+	 *         containing objects to be merged with the template and merges them
+	 *         into a string
 	 */
-	private String generateEmailBodyFromVelocityTemplate( String templateName, Map<String, Object> model ) {
-		String emailHtmlBody = VelocityEngineUtils.mergeTemplateIntoString(
-                velocityEngine, templateName, Constants.UTF_8, model);
+	private String generateEmailBodyFromVelocityTemplate(String templateName, Map<String, Object> model) {
+		String emailHtmlBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, templateName,
+				Constants.UTF_8, model);
 		return emailHtmlBody;
 	}
 
@@ -138,138 +132,119 @@ public class MailServiceImpl implements MailService {
 	 * 
 	 * @see
 	 * com.belhopat.backoffice.service.MailService#sendCandidateRegMail(java.
-	 * lang.String, java.lang.String)
-	 * sends mail on candidate registration success
+	 * lang.String, java.lang.String) sends mail on candidate registration
+	 * success
 	 */
 	@Override
-	public void sendCandidateRegMail(String userEmail, String mailContent ) throws MessagingException {
+	public void sendCandidateRegMail(String userEmail, String mailContent) throws MessagingException {
 
-		Map<String, Object> model = new HashMap < String, Object > ();
-		model.put( Constants.CONTENT, mailContent );
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.DEFAULT_EMAIL_TEMPLATE, model);
-		
-		
-//		MailMessageObject mailObject = new MailMessageObject(userEmail, MAIL_FROM, Constants.CAND_REG_SUCC_MAIL_SUB,
-//				emailHtmlBody, mailSender);
-		
-        List< InternetAddress > forDebugList = new ArrayList< InternetAddress >();
-        forDebugList.add( 
-        		new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
-        forDebugList.add(  
-        		new InternetAddress("sreekesh@belhopat.com"));
-        forDebugList.add( 		
-        		new InternetAddress("akhil@belhopat.com"));
-        forDebugList.add( 
-        		new InternetAddress("akhilp338@gmail.com"));
-        InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
-        forDebugEmail = forDebugList.toArray( forDebugEmail );
-		
-        MailMessageObject mailObject = new MailMessageObject( forDebugEmail, MAIL_FROM, Constants.CAND_REG_SUCC_MAIL_SUB,
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put(Constants.CONTENT, mailContent);
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.DEFAULT_EMAIL_TEMPLATE, model);
+
+		// MailMessageObject mailObject = new MailMessageObject(userEmail,
+		// MAIL_FROM, Constants.CAND_REG_SUCC_MAIL_SUB,
+		// emailHtmlBody, mailSender);
+
+		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
+		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
+		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhilp338@gmail.com"));
+		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
+		forDebugEmail = forDebugList.toArray(forDebugEmail);
+
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.CAND_REG_SUCC_MAIL_SUB,
 				emailHtmlBody, mailSender);
-		
-		
-		
+
 		sendMail(mailObject);
 
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.belhopat.backoffice.service.MailService#sendClientRegMail(java.
-	 * lang.String, java.lang.String)
-	 * sends mail on client registration success
+	 * @see com.belhopat.backoffice.service.MailService#sendClientRegMail(java.
+	 * lang.String, java.lang.String) sends mail on client registration success
 	 */
 	@Override
-	public void sendClientRegMail( Client client ) throws MessagingException {
+	public void sendClientRegMail(Client client) throws MessagingException {
 
-		Map<String, Object> model = new HashMap < String, Object > ();
-		model.put( Constants.CLIENT, client );
-		model.put( Constants.POC, client.getPoc() );
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
-		
-		
-//		MailMessageObject mailObject = new MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
-//				MAIL_FROM, Constants.CLIENT_REG_SUCC_MAIL_SUB,
-//				emailHtmlBody, mailSender);
-		
-        List< InternetAddress > forDebugList = new ArrayList< InternetAddress >();
-        forDebugList.add( 
-        		new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
-        forDebugList.add(  
-        		new InternetAddress("sreekesh@belhopat.com"));
-        forDebugList.add( 		
-        		new InternetAddress("akhil@belhopat.com"));
-        forDebugList.add( 
-        		new InternetAddress("akhilp338@gmail.com"));
-        InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
-        forDebugEmail = forDebugList.toArray( forDebugEmail );
-		
-		
-		MailMessageObject mailObject = new MailMessageObject( forDebugEmail,
-				MAIL_FROM, Constants.CLIENT_REG_SUCC_MAIL_SUB,
-				emailHtmlBody, mailSender);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put(Constants.CLIENT, client);
+		model.put(Constants.POC, client.getPoc());
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
+
+		// MailMessageObject mailObject = new
+		// MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
+		// MAIL_FROM, Constants.CLIENT_REG_SUCC_MAIL_SUB,
+		// emailHtmlBody, mailSender);
+
+		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
+		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
+		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhilp338@gmail.com"));
+		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
+		forDebugEmail = forDebugList.toArray(forDebugEmail);
+
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
+				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
 	}
-	
 
 	@Override
 	public void sendEventInvitaionMail(List<String> guestEmails, String emailBody) throws MessagingException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.belhopat.backoffice.service.MailService#sendCandidateRegMail
-	 * (com.belhopat.backoffice.model.Candidate, java.lang.Boolean)
-	 * sends Mail on candidate and employee registration based on value of isEmployee status flag
+	 * (com.belhopat.backoffice.model.Candidate, java.lang.Boolean) sends Mail
+	 * on candidate and employee registration based on value of isEmployee
+	 * status flag
 	 */
 	@Override
-	public void sendCandidateRegMail( Candidate candidate, Boolean isEmployee, String employeeId ) throws MessagingException {
-		
+	public void sendCandidateRegMail(Candidate candidate, Boolean isEmployee, String employeeId)
+			throws MessagingException {
+
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
 		String mailTemplate = null;
-		Map<String, Object> model = new HashMap < String, Object > ();
-		if(!isEmployee){
-			model.put( Constants.CANDIDATE, candidate );
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (!isEmployee) {
+			model.put(Constants.CANDIDATE, candidate);
 			mailSubject = Constants.CAND_REG_SUCC_MAIL_SUB;
 			mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
 
-		}else{
-			String employeeName = candidate.getFirstName() + " "
-					+ candidate.getLastName();
+		} else {
+			String employeeName = candidate.getFirstName() + " " + candidate.getLastName();
 			mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
 			mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
-			model.put( Constants.EMPLOYEES, employeeId );
-			model.put( Constants.EMPLOYEE_NAME, employeeName );
+			model.put(Constants.EMPLOYEES, employeeId);
+			model.put(Constants.EMPLOYEE_NAME, employeeName);
 		}
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
-		
-//		mailObject = new MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
-//				MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
-		
-		
-        List< InternetAddress > forDebugList = new ArrayList< InternetAddress >();
-        forDebugList.add( 
-        		new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
-        forDebugList.add(  
-        		new InternetAddress("sreekesh@belhopat.com"));
-        forDebugList.add( 		
-        		new InternetAddress("akhil@belhopat.com"));
-        forDebugList.add( 
-        		new InternetAddress("akhilp338@gmail.com"));
-        InternetAddress[] forDebugEmail = new InternetAddress[ forDebugList.size() ];
-        forDebugEmail = forDebugList.toArray( forDebugEmail );
-		
-		
-		
-		mailObject = new MailMessageObject(forDebugEmail,
-				MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+
+		// mailObject = new
+		// MailMessageObject(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING,
+		// MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+
+		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
+		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
+		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
+		forDebugList.add(new InternetAddress("akhilp338@gmail.com"));
+		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
+		forDebugEmail = forDebugList.toArray(forDebugEmail);
+
+		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
-		
+
 	}
 
 }
