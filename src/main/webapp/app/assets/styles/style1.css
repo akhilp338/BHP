@@ -1760,6 +1760,7 @@ span.upload-label {
 .event-modal .modal-body {
     max-height: none;
     overflow-y: auto;
+    max-width: 100%
 } 
 
 .fc-event {
@@ -2053,4 +2054,15 @@ md-chips-wrap.md-chips {
 .skill-btn span.text{
     margin-left: 0;
     padding: 0;
+}
+
+.md-chips ._md-chip-input-container{
+    display:none!important;
+}
+.guest-chip{
+    float: left;
+    max-width: 100%;
+}
+.theme4 .logout-button[disabled="disabled"] {
+    opacity: .5;
 }

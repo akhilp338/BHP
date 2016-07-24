@@ -255,7 +255,6 @@ INSERT INTO `belhopat_backoffice`.`country_test` (`id`, `iso`, `name`, `nicename
 (239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
 
 
-
 ALTER TABLE `belhopat_backoffice`.`Country` 
 ADD COLUMN `phonecode` INT(5) NULL AFTER `description`,
 ADD COLUMN `numcode` INT(5) NULL AFTER `phonecode`,
@@ -271,7 +270,7 @@ SET
     C.iso3 = CT.iso3
 WHERE
     C.`code` = CT.iso
-  
+
 UPDATE belhopat_backoffice.Country SET phonecode = 670 WHERE code = 'TP';
 UPDATE belhopat_backoffice.Country SET phonecode = 672 WHERE code = 'XA';
 UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XU';

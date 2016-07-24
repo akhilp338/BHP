@@ -162,7 +162,7 @@
                     });
             return deferred.promise;
         };
-        
+
         service.getSalaryGradesUrl = function (url) {
             var deferred = $q.defer();
             Core_HttpRequest.post(url)
@@ -176,7 +176,7 @@
 
         service.defaultApiByIdAndUrlImpl = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url,data)
+            Core_HttpRequest.post(url, data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -185,20 +185,34 @@
             return deferred.promise;
         };
 
-        service.sweetAlert = function (congrats, message, type, redirectState) {            
+        service.sweetAlert = function (congrats, message, type, redirectState) {
             swal({
                 title: congrats,
                 text: message,
-                type:type,
+                type: type,
                 showCancelButton: false,
                 confirmButtonColor: "#CC2727",
                 confirmButtonText: "OK",
                 closeOnConfirm: true},
                     function () {
-                	if(redirectState)
-                		$state.go( redirectState );
+                        if (redirectState)
+                            $state.go(redirectState);
 //                        $state.go("coreuser.candidate");
                     });
+        };
+
+        service.sweetAlertWithConfirm = function (congrats, message, type, callback) {
+            swal({
+                title: congrats,
+                text: message,
+                type: type,
+                showCancelButton: true,
+                confirmButtonColor: "#CC2727",
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                closeOnConfirm: false},
+                callback
+                );
         };
 
         service.getUserName = function () {
@@ -209,7 +223,7 @@
                         return error;
                     });
         };
-        
+
         service.getRoleTabs = function () {
             Core_HttpRequest.post('api/getRoleTabs')
                     .then(function (response) {
@@ -218,14 +232,14 @@
                         return error;
                     });
         };
-        
+
 //        service.tab.dashboard = {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard"}
 //        service.tab.candidate = {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate"}
 //        service.tab.employee = {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee"}
 //        service.tab.client =  {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client"}
 //        service.tab.offerletter = {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome"}
 //        service.tab.offerletter = {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event"}
-        
+
         service.recall = function () {
             setTimeout(function () {
                 if (document.createEvent) { // W3C
@@ -253,10 +267,10 @@
             var returnDate = yyyy + '-' + mm + '-' + dd;
             return returnDate;
         };
-        
-        service.getSalaryDetails = function (url,params) {
+
+        service.getSalaryDetails = function (url, params) {
             var deferred = $q.defer();
-                url=url+'?fixed='+params.fixed+'&grade='+params.grade;
+            url = url + '?fixed=' + params.fixed + '&grade=' + params.grade;
             Core_HttpRequest.get(url)
                     .then(function (response) {
                         deferred.resolve(response)
@@ -265,8 +279,8 @@
                     });
             return deferred.promise;
         };
-        
-        service.getAllEvents = function(url){
+
+        service.getAllEvents = function (url) {
             var deferred = $q.defer();
             Core_HttpRequest.get(url)
                     .then(function (response) {
@@ -276,8 +290,8 @@
                     });
             return deferred.promise;
         };
-        
-        service.getAllGuests = function(url){
+
+        service.getAllGuests = function (url) {
             var deferred = $q.defer();
             Core_HttpRequest.get(url)
                     .then(function (response) {
@@ -287,21 +301,10 @@
                     });
             return deferred.promise;
         }
-        
-        service.addEventDetails = function(url,data){
+
+        service.addEventDetails = function (url, data) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url,data)
-                    .then(function (response) {
-                        deferred.resolve(response)
-                    }, function (error) {
-                        deferred.reject(error)
-                    });
-            return deferred.promise;
-        } 
-        
-        service.updateEventDetails = function(url,data){
-            var deferred = $q.defer();
-            Core_HttpRequest.post(url,data)
+            Core_HttpRequest.post(url, data)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -309,7 +312,18 @@
                     });
             return deferred.promise;
         }
-        
+
+        service.updateEventDetails = function (url, data) {
+            var deferred = $q.defer();
+            Core_HttpRequest.post(url, data)
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        }
+
         service.generateOfferLetterImpl = function (url, postData) {
             var deferred = $q.defer();
             Core_HttpRequest.post(url, postData)
@@ -334,10 +348,10 @@
                     });
             return deferred.promise;
         };
-        
-        service.requestForApproval = function (url,employeeSalary) {
+
+        service.requestForApproval = function (url, employeeSalary) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url,employeeSalary)
+            Core_HttpRequest.post(url, employeeSalary)
                     .then(function (response) {
                         deferred.resolve(response)
                     }, function (error) {
@@ -345,10 +359,10 @@
                     });
             return deferred.promise;
         };
-        
-        service.downloadOfferLetter = function (url) {
+
+        service.downloadOfferLetter = function (url,id) {
             var deferred = $q.defer();
-            url=url+'?empSalId='+40;
+            url=url+'?empSalId='+id;
             Core_HttpRequest.get(url)
                     .then(function (response) {
                         deferred.resolve(response)
@@ -357,7 +371,7 @@
                     });
             return deferred.promise;
         };
-        
+
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')

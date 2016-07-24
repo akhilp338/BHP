@@ -122,8 +122,8 @@
                     class="fa fa-paper-plane" aria-hidden="true"></i></span>
             <span class="text">Request For Approval</span>              
         </button>
-        <button ng-click="vm.downloadOfferLetter()"
-                class="logout-button pull-right add-button download-btn" title="Download Offer Letter">
+        <button  ng-click="vm.downloadOfferLetter()"
+                class="logout-button pull-right add-button download-btn" title="Download Offer Letter" ng-disabled="!vm.offerletter.id">
             <span class="fa-stack fa-lg pull-left"><i
                     class="fa fa-download" aria-hidden="true"></i></span>
             <span class="text">Download Offer Letter</span>              

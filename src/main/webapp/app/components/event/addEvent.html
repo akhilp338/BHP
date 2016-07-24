@@ -12,34 +12,55 @@
                    validation="required:alt=Required" />
         </div>
     </div>
-    <div class="control-group checkbox-input col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+    <div class="control-group col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+        <label class="control-label" for="guests">Guest List</label>
         <div class="controls">
-            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
-                   class="styled" > <label for="checkbox1">
-                All day Event</label>
+            <select ng-change = "vm.removeSelectedGuest(vm.eventguests, vm.eventguestList)" name="guests" ng-model="vm.eventguestList"
+                    class="form-input width-100" ng-options="guest as (guest.text) for guest in vm.eventguests"
+                    >
+                <option value="">--SELECT--</option>
+            </select>                                    
         </div>
     </div>
-        
+    <div ng-if="vm.addEventData.guests.length" class="control-group col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
+        <div class="controls guest-chip">
+            <md-content class="md-padding col-lg-12 col-md-12 col-sm-12 col-xs-12" layout="column">                                        
+                <md-chips style="padding-left: 0;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 custom-chip"
+                          ng-model="vm.addEventData.guests"
+                          md-separator-keys="vm.keys"
+                          md-input-name="eventguests"
+                          md-input-minlength="1"
+                          md-on-remove="vm.guestRemove($chip)"> 
+                    <md-chip-template>
+                        <span title="{{$chip.text}}">
+                            <em>{{$chip.text}}</em>
+                        </span>
+                    </md-chip-template>
+                </md-chips>
+                <br/>
+            </md-content>                                  
+        </div></div>   
+
     <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
         <label class="control-label" for="start_date">Start Date</label>
         <div class="controls">
-             <p class="input-group">
-                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker7.date" is-open="vm.picker7.open" />
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker7')"><i class="fa fa-calendar"></i></button>
-              </span>
-              </p>
+            <p class="input-group">
+                <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker7.date" is-open="vm.picker7.open" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker7')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </p>
         </div>
     </div>
     <div class="control-group dateTimePicker col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-left">
         <label class="control-label" for="end_date">End Date</label>
         <div class="controls">                       
-              <p class="input-group">
-                  <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker6.date" is-open="vm.picker6.open" />
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker6')"><i class="fa fa-calendar"></i></button>
-              </span>
-              </p>
+            <p class="input-group">
+                <input type="text" class="form-input date-form" datetime-picker ng-model="vm.picker6.date" is-open="vm.picker6.open" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event, 'picker6')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </p>
 
         </div>
     </div>
@@ -61,7 +82,13 @@
                    validation="required:alt=Required field" />
         </div>
     </div>
-    
+    <div class="control-group checkbox-input col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left">
+        <div class="controls">
+            <input type="checkbox" id="checkbox1" ng-model="vm.addEventData.allDay"
+                   class="styled" > <label for="checkbox1">
+                All day Event</label>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button ng-if="vm.isEdit" class="logout-button btn-formsubmit" type="button" ng-click="vm.cancelEvent()">Cancel event</button>
