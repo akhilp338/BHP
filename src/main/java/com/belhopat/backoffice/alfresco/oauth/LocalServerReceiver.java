@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Request;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.AbstractHandler;
@@ -35,16 +36,10 @@ import org.mortbay.jetty.handler.AbstractHandler;
  */
 public final class LocalServerReceiver implements VerificationCodeReceiver {
 
-  private static final String CALLBACK_PATH = "/BelhopatBackOffice";
+  private static final String CALLBACK_PATH = "/Callback";
   private static final String LOCALHOST = "localhost";//"127.0.0.1";
   
-//  private static final String CALLBACK_PATH = "/Callback";
-//  -  private static final String LOCALHOST = "127.0.0.1";
-//  +  private static final String CALLBACK_PATH = "/BelhopatBackOffice";
-//  +  private static final String LOCALHOST = "localhost";//"127.0.0.1";
-  
-  
-  private static final int PORT = 8080;
+  private static final int PORT = 8089;
 
 	/** Server or {@code null} before {@link #getRedirectUri()}. */
 	private Server server;
@@ -54,12 +49,12 @@ public final class LocalServerReceiver implements VerificationCodeReceiver {
 
 	@Override
 	public String getRedirectUri() throws Exception {
-		// server = new Server(PORT);
-		// for (Connector c : server.getConnectors()) {
-		// c.setHost(LOCALHOST);
-		// }
-		// server.addHandler(new CallbackHandler());
-		// server.start();
+		 server = new Server(PORT);
+		 for (Connector c : server.getConnectors()) {
+		 c.setHost(LOCALHOST);
+		 }
+		 server.addHandler(new CallbackHandler());
+		 server.start();
 		return "http://" + LOCALHOST + ":" + PORT + CALLBACK_PATH;
 	}
 
