@@ -273,3 +273,17 @@ SET
     C.iso3 = CT.iso3
 WHERE
     C.`code` = CT.iso
+  
+--country codes that are not in the temporary table
+UPDATE belhopat_backoffice.Country SET phonecode = 670 WHERE code = 'TP';
+UPDATE belhopat_backoffice.Country SET phonecode = 672 WHERE code = 'XA';
+UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XU';
+UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XJ';
+UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XM';
+UPDATE belhopat_backoffice.Country SET phonecode = 381 WHERE code = 'RS';
+UPDATE belhopat_backoffice.Country SET phonecode = 44 WHERE code = 'XG';
+UPDATE belhopat_backoffice.Country SET phonecode = 211 WHERE code = 'SS';
+UPDATE belhopat_backoffice.Country SET phonecode = 38 WHERE code = 'YU';
+
+--drop temporary table    
+DROP TABLE IF EXISTS `belhopat_backoffice`.`country_test`;
