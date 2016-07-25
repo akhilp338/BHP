@@ -14,6 +14,7 @@
         <link href="/BelhopatBackOffice/app/assets/libs/css/sb-admin.css" rel="stylesheet">
         <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/selectric.css">
         <link href='/BelhopatBackOffice/app/assets/libs/css/jquery.datepick.css' rel='stylesheet' type='text/css'> 
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
@@ -49,6 +50,7 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/ngstorage.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.dataTables.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-ui.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.selectric.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/bootstrap-filestyle.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery.plugin.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/dateTimePicker.js"></script>

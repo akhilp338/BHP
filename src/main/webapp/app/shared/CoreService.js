@@ -360,6 +360,12 @@
             return deferred.promise;
         };
 
+        service.selectric = function(){
+            $timeout(function(){
+               angular.element("select").selectric(); 
+            },100)
+        };
+        
         service.downloadOfferLetter = function (url,id) {
             var deferred = $q.defer();
             url=url+'?empSalId='+id;

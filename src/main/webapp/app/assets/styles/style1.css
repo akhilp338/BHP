@@ -767,7 +767,8 @@ span.sub-section {
 }
 
 .control-group input {
-    height: 25px !important;
+    height: 30px !important;
+    margin-top: 0;
 }
 
 #candidatesList tbody tr.odd {
@@ -1268,7 +1269,6 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 .date-form {
     border-right: none;
-    margin-top: 5px !important;
 }
 
 /*theme4*/

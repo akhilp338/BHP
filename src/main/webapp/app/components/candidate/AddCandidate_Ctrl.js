@@ -86,7 +86,7 @@
                 angular.element('input[type=file]').bootstrapFileInput()
                 vm.isFileInput = $scope.steps[index] == "Official" ? true : false;
             }, 500)
-
+            Core_Service.selectric();
             //}
         };
 
@@ -269,7 +269,8 @@
                     }, function (error) {
                     });
         };
-
+        Core_Service.selectric();
+        
     };
 
     AddCandidate_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService', '$mdConstant'];
