@@ -212,6 +212,12 @@ public class DateUtil extends DateTool {
 		int year = cal.get(Calendar.YEAR);
 		return year;
 	}
+	
+	public static String getYearYY(Date date) {
+		DateFormat df = new SimpleDateFormat("yy");
+		String yy = df.format(Calendar.getInstance().getTime());
+		return yy;
+	}
 
 	public static boolean isToday(Date date) {
 		if (getDayOfMonth(date) == getDayOfMonth(new Date()) && getMonth(date) == getMonth(new Date())
@@ -226,6 +232,12 @@ public class DateUtil extends DateTool {
 			return true;
 		}
 		return true;
+	}
+
+	public static String getYMonthMM(Date date) {
+		DateFormat df = new SimpleDateFormat("MM");
+		String mm = df.format(Calendar.getInstance().getTime());
+		return mm;
 	}
 
 }

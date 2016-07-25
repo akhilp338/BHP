@@ -1,5 +1,9 @@
 package com.belhopat.backoffice.util.sequence;
 
+import java.util.Date;
+
+import com.belhopat.backoffice.util.DateUtil;
+
 /**
  * @author BHP_DEV
  * Generates sequence
@@ -28,9 +32,12 @@ public class SequenceGenerator {
      * @return Employee-ID
      * Generates sequence for listing of Employees
      */
-    public static String generateEmployeeId( Long increment ) {
+    public static String generateEmployeeId( Long increment, String division ) {
 
-        String candidateId = "BHP-E-";
+    	String div = division.substring(0, 1);
+        String yy = DateUtil.getYearYY(new Date());
+        String mm = DateUtil.getYMonthMM(new Date());
+        String candidateId = div + yy + mm;
         Long sequence = getSequenceNumber( increment );
         candidateId = candidateId + sequence;
         return candidateId;

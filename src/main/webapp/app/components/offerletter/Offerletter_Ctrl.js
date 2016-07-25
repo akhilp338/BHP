@@ -1,5 +1,5 @@
 (function () {
-    var Offerletter_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService) {
+    var Offerletter_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService, Core_HttpRequest) {
         var vm = this;
         vs = new validationService({
             controllerAs: vm
@@ -59,7 +59,7 @@
                         .then(function (response) {
                             response.data.selectedGrade = vm.offerletter.selectedGrade;
                             response.data.grade = params.grade;
-                            vm.offerletter.grade = params.grade;
+                            vm.offerletter.gradeUi = params.grade;
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
                             vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
@@ -207,13 +207,21 @@
             vm.generateOfferLetter = function () {
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
+                vm.offerletter.gradeUi = vm.offerletter.grade.grade;
                 vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
                         .then(function (response) {
-                            Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
-                                console.log("fgg");
-                            });
+                        	 if(response.data.candidate.id){
+                                 vm.offerletter.id = response.data.candidate.id;
+                                 Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
+                                	 var url = "api/previewOfferLetter?empSalId="+vm.offerletter.id;
+                                	 url = Core_HttpRequest.getUrl(url);
+                                	 var win = window.open(url,"_blank");
+                                	 win.focus();
+                                 });      
+                               }
+                               
                         }, function (error) {
 
                         });
@@ -235,7 +243,8 @@
         
         vm.requestForApproval = function(){
         	vm.offerletter.candidate=$rootScope.selectedCandidate;
-        	vm.offerletter.grade=vm.getGrade($stateParams.grade,vm.offerletter.grades);
+        	vm.offerletter.grade = vm.getGrade($stateParams.grade,vm.offerletter.grades);
+        	vm.offerletter.gradeUi = vm.offerletter.grade.grade;
             vm.requestForApprovalUrl = "api/candidate/requestForApproval";
             Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
                     .then(function (response) {
@@ -246,17 +255,13 @@
         }
         
         vm.downloadOfferLetter = function(){
-            vm.downloadOfferLetterUrl = "api/downloadDocument";
-            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,vm.offerletter.id)
-                    .then(function (response) {
-                    	Core_Service.sweetAlert("download in progress!",response.data.data,"success","coreuser.offerletter"); 
-                    }, function (error) {
-
-                    });
+            vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
+            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(url);
+            Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,"offer-letter"+vm.offerletter.id);                    
         }
 
     };
-    Offerletter_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService'];
+    Offerletter_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
     angular.module('coreModule')
             .controller('Offerletter_Ctrl', Offerletter_Ctrl);
 })();
