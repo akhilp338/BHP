@@ -15,9 +15,15 @@ public class Constants {
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";
 	public static final String PASS_RESET_FAIL_MSG = "User account does not exist. Please contact administrator.";
+	
+
+	/* password change msg constants */
+	public static final String PASS_CHANGE_SUCC_MSG = "Your password has been changed successfully";
+	public static final String PASS_CHANGE_FAIL_MSG = "Invalid credentials entered. Please try again."
+			+ " Please try again after some time";
 
 	/* mail constants */
-	public static final String UTF_8 = "ascii";
+	public static final String UTF_8 = "utf-8";
 	public static final String TEMP_EMAIL_ACCOUNT_FOR_TESTING = "bhptestreceiver@gmail.com";
 	public static final String PASS_RESET_MAIL_SUB = "Belhopat Employee Portal Password Reset Request";
 	public static final String CAND_REG_SUCC_MAIL_SUB = "New Candidate has been added.";
@@ -36,6 +42,7 @@ public class Constants {
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
+	public static final String PASSWORD_RESET_URL = "passwordResetUrl";
 	public static final String USERNAME = "username";
 	public static final String CLIENT = "client";
 	public static final String EMPLOYEE = "employee";
@@ -46,6 +53,7 @@ public class Constants {
 	public static final String POC = "poc";
 	public static final String EMPLOYEE_NAME = "employeeName";
 	public static final String EMPLOYEE_ID = "employeeId";
+	public static final String CHANGE_PASSWORD_API = "/changePassword";
 
 	/* data constants */
 	public static final String DD_MM_YYYY_HH_MM_SS = "dd-MM-yyyy HH:mm:ss";

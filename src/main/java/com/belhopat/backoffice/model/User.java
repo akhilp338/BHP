@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,6 +31,14 @@ public class User {
 	private String password;
 
 	private String email;
+	
+	private Byte[] salt;
+
+	@Column( name = "forgot_password_status" )
+	private Boolean forgotPasswordStatus;
+	
+	@Column( name = "forgot_password_url" )
+	private String forgotPasswordToken;
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	private MasterRoles primaryRole;
@@ -120,6 +129,30 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Byte[] getSalt() {
+		return salt;
+	}
+	
+	public void setSalt(Byte[] salt) {
+		this.salt = salt;
+	}
+	
+	public Boolean getForgotPasswordStatus() {
+		return forgotPasswordStatus;
+	}
+	
+	public void setForgotPasswordStatus(Boolean forgotPasswordStatus) {
+		this.forgotPasswordStatus = forgotPasswordStatus;
+	}
+
+	public String getForgotPasswordToken() {
+		return forgotPasswordToken;
+	}
+
+	public void setForgotPasswordToken(String forgotPasswordToken) {
+		this.forgotPasswordToken = forgotPasswordToken;
+	}
 
 	@Override
 	public int hashCode() {
@@ -145,7 +178,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", salt="
+				+ Arrays.toString(salt) + ", forgotPasswordStatus=" + forgotPasswordStatus + ", forgotPasswordToken="
+				+ forgotPasswordToken + ", primaryRole=" + primaryRole + ", roles=" + roles + ", designation="
+				+ designation + "]";
 	}
-
 }

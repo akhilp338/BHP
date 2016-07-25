@@ -32,15 +32,16 @@
                             controllerAs: 'vm'
                         }
                     }
-                }).state('coreuser.dashboard', {
-            url: urlConfig.root_path+'dashboard',
-            views: {
-                'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.html',
-                    controller: 'Dash_Ctrl',
-                    controllerAs: 'vm'
-                }
-            }
+                })
+                .state('coreuser.dashboard', {
+		            url: urlConfig.root_path+'dashboard',
+		            views: {
+		                'content@': {
+		                    templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.html',
+		                    controller: 'Dash_Ctrl',
+		                    controllerAs: 'vm'
+		                }
+		            }
         }).state('coreuser.success', {
             url: urlConfig.root_path+'loginSuccess',
             views: {
@@ -220,6 +221,22 @@
                 }
             }
         })
+        
+        .state('changePassword.reset.form', {
+            url: urlConfig.root_path+'changePassword/:token',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/login/login-sample.html',
+                    controller: 'ChangePassword_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+    
+        
+        
+        
+        
         
         //Events States Routing
         .state('coreuser.event', {

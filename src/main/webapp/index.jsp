@@ -93,7 +93,8 @@
         <script src="/BelhopatBackOffice/app/shared/CommonModalService.js"></script>
         <script src="/BelhopatBackOffice/app/components/common/directives.js"></script>
         <script src="/BelhopatBackOffice/app/components/login/LoginCtrl.js"></script>
-        <script src="/BelhopatBackOffice/app/components/login/Forgotpassword_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/login/ForgotPassword_Ctrl.js"></script>
+                <script src="/BelhopatBackOffice/app/components/login/ChangePassword_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/common/Header_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/home/Home_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/dashboard/Dash_Ctrl.js"></script>

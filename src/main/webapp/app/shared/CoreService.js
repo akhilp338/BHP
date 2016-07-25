@@ -65,6 +65,22 @@
             });
             return deferred.promise;
         };
+        
+        service.changePassword = function (data) {
+            var deferred = $q.defer();
+            var url = "/resetPassword";
+            Core_HttpRequest.post(url, data).then(function (res) {
+                if (res.success) {
+                    deferred.resolve(res);
+                } else {
+                    deferred.reject(res);
+                }
+            }, function (error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        };
+        
         service.SetCredentials = function (username, password) {
             var authdata = Base64.encode(username + ':' + password);
 

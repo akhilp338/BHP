@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UserDTO;
 import com.belhopat.backoffice.model.RoleTab;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.LoginService;
@@ -106,12 +108,13 @@ public class LoginController {
 	 * @throws MessagingException
 	 *             Generates a password and sends that password to users e mail
 	 *             id
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
-	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException {
+	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException, UnsupportedEncodingException {
 		boolean userStatus = userService.generatePasswordResetLink(user.getEmail());
 		if (userStatus)
-			return new ResponseEntity<ResponseObject>(new ResponseObject(true, Constants.PASS_RESET_SUCC_MSG),
+			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_SUCC_MSG),
 					HttpStatus.OK);
 		else
 			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_FAIL_MSG),
@@ -123,6 +126,24 @@ public class LoginController {
 	public List<RoleTab> getUserTabs() {
 		List<RoleTab> userTabs = loginService.getUserTabs();
 		return userTabs;
+	}
+
+	/**
+	 * @param user
+	 * @return
+	 * @throws MessagingException
+	 *             Generates a password and sends that password to users e mail
+	 *             id
+	 */
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	public ResponseEntity<ResponseObject> resetPassword(@RequestBody UserDTO user) throws MessagingException {
+		Boolean resetStatus = userService.resetPassword( user );
+		if ( resetStatus )
+			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_SUCC_MSG),
+					HttpStatus.OK);
+		else
+			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_FAIL_MSG),
+					HttpStatus.OK);
 	}
 
 }
