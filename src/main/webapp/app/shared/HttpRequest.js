@@ -5,6 +5,9 @@
                 var getUrl = function(path) {
                 	return urlConfig.root_path + path;
                 };
+                service.getUrl = function(path) {
+                	return urlConfig.root_path + path;
+                };
                 service.get = function(path) {
                     return $http.get(getUrl(path));
                 };
