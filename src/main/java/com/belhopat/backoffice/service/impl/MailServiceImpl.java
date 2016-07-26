@@ -99,7 +99,7 @@ public class MailServiceImpl implements MailService {
 	public void sendPasswordResetMail( User user ) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
 		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() 
-				+ "#/"+ Constants.CHANGE_PASSWORD_API + "/" + user.getForgotPasswordToken();
+				+ Constants.CHANGE_PASSWORD_API + "/" + user.getForgotPasswordToken();
 		model.put(Constants.GENERATED_PASSWORD, user.getPassword() );
 		model.put(Constants.PASSWORD_RESET_URL, passwordResetURL);
 		model.put(Constants.USERNAME, user.getUsername());
