@@ -6,8 +6,11 @@ import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -95,6 +98,13 @@ public class BaseController {
 	@ResponseBody
 	public void previewOfferLetter(@RequestParam Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException {
 		baseService.previewOfferLetter(empSalId, response);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUserTasks", method = RequestMethod.GET)
+	public DataTablesOutput<TaskList> getUserTasks(@Valid DataTablesInput input)
+			throws MalformedURLException, DocumentException, IOException, ParseException {
+		return baseService.getUserTasks(input);
 	}
 
 }

@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -442,6 +444,11 @@ public class BaseServiceImpl implements BaseService {
 		output.flush();
 		response.flushBuffer();
 		output.close();
+	}
+
+	@Override
+	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input) {
+		return taskListRepository.findAll(input);
 	}
 
 }
