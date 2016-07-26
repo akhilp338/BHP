@@ -1,11 +1,11 @@
 (function () {
-    var ChangePassword_Ctrl = function ( $scope, $uibModalInstance, $route, $routeParams, $location, validationService, Core_Service) {
-
-    	var vm = this,
+    var ChangePassword_Ctrl = function ($rootScope, $stateParams, $scope, validationService, Core_Service) {
+         $rootScope.isLogin = true;
+            	var vm = this,
     		vs = new validationService({
     		    controllerAs: vm
     		});
-    	
+    	vm.changePassword = {};
     	vs.setGlobalOptions({
     		debounce: 1500,
     		scope: $scope,
@@ -16,49 +16,25 @@
 
     	vm.errorMessage = "";
     	
-    	vm.token = $routeParams.token;
-    	
-        vm.submitChangePasswordReq = function (data) {
-           if (vm.changePassword.currentPassword && vm.changePassword.newPassword && 
-    		   vm.changePassword.newPassword == vm.changePassword.confirmNewPassword
-    		   && vs.checkFormValidity($scope) ) {
+    	vm.changePassword.token = $stateParams.token;
+            vm.submitChangePasswordReq = function (data) {
+           if (vs.checkFormValidity($scope) ) {
        			var data = {
-       					"resetToken":vm.token, 
-       					"currentPassword": vm.changePassword.currentPassword, 
-       					"newPassword" : vm.changePassword.newPassword
+       					"resetToken":data.token, 
+       					"currentPassword": data.currentPassword, 
+       					"newPassword" : data.newPassword
        					}
        			Core_Service.changePassword(data).then(function(res){
-       				$uibModalInstance.close(res); 
+                            Core_Service.sweetAlert("Success!!!","Password successfully changed.","success","login"); 
        			},
-       			function(error){
-       				$uibModalInstance.close(error);  
+       			function(error){ 
+                            Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
+                    			"error","changePassword");                            
        			});
        		}
         }
-           
-       	vm.cancel = function () {
-       		$uibModalInstance.dismiss('cancel');
-       	};
-       	
-        vm.changePassword = function (size) {          
-            Core_ModalService.openChangePassword().result.then(function(res){
-                if(res.data.success){
-                  Core_Service.sweetAlert("Done!",res.data.data,"success","login");  
-                }
-                else{
-                   Core_Service.sweetAlert("Oops!",res.data.data,"error"); 
-                }
-            },function(error){
-               Core_Service.sweetAlert("Oops!",res.data.data,"error");  
-            });
-        };
-
     };
-    ChangePassword_Ctrl.$inject = ["$scope", '$uibModalInstance', '$route', '$routeParams', '$location', 'validationService', 'Core_Service'];
+    ChangePassword_Ctrl.$inject = ['$rootScope', '$stateParams', '$scope', 'validationService', 'Core_Service'];
     angular.module('coreModule')
             .controller('ChangePassword_Ctrl', ChangePassword_Ctrl);
-            
-    })();
-
-
-
+})();

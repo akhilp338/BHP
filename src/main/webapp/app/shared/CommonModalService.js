@@ -23,7 +23,7 @@
             return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/client/viewClient.html', 'ViewClient_Ctrl', 'vm', data);
         };
         service.openChangePassword = function (data) {
-            return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/login/changePassword.html', 'ChangePassword_Ctrl', 'vm', data);
+            return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/login/changePasswordModaL.html', 'ChangePasswordModal_Ctrl', 'vm', data);
         }; 
     };
     angular.module('app.common')

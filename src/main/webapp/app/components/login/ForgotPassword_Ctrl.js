@@ -1,5 +1,5 @@
 (function () {
-    var ForgotPassword_Ctrl = function ($scope, $uibModalInstance, validationService, Core_Service) {
+    var ForgotPassword_Ctrl = function ($scope, validationService, Core_Service, $uibModalInstance ) {
         var vm = this,
                 vs = new validationService({
                     controllerAs: vm
@@ -27,7 +27,7 @@
             $uibModalInstance.dismiss('cancel');
         };
     };
-    ForgotPassword_Ctrl.$inject = ["$scope", '$uibModalInstance', 'validationService', 'Core_Service'];
+    ForgotPassword_Ctrl.$inject = ["$scope", 'validationService', 'Core_Service', '$uibModalInstance'];
     angular.module('coreModule')
             .controller('ForgotPassword_Ctrl', ForgotPassword_Ctrl);
 })();

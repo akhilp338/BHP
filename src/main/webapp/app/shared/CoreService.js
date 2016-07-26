@@ -70,7 +70,7 @@
             var deferred = $q.defer();
             var url = "/resetPassword";
             Core_HttpRequest.post(url, data).then(function (res) {
-                if (res.success) {
+                if (res.data.success) {
                     deferred.resolve(res);
                 } else {
                     deferred.reject(res);

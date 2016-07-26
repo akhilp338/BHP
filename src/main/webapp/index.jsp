@@ -26,17 +26,6 @@
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/tooltip.css" rel="stylesheet">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/sidebar.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/styles/style1.css">
-        <style type="text/css">
-            .custom-chip md-chip {
-    background: rgb(255, 173, 88);
-    color: rgb(255, 255, 255);
-        }
-        .custom-chip md-chip.md-focused {
-        background: rgb(255, 136, 21);
-        }
-        .custom-chip md-chip md-icon{
-            color: rgb(255, 255, 255);
-        }</style>
         <!-- Libraries -->
         <script src="/BelhopatBackOffice/app/assets/libs/js/jquery-2.2.3.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
@@ -94,7 +83,7 @@
         <script src="/BelhopatBackOffice/app/components/common/directives.js"></script>
         <script src="/BelhopatBackOffice/app/components/login/LoginCtrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/login/ForgotPassword_Ctrl.js"></script>
-                <script src="/BelhopatBackOffice/app/components/login/ChangePassword_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/login/ChangePassword_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/common/Header_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/home/Home_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/dashboard/Dash_Ctrl.js"></script>
