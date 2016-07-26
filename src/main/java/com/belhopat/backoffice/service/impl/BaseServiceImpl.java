@@ -251,11 +251,11 @@ public class BaseServiceImpl implements BaseService {
 			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
 			increment = candidateSequence.getId();
 		} else if (clazz.equals(Employee.class)) {
-//			Date latestDate = employeeSequenceRepository.getLatestDate();
-//			if ((DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate))
-//					|| DateUtil.isPreviousMonth(latestDate)) {
-//				employeeSequenceRepository.truncate();
-//			}
+			Date latestDate = employeeSequenceRepository.getLatestDate();
+			if ((DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate))
+					|| DateUtil.isPreviousMonth(latestDate)) {
+				employeeSequenceRepository.truncate();
+			}
 			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
 		} else if (clazz.equals(Client.class)) {

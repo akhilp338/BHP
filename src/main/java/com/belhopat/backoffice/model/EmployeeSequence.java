@@ -14,7 +14,7 @@ public class EmployeeSequence {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private Date createdDate;
 
 	public Long getId() {
@@ -35,7 +35,7 @@ public class EmployeeSequence {
 
 	public EmployeeSequence() {
 		super();
-		this.createdDate =new Date();
+		this.createdDate = new Date();
 	}
 
 }

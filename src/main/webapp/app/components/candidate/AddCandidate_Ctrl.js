@@ -198,6 +198,7 @@
         vm.candidateRegister = function () {
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
+                debugger;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
                             Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
