@@ -232,7 +232,7 @@
                             controllerAs: 'vm'
                         }
                     }
-                });
+                })
 
         //Events States Routing
         .state('coreuser.event', {
