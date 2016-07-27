@@ -38,6 +38,7 @@ public class OfferLetterPDF extends BasePDFGenerator {
 		writer.setBoxSize("art", PageSize.A4);
 		HeaderFooterEvent event = new HeaderFooterEvent();
 		writer.setPageEvent(event);
+		document.open();
 		addContentToDocument(document, employeeSalary);
 		document.close();
 		outputStream.close();
@@ -47,24 +48,25 @@ public class OfferLetterPDF extends BasePDFGenerator {
 
 	private void addContentToDocument(Document document, EmployeeSalary employeeSalary)
 			throws DocumentException, ParseException, MalformedURLException, IOException {
-		document.open();
-		document.add(getHeading(employeeSalary.getCandidate()));
-		document.add(getHeadingContent(employeeSalary.getCandidate()));
-		document.add(getAcceptanceAndCommencementContent(employeeSalary.getCandidate()));
-		document.add(getConfidentialityContent());
-		document.add(getCompensationContent());
-		document.add(getProbationContent());
-		document.add(getWorkingHoursContent());
-		document.newPage();
-		document.add(getCodeOfConductContent());
-		document.add(getEndingContent(employeeSalary.getCandidate()));
-		document.add(getAcknowledgementContent());
-		document.newPage();
-		document.add(getCompensationStructureTable(employeeSalary));
-		document.newPage();
-		document.add(getAnnexureA());
-		document.newPage();
-		document.add(getAnnexureB());
+		if(employeeSalary != null){
+			document.add(getHeading(employeeSalary.getCandidate()));
+			document.add(getHeadingContent(employeeSalary.getCandidate()));
+			document.add(getAcceptanceAndCommencementContent(employeeSalary.getCandidate()));
+			document.add(getConfidentialityContent());
+			document.add(getCompensationContent());
+			document.add(getProbationContent());
+			document.add(getWorkingHoursContent());
+			document.newPage();
+			document.add(getCodeOfConductContent());
+			document.add(getEndingContent(employeeSalary.getCandidate()));
+			document.add(getAcknowledgementContent());
+			document.newPage();
+			document.add(getCompensationStructureTable(employeeSalary));
+			document.newPage();
+			document.add(getAnnexureA());
+			document.newPage();
+			document.add(getAnnexureB());
+		}
 
 	}
 
