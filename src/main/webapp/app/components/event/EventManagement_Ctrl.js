@@ -69,6 +69,7 @@
                     vm.updateEvents(event);
                 },
                 eventClick: function (calEvent, jsEvent, view) {
+                    calEvent.guestList = vm.eventData.guestList;
                     Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
                         if (response)
                             $state.reload();
