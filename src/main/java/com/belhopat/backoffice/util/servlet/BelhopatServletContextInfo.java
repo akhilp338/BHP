@@ -71,8 +71,11 @@ public class BelhopatServletContextInfo {
 	}
 
 	public static void setDeployURL(String deployURL) {
-		BelhopatServletContextInfo.deployURL = "http://" + BelhopatServletContextInfo.getHostname() + ":"
-				+ BelhopatServletContextInfo.getPortNo() + BelhopatServletContextInfo.getContext().getContextPath();
+		
+//		TODO Hardcoded for the moment
+		BelhopatServletContextInfo.deployURL = "http://ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
+//		BelhopatServletContextInfo.deployURL = "http://" + BelhopatServletContextInfo.getHostname() + ":"
+//				+ BelhopatServletContextInfo.getPortNo() + BelhopatServletContextInfo.getContext().getContextPath();
 	}
 	
 }
