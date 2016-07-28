@@ -1,7 +1,7 @@
 (function () {
     var Header_Ctrl = function ($scope, $state, $rootScope, Core_Service) {
         var vm = this;
-        vm.getUserName = localStorage["userName"];
+        vm.getUserName = localStorage["userName"] || "Rafique";
         vm.logout = function () {
             Core_Service.ClearCredentials();
             $state.go('login');
