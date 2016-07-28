@@ -70,6 +70,8 @@ public class Constants {
 	public static final String EMPLOYEES = "EMPLOYEES";
 	public static final String TIMEZONE = "TIMEZONE";
 	public static final String CLIENTS = "CLIENT";
+	public static final String SOURCED_BY = "SOURCEDBY";
+
 
 	/* lookup detail code */
 	public static final String EMP_DESIG_HRM = "HRM";
@@ -102,5 +104,4 @@ public class Constants {
 	public static final String PDF_CONTENT_TYPE = "application/pdf";
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 	public static final String ATTACHMENT = "attachment; filename=";
-
 }

@@ -146,6 +146,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
 		List<ResponseObject> clients = clientRepository.getClientDropdownData();
+		List<ResponseObject> employees = employeeRepository.getEmployeesDropDown();
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
@@ -159,6 +160,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.COUNTRY, countries);
 		dropDownMap.put(Constants.GENDER, gender);
 		dropDownMap.put(Constants.CLIENTS, clients);
+		dropDownMap.put(Constants.EMPLOYEES, employees);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
