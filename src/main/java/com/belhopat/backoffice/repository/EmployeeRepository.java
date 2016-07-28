@@ -30,5 +30,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 
 	@Query("select e.id,CONCAT(e.employeeMaster.firstName,' ( ' ,e.employeeMaster.officialEmail, ' )') as data " + "from Employee e")
 	List<ResponseObject> getEmployeeNameAndEmailData();
+	
+	@Query("select e.id,e.employeeMaster.firstName as data " + "from Employee e")
+	List<ResponseObject> getEmployeesDropDown();
 
 }
