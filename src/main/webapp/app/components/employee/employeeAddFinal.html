@@ -73,7 +73,7 @@
                             <select name="bloodGroup"
                                     ng-model="vm.registration.accountManager"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.AM">
+                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.AM">
                                 <option value="">--SELECT--</option>
                             </select>
                         </div>
@@ -85,7 +85,7 @@
                             <select name="bloodGroup"
                                     ng-model="vm.registration.hrRecruiter"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRR">
+                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRR">
                                 <option value="">--SELECT--</option>
                             </select>
                         </div>
@@ -97,7 +97,7 @@
                             <select name="bloodGroup"
                                     ng-model="vm.registration.hrManager"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRM">
+                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRM">
                                 <option value="">--SELECT--</option>
                             </select>
                         </div>
@@ -109,7 +109,7 @@
                             <select name="bloodGroup"
                                     ng-model="vm.registration.reportingManager"
                                     validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeId) for accounts in vm.lookups.HRM">
+                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName ) for accounts in vm.lookups.HRM">
                                 <option value="">--SELECT--</option>
                             </select>
                         </div>
