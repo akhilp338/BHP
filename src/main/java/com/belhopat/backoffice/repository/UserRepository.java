@@ -14,7 +14,7 @@ import com.belhopat.backoffice.model.User;
 @Repository
 public interface UserRepository extends JpaRepository< User, Long >  {
 
-	User findByEmail(String lastname);
+	User findByEmail(String email);
 
 
 	@Query("select u from User u where u.username=:username and u.password=:password")
@@ -25,6 +25,9 @@ public interface UserRepository extends JpaRepository< User, Long >  {
 
 
 	User findById(Long id);
+
+
+	User findByForgotPasswordToken(String forgotPasswordToken);
 
 
 }

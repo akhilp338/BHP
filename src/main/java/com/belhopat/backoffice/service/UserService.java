@@ -1,13 +1,14 @@
 package com.belhopat.backoffice.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
 
 import org.springframework.stereotype.Service;
 
+import com.belhopat.backoffice.dto.UserDTO;
 import com.belhopat.backoffice.model.User;
-
 
 @Service
 public interface UserService {
@@ -28,6 +29,8 @@ public interface UserService {
 	
 	public boolean isUserExist( User user );
 
-	boolean generatePasswordResetLink( String email ) throws MessagingException;
+	boolean generatePasswordResetLink( String email ) throws MessagingException, UnsupportedEncodingException;
+
+	Boolean resetPassword( UserDTO user );
 	
 }

@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -144,6 +146,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
 		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
 		List<ResponseObject> clients = clientRepository.getClientDropdownData();
+		List<ResponseObject> employees = employeeRepository.getEmployeesDropDown();
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
@@ -157,6 +160,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.COUNTRY, countries);
 		dropDownMap.put(Constants.GENDER, gender);
 		dropDownMap.put(Constants.CLIENTS, clients);
+		dropDownMap.put(Constants.EMPLOYEES, employees);
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
@@ -442,6 +446,11 @@ public class BaseServiceImpl implements BaseService {
 		output.flush();
 		response.flushBuffer();
 		output.close();
+	}
+
+	@Override
+	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input) {
+		return taskListRepository.findAll(input);
 	}
 
 }

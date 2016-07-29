@@ -13,6 +13,10 @@
         vm.back = function () {
             $state.go('coreuser.candidate');
         };
+        vm.dobDateOptions = {
+            maxDate: new Date().getTime()
+        };
+        vm.dobMax = new Date().getTime();
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/candidate/getCandidate", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
@@ -20,12 +24,12 @@
                     vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id, countryType[i]);
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
                 }
-                if(res.data.skillSet){
+                if (res.data.skillSet) {
                     var expYr, expMnth;
-                    for(var m=0; m<vm.registration.skillSet.length; m++){
+                    for (var m = 0; m < vm.registration.skillSet.length; m++) {
                         expYr = vm.registration.skillSet[m].experienceYear ? vm.registration.skillSet[m].experienceYear : 0;
                         expMnth = vm.registration.skillSet[m].experienceMonth ? vm.registration.skillSet[m].experienceMonth : 0
-                            vm.registration.skillSet[m].chipString = vm.registration.skillSet[m].skillName + "(" + expYr + " yrs " + expMnth + " months)";
+                        vm.registration.skillSet[m].chipString = vm.registration.skillSet[m].skillName + "(" + expYr + " yrs " + expMnth + " months)";
                     }
                 }
                 vm.isCheckboxEnable = true;
@@ -48,7 +52,7 @@
         });
 
 
-        vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];        
+        vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
         // Any key code can be used to create a custom separator
         var semicolon = 186;
         vm.customKeys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA, semicolon];
@@ -80,14 +84,14 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-            // if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
-            $scope.selection = $scope.steps[index];
-            $timeout(function () {
-                angular.element('input[type=file]').bootstrapFileInput()
-                vm.isFileInput = $scope.steps[index] == "Official" ? true : false;
-            }, 500)
+            if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+                $scope.selection = $scope.steps[index];
+                $timeout(function () {
+                    angular.element('input[type=file]').bootstrapFileInput()
+                    vm.isFileInput = $scope.steps[index] == "Official" ? true : false;
+                }, 500)
 
-            //}
+            }
         };
 
         vm.contacts = [];
@@ -98,27 +102,26 @@
             var chipString = "";
             if (vm.add.skill && vm.add.expYr && vm.add.expMnth) {
                 chipString = vm.add.skill + "(" + vm.add.expYr + " yrs " + vm.add.expMnth + "months)";
+            } else if (vm.add.skill && vm.add.expYr) {
+                chipString = vm.add.skill + "(" + vm.add.expYr + " yrs " + "0 months)";
             }
-            else if (vm.add.skill && vm.add.expYr){
-                 chipString = vm.add.skill + "(" + vm.add.expYr + " yrs " +"0 months)";
+            if (chipString) {
+                vm.registration.skillSet.push({
+                    skillName: vm.add.skill,
+                    experienceYear: vm.add.expYr,
+                    experienceMonth: vm.add.expMnth,
+                    chipString: chipString
+                });
+                vm.add.skill = "";
+                vm.add.expYr = "";
+                vm.add.expMnth = "";
             }
-            if(chipString){      
-            vm.registration.skillSet.push({
-              skillName:vm.add.skill,
-              experienceYear:vm.add.expYr,
-              experienceMonth:vm.add.expMnth,
-              chipString: chipString
-            });
-            vm.add.skill = "";
-            vm.add.expYr = "";
-            vm.add.expMnth = "";
-        }
         };
 
-        vm.removeChip = function(chipInfo){
+        vm.removeChip = function (chipInfo) {
             console.log(chipInfo)
         };
-        
+
         $scope.hasNextStep = function () {
             var stepIndex = $scope.getCurrentStepIndex();
             var nextStep = stepIndex + 1;
@@ -198,6 +201,7 @@
         vm.candidateRegister = function () {
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
+                debugger;
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
                             Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");

@@ -33,8 +33,7 @@
                 else{
                    Core_Service.sweetAlert("Oops!",res.data.data,"error"); 
                 }
-            },function(error){
-               Core_Service.sweetAlert("Oops!",res.data.data,"error");  
+            },function(error){ 
             });
         };
 

@@ -14,9 +14,9 @@ public interface MailService {
 
 	public void sendMail(MailMessageObject mailObj);
 
-	public void sendPasswordResetMail( User user, String emailBody ) throws MessagingException;
+	public void sendPasswordResetMail( User user ) throws MessagingException;
 	
-	public void sendPasswordResetMail( Candidate candidate, String emailBody ) throws MessagingException;
+	public void sendPasswordResetMail( Candidate candidate ) throws MessagingException;
 
 	public void sendEventInvitaionMail( List<String> guestEmails, String emailBody ) throws MessagingException;
 

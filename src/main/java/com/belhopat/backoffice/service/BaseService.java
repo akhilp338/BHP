@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +55,5 @@ public interface BaseService {
 
 	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException;
 
+	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input);
 }

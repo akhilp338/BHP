@@ -14,9 +14,15 @@ public class BelhopatServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized( ServletContextEvent event ) {
-		BelhopatServletContextInfo.setContextPath( event.getServletContext().getContextPath() );
-		BelhopatServletContextInfo.setRealPath( event.getServletContext().getRealPath( File.separator ));
-		BelhopatServletContextInfo.setContext( event.getServletContext() );
+		try {
+			BelhopatServletContextInfo.setContextPath( event.getServletContext().getContextPath() );
+			BelhopatServletContextInfo.setRealPath( event.getServletContext().getRealPath( File.separator ));
+			BelhopatServletContextInfo.setContext( event.getServletContext() );
+			BelhopatServletContextInfo.setHostname( null );
+			BelhopatServletContextInfo.setDeployURL( null );
+		} catch ( Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

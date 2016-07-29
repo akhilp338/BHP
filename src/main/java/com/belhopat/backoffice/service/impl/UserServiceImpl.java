@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.belhopat.backoffice.dto.UserDTO;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.UserService;
+import com.belhopat.backoffice.util.Constants;
+import com.belhopat.backoffice.util.PasswordUtil;
 import com.belhopat.backoffice.util.RandomPasswordGenerator;
 
 /**
@@ -102,18 +106,35 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean generatePasswordResetLink( String userEmail ) throws MessagingException {
-		Candidate candidate = candidateRepo.findOne(1L);
-		//TODO For Debug
-//		User user = userRepo.findByEmail( userEmail );
-//		if ( user != null ){
+	public boolean generatePasswordResetLink( String userEmail ) throws MessagingException, UnsupportedEncodingException {
+		User user = userRepo.findByEmail( userEmail );
+		if ( user != null ){
 			String generatedPassword = randomPasswordGenerator.nextSessionId();
-			mailService.sendPasswordResetMail( candidate, generatedPassword );
-//			user.setPassword( generatedPassword );
-//			userRepo.saveAndFlush( user );
+			String forgotPasswordToken = PasswordUtil.generateRandomPassword( 15 );
+			user.setForgotPasswordStatus(true);
+			user.setForgotPasswordToken(forgotPasswordToken);
+			user.setPassword( generatedPassword );
+			userRepo.saveAndFlush( user );
+			mailService.sendPasswordResetMail( user );
 			return true;
-//		}
-//		return false;
+		}
+		return false;
+	}
+	@Override
+	public Boolean resetPassword( UserDTO user ) {
+		Boolean resetStatus = false;
+		if( user.getResetToken() != null ){
+			User persistedUser = userRepo.findByForgotPasswordToken( user.getResetToken() );
+			if( persistedUser != null && persistedUser.getForgotPasswordStatus().equals(true) 
+					&& persistedUser.getPassword().equals( user.getCurrentPassword() )){
+				persistedUser.setPassword ( user.getNewPassword() );
+				persistedUser.setForgotPasswordStatus( false );
+				persistedUser.setForgotPasswordToken( null );
+				userRepo.saveAndFlush( persistedUser );
+			}
+			resetStatus = true;
+		}
+		return resetStatus;
 	}
 
 }

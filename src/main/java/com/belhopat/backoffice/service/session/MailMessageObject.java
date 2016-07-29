@@ -1,7 +1,5 @@
 package com.belhopat.backoffice.service.session;
 
-import java.util.List;
-
 import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;

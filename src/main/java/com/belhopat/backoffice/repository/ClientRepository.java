@@ -13,6 +13,6 @@ import com.belhopat.backoffice.model.Client;
 @Repository
 public interface ClientRepository extends JpaRepository< Client, Long >, DataTablesRepository < Client, Long > {
 	
-	@Query("select c.id as id ,c.clientId as data from Client c")
+	@Query("select c.id as id ,c.clientName as data from Client c")
 	List<ResponseObject> getClientDropdownData();
 }

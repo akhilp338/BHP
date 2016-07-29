@@ -61,6 +61,7 @@
                                                is-open="vm.isDobPickerOpen"
                                                uib-datepicker-popup="dd-MMM-yyyy"
                                                validation="required:alt=Required"
+                                               datepicker-options="vm.dobDateOptions" 
                                                readonly/>
                                         <span class="input-group-btn custom-datepick">
                                             <button type="button" 
@@ -427,8 +428,8 @@
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                 <label class="control-label" for="partner">Sourced By</label>
                                 <div class="controls">
-                                    <select name="sourcedBy" ng-model="vm.registration.sourcedBy.id"
-                                            class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
+                                    <select name="sourcedBy" ng-model="vm.registration.sourcedBy"
+                                            class="form-input width-100" ng-options="employee[1] as (employee[1]) for employee in vm.lookups.EMPLOYEES"
                                             validation="required:alt=required">
                                         <option value="">--SELECT--</option>
                                     </select>
