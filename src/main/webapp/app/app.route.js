@@ -232,10 +232,19 @@
                             controllerAs: 'vm'
                         }
                     }
-                });
+                })
 
         //Events States Routing
-
+        .state('coreuser.event', {
+            url: urlConfig.root_path+'event',
+            views: {
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/event/event.html',
+                    controller: 'EventManagement_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        });
     };
     angular.module('coreModule')
             .config(Core_Routes);

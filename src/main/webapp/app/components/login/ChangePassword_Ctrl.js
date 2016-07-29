@@ -16,7 +16,7 @@
 
     	vm.errorMessage = "";
     	
-    	vm.changePassword.token = $stateParams.token;
+    	vm.changePassword.token = $stateParams.token || "";
             vm.submitChangePasswordReq = function (data) {
            if (vs.checkFormValidity($scope) ) {
        			var data = {

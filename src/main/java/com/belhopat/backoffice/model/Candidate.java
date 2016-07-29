@@ -88,8 +88,7 @@ public class Candidate extends BaseEntity {
 	@ManyToOne
 	private Client client;
 
-	@ManyToOne
-	private Client sourcedBy;
+	private String sourcedBy;
 
 	private String partner;
 
@@ -353,11 +352,11 @@ public class Candidate extends BaseEntity {
 		this.client = client;
 	}
 
-	public Client getSourcedBy() {
+	public String getSourcedBy() {
 		return sourcedBy;
 	}
 
-	public void setSourcedBy(Client sourcedBy) {
+	public void setSourcedBy(String sourcedBy) {
 		this.sourcedBy = sourcedBy;
 	}
 

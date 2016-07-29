@@ -21,9 +21,9 @@
                         console.log(error)
                     });
         };
-        vm.processArrayToObject = function(list){
+        vm.processArrayToObject = function (list) {
             var guestObjArray = [];
-            for(var i=0; i<list.length; i++){
+            for (var i = 0; i < list.length; i++) {
                 var guestObj = {};
                 guestObj.id = list[i][0];
                 guestObj.text = list[i][1];
@@ -31,11 +31,6 @@
             }
             return guestObjArray;
         };
-        
-        Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
-            vm.eventData.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
-        });
-
         Core_Service.getAllEvents("api/event/getEvents").then(function (res) {
             vm.calander = angular.element("#calendar").fullCalendar({
                 header: {
@@ -51,13 +46,20 @@
                 events: res.data,
                 dayClick: function (date, jsEvent, view) {
                     if (!date.isBefore(moment())) {
-                        date = new Date(date.format())
-                        date = moment(date.getTime() + date.getTimezoneOffset() * 60000);
-                        vm.eventData.date = date;
-                        Core_ModalService.openAddEventModal(vm.eventData).result.then(function (response) {
-                            if (response)
-                                $state.reload();
+                        Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
+                            if (res.data) {
+                                vm.eventData.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
+                                date = new Date(date.format());
+                                date = moment(date.getTime() + date.getTimezoneOffset() * 60000);
+                                vm.eventData.date = date;
+                                Core_ModalService.openAddEventModal(vm.eventData).result.then(function (response) {
+                                    if (response)
+                                        $state.reload();
+                                });
+                            }
                         });
+
+
                     }
                 },
                 eventResize: function (event, dayDelta, minuteDelta) {
@@ -69,11 +71,15 @@
                     vm.updateEvents(event);
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
-                        if (response)
-                            $state.reload();
+                    Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
+                        if (res.data) {
+                            calEvent.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
+                            Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
+                                if (response)
+                                    $state.reload();
+                            });
+                        }
                     });
-
                 }
             });
         }, function (err) {

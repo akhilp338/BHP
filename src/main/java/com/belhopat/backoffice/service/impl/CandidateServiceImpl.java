@@ -192,7 +192,7 @@ public class CandidateServiceImpl implements CandidateService {
 		employmentInfo.setPurpose(candidate.getPurpose().getDescription());
 		employmentInfo.setClient(candidate.getClient().getClientId());
 		employmentInfo.setPartner(candidate.getPartner());
-		employmentInfo.setSourcedBy(candidate.getSourcedBy().getClientId());
+		employmentInfo.setSourcedBy(candidate.getSourcedBy());
 		employmentInfo.setOnsiteAddress(onsiteAddress);
 		// TODO set skill set as a string :)
 		return employmentInfo;
