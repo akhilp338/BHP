@@ -90,8 +90,9 @@ abstract public class BaseCoreAPIFns {
     public String getHomeNetwork() throws IOException {
         if (this.homeNetwork == null) {
             GenericUrl url = new GenericUrl(getAlfrescoAPIUrl());
-
+            System.out.println("url : " + url.toString());
             HttpRequest request = getRequestFactory().buildGetRequest(url);
+            System.out.println("No folder found!");
 
             NetworkList networkList = request.execute().parseAs(NetworkList.class);
             System.out.println("Found " + networkList.list.pagination.totalItems + " networks.");
