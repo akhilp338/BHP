@@ -105,6 +105,7 @@
         <script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/employee/GenerateCredentials_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/fileUpload/FileUpload_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/client/ViewClient_Ctrl.js"></script>
 
 
