@@ -38,7 +38,9 @@
                             <label class="control-label" for="contact_code">Code</label>
                                 <div class="controls">
                                     <select name="contact_code" ng-model="vm.registration.contact_code"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                        class="form-input width-100" 
+                                        ng-options="country.id as ( country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
+										onselect = "country.id as (country.phoneCode)"
                                         >
                                         <option value="">--SELECT--</option>
                                     </select>                                    
@@ -187,7 +189,7 @@
                             <div class="controls">
                                 <select name="clientAddress_state" ng-model="vm.registration.clientAddress.city.state.id"
                                         ng-change="vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, 'client')"
-                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
+                                        class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesClient"
                                         validation="required:alt=required">
                                     <option value="">--SELECT--</option>
                                 </select>
@@ -197,7 +199,7 @@
                             <label class="control-label" for="clientAddress_city">City</label>
                             <div class="controls">
                                 <select name="clientAddress_city" ng-model="vm.registration.clientAddress.city.id"
-                                        class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
+                                        class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesClient">
                                     <option value="">--SELECT--</option>   
                                 </select> 
 
@@ -255,7 +257,9 @@
                             <label class="control-label" for="poc_country_code">Code</label>
                                 <div class="controls">
                                     <select name="poc_country_code" ng-model="vm.registration.poc_country_code"
-                                        class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
+                                        class="form-input width-100" 
+                                        ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
+										onselect = "country.id as (country.phoneCode)"
                                         >
                                         <option value="">--SELECT--</option>
                                     </select>                                    

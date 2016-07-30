@@ -205,8 +205,8 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException {
 		List<InternetAddress> emailIds = new ArrayList<InternetAddress>();
-		for (Employee employee : event.getGuestList()) {
-			emailIds.add(new InternetAddress(employee.getOfficialEmail()));
+		for (User user : event.getGuestList()) {
+			emailIds.add(new InternetAddress(user.getEmail()));
 		}
 		emailIds.add(new InternetAddress("sujith@belhopat.com"));
 		emailIds.add(new InternetAddress("sujithkvclt@gmail.com"));
@@ -215,9 +215,12 @@ public class MailServiceImpl implements MailService {
 		String mailTemplate = null;
 		String eventTitle = event.getTitle()==null?"":event.getTitle();
 		String eventStart = event.getStart()==null?"":DateUtil.toMMMMddYYYY(event.getStart()) ;
+		String eventEnd = event.getEnd()==null?"":DateUtil.toMMMMddYYYY(event.getEnd()) ;
 		mailSubject = "Event Invitation - " + eventTitle + " scheduled on "+ eventStart;
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("EVENT",event);
+		model.put("event",event);
+		model.put("start",eventStart);
+		model.put("end",eventEnd);
 		InternetAddress[] emailIdsArray = new InternetAddress[emailIds.size()];
 		emailIdsArray = emailIds.toArray(emailIdsArray);
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;

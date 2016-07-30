@@ -19,10 +19,10 @@ public class Event extends BaseEntity {
 
 	private boolean allDay;
 
-	@Column( name = "[start]")
+	@Column(name = "[start]")
 	private Date start;
 
-	@Column( name = "[end]")
+	@Column(name = "[end]")
 	private Date end;
 
 	@JsonIgnore
@@ -47,11 +47,11 @@ public class Event extends BaseEntity {
 	private boolean overlap;
 
 	@JsonIgnore
-	@Column( name = "[constraint]")
+	@Column(name = "[constraint]")
 	private Long constraint;
 
 	@JsonIgnore
-	@Column( name = "[source]")
+	@Column(name = "[source]")
 	private String source;
 
 	@JsonIgnore
@@ -69,9 +69,9 @@ public class Event extends BaseEntity {
 	private String description;
 
 	private String location;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Employee> guestList;
+	private List<User> guestList;
 
 	public String getTitle() {
 		return title;
@@ -225,19 +225,19 @@ public class Event extends BaseEntity {
 		this.location = location;
 	}
 
-	public List<Employee> getGuestList() {
+	public List<User> getGuestList() {
 		return guestList;
 	}
 
-	public void setGuestList(List<Employee> guestList) {
+	public void setGuestList(List<User> guestList) {
 		this.guestList = guestList;
 	}
-	
-	public void addGuest(Employee guest ){
+
+	public void addGuest(User guest) {
 		this.guestList.add(guest);
 	}
 
-	public void removeGuest(Employee guest ){
+	public void removeGuest(Employee guest) {
 		this.guestList.remove(guest);
 	}
 

@@ -18,6 +18,8 @@
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
+                vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id, "client");
+                vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
@@ -74,10 +76,7 @@
                     .then(function (response) {
                         switch (flag) {
                             case "client":
-                                vm.statesPerm = response.data;
-                                break;
-                            case "current":
-                                vm.statesCurnt = response.data;
+                                vm.statesClient = response.data;
                                 break;
                             default:
                                 break;
@@ -93,10 +92,7 @@
                     .then(function (response) {
                         switch (flag) {
                             case "client":
-                                vm.citiesPerm = response.data;
-                                break;
-                            case "current":
-                                vm.citiesCurnt = response.data;
+                                vm.citiesClient = response.data;
                                 break;
                             default:
                                 break;
@@ -106,16 +102,6 @@
                     });
         };
 
-        vm.getCitiesByStatesBank = function (stateId) {
-            var data = {"id": stateId};
-            vm.apiUrl = "api/getCitiesByState";
-            Core_Service.defaultApiByIdAndUrlImpl(vm.apiUrl, data)
-                    .then(function (response) {
-                        vm.citiesBank = response.data;
-                    }, function (error) {
-                    });
-        };
-        
         Core_Service.calculateSidebarHeight();
         $rootScope.showLoader = false;
     };
