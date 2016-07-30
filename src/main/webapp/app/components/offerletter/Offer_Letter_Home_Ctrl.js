@@ -1,5 +1,5 @@
 (function () {
-    var Offer_Letter_Home_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service,Core_ModalService) {
+    var Offer_Letter_Home_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service,Core_ModalService,Core_HttpRequest) {
         var vm = this;
         $rootScope.active = 'offerletter';
        /* vm.addOfferLetter = function(){
@@ -90,11 +90,21 @@
                         render: function (data) {
                             $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
-                                    '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
+                                    '<span value="' + data + '" class="actions action-download fa-stack fa-lg pull-left" title="Edit">'+
                                     '<i class="fa fa-cloud-download" aria-hidden="true"></i></i></span></div>'
                         }
                     }]
             });
+            
+            $('#offerLetterList').on('click', '.action-download', function () {
+            	var empSalId = this.getAttribute('value');
+            	var url = "api/previewOfferLetter?empSalId="+empSalId;
+           	    url = Core_HttpRequest.getUrl(url);
+           	    var win = window.open(url,"_blank");
+           	    win.focus();
+            });
+            
+            
             
             vm.getFormattedDate = function(data){
             	var today = new Date(data);
@@ -106,7 +116,7 @@
         Core_Service.calculateSidebarHeight();
          };
 
-         Offer_Letter_Home_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'urlConfig', 'Core_Service','Core_ModalService'];
+         Offer_Letter_Home_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'urlConfig', 'Core_Service','Core_ModalService','Core_HttpRequest'];
     angular.module('coreModule')
             .controller('Offer_Letter_Home_Ctrl', Offer_Letter_Home_Ctrl);
 })();
