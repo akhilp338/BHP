@@ -11,6 +11,13 @@
             localStorage.clear();
             angular.element(".link-btn").trigger("click");
         };
+        vm.getUserName= function(data){
+       	 Core_Service.getCurrentUser(data).then(function (res){
+       		$rootScope.currentUser=res;
+            },function (error){
+            }); 
+       	
+       }
 
         
     };    

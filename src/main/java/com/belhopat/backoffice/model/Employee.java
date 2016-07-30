@@ -51,7 +51,19 @@ public class Employee extends BaseEntity{
 	private City workLocation;
 	
 	@ManyToOne
+	private City baseLocation;
+	
+	@ManyToOne
 	private TimeZone timeZone;
+
+	
+	public City getBaseLocation() {
+		return baseLocation;
+	}
+
+	public void setBaseLocation(City baseLocation) {
+		this.baseLocation = baseLocation;
+	}
 
 	public User getEmployeeUser() {
 		return employeeUser;

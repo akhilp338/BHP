@@ -14,8 +14,6 @@ public class EmployeeDto {
 	
 	private Long workLocation;
 	
-	private Long timeZone;
-	
 	private Long reportingManager;
 	
 	private Long accountManager;
@@ -28,6 +26,16 @@ public class EmployeeDto {
 	
 	private String mail;
 	
+	private Long baseLocation;
+	
+
+	public Long getBaseLocation() {
+		return baseLocation;
+	}
+
+	public void setBaseLocation(Long baseLocation) {
+		this.baseLocation = baseLocation;
+	}
 
 	public String getMail() {
 		return mail;
@@ -117,13 +125,6 @@ public class EmployeeDto {
 		this.workLocation = workLocation;
 	}
 
-	public Long getTimeZone() {
-		return timeZone;
-	}
-
-	public void setTimeZone(Long timeZone) {
-		this.timeZone = timeZone;
-	}
 	
 	
 	

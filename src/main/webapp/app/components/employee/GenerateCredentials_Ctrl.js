@@ -5,28 +5,30 @@
 		
 		var employeeId = candidateDetails[ 'employeeId' ] || '-';
 		
-		vm.template = "<div class = 'candidate-details-wrapper'>";
-		vm.template += "<div class='cat-row'><span class = 'catagory'>" 
-					+ fields[ 'employeeId' ]
-					+ " </span><span class='cat-value'>"
+		vm.template = "<div class = 'generate-login-wrapper'>";
+		vm.template += "<div class='row'>" +
+				    "<span class = 'catagory'>" 
+					+ fields[ 'employeeId' ] 
+					+ ": </span><span class='cat-value'>"
 					+ employeeId + "</span></div>";
 		
+		vm.template += "<div class='row'> <span class = 'catagory'>Official email </span>" +
+				
+				"<input type='text' name='officialEmail' id='officialEmail'>" +
+				"<br></div></div>" ;
 		vm.mail = candidateDetails[ 'mail' ];
 		if( vm.mail == "-999"){
 			Core_Service.sweetAlert("Oops!","Please update personal email of the candidate before continuing.","error"); 
 		}
 		
-		vm.template += "<div class='cat-row'><span class = 'catagory'>" 
-					+ fields[ 'personalEmail' ]
-					+ " </span><span class='cat-value'>"
-					+ vm.mail + "</span></div>";
-		vm.template += "</div>";
+		vm.template += "Welcome mail with login credentials will be send to his/her personal email ( " 
+					+ vm.mail + ")</div>";
 		
 		vm.submitGenerateCredentialsRequest = function( ){
-			var data = {"email":vm.mail }
+			var data = {"email":vm.mail,'officialEmail':$('#officialEmail').val() }
 			Core_Service.sendPassword(data).then(function(res){
 				if(res.data.success){
-	                  Core_Service.sweetAlert("Done!",res.data.data,"success");  
+	                  Core_Service.sweetAlertWithConfirm("Done!",res.data.data,"success");  
                 }
                 else{
                    Core_Service.sweetAlert("Oops!",res.data.data,"error"); 
@@ -34,7 +36,7 @@
 			},
             function(error){
 //				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 
-				Core_Service.sweetAlert("Done!",error.data.data,"success"); 
+				Core_Service.sweetAlertWithConfirm("Done!",error.data.data,"success"); 
             });
         };
 		
