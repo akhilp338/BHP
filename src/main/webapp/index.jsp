@@ -62,6 +62,8 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-spinner.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-loading-spinner.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/ngUpload.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/ngUploadShim.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
          <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-1.3.3.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-tpls-1.3.3.min.js"></script>
@@ -105,6 +107,7 @@
         <script src="/BelhopatBackOffice/app/components/employee/ViewEmployee_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/employee/GenerateCredentials_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/fileUpload/FileUpload_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/client/ViewClient_Ctrl.js"></script>
 
 

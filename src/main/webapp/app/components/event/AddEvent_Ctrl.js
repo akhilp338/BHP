@@ -47,10 +47,10 @@
             vm.eventguests.push(chipInfo);
         };
         
-        if (candidateDetails.date) {
+        if (candidateDetails) {
             var start, end;
-            if (candidateDetails.date.start) {
-                start = new Date(candidateDetails.date.start.format());
+            if (candidateDetails.start) {
+                start = new Date(candidateDetails.start.format());
                 start = new Date(start.getTime() + start.getTimezoneOffset() * 60000);
                 vm.addEventData.start = start.getTime();
                 vm.picker7.date = start;
@@ -61,8 +61,8 @@
                 vm.buttonText = "Add Event";
                 vm.isEdit = false;
             }
-            if (candidateDetails.date.end) {
-                end = new Date(candidateDetails.date.end.format());
+            if (candidateDetails.end) {
+                end = new Date(candidateDetails.end.format());
                 end = new Date(end.getTime() + end.getTimezoneOffset() * 60000);
                 vm.addEventData.end = end.getTime();
                 vm.picker6.date = end;
@@ -73,11 +73,11 @@
                 vm.buttonText = "Add Event";
                 vm.isEdit = false;
             }
-            vm.addEventData.id = candidateDetails.date.id;
-            vm.addEventData.title = candidateDetails.date.title;
-            vm.addEventData.description = candidateDetails.date.description;
-            vm.addEventData.location = candidateDetails.date.location;
-            vm.addEventData.allDay = candidateDetails.date.allDay;
+            vm.addEventData.id = candidateDetails.id;
+            vm.addEventData.title = candidateDetails.title;
+            vm.addEventData.description = candidateDetails.description;
+            vm.addEventData.location = candidateDetails.location;
+            vm.addEventData.allDay = candidateDetails.allDay;
         }
         if(candidateDetails.guestList){
             vm.eventguests = candidateDetails.guestList;

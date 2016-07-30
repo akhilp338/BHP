@@ -1,0 +1,34 @@
+<div>
+    <div class="container">
+        <div ng-if="vm.passbook.progress">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.passbook.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.passbook.progress}};">
+                {{vm.passbook.progress}}
+            </div>
+        </div>
+        <hr>
+        <ul>
+            <li ng-repeat="f in vm.passbook.files" style="font:smaller">{{f.name}}</li>
+        </ul>
+    </div>
+    <div ng-hide="vm.passbook.progress" ngf-drop ngf-select ng-model="vm.passbook.files" ngf-pattern="'image/*'" ngf-multiple="true" >
+        <p><span class="btn btn-primary">Upload scanned docs of passbook</span></p>
+    </div></div>
+    
+    <div class="container">
+    <div ng-if="progress">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}};">
+                {{progress}}
+            </div>
+        </div>
+        <hr>
+        <ul>
+            <li ng-repeat="f in gFiles" style="font:smaller">{{f.name}}</li>
+        </ul>
+    </div>
+    <div ng-hide="progress" ngf-drop ngf-select ng-model="gFiles" ngf-pattern="'image/*'" ngf-multiple="true" >
+        <p><span class="btn btn-primary">Select photots from your computer</span></p>
+    </div></div>
+    
+</div>

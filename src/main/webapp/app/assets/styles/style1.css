@@ -1074,7 +1074,7 @@ div#candidatesList_length select, div#employeeList_length select, div#clientList
 }
 
 .top-main-head h4 {
-    margin: 0 20px;
+    margin: 0;
     line-height: 26px;
 }
 
