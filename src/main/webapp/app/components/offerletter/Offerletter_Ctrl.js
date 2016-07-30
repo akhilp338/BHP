@@ -255,8 +255,8 @@
         }
         
         vm.downloadOfferLetter = function(){
-            vm.downloadOfferLetterUrl = "api/previewOfferLetter?empSalId="+vm.offerletter.id;
-            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(url);
+            vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
+            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(downloadOfferLetterUrl);
             Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,"offer-letter"+vm.offerletter.id);                    
         }
 

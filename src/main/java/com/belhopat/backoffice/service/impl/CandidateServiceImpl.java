@@ -452,7 +452,7 @@ public class CandidateServiceImpl implements CandidateService {
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
 				Predicate employeeStatus = criteriaBuilder.equal(root.get("employee"), false);
-				Predicate salaryNotProcessed = criteriaBuilder.isNull(root.get("salary"));
+				Predicate salaryNotProcessed = criteriaBuilder.equal(root.get("offerletterStatus"), false);
 				return criteriaBuilder.and(isNotDeleted, employeeStatus, salaryNotProcessed);
 			}
 		};

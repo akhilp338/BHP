@@ -119,6 +119,8 @@ public class Candidate extends BaseEntity {
 	private LookupDetail registrationStatus;
 
 	private boolean employee;
+	
+	private boolean offerletterStatus;
 
 	public String getCandidateId() {
 		return candidateId;
@@ -448,6 +450,14 @@ public class Candidate extends BaseEntity {
 		this.employee = employee;
 	}
 
+	public boolean isOfferletterStatus() {
+		return offerletterStatus;
+	}
+
+	public void setOfferletterStatus(boolean offerletterStatus) {
+		this.offerletterStatus = offerletterStatus;
+	}
+	
 	@Override
 	public String toString() {
 		return "Candidate [candidateId=" + candidateId + ", firstName=" + firstName + ", middleName=" + middleName

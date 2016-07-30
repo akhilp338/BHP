@@ -1,7 +1,10 @@
 package com.belhopat.backoffice.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +40,7 @@ public class EventController {
 
 	@ResponseBody
 	@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
-	public ResponseEntity<Event> addEvent(@RequestBody Event event) {
+	public ResponseEntity<Event> addEvent(@RequestBody Event event) throws MessagingException, ParseException {
 		return eventService.addEvent(event);
 	}
 
@@ -53,7 +56,6 @@ public class EventController {
 		return eventService.deleteEvent(eventId);
 	}
 
-	
 	@ResponseBody
 	@RequestMapping(value = "/getEmployeesDropDownData", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<?>>> getEmployeesDropDownData() {

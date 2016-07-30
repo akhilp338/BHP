@@ -83,10 +83,12 @@
             vm.eventguests = candidateDetails.guestList;
         }
         vm.addEvent = function () {
-            vm.addEventData.start = vm.picker7.date;
-            vm.addEventData.end = vm.picker6.date;
+        	debugger;
+        	var utcStartDateString = new Date(vm.picker7.date).toDateString() + " 00:00:00 GMT";
+        	var utcEndDateString  = new Date(vm.picker6.date).toDateString() + " 00:00:00 GMT";
+            vm.addEventData.start = new Date(utcStartDateString).getTime();
+            vm.addEventData.end = new Date(utcEndDateString).getTime();
             vm.addEventData.guestList = vm.processObjecToArray(vm.addEventData.guests);
-            debugger;
             var url = "api/event/addEvent";
             Core_Service.addEventDetails(url, vm.addEventData).then(function (response) {
                 if (response.data)

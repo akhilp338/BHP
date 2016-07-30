@@ -385,6 +385,7 @@ public class BaseServiceImpl implements BaseService {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
+				Candidate candidate = candidateRepository.findById(employeeSalary.getCandidate().getId());
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
@@ -392,6 +393,8 @@ public class BaseServiceImpl implements BaseService {
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
 //				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 //				employeeSalary.setOfferLetterFileName(document);
+				candidate.setOfferletterStatus(true);
+				candidateRepository.saveAndFlush(candidate);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
