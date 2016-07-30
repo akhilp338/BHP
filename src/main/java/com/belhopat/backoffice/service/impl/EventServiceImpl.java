@@ -17,6 +17,17 @@ import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EventRepository;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EventService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -40,7 +51,7 @@ public class EventServiceImpl implements EventService {
 	EmployeeRepository employeeRepository;
 	
 	@Autowired
-	BaseServiceImpl baseService;
+	BaseService baseService;
 
 	@Override
 	public ResponseEntity<List<Event>> getEvents() {
