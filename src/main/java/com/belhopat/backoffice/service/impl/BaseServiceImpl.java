@@ -299,18 +299,21 @@ public class BaseServiceImpl implements BaseService {
 	public TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		TaskList currentTaskRow = new TaskList();
-		TaskList newTaskRow = new TaskList();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
 		currentTaskRow.setCompleted((byte) 1);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
 		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
-		newTaskRow.setTask(nextTask);
-		newTaskRow.setBaseAttributes(currentUser);
 		taskListRepository.save(currentTaskRow);
-		newTaskRow = taskListRepository.save(newTaskRow);
-		return newTaskRow;
+		if(nextTask!=null){
+			TaskList newTaskRow = new TaskList();
+			newTaskRow.setTask(nextTask);
+			newTaskRow.setBaseAttributes(currentUser);
+			newTaskRow = taskListRepository.save(newTaskRow);
+			return newTaskRow;
+		}
+		return currentTaskRow;
 	}
 
 	@Override
