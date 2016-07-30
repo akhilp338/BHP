@@ -874,9 +874,9 @@ span.user-list-head {
     border: 0;
     border-radius: 0;
 }
-#generateCredentials {
+/* #generateCredentials {
     width: 312px;
-}
+} */
 .modal-header {
     color: white;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffb76b),
@@ -1992,7 +1992,7 @@ md-dialog-actions .md-button.md-default-theme.md-primary, .md-button.md-primary
 }
 
 md-dialog-actions .md-button:focus, .md-button:hover {
-    background: green !important;
+    background:rgb(255, 173, 90) !important;
 }
 
 .pending, .completed {
@@ -2001,7 +2001,12 @@ md-dialog-actions .md-button:focus, .md-button:hover {
     padding: 5px;
     border: 1px solid white;
 }
-
+.generate-login-wrapper .row {
+    padding: 13px;
+}
+.generate-login-wrapper span.catagory{
+	    border-right: 1px solid #fff;
+}
 #pending, #completed {
     top: 2px;
     position: relative;

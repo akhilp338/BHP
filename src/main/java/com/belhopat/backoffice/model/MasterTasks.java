@@ -20,6 +20,26 @@ public class MasterTasks {
 	private String taskDesc;
 
 	private String taskOwnerRole;
+	
+	private String taskRoute;
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTaskRoute() {
+		return taskRoute;
+	}
+
+	public void setTaskRoute(String taskRoute) {
+		this.taskRoute = taskRoute;
+	}
 
 	public String getTaskKey() {
 		return taskKey;

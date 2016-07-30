@@ -17,6 +17,7 @@
             angular.element('.navbar-nav li').removeClass("active");
             angular.element(e.currentTarget).addClass("active");                     
         };
+       
     };
 
     Home_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service'];

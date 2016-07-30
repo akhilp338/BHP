@@ -25,7 +25,7 @@
                 
             },
             language: {
-            	zeroRecords: 'No data to dispay',
+            	zeroRecords: 'No data to display',
                 searchPlaceholder: 'Search Your Tasks',
                 search: '',
                 infoEmpty: '',
@@ -73,14 +73,15 @@
         } );
         
     });
+		$scope.close= function(){
+			$mdDialog.hide();
+		}
 		vm.showAdvanced = function(res) {
-		    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+		    
 		    $mdDialog.show({
 		      controller: Dash_Ctrl,
 		      templateUrl: 'app/components/dashboard/taskDialogue.html',
-		      parent: angular.element(document.body),
-		      clickOutsideToClose:true,
-		      fullscreen: useFullScreen
+		      clickOutsideToClose:false,
 		    })
 		   
 		  };

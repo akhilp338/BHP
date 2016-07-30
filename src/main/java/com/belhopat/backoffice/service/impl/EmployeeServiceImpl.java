@@ -76,8 +76,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee accountManager = employeeRepository.findOne(employeeDto.getAccountManager());
 		LookupDetail businessUnit = lookupDetailRepository.findOne(employeeDto.getBusinessUnit());
 		Candidate employeeMaster = candidateRepository.findOne(employeeDto.getEmployeeMasterId());
-		TimeZone timeZone=timeZoneRepository.findOne(employeeDto.getTimeZone());
 		City workLocation=cityRepository.findOne(employeeDto.getWorkLocation());
+		City baseLocation=cityRepository.findOne(employeeDto.getBaseLocation());
 		Employee employee = null;
 		if (employeeDto.getId() == null) {
 			employee = new Employee();
@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setWorkLocation(workLocation);
 		employee.setHrRecruiter(hrr);
 		employee.setReportingManager(reportingMngr);
-		employee.setTimeZone(timeZone);
+		employee.setBaseLocation(baseLocation);
 		employee.setAccountManager(accountManager);
 		employee.setBusinessUnit(businessUnit);
 		employee.setEmployeeMaster(employeeMaster);
@@ -156,7 +156,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		outputObj.setHrRecruiter( employeeObj.getHrRecruiter() != null ? employeeObj.getHrRecruiter().getId() : -999 );
 		outputObj.setReportingManager(employeeObj.getReportingManager() != null ? employeeObj.getReportingManager().getId() : -999 );
 		outputObj.setEmployeeMasterId( employeeObj.getEmployeeMaster() != null ? employeeObj.getEmployeeMaster().getId() : -999 );
-		outputObj.setTimeZone( employeeObj.getTimeZone() != null ? employeeObj.getTimeZone().getId() : -999 );
+		outputObj.setBaseLocation( employeeObj.getBaseLocation() != null ? employeeObj.getBaseLocation().getId() : -999 );
 		outputObj.setWorkLocation( employeeObj.getWorkLocation() != null ? employeeObj.getWorkLocation().getId() : -999 );
 		outputObj.setBusinessUnit( employeeObj.getBusinessUnit() != null ? employeeObj.getBusinessUnit().getId() : -999 );
 		outputObj.setJoiningDate( employeeObj.getJoiningDate() );

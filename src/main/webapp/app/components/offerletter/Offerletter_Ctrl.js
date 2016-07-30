@@ -85,7 +85,7 @@
 
                 },
                 language: {
-                    zeroRecords: 'No data to dispay',
+                    zeroRecords: 'No data to display',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',
@@ -256,7 +256,7 @@
         
         vm.downloadOfferLetter = function(){
             vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
-            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(url);
+            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(downloadOfferLetterUrl);
             Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,"offer-letter"+vm.offerletter.id);                    
         }
 
