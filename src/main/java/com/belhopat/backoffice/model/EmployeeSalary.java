@@ -16,7 +16,7 @@ public class EmployeeSalary extends BaseEntity {
 	private Candidate candidate;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@Column(name = "GRADE_ID")
+	@JoinColumn(name = "GRADE_ID")
 	private SalaryGrade selectedGrade;
 
 	@Column(name = "MIN_BAS_SAL", scale = 2)

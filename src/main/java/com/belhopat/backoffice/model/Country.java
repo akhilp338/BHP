@@ -15,10 +15,10 @@ public class Country {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column(name = "CODE", nullable = false, length = 10)
+	@Column(name = "[CODE]", nullable = false, length = 10)
 	private String code;
 
-	@Column(name = "DESC", length = 50)
+	@Column(name = "[DESC]", length = 50)
 	private String description;
 
 	@Column(name = "ISO_3_CODE", length = 10)

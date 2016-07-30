@@ -17,10 +17,10 @@ public class State {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column(name = "CODE", nullable = false, length = 10)
+	@Column(name = "[CODE]", length = 10)
 	private String code;
 
-	@Column(name = "DESC", length = 50)
+	@Column(name = "[DESC]", length = 50)
 	private String description;
 
 	@ManyToOne

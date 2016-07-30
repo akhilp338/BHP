@@ -29,7 +29,7 @@ public class User {
 	@Column(name = "USERNAME", nullable = false, unique = true, length = 50)
 	private String username;
 
-	@Column(name = "PASSWORD", nullable = false,  length = 100)
+	@Column(name = "PASSWORD", nullable = false, length = 100)
 	private String password;
 
 	@Column(name = "EMAIL", nullable = false, unique = true, length = 50)
@@ -45,7 +45,7 @@ public class User {
 	@Column(name = "FRGT_PSWD_STS", columnDefinition = "boolean default false", nullable = false)
 	private Boolean forgotPasswordStatus;
 
-	@Column(name = "FRGT_PSWD_TKN" , length = 200)
+	@Column(name = "FRGT_PSWD_TKN", length = 200)
 	private String forgotPasswordToken;
 
 	@OneToOne(fetch = FetchType.EAGER)
@@ -64,6 +64,9 @@ public class User {
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ROLE_ID") })
 	private Set<MasterRole> roles = new HashSet<MasterRole>();
+
+	public User() {
+	}
 
 	public User(Long id) {
 		this.id = id;

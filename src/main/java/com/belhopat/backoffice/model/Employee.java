@@ -27,7 +27,7 @@ public class Employee extends BaseEntity {
 	private User employeeUser;
 
 	@Temporal(TemporalType.DATE)
-	@JoinColumn(name = "JOIN_DATE")
+	@Column(name = "JOIN_DATE")
 	private Date joiningDate;
 
 	@OneToOne(fetch = FetchType.EAGER)

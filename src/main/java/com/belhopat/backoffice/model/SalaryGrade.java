@@ -2,11 +2,18 @@ package com.belhopat.backoffice.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "SALARY_GRADE")
-public class SalaryGrade extends BaseEntity {
+public class SalaryGrade {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private Long id;
 
 	@Column(name = "GRADE", length = 10)
 	private String grade;
@@ -19,6 +26,14 @@ public class SalaryGrade extends BaseEntity {
 
 	@Column(name = "MAX_GS_PER_MNT", scale = 2)
 	private Double maxGSPerMonth;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getGrade() {
 		return grade;
@@ -54,8 +69,7 @@ public class SalaryGrade extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "SalaryGrade [grade=" + grade + ", fixedSalary=" + fixedSalary + ", minGSPerMonth=" + minGSPerMonth
-				+ ", maxGSPerMonth=" + maxGSPerMonth + "]";
+		return "SalaryGrade [id=" + id + ", grade=" + grade + ", fixedSalary=" + fixedSalary + ", minGSPerMonth="
+				+ minGSPerMonth + ", maxGSPerMonth=" + maxGSPerMonth + "]";
 	}
-
 }

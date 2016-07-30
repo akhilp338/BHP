@@ -24,10 +24,10 @@ public class LookupDetail {
 	@JoinColumn(name = "LOOKUP_ID")
 	private Lookup lookup;
 
-	@Column(name = "CODE", nullable = false, length = 10)
+	@Column(name = "[CODE]", nullable = false, length = 10)
 	private String code;
 
-	@Column(name = "DESC", nullable = false, length = 50)
+	@Column(name = "[DESC]", nullable = false, length = 50)
 	private String description;
 
 	public Long getId() {

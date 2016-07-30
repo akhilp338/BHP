@@ -18,7 +18,7 @@ public class Lookup {
 	@Column(name = "LOOKUP_KEY", unique = true, nullable = false, length = 15)
 	private String lookupKey;
 
-	@Column(name = "DESC", length = 50)
+	@Column(name = "[DESC]", length = 50)
 	private String decription;
 
 	public Long getId() {

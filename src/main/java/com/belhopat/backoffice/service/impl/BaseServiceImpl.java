@@ -306,7 +306,7 @@ public class BaseServiceImpl implements BaseService {
 		currentTaskRow.setStatus(TaskConstants.CREATED);
 		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
 		taskListRepository.save(currentTaskRow);
-		if(nextTask!=null){
+		if (nextTask != null) {
 			TaskList newTaskRow = new TaskList();
 			newTaskRow.setTask(nextTask);
 			newTaskRow.setBaseAttributes(currentUser);
@@ -394,16 +394,11 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-<<<<<<< HEAD
-				String document = alfrescoUploadService.uploadFileByCategory(offerLetter, employeeSalary,
-						Constants.OFFER_LETTERS);
-				employeeSalary.setOfferLetterFileName(document);
-=======
-//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
-//				employeeSalary.setOfferLetterFileName(document);
+				// String document =
+				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				// employeeSalary.setOfferLetterFileName(document);
 				candidate.setOfferletterStatus(true);
 				candidateRepository.saveAndFlush(candidate);
->>>>>>> 0527f5148ceb109c99b154122fb40d1e255d9b77
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}
