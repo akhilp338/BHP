@@ -12,14 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.dto.UserDTO;
-import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
+import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.UserService;
-import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.PasswordUtil;
 import com.belhopat.backoffice.util.RandomPasswordGenerator;
 
@@ -39,6 +40,10 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	CandidateRepository candidateRepo;
+	
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 	
 	@Autowired
 	RandomPasswordGenerator randomPasswordGenerator;
@@ -70,10 +75,11 @@ public class UserServiceImpl implements UserService{
 		}
 		return null;
 	}
-	public void saveUser(User user) {
-		userRepo.save(user);
+	public User saveUser(User user) {
+		User userNew=userRepo.save(user);
 		user.setId(counter.incrementAndGet());
 		users.add(user);
+		return userNew;
 	}
 	public void updateUser(User user) {
 		int index = users.indexOf(user);
@@ -135,6 +141,27 @@ public class UserServiceImpl implements UserService{
 			resetStatus = true;
 		}
 		return resetStatus;
+	}
+	@Override
+	public Employee createUser(EmployeeDto employee) {
+		Employee employeeEntity=employeeRepository.findByEmployeeId(employee.getEmployeeId());
+		User user=null;
+		if(employeeEntity.getEmployeeUser()==null)
+			 user=new User();
+		else
+			 user=employeeEntity.getEmployeeUser();
+		user.setEmail(employee.getOfficialEmailId());
+		user.setUsername(employee.getEmployeeId());
+		user.setDesignation(employeeEntity.getEmployeeMaster().getDesignation());
+		employeeEntity.setEmployeeUser(user);
+		Employee returnEntity=employeeRepository.save(employeeEntity);
+		try {
+			mailService.sendPasswordResetMail( employeeEntity.getEmployeeUser() );
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnEntity;
 	}
 
 }

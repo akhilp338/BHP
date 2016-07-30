@@ -34,7 +34,21 @@
                     });
             return deferred.promise;
         };
+        service.createUser = function (employee) {
+            var deferred = $q.defer();
+            var user = {};
+            Core_HttpRequest.post("/api/user/saveUser",employee)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
 
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
         service.isAuthenticated = function (item, data) {
             var isUserNameOk, isPasswordOk;
             for (var i = 0; i < data.length; i++) {

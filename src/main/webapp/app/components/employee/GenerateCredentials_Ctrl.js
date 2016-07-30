@@ -25,8 +25,21 @@
 					+ vm.mail + ")</div>";
 		
 		vm.submitGenerateCredentialsRequest = function( ){
-			var data = {"email":vm.mail,'officialEmail':$('#officialEmail').val() }
-			Core_Service.sendPassword(data).then(function(res){
+			var data = {"email":vm.mail,'officialEmailId':$('#officialEmail').val(),'employeeId':employeeId }
+			Core_Service.createUser(data).then(function(res){
+				if(res){
+	                  Core_Service.sweetAler("Email Sent!",res,"success");  
+                }
+                else{
+                   Core_Service.sweetAlert("Oops!",res,"error"); 
+                }
+			},
+            function(error){
+//				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 
+				Core_Service.sweetAlertWithConfirm("Done!",error.data.data,"success"); 
+            });
+			
+			/*Core_Service.sendPassword(data).then(function(res){
 				if(res.data.success){
 	                  Core_Service.sweetAlertWithConfirm("Done!",res.data.data,"success");  
                 }
@@ -37,7 +50,7 @@
             function(error){
 //				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 
 				Core_Service.sweetAlertWithConfirm("Done!",error.data.data,"success"); 
-            });
+            });*/
         };
 		
         vm.cancel = function () {

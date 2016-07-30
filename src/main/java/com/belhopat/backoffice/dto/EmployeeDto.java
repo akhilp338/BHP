@@ -28,6 +28,16 @@ public class EmployeeDto {
 	
 	private Long baseLocation;
 	
+	private String officialEmailId;
+	
+	
+	public String getOfficialEmailId() {
+		return officialEmailId;
+	}
+
+	public void setOfficialEmailId(String officialEmailId) {
+		this.officialEmailId = officialEmailId;
+	}
 
 	public Long getBaseLocation() {
 		return baseLocation;
