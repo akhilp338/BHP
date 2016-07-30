@@ -215,9 +215,12 @@ public class MailServiceImpl implements MailService {
 		String mailTemplate = null;
 		String eventTitle = event.getTitle()==null?"":event.getTitle();
 		String eventStart = event.getStart()==null?"":DateUtil.toMMMMddYYYY(event.getStart()) ;
+		String eventEnd = event.getEnd()==null?"":DateUtil.toMMMMddYYYY(event.getEnd()) ;
 		mailSubject = "Event Invitation - " + eventTitle + " scheduled on "+ eventStart;
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("EVENT",event);
+		model.put("event",event);
+		model.put("start",eventStart);
+		model.put("end",eventEnd);
 		InternetAddress[] emailIdsArray = new InternetAddress[emailIds.size()];
 		emailIdsArray = emailIds.toArray(emailIdsArray);
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
