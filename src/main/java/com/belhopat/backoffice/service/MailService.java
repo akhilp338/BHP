@@ -17,8 +17,6 @@ public interface MailService {
 
 	public void sendPasswordResetMail(User user) throws MessagingException;
 
-	public void sendPasswordResetMail(Candidate candidate) throws MessagingException;
-
 	public void sendCandidateRegMail(Candidate candidate) throws MessagingException;
 
 	public void sendEmployeeRegMail(Employee employee) throws MessagingException;
@@ -26,5 +24,7 @@ public interface MailService {
 	public void sendClientRegMail(Client client) throws MessagingException;
 
 	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException, Exception;
+
+	public void sendWelcomeMail(Employee employee) throws MessagingException;
 
 }
