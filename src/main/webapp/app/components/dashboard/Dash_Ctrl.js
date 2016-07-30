@@ -25,7 +25,7 @@
                 
             },
             language: {
-            	zeroRecords: 'No data to dispay',
+            	zeroRecords: 'No data to display',
                 searchPlaceholder: 'Search Your Tasks',
                 search: '',
                 infoEmpty: '',

@@ -20,4 +20,7 @@ public class TaskConstants {
 	/*status constants*/
 	public static final String CREATED = "CREATED";
 	public static final String AH_APPROVED = "AH_APPROVED";
+	
+	/*event management constants*/
+	public static final String GENERAL_TASK = "GEN_EVENT_TASK";
 }

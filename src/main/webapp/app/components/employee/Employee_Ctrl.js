@@ -24,6 +24,19 @@
         vm.generateCredentials = function(data){
         	Core_ModalService.openGenerateCredentialsModal(data);
         }
+        
+        vm.getEmpFullName = function( rowData ){
+        	console.log(rowData);
+        	var firstName = rowData.employeeMaster.firstName != null ? rowData.employeeMaster.firstName : '',
+        		lastName = rowData.employeeMaster.lastName != null ? rowData.employeeMaster.lastName : ' - ',
+        		name = rowData != null ? firstName + " " + lastName : '-';
+        	return name;
+        };
+        
+        vm.nullCheck = function ( data ){
+        	var displayData = data != null ? data : '-';
+        	return displayData;
+        };
 
         angular.element(document).ready(function () {
             var oTable = angular.element('#employeeList').DataTable({
@@ -37,7 +50,7 @@
                     Core_Service.calculateSidebarHeight();
                 },
                 language: {
-                	zeroRecords: 'No data to dispay',
+                	zeroRecords: 'No data to display',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',
@@ -46,20 +59,67 @@
                 order: [[ 0, "desc" ]],
                 aoColumns: [ {
                     	data: 'id',
-                    	visible : false
+                    	visible : false,
+                    	render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
                 	},{
                         title: "Employee ID",
                         data: 'employeeId',
-                        
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
                     }, {
+                        title: "Full Name",
+                        data: 'employeeMaster.id',
+                        render: function (data, type, row) {
+                        	return vm.getEmpFullName(row);
+                        }
+                    },  {
                         title: "First Name",
                         data: 'employeeMaster.firstName',
+                        visible: false,
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
                     },  {
                         title: "Last Name",
                         data: 'employeeMaster.lastName',
+                        visible: false,
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
+                    },  {
+                        title: "Designation",
+                        data: 'employeeMaster.designation.description',
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
+
                     }, {
+                        title: "Location",
+                        data: 'workLocation.description',
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
+                    },{
+                        title: "BU",
+                        data: 'businessUnit.description',
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
+                    },{
+                        title: "Official Email ID",
+                        data: 'employeeMaster.officialEmail',
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
+                    },{
                         title: "Employment Status",
                         data: 'employeeMaster.employmentStatus.description',
+                        render : function (data) {
+                        	return vm.nullCheck(data);
+                        }
                     },{
                         data: 'id',
                         bSortable: false,
