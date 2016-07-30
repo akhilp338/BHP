@@ -209,7 +209,7 @@
                             console.log(error)
                         });
             }
-        //$state.go("coreuser.upload")
+          //$state.go("coreuser.upload")
         };
 
         //To Do(move these methods to base controller)

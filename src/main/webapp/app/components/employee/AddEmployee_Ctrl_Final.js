@@ -56,9 +56,9 @@
             vm.registration.employeeMasterId=vm.candId ;
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                    	   $state.go("coreuser.employee")
+                    	  Core_Service.sweetAlert("Done!", response.Message, "warning", "coreuser.employee");
                     }, function (error) {
-                    	   $state.go("coreuser.employee")
+                    	 Core_Service.sweetAlert("Oops!", response.Message, "error", "coreuser.employee");
                     });
         };
      
