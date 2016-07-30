@@ -34,4 +34,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 	@Query("select e.employeeUser.id,e.employeeMaster.firstName as data " + "from Employee e")
 	List<ResponseObject> getEmployeesDropDown();
 
+	Employee findByEmployeeId(String employeeId);
+
 }
