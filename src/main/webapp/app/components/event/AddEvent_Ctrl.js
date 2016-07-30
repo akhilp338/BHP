@@ -83,7 +83,6 @@
             vm.eventguests = candidateDetails.guestList;
         }
         vm.addEvent = function () {
-        	debugger;
         	var utcStartDateString = new Date(vm.picker7.date).toDateString() + " 00:00:00 GMT";
         	var utcEndDateString  = new Date(vm.picker6.date).toDateString() + " 00:00:00 GMT";
             vm.addEventData.start = new Date(utcStartDateString).getTime();
