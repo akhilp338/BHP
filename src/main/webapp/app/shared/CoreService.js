@@ -19,6 +19,21 @@
                     });
             return deferred.promise;
         };
+        service.getCurrentUser = function () {
+            var deferred = $q.defer();
+            var user = {};
+            Core_HttpRequest.get("api/getCurrentUser")
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
 
         service.isAuthenticated = function (item, data) {
             var isUserNameOk, isPasswordOk;

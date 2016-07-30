@@ -47,13 +47,7 @@
                         render: function (data) {
                         	return data == null? "":data;
                         }
-                    },  {
-                        title: "Status",
-                        data: 'status',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    },{
+                    }, {
                         title: "Gross CTC",
                         data: 'grossCTC',
                         render: function (data) {
@@ -83,6 +77,12 @@
                         render: function (data) {
                         	return data == null? "":data;
                         }
+                    }, {
+                        title: "Status",
+                        data: 'status',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         data: 'id',
                         bSortable: false,
@@ -101,16 +101,6 @@
         	    return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
             }
             
-            $('#offerLetterList tbody').on( 'click', 'tr', function () {
-            	
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                	oTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            } );
          
         })
         Core_Service.calculateSidebarHeight();

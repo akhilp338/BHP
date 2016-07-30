@@ -21,6 +21,8 @@ public class TaskList extends BaseEntity {
 	@Column(name = "completed")
 	byte completed;
 
+	private String taskModalId;
+	
 	@Lob
 	@NotAudited
 	@Column(name = "comment")
@@ -35,6 +37,14 @@ public class TaskList extends BaseEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getTaskModalId() {
+		return taskModalId;
+	}
+
+	public void setTaskModalId(String taskModalId) {
+		this.taskModalId = taskModalId;
 	}
 
 	public MasterTasks getTask() {
