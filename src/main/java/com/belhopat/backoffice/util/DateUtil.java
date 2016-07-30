@@ -212,7 +212,7 @@ public class DateUtil extends DateTool {
 		int year = cal.get(Calendar.YEAR);
 		return year;
 	}
-	
+
 	public static String getYearYY(Date date) {
 		DateFormat df = new SimpleDateFormat("yy");
 		String yy = df.format(Calendar.getInstance().getTime());
@@ -228,7 +228,7 @@ public class DateUtil extends DateTool {
 	}
 
 	public static boolean isPreviousMonth(Date date) {
-		if ((getYear(date) < getYear(new Date())) || getMonth(date) < getMonth(new Date())) {
+		if ((getYear(date) <= getYear(new Date())) && getMonth(date) < getMonth(new Date())) {
 			return true;
 		}
 		return true;

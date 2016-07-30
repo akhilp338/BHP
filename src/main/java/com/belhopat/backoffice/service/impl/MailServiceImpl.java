@@ -1,6 +1,7 @@
 
 package com.belhopat.backoffice.service.impl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +25,13 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 import com.belhopat.backoffice.util.Constants;
+import com.belhopat.backoffice.util.DateUtil;
 import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 
 /**
@@ -83,9 +86,9 @@ public class MailServiceImpl implements MailService {
 	 * com.belhopat.backoffice.service.MailService#sendPasswordResetMail(java.
 	 * lang.String, java.lang.String) sends reseted password
 	 */
-	public void sendPasswordResetMail( Candidate candidate ) throws MessagingException {
+	public void sendPasswordResetMail(Candidate candidate) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
-//		model.put(Constants.GENERATED_PASSWORD, generatedPassword);
+		// model.put(Constants.GENERATED_PASSWORD, generatedPassword);
 		model.put(Constants.USERNAME, candidate.getFirstName());
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.PASSWORD_RESET_TEMPLATE, model);
 		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
@@ -96,11 +99,11 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public void sendPasswordResetMail( User user ) throws MessagingException {
+	public void sendPasswordResetMail(User user) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
-		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() 
-				+ Constants.CHANGE_PASSWORD_API + "/" + user.getForgotPasswordToken();
-		model.put(Constants.GENERATED_PASSWORD, user.getPassword() );
+		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() + Constants.CHANGE_PASSWORD_API + "/"
+				+ user.getForgotPasswordToken();
+		model.put(Constants.GENERATED_PASSWORD, user.getPassword());
 		model.put(Constants.PASSWORD_RESET_URL, passwordResetURL);
 		model.put(Constants.USERNAME, user.getUsername());
 
@@ -142,12 +145,6 @@ public class MailServiceImpl implements MailService {
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
 				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
 		sendMail(mailObject);
-
-	}
-
-	@Override
-	public void sendEventInvitaionMail(List<String> guestEmails, String emailBody) throws MessagingException {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -203,6 +200,31 @@ public class MailServiceImpl implements MailService {
 		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
 		forDebugEmail = forDebugList.toArray(forDebugEmail);
 		return forDebugEmail;
+	}
+
+	@Override
+	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException {
+		List<InternetAddress> emailIds = new ArrayList<InternetAddress>();
+		for (Employee employee : event.getGuestList()) {
+			emailIds.add(new InternetAddress(employee.getOfficialEmail()));
+		}
+		emailIds.add(new InternetAddress("sujith@belhopat.com"));
+		emailIds.add(new InternetAddress("sujithkvclt@gmail.com"));
+		MailMessageObject mailObject = null;
+		String mailSubject = null;
+		String mailTemplate = null;
+		String eventTitle = event.getTitle()==null?"":event.getTitle();
+		String eventStart = event.getStart()==null?"":DateUtil.toMMMMddYYYY(event.getStart()) ;
+		mailSubject = "Event Invitation - " + eventTitle + " scheduled on "+ eventStart;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("EVENT",event);
+		InternetAddress[] emailIdsArray = new InternetAddress[emailIds.size()];
+		emailIdsArray = emailIds.toArray(emailIdsArray);
+		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		mailObject = new MailMessageObject(emailIdsArray, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		sendMail(mailObject);
+
 	}
 
 }
