@@ -18,80 +18,53 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "USER")
 public class User {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column ( unique = true )
+	@Column(name = "USERNAME", nullable = false, unique = true, length = 50)
 	private String username;
 
+	@Column(name = "PASSWORD", nullable = false,  length = 100)
 	private String password;
 
+	@Column(name = "EMAIL", nullable = false, unique = true, length = 50)
 	private String email;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "DSGNTN_ID", nullable = false)
+	private LookupDetail designation;
+
+	@Column(name = "SALT")
 	private Byte[] salt;
 
-	@Column( name = "forgot_password_status" )
+	@Column(name = "FRGT_PSWD_STS", columnDefinition = "boolean default false", nullable = false)
 	private Boolean forgotPasswordStatus;
-	
-	@Column( name = "forgot_password_url" )
+
+	@Column(name = "FRGT_PSWD_TKN" , length = 200)
 	private String forgotPasswordToken;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
-	private MasterRoles primaryRole;
-	
-	
-	public MasterRoles getPrimaryRole() {
+	@JoinColumn(name = "MST_ROLE")
+	private MasterRole primaryRole;
+
+	public MasterRole getPrimaryRole() {
 		return primaryRole;
 	}
 
-	public void setPrimaryRole(MasterRoles primaryRole) {
+	public void setPrimaryRole(MasterRole primaryRole) {
 		this.primaryRole = primaryRole;
 	}
 
-	@ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
-    @JoinTable(name="User_Roles", 
-                joinColumns={@JoinColumn(name="user_id")}, 
-                inverseJoinColumns={@JoinColumn(name="role_id")})
-    private Set<MasterRoles> roles = new HashSet<MasterRoles>();
-	
-	
-	public Set<MasterRoles> getRoles() {
-		return roles;
-	}
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "ROLE_ID") })
+	private Set<MasterRole> roles = new HashSet<MasterRole>();
 
-	public void setRoles(Set<MasterRoles> roles) {
-		this.roles = roles;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@ManyToOne
-	private LookupDetail designation;
-
-	
-
-	public LookupDetail getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(LookupDetail designation) {
-		this.designation = designation;
-	}
-
-	
-	public User() {
-	}
-	
 	public User(Long id) {
 		this.id = id;
 	}
@@ -103,6 +76,13 @@ public class User {
 		this.email = email;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;
@@ -111,8 +91,6 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
 
 	public String getPassword() {
 		return password;
@@ -129,19 +107,27 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public LookupDetail getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(LookupDetail designation) {
+		this.designation = designation;
+	}
+
 	public Byte[] getSalt() {
 		return salt;
 	}
-	
+
 	public void setSalt(Byte[] salt) {
 		this.salt = salt;
 	}
-	
+
 	public Boolean getForgotPasswordStatus() {
 		return forgotPasswordStatus;
 	}
-	
+
 	public void setForgotPasswordStatus(Boolean forgotPasswordStatus) {
 		this.forgotPasswordStatus = forgotPasswordStatus;
 	}
@@ -152,6 +138,14 @@ public class User {
 
 	public void setForgotPasswordToken(String forgotPasswordToken) {
 		this.forgotPasswordToken = forgotPasswordToken;
+	}
+
+	public Set<MasterRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<MasterRole> roles) {
+		this.roles = roles;
 	}
 
 	@Override
@@ -178,9 +172,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", salt="
-				+ Arrays.toString(salt) + ", forgotPasswordStatus=" + forgotPasswordStatus + ", forgotPasswordToken="
-				+ forgotPasswordToken + ", primaryRole=" + primaryRole + ", roles=" + roles + ", designation="
-				+ designation + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", designation=" + designation + ", salt=" + Arrays.toString(salt) + ", forgotPasswordStatus="
+				+ forgotPasswordStatus + ", forgotPasswordToken=" + forgotPasswordToken + ", primaryRole=" + primaryRole
+				+ ", roles=" + roles + "]";
 	}
+
 }

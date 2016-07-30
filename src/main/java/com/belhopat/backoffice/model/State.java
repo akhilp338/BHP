@@ -1,24 +1,30 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "STATE")
 public class State {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
-	
+
+	@Column(name = "CODE", nullable = false, length = 10)
 	private String code;
-	
+
+	@Column(name = "DESC", length = 50)
 	private String description;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "CNTRY_ID")
 	private Country country;
 
 	public Long getId() {
@@ -57,5 +63,5 @@ public class State {
 	public String toString() {
 		return "State [id=" + id + ", code=" + code + ", description=" + description + ", country=" + country + "]";
 	}
-	
+
 }

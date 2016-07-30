@@ -5,32 +5,45 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public class BaseEntity implements Cloneable {
 
 	@Id
 	@GeneratedValue
-	@Column( name = "ID")
+	@Column(name = "ID")
 	private Long id;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CRTD_DATE")
 	private Date createdDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "UPTD_DATE")
 	private Date updatedDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DLTD_DATE")
 	private Date deletedDate;
 
 	@ManyToOne
+	@JoinColumn(name = "CRTD_BY_ID")
 	private User createdBy;
 
 	@ManyToOne
+	@JoinColumn(name = "UPTD_BY_ID")
 	private User updatedBy;
 
 	@ManyToOne
+	@JoinColumn(name = "DLTD_BY_ID")
 	private User deletedBy;
 
+	@Column(name = "IS_DLTD", columnDefinition = "boolean default false", nullable = false)
 	private boolean deleted;
 
 	public Long getId() {
@@ -116,7 +129,7 @@ public class BaseEntity implements Cloneable {
 		this.deletedBy = user;
 		this.deletedDate = new Date();
 	}
-	
+
 	public void hideAttributes() {
 		this.id = null;
 		this.createdBy = null;
@@ -126,12 +139,4 @@ public class BaseEntity implements Cloneable {
 		this.deletedBy = null;
 		this.deletedDate = null;
 	}
-
-	@Override
-	public String toString() {
-		return "BaseEntity [id=" + id + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate
-				+ ", deletedDate=" + deletedDate + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy
-				+ ", deletedBy=" + deletedBy + ", deleted=" + deleted + "]";
-	}
-
 }

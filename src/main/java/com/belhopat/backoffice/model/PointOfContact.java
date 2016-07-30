@@ -7,40 +7,36 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table ( name = "POINT_OF_CONTACT" )
+@Table(name = "POINT_OF_CONTACT")
 public class PointOfContact {
-	
+
 	@Id
 	@GeneratedValue
-	@Column( name = "ID" )
+	@Column(name = "ID")
 	private Long id;
 
-	@NotNull
-	@Column( name = "POC_NM", unique = true )
+	@Column(name = "POC_NM", nullable = false)
 	private String pocName;
-	
-	@ManyToOne
-	@NotNull
-	@JoinColumn( name = "POC_DSGNTN" )
-	private LookupDetail pocDesignation;
-	
-	@ManyToOne
-	@NotNull
-	@JoinColumn( name = "POC_CNTRY" )
-	private Country pocCountry;
-	
-	@NotNull
-	@Column( name = "PH_NO" )
-	private String contactNo;
-	
-	@Column( name = "MOB_NO" )
-	private String mobNo;
 
-	@NotNull
-	@Column( name = "WORK_AR" )
+	@ManyToOne
+	@JoinColumn(name = "POC_DSGTN_ID")
+	private LookupDetail pocDesignation;
+
+	@ManyToOne
+	@JoinColumn(name = "POC_CNTRY_ID")
+	private Country pocCountry;
+
+	@ManyToOne
+	@JoinColumn(name = "CONT_NO_ID")
+	private Phone contactNo;
+
+	@ManyToOne
+	@JoinColumn(name = "MOB_NO_ID")
+	private Phone mobNo;
+
+	@Column(name = "AREA_OF_WRK", length = 25)
 	private String areaOfWork;
 
 	public Long getId() {
@@ -75,19 +71,19 @@ public class PointOfContact {
 		this.pocCountry = pocCountry;
 	}
 
-	public String getContactNo() {
+	public Phone getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(String contactNo) {
+	public void setContactNo(Phone contactNo) {
 		this.contactNo = contactNo;
 	}
-	
-	public String getMobNo() {
+
+	public Phone getMobNo() {
 		return mobNo;
 	}
 
-	public void setMobNo(String mobNo) {
+	public void setMobNo(Phone mobNo) {
 		this.mobNo = mobNo;
 	}
 
@@ -98,5 +94,12 @@ public class PointOfContact {
 	public void setAreaOfWork(String areaOfWork) {
 		this.areaOfWork = areaOfWork;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PointOfContact [id=" + id + ", pocName=" + pocName + ", pocDesignation=" + pocDesignation
+				+ ", pocCountry=" + pocCountry + ", contactNo=" + contactNo + ", mobNo=" + mobNo + ", areaOfWork="
+				+ areaOfWork + "]";
+	}
+
 }

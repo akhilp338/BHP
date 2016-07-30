@@ -1,24 +1,30 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Mst_Tasks")
+@Table(name = "MST_TASK")
 public class MasterTasks {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@Column(name = "TSK_KEY", length = 15)
 	private String taskKey;
 
+	@Column(name = "NXT_TSK_ID")
 	private Long nextTaskId;
 
+	@Column(name = "TSK_DESC", length = 50)
 	private String taskDesc;
 
+	@Column(name = "TSK_OWNR_ROLE", length = 10)
 	private String taskOwnerRole;
 
 	public String getTaskKey() {

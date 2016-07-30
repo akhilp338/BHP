@@ -3,55 +3,79 @@ package com.belhopat.backoffice.model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Employee")
-public class Employee extends BaseEntity{
+@Table(name = "EMPLOYEE")
+public class Employee extends BaseEntity {
 
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	private User employeeUser;
-	
-	private Date joiningDate;
-	
-	@OneToOne(fetch=FetchType.EAGER)
-	private Candidate employeeMaster;
-	
-	private String officialEmail;
-	
+	@Column(name = "EMP_ID", unique = true, nullable = false, length = 15)
 	private String employeeId;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EMP_USR_ID")
+	private User employeeUser;
+
+	@Temporal(TemporalType.DATE)
+	@JoinColumn(name = "JOIN_DATE")
+	private Date joiningDate;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "CNDT_ID")
+	private Candidate employeeMaster;
+
+	@Column(name = "OFC_EMAIL", length = 50)
+	private String officialEmail;
+
 	@ManyToOne
+	@JoinColumn(name = "BUS_UNT_ID")
 	private LookupDetail businessUnit;
-	
+
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ACC_MNGR_ID")
 	private Employee accountManager;
-	
+
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "HR_RCTR_ID")
 	private Employee hrRecruiter;
 
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "HR_MNGR_ID")
 	private Employee hrManager;
-	
+
 	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "RPTNG_MNGR_ID")
 	private Employee reportingManager;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "WRK_LCTN_ID")
 	private City workLocation;
-	
+
 	@ManyToOne
+	@JoinColumn(name = "TIME_ZONE_ID")
 	private TimeZone timeZone;
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 
 	public User getEmployeeUser() {
 		return employeeUser;
@@ -83,14 +107,6 @@ public class Employee extends BaseEntity{
 
 	public void setOfficialEmail(String officialEmail) {
 		this.officialEmail = officialEmail;
-	}
-
-	public String getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
 	}
 
 	public LookupDetail getBusinessUnit() {
@@ -148,5 +164,14 @@ public class Employee extends BaseEntity{
 	public void setTimeZone(TimeZone timeZone) {
 		this.timeZone = timeZone;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", employeeUser=" + employeeUser + ", joiningDate=" + joiningDate
+				+ ", employeeMaster=" + employeeMaster + ", officialEmail=" + officialEmail + ", businessUnit="
+				+ businessUnit + ", accountManager=" + accountManager + ", hrRecruiter=" + hrRecruiter + ", hrManager="
+				+ hrManager + ", reportingManager=" + reportingManager + ", workLocation=" + workLocation
+				+ ", timeZone=" + timeZone + "]";
+	}
+
 }

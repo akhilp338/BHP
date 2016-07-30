@@ -1,20 +1,24 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "LOOKUP")
 public class Lookup {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "LOOKUP_KEY", unique = true, nullable = false, length = 15)
 	private String lookupKey;
 
+	@Column(name = "DESC", length = 50)
 	private String decription;
 
 	public Long getId() {

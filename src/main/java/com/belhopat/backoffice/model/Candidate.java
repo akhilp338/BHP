@@ -4,120 +4,166 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table
+@Table(name = "CANDIDATE")
 public class Candidate extends BaseEntity {
 
+	@Column(name = "CAND_ID", unique = true, nullable = false, length = 15)
 	private String candidateId;
 
+	@Column(name = "FRST_NAME", length = 50)
 	private String firstName;
 
+	@Column(name = "MDLE_NAME", length = 50)
 	private String middleName;
 
+	@Column(name = "LST_NAME", length = 50)
 	private String lastName;
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DOB")
 	private Date dob;
 
 	@ManyToOne
+	@JoinColumn(name = "GNDR_ID", nullable = false)
 	private LookupDetail gender;
 
 	@ManyToOne
+	@JoinColumn(name = "BLD_GRP_ID")
 	private LookupDetail bloodGroup;
 
+	@Column(name = "PER_EMAIL", length = 50)
 	private String personalEmail;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PER_CONT_NO_ID")
 	private Phone personalContactNo;
 
+	@Column(name = "OFC_EMAIL", length = 50)
 	private String officialEmail;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "OFC_CONT_NO_ID")
 	private Phone officialContactNo;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FAM_CONT_NO1_ID")
 	private Phone familyContact1;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FAM_CONT_NO2_ID")
 	private Phone familyContact2;
 
+	@Column(name = "FAM_EMAIL", length = 50)
 	private String familyEmail;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ONST_CONT_NO_ID")
 	private Phone onsiteContactNo;
 
+	@Column(name = "FATR_NAME", length = 50)
 	private String fathersName;
 
+	@Column(name = "MOTR_NAME", length = 50)
 	private String mothersName;
 
+	@Column(name = "CHLD_NAME", length = 50)
 	private String childName;
 
+	@Column(name = "SPOS_NAME", length = 50)
 	private String spouseName;
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "EMP_SALARY_ID")
 	private EmployeeSalary salary;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CURR_ADRS_ID")
 	private Address currentAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PERM_ADRS_ID")
 	private Address permanentAddress;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ONST_ADRS_ID")
 	private Address onsiteAddress;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Skill> skillSet;
 
+	@Column(name = "PRIR_EXP_YR")
 	private Integer priorExperienceYear;
 
+	@Column(name = "PRIR_EXP_MNT")
 	private Integer priorExperienceMonth;
 
 	@ManyToOne
+	@JoinColumn(name = "CNTY_OF_ORG_ID")
 	private Country countryOfOrigin;
 
 	@ManyToOne
+	@JoinColumn(name = "CNTY_TO_VST_ID")
 	private Country countryToVisit;
 
 	@ManyToOne
+	@JoinColumn(name = "CLNT_ID")
 	private Client client;
 
+	@Column(name = "SRCD_BY", length = 50)
 	private String sourcedBy;
 
+	@Column(name = "PARTNER", length = 50)
 	private String partner;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "BNK_ACC_ID")
 	private BankAccount bankAccount;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PASSPORT_ID")
 	private Passport passport;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "OFC_DTLS_ID")
 	private OfficialCards officialDetails;
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DOJ")
 	private Date doj;
 
 	@ManyToOne
+	@JoinColumn(name = "DVSN_ID")
 	private LookupDetail division;
 
 	@ManyToOne
+	@JoinColumn(name = "DSGNT_ID")
 	private LookupDetail designation;
 
 	@ManyToOne
+	@JoinColumn(name = "PRPUS_ID")
 	private LookupDetail purpose;
 
 	@ManyToOne
+	@JoinColumn(name = "EMP_STS_ID")
 	private LookupDetail employmentStatus;
 
 	@ManyToOne
+	@JoinColumn(name = "REG_STS_ID")
 	private LookupDetail registrationStatus;
 
+	@Column(name = "IS_EMP", columnDefinition = "boolean default false", nullable = false)
 	private boolean employee;
 
 	public String getCandidateId() {

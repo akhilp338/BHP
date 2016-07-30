@@ -8,25 +8,22 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.envers.NotAudited;
-
 @Entity
-@Table(name = "Task_List")
+@Table(name = "TASK_LIST")
 public class TaskList extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "task_id")
+	@JoinColumn(name = "TSK_ID")
 	private MasterTasks task;
 
-	@Column(name = "completed")
-	byte completed;
+	@Column(name = "IS_CMPLTD", columnDefinition = "boolean default false", nullable = false)
+	Boolean completed;
 
 	@Lob
-	@NotAudited
-	@Column(name = "comment")
+	@Column(name = "[COMMENT]", length = 500)
 	private String comment;
 
-	@Column(name = "status")
+	@Column(name = "[STATUS]", length = 15)
 	private String status;
 
 	public String getStatus() {
@@ -45,11 +42,11 @@ public class TaskList extends BaseEntity {
 		this.task = task;
 	}
 
-	public byte getCompleted() {
+	public Boolean getCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(byte completed) {
+	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
 
@@ -59,6 +56,12 @@ public class TaskList extends BaseEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	@Override
+	public String toString() {
+		return "TaskList [task=" + task + ", completed=" + completed + ", comment=" + comment + ", status=" + status
+				+ "]";
 	}
 
 }

@@ -10,67 +10,54 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table ( name = "CLIENT_DTLS" )
+@Table(name = "CLIENT")
 public class Client extends BaseEntity {
-	
-//	@NotNull
-	@Column( name = "CLNT_CID", unique = true )
+
+	@Column(name = "CLNT_ID", unique = true, nullable = false, length = 15)
 	private String clientId;
-	
-//	@NotNull
-	@Column( name = "CLNT_NM", unique = true )
+
+	@Column(name = "CLNT_NAME", length = 50)
 	private String clientName;
-	
-//	@NotNull
-	@Column( name = "RVNUE_PC" )
+
+	@Column(name = "REVENUE", scale = 2)
 	private Float revenue;
-	
-//	@NotNull
+
 	@ManyToOne
-	@JoinColumn( name = "BHP_AM" )
+	@JoinColumn(name = "ACC_MNGR_ID")
 	private Employee accountManager;
-	
-//	@NotNull
+
 	@ManyToOne
-	@JoinColumn( name = "BHP_BDM" )
+	@JoinColumn(name = "BUS_DEV_MNGR_ID")
 	private Employee bussDManager;
 
-//	@NotNull
 	@ManyToOne
-	@JoinColumn( name = "BU_HD" )
+	@JoinColumn(name = "BUS_UNT_HED_ID")
 	private Employee bussUnitHead;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn( name = "CLNT_ADDR" )
-	private Address clientAddress;
-	
-//	@NotNull
-	@Column( name = "PH_NO" )
-	private String contactNo;
 
-//	@NotNull
-	@Column( name = "EML_ID" )
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CLNT_ADRS_ID")
+	private Address clientAddress;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CONT_NO_ID")
+	private Phone contactNo;
+
+	@Column(name = "EMAIL", length = 50)
 	private String email;
 
-//	@NotNull
-	@Column( name = "WEB_URL" )
+	@Column(name = "WEB_URL")
 	private String webUrl;
-	
+
 	@ManyToOne
-	@JoinColumn( name = "CLNT_ST" )
+	@JoinColumn(name = "CLNT_STS_ID")
 	private LookupDetail clientStatus;
-	
+
 	@ManyToOne
-	@JoinColumn( name = "BU" )
+	@JoinColumn(name = "BUS_UNT_ID")
 	private LookupDetail businessUnit;
 
-//	@JsonIgnore
-//    @NotNull
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable( name="CLNT_POC", 
-//    joinColumns=@JoinColumn ( name = "CLNT_ID" ), 
-//    inverseJoinColumns=@JoinColumn( name = "POC_ID" ) ) 
-	@JoinColumn( name = "POC_ID" )
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PONT_OF_CONT_ID")
 	private PointOfContact poc;
 
 	public String getClientId() {
@@ -129,11 +116,11 @@ public class Client extends BaseEntity {
 		this.clientAddress = clientAddress;
 	}
 
-	public String getContactNo() {
+	public Phone getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(String contactNo) {
+	public void setContactNo(Phone contactNo) {
 		this.contactNo = contactNo;
 	}
 
@@ -160,14 +147,6 @@ public class Client extends BaseEntity {
 	public void setClientStatus(LookupDetail clientStatus) {
 		this.clientStatus = clientStatus;
 	}
-	
-	public PointOfContact getPoc() {
-		return poc;
-	}
-
-	public void setPoc(PointOfContact poc) {
-		this.poc = poc;
-	}
 
 	public LookupDetail getBusinessUnit() {
 		return businessUnit;
@@ -176,5 +155,22 @@ public class Client extends BaseEntity {
 	public void setBusinessUnit(LookupDetail businessUnit) {
 		this.businessUnit = businessUnit;
 	}
-	
+
+	public PointOfContact getPoc() {
+		return poc;
+	}
+
+	public void setPoc(PointOfContact poc) {
+		this.poc = poc;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [clientId=" + clientId + ", clientName=" + clientName + ", revenue=" + revenue
+				+ ", accountManager=" + accountManager + ", bussDManager=" + bussDManager + ", bussUnitHead="
+				+ bussUnitHead + ", clientAddress=" + clientAddress + ", contactNo=" + contactNo + ", email=" + email
+				+ ", webUrl=" + webUrl + ", clientStatus=" + clientStatus + ", businessUnit=" + businessUnit + ", poc="
+				+ poc + "]";
+	}
+
 }

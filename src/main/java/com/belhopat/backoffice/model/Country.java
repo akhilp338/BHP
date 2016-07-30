@@ -7,24 +7,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "COUNTRY")
 public class Country {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
-	
+
+	@Column(name = "CODE", nullable = false, length = 10)
 	private String code;
-	
+
+	@Column(name = "DESC", length = 50)
 	private String description;
-	
-	@Column(name = "iso3")
+
+	@Column(name = "ISO_3_CODE", length = 10)
 	private String iso3Code;
 
-	@Column(name = "phonecode")
+	@Column(name = "PH_CODE")
 	private Integer phoneCode;
-	
-	@Column(name = "numcode")
+
+	@Column(name = "NUM_CODE")
 	private Integer numberCode;
 
 	public Long getId() {
@@ -80,5 +83,5 @@ public class Country {
 		return "Country [id=" + id + ", code=" + code + ", description=" + description + ", iso3Code=" + iso3Code
 				+ ", phoneCode=" + phoneCode + ", numberCode=" + numberCode + "]";
 	}
-	
+
 }

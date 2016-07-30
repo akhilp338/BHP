@@ -1,28 +1,36 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "OFFICIAL_CARDS")
 public class OfficialCards {
-	
+
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@Column(name = "DRV_LIC_NO", length = 25)
 	private String drivingLicenceNo;
 
+	@Column(name = "PAN_NO", length = 25)
 	private String PANNo;
 
+	@Column(name = "ESI_NO", length = 25)
 	private String ESINo;
 
+	@Column(name = "PF_NO", length = 25)
 	private String PFNo;
 
+	@Column(name = "FORX_CDR_NO", length = 25)
 	private String forexCardNo;
 
+	@Column(name = "FORX_CRD_AGNCY", length = 25)
 	private String forexCardAgency;
 
 	public Long getId() {

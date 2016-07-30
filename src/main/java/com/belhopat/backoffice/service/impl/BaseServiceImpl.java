@@ -32,7 +32,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
-import com.belhopat.backoffice.model.MasterRoles;
+import com.belhopat.backoffice.model.MasterRole;
 import com.belhopat.backoffice.model.MasterTasks;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
@@ -302,7 +302,7 @@ public class BaseServiceImpl implements BaseService {
 		TaskList newTaskRow = new TaskList();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
-		currentTaskRow.setCompleted((byte) 1);
+		currentTaskRow.setCompleted(true);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
 		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
@@ -321,7 +321,7 @@ public class BaseServiceImpl implements BaseService {
 		List<TaskList> newTasks = new ArrayList<TaskList>();
 		TaskList newTaskRow = new TaskList();
 		taskList.setUpdateAttributes(currentUser);
-		taskList.setCompleted((byte) 1);
+		taskList.setCompleted(true);
 		taskList.setStatus(TaskConstants.CREATED);// status to be chnaged
 		// newTaskRow.setTask(taskList.getNextTask());
 		newTaskRow.setBaseAttributes(currentUser);
@@ -347,7 +347,7 @@ public class BaseServiceImpl implements BaseService {
 			Long medicalAllowanceLong = medicalAllowance < 0 ? 0 : Math.round(medicalAllowance);
 			Double conveyanceAllowance = minFixedSalary - (basicSalary + hra + medicalAllowanceLong);
 			Long conveyanceAllowanceLong = conveyanceAllowance < 0 ? 0 : Math.round(conveyanceAllowance);
-			int profTax = grossSalary < 1000 ? 0 : (grossSalary < 15000 ? 150 : 200);
+			Long profTax = grossSalary < 1000 ? 0L : (grossSalary < 15000 ? 150L : 200L);
 			Long pfEmpContrbtn = Math.round(basicSalary < 15000 ? basicSalary * 0.12 : 15000 * 0.12);
 			Long esiByEmplyr = Math.round(grossSalary < 15000 ? grossSalary * 0.0475 : 0);
 			Long esiByEmplye = Math.round(grossSalary < 15000 ? grossSalary * 0.0175 : 0);
@@ -390,7 +390,8 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				String document = alfrescoUploadService.uploadFileByCategory(offerLetter, employeeSalary,
+						Constants.OFFER_LETTERS);
 				employeeSalary.setOfferLetterFileName(document);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
@@ -414,7 +415,7 @@ public class BaseServiceImpl implements BaseService {
 		User user = userRepository.findById(id);
 		List<String> userRoles = new ArrayList<String>();
 		if (!user.getRoles().isEmpty()) {
-			for (MasterRoles role : user.getRoles()) {
+			for (MasterRole role : user.getRoles()) {
 				userRoles.add(role.getRoleName());
 			}
 			// user.getRoles().forEach(p->userRoles.add(p.getRoleName()));
@@ -429,9 +430,10 @@ public class BaseServiceImpl implements BaseService {
 				empSal.getOfferLetterFileName());
 		generateDownloadLink(fileBytes, empSal.getOfferLetterFileName(), response);
 	}
-	
+
 	@Override
-	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException {
+	public void previewOfferLetter(Long empSalId, HttpServletResponse response)
+			throws IOException, DocumentException, ParseException {
 		EmployeeSalary empSal = employeeSalaryRepository.findById(empSalId);
 		byte[] offerLetter = pdfService.generateOfferLetterPDF(empSal);
 		generateDownloadLink(offerLetter, empSal.getOfferLetterFileName(), response);

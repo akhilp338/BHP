@@ -1,28 +1,36 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "ADDRESS")
 public class Address {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@Column(name = "ADRS_1", length = 100)
 	private String address1;
 
+	@Column(name = "ADRS_2", length = 100)
 	private String address2;
 
+	@Column(name = "STREET", length = 100)
 	private String street;
 
 	@ManyToOne
+	@JoinColumn(name = "CITY_ID")
 	private City city;
 
+	@Column(name = "ZIP_CODE")
 	private Long zipCode;
 
 	public Long getId() {

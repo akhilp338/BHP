@@ -1,24 +1,27 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.jmx.export.annotation.ManagedOperationParameter;
-
 @Entity
-@Table
+@Table(name = "PHONE")
 public class Phone {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@Column(name = "PH_NO", length = 25)
 	private String number;
 
 	@ManyToOne
+	@JoinColumn(name = "CNTRY_ID")
 	private Country country;
 
 	public Long getId() {

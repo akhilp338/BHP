@@ -1,27 +1,33 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table
+@Table(name = "ROLE_TAB")
 public class RoleTab {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@ManyToOne
 	@JsonIgnore
-	private MasterRoles masterRole;
+	@ManyToOne
+	@JoinColumn(name = "MST_ROLE_ID")
+	private MasterRole masterRole;
 
+	@Column(name = "TAB_CODE", length = 25)
 	private String tabCode;
 
+	@Column(name = "TAB_DESC", length = 50)
 	private String tabDescription;
 
 	public Long getId() {
@@ -32,11 +38,11 @@ public class RoleTab {
 		this.id = id;
 	}
 
-	public MasterRoles getMasterRole() {
+	public MasterRole getMasterRole() {
 		return masterRole;
 	}
 
-	public void setMasterRole(MasterRoles masterRole) {
+	public void setMasterRole(MasterRole masterRole) {
 		this.masterRole = masterRole;
 	}
 

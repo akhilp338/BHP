@@ -1,23 +1,28 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "SKILL")
 public class Skill {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID", nullable = false)
 	private Long id;
 
+	@Column(name = "SKIL_NAME", length = 25)
 	private String skillName;
 
-	public Long experienceYear;
+	@Column(name = "PRIR_EXP_YR")
+	public Integer experienceYear;
 
-	public Long experienceMonth;
+	@Column(name = "PRIR_EXP_MNT")
+	public Integer experienceMonth;
 
 	public Long getId() {
 		return id;
@@ -35,19 +40,19 @@ public class Skill {
 		this.skillName = skillName;
 	}
 
-	public Long getExperienceYear() {
+	public Integer getExperienceYear() {
 		return experienceYear;
 	}
 
-	public void setExperienceYear(Long experienceYear) {
+	public void setExperienceYear(Integer experienceYear) {
 		this.experienceYear = experienceYear;
 	}
 
-	public Long getExperienceMonth() {
+	public Integer getExperienceMonth() {
 		return experienceMonth;
 	}
 
-	public void setExperienceMonth(Long experienceMonth) {
+	public void setExperienceMonth(Integer experienceMonth) {
 		this.experienceMonth = experienceMonth;
 	}
 
