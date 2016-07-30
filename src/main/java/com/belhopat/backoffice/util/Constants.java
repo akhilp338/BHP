@@ -15,12 +15,15 @@ public class Constants {
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";
 	public static final String PASS_RESET_FAIL_MSG = "User account does not exist. Please contact administrator.";
-	
 
 	/* password change msg constants */
 	public static final String PASS_CHANGE_SUCC_MSG = "Your password has been changed successfully";
 	public static final String PASS_CHANGE_FAIL_MSG = "Invalid credentials entered. Please try again."
 			+ " Please try again after some time";
+	
+	/* Welcome mail msg constants*/
+	public static final String WEL_MAIL_SUCC = "Mail has been sent successfully.";
+	public static final String WEL_MAIL_FAIL = "An unexpected error occurred. Please try again after some time.";
 
 	/* mail constants */
 	public static final String UTF_8 = "utf-8";
@@ -30,7 +33,8 @@ public class Constants {
 	public static final String CLIENT_REG_SUCC_MAIL_SUB = "New Client has been added.";
 	public static final String EMP_REG_SUCC_MAIL_SUB = "New Employee has been added.";
 	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
-
+	public static final String EMPLOYEE_PORTAL_CREDENTIALS = "Belhopat Employee Portal Credentials";
+	
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
@@ -39,12 +43,14 @@ public class Constants {
 	public static final String EVENT_INV_EMAIL_TEMPLATE = "/employee-invitaion-email-template.vm";
 	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
 	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
+	public static final String USER_CREATED_EMAIL_TEMPLATE = "/user-created-email-template.vm";
 
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
 	public static final String PASSWORD_RESET_URL = "passwordResetUrl";
 	public static final String USERNAME = "username";
+	public static final String FULL_NAME = "fullName";
 	public static final String CLIENT = "client";
 	public static final String EMPLOYEE = "employee";
 	public static final String CANDIDATE = "candidate";
@@ -55,6 +61,7 @@ public class Constants {
 	public static final String EMPLOYEE_NAME = "employeeName";
 	public static final String EMPLOYEE_ID = "employeeId";
 	public static final String CHANGE_PASSWORD_API = "changePassword";
+	public static final String OFFICIAL_EMAIL = "officialEmail";
 
 	/* data constants */
 	public static final String DD_MM_YYYY_HH_MM_SS = "dd-MM-yyyy HH:mm:ss";
@@ -105,4 +112,5 @@ public class Constants {
 	public static final String PDF_CONTENT_TYPE = "application/pdf";
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 	public static final String ATTACHMENT = "attachment; filename=";
+	
 }

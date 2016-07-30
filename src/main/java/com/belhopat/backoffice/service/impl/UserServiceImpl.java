@@ -121,7 +121,11 @@ public class UserServiceImpl implements UserService{
 			user.setForgotPasswordToken(forgotPasswordToken);
 			user.setPassword( generatedPassword );
 			userRepo.saveAndFlush( user );
-			mailService.sendPasswordResetMail( user );
+			try{
+				mailService.sendPasswordResetMail( user );
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			return true;
 		}
 		return false;
@@ -146,19 +150,23 @@ public class UserServiceImpl implements UserService{
 	public Employee createUser(EmployeeDto employee) {
 		Employee employeeEntity=employeeRepository.findByEmployeeId(employee.getEmployeeId());
 		User user=null;
+		String generatedPassword = randomPasswordGenerator.nextSessionId();
+		String forgotPasswordToken = PasswordUtil.generateRandomPassword( 15 );
 		if(employeeEntity.getEmployeeUser()==null)
-			 user=new User();
+			user=new User();
 		else
-			 user=employeeEntity.getEmployeeUser();
+			user=employeeEntity.getEmployeeUser();
 		user.setEmail(employee.getOfficialEmailId());
 		user.setUsername(employee.getEmployeeId());
 		user.setDesignation(employeeEntity.getEmployeeMaster().getDesignation());
+		user.setPassword(generatedPassword);
+		user.setForgotPasswordStatus( false );
+		user.setForgotPasswordToken( forgotPasswordToken );
 		employeeEntity.setEmployeeUser(user);
 		Employee returnEntity=employeeRepository.save(employeeEntity);
 		try {
-			mailService.sendPasswordResetMail( employeeEntity.getEmployeeUser() );
+			mailService.sendWelcomeMail( employeeEntity );
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return returnEntity;
