@@ -91,7 +91,7 @@
                             $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
-                                    '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
+                                    '<i class="fa fa-cloud-download" aria-hidden="true"></i></i></span></div>'
                         }
                     }]
             });
