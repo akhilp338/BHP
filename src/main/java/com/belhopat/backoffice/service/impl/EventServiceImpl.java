@@ -70,7 +70,7 @@ public class EventServiceImpl implements EventService {
 		event.setBaseAttributes(loggedInUser);
 		event = eventRepository.save(event);
 		baseService.createNewTaskList(TaskConstants.GENERAL_TASK);
-		mailService.sendEventInvitaionMail(event);
+//		mailService.sendEventInvitaionMail(event);
 		if (event != null) {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		}
