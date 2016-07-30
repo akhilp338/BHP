@@ -84,14 +84,14 @@
         // Go to a defined step index
         $scope.goToStep = function (index) {
             var flag = index > $scope.getCurrentStepIndex();
-            //if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
+            if (!_.isUndefined($scope.steps[index]) && (!flag || vs.checkFormValidity($scope))) {
                 $scope.selection = $scope.steps[index];
                 $timeout(function () {
                     angular.element('input[type=file]').bootstrapFileInput()
                     vm.isFileInput = $scope.steps[index] == "Official" ? true : false;
                 }, 500)
 
-            //}
+            }
         };
 
         vm.contacts = [];
@@ -199,18 +199,18 @@
             $state.go("coreuser.candidate")
         };
         vm.candidateRegister = function () {
-//            if (vs.checkFormValidity($scope["regForm"])) {
-//                vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
-//                debugger;
-//                Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
-//                        .then(function (response) {
-//                            Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
-//                            console.log(response)
-//                        }, function (error) {
-//                            console.log(error)
-//                        });
-//            }
-$state.go("coreuser.upload")
+            if (vs.checkFormValidity($scope["regForm"])) {
+                vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
+                debugger;
+                Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
+                        .then(function (response) {
+                            Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
+                            console.log(response)
+                        }, function (error) {
+                            console.log(error)
+                        });
+            }
+        //$state.go("coreuser.upload")
         };
 
         //To Do(move these methods to base controller)
