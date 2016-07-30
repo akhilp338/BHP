@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository< User, Long >  {
 
 	User findByForgotPasswordToken(String forgotPasswordToken);
 
-	@Query("SELECT u.email FROM User u WHERE u.id IN = :userIDList ")
+	@Query("SELECT u.email FROM User u WHERE u.id IN ( :userIDList )")
 	public List < String > findEmailsByIdList(@Param("userIDList") List<Long> userIds);
 
 

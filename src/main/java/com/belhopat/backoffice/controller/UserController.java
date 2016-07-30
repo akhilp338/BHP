@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.dto.ResponseObject;
-import com.belhopat.backoffice.model.Employee;
-import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.UserService;
 import com.belhopat.backoffice.util.Constants;
 
@@ -35,7 +33,7 @@ public class UserController {
 			return new ResponseEntity<ResponseObject>(new ResponseObject(true, Constants.WEL_MAIL_SUCC),
 					HttpStatus.OK);
 		}else{
-			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.WEL_MAIL_FAIL),
+			return new ResponseEntity<ResponseObject>(new ResponseObject(false, Constants.WEL_MAIL_FAIL),
 					HttpStatus.OK);
 		}
 	}

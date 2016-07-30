@@ -25,10 +25,10 @@
        					"newPassword" : data.newPassword
        					}
        			Core_Service.changePassword(data).then(function(res){
-                            Core_Service.sweetAlert("Success!!!","Password successfully changed.","success","login"); 
+                            Core_Service.sweetAlert("Success !","Password successfully changed.","success","login"); 
        			},
        			function(error){ 
-                            Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
+                            Core_Service.sweetAlert("Oops !","An internal error occcured.Please try after some time.",
                     			"error","changePassword");                            
        			});
        		}

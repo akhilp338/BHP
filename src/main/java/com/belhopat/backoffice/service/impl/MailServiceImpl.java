@@ -133,6 +133,13 @@ public class MailServiceImpl implements MailService {
 		model.put(Constants.CLIENT, client);
 		model.put(Constants.POC, client.getPoc());
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
+		
+		List < String > clientRegNotificationList = new ArrayList < String > (1);
+
+		//TODO Uncomment for production	
+		//clientRegNotificationList.add( "rafique@belhopat.com" );
+		
+		clientRegNotificationList.add( client.getBussUnitHead().getOfficialEmail() != null ? client.getBussUnitHead().getOfficialEmail() : null );
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
 				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
