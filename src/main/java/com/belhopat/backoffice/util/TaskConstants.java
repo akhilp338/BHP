@@ -23,4 +23,7 @@ public class TaskConstants {
 	
 	/*event management constants*/
 	public static final String GENERAL_TASK = "GEN_EVENT_TASK";
+	
+	/*Employee creation task*/
+	public static final String CREATE_OFFICIAL_EMAIL_ID = "CREATE_OFFICIAL_EMAIL_ID";
 }
