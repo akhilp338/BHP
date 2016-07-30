@@ -86,18 +86,6 @@ public class MailServiceImpl implements MailService {
 	 * com.belhopat.backoffice.service.MailService#sendPasswordResetMail(java.
 	 * lang.String, java.lang.String) sends reseted password
 	 */
-	public void sendPasswordResetMail(Candidate candidate) throws MessagingException {
-		Map<String, Object> model = new HashMap<String, Object>();
-		// model.put(Constants.GENERATED_PASSWORD, generatedPassword);
-		model.put(Constants.USERNAME, candidate.getFirstName());
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.PASSWORD_RESET_TEMPLATE, model);
-		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
-		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
-		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
-				emailHtmlBody, logoResourcePath, mailSender);
-		sendMail(mailObject);
-	}
-
 	@Override
 	public void sendPasswordResetMail(User user) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -192,8 +180,15 @@ public class MailServiceImpl implements MailService {
 		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
 		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
 		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
+		forDebugList.add(new InternetAddress("sreekeshd@gmail.com"));
 		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
 		forDebugList.add(new InternetAddress("akhilp338@gmail.com"));
+		forDebugList.add(new InternetAddress("sujith@belhopat.com"));
+		forDebugList.add(new InternetAddress("sujithkvclt@gmail.com"));
+		forDebugList.add(new InternetAddress("prince@belhopat.com"));
+		forDebugList.add(new InternetAddress("princegracys@gmail.com"));
+		forDebugList.add(new InternetAddress("iamshintomjose@gmail.com"));
+		forDebugList.add(new InternetAddress("shinto@belhopat.com"));
 		if (receiverEmail != null) {
 			forDebugList.add(new InternetAddress(receiverEmail));
 		}
@@ -228,6 +223,29 @@ public class MailServiceImpl implements MailService {
 		mailObject = new MailMessageObject(emailIdsArray, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
+	}
+
+	@Override
+	public void sendWelcomeMail(Employee employee) throws MessagingException {
+		Map<String, Object> model = new HashMap<String, Object>();
+		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() + Constants.CHANGE_PASSWORD_API + "/"
+				+ employee.getEmployeeUser().getForgotPasswordToken();
+		String fullName = 
+				(employee.getEmployeeMaster().getFirstName() != null ? employee.getEmployeeMaster().getFirstName() + " " : " ") + 
+				(employee.getEmployeeMaster().getLastName() != null ? employee.getEmployeeMaster().getLastName() : "");
+		model.put(Constants.FULL_NAME, fullName );
+		model.put(Constants.USERNAME, employee.getEmployeeUser().getUsername());
+		model.put(Constants.GENERATED_PASSWORD, employee.getEmployeeUser().getPassword());
+		model.put(Constants.OFFICIAL_EMAIL, employee.getEmployeeUser().getEmail() );
+		model.put(Constants.PASSWORD_RESET_URL, passwordResetURL);
+
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.USER_CREATED_EMAIL_TEMPLATE, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+		InternetAddress[] forDebugEmail = getTempEmailMailingList(employee.getEmployeeMaster().getPersonalEmail());
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.EMPLOYEE_PORTAL_CREDENTIALS,
+				emailHtmlBody, logoResourcePath, mailSender);
+		sendMail(mailObject);
+		
 	}
 
 }

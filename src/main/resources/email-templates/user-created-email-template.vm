@@ -1,0 +1,39 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title></title>
+		</head>
+		<body>
+			<a style="cursor: default !important; pointer-events:none !important">
+				<img alt="Belhopat Logo" src="cid:templateLogo" width="75%" style="cursor: default !important; pointer-events:none !important">
+			</a>
+			<br /><br />
+			<div>
+				<p>
+				Hello <strong>$fullName</strong>,
+				</p>
+			</div>
+			<div>
+				<p>
+					Welcome to Belhopat Global Services.
+					<br /><br />
+					Specifed below are your credentials for Belhopat Employee Portal. 
+				</p>
+				<p>
+					Username: <strong>$!username</strong>
+				</p>
+				<p>
+					Password: <strong>$!generatedPassword</strong>
+				</p>
+					Official Email-ID: <strong>$!officialEmail</strong>
+				</p>
+				<p>
+					We strongly recommend that you change your login password <a href=" $!passwordResetUrl "> here </a> and login with your new password for security reasons. 
+					</br></br>
+				</p>
+			</div>
+			Sincerely,
+			<br />
+			Belhopat Global Services
+	</body>
+	</html>
