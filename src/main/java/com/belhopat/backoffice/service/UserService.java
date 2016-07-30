@@ -7,7 +7,9 @@ import javax.mail.MessagingException;
 
 import org.springframework.stereotype.Service;
 
+import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.dto.UserDTO;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.User;
 
 @Service
@@ -17,7 +19,7 @@ public interface UserService {
 	
 	User findByName( String name );
 	
-	void saveUser( User user );
+	User saveUser( User user );
 	
 	void updateUser( User user );
 	
@@ -32,5 +34,7 @@ public interface UserService {
 	boolean generatePasswordResetLink( String email ) throws MessagingException, UnsupportedEncodingException;
 
 	Boolean resetPassword( UserDTO user );
+
+	Employee createUser(EmployeeDto employee);
 	
 }

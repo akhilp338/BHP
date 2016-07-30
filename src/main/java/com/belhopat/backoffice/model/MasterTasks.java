@@ -27,6 +27,17 @@ public class MasterTasks {
 	@Column(name = "TSK_OWNR_ROLE", length = 10)
 	private String taskOwnerRole;
 
+	@Column(name = "TSK_ROUTE", length = 30)
+	private String taskRoute;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTaskKey() {
 		return taskKey;
 	}
@@ -59,4 +70,17 @@ public class MasterTasks {
 		this.nextTaskId = nextTaskId;
 	}
 
+	public String getTaskRoute() {
+		return taskRoute;
+	}
+
+	public void setTaskRoute(String taskRoute) {
+		this.taskRoute = taskRoute;
+	}
+
+	@Override
+	public String toString() {
+		return "MasterTasks [id=" + id + ", taskKey=" + taskKey + ", nextTaskId=" + nextTaskId + ", taskDesc="
+				+ taskDesc + ", taskOwnerRole=" + taskOwnerRole + ", taskRoute=" + taskRoute + "]";
+	}
 }

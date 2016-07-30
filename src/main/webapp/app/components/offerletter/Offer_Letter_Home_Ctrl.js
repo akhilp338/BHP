@@ -25,7 +25,7 @@
                     Core_Service.calculateSidebarHeight();
                 },
                 language: {
-                	zeroRecords: 'No data to dispay',
+                	zeroRecords: 'No data to display',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',
@@ -47,13 +47,7 @@
                         render: function (data) {
                         	return data == null? "":data;
                         }
-                    },  {
-                        title: "Status",
-                        data: 'status',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    },{
+                    }, {
                         title: "Gross CTC",
                         data: 'grossCTC',
                         render: function (data) {
@@ -83,6 +77,12 @@
                         render: function (data) {
                         	return data == null? "":data;
                         }
+                    }, {
+                        title: "Status",
+                        data: 'status',
+                        render: function (data) {
+                        	return data == null? "":data;
+                        }
                     },{
                         data: 'id',
                         bSortable: false,
@@ -91,7 +91,7 @@
                             $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
-                                    '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
+                                    '<i class="fa fa-cloud-download" aria-hidden="true"></i></i></span></div>'
                         }
                     }]
             });
@@ -101,16 +101,6 @@
         	    return today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
             }
             
-            $('#offerLetterList tbody').on( 'click', 'tr', function () {
-            	
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                	oTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            } );
          
         })
         Core_Service.calculateSidebarHeight();

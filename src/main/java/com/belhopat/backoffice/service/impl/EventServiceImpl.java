@@ -17,10 +17,22 @@ import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EventRepository;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EventService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
+import com.belhopat.backoffice.util.TaskConstants;
 
 /**
  * @author BHP_DEV Service layer to implement event and reminders business
@@ -37,6 +49,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	BaseService baseService;
 
 	@Override
 	public ResponseEntity<List<Event>> getEvents() {
@@ -54,12 +69,14 @@ public class EventServiceImpl implements EventService {
 		User loggedInUser = SessionManager.getCurrentUser();
 		event.setBaseAttributes(loggedInUser);
 		event = eventRepository.save(event);
+		baseService.createNewTaskList(TaskConstants.GENERAL_TASK);
 		mailService.sendEventInvitaionMail(event);
 		if (event != null) {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		}
 		return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
 	}
+
 
 	@Override
 	public ResponseEntity<Event> updateEvent(Event editedEvent) {

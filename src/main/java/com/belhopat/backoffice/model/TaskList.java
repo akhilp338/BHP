@@ -19,20 +19,15 @@ public class TaskList extends BaseEntity {
 	@Column(name = "IS_CMPLTD", columnDefinition = "boolean default false", nullable = false)
 	Boolean completed;
 
+	@Column(name = "TSK_MDL_ID", length = 15)
+	private String taskModalId;
+
 	@Lob
 	@Column(name = "[COMMENT]", length = 500)
 	private String comment;
 
 	@Column(name = "[STATUS]", length = 15)
 	private String status;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public MasterTasks getTask() {
 		return task;
@@ -50,6 +45,14 @@ public class TaskList extends BaseEntity {
 		this.completed = completed;
 	}
 
+	public String getTaskModalId() {
+		return taskModalId;
+	}
+
+	public void setTaskModalId(String taskModalId) {
+		this.taskModalId = taskModalId;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -58,10 +61,18 @@ public class TaskList extends BaseEntity {
 		this.comment = comment;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "TaskList [task=" + task + ", completed=" + completed + ", comment=" + comment + ", status=" + status
-				+ "]";
+		return "TaskList [task=" + task + ", completed=" + completed + ", taskModalId=" + taskModalId + ", comment="
+				+ comment + ", status=" + status + "]";
 	}
 
 }

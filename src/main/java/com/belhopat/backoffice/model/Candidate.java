@@ -166,6 +166,9 @@ public class Candidate extends BaseEntity {
 	@Column(name = "IS_EMP", columnDefinition = "boolean default false", nullable = false)
 	private boolean employee;
 
+	@Column(name = "IS_OFR_LTR_GNRTD", columnDefinition = "boolean default false", nullable = false)
+	private boolean offerletterStatus;
+
 	public String getCandidateId() {
 		return candidateId;
 	}
@@ -492,6 +495,14 @@ public class Candidate extends BaseEntity {
 
 	public void setEmployee(boolean employee) {
 		this.employee = employee;
+	}
+
+	public boolean isOfferletterStatus() {
+		return offerletterStatus;
+	}
+
+	public void setOfferletterStatus(boolean offerletterStatus) {
+		this.offerletterStatus = offerletterStatus;
 	}
 
 	@Override

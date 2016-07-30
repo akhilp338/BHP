@@ -66,6 +66,10 @@ public class Employee extends BaseEntity {
 	private City workLocation;
 
 	@ManyToOne
+	@JoinColumn(name = "BASE_LOC_ID")
+	private City baseLocation;
+
+	@ManyToOne
 	@JoinColumn(name = "TIME_ZONE_ID")
 	private TimeZone timeZone;
 
@@ -157,6 +161,14 @@ public class Employee extends BaseEntity {
 		this.workLocation = workLocation;
 	}
 
+	public City getBaseLocation() {
+		return baseLocation;
+	}
+
+	public void setBaseLocation(City baseLocation) {
+		this.baseLocation = baseLocation;
+	}
+
 	public TimeZone getTimeZone() {
 		return timeZone;
 	}
@@ -171,7 +183,7 @@ public class Employee extends BaseEntity {
 				+ ", employeeMaster=" + employeeMaster + ", officialEmail=" + officialEmail + ", businessUnit="
 				+ businessUnit + ", accountManager=" + accountManager + ", hrRecruiter=" + hrRecruiter + ", hrManager="
 				+ hrManager + ", reportingManager=" + reportingManager + ", workLocation=" + workLocation
-				+ ", timeZone=" + timeZone + "]";
+				+ ", baseLocation=" + baseLocation + ", timeZone=" + timeZone + "]";
 	}
 
 }

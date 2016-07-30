@@ -145,7 +145,7 @@ var candidatesListTable;
                     
                 },
                 language: {
-                	zeroRecords: 'No data to dispay',
+                	zeroRecords: 'No data to display',
                     searchPlaceholder: 'Search',
                     search: '',
                     infoEmpty: '',

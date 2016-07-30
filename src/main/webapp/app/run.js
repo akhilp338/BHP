@@ -34,8 +34,9 @@
             $rootScope.active = parts[1];
         });
         $rootScope.$on('IdleTimeout', function() {
-          $state.go("login");
-          });
+          Core_Service.sweetAlert("Session timeout", "Your session has timed out. Please login again", "success", "login");
+          Core_Service.ClearCredentials();
+        });
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.addPage = (toState.name == "coreuser.candidate.add" ||
                                   toState.name == "coreuser.employee.add" ||

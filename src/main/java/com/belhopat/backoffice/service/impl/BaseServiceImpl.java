@@ -299,18 +299,21 @@ public class BaseServiceImpl implements BaseService {
 	public TaskList createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		TaskList currentTaskRow = new TaskList();
-		TaskList newTaskRow = new TaskList();
 		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
 		currentTaskRow.setCompleted(true);
 		currentTaskRow.setTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
 		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
-		newTaskRow.setTask(nextTask);
-		newTaskRow.setBaseAttributes(currentUser);
 		taskListRepository.save(currentTaskRow);
-		newTaskRow = taskListRepository.save(newTaskRow);
-		return newTaskRow;
+		if(nextTask!=null){
+			TaskList newTaskRow = new TaskList();
+			newTaskRow.setTask(nextTask);
+			newTaskRow.setBaseAttributes(currentUser);
+			newTaskRow = taskListRepository.save(newTaskRow);
+			return newTaskRow;
+		}
+		return currentTaskRow;
 	}
 
 	@Override
@@ -385,14 +388,22 @@ public class BaseServiceImpl implements BaseService {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
+				Candidate candidate = candidateRepository.findById(employeeSalary.getCandidate().getId());
 				User currentUser = SessionManager.getCurrentUserAsEntity();
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+<<<<<<< HEAD
 				String document = alfrescoUploadService.uploadFileByCategory(offerLetter, employeeSalary,
 						Constants.OFFER_LETTERS);
 				employeeSalary.setOfferLetterFileName(document);
+=======
+//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+//				employeeSalary.setOfferLetterFileName(document);
+				candidate.setOfferletterStatus(true);
+				candidateRepository.saveAndFlush(candidate);
+>>>>>>> 0527f5148ceb109c99b154122fb40d1e255d9b77
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 				return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 			}

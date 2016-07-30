@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,9 @@ import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.session.SessionManager;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -105,6 +108,12 @@ public class BaseController {
 	public DataTablesOutput<TaskList> getUserTasks(@Valid DataTablesInput input)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.getUserTasks(input);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
+	public Object getUserName() {
+		Object currentUser=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return currentUser;
 	}
 
 }
