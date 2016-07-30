@@ -205,8 +205,8 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException {
 		List<InternetAddress> emailIds = new ArrayList<InternetAddress>();
-		for (Employee employee : event.getGuestList()) {
-			emailIds.add(new InternetAddress(employee.getOfficialEmail()));
+		for (User user : event.getGuestList()) {
+			emailIds.add(new InternetAddress(user.getEmail()));
 		}
 		emailIds.add(new InternetAddress("sujith@belhopat.com"));
 		emailIds.add(new InternetAddress("sujithkvclt@gmail.com"));

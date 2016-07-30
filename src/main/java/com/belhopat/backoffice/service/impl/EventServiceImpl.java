@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
 		User loggedInUser = SessionManager.getCurrentUser();
 		event.setBaseAttributes(loggedInUser);
 		event = eventRepository.save(event);
-		//mailService.sendEventInvitaionMail(event);
+		mailService.sendEventInvitaionMail(event);
 		if (event != null) {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
 		}
