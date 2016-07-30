@@ -28,6 +28,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 import com.belhopat.backoffice.util.Constants;
@@ -53,6 +54,9 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private VelocityEngine velocityEngine;
+
+	@Autowired
+	UserRepository userRepository;
 
 	protected static final Logger LOGGER = Logger.getLogger(MailServiceImpl.class.getName());
 
@@ -203,13 +207,20 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException {
+	public void sendEventInvitaionMail(Event event) throws Exception {
 		List<InternetAddress> emailIds = new ArrayList<InternetAddress>();
-		for (User user : event.getGuestList()) {
-			emailIds.add(new InternetAddress(user.getEmail()));
+		List <Long> userIds = new ArrayList<Long> (1);
+		List <String> emailList = new ArrayList <String> (1);
+		if( event.getGuestList() != null ){
+			for (User user : event.getGuestList()) {
+				userIds.add( user.getId() );
+			}
+			emailList = userRepository.findEmailsByIdList( userIds );
 		}
-		emailIds.add(new InternetAddress("sujith@belhopat.com"));
-		emailIds.add(new InternetAddress("sujithkvclt@gmail.com"));
+		else{
+			throw new Exception( "No user ids specified for guest list");
+		}
+		emailIds = getTempEmailMailingList( emailList );
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
 		String mailTemplate = null;
@@ -228,6 +239,11 @@ public class MailServiceImpl implements MailService {
 		mailObject = new MailMessageObject(emailIdsArray, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
+	}
+
+	private List<InternetAddress> getTempEmailMailingList(List<String> emailList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
