@@ -36,6 +36,7 @@
             var newGuests = [],obj = {};            
             for (var k = 0; k < guests.length; k++) {  
                 for (var i = 0; i < list.length; i++) {
+                    if((list[i].name || list[i].username))
                     list[i].text = (list[i].name || list[i].username) + " (" + list[i].email + ")";
                     if(guests[k][0] == list[i].id){
                         guests.splice(k,1);

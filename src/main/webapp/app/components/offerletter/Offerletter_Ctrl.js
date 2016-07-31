@@ -110,7 +110,7 @@
                         }
                     }, {
                         title: "Contact No",
-                        data: 'officialContactNo',
+                        data: 'officialContactNo.number',
                         render: function (data) {
                         	return data == null? "":data;
                         }
@@ -190,7 +190,8 @@
                 vm.employeeSummary["Passport"] = data.passport.passportNo;
                 ;
                 vm.employeeSummary["Email Id"] = data.personalEmail;
-                vm.employeeSummary["Contact No"] = data.personalContactNo;
+                vm.employeeSummary["Country Code"] = "+"+data.personalContactNo.country.phoneCode
+                vm.employeeSummary["Contact No"] = data.personalContactNo.number;
                 vm.employeeSummary["Skillset"] = [];
                 for (var j = 0; j < data.skillSet.length; j++) {
                     vm.employeeSummary.Skillset.push(data.skillSet[j].skillName)

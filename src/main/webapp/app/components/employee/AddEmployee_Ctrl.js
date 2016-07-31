@@ -112,6 +112,18 @@ var addEmployeeTable
                     }]
             });
             $("#candidatesList").on('click',' tbody tr', function (){
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    addEmployeeTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+                var data = addEmployeeTable.row($('tr.selected').index()).data();
+                $rootScope.selectedCandId = data.id;
+                localStorage["selectedCandidate"] = data.candidateId;
+                localStorage["selectedCandidateName"] = data.firstName + " " + data.lastName;
+                localStorage["selectedCandidateId"] =  $rootScope.selectedCandId ;
                 vm.Employeetemplate = "";
                 $(".candidate-summary").removeClass("init")
                 var data = addEmployeeTable.data()[$(this).index()];
@@ -122,7 +134,8 @@ var addEmployeeTable
                 vm.employeeSummary["Designation"] = data.designation.description;
                 vm.employeeSummary["Passport"] = data.passport.passportNo;;
                 vm.employeeSummary["Email Id"]= data.personalEmail;
-                vm.employeeSummary["Contact No"] = data.personalContactNo;
+                vm.employeeSummary["Country Code"] = "+"+data.personalContactNo.country.phoneCode;
+                vm.employeeSummary["Contact No"] = data.personalContactNo.number;
 //                vm.employeeSummary["Skillset"] = data.skillSet.skillName.join(", ");                
                 for (var key in vm.employeeSummary){
                     vm.Employeetemplate += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">'+  
@@ -137,20 +150,6 @@ var addEmployeeTable
             	console.log(this.getAttribute('value'));
                 vm.getCandidate(this.getAttribute('value'));
             });
-            $('#candidatesList tbody').on( 'click', 'tr', function () {
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    addEmployeeTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-                var data = addEmployeeTable.row($('tr.selected').index()).data();
-                $rootScope.selectedCandId = data.id;
-                localStorage["selectedCandidate"] = data.candidateId;
-                localStorage["selectedCandidateName"] = data.firstName + " " + data.lastName;
-                localStorage["selectedCandidateId"] =  $rootScope.selectedCandId ;
-            } );
             
             vm.addEmployeeNextStep=function(candidateId){        	
         	$scope.candidateId=candidateId;
