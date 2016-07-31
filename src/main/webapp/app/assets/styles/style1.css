@@ -2079,7 +2079,7 @@ md-chips-wrap.md-chips {
 }
 .guest-chip{
     float: left;
-    max-width: 100%;
+    width: 100%;
 }
 .theme4 .logout-button[disabled="disabled"] {
     opacity: .5;
@@ -2116,6 +2116,7 @@ md-chips-wrap.md-chips {
 .custom-chip md-chip {
     background: rgb(255, 173, 88);
     color: rgb(255, 255, 255);
+    width: 35%;
 }
 .custom-chip md-chip.md-focused {
 background: rgb(255, 136, 21);
@@ -2212,4 +2213,7 @@ a.spec-link{
     border-top-color: #fbd364;
     border-width: 7px;
     margin-left: -7px;
+}
+.event-modal .modal-dialog {
+    width: 60%;
 }
