@@ -26,10 +26,14 @@
         }
         
         vm.getEmpFullName = function( rowData ){
-        	console.log(rowData);
+            if(rowData.employeeMaster){
         	var firstName = rowData.employeeMaster.firstName != null ? rowData.employeeMaster.firstName : '',
         		lastName = rowData.employeeMaster.lastName != null ? rowData.employeeMaster.lastName : ' - ',
         		name = rowData != null ? firstName + " " + lastName : '-';
+            }
+            else{
+                name = "";
+            }
         	return name;
         };
         

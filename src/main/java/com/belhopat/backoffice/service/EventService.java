@@ -16,7 +16,7 @@ public interface EventService {
 
 	ResponseEntity<List<Event>> getEvents();
 
-	ResponseEntity<Event> addEvent(Event event) throws MessagingException, ParseException;
+	ResponseEntity<Event> addEvent(Event event) throws MessagingException, ParseException, Exception;
 
 	ResponseEntity<Event> updateEvent(Event event);
 

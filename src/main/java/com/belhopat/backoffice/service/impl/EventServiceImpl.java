@@ -1,11 +1,8 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +14,6 @@ import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EventRepository;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EventService;
 import com.belhopat.backoffice.service.MailService;
@@ -65,16 +52,18 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public ResponseEntity<Event> addEvent(Event event) throws MessagingException, ParseException {
+	public ResponseEntity<Event> addEvent(Event event) throws Exception {
 		User loggedInUser = SessionManager.getCurrentUser();
 		event.setBaseAttributes(loggedInUser);
 		event = eventRepository.save(event);
 		baseService.createNewTaskList(TaskConstants.GENERAL_TASK);
-		mailService.sendEventInvitaionMail(event);
+//		mailService.sendEventInvitaionMail(event);
 		if (event != null) {
 			return new ResponseEntity<Event>(event, HttpStatus.OK);
+		}else{
+			
+			return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
 	}
 
 

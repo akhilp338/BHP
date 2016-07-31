@@ -28,11 +28,12 @@
 			var data = {"email":vm.mail,'officialEmailId':$('#officialEmail').val(),'employeeId':employeeId }
 			Core_Service.createUser(data).then(function(res){
 				if(res){
-	                  Core_Service.sweetAler("Email Sent!",res,"success");  
+	                Core_Service.sweetAlert("Email Sent!",res.data,"success","coreuser.employee");  
                 }
                 else{
-                   Core_Service.sweetAlert("Oops!",res,"error"); 
+                   Core_Service.sweetAlert("Oops!",res.data,"error","coreuser.employee");
                 }
+				$uibModalInstance.close(res); 
 			},
             function(error){
 //				Core_Service.sweetAlert("Oops!",error.data.data,"error"); 

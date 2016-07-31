@@ -52,6 +52,18 @@ nav.sidebar, .main{
     .navbar-header{
         padding-right: 16px;
     }
+    .inner-page .page-side-bar{
+        display: none;
+    }
+    .inner-page .main{
+        margin-top: 70px!important;
+    }
+    .odd-btn {
+        margin-left: 15.333333%!important;
+    }
+    .tab-btn{
+        margin-right: 0!important; 
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1321px) {

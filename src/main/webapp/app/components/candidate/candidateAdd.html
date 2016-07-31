@@ -8,8 +8,8 @@
             <span class="text">Back</span>              
         </button>
         <div class="nav nav-tabs col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-4 col-xs-4"
-                    ng-class="{active: $index == getCurrentStepIndex()}"><a
+            <button ng-repeat="step in steps" class="tab-btn col-md-2 col-lg-2 col-sm-5 col-xs-5"
+                    ng-class="{'odd-btn':$index%2!=0,'active': $index == getCurrentStepIndex()}"><a
                     href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a></button>
 
         </div>

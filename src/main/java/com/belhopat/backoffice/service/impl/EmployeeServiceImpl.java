@@ -29,6 +29,7 @@ import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
@@ -98,6 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setHrManager(hrManager);
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
+		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID);
 		if (employee != null) {
 			Candidate candidate = candidateRepository.findById(employeeDto.getEmployeeMasterId());
 			candidate.setEmployee(true);
