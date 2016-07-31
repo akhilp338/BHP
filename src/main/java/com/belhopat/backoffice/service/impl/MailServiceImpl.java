@@ -169,14 +169,15 @@ public class MailServiceImpl implements MailService {
 		String mailSubject = null;
 		String mailTemplate = null;
 		String employeeId = null;
-		String employeeName = employee.getEmployeeMaster().getFirstName() + " "
-				+ employee.getEmployeeMaster().getLastName();
+		String fullName = 
+				(employee.getEmployeeMaster().getFirstName() != null ? employee.getEmployeeMaster().getFirstName() + " " : " ") + 
+				(employee.getEmployeeMaster().getLastName() != null ? employee.getEmployeeMaster().getLastName() : "");
 		Map<String, Object> model = new HashMap<String, Object>();
 		mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
-		model.put(Constants.EMPLOYEES, employeeId);
-		model.put(Constants.EMPLOYEE_NAME, employeeName);
+		model.put(Constants.EMPLOYEE_ID, employeeId);
+		model.put(Constants.EMPLOYEE_NAME, fullName);
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
@@ -223,7 +224,6 @@ public class MailServiceImpl implements MailService {
 		else{
 			throw new Exception( "No user ids specified for guest list");
 		}
-		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
 		String mailTemplate = null;
@@ -235,10 +235,10 @@ public class MailServiceImpl implements MailService {
 		model.put("event",event);
 		model.put("start",eventStart);
 		model.put("end",eventEnd);
-		InternetAddress[] emailIdsArray = getTempEmailMailingList(null);
+		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
-		mailObject = new MailMessageObject(emailIdsArray, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		mailObject = new MailMessageObject(emailIds, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
 	}
