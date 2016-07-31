@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +85,12 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 		Long roleId = loggedInUser.getPrimaryRole().getId();
 		List<RoleTab> userTabs = roleTabRepository.getUserTabsByRole(roleId);
 		return userTabs;
+	}
+
+	@Override
+	public void logout(HttpServletRequest request) throws ServletException {
+		request.getSession().invalidate();
+		request.logout();
 	}
 
 }

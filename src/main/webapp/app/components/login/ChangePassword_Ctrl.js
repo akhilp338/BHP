@@ -17,11 +17,11 @@
     	vm.errorMessage = "";
     	
     	vm.changePassword.token = $stateParams.token || undefined;
+    	vm.userId = $rootScope.currentUser != undefined ? $rootScope.currentUser.id : undefined;
             vm.submitChangePasswordReq = function (data) {
-            	console.log($rootScope);
            if (vs.checkFormValidity($scope) ) {
        			var data = {
-       					"id":$rootScope.currentUser.id,
+       					"id":vm.userId,
        					"resetToken":data.token, 
        					"currentPassword": data.currentPassword, 
        					"newPassword" : data.newPassword

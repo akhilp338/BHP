@@ -142,13 +142,14 @@ public class UserServiceImpl implements UserService{
 				persistedUser.setForgotPasswordStatus( false );
 				persistedUser.setForgotPasswordToken( null );
 				userRepo.saveAndFlush( persistedUser );
+				resetStatus = true;
 			}
-			resetStatus = true;
 		}else{
 			persistedUser = userRepo.findOne( user.getId() );
 			if( persistedUser != null && persistedUser.getPassword().equals( user.getCurrentPassword() )){
 				persistedUser.setPassword ( user.getNewPassword() );
 				userRepo.saveAndFlush( persistedUser );
+				resetStatus = true;
 			}
 		}
 		return resetStatus;

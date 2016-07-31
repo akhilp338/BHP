@@ -89,8 +89,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
-		request.getSession().invalidate();
-		request.logout();
+		loginService.logout( request );
 	}
 
 	/**
@@ -134,13 +133,16 @@ public class LoginController {
 	 * @throws MessagingException
 	 *             Generates a password and sends that password to users e mail
 	 *             id
+	 * @throws ServletException 
 	 */
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	public ResponseEntity<ResponseObject> resetPassword(@RequestBody UserDTO user) throws MessagingException {
+	public ResponseEntity<ResponseObject> resetPassword(@RequestBody UserDTO user, HttpServletRequest request) throws MessagingException, ServletException {
 		Boolean resetStatus = userService.resetPassword( user );
-		if ( resetStatus )
+		if ( resetStatus ){
+			loginService.logout(request);
 			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_SUCC_MSG),
 					HttpStatus.OK);
+		}
 		else
 			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_FAIL_MSG),
 					HttpStatus.OK);
