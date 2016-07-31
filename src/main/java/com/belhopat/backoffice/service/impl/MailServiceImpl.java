@@ -168,7 +168,6 @@ public class MailServiceImpl implements MailService {
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
 		String mailTemplate = null;
-		String employeeId = null;
 		String fullName = 
 				(employee.getEmployeeMaster().getFirstName() != null ? employee.getEmployeeMaster().getFirstName() + " " : " ") + 
 				(employee.getEmployeeMaster().getLastName() != null ? employee.getEmployeeMaster().getLastName() : "");
@@ -176,7 +175,7 @@ public class MailServiceImpl implements MailService {
 		mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
-		model.put(Constants.EMPLOYEE_ID, employeeId);
+		model.put(Constants.EMPLOYEE, employee);
 		model.put(Constants.EMPLOYEE_NAME, fullName);
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
