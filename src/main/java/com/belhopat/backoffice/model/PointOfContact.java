@@ -1,11 +1,13 @@
 package com.belhopat.backoffice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,11 +30,11 @@ public class PointOfContact {
 	@JoinColumn(name = "POC_CNTRY_ID")
 	private Country pocCountry;
 
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CONT_NO_ID")
 	private Phone contactNo;
 
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "MOB_NO_ID")
 	private Phone mobNo;
 

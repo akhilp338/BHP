@@ -22,7 +22,7 @@ public class Employee extends BaseEntity {
 	@Column(name = "EMP_ID", unique = true, nullable = false, length = 15)
 	private String employeeId;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "EMP_USR_ID")
 	private User employeeUser;
 
@@ -63,11 +63,11 @@ public class Employee extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "WRK_LCTN_ID")
-	private City workLocation;
+	private Country workLocation;
 
 	@ManyToOne
 	@JoinColumn(name = "BASE_LOC_ID")
-	private City baseLocation;
+	private Country baseLocation;
 
 	@ManyToOne
 	@JoinColumn(name = "TIME_ZONE_ID")
@@ -153,19 +153,19 @@ public class Employee extends BaseEntity {
 		this.reportingManager = reportingManager;
 	}
 
-	public City getWorkLocation() {
+	public Country getWorkLocation() {
 		return workLocation;
 	}
 
-	public void setWorkLocation(City workLocation) {
+	public void setWorkLocation(Country workLocation) {
 		this.workLocation = workLocation;
 	}
 
-	public City getBaseLocation() {
+	public Country getBaseLocation() {
 		return baseLocation;
 	}
 
-	public void setBaseLocation(City baseLocation) {
+	public void setBaseLocation(Country baseLocation) {
 		this.baseLocation = baseLocation;
 	}
 

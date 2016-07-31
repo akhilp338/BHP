@@ -179,6 +179,7 @@ public class BaseServiceImpl implements BaseService {
 		List<LookupDetail> bloodGroups = lookupDetailRepository.findByLookupKey(Constants.BLOOD_GROUP);
 		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
+
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
 		List<TimeZone> timezones = timezoneRepository.findAll();
@@ -256,9 +257,11 @@ public class BaseServiceImpl implements BaseService {
 			increment = candidateSequence.getId();
 		} else if (clazz.equals(Employee.class)) {
 			Date latestDate = employeeSequenceRepository.getLatestDate();
-			if ((DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate))
-					|| DateUtil.isPreviousMonth(latestDate)) {
-				employeeSequenceRepository.truncate();
+			if ((latestDate != null)) {
+				if (DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate)
+						|| DateUtil.isPreviousMonth(latestDate)) {
+					employeeSequenceRepository.truncate();
+				}
 			}
 			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
@@ -278,7 +281,7 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
 		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
 		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
-		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_BDM));
+		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
 		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
 		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
 		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());

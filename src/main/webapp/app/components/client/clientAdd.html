@@ -37,7 +37,7 @@
                      <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                             <label class="control-label" for="contact_code">Code</label>
                                 <div class="controls">
-                                    <select name="contact_code" ng-model="vm.registration.contact_code"
+                                    <select name="contact_code" ng-model="vm.registration.contactNo.country.id"
                                         class="form-input width-100" 
                                         ng-options="country.id as ( country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
 										onselect = "country.id as (country.phoneCode)"
@@ -50,7 +50,7 @@
                         <label class="control-label" for="contactNo">Contact no</label>
                         <div class="controls">
                             <input type="text" name="contactNo" id="contactNo"
-                                   ng-model="vm.registration.contactNo"
+                                   ng-model="vm.registration.contactNo.number"
                                    class="form-input width-100"
                                    placeholder="Contact No"
                                    validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"
@@ -256,7 +256,7 @@
                             <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                             <label class="control-label" for="poc_country_code">Code</label>
                                 <div class="controls">
-                                    <select name="poc_country_code" ng-model="vm.registration.poc_country_code"
+                                    <select name="poc_country_code" ng-model="vm.registration.poc.contactNo.country.id"
                                         class="form-input width-100" 
                                         ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
 										onselect = "country.id as (country.phoneCode)"
@@ -270,11 +270,23 @@
                                 <label class="control-label" for="contactNo">Contact no</label>
                                 <div class="controls">
                                     <input type="text" name="poc.contactNo" id="poc.contactNo"
-                                           ng-model="vm.registration.poc.contactNo"
+                                           ng-model="vm.registration.poc.contactNo.number"
                                            class="form-input width-100"
                                            placeholder="Contact No"
                                            validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"
                                            maxlength="10"/>
+                                </div>
+                            </div>
+                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
+                            <label class="control-label" for="poc_mob_country_code">Code</label>
+                                <div class="controls">
+                                    <select name="poc_mob_country_code" ng-model="vm.registration.poc.mobNo.country.id"
+                                        class="form-input width-100" 
+                                        ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
+										onselect = "country.id as (country.phoneCode)"
+                                        >
+                                        <option value="">--SELECT--</option>
+                                    </select>                                    
                                 </div>
                             </div>
                             <div
@@ -282,7 +294,7 @@
                                 <label class="control-label" for="contactNo">Mobile no</label>
                                 <div class="controls">
                                     <input type="text" name="poc.mobNo" id="poc.mobNo"
-                                           ng-model="vm.registration.poc.mobNo"
+                                           ng-model="vm.registration.poc.mobNo.number"
                                            class="form-input width-100"
                                            placeholder="Mobile No"
                                            validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"

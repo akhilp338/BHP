@@ -411,8 +411,7 @@
                                 <label class="control-label" for="client">Client</label>
                                 <div class="controls">
                                     <select name="client" ng-model="vm.registration.client.id"
-                                            class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT"
-                                            validation="required:alt=required">
+                                            class="form-input width-100" ng-options="client[0] as (client[1]) for client in vm.lookups.CLIENT">
                                         <option value="">--SELECT--</option>
                                     </select>
                                 </div>

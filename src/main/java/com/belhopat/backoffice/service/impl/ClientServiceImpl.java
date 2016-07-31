@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	MailService mailService;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -79,7 +79,7 @@ public class ClientServiceImpl implements ClientService {
 	public ResponseEntity<Client> getClient(Long clientId) {
 		Client client = clientRepository.findOne(clientId);
 		if (client == null) {
-			
+
 			return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Client>(client, HttpStatus.OK);
@@ -113,20 +113,20 @@ public class ClientServiceImpl implements ClientService {
 	 * @param loggedInUser
 	 * @param clientObj
 	 * @return Newly persisted Client object.
-	 * @throws MessagingException 
+	 * @throws MessagingException
 	 */
 	private Client registerNewClient(User loggedInUser, Client clientObj) throws MessagingException {
 		clientObj.setBaseAttributes(loggedInUser);
 		Long increment = baseService.getSequenceIncrement(Client.class);
-		String clientId = SequenceGenerator.generateClientId( increment );
+		String clientId = SequenceGenerator.generateClientId(increment);
 		clientObj.setClientId(clientId);
 		Client persisted = clientRepository.save(clientObj);
-		
-		//TODO make this generic
-		
-		try{
-			mailService.sendClientRegMail( persisted );
-		}catch(MessagingException e){
+
+		// TODO make this generic
+
+		try {
+			mailService.sendClientRegMail(persisted);
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		return persisted;
@@ -141,6 +141,8 @@ public class ClientServiceImpl implements ClientService {
 		Client clientToUpdate = clientRepository.findOne(clientObj.getId());
 		if (clientObj.getAccountManager() != null) {
 			clientToUpdate.setAccountManager(clientObj.getAccountManager());
+		}if (clientObj.getBusinessUnit() != null) {
+			clientToUpdate.setBusinessUnit(clientObj.getBusinessUnit());
 		}
 		if (clientObj.getBussDManager() != null) {
 			clientToUpdate.setBussDManager(clientObj.getBussDManager());
@@ -166,6 +168,18 @@ public class ClientServiceImpl implements ClientService {
 		if (clientObj.getWebUrl() != null) {
 			clientToUpdate.setWebUrl(clientObj.getWebUrl());
 		}
+		if (clientObj.getClientAddress() != null) {
+			clientToUpdate.setClientAddress(clientObj.getClientAddress());
+		}
+		if (clientObj.getPoc() != null) {
+			clientToUpdate.setPoc(clientObj.getPoc());
+		}
+		/*if (clientObj.getPoc().getContactNo() != null) {
+			clientToUpdate.getPoc().setContactNo(clientObj.getPoc().getContactNo());
+		}
+		if (clientObj.getPoc().getMobNo() != null) {
+			clientToUpdate.getPoc().setContactNo(clientObj.getPoc().getMobNo());
+		}*/
 		clientToUpdate.setUpdateAttributes(loggedInUser);
 		Client persisted = clientRepository.save(clientToUpdate);
 		return persisted;

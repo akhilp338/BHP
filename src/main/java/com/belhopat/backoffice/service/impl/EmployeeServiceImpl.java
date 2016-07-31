@@ -16,13 +16,12 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.model.Candidate;
-import com.belhopat.backoffice.model.City;
+import com.belhopat.backoffice.model.Country;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.LookupDetail;
-import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
-import com.belhopat.backoffice.repository.CityRepository;
+import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
@@ -49,14 +48,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	CandidateRepository candidateRepository;
 
 	@Autowired
-	CityRepository cityRepository;
-	
+	CountryRepository countryRepository;
+
 	@Autowired
 	TimeZoneRepository timeZoneRepository;
-	
+
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
-	
+
 	@Autowired
 	MailService mailService;
 
@@ -76,14 +75,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee accountManager = employeeRepository.findOne(employeeDto.getAccountManager());
 		LookupDetail businessUnit = lookupDetailRepository.findOne(employeeDto.getBusinessUnit());
 		Candidate employeeMaster = candidateRepository.findOne(employeeDto.getEmployeeMasterId());
-		City workLocation=cityRepository.findOne(employeeDto.getWorkLocation());
-		City baseLocation=cityRepository.findOne(employeeDto.getBaseLocation());
+		Country workLocation = countryRepository.findOne(employeeDto.getWorkLocation());
+		Country baseLocation = countryRepository.findOne(employeeDto.getBaseLocation());
 		Employee employee = null;
 		if (employeeDto.getId() == null) {
 			employee = new Employee();
 			employee.setBaseAttributes(loggedInUser);
 			Long increment = baseService.getSequenceIncrement(Employee.class);
-			String employeeId = SequenceGenerator.generateEmployeeId(increment,employeeMaster.getDivision().getCode());
+			String employeeId = SequenceGenerator.generateEmployeeId(increment, employeeMaster.getDivision().getCode());
 			employee.setEmployeeId(employeeId);
 		} else {
 			employee = employeeRepository.findOne(employeeDto.getId());
@@ -106,9 +105,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (candidate != null) {
 				String employeeName = employee.getEmployeeMaster().getFirstName() + " "
 						+ employee.getEmployeeMaster().getLastName();
-				try{
-					mailService.sendEmployeeRegMail( employee );
-				}catch(MessagingException e){
+				try {
+					mailService.sendEmployeeRegMail(employee);
+				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
 				return new ResponseEntity<String>(employeeName, HttpStatus.OK);
@@ -149,18 +148,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeDto getAnEmployee(Long id) {
 		Employee employeeObj = employeeRepository.findById(id);
 		EmployeeDto outputObj = new EmployeeDto();
-		outputObj.setId( employeeObj.getId() );
-		outputObj.setEmployeeId( employeeObj.getEmployeeId() );
-		outputObj.setAccountManager( employeeObj.getAccountManager() != null ? employeeObj.getAccountManager().getId() : -999 );
-		outputObj.setHrManager( employeeObj.getHrManager() != null ? employeeObj.getHrManager().getId() : -999 );
-		outputObj.setHrRecruiter( employeeObj.getHrRecruiter() != null ? employeeObj.getHrRecruiter().getId() : -999 );
-		outputObj.setReportingManager(employeeObj.getReportingManager() != null ? employeeObj.getReportingManager().getId() : -999 );
-		outputObj.setEmployeeMasterId( employeeObj.getEmployeeMaster() != null ? employeeObj.getEmployeeMaster().getId() : -999 );
-		outputObj.setBaseLocation( employeeObj.getBaseLocation() != null ? employeeObj.getBaseLocation().getId() : -999 );
-		outputObj.setWorkLocation( employeeObj.getWorkLocation() != null ? employeeObj.getWorkLocation().getId() : -999 );
-		outputObj.setBusinessUnit( employeeObj.getBusinessUnit() != null ? employeeObj.getBusinessUnit().getId() : -999 );
-		outputObj.setJoiningDate( employeeObj.getJoiningDate() );
-		outputObj.setMail( employeeObj.getEmployeeMaster().getPersonalEmail() != null ? employeeObj.getEmployeeMaster().getPersonalEmail() : "-999" );
+		outputObj.setId(employeeObj.getId());
+		outputObj.setEmployeeId(employeeObj.getEmployeeId());
+		outputObj.setAccountManager(
+				employeeObj.getAccountManager() != null ? employeeObj.getAccountManager().getId() : -999);
+		outputObj.setHrManager(employeeObj.getHrManager() != null ? employeeObj.getHrManager().getId() : -999);
+		outputObj.setHrRecruiter(employeeObj.getHrRecruiter() != null ? employeeObj.getHrRecruiter().getId() : -999);
+		outputObj.setReportingManager(
+				employeeObj.getReportingManager() != null ? employeeObj.getReportingManager().getId() : -999);
+		outputObj.setEmployeeMasterId(
+				employeeObj.getEmployeeMaster() != null ? employeeObj.getEmployeeMaster().getId() : -999);
+		outputObj.setBaseLocation(employeeObj.getBaseLocation() != null ? employeeObj.getBaseLocation().getId() : -999);
+		outputObj.setWorkLocation(employeeObj.getWorkLocation() != null ? employeeObj.getWorkLocation().getId() : -999);
+		outputObj.setBusinessUnit(employeeObj.getBusinessUnit() != null ? employeeObj.getBusinessUnit().getId() : -999);
+		outputObj.setJoiningDate(employeeObj.getJoiningDate());
+		outputObj.setMail(employeeObj.getEmployeeMaster().getPersonalEmail() != null
+				? employeeObj.getEmployeeMaster().getPersonalEmail() : "-999");
 		return outputObj;
 	}
 
