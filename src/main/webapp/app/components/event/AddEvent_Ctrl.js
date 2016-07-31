@@ -8,6 +8,7 @@
         vm.buttonText = "Add Event"
         vm.addEventData.allDay = false;
         vm.addEventData.guests = [];
+        vm.eventguests  = [];
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
@@ -31,7 +32,9 @@
         vm.openCalendar = function (e, picker) {
             vm[picker].open = true;
         };
-
+        if (candidateDetails.guestList) {
+            vm.eventguests = candidateDetails.guestList;
+        }
         vm.processObjecToArray = function (obj) {
             var guestObjArray = [];
             for (var i = 0; i < obj.length; i++) {
@@ -83,15 +86,19 @@
                 vm.buttonText = "Add Event";
                 vm.isEdit = false;
             }
+            if(candidateDetails.guests){
+               vm.addEventData.guests = candidateDetails.guests;
+            }
+            else{
+                
+            }
             vm.addEventData.id = candidateDetails.id;
             vm.addEventData.title = candidateDetails.title;
             vm.addEventData.description = candidateDetails.description;
             vm.addEventData.location = candidateDetails.location;
             vm.addEventData.allDay = candidateDetails.allDay;
         }
-        if (candidateDetails.guestList) {
-            vm.eventguests = candidateDetails.guestList;
-        }
+      
         vm.addEvent = function () {
             if (vs.checkFormValidity($scope)) {
                 var utcStartDateString = new Date(vm.picker7.date).toDateString() + " 00:00:00 GMT";
