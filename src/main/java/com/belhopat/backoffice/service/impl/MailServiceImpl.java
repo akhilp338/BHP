@@ -101,8 +101,11 @@ public class MailServiceImpl implements MailService {
 
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.PASSWORD_RESET_TEMPLATE, model);
 		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList( Collections.singletonList(user.getEmail()));
-		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC,  MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
 				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 	}
@@ -136,12 +139,15 @@ public class MailServiceImpl implements MailService {
 		
 		List < String > clientRegNotificationList = new ArrayList < String > (1);
 
-		//TODO Uncomment for production	
-		//clientRegNotificationList.add( "rafique@belhopat.com" );
+		//TODO GET CEO mail id here	
+		clientRegNotificationList.add( "bhptestreceiver@gmail.com" );
 		
 		clientRegNotificationList.add( client.getBussUnitHead().getOfficialEmail() != null ? client.getBussUnitHead().getOfficialEmail() : null );
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
-		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM,
 				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
@@ -157,8 +163,11 @@ public class MailServiceImpl implements MailService {
 		mailSubject = Constants.CAND_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
-		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -177,19 +186,21 @@ public class MailServiceImpl implements MailService {
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
 		model.put(Constants.EMPLOYEE, employee);
 		model.put(Constants.EMPLOYEE_NAME, fullName);
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
-		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
 	}
 
 	/**
-	 * @return temp list of email addresses.
+	 * @return temp list of email addresses AS CC.
 	 * @throws AddressException
 	 */
-	public InternetAddress[] getTempEmailMailingList(List <String> receiverEmail) throws AddressException {
+	public InternetAddress[] getTempEmailMailingListForCC(List <String> receiverEmail) throws AddressException {
 		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
-		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
 		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
 		forDebugList.add(new InternetAddress("sreekeshd@gmail.com"));
 		forDebugList.add(new InternetAddress("akhil@belhopat.com"));
@@ -200,6 +211,23 @@ public class MailServiceImpl implements MailService {
 		forDebugList.add(new InternetAddress("princegracys@gmail.com"));
 		forDebugList.add(new InternetAddress("iamshintomjose@gmail.com"));
 		forDebugList.add(new InternetAddress("shinto@belhopat.com"));
+		if (receiverEmail != null) {
+			for (String email: receiverEmail) {
+				forDebugList.add(new InternetAddress(email));
+			}
+		}
+		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
+		forDebugEmail = forDebugList.toArray(forDebugEmail);
+		return forDebugEmail;
+	}
+	
+	/**
+	 * @return temp list of email addresses.
+	 * @throws AddressException
+	 */
+	public InternetAddress[] getTempEmailMailingList(List <String> receiverEmail) throws AddressException {
+		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
+		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
 		if (receiverEmail != null) {
 			for (String email: receiverEmail) {
 				forDebugList.add(new InternetAddress(email));
@@ -234,10 +262,13 @@ public class MailServiceImpl implements MailService {
 		model.put("event",event);
 		model.put("start",eventStart);
 		model.put("end",eventEnd);
-		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
-		mailObject = new MailMessageObject(emailIds, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		
+		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		mailObject = new MailMessageObject(emailIds, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -258,8 +289,11 @@ public class MailServiceImpl implements MailService {
 
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.USER_CREATED_EMAIL_TEMPLATE, model);
 		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList( Collections.singletonList(employee.getEmployeeMaster().getPersonalEmail()));
-		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.EMPLOYEE_PORTAL_CREDENTIALS,
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, Constants.EMPLOYEE_PORTAL_CREDENTIALS,
 				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 		
@@ -281,8 +315,11 @@ public class MailServiceImpl implements MailService {
 		model.put(Constants.EMPLOYEE, employee);
 		model.put(Constants.EMPLOYEE_NAME, fullName);
 		model.put(Constants.LOGIN_URL, loginUrl);
+		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
-		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
+		
+		mailObject = new MailMessageObject(forDebugEmail,forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 		
 	}

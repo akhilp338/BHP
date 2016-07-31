@@ -72,6 +72,20 @@ public class MailMessageObject {
 	 * sets the email object
 	 *
 	 */
+	public MailMessageObject( InternetAddress[] emailToList, InternetAddress[] emailCCList,  String emailFrom, String subject, String emailBody, JavaMailSender mailSender )
+			throws MessagingException {
+		this.mimeMessage = mailSender.createMimeMessage();
+		this.helper = new MimeMessageHelper( this.mimeMessage );
+		this.helper.setTo( emailToList );
+		this.helper.setCc( emailCCList );
+		this.helper.setFrom( new InternetAddress ( emailFrom ) );
+		this.helper.setSubject( subject );
+		this.helper.setText ( emailBody, true );
+	}
+	/**
+	 * sets the email object
+	 *
+	 */
 	public MailMessageObject( String emailTo, String emailFrom, String subject, String emailBody, DataSource attachment, JavaMailSender mailSender )
 			throws MessagingException {
 		this.mimeMessage = mailSender.createMimeMessage();
@@ -104,6 +118,20 @@ public class MailMessageObject {
 		this.mimeMessage = mailSender.createMimeMessage();
 		this.helper = new MimeMessageHelper( this.mimeMessage, true );
 		this.helper.setTo( emailToList );
+		this.helper.setFrom( new InternetAddress ( emailFrom ) );
+		this.helper.setSubject( subject );
+		this.helper.setText ( emailBody, true );
+		this.helper.addInline( "templateLogo", res );
+	}
+	
+	public MailMessageObject(
+			InternetAddress[] emailToList, InternetAddress[] emailCCList, String emailFrom, String subject, String emailBody, 
+			String resourcePath, JavaMailSender mailSender) throws MessagingException {
+		ClassPathResource res = new ClassPathResource( resourcePath );
+		this.mimeMessage = mailSender.createMimeMessage();
+		this.helper = new MimeMessageHelper( this.mimeMessage, true );
+		this.helper.setTo( emailToList );
+		this.helper.setCc( emailCCList );
 		this.helper.setFrom( new InternetAddress ( emailFrom ) );
 		this.helper.setSubject( subject );
 		this.helper.setText ( emailBody, true );
