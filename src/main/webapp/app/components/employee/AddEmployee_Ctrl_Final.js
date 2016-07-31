@@ -25,6 +25,7 @@
                 vm.registration.timeZone=res.data.timeZone;
                 vm.registration.hrRecruiter= res.data.hrRecruiter;
                 vm.registration.reportingManager=res.data.reportingManager;
+                vm.registration.baseLocation =res.data.baseLocation;
         	console.log("edit");
         	console.log(vm.registration);
             }, function (err) {
