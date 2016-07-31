@@ -2105,6 +2105,10 @@ md-chips-wrap.md-chips {
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
+.forgot-template .no-cancel{
+    margin-left: 24% !important;
+}
+
 .forgot-template .changeCancel-btn {
     margin-left: 35px!important;
 }

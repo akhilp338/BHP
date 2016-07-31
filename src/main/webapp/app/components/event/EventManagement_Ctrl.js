@@ -72,7 +72,8 @@
                 },
                 eventClick: function (calEvent, jsEvent, view) {
                     Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
-                        if (res.data && calEvent.end && !calEvent.end.isBefore(moment())) {
+                        calEvent.end = calEvent.end ? calEvent.end : view.end; 
+                        if (res.data && calEvent.end && !calEvent.end.isBefore(moment())) {                                                           
                             calEvent.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
                             Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
                                 if (response)
