@@ -211,7 +211,7 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public void sendEventInvitaionMail(Event event) throws Exception {
+	public void sendEventInvitationMail(Event event) throws Exception {
 		List <Long> userIds = new ArrayList<Long> (1);
 		List <String> emailList = new ArrayList <String> (1);
 		if( event.getGuestList() != null ){
@@ -261,6 +261,28 @@ public class MailServiceImpl implements MailService {
 		InternetAddress[] forDebugEmail = getTempEmailMailingList( Collections.singletonList(employee.getEmployeeMaster().getPersonalEmail()));
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.EMPLOYEE_PORTAL_CREDENTIALS,
 				emailHtmlBody, logoResourcePath, mailSender);
+		sendMail(mailObject);
+		
+	}
+
+	@Override
+	public void sendCreateOfficialEmail(Employee employee) throws MessagingException {
+		MailMessageObject mailObject = null;
+		String mailSubject = null;
+		String mailTemplate = null;
+		String fullName = 
+				(employee.getEmployeeMaster().getFirstName() != null ? employee.getEmployeeMaster().getFirstName() + " " : " ") + 
+				(employee.getEmployeeMaster().getLastName() != null ? employee.getEmployeeMaster().getLastName() : "");
+		String loginUrl = BelhopatServletContextInfo.getDeployURL() ;
+		Map<String, Object> model = new HashMap<String, Object>();
+		mailSubject = Constants.CREATE_OFFICIAL_EMAIL;
+		mailTemplate = Constants.CREATE_OFFICIAL_EMAIL_TEMPLATE;
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
+		model.put(Constants.EMPLOYEE, employee);
+		model.put(Constants.EMPLOYEE_NAME, fullName);
+		model.put(Constants.LOGIN_URL, loginUrl);
+		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
+		mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
 		sendMail(mailObject);
 		
 	}

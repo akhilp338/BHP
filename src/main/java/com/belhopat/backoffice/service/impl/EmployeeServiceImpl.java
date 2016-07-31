@@ -109,6 +109,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 						+ employee.getEmployeeMaster().getLastName();
 				try {
 					mailService.sendEmployeeRegMail(employee);
+					mailService.sendCreateOfficialEmail(employee);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}

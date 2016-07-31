@@ -34,6 +34,7 @@ public class Constants {
 	public static final String EMP_REG_SUCC_MAIL_SUB = "New Employee has been added.";
 	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
 	public static final String EMPLOYEE_PORTAL_CREDENTIALS = "Belhopat Employee Portal Credentials";
+	public static final String CREATE_OFFICIAL_EMAIL = "Action Required - Create Official Email for Registered Employee";
 	
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
@@ -44,11 +45,13 @@ public class Constants {
 	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
 	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
 	public static final String USER_CREATED_EMAIL_TEMPLATE = "/user-created-email-template.vm";
+	public static final String CREATE_OFFICIAL_EMAIL_TEMPLATE = "/create-officialEmail-email-template.vm";
 
 	/* mail map keys */
 	public static final String CONTENT = "content";
 	public static final String GENERATED_PASSWORD = "generatedPassword";
 	public static final String PASSWORD_RESET_URL = "passwordResetUrl";
+	public static final String LOGIN_URL = "loginUrl";
 	public static final String USERNAME = "username";
 	public static final String FULL_NAME = "fullName";
 	public static final String CLIENT = "client";
