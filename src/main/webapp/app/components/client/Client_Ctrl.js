@@ -58,10 +58,38 @@
 			                        }
 								},
 								{
+									title : "Email",
+									data : 'email',
+									render: function (data) {
+			                        	return data == null? "":data;
+			                        }
+								},
+								{
+									title : "contactNo",
+									data : 'contactNo.number',
+									render: function (data,display,row) {
+			                        	return row.contactNo == null? "":row.contactNo.number == null? "":data;
+			                        }
+								},
+								{
 									title : "Revenue",
 									data : 'revenue',
 									render: function (data) {
 			                        	return data == null? "":data;
+			                        }
+								},
+								{
+									title : "POC Name",
+									data : 'poc.pocName',
+									render: function (data,display,row) {
+			                        	return row.poc == null? "":row.poc.pocName == null? "":data;
+			                        }
+								},
+								{
+									title : "Bussiness Unit",
+									data : 'businessUnit.description',
+									render: function (data,display,row) {
+			                        	return row.businessUnit == null? "":row.businessUnit.description == null? "":data;
 			                        }
 								},
 								{
