@@ -136,19 +136,19 @@ public class MailServiceImpl implements MailService {
 		model.put(Constants.CLIENT, client);
 		model.put(Constants.POC, client.getPoc());
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
 		
 		List < String > clientRegNotificationList = new ArrayList < String > (1);
-
 		//TODO GET CEO mail id here	
 		clientRegNotificationList.add( "bhptestreceiver@gmail.com" );
-		
 		clientRegNotificationList.add( client.getBussUnitHead().getOfficialEmail() != null ? client.getBussUnitHead().getOfficialEmail() : null );
 		
-		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
+		InternetAddress[] forDebugEmail = getTempEmailMailingList(clientRegNotificationList);
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
 		
+		
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM,
-				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
+				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -163,11 +163,12 @@ public class MailServiceImpl implements MailService {
 		mailSubject = Constants.CAND_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
 		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
 		
-		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -183,14 +184,15 @@ public class MailServiceImpl implements MailService {
 		Map<String, Object> model = new HashMap<String, Object>();
 		mailSubject = Constants.EMP_REG_SUCC_MAIL_SUB;
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
 		model.put(Constants.EMPLOYEE, employee);
 		model.put(Constants.EMPLOYEE_NAME, fullName);
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
 		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
 		
-		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -264,11 +266,12 @@ public class MailServiceImpl implements MailService {
 		model.put("end",eventEnd);
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
 		
 		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
 		
-		mailObject = new MailMessageObject(emailIds, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		mailObject = new MailMessageObject(emailIds, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -311,15 +314,16 @@ public class MailServiceImpl implements MailService {
 		Map<String, Object> model = new HashMap<String, Object>();
 		mailSubject = Constants.CREATE_OFFICIAL_EMAIL;
 		mailTemplate = Constants.CREATE_OFFICIAL_EMAIL_TEMPLATE;
-		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
 		model.put(Constants.EMPLOYEE, employee);
 		model.put(Constants.EMPLOYEE_NAME, fullName);
 		model.put(Constants.LOGIN_URL, loginUrl);
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate( mailTemplate, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
 		
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC( null );
 		
-		mailObject = new MailMessageObject(forDebugEmail,forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
+		mailObject = new MailMessageObject(forDebugEmail,forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 		
 	}
