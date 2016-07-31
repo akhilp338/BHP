@@ -35,7 +35,7 @@ public class UserController {
 			return new ResponseEntity<ResponseObject>(new ResponseObject(true, Constants.WEL_MAIL_SUCC),
 					HttpStatus.OK);
 		}else{
-			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.WEL_MAIL_FAIL),
+			return new ResponseEntity<ResponseObject>(new ResponseObject(false, Constants.WEL_MAIL_FAIL),
 					HttpStatus.OK);
 		}
 	}
