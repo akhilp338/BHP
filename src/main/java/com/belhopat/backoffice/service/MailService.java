@@ -23,7 +23,7 @@ public interface MailService {
 
 	public void sendClientRegMail(Client client) throws MessagingException;
 
-	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException;
+	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException, Exception;
 
 	public void sendWelcomeMail(Employee employee) throws MessagingException;
 

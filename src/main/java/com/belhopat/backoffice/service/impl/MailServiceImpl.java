@@ -1,8 +1,8 @@
 
 package com.belhopat.backoffice.service.impl;
 
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +28,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.pdf.PDFConstants;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 import com.belhopat.backoffice.util.Constants;
@@ -53,6 +54,9 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private VelocityEngine velocityEngine;
+
+	@Autowired
+	UserRepository userRepository;
 
 	protected static final Logger LOGGER = Logger.getLogger(MailServiceImpl.class.getName());
 
@@ -97,7 +101,7 @@ public class MailServiceImpl implements MailService {
 
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.PASSWORD_RESET_TEMPLATE, model);
 		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
-		InternetAddress[] forDebugEmail = getTempEmailMailingList(user.getEmail());
+		InternetAddress[] forDebugEmail = getTempEmailMailingList( Collections.singletonList(user.getEmail()));
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.PASS_RESET_MAIL_SUB,
 				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
@@ -129,6 +133,13 @@ public class MailServiceImpl implements MailService {
 		model.put(Constants.CLIENT, client);
 		model.put(Constants.POC, client.getPoc());
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CLIENT_REG_EMAIL_TEMPLATE, model);
+		
+		List < String > clientRegNotificationList = new ArrayList < String > (1);
+
+		//TODO Uncomment for production	
+		//clientRegNotificationList.add( "rafique@belhopat.com" );
+		
+		clientRegNotificationList.add( client.getBussUnitHead().getOfficialEmail() != null ? client.getBussUnitHead().getOfficialEmail() : null );
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM,
 				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, mailSender);
@@ -176,7 +187,7 @@ public class MailServiceImpl implements MailService {
 	 * @return temp list of email addresses.
 	 * @throws AddressException
 	 */
-	public InternetAddress[] getTempEmailMailingList(String receiverEmail) throws AddressException {
+	public InternetAddress[] getTempEmailMailingList(List <String> receiverEmail) throws AddressException {
 		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
 		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
 		forDebugList.add(new InternetAddress("sreekesh@belhopat.com"));
@@ -190,7 +201,9 @@ public class MailServiceImpl implements MailService {
 		forDebugList.add(new InternetAddress("iamshintomjose@gmail.com"));
 		forDebugList.add(new InternetAddress("shinto@belhopat.com"));
 		if (receiverEmail != null) {
-			forDebugList.add(new InternetAddress(receiverEmail));
+			for (String email: receiverEmail) {
+				forDebugList.add(new InternetAddress(email));
+			}
 		}
 		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];
 		forDebugEmail = forDebugList.toArray(forDebugEmail);
@@ -198,13 +211,19 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public void sendEventInvitaionMail(Event event) throws MessagingException, ParseException {
-		List<InternetAddress> emailIds = new ArrayList<InternetAddress>();
-		for (User user : event.getGuestList()) {
-			emailIds.add(new InternetAddress(user.getEmail()));
+	public void sendEventInvitaionMail(Event event) throws Exception {
+		List <Long> userIds = new ArrayList<Long> (1);
+		List <String> emailList = new ArrayList <String> (1);
+		if( event.getGuestList() != null ){
+			for (User user : event.getGuestList()) {
+				userIds.add( user.getId() );
+			}
+			emailList = userRepository.findEmailsByIdList( userIds );
 		}
-		emailIds.add(new InternetAddress("sujith@belhopat.com"));
-		emailIds.add(new InternetAddress("sujithkvclt@gmail.com"));
+		else{
+			throw new Exception( "No user ids specified for guest list");
+		}
+		InternetAddress[] emailIds = getTempEmailMailingList( emailList );
 		MailMessageObject mailObject = null;
 		String mailSubject = null;
 		String mailTemplate = null;
@@ -216,8 +235,7 @@ public class MailServiceImpl implements MailService {
 		model.put("event",event);
 		model.put("start",eventStart);
 		model.put("end",eventEnd);
-		InternetAddress[] emailIdsArray = new InternetAddress[emailIds.size()];
-		emailIdsArray = emailIds.toArray(emailIdsArray);
+		InternetAddress[] emailIdsArray = getTempEmailMailingList(null);
 		mailTemplate = Constants.EMP_REG_EMAIL_TEMPLATE;
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
 		mailObject = new MailMessageObject(emailIdsArray, MAIL_FROM, mailSubject, emailHtmlBody, mailSender);
@@ -241,7 +259,7 @@ public class MailServiceImpl implements MailService {
 
 		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.USER_CREATED_EMAIL_TEMPLATE, model);
 		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
-		InternetAddress[] forDebugEmail = getTempEmailMailingList(employee.getEmployeeMaster().getPersonalEmail());
+		InternetAddress[] forDebugEmail = getTempEmailMailingList( Collections.singletonList(employee.getEmployeeMaster().getPersonalEmail()));
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, MAIL_FROM, Constants.EMPLOYEE_PORTAL_CREDENTIALS,
 				emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);

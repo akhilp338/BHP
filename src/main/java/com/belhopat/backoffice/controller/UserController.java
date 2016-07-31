@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.dto.ResponseObject;
-import com.belhopat.backoffice.model.Employee;
-import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.UserService;
 import com.belhopat.backoffice.util.Constants;
 
