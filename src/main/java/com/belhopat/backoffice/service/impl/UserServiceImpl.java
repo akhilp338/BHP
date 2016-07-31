@@ -133,8 +133,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Boolean resetPassword( UserDTO user ) {
 		Boolean resetStatus = false;
+		User persistedUser = null;
 		if( user.getResetToken() != null ){
-			User persistedUser = userRepo.findByForgotPasswordToken( user.getResetToken() );
+			persistedUser = userRepo.findByForgotPasswordToken( user.getResetToken() );
 			if( persistedUser != null && persistedUser.getForgotPasswordStatus().equals(true) 
 					&& persistedUser.getPassword().equals( user.getCurrentPassword() )){
 				persistedUser.setPassword ( user.getNewPassword() );
@@ -143,6 +144,12 @@ public class UserServiceImpl implements UserService{
 				userRepo.saveAndFlush( persistedUser );
 			}
 			resetStatus = true;
+		}else{
+			persistedUser = userRepo.findOne( user.getId() );
+			if( persistedUser != null && persistedUser.getPassword().equals( user.getCurrentPassword() )){
+				persistedUser.setPassword ( user.getNewPassword() );
+				userRepo.saveAndFlush( persistedUser );
+			}
 		}
 		return resetStatus;
 	}

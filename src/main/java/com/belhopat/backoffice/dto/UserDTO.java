@@ -7,6 +7,8 @@ package com.belhopat.backoffice.dto;
  */
 public class UserDTO {
 	
+	private Long id;
+	
 	private String username;
 
 	private String currentPassword;
@@ -55,6 +57,14 @@ public class UserDTO {
 
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

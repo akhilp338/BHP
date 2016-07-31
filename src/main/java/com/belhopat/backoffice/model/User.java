@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "USER")
 public class User {
@@ -29,6 +31,7 @@ public class User {
 	@Column(name = "USERNAME", nullable = false, unique = true, length = 50)
 	private String username;
 
+	@JsonIgnore
 	@Column(name = "PASSWORD", nullable = false, length = 100)
 	private String password;
 
@@ -39,15 +42,19 @@ public class User {
 	@JoinColumn(name = "DSGNTN_ID", nullable = false)
 	private LookupDetail designation;
 
+	@JsonIgnore
 	@Column(name = "SALT")
 	private Byte[] salt;
 
+	@JsonIgnore
 	@Column(name = "FRGT_PSWD_STS", columnDefinition = "boolean default false", nullable = false)
 	private Boolean forgotPasswordStatus;
 
+	@JsonIgnore
 	@Column(name = "FRGT_PSWD_TKN", length = 200)
 	private String forgotPasswordToken;
 
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MST_ROLE")
 	private MasterRole primaryRole;

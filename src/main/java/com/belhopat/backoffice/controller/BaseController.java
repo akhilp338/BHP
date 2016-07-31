@@ -111,8 +111,8 @@ public class BaseController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
-	public Object getUserName() {
-		Object currentUser=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	public User getUserName() {
+		User currentUser=SessionManager.getCurrentUserAsEntity();
 		return currentUser;
 	}
 
