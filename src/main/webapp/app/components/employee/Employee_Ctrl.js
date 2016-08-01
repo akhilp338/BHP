@@ -140,8 +140,7 @@
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.employee.edit', {id: $rootScope.id});
             });
-            $('#employeeList tbody').on( 'click', 'tr', function () {
-            	
+            $('#employeeList tbody').on( 'click', 'tr', function () {            	
                 if ( $(this).hasClass('selected') ) {
                     $(this).removeClass('selected');
                 }
@@ -151,11 +150,14 @@
                 }
             } );
             $("#generateCredentials").on('click',function () {
+                var empDetails = addEmployeeTable.data()[$('#employeeList tbody .selected').index()]
             	var selectedEmployee =$('#employeeList tbody .selected .action-view')[0];
             	if( selectedEmployee != undefined ){
             		$rootScope.id = selectedEmployee.getAttribute('value');
-            		vm.getEmployee($rootScope.id,'generate-credentials');
-            	}
+            		vm.getEmployee(empDetails,'generate-credentials');
+            	}else{
+                    Core_Service.sweetAlert("Hey!", "Please select atleast one candidate", "warning");
+                }
             	$rootScope.showLoader = true;
             	
             });
