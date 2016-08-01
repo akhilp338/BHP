@@ -1,7 +1,6 @@
 (function() {
-	var Dash_Ctrl = function($scope, $state, $rootScope, Core_Service,
-			$mdDialog, $mdMedia,urlConfig) {
-		var vm = this;
+	var Dash_Ctrl = function($scope, $rootScope, Core_Service, Core_ModalService, urlConfig) {
+		var vm = this, dashBoardTable;
 		$rootScope.active = 'dashboard';
 		vm.init = function() {
 			vm.url = "api/candidate/getCurrentUserTasks";
@@ -13,7 +12,7 @@
 			});
 		}
 		angular.element(document).ready(function () {
-            candidatesListTable = angular.element('#tasksList').DataTable({
+            dashBoardTable = angular.element('#tasksList').DataTable({
             ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "getUserTasks",
             serverSide: true,
             bDestroy: true,
@@ -60,14 +59,15 @@
                     }]
         });
             $('#tasksList').on('click', '.action-view', function () {
-                vm.showAdvanced(this.getAttribute('value'));
+                var data = dashBoardTable.data()[$(this).parents("tr").index()];
+                vm.showAdvanced(data);
             });
         $('#tasksList tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
             }
             else {
-                candidatesListTable.$('tr.selected').removeClass('selected');
+                dashBoardTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
             }
         } );
@@ -76,19 +76,12 @@
 		$scope.close= function(){
 			$mdDialog.hide();
 		}
-		vm.showAdvanced = function(res) {
-		    
-		    $mdDialog.show({
-		      controller: Dash_Ctrl,
-		      templateUrl: 'app/components/dashboard/taskDialogue.html',
-		      clickOutsideToClose:false,
-		    })
-		   
+		vm.showAdvanced = function(data) {
+		   Core_ModalService.openTaskDetails(data);		   
 		  };
     
 	};
 
-	Dash_Ctrl.$inject = [ "$scope", '$state', '$rootScope', 'Core_Service',
-			'$mdDialog', '$mdMedia','urlConfig' ];
+	Dash_Ctrl.$inject = [ "$scope", '$rootScope', 'Core_Service', 'Core_ModalService', 'urlConfig' ];
 	angular.module('coreModule').controller('Dash_Ctrl', Dash_Ctrl);
 })();

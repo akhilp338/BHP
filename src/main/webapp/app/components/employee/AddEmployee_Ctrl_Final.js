@@ -61,7 +61,7 @@
                     .then(function (response) {
                     	  Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.employee");
                     }, function (error) {
-                    	 Core_Service.sweetAlert("Oops!", "Systemm error please try after some time", "error", "coreuser.employee");
+                    	 Core_Service.sweetAlert("Oops!", "System error please try after some time.", "error", "coreuser.employee");
                     });
             });     
                                  

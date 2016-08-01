@@ -201,13 +201,14 @@
         vm.candidateRegister = function () {
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
+                Core_Service.sweetAlertWithConfirm("Candidate details filled!", "Are you sure to register this Candidate?", "warning", function(){
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
                             Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
-                            console.log(response)
                         }, function (error) {
-                            console.log(error)
+                            Core_Service.sweetAlert("Ouch!", "Something went wrong", "error", "coreuser.candidate");
                         });
+                    });
             }
           //$state.go("coreuser.upload")
         };

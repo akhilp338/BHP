@@ -24,6 +24,9 @@
         };
         service.openChangePassword = function (data) {
             return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/login/changePasswordModaL.html', 'ChangePasswordModal_Ctrl', 'vm', data);
+        };
+        service.openTaskDetails = function (data) {
+            return Core_Modal.modalOpen('task-modal', '/BelhopatBackOffice/app/components/dashboard/taskDialogue.html', 'DashModal_Ctrl', 'vm', data);
         }; 
     };
     angular.module('app.common')

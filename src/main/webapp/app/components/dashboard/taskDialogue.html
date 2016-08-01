@@ -1,26 +1,10 @@
-<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>TASK NAME</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <p>
-         GO TO TASK
-        </p>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button ng-click="close('useful')">
-        CLOSE
-      </md-button>
-    </md-dialog-actions>
-  </form>
-</md-dialog>
+<div class="modal-header">
+<span id='close' ng-click="vm.close()">x</span>
+    <h3 class="modal-title">Task Details</h3>
+</div>
+<div class="modal-body" ng-show-data template="{{vm.template}}">
+</div>
+<div class="modal-footer">
+    <button class="logout-button btn-formsubmit" type="button" ng-click="vm.gotoState()">Goto Task</button>
+    <button class="logout-button btn-formsubmit" type="button" ng-click="vm.close()">Close</button>
+</div>
