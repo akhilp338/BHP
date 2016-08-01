@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.service;
 
+import java.util.Map;
+
 import javax.mail.MessagingException;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -13,7 +15,7 @@ import com.belhopat.backoffice.model.Employee;
 @Service
 public interface EmployeeService {
 
-	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) throws MessagingException;
+	public ResponseEntity<Map<String, String>> saveOrUpdateEmployee(EmployeeDto employeeDto) throws MessagingException;
 
 	public DataTablesOutput<Employee> getEmployee(DataTablesInput input);
 

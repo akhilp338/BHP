@@ -44,7 +44,7 @@ public class EmployeeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateEmployee", method = RequestMethod.POST)
-	public ResponseEntity<String> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) throws MessagingException {
+	public ResponseEntity<Map<String, String>> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) throws MessagingException {
 		return employeeService.saveOrUpdateEmployee(employeeDto);
 	}
 	
