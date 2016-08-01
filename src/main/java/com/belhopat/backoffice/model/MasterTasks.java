@@ -15,7 +15,7 @@ public class MasterTasks {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column(name = "TSK_KEY", length = 15)
+	@Column(name = "TSK_KEY", length = 50)
 	private String taskKey;
 
 	@Column(name = "NXT_TSK_ID")
