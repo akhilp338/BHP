@@ -19,7 +19,7 @@ public class CandidateSequence {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CRTD_DATE", nullable = false)
 	private Date createdDate;
 
