@@ -41,7 +41,7 @@ public class Constants {
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
 	public static final String CLIENT_REG_EMAIL_TEMPLATE = "/client-reg-email-template.vm";
 	public static final String EMP_REG_EMAIL_TEMPLATE = "/employee-reg-email-template.vm";
-	public static final String EVENT_INV_EMAIL_TEMPLATE = "/employee-invitaion-email-template.vm";
+	public static final String EVENT_INV_EMAIL_TEMPLATE = "/employee-invitation-email-template.vm";
 	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
 	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
 	public static final String USER_CREATED_EMAIL_TEMPLATE = "/user-created-email-template.vm";
