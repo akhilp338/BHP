@@ -23,7 +23,11 @@
                 	for(var newKey in thisobject){
                 		if(newKey =='id'){
                         	continue;
-                        }else if(fields[newKey]==undefined){
+                        }else if(typeof (newKey[key])=='object'){
+                    		vm.template += "<div class='cat-row'><span class = 'catagory'>" + fields[newKey] + " </span><span class='cat-value'>"
+                            + thisobject[newKey] + "</span></div>";
+                        }
+                		else if(fields[newKey]==undefined){
                 			continue;
                 		}
                 		vm.template += "<div class='cat-row'><span class = 'catagory'>" + fields[newKey] + " </span><span class='cat-value'>"

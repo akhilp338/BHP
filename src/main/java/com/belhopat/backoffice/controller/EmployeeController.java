@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.controller;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.EmployeeDto;
+import com.belhopat.backoffice.dto.EmployeeViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.service.BaseService;
@@ -68,6 +71,20 @@ public class EmployeeController {
 	@RequestMapping(value = "/getAnEmployee", method = RequestMethod.POST)
 	public EmployeeDto getAnEmployee(@RequestBody RequestObject requestObject) {
 		return employeeService.getAnEmployee(requestObject.getId());
+	}
+	
+	/**
+	 * @param requestObject
+	 * @return Candidate For edit candidate , gets the id and fetches the
+	 *         candidate from database
+	 * @throws ParseException
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getEmployeeView", method = RequestMethod.POST)
+
+	public ResponseEntity<EmployeeViewDTO> getEmployeeView(@RequestBody RequestObject requestObject)
+			throws ParseException {
+		return employeeService.getEmployeeView(requestObject.getId());
 	}
 	
 	/**

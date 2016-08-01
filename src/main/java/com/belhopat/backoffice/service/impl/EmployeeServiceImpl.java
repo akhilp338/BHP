@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.text.ParseException;
+
 import javax.mail.MessagingException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,7 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.EmployeeDto;
+import com.belhopat.backoffice.dto.EmployeeViewDTO;
+import com.belhopat.backoffice.dto.EmploymentInfoDTO;
+import com.belhopat.backoffice.dto.OfficialInfoDTO;
+import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Country;
 import com.belhopat.backoffice.model.Employee;
@@ -169,5 +176,45 @@ public class EmployeeServiceImpl implements EmployeeService {
 				? employeeObj.getEmployeeMaster().getPersonalEmail() : "-999");
 		return outputObj;
 	}
+	
+	@Override
+	public ResponseEntity<EmployeeViewDTO> getEmployeeView(Long empId) throws ParseException {
+		EmployeeViewDTO employeeView = getEmployeeViewDTO(empId);
+		if (employeeView != null) {
 
+			return new ResponseEntity<EmployeeViewDTO>(employeeView, HttpStatus.OK);
+		}
+		return new ResponseEntity<EmployeeViewDTO>(HttpStatus.NO_CONTENT);
+	}
+
+	private EmployeeViewDTO getEmployeeViewDTO(Long empId) throws ParseException {
+			Employee employee = employeeRepository.findById(empId);
+			Employee hrr = employeeRepository.findOne(employee.getHrRecruiter().getId());
+			Employee reportingMngr = employeeRepository.findOne(employee.getReportingManager().getId());
+			Employee hrManager = employeeRepository.findOne(employee.getHrManager().getId());
+			Employee accountManager = employeeRepository.findOne(employee.getAccountManager().getId());
+			LookupDetail businessUnit = lookupDetailRepository.findOne(employee.getBusinessUnit().getId());
+			if (employee == null) {
+				return null;
+			}
+			EmployeeViewDTO employeeView = new EmployeeViewDTO();
+			employeeView.setEmployeeId(employeeView.getEmployeeId());
+			employeeView.setAccountManager(accountManager.getEmployeeId());
+			employeeView.setReportingManager(reportingMngr.getEmployeeId());
+			employeeView.setHrManager(hrManager.getEmployeeId());
+			employeeView.setHrRecruiter(hrr.getEmployeeId());
+			employeeView.setBaseLocation(employee.getBaseLocation().getDescription());
+			employeeView.setWorkLocation(employee.getWorkLocation().getDescription());
+			employeeView.setBusinessUnit(employee.getBusinessUnit().getDescription());
+			CandidateViewDTO candidateView = new CandidateViewDTO();
+			PersonalInfoDTO personalInfo = baseService.getPersonalInfo(employee.getEmployeeMaster());
+			EmploymentInfoDTO employmentInfo = baseService.getEmploymentInfo(employee.getEmployeeMaster());
+			OfficialInfoDTO officialInfo = baseService.getOfficialInfo(employee.getEmployeeMaster());
+			// FamilyInfoDTO familyInfo = getFamilyInfo(candidate);
+			candidateView.setEmployment(employmentInfo);
+			candidateView.setPersonal(personalInfo);
+			candidateView.setOfficial(officialInfo);
+			// TODO candidateView.setFamily(familyInfo);
+			return employeeView;
+		}
 }

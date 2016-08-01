@@ -40,25 +40,44 @@
 //        vm.template += "</div>";
     	var vm = this,
 		fields = CANDIDATE.fieldMapping;
-	
-	var employeeId = candidateDetails[ 'employeeId' ] || '-';
-	
-	vm.template = "<div class = 'candidate-details-wrapper'>";
-	vm.template += "<div class='cat-row'><span class = 'catagory'>" 
-				+ fields[ 'employeeId' ]
-				+ " </span><span class='cat-value'>"
-				+ employeeId + "</span></div>";
-	
-	vm.mail = candidateDetails[ 'mail' ];
-	if( vm.mail == "-999"){
-		Core_Service.sweetAlert("Oops!","Please update personal email of the candidate before continuing.","error"); 
-	}
-	
-	vm.template += "<div class='cat-row'><span class = 'catagory'>" 
-				+ fields[ 'personalEmail' ]
-				+ " </span><span class='cat-value'>"
-				+ vm.mail + "</span></div>";
-	vm.template += "</div>";
+    	vm.employeeSummary = {};
+//	var employeeId = candidateDetails[ 'employeeId' ] || '-';
+//	
+//	vm.template = "<div class = 'candidate-details-wrapper'>";
+//	vm.template += "<div class='cat-row'><span class = 'catagory'>" 
+//				+ fields[ 'employeeId' ]
+//				+ " </span><span class='cat-value'>"
+//				+ employeeId + "</span></div>";
+//	
+//	vm.mail = candidateDetails[ 'mail' ];
+//	if( vm.mail == "-999"){
+//		Core_Service.sweetAlert("Oops!","Please update personal email of the candidate before continuing.","error"); 
+//	}
+//	
+//	vm.template += "<div class='cat-row'><span class = 'catagory'>" 
+//				+ fields[ 'personalEmail' ]
+//				+ " </span><span class='cat-value'>"
+//				+ vm.mail + "</span></div>";
+//	vm.template += "</div>";
+    	
+    	
+    	vm.Employeetemplate = "";
+        $(".candidate-summary").removeClass("init")
+        var data = addEmployeeTable.data()[$(this).index()];
+        vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
+        vm.employeeSummary["Candidate Id"] = data.candidateId;
+        vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+        vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
+        vm.employeeSummary["Designation"] = data.designation.description;
+        vm.employeeSummary["Passport"] = data.passport.passportNo;;
+        vm.employeeSummary["Email Id"]= data.personalEmail;
+        vm.employeeSummary["Country Code"] = "+"+data.personalContactNo.country.phoneCode;
+        vm.employeeSummary["Contact No"] = data.personalContactNo.number;
+        
+    	vm.mail = candidateDetails[ 'mail' ];
+    	if( vm.mail == "-999"){
+    		Core_Service.sweetAlert("Oops!","Please update personal email of the candidate before continuing.","error"); 
+    	}
         vm.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };

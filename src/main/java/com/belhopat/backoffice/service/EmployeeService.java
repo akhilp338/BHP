@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.service;
 
+import java.text.ParseException;
+
 import javax.mail.MessagingException;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -7,7 +9,9 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.EmployeeDto;
+import com.belhopat.backoffice.dto.EmployeeViewDTO;
 import com.belhopat.backoffice.model.Employee;
 
 @Service
@@ -18,5 +22,7 @@ public interface EmployeeService {
 	public DataTablesOutput<Employee> getEmployee(DataTablesInput input);
 
 	public EmployeeDto getAnEmployee(Long id);
+
+	public ResponseEntity<EmployeeViewDTO> getEmployeeView(Long id) throws ParseException;
 
 }
