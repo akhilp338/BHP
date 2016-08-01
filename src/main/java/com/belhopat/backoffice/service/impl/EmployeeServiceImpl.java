@@ -1,6 +1,8 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -75,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * belhopat.backoffice.model.Employee) saves the employee to the db
 	 */
 	@Override
-	public ResponseEntity<String> saveOrUpdateEmployee(EmployeeDto employeeDto) throws MessagingException {
+	public ResponseEntity<Map<String, String>> saveOrUpdateEmployee(EmployeeDto employeeDto) throws MessagingException {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Employee hrr = employeeRepository.findOne(employeeDto.getHrRecruiter());
 		Employee reportingMngr = employeeRepository.findOne(employeeDto.getReportingManager());
@@ -108,22 +110,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee = employeeRepository.save(employee);
 		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID);
 		if (employee != null) {
+			Map<String, String> responseMap = new HashMap<>();
 			Candidate candidate = candidateRepository.findById(employeeDto.getEmployeeMasterId());
 			candidate.setEmployee(true);
 			candidate = candidateRepository.save(candidate);
 			if (candidate != null) {
 				String employeeName = employee.getEmployeeMaster().getFirstName() + " "
 						+ employee.getEmployeeMaster().getLastName();
+				responseMap.put("Message", employeeName);
 				try {
 					mailService.sendEmployeeRegMail(employee);
 					mailService.sendCreateOfficialEmail(employee);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
-				return new ResponseEntity<String>(employeeName, HttpStatus.OK);
+				return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 			}
 		}
-		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Map<String, String>>(HttpStatus.NO_CONTENT);
 	}
 
 	/*

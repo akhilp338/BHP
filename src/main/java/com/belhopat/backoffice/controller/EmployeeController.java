@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.EmployeeDto;
 import com.belhopat.backoffice.dto.EmployeeViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
@@ -47,7 +46,7 @@ public class EmployeeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateEmployee", method = RequestMethod.POST)
-	public ResponseEntity<String> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) throws MessagingException {
+	public ResponseEntity<Map<String, String>> saveOrUpdateEmployee(@RequestBody EmployeeDto employeeDto) throws MessagingException {
 		return employeeService.saveOrUpdateEmployee(employeeDto);
 	}
 	
