@@ -3,7 +3,8 @@
 		var vm = this, fields = CLIENT.fieldMapping;
 		vm.template = "<div class = 'candidate-details-wrapper'>"
 		var array = [];
-
+                vm.viewClient = {};
+                
 		for ( var key in clientDetails) {
 			if (key == 'id') {
 				continue;

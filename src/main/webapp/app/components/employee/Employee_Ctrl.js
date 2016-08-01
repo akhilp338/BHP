@@ -1,22 +1,16 @@
 (function () {
     var Employee_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service,Core_ModalService) {
-        var vm = this;
+        var vm = this,addEmployeeTable;
         $rootScope.active = 'employee';
         vm.addEmployee = function(){
         	$state.go("coreuser.employee.add");
-        }
-        vm.getEmployee = function(id, actionType){
-        	vm.getEmployeeUrl = "api/employee/getAnEmployee";
-            Core_Service.getCandidateImpl(vm.getEmployeeUrl,id)
-            .then( function(response) {
+        };        
+        vm.getEmployee = function(data, actionType){
             	if(actionType=='action-view'){
-            		vm.viewEmployee(response.data);
+            		vm.viewEmployee(data);
             	}else if(actionType=='generate-credentials' ){
-            		vm.generateCredentials(response.data);
+            		vm.generateCredentials(data);
             	}
-            },function(error){
-            	
-            });
         };
         vm.viewEmployee = function (data) {
             Core_ModalService.openViewEmployeeModal(data);
@@ -43,7 +37,7 @@
         };
 
         angular.element(document).ready(function () {
-            var oTable = angular.element('#employeeList').DataTable({
+                addEmployeeTable = angular.element('#employeeList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "employee/getEmployee",
                 serverSide: true,
                 bDestroy: true,
@@ -139,7 +133,7 @@
                     }]
             });
             $('#employeeList').on('click', '.action-view', function () {
-                vm.getEmployee(this.getAttribute('value'),'action-view');
+                vm.getEmployee(addEmployeeTable.data()[$(this).parents("tr").index()],'action-view');
             });
             $('#employeeList').on('click', '.action-edit', function () {
                 $rootScope.showLoader = true;
@@ -152,7 +146,7 @@
                     $(this).removeClass('selected');
                 }
                 else {
-                	oTable.$('tr.selected').removeClass('selected');
+                    addEmployeeTable.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
             } );
