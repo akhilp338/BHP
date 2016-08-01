@@ -401,9 +401,8 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-				// String document =
-				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
-				// employeeSalary.setOfferLetterFileName(document);
+//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				employeeSalary.setOfferLetterFileName(candidate.getCandidateId()+"_"+candidate.getFirstName()+".pdf");
 				candidate.setOfferletterStatus(true);
 				candidateRepository.saveAndFlush(candidate);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
