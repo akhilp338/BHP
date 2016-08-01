@@ -43,7 +43,8 @@
         
         vm.clientRegister = function () {
             vm.registerUrl = "api/client/saveOrUpdateClient";
-            console.log(vm.registration);
+            if(vs.checkFormValidity($scope.regForm)){
+                Core_Service.sweetAlertWithConfirm("Client details filled!", "Are you sure to register this Client?", "warning", function(){
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
                     	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.client");
@@ -51,6 +52,8 @@
                     	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
                     			"error","coreuser.client");
                     });
+                });
+            }
         };
         vm.getPocList=function(poc){
         	var array = [];
