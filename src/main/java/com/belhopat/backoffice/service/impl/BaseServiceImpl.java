@@ -20,6 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.alfresco.main.AlfrescoUploadService;
+import com.belhopat.backoffice.dto.AddressDTO;
+import com.belhopat.backoffice.dto.EmploymentInfoDTO;
+import com.belhopat.backoffice.dto.OfficialInfoDTO;
+import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
@@ -397,9 +401,8 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
 				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-				// String document =
-				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
-				// employeeSalary.setOfferLetterFileName(document);
+//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				employeeSalary.setOfferLetterFileName(candidate.getCandidateId()+"_"+candidate.getFirstName()+".pdf");
 				candidate.setOfferletterStatus(true);
 				candidateRepository.saveAndFlush(candidate);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
@@ -462,6 +465,91 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input) {
 		return taskListRepository.findAll(input);
+	}
+	
+	@Override
+	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException {
+		PersonalInfoDTO personalInfo = new PersonalInfoDTO();
+		AddressDTO permenantAddress = new AddressDTO();
+		permenantAddress.setAddress1(candidate.getPermanentAddress().getAddress1());
+		permenantAddress.setAddress2(candidate.getPermanentAddress().getAddress2());
+		permenantAddress.setCity(candidate.getPermanentAddress().getCity().getCode());
+		permenantAddress.setState(candidate.getPermanentAddress().getCity().getState().getCode());
+		permenantAddress.setCountry(candidate.getPermanentAddress().getCity().getState().getCountry().getCode());
+		AddressDTO currentAddress = new AddressDTO();
+		currentAddress.setAddress1(candidate.getCurrentAddress().getAddress1());
+		currentAddress.setAddress2(candidate.getCurrentAddress().getAddress2());
+		currentAddress.setCity(candidate.getCurrentAddress().getCity().getCode());
+		currentAddress.setState(candidate.getCurrentAddress().getCity().getState().getCode());
+		currentAddress.setCountry(candidate.getCurrentAddress().getCity().getState().getCountry().getCode());
+		personalInfo.setFirstName(candidate.getFirstName());
+		personalInfo.setMiddleName(candidate.getMiddleName());
+		personalInfo.setLastName(candidate.getLastName());
+		personalInfo.setDob(DateUtil.toDdMmYyyy(candidate.getDob()));
+		personalInfo.setGender(candidate.getGender().getCode());
+		personalInfo.setBloodGroup(candidate.getBloodGroup().getCode());
+		personalInfo.setCountryOfOrigin(candidate.getCountryOfOrigin().getDescription());
+		personalInfo.setPersonalContactNo(candidate.getPersonalContactNo().getNumber());
+		personalInfo.setPersonalEmailId(candidate.getPersonalEmail());
+		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo().getNumber());
+		personalInfo.setOfficialEmailId(candidate.getOfficialEmail());
+		personalInfo.setOfficialContactNo(candidate.getOfficialContactNo().getNumber());
+		personalInfo.setPermenantAddress(permenantAddress);
+		personalInfo.setCurrentAddress(currentAddress);
+		return personalInfo;
+	}
+
+	@Override
+	public EmploymentInfoDTO getEmploymentInfo(Candidate candidate) throws ParseException {
+		EmploymentInfoDTO employmentInfo = new EmploymentInfoDTO();
+		String experience = Integer.toString(candidate.getPriorExperienceYear()) + " years ,"
+				+ Integer.toString(candidate.getPriorExperienceYear()) + "Months";
+		AddressDTO onsiteAddress = new AddressDTO();
+		onsiteAddress.setAddress1(candidate.getOnsiteAddress().getAddress1());
+		onsiteAddress.setAddress2(candidate.getOnsiteAddress().getAddress2());
+		onsiteAddress.setCity(candidate.getOnsiteAddress().getCity().getCode());
+		onsiteAddress.setState(candidate.getOnsiteAddress().getCity().getState().getCode());
+		onsiteAddress.setCountry(candidate.getOnsiteAddress().getCity().getState().getCountry().getCode());
+		employmentInfo.setExperience(experience);
+		employmentInfo.setDoj(DateUtil.toDdMmYyyy(candidate.getDoj()));
+		employmentInfo.setDivision(candidate.getDivision().getDescription());
+		employmentInfo.setDesignation(candidate.getDesignation().getDescription());
+		employmentInfo.setEmploymentStatus(candidate.getEmploymentStatus().getDescription());
+		employmentInfo.setPurpose(candidate.getPurpose().getDescription());
+		employmentInfo.setClient(candidate.getClient().getClientId());
+		employmentInfo.setPartner(candidate.getPartner());
+		employmentInfo.setSourcedBy(candidate.getSourcedBy());
+		employmentInfo.setOnsiteAddress(onsiteAddress);
+		// TODO set skill set as a string :)
+		return employmentInfo;
+	}
+
+	@Override
+	public OfficialInfoDTO getOfficialInfo(Candidate candidate) throws ParseException {
+		OfficialInfoDTO officialInfo = new OfficialInfoDTO();
+		AddressDTO bankAddress = new AddressDTO();
+		bankAddress.setAddress1(candidate.getBankAccount().getBankAddress().getAddress1());
+		bankAddress.setAddress2(candidate.getBankAccount().getBankAddress().getAddress2());
+		bankAddress.setCity(candidate.getBankAccount().getBankAddress().getCity().getCode());
+		bankAddress.setState(candidate.getBankAccount().getBankAddress().getCity().getState().getCode());
+		bankAddress.setCountry(candidate.getBankAccount().getBankAddress().getCity().getState().getCountry().getCode());
+		officialInfo.setBankAccountNo(candidate.getBankAccount().getAccountNo());
+		officialInfo.setBankIFSCCode(candidate.getBankAccount().getIFSCCode());
+		officialInfo.setBankAccountHolderName(candidate.getBankAccount().getAccountHolderName());
+		officialInfo.setBankAccountHolderName(candidate.getBankAccount().getAccountHolderName());
+		officialInfo.setBankName(candidate.getBankAccount().getBankName());
+		officialInfo.setBankAddress(bankAddress);
+		officialInfo.setPassportNo(candidate.getPassport().getPassportNo());
+		officialInfo.setPassportIssueDate(DateUtil.toDdMmYyyy(candidate.getPassport().getIssueDate()));
+		officialInfo.setPassportExpiryDate(DateUtil.toDdMmYyyy(candidate.getPassport().getExpiryDate()));
+		officialInfo.setPassportCountry(candidate.getPassport().getCountry().getDescription());
+		officialInfo.setDrivingLicenceNo(candidate.getOfficialDetails().getDrivingLicenceNo());
+		officialInfo.setPANNo(candidate.getOfficialDetails().getPANNo());
+		officialInfo.setESINo(candidate.getOfficialDetails().getESINo());
+		officialInfo.setPFNo(candidate.getOfficialDetails().getPFNo());
+		officialInfo.setForexCardNo(candidate.getOfficialDetails().getForexCardNo());
+		officialInfo.setForexCardAgency(candidate.getOfficialDetails().getForexCardAgency());
+		return officialInfo;
 	}
 
 }

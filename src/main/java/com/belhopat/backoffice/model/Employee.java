@@ -25,7 +25,7 @@ public class Employee extends BaseEntity {
 	@JoinColumn(name = "EMP_USR_ID")
 	private User employeeUser;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "JOIN_DATE")
 	private Date joiningDate;
 

@@ -19,7 +19,7 @@
                 vm.registration.hrManager=res.data.hrManager;
                 vm.registration.accountManager=res.data.accountManager;
                 vm.registration.businessUnit= res.data.businessUnit;
-                vm.registration.joiningDate=res.data.joiningDate;
+                vm.registration.joiningDate= res.data.joiningDate;
                 vm.registration.employeeMasterId=res.data.employeeMasterId;
                 vm.registration.workLocation= res.data.workLocation;
                 vm.registration.timeZone=res.data.timeZone;
@@ -55,12 +55,17 @@
         vm.employeeRegister = function () {
             vm.registerUrl = "api/employee/saveOrUpdateEmployee";
             vm.registration.employeeMasterId=vm.candId ;
-            Core_Service.registerImpl(vm.registerUrl, vm.registration)
+            
+            Core_Service.sweetAlertWithConfirm("Employee details filled!", "Are you sure to register this employee?", "warning", function(){
+                   Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                    	  Core_Service.sweetAlert("Done!", response.Message, "warning", "coreuser.employee");
+                    	  Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.employee");
                     }, function (error) {
-                    	 Core_Service.sweetAlert("Oops!", response.Message, "error", "coreuser.employee");
+                    	 Core_Service.sweetAlert("Oops!", "Systemm error please try after some time", "error", "coreuser.employee");
                     });
+            });     
+                                 
+            
         };
      
         $scope.candidateId=$rootScope.id;

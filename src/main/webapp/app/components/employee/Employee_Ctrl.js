@@ -1,22 +1,16 @@
 (function () {
     var Employee_Ctrl = function ($scope, $state, $rootScope, urlConfig, Core_Service,Core_ModalService) {
-        var vm = this;
+        var vm = this,addEmployeeTable;
         $rootScope.active = 'employee';
         vm.addEmployee = function(){
         	$state.go("coreuser.employee.add");
-        }
-        vm.getEmployee = function(id, actionType){
-        	vm.getEmployeeUrl = "api/employee/getAnEmployee";
-            Core_Service.getCandidateImpl(vm.getEmployeeUrl,id)
-            .then( function(response) {
+        };        
+        vm.getEmployee = function(data, actionType){
             	if(actionType=='action-view'){
-            		vm.viewEmployee(response.data);
+            		vm.viewEmployee(data);
             	}else if(actionType=='generate-credentials' ){
-            		vm.generateCredentials(response.data);
+            		vm.generateCredentials(data);
             	}
-            },function(error){
-            	
-            });
         };
         vm.viewEmployee = function (data) {
             Core_ModalService.openViewEmployeeModal(data);
@@ -43,7 +37,7 @@
         };
 
         angular.element(document).ready(function () {
-            var oTable = angular.element('#employeeList').DataTable({
+                addEmployeeTable = angular.element('#employeeList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "employee/getEmployee",
                 serverSide: true,
                 bDestroy: true,
@@ -139,29 +133,31 @@
                     }]
             });
             $('#employeeList').on('click', '.action-view', function () {
-                vm.getEmployee(this.getAttribute('value'),'action-view');
+                vm.getEmployee(addEmployeeTable.data()[$(this).parents("tr").index()],'action-view');
             });
             $('#employeeList').on('click', '.action-edit', function () {
                 $rootScope.showLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.employee.edit', {id: $rootScope.id});
             });
-            $('#employeeList tbody').on( 'click', 'tr', function () {
-            	
+            $('#employeeList tbody').on( 'click', 'tr', function () {            	
                 if ( $(this).hasClass('selected') ) {
                     $(this).removeClass('selected');
                 }
                 else {
-                	oTable.$('tr.selected').removeClass('selected');
+                    addEmployeeTable.$('tr.selected').removeClass('selected');
                     $(this).addClass('selected');
                 }
             } );
             $("#generateCredentials").on('click',function () {
+                var empDetails = addEmployeeTable.data()[$('#employeeList tbody .selected').index()]
             	var selectedEmployee =$('#employeeList tbody .selected .action-view')[0];
             	if( selectedEmployee != undefined ){
             		$rootScope.id = selectedEmployee.getAttribute('value');
-            		vm.getEmployee($rootScope.id,'generate-credentials');
-            	}
+            		vm.getEmployee(empDetails,'generate-credentials');
+            	}else{
+                    Core_Service.sweetAlert("Hey!", "Please select atleast one candidate", "warning");
+                }
             	$rootScope.showLoader = true;
             	
             });

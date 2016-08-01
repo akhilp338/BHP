@@ -19,15 +19,15 @@ public class BaseEntity implements Cloneable {
 	@Column(name = "ID")
 	private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CRTD_DATE")
 	private Date createdDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPTD_DATE")
 	private Date updatedDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DLTD_DATE")
 	private Date deletedDate;
 

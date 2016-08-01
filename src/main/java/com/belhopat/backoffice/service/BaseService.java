@@ -13,7 +13,11 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.belhopat.backoffice.dto.EmploymentInfoDTO;
+import com.belhopat.backoffice.dto.OfficialInfoDTO;
+import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.RequestObject;
+import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
@@ -56,4 +60,10 @@ public interface BaseService {
 	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException;
 
 	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input);
+
+	public OfficialInfoDTO getOfficialInfo(Candidate candidate) throws ParseException;
+
+	public EmploymentInfoDTO getEmploymentInfo(Candidate candidate) throws ParseException;
+
+	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException;
 }

@@ -31,6 +31,24 @@
             }
             return guestObjArray;
         };
+
+        vm.processReturnGuestList = function (list, guests) {
+            var newGuests = [],obj = {};            
+            for (var k = 0; k < guests.length; k++) {  
+                for (var i = 0; i < list.length; i++) {
+                    if((list[i].name || list[i].username))
+                    list[i].text = (list[i].name || list[i].username) + " (" + list[i].email + ")";
+                    if(guests[k][0] == list[i].id){
+                        guests.splice(k,1);
+                        if(k>0)k--;
+                    }                    
+                }                
+            }
+            obj["list"] = list;
+            obj["guests"] = guests;
+            return obj;
+        };
+
         Core_Service.getAllEvents("api/event/getEvents").then(function (res) {
             vm.calander = angular.element("#calendar").fullCalendar({
                 header: {
@@ -38,12 +56,14 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
+                firstDay: 1,
                 buttonIcons: false, // show the prev/next text
                 weekNumbers: true,
                 timezone: "UTC",
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: res.data,
+                nextDayThreshold: '00:00:00',
                 dayClick: function (date, jsEvent, view) {
                     if (!date.isBefore(moment())) {
                         Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
@@ -72,9 +92,11 @@
                 },
                 eventClick: function (calEvent, jsEvent, view) {
                     Core_Service.getAllGuests("api/event/getEmployeesDropDownData").then(function (res) {
-                        calEvent.end = calEvent.end ? calEvent.end : view.end; 
-                        if (res.data && calEvent.end && !calEvent.end.isBefore(moment())) {                                                           
-                            calEvent.guestList = vm.processArrayToObject(res.data.EMPLOYEES);
+                        calEvent.end = calEvent.end ? calEvent.end : view.end;
+                        var processedList = vm.processReturnGuestList(calEvent.guestList, res.data.EMPLOYEES);
+                        if (res.data && calEvent.end && !calEvent.end.isBefore(moment())) {
+                            calEvent.guestList  = vm.processArrayToObject(processedList.guests);
+                            calEvent.guests = processedList.list;
                             Core_ModalService.openAddEventModal(calEvent).result.then(function (response) {
                                 if (response)
                                     $state.reload();

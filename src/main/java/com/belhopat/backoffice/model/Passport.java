@@ -24,11 +24,11 @@ public class Passport {
 	@Column(name = "PSPRT_NO", length = 25)
 	private String passportNo;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "ISS_DATE")
 	private Date issueDate;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name = "EXP_DATE")
 	private Date expiryDate;
 
