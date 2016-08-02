@@ -31,6 +31,14 @@
             if(toState.name == "coreuser.offerletter.verify" && fromState.name == ""){                
                 $state.go("coreuser.offerletter")
             }
+            if(toState.name == "coreuser.upload" && 
+              (fromState.name == "coreuser.candidate.edit" || fromState.name == "coreuser.candidate.add")){                
+                $rootScope.isEmpDocs = false;
+            }
+            if(toState.name == "coreuser.upload" && 
+              (fromState.name == "coreuser.employee.edit" || fromState.name == "coreuser.employee.add")){                
+                $rootScope.isEmpDocs = true;
+            }
             $rootScope.active = parts[1];
         });
         $rootScope.$on('IdleTimeout', function() {

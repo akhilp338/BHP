@@ -22,7 +22,7 @@
         'angular-carousel',
         'bb.scrollWhen',
         'ngLoadingSpinner',
-        'ngFileUpload'
+        'angularFileUpload'
     ]);
     window.app.config(['$locationProvider','KeepaliveProvider', 'IdleProvider', function ($locationProvider,KeepaliveProvider, IdleProvider) {
             $locationProvider.html5Mode({

@@ -1,55 +1,90 @@
 (function () {
-    var FileUpload_Ctrl = function ($rootScope, $scope, Upload, $timeout) {
+    var FileUpload_Ctrl = function ($rootScope, FileUploader, $scope, $timeout) {
+        var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        var passportUploader =  $scope.passportUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        var licenceUploader = $scope.licenceUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        var panUploader =  $scope.panUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        var forexUploader =  $scope.forexUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        var employeeDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
+            url: 'upload.php'
+        });
+        uploadManager(bankDetailsUploader);
+        uploadManager(passportUploader);
+        uploadManager(licenceUploader);
+        uploadManager(panUploader);
+        uploadManager(forexUploader);
+        uploadManager(employeeDocsUploader);
+        $scope.oneAtATime = true;
+        $scope.showbtn = false;
+        $scope.status = {
+            isCustomHeaderOpen: false,
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
         $rootScope.addPage = true;
-        var vm = this;
-        vm.bankDocs = {};
-        vm.passport = {};
-        vm.pancard = {};
-        vm.forexcard = {};
-        vm.liscence = {};
-        
-        $scope.$watch('vm.bankDocs.files', function () {
-            $scope.upload(vm.bankDocs.files,vm.bankDocs);
-        });
-         $scope.$watch('vm.passport.files', function () {
-            $scope.upload(vm.passport.files,vm.bankDocs);
-        });
-         $scope.$watch('vm.pancard.files', function () {
-            $scope.upload(vm.pancard.files,vm.bankDocs);
-        });
-         $scope.$watch('vm.forexcard.files', function () {
-            $scope.upload(vm.forexcard.files,vm.bankDocs);
-        });
-         $scope.$watch('vm.liscence.files', function () {
-            $scope.upload(vm.liscence.files,vm.bankDocs);
-        });
-        
-        $scope.upload = function (gFiles, modal) {
-            if (gFiles && gFiles.length) {
-                for (var i = 0; i < gFiles.length; i++) {
-                    var file = gFiles[i];
-                    if (!file.$error) {
-                        Upload.upload({
-                            url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                            data: {
-                                file: file
-                            }
-                        })
-                                .then(function (response) {
-                                    $timeout(function () {});
-                                }, function (response) {
-                                    console.log('Error status: ' + response.status);
-                                }, function (evt) {
-                                    var progressPercentage = parseInt(100.0 *
-                                            evt.loaded / evt.total);
-                                    modal.progress = progressPercentage + '% ';
-                                });
-                    }
-                }
+        // FILTERS
+
+    function uploadManager(uploader){
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
-        }
-    };
-    FileUpload_Ctrl.$inject = ['$rootScope', '$scope', 'Upload', '$timeout'];
+        });
+
+        // CALLBACKS
+
+        uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function (fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function (addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function (item) {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function (fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function (progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function (fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function (fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function (fileItem, response, status, headers) {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function (fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteAll = function () {
+            console.info('onCompleteAll');
+        };
+
+        console.info('uploader', uploader);
+    }
+    
+        
+    }
+    FileUpload_Ctrl.$inject = ['$rootScope', 'FileUploader', '$scope', '$timeout'];
     angular.module('coreModule')
             .controller('FileUpload_Ctrl', FileUpload_Ctrl);
 })();

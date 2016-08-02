@@ -59,12 +59,12 @@
             Core_Service.sweetAlertWithConfirm("Employee details filled!", "Are you sure to register this employee?", "warning", function(){
                    Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                    	  Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.employee");
+                        $state.go("coreuser.upload");
+                    	  //Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.employee");
                     }, function (error) {
                     	 Core_Service.sweetAlert("Oops!", "System error please try after some time.", "error", "coreuser.employee");
                     });
-            });     
-                                 
+            });                                      
             
         };
      

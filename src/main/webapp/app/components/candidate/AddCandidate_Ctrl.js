@@ -204,13 +204,14 @@
                 Core_Service.sweetAlertWithConfirm("Candidate details filled!", "Are you sure to register this Candidate?", "warning", function(){
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {
-                            Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
+                            $state.go("coreuser.upload");
+                            //Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
                         }, function (error) {
                             Core_Service.sweetAlert("Ouch!", "Something went wrong", "error", "coreuser.candidate");
                         });
                     });
             }
-          //$state.go("coreuser.upload")
+          
         };
 
         //To Do(move these methods to base controller)
