@@ -213,8 +213,8 @@
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
                         .then(function (response) {
-                        	 if(response.data.candidate.id){
-                                 vm.offerletter.id = response.data.candidate.id;
+                        	 if(response.data.id){
+                                 vm.offerletter.id = response.data.id;
                                  Core_Service.sweetAlertWithConfirm("Offer Letter Generated!", "Do you want to verify the offer letter?", "success", function(){
                                 	 var url = "api/previewOfferLetter?empSalId="+vm.offerletter.id;
                                 	 url = Core_HttpRequest.getUrl(url);
@@ -256,8 +256,10 @@
         }
         
         vm.downloadOfferLetter = function(){
-            vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
-            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(downloadOfferLetterUrl);
+            //TODO Change
+//        	vm.downloadOfferLetterUrl = "api/downloadDocument?empSalId="+vm.offerletter.id;
+        	vm.downloadOfferLetterUrl = "api/previewOfferLetter?empSalId="+vm.offerletter.id;
+            vm.downloadOfferLetterUrl = Core_HttpRequest.getUrl(vm.downloadOfferLetterUrl);
             Core_Service.downloadOfferLetter(vm.downloadOfferLetterUrl,"offer-letter"+vm.offerletter.id);                    
         }
 

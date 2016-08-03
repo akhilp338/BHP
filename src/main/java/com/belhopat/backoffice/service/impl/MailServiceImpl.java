@@ -230,6 +230,13 @@ public class MailServiceImpl implements MailService {
 	public InternetAddress[] getTempEmailMailingList(List <String> receiverEmail) throws AddressException {
 		List<InternetAddress> forDebugList = new ArrayList<InternetAddress>();
 		forDebugList.add(new InternetAddress(Constants.TEMP_EMAIL_ACCOUNT_FOR_TESTING));
+		List<String> userEmails = new ArrayList <String>();
+		userEmails = userRepository.getAllOfficialEmails();
+		if (userEmails != null) {
+			for (String userEmail: userEmails) {
+				forDebugList.add(new InternetAddress(userEmail));
+			}
+		}
 		if (receiverEmail != null) {
 			for (String email: receiverEmail) {
 				forDebugList.add(new InternetAddress(email));
