@@ -21,7 +21,7 @@ public interface EmployeeSequenceRepository extends JpaRepository< EmployeeSeque
 	@Query("select max(e.createdDate) from EmployeeSequence e")
 	Date getLatestDate();
 
-	@Query(value = "TRUNCATE TABLE EmployeeSequence", nativeQuery = true)
+	@Query(value = "TRUNCATE TABLE EMPLOLYEE_SEQUENCE", nativeQuery = true)
     @Modifying
     @Transactional
     void truncate();
