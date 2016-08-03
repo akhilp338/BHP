@@ -3,7 +3,6 @@
     var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service,urlConfig, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
         $rootScope.showLoader = true;
-        console.log($stateParams.id); 
         vm.candidateId = localStorage["selectedCandidate"];
         vm.candId = localStorage["selectedCandidateId"];
         vm.display = {};
@@ -26,8 +25,6 @@
                 vm.registration.hrRecruiter= res.data.hrRecruiter;
                 vm.registration.reportingManager=res.data.reportingManager;
                 vm.registration.baseLocation =res.data.baseLocation;
-        	console.log("edit");
-        	console.log(vm.registration);
             }, function (err) {
                 vm.registration = {};
             });
@@ -43,8 +40,7 @@
         vm.urlForLookups = "api/employee/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                    vm.lookups = response.data;
-                    console.log(vm.lookups);	
+                    vm.lookups = response.data;	
                 }, function (error) {
 
                 });

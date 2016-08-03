@@ -3,13 +3,13 @@
 		var vm = this, dashBoardTable;
 		$rootScope.active = 'dashboard';
 		vm.init = function() {
-			vm.url = "api/candidate/getCurrentUserTasks";
-			Core_Service.getUserTasks(vm.url).then(function(response) {
-				console.log(response.data)
+                    vm.url = "api/candidate/getCurrentUserTasks";
+                    Core_Service.getUserTasks(vm.url).then(function(response) {
+                            console.log(response.data)
 
-			}, function(error) {
-				console.log(error)
-			});
+                    }, function(error) {
+                            console.log(error)
+                    });
 		}
 		angular.element(document).ready(function () {
             dashBoardTable = angular.element('#tasksList').DataTable({

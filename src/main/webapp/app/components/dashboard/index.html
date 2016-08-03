@@ -264,12 +264,10 @@
             addSlides(slideImages, 'technics', 10);
             $scope.totalimg = slideImages.length;
             $scope.galleryNumber = 1;
-            console.log($scope.galleryNumber);
             
             function getImage(target) {
                 var i = target.length
                     , p = (($scope.galleryNumber-1)*$scope.setOfImagesToShow)+i;
-                console.log("i=" + i + "--" + p);
                 
                 return slideImages[p];
             }
@@ -289,7 +287,6 @@
             $scope.setOfImagesToShow = 3;
             addImages($scope.slides7, $scope.setOfImagesToShow);
             $scope.loadNextImages = function() {
-                console.log("loading Next images");
                 if (slideImages[slideImages.length-1].id !== $scope.slides7[$scope.slides7.length-1].id) {
                     // Go to next set of images if exist
                     $scope.slides7 = [];
@@ -312,14 +309,10 @@
                     --$scope.galleryNumber;
                     addImages($scope.slides7, $scope.setOfImagesToShow);
                 } else {
-                    // Go to last set of images if not exist
-                    console.log("slideimageslength: " + slideImages.length + ", " + slideImages.length-1 / $scope.setOfImagesToShow);
-                    // console.log("slideimageslength: " + slideImages.length );
                     $scope.galleryNumber = slideImages.length / $scope.setOfImagesToShow;
                     $scope.slides7 = [];
                     $scope.carouselIndex7 = 0;
                     addImages($scope.slides7, $scope.setOfImagesToShow);
-                    console.log("no images left");
                 }
                 
             }

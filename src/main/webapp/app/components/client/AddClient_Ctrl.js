@@ -34,7 +34,6 @@
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;
-                    console.log(vm.lookups);
                 }, function (error) {
 
                 });

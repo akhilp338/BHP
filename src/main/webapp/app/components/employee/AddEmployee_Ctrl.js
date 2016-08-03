@@ -147,7 +147,6 @@ var addEmployeeTable
             });
             
             $('#candidatesList').on('click', '.action-view', function () {
-            	console.log(this.getAttribute('value'));
                 vm.getCandidate(this.getAttribute('value'));
             });
             

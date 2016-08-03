@@ -35,7 +35,7 @@
                 	}
             	}
             }else if(fields[key]==undefined){
-            	console.log(key);
+            	
             }else {
                 vm.template += "<div class='cat-row'><span class = 'catagory'>" + fields[key] + " </span><span class='cat-value'>"
                         + candidateDetails[key] + "</span></div>";

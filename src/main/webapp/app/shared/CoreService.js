@@ -161,10 +161,8 @@
             var deferred = $q.defer();
             Core_HttpRequest.post(url, postData)
                     .then(function (response) {
-                        console.log(response);
                         deferred.resolve(response)
                     }, function (error) {
-                        console.log(error);
                         deferred.reject(error)
                     });
             return deferred.promise;
@@ -373,10 +371,8 @@
             var deferred = $q.defer();
             Core_HttpRequest.post(url, postData)
                     .then(function (response) {
-                        console.log(response);
                         deferred.resolve(response)
                     }, function (error) {
-                        console.log(error);
                         deferred.reject(error)
                     });
             return deferred.promise;
@@ -385,10 +381,8 @@
             var deferred = $q.defer();
             Core_HttpRequest.get(url)
                     .then(function (response) {
-                        console.log(response);
-                        deferred.resolve(response)
+                        deferred.resolve(response);
                     }, function (error) {
-                        console.log(error);
                         deferred.reject(error)
                     });
             return deferred.promise;

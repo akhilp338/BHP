@@ -119,7 +119,6 @@
         };
 
         vm.removeChip = function (chipInfo) {
-            console.log(chipInfo)
         };
 
         $scope.hasNextStep = function () {

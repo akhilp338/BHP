@@ -82,7 +82,6 @@ var candidatesListTable;
 
         
         vm.copyAddress = function () {
-            console.log(vm.registration.permenant)
             if (vm.registration.permenant) {
                 vm.registration.current = {};
                 vm.isCheckboxEnable = true;
@@ -122,7 +121,6 @@ var candidatesListTable;
         };
         
         vm.getSelectedCandidate = function (event) {
-            console.log(event);
         };
 
         vm.viewCandidate = function (data) {

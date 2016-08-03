@@ -63,6 +63,7 @@
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
                             vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
+                            vm.offerletter.display.grade = vm.offerletter.grade;
                         }, function (error) {
                             console.log(error)
                         });
@@ -148,7 +149,6 @@
             });
 
             $('#candidatesList').on('click', '.action-view', function () {
-                console.log(this.getAttribute('value'));
                 vm.getCandidate(this.getAttribute('value'));
             });
             $('#candidatesList tbody').on('click', 'tr', function () {
@@ -208,7 +208,7 @@
             vm.generateOfferLetter = function () {
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
-                vm.offerletter.gradeUi = vm.offerletter.grade.grade;
+                vm.offerletter.display.grade = vm.offerletter.grade.grade;
                 vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
