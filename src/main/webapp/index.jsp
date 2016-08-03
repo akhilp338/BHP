@@ -89,7 +89,7 @@
         <script src="/BelhopatBackOffice/app/components/common/Header_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/home/Home_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/dashboard/Dash_Ctrl.js"></script>
-<!--         <script src="/BelhopatBackOffice/app/components/dashboard/DashModal_Ctrl.js"></script> -->
+        <script src="/BelhopatBackOffice/app/components/dashboard/DashModal_Ctrl.js"></script> 
         <script src="/BelhopatBackOffice/app/components/candidate/Candidate_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/candidate/AddCandidate_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/candidate/ViewCandidate_Ctrl.js"></script>
