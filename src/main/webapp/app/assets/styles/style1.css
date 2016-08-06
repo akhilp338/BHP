@@ -2265,3 +2265,6 @@ a.spec-link{
 .upload-docs-btn {
     margin-right: 0;
 }
+.small-drop.controls select {
+    padding: 0;
+}

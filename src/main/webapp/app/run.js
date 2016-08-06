@@ -49,7 +49,9 @@
             $rootScope.addPage = (toState.name == "coreuser.candidate.add" ||
                                   toState.name == "coreuser.employee.add" ||
                                   toState.name == "coreuser.candidate.edit" ||
-                                  toState.name == "coreuser.employee.edit") ? true : false;
+                                  toState.name == "coreuser.employee.edit"||
+                                  toState.name == "coreuser.client.edit" ||
+                                  toState.name == "coreuser.client.add") ? true : false;
                            //$rootScope.showLoader = false;
             $rootScope.spinnerActive =false;
            $timeout(function(){

@@ -36,13 +36,13 @@
                     </div>
                      <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
                             <label class="control-label" for="contact_code">Code</label>
-                                <div class="controls">
+                                <div class="controls small-drop">
                                     <select name="contact_code" ng-model="vm.registration.contactNo.country.id"
                                         class="form-input width-100" 
                                         ng-options="country.id as ( country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
 										onselect = "country.id as (country.phoneCode)"
                                         >
-                                        <option value="">--SELECT--</option>
+                                        <option value="">-SELECT-</option>
                                     </select>                                    
                                 </div>
                             </div>
@@ -253,20 +253,20 @@
                                     </select> 
                                 </div>
                             </div>
-                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
+                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-4 pull-left">
                             <label class="control-label" for="poc_country_code">Code</label>
-                                <div class="controls">
+                                <div class="controls small-drop">
                                     <select name="poc_country_code" ng-model="vm.registration.poc.contactNo.country.id"
                                         class="form-input width-100" 
                                         ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
 										onselect = "country.id as (country.phoneCode)"
                                         >
-                                        <option value="">--SELECT--</option>
+                                        <option value="">-SELECT-</option>
                                     </select>                                    
                                 </div>
                             </div>
                             <div
-                                class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-4 col-xs-8 pull-left">
                                 <label class="control-label" for="contactNo">Contact no</label>
                                 <div class="controls">
                                     <input type="text" name="poc.contactNo" id="poc.contactNo"
@@ -277,20 +277,20 @@
                                            maxlength="10"/>
                                 </div>
                             </div>
-                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
+                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-4 pull-left">
                             <label class="control-label" for="poc_mob_country_code">Code</label>
-                                <div class="controls">
+                                <div class="controls small-drop">
                                     <select name="poc_mob_country_code" ng-model="vm.registration.poc.mobNo.country.id"
                                         class="form-input width-100" 
                                         ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
 										onselect = "country.id as (country.phoneCode)"
                                         >
-                                        <option value="">--SELECT--</option>
+                                        <option value="">-SELECT-</option>
                                     </select>                                    
                                 </div>
                             </div>
                             <div
-                                class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-4 col-xs-8 pull-left">
                                 <label class="control-label" for="contactNo">Mobile no</label>
                                 <div class="controls">
                                     <input type="text" name="poc.mobNo" id="poc.mobNo"
