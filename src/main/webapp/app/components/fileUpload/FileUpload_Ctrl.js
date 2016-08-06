@@ -1,5 +1,10 @@
 (function () {
-    var FileUpload_Ctrl = function ($rootScope, FileUploader, $scope, $timeout) {
+    var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, $timeout) {
+        var vm = this;
+    	vm.redirect = function (){
+            $state.go('coreuser.candidate');
+        };
+    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
             url: 'upload.php'
         });
@@ -84,7 +89,7 @@
     
         
     }
-    FileUpload_Ctrl.$inject = ['$rootScope', 'FileUploader', '$scope', '$timeout'];
+    FileUpload_Ctrl.$inject = ["$scope", '$state','$rootScope', 'FileUploader', '$scope', '$timeout'];
     angular.module('coreModule')
             .controller('FileUpload_Ctrl', FileUpload_Ctrl);
 })();

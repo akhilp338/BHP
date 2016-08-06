@@ -129,10 +129,10 @@ var addEmployeeTable
                 var data = addEmployeeTable.data()[$(this).index()];
                 vm.employeeSummary["Name"] = data.firstName + " " + data.lastName;
                 vm.employeeSummary["Candidate Id"] = data.candidateId;
-                vm.employeeSummary["Country"] = data.countryOfOrigin.description;
+                vm.employeeSummary["Country"] = data.countryOfOrigin==null ? '-' : data.countryOfOrigin.description;
                 vm.employeeSummary["DOB"] = moment(data.dob).format("DD MMM YYYY hh:mm a");
-                vm.employeeSummary["Designation"] = data.designation.description;
-                vm.employeeSummary["Passport"] = data.passport.passportNo;;
+                vm.employeeSummary["Designation"] = data.designation==null ? '- ' : data.designation.description;
+                vm.employeeSummary["Passport"] = data.passport==null ? '-' : data.passport.passportNo;;
                 vm.employeeSummary["Email Id"]= data.personalEmail;
                 vm.employeeSummary["Country Code"] = "+"+data.personalContactNo.country.phoneCode;
                 vm.employeeSummary["Contact No"] = data.personalContactNo.number;
