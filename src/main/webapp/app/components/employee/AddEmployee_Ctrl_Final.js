@@ -1,16 +1,16 @@
 
 (function () {
-    var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service,urlConfig, $stateParams, Core_HttpRequest, validationService) {
+    var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service) {
         var vm = this;
         $rootScope.showLoader = true;
-        vm.candidateId = localStorage["selectedCandidate"];
-        vm.candId = localStorage["selectedCandidateId"];
+        vm.candidateId = localStorage["selectedCandidate"] ? localStorage["selectedCandidate"] : "";
+        vm.candId = localStorage["selectedCandidateId"] ? localStorage["selectedCandidateId"] : "";
         vm.display = {};
-        vm.display.name = localStorage["selectedCandidateName"];
+        vm.display.name = localStorage["selectedCandidateName"] ? localStorage["selectedCandidateName"] : "";
         vm.display.candidateId = vm.candidateId;
         vm.registration = {};
-        if ($stateParams.id) {
-            Core_Service.getCandidateImpl("api/employee/getAnEmployee", $stateParams.id).then(function (res) {
+        if (vm.candId) {
+            Core_Service.getCandidateImpl("api/employee/getAnEmployee", vm.candId).then(function (res) {
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.showLoader = false;
@@ -55,8 +55,16 @@
             Core_Service.sweetAlertWithConfirm("Employee details filled!", "Are you sure to register this employee?", "warning", function(){
                    Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                        $state.go("coreuser.upload");
-                    	  //Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.employee");
+                         Core_Service.sweetAlertWithConfirm("Employee Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
+                                 if (isConfirm) {
+                                     $rootScope.isEmpDocs = true;
+                                     $state.go("coreuser.upload");
+                                 } else { 
+                                     $timeout(function(){
+                                         Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.employee");
+                                     },200);                                    
+                                 } 
+                             });                       
                     }, function (error) {
                     	 Core_Service.sweetAlert("Oops!", "System error please try after some time.", "error", "coreuser.employee");
                     });
@@ -69,7 +77,7 @@
         $rootScope.showLoader = false;
     };
 
-    AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service','urlConfig', '$stateParams', 'Core_HttpRequest', 'validationService'];
+    AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service'];
     angular.module('coreModule')
             .controller('AddEmployee_Ctrl_Final', AddEmployee_Ctrl_Final);
 })();

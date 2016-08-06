@@ -136,9 +136,14 @@
                 vm.getEmployee(addEmployeeTable.data()[$(this).parents("tr").index()],'action-view');
             });
             $('#employeeList').on('click', '.action-edit', function () {
+                var data = addEmployeeTable.row($(this).parents("tr").index()).data();
+                $rootScope.selectedCandId = data.id;
+                localStorage["selectedCandidate"] = data.employeeId;
+                localStorage["selectedCandidateName"] = vm.getEmpFullName(data);
+                localStorage["selectedCandidateId"] =  data.id;
                 $rootScope.showLoader = true;
-                $rootScope.id = this.getAttribute('value');
-                $state.go('coreuser.employee.edit', {id: $rootScope.id});
+                var empId = this.getAttribute('value');
+                $state.go('coreuser.employee.edit', {id: empId});
             });
             $('#employeeList tbody').on( 'click', 'tr', function () {            	
                 if ( $(this).hasClass('selected') ) {

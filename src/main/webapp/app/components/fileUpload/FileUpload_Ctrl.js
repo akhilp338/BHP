@@ -1,10 +1,9 @@
 (function () {
-    var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, $timeout) {
+    var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, Core_Service) {
         var vm = this;
     	vm.redirect = function (){
             $state.go('coreuser.candidate');
-        };
-    	
+        };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
             url: 'upload.php'
         });
@@ -87,9 +86,12 @@
         console.info('uploader', uploader);
     }
     
-        
-    }
-    FileUpload_Ctrl.$inject = ["$scope", '$state','$rootScope', 'FileUploader', '$scope', '$timeout'];
+      vm.uploadDocs = function(){
+          var state = $rootScope.isEmpDocs ? "coreuser.employee" : "coreuser.candidate";
+          Core_Service.sweetAlert("Done!", "Docs uploaded successfully", "success", state);
+      };  
+    };
+    FileUpload_Ctrl.$inject = ["$scope", '$state','$rootScope', 'FileUploader', '$scope', 'Core_Service'];
     angular.module('coreModule')
             .controller('FileUpload_Ctrl', FileUpload_Ctrl);
 })();

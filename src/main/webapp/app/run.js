@@ -32,11 +32,11 @@
                 $state.go("coreuser.offerletter")
             }
             if(toState.name == "coreuser.upload" && 
-              (fromState.name == "coreuser.candidate.edit" || fromState.name == "coreuser.candidate.add")){                
+              (fromState.name.indexOf("candidate") != -1)){                
                 $rootScope.isEmpDocs = false;
             }
             if(toState.name == "coreuser.upload" && 
-              (fromState.name == "coreuser.employee.edit" || fromState.name == "coreuser.employee.add")){                
+              (fromState.name.indexOf("employee") != -1)){                
                 $rootScope.isEmpDocs = true;
             }
             $rootScope.active = parts[1];

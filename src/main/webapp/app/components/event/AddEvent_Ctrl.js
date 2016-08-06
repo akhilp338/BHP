@@ -1,5 +1,5 @@
 (function () {
-    var AddEvent_Ctrl = function ($scope, $uibModalInstance, validationService , Core_Service, candidateDetails) {
+    var AddEvent_Ctrl = function ($scope, $state, $stateParams, $uibModalInstance, validationService , Core_Service, candidateDetails) {
         var vm = this;
         vm.isStartDatePickerOpen = false;
         vm.isEndDatePickerOpen = false;
@@ -129,12 +129,12 @@
         };
         vm.close = function () {
             $uibModalInstance.dismiss('cancel');
+            $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: true });
         };
 
     };
-    AddEvent_Ctrl.$inject = ["$scope", '$uibModalInstance', 'validationService', 'Core_Service', 'candidateDetails'];
+    AddEvent_Ctrl.$inject = ["$scope", '$state', '$stateParams', '$uibModalInstance', 'validationService', 'Core_Service', 'candidateDetails'];
     angular.module('coreModule')
             .controller('AddEvent_Ctrl', AddEvent_Ctrl);
 })();
-
 

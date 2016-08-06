@@ -202,10 +202,19 @@
                 vm.registerUrl = "api/candidate/saveOrUpdateCandidate";
                 Core_Service.sweetAlertWithConfirm("Candidate details filled!", "Are you sure to register this Candidate?", "warning", function(){
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
-                        .then(function (response) {
-                            $state.go("coreuser.upload");
-                            //Core_Service.sweetAlert("Done!", response.Message, "success", "coreuser.candidate");
-                        }, function (error) {
+                        .then(function (response) {                            
+                            Core_Service.sweetAlertWithConfirm("Candidate Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
+                                 if (isConfirm) {
+                                     $rootScope.isEmpDocs = false;
+                                     $state.go("coreuser.upload");
+                                 } else { 
+                                     $timeout(function(){
+                                         Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.candidate");
+                                     },200);
+                                    
+                                 } 
+                            });
+                        }, function (error) { 
                             Core_Service.sweetAlert("Ouch!", "Something went wrong", "error", "coreuser.candidate");
                         });
                     });

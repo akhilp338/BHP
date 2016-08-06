@@ -243,7 +243,17 @@
 //                        $state.go("coreuser.candidate");
                     });
         };
-
+        service.swaservicelService= function (congrats, message, type, callback) {
+            swal({
+                title: congrats,
+                text: message,
+                type: type,
+                confirmButtonColor: "#CC2727",
+                confirmButtonText: "OK",
+                closeOnConfirm: true},
+                callback
+                );
+        };
         service.sweetAlertWithConfirm = function (congrats, message, type, callback) {
             swal({
                 title: congrats,
