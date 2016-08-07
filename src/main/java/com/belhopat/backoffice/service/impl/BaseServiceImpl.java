@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -209,7 +208,7 @@ public class BaseServiceImpl implements BaseService {
 	 */
 	@Override
 	public ResponseEntity<List<State>> getStatesByCountry(Long countryId) {
-		List<State> states = stateRepository.findByCountry(countryId);
+		List<State> states = stateRepository.findByCountryId(countryId);
 		return new ResponseEntity<List<State>>(states, HttpStatus.OK);
 	}
 

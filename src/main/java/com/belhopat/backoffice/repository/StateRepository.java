@@ -16,6 +16,6 @@ import com.belhopat.backoffice.model.State;
 @Repository
 public interface StateRepository extends JpaRepository<State, Long> {
 
-	@Query("select s from State s where s.country.id =:countryId")
-	List<State> findByCountry(@Param("countryId") Long countryId);
+	@Query("select s from State s where s.country.id =:countryId ORDER BY s.description")
+	List<State> findByCountryId(@Param("countryId") Long countryId);
 }

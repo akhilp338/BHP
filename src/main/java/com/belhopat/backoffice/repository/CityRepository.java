@@ -17,7 +17,7 @@ import com.belhopat.backoffice.model.City;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long>, DataTablesRepository<City, Long> {
 
-	@Query("select c from City c where c.state.id =:stateId")
+	@Query("select c from City c where c.state.id =:stateId ORDER BY c.description")
 	List<City> findByStateId(@Param("stateId") Long stateId);
 
 }
