@@ -9,6 +9,7 @@
         vm.triggerButton = function (event) {
             event.preventDefault();
             localStorage.clear();
+            vm.logout();
             angular.element(".link-btn").trigger("click");
         };
         vm.getUserName= function(data){

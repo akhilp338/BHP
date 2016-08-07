@@ -6,6 +6,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,6 +90,11 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
+		SecurityContextHolder.clearContext();
+		 HttpSession session = request.getSession(false);
+	        if (session != null) {
+	            session.invalidate();
+	        }
 		loginService.logout( request );
 	}
 

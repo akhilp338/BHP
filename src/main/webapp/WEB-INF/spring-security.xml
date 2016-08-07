@@ -15,9 +15,9 @@
 			default-target-url="/dashboard" />
 		<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true"  />
 		<csrf disabled="true"/>
-		<session-management session-fixation-protection="none">
-		<concurrency-control max-sessions="1000" error-if-maximum-exceeded="true"/>
-		</session-management>
+<!-- 		<session-management > -->
+<!-- 		<concurrency-control max-sessions="1000" error-if-maximum-exceeded="true"/> -->
+<!-- 		</session-management> -->
 	</http>
 
 	<authentication-manager>
