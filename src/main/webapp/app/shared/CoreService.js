@@ -408,7 +408,18 @@
                     });
             return deferred.promise;
         };
-
+        
+        service.sessionCheck = function () {
+            var deferred = $q.defer();
+            Core_HttpRequest.get("api/sessioncheck")
+                    .then(function (response) {
+                        deferred.resolve(response)
+                    }, function (error) {
+                        deferred.reject(error)
+                    });
+            return deferred.promise;
+        };
+        
         
         
         service.downloadOfferLetter = function(fileURL, fileName){

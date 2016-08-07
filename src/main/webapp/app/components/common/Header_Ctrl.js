@@ -13,12 +13,25 @@
             angular.element(".link-btn").trigger("click");
         };
         vm.getUserName= function(data){
+        	   vm.sessionCheck();
        	 Core_Service.getCurrentUser(data).then(function (res){
        		$rootScope.currentUser=res;
             },function (error){
             }); 
        	
        }
+        vm.sessionCheck= function(){
+        	 Core_Service.sessionCheck().then(function (res){
+        		if(res.data.startsWith("<!DOC")){
+                   Core_Service.sweetAlert("No Session!", "Please login again", "success", "login");
+                   
+          		}
+             },function (error){
+           	  /*Core_Service.sweetAlert("Session already Exists!", "Please login again", "success", "login");
+           	  vm.logout();*/
+             }); 
+        	
+        }
 
         
     };    

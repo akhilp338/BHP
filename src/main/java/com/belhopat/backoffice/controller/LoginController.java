@@ -48,6 +48,10 @@ public class LoginController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String getIndexPage() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.isAuthenticated()) {
+			return "/dashboard";
+		}
 		return "index";
 	}
 
@@ -91,11 +95,20 @@ public class LoginController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public void logout(HttpServletRequest request) throws ServletException {
 		SecurityContextHolder.clearContext();
-		 HttpSession session = request.getSession(false);
-	        if (session != null) {
-	            session.invalidate();
-	        }
-		loginService.logout( request );
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		loginService.logout(request);
+	}
+
+	@RequestMapping(value = "/sessioncheck", method = RequestMethod.GET)
+	public String sessionCheck(HttpServletRequest request) throws ServletException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			return auth.getName();
+		}
+		return null;
 	}
 
 	/**
@@ -113,10 +126,11 @@ public class LoginController {
 	 * @throws MessagingException
 	 *             Generates a password and sends that password to users e mail
 	 *             id
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
-	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user) throws MessagingException, UnsupportedEncodingException {
+	public ResponseEntity<ResponseObject> forgotPassword(@RequestBody User user)
+			throws MessagingException, UnsupportedEncodingException {
 		boolean userStatus = userService.generatePasswordResetLink(user.getEmail());
 		if (userStatus)
 			return new ResponseEntity<ResponseObject>(new ResponseObject(userStatus, Constants.PASS_RESET_SUCC_MSG),
@@ -139,17 +153,17 @@ public class LoginController {
 	 * @throws MessagingException
 	 *             Generates a password and sends that password to users e mail
 	 *             id
-	 * @throws ServletException 
+	 * @throws ServletException
 	 */
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	public ResponseEntity<ResponseObject> resetPassword(@RequestBody UserDTO user, HttpServletRequest request) throws MessagingException, ServletException {
-		Boolean resetStatus = userService.resetPassword( user );
-		if ( resetStatus ){
+	public ResponseEntity<ResponseObject> resetPassword(@RequestBody UserDTO user, HttpServletRequest request)
+			throws MessagingException, ServletException {
+		Boolean resetStatus = userService.resetPassword(user);
+		if (resetStatus) {
 			loginService.logout(request);
 			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_SUCC_MSG),
 					HttpStatus.OK);
-		}
-		else
+		} else
 			return new ResponseEntity<ResponseObject>(new ResponseObject(resetStatus, Constants.PASS_CHANGE_FAIL_MSG),
 					HttpStatus.OK);
 	}
