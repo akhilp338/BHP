@@ -106,6 +106,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setBusinessUnit(businessUnit);
 		employee.setEmployeeMaster(employeeMaster);
 		employee.setHrManager(hrManager);
+		if(employeeDto.getBelhopatDesignation()!=null)
+		employee.setBelhopatDesignation(employeeDto.getBelhopatDesignation());
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
 		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID);

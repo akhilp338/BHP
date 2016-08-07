@@ -184,7 +184,7 @@ var candidatesListTable;
                         	return data == null? "":data;
                         }
                     }, {
-                        title: "Designation",
+                        title: "Role",
                         data: 'designation.code',
                         render: function (data) {
                         	return data == null? "":data;

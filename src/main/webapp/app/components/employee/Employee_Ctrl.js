@@ -140,7 +140,7 @@
                 $rootScope.selectedCandId = data.id;
                 localStorage["selectedCandidate"] = data.employeeId;
                 localStorage["selectedCandidateName"] = vm.getEmpFullName(data);
-                localStorage["selectedCandidateId"] =  data.id;
+                localStorage["selectedCandidateId"] =  data.employeeMaster.id;
                 $rootScope.showLoader = true;
                 var empId = this.getAttribute('value');
                 $state.go('coreuser.employee.edit', {id: empId});
