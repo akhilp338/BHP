@@ -72,10 +72,15 @@ public class BelhopatServletContextInfo {
 
 	public static void setDeployURL(String deployURL) {
 		
-//		TODO Hardcoded for the moment
-		BelhopatServletContextInfo.deployURL = "http://ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
-//		BelhopatServletContextInfo.deployURL = "http://" + BelhopatServletContextInfo.getHostname() + ":"
-//				+ BelhopatServletContextInfo.getPortNo() + BelhopatServletContextInfo.getContext().getContextPath();
+		//TODO Hardcoded for the moment - BHP STAGING
+//		BelhopatServletContextInfo.deployURL = "http://ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
+
+		//TODO Hardcoded for the moment - BHP PRODUCTION
+//		BelhopatServletContextInfo.deployURL = "http://ec2-52-66-84-91.ap-south-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
+
+		//TODO LOCAL ENV
+		BelhopatServletContextInfo.deployURL = "http://" + BelhopatServletContextInfo.getHostname() + ":"
+		+ BelhopatServletContextInfo.getPortNo() + BelhopatServletContextInfo.getContext().getContextPath();
 	}
 	
 }

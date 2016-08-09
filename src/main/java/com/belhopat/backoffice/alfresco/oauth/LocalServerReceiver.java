@@ -37,7 +37,16 @@ import org.mortbay.jetty.handler.AbstractHandler;
 public final class LocalServerReceiver implements VerificationCodeReceiver {
 
   private static final String CALLBACK_PATH = "/Callback";
-  private static final String LOCALHOST = "ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com";
+  
+  //TODO LOCAL ENV
+  private static final String LOCALHOST = "localhost";
+
+  //  TODO BHP_STAGING
+  //  private static final String LOCALHOST = "ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com";
+
+  //	TODO BHP_PRODUCTION
+  //  private static final String LOCALHOST = "ec2-52-66-84-91.ap-south-1.compute.amazonaws.com";
+  
   
   private static final int PORT = 8089;
 
