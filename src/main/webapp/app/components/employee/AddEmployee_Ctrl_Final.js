@@ -1,6 +1,6 @@
 
 (function () {
-    var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service) {
+    var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service,$timeout) {
         var vm = this;
         $rootScope.showLoader = true;
         vm.candidateId = localStorage["selectedCandidate"] ? localStorage["selectedCandidate"] : "";
@@ -25,6 +25,7 @@
                 vm.registration.hrRecruiter= res.data.hrRecruiter;
                 vm.registration.reportingManager=res.data.reportingManager;
                 vm.registration.baseLocation =res.data.baseLocation;
+                vm.registration.belhopatDesignation=res.vm.belhopatDesignation;
             }, function (err) {
                 vm.registration = {};
             });
@@ -77,7 +78,7 @@
         $rootScope.showLoader = false;
     };
 
-    AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service'];
+    AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service','$timeout'];
     angular.module('coreModule')
             .controller('AddEmployee_Ctrl_Final', AddEmployee_Ctrl_Final);
 })();

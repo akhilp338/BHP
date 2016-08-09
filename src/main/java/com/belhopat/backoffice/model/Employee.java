@@ -72,6 +72,20 @@ public class Employee extends BaseEntity {
 	@JoinColumn(name = "TIME_ZONE_ID")
 	private TimeZone timeZone;
 
+	@Column(name="BHP_DSGNATN")
+	private String belhopatDesignation;
+	
+	
+	
+	
+	public String getBelhopatDesignation() {
+		return belhopatDesignation;
+	}
+
+	public void setBelhopatDesignation(String belhopatDesignation) {
+		this.belhopatDesignation = belhopatDesignation;
+	}
+
 	public String getEmployeeId() {
 		return employeeId;
 	}

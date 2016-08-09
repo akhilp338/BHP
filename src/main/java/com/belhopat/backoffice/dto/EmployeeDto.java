@@ -30,7 +30,17 @@ public class EmployeeDto {
 	
 	private String officialEmailId;
 	
+	private String belhopatDesignation;
 	
+	
+	public String getBelhopatDesignation() {
+		return belhopatDesignation;
+	}
+
+	public void setBelhopatDesignation(String belhopatDesignation) {
+		this.belhopatDesignation = belhopatDesignation;
+	}
+
 	public String getOfficialEmailId() {
 		return officialEmailId;
 	}

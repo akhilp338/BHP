@@ -1,158 +1,168 @@
 <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left">Fill Employee Details</h4>
+	<h4 class="pull-left">Fill Employee Details</h4>
 	<button ng-click="vm.back()"
 		class="logout-button pull-right add-button" title="Add Employee">
 		<span class="fa-stack fa-lg pull-left"><i
-			class="fa fa-arrow-left" aria-hidden="true"></i></span>
-                        <span class="text">Back</span>              
+			class="fa fa-arrow-left" aria-hidden="true"></i></span> <span class="text">Back</span>
 	</button>
-    </div>
-<div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">
-    <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
-        <label class="item-label">Candidate ID : </label>
-        <p class="item-label-desc">{{vm.display.candidateId}}</p>
-    </div>
-    <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
-        <label class="item-label">Name : </label>
-        <p class="item-label-desc">{{vm.display.name}}</p>
-    </div>
 </div>
-<div class="employee-add form-horizontal col-md-12 col-lg-12 col-sm-12 col-xs-12" name="reg_form">
-    <form name="regForm" id="form_0" novalidate>
-        <div class="row">
-            <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">                
-                <header class="data-main-container-header">Basic Information</header>
-                <div class="data-main-container">                    
-                    <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" >Candidate ID</label>
-                        <div class="controls">
-                            <input type="text" name="joiningDate" id="joiningDate"
-                                   value="{{vm.candidateId}}" class="form-input width-100" disabled/>                            
-                        </div>
-                    </div>
-                    <div ng-model=vm.registration.employeeMasterId value="{{vm.candId}}"></div>
-                    <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">Joining Date</label>
-                        <div class="controls">
-                            <p class="input-group">
-                                <input type="text"
-                                       name="jd"
-                                       show-button-bar ="false"
-                                       class="form-input date-form"                                           
-                                       ng-model="vm.registration.joiningDate"
-                                       is-open="vm.isDobPickerOpen"
-                                       uib-datepicker-popup="dd-MMM-yyyy"
-                                       validation="required:alt=Required field"
-                                       readonly/>
-                                <span class="input-group-btn custom-datepick">
-                                    <button type="button" 
-                                            class="btn btn-default" 
-                                            ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </button>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">Business Unit</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.businessUnit"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="business.id as (business.description) for business in vm.lookups.DIV">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">Account Manager</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.accountManager"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.AM">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">HR Recruiter</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.hrRecruiter"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRR">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">HR Manager</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.hrManager"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRM">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                     <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">Reporting Manager</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.reportingManager"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName ) for accounts in vm.lookups.HRM">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div
-                        class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="dob">Work Location</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.workLocation"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
-                        <label class="control-label" for="timeZone">Base Location</label>
-                        <div class="controls">
-                            <select name="bloodGroup"
-                                    ng-model="vm.registration.baseLocation"
-                                    validation="required:alt=required" class="form-input width-100"
-                                    ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
-                                <option value="">--SELECT--</option>
-                            </select>
-                        </div>
-                    </div>
-                     <div ng-show="vm.isFileInput" class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">   
-                                <input name="passbook-file" data-filename-placement="inside" type="file" title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload Passbook' class='upload-label'>Upload Documents</span>" class="filestyle" data-input="false" data-buttonText="documents" data-iconName="glyphicon glyphicon-inbox">
-                            </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div class="clearfix"></div>
-    <div class="bottom-button-liner">        
-        <button ng-click="vm.employeeRegister()"
-		class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
-		<span class="fa-stack fa-lg pull-left"><i
-			class="fa fa-check" aria-hidden="true"></i></span>
-                        <span class="text">Confirm and Register</span>              
-	</button>
-        </div>
+<div class="candidate-summary col-md-12 col-lg-12 col-sm-12 col-xs-12">
+	<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+		<label class="item-label">Candidate ID : </label>
+		<p class="item-label-desc">{{vm.display.candidateId}}</p>
+	</div>
+	<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+		<label class="item-label">Name : </label>
+		<p class="item-label-desc">{{vm.display.name}}</p>
+	</div>
+</div>
+<div
+	class="employee-add form-horizontal col-md-12 col-lg-12 col-sm-12 col-xs-12"
+	name="reg_form">
+	<form name="regForm" id="form_0" novalidate>
+		<div class="row">
+			<div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">
+				<header class="data-main-container-header">Basic
+					Information</header>
+				<div class="data-main-container">
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label">Candidate ID</label>
+						<div class="controls">
+							<input type="text" name="joiningDate" id="joiningDate"
+								value="{{vm.candidateId}}" class="form-input width-100" disabled />
+						</div>
+					</div>
+					<div ng-model=vm.registration.employeeMasterId
+						value="{{vm.candId}}"></div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">Joining Date</label>
+						<div class="controls">
+							<p class="input-group">
+								<input type="text" name="jd" show-button-bar="false"
+									class="form-input date-form"
+									ng-model="vm.registration.joiningDate"
+									is-open="vm.isDobPickerOpen" uib-datepicker-popup="dd-MMM-yyyy"
+									validation="required:alt=Required field" readonly /> <span
+									class="input-group-btn custom-datepick">
+									<button type="button" class="btn btn-default"
+										ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">Business Unit</label>
+						<div class="controls">
+							<select name="bloodGroup" ng-model="vm.registration.businessUnit"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="business.id as (business.description) for business in vm.lookups.DIV">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">Account Manager</label>
+						<div class="controls">
+							<select name="bloodGroup"
+								ng-model="vm.registration.accountManager"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.AM">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">HR Recruiter</label>
+						<div class="controls">
+							<select name="bloodGroup" ng-model="vm.registration.hrRecruiter"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRR">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">HR Manager</label>
+						<div class="controls">
+							<select name="bloodGroup" ng-model="vm.registration.hrManager"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName) for accounts in vm.lookups.HRM">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">Reporting Manager</label>
+						<div class="controls">
+							<select name="bloodGroup"
+								ng-model="vm.registration.reportingManager"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="accounts.id as (accounts.employeeMaster.firstName+' '+accounts.employeeMaster.lastName ) for accounts in vm.lookups.HRM">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="dob">Work Location</label>
+						<div class="controls">
+							<select name="bloodGroup" ng-model="vm.registration.workLocation"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label" for="timeZone">Base Location</label>
+						<div class="controls">
+							<select name="bloodGroup" ng-model="vm.registration.baseLocation"
+								validation="required:alt=required" class="form-input width-100"
+								ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY">
+								<option value="">--SELECT--</option>
+							</select>
+						</div>
+					</div>
+					<div
+						class="control-group col-md-3 col-lg-3 col-sm-4 col-xs-12 pull-left">
+						<label class="control-label">Designation</label>
+						<div class="controls">
+							<input type="text" name="joiningDate" id="joiningDate" ng-model="vm.registration.belhopatDesignation"
+								value="{{vm.registration.belhopatDesignation}}" class="form-input width-100" />
+						</div>
+					</div>
+					<div ng-show="vm.isFileInput"
+						class="file-control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+						<input name="passbook-file" data-filename-placement="inside"
+							type="file"
+							title="<i class='fa fa-upload' aria-hidden='true'></i><span title='Upload Passbook' class='upload-label'>Upload Documents</span>"
+							class="filestyle" data-input="false" data-buttonText="documents"
+							data-iconName="glyphicon glyphicon-inbox">
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="clearfix"></div>
+	<div class="bottom-button-liner">
+		<button ng-click="vm.employeeRegister()"
+			class="logout-button pull-right add-button confirm-btn"
+			title="Confirm and Register">
+			<span class="fa-stack fa-lg pull-left"><i class="fa fa-check"
+				aria-hidden="true"></i></span> <span class="text">Confirm and
+				Register</span>
+		</button>
+	</div>
 </div>
 
 <div class="clearfix"></div>
