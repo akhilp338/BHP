@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public class BaseEntity implements Cloneable {
@@ -19,15 +17,12 @@ public class BaseEntity implements Cloneable {
 	@Column(name = "ID")
 	private Long id;
 
-//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CRTD_DATE")
 	private Date createdDate;
 
-//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPTD_DATE")
 	private Date updatedDate;
 
-//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DLTD_DATE")
 	private Date deletedDate;
 
