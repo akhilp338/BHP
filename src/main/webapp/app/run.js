@@ -51,7 +51,13 @@
                                   toState.name == "coreuser.candidate.edit" ||
                                   toState.name == "coreuser.employee.edit"||
                                   toState.name == "coreuser.client.edit" ||
-                                  toState.name == "coreuser.client.add") ? true : false;
+                                  toState.name == "coreuser.client.add" ||
+                                  toState.name == "coreuser.consultant.edit" ||
+                                  toState.name == "coreuser.consultant.add" ||
+                                  toState.name == "coreuser.vendor.edit" ||
+                                  toState.name == "coreuser.vendor.add" ||
+                                  toState.name == "coreuser.bankacc.edit" ||
+                                  toState.name == "coreuser.bankacc.add") ? true : false;
                            //$rootScope.showLoader = false;
             $rootScope.spinnerActive =false;
            $timeout(function(){

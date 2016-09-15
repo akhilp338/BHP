@@ -110,8 +110,15 @@
         <script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/fileUpload/FileUpload_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/client/ViewClient_Ctrl.js"></script>
-
-
+        <script src="/BelhopatBackOffice/app/components/consultant/AddConsultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/consultant/Consultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/consultant/ViewConsultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/AddVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/Vendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/bankacc/AddbankAcc_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/bankacc/BankAcc_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/bankacc/ViewVendor_Ctrl.js"></script>
         <style>
             [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
                 display: none !important;

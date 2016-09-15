@@ -258,7 +258,115 @@
                             controllerAs: 'vm'
                         }
                     }
-                });
+                })
+                
+                //consultant states routing
+                .state('coreuser.consultant', {
+                    url: urlConfig.root_path + 'consultant',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/consultant/consultant.html',
+                            controller: 'Consultant_Ctrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                }).state('coreuser.consultant.add', {
+            url: '^/BelhopatBackOffice/consultant/add',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.html',
+                    controller: 'AddConsultant_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.consultant.edit', {
+            url: '/edit/:id',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.html',
+                    controller: 'AddConsultant_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        
+        //vendor states routing
+                .state('coreuser.vendor', {
+                    url: urlConfig.root_path + 'vendor',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/vendor/vendor.html',
+                            controller: 'Vendor_Ctrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                }).state('coreuser.vendor.add', {
+            url: '^/BelhopatBackOffice/vendor/add',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.html',
+                    controller: 'AddVendor_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.vendor.edit', {
+            url: '/edit/:id',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.html',
+                    controller: 'AddVendor_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        })
+        
+        //Bank Account states routing
+                .state('coreuser.bankacc', {
+                    url: urlConfig.root_path + 'bankacc',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankacc.html',
+                            controller: 'BankAcc_Ctrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                }).state('coreuser.bankacc.add', {
+            url: '^/BelhopatBackOffice/bankacc/add',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.html',
+                    controller: 'AddbankAcc_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.bankacc.edit', {
+            url: '/edit/:id',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.html',
+                    controller: 'AddbankAcc_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        });
     };
     angular.module('coreModule').config(Core_Routes);
 })();
