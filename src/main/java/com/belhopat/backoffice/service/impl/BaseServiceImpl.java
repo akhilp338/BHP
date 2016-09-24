@@ -259,13 +259,14 @@ public class BaseServiceImpl implements BaseService {
 			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
 			increment = candidateSequence.getId();
 		} else if (clazz.equals(Employee.class)) {
-//			Date latestDate = employeeSequenceRepository.getLatestDate();
-//			if ((latestDate != null)) {
-//				if (DateUtil.getDayOfMonth(new Date()) == 1 && DateUtil.isToday(latestDate)
-//						|| DateUtil.isPreviousMonth(latestDate)) {
-//					employeeSequenceRepository.truncate();
-//				}
-//			}
+			// Date latestDate = employeeSequenceRepository.getLatestDate();
+			// if ((latestDate != null)) {
+			// if (DateUtil.getDayOfMonth(new Date()) == 1 &&
+			// DateUtil.isToday(latestDate)
+			// || DateUtil.isPreviousMonth(latestDate)) {
+			// employeeSequenceRepository.truncate();
+			// }
+			// }
 			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
 		} else if (clazz.equals(Client.class)) {
@@ -399,9 +400,12 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
-//				String document = alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
-				employeeSalary.setOfferLetterFileName(candidate.getCandidateId()+"_"+candidate.getFirstName()+".pdf");
+//				byte[] offerLetter = 
+						pdfService.generateOfferLetterPDF(employeeSalary);
+				// String document =
+				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
+				employeeSalary
+						.setOfferLetterFileName(candidate.getCandidateId() + "_" + candidate.getFirstName() + ".pdf");
 				candidate.setOfferletterStatus(true);
 				candidateRepository.saveAndFlush(candidate);
 				EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
@@ -465,7 +469,7 @@ public class BaseServiceImpl implements BaseService {
 	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input) {
 		return taskListRepository.findAll(input);
 	}
-	
+
 	@Override
 	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException {
 		PersonalInfoDTO personalInfo = new PersonalInfoDTO();

@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "PASSPORT")
@@ -24,11 +22,11 @@ public class Passport {
 	@Column(name = "PSPRT_NO", length = 25)
 	private String passportNo;
 
-//	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "ISS_DATE")
 	private Date issueDate;
 
-//	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "EXP_DATE")
 	private Date expiryDate;
 

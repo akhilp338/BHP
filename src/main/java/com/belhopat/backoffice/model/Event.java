@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,11 +23,11 @@ public class Event extends BaseEntity {
 	@Column(name = "IS_ALL_DAY", columnDefinition = "boolean default false", nullable = false)
 	private boolean allDay;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "[START]")
 	private Date start;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "[END]")
 	private Date end;
 

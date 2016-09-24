@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,7 +23,7 @@ public class Employee extends BaseEntity {
 	@JoinColumn(name = "EMP_USR_ID")
 	private User employeeUser;
 
-//	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "JOIN_DATE")
 	private Date joiningDate;
 
@@ -72,12 +70,9 @@ public class Employee extends BaseEntity {
 	@JoinColumn(name = "TIME_ZONE_ID")
 	private TimeZone timeZone;
 
-	@Column(name="BHP_DSGNATN")
+	@Column(name = "BHP_DSGNATN")
 	private String belhopatDesignation;
-	
-	
-	
-	
+
 	public String getBelhopatDesignation() {
 		return belhopatDesignation;
 	}

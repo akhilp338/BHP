@@ -430,14 +430,14 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input) {
-		Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
-			@Override
-			public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
-					CriteriaBuilder criteriaBuilder) {
-				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
-				return criteriaBuilder.and(isNotDeleted);
-			}
-		};
+//		Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
+//			@Override
+//			public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
+//					CriteriaBuilder criteriaBuilder) {
+//				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
+//				return criteriaBuilder.and(isNotDeleted);
+//			}
+//		};
 		DataTablesOutput<EmployeeSalary> dataTablesOutput = employeeSalaryRepository
 				.findAll(input/* , specification */);
 		return dataTablesOutput;

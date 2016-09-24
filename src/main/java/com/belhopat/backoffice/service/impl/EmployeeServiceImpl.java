@@ -106,8 +106,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setBusinessUnit(businessUnit);
 		employee.setEmployeeMaster(employeeMaster);
 		employee.setHrManager(hrManager);
-		if(employeeDto.getBelhopatDesignation()!=null)
-		employee.setBelhopatDesignation(employeeDto.getBelhopatDesignation());
+		if (employeeDto.getBelhopatDesignation() != null)
+			employee.setBelhopatDesignation(employeeDto.getBelhopatDesignation());
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
 		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID);
@@ -182,7 +182,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				? employeeObj.getEmployeeMaster().getPersonalEmail() : "-999");
 		return outputObj;
 	}
-	
+
 	@Override
 	public ResponseEntity<EmployeeViewDTO> getEmployeeView(Long empId) throws ParseException {
 		EmployeeViewDTO employeeView = getEmployeeViewDTO(empId);
@@ -194,33 +194,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	private EmployeeViewDTO getEmployeeViewDTO(Long empId) throws ParseException {
-			Employee employee = employeeRepository.findById(empId);
-			Employee hrr = employeeRepository.findOne(employee.getHrRecruiter().getId());
-			Employee reportingMngr = employeeRepository.findOne(employee.getReportingManager().getId());
-			Employee hrManager = employeeRepository.findOne(employee.getHrManager().getId());
-			Employee accountManager = employeeRepository.findOne(employee.getAccountManager().getId());
-			LookupDetail businessUnit = lookupDetailRepository.findOne(employee.getBusinessUnit().getId());
-			if (employee == null) {
-				return null;
-			}
-			EmployeeViewDTO employeeView = new EmployeeViewDTO();
-			employeeView.setEmployeeId(employeeView.getEmployeeId());
-			employeeView.setAccountManager(accountManager.getEmployeeId());
-			employeeView.setReportingManager(reportingMngr.getEmployeeId());
-			employeeView.setHrManager(hrManager.getEmployeeId());
-			employeeView.setHrRecruiter(hrr.getEmployeeId());
-			employeeView.setBaseLocation(employee.getBaseLocation().getDescription());
-			employeeView.setWorkLocation(employee.getWorkLocation().getDescription());
-			employeeView.setBusinessUnit(employee.getBusinessUnit().getDescription());
-			CandidateViewDTO candidateView = new CandidateViewDTO();
-			PersonalInfoDTO personalInfo = baseService.getPersonalInfo(employee.getEmployeeMaster());
-			EmploymentInfoDTO employmentInfo = baseService.getEmploymentInfo(employee.getEmployeeMaster());
-			OfficialInfoDTO officialInfo = baseService.getOfficialInfo(employee.getEmployeeMaster());
-			// FamilyInfoDTO familyInfo = getFamilyInfo(candidate);
-			candidateView.setEmployment(employmentInfo);
-			candidateView.setPersonal(personalInfo);
-			candidateView.setOfficial(officialInfo);
-			// TODO candidateView.setFamily(familyInfo);
-			return employeeView;
-		}
+		Employee employee = employeeRepository.findById(empId);
+		Employee hrr = employeeRepository.findOne(employee.getHrRecruiter().getId());
+		Employee reportingMngr = employeeRepository.findOne(employee.getReportingManager().getId());
+		Employee hrManager = employeeRepository.findOne(employee.getHrManager().getId());
+		Employee accountManager = employeeRepository.findOne(employee.getAccountManager().getId());
+//		LookupDetail businessUnit = lookupDetailRepository.findOne(employee.getBusinessUnit().getId());
+//		if (employee == null) {
+//			return null;
+//		}
+		EmployeeViewDTO employeeView = new EmployeeViewDTO();
+		employeeView.setEmployeeId(employeeView.getEmployeeId());
+		employeeView.setAccountManager(accountManager.getEmployeeId());
+		employeeView.setReportingManager(reportingMngr.getEmployeeId());
+		employeeView.setHrManager(hrManager.getEmployeeId());
+		employeeView.setHrRecruiter(hrr.getEmployeeId());
+		employeeView.setBaseLocation(employee.getBaseLocation().getDescription());
+		employeeView.setWorkLocation(employee.getWorkLocation().getDescription());
+		employeeView.setBusinessUnit(employee.getBusinessUnit().getDescription());
+		CandidateViewDTO candidateView = new CandidateViewDTO();
+		PersonalInfoDTO personalInfo = baseService.getPersonalInfo(employee.getEmployeeMaster());
+		EmploymentInfoDTO employmentInfo = baseService.getEmploymentInfo(employee.getEmployeeMaster());
+		OfficialInfoDTO officialInfo = baseService.getOfficialInfo(employee.getEmployeeMaster());
+		// FamilyInfoDTO familyInfo = getFamilyInfo(candidate);
+		candidateView.setEmployment(employmentInfo);
+		candidateView.setPersonal(personalInfo);
+		candidateView.setOfficial(officialInfo);
+		// TODO candidateView.setFamily(familyInfo);
+		return employeeView;
+	}
 }

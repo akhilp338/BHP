@@ -34,6 +34,8 @@ public class BHPBankAccountController {
 	@Autowired
 	BHPBankAccountService bankAccountService;
 
+	@ResponseBody
+	@RequestMapping(value = "/getBankAccounts", method = RequestMethod.GET)
 	public DataTablesOutput<BHPBankAccount> getBankAccounts(@Valid DataTablesInput input) {
 		return bankAccountService.getBankAccounts(input);
 	}

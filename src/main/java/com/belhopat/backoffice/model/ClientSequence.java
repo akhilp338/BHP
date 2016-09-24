@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CLIENT_SEQUENCE")
@@ -19,7 +17,7 @@ public class ClientSequence {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CRTD_DATE", nullable = false)
 	private Date createdDate;
 

@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CANDIDATE")
@@ -31,7 +29,7 @@ public class Candidate extends BaseEntity {
 	@Column(name = "LST_NAME", length = 50)
 	private String lastName;
 
-//	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
 	private Date dob;
 
@@ -139,7 +137,7 @@ public class Candidate extends BaseEntity {
 	@JoinColumn(name = "OFC_DTLS_ID")
 	private OfficialCards officialDetails;
 
-//	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
 	private Date doj;
 
