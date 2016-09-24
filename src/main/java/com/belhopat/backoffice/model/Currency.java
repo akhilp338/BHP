@@ -15,10 +15,10 @@ public class Currency {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "CODE", length = 10)
+	@Column(name = "[CODE]", length = 10)
 	private String code;
 
-	@Column(name = "DESC", length = 50)
+	@Column(name = "[DESC]", length = 50)
 	private String description;
 
 	public Long getId() {

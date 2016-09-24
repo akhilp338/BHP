@@ -19,10 +19,6 @@ public class Expense {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "REIMB_ID")
-	private Reimburse reimburse;
-
 	@Column(name = "EXP_DATE")
 	private Date date;
 
@@ -45,14 +41,6 @@ public class Expense {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Reimburse getReimburse() {
-		return reimburse;
-	}
-
-	public void setReimburse(Reimburse reimburse) {
-		this.reimburse = reimburse;
 	}
 
 	public Date getDate() {
@@ -97,7 +85,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", reimburse=" + reimburse + ", date=" + date + ", description=" + description
+		return "Expense [id=" + id + ", date=" + date + ", description=" + description
 				+ ", currency=" + currency + ", amount=" + amount + ", remarks=" + remarks + "]";
 	}
 }
