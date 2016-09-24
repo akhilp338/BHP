@@ -28,6 +28,7 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.TaskList;
 import com.belhopat.backoffice.model.User;
@@ -466,6 +467,12 @@ public class ReimburseServiceImpl implements ReimburseService {
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(Reimburse reimburse) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -39,4 +39,6 @@ public interface ReimburseService {
 
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary);
 
+	ResponseEntity<Map<String, String>> saveOrUpdateCandidate(Candidate candidateObj);
+
 }
