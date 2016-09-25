@@ -11,6 +11,7 @@ public class TaskConstants {
 	
 	/* Reimbursed constants*/
 	public static final String REIMBURSE_VERIF = "REIMBURSE_VERIF";
+	public static final String REIMBURSE_APPR = "REIMBURSE_APPR";
 	
 	
 	
