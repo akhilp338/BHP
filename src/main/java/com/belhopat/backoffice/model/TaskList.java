@@ -19,6 +19,9 @@ public class TaskList extends BaseEntity {
 	@Column(name = "IS_CMPLTD", columnDefinition = "boolean default false", nullable = false)
 	Boolean completed;
 
+	@Column(name = "TSK_ENT_ID")
+	private Long taskEntityId;
+
 	@Column(name = "TSK_MDL_ID", length = 15)
 	private String taskModalId;
 
@@ -43,6 +46,14 @@ public class TaskList extends BaseEntity {
 
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
+	}
+
+	public Long getTaskEntityId() {
+		return taskEntityId;
+	}
+
+	public void setTaskEntityId(Long taskEntityId) {
+		this.taskEntityId = taskEntityId;
 	}
 
 	public String getTaskModalId() {
@@ -71,8 +82,8 @@ public class TaskList extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "TaskList [task=" + task + ", completed=" + completed + ", taskModalId=" + taskModalId + ", comment="
-				+ comment + ", status=" + status + "]";
+		return "TaskList [task=" + task + ", completed=" + completed + ", taskEntityId=" + taskEntityId
+				+ ", taskModalId=" + taskModalId + ", comment=" + comment + ", status=" + status + "]";
 	}
 
 }

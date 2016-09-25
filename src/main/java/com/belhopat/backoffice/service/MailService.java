@@ -8,6 +8,7 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
+import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 
@@ -28,5 +29,9 @@ public interface MailService {
 	public void sendWelcomeMail(Employee employee) throws MessagingException;
 
 	public void sendCreateOfficialEmail(Employee employee) throws MessagingException;
+
+	public void sendReimburseRequestMail(Reimburse reimburse);
+
+	public void sendReimburseVerificationMail(Reimburse reimburse);
 
 }

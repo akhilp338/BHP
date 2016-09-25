@@ -9,6 +9,11 @@ public class TaskConstants {
 	public static final String OFFER_LETTER_AH_APPROVAL = "OFR_LTR_AH_APPRVL";
 	public static final String OFFER_LETTER_HRM_APPROVAL = "OFR_LTR_HRM_APPRVL";
 	
+	/* Reimbursed constants*/
+	public static final String REIMBURSE_VERIF = "REIMBURSE_VERIF";
+	
+	
+	
 	/*salary process constants*/
 	public static final String BLOOD_GROUP = "BG";
 	public static final String EMPLOYMENT_STATUS = "ESTATS";
