@@ -74,7 +74,7 @@ public class ReimburseServiceImpl implements ReimburseService {
 	public ResponseEntity<String> approveOrRejectReimburseTask(TaskDTO taskDTO) {
 		if (taskDTO.getTaskId() != null) {
 			User currentUser = SessionManager.getCurrentUserAsEntity();
-			Task task = taskRepository.finbyId(taskDTO.getTaskId());
+			Task task = taskRepository.findById(taskDTO.getTaskId());
 			task.setCompleted(true);
 			task.setStatus(taskDTO.getAction());
 			task.setUpdateAttributes(currentUser);

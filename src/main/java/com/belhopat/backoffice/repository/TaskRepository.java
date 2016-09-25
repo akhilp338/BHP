@@ -20,8 +20,8 @@ public interface TaskRepository extends JpaRepository<Task, Long>, DataTablesRep
 
 	public Task findByMasterTask(MasterTask masterTask);
 
-	@Query("select tl from TaskList tl where tl.completed!=1 and tl.task.taskOwnerRole IN(:roles)")
-	public List<Task> findByTaskOwner(@Param("roles") List<String> userRoles);
+	@Query("select t from Task t where t.completed!=1 and t.masterTask.taskOwnerRole IN(:roles)")
+	List<Task> findByTaskOwner(@Param("roles") List<String> userRoles);
 
-	public Task finbyId(Long taskId);
+	Task findById(Long taskId);
 }
