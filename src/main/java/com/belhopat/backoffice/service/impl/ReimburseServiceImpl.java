@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Reimburse;
-import com.belhopat.backoffice.repository.MasterTasksRepository;
 import com.belhopat.backoffice.repository.ReimburseRepository;
-import com.belhopat.backoffice.repository.TaskListRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.ReimburseService;
 import com.belhopat.backoffice.service.TaskService;
+import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
@@ -44,13 +43,13 @@ public class ReimburseServiceImpl implements ReimburseService {
 		String reimburseId = SequenceGenerator.generateReimburseId(increment);
 		reimburse.setReimburseId(reimburseId);
 		reimburseRepository.save(reimburse);
-		sendReimburseVerificationRequestToHRM(reimburse);
-		mailService.sendReimburseRequestMail(reimburse);
+		sendReimburseVerificationRequest(reimburse);
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 	}
 
-	private void sendReimburseVerificationRequestToHRM(Reimburse reimburse) {
-		taskService.createReimburseVerificationTask(reimburse);
+	private void sendReimburseVerificationRequest(Reimburse reimburse) {
+		mailService.sendReimburseRequestMail(reimburse);
+		taskService.createReimburseTask(reimburse.getId(), TaskConstants.REIMBURSE_VERIF);
 		mailService.sendReimburseVerificationMail(reimburse);
 	}
 

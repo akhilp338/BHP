@@ -8,18 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.belhopat.backoffice.model.MasterTasks;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.MasterTask;
+import com.belhopat.backoffice.model.Task;
 
 /**
  * @author BHP_DEV Data repository for employee entity
  *
  */
 @Repository
-public interface TaskListRepository extends JpaRepository<TaskList, Long>, DataTablesRepository<TaskList, Long> {
+public interface TaskRepository extends JpaRepository<Task, Long>, DataTablesRepository<Task, Long> {
 
-	public TaskList findByTask(MasterTasks masterTasks);
+	public Task findByMasterTask(MasterTask masterTask);
 
 	@Query( "select tl from TaskList tl where tl.completed!=1 and tl.task.taskOwnerRole IN(:roles)" )
-	public List<TaskList> findByTaskOwner(@Param( "roles" )List<String> userRoles);
+	public List<Task> findByTaskOwner(@Param( "roles" )List<String> userRoles);
 }

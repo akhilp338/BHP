@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.State;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -69,7 +69,7 @@ public class BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/createOfferLetter", method = RequestMethod.POST)
-	public ResponseEntity<List<TaskList>> createOfferLetter(@RequestBody RequestObject requestObject)
+	public ResponseEntity<List<Task>> createOfferLetter(@RequestBody RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.createOfferLetter(requestObject);
 	}
@@ -104,7 +104,7 @@ public class BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/getUserTasks", method = RequestMethod.GET)
-	public DataTablesOutput<TaskList> getUserTasks(@Valid DataTablesInput input)
+	public DataTablesOutput<Task> getUserTasks(@Valid DataTablesInput input)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.getUserTasks(input);
 	}

@@ -9,21 +9,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TASK_LIST")
-public class TaskList extends BaseEntity {
+@Table(name = "TASK")
+public class Task extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TSK_ID")
-	private MasterTasks task;
+	private MasterTask masterTask;
 
 	@Column(name = "IS_CMPLTD", columnDefinition = "boolean default false", nullable = false)
-	Boolean completed;
+	private Boolean completed;
 
 	@Column(name = "TSK_ENT_ID")
 	private Long taskEntityId;
-
-	@Column(name = "TSK_MDL_ID", length = 15)
-	private String taskModalId;
 
 	@Lob
 	@Column(name = "[COMMENT]", length = 500)
@@ -32,12 +29,18 @@ public class TaskList extends BaseEntity {
 	@Column(name = "[STATUS]", length = 15)
 	private String status;
 
-	public MasterTasks getTask() {
-		return task;
+	@Column(name = "ADTNL_FLD_1", length = 100)
+	private String additionalField1;
+
+	@Column(name = "ADTNL_FLD_2", length = 100)
+	private String additionalField2;
+
+	public MasterTask getMasterTask() {
+		return masterTask;
 	}
 
-	public void setTask(MasterTasks task) {
-		this.task = task;
+	public void setMasterTask(MasterTask masterTask) {
+		this.masterTask = masterTask;
 	}
 
 	public Boolean getCompleted() {
@@ -56,14 +59,6 @@ public class TaskList extends BaseEntity {
 		this.taskEntityId = taskEntityId;
 	}
 
-	public String getTaskModalId() {
-		return taskModalId;
-	}
-
-	public void setTaskModalId(String taskModalId) {
-		this.taskModalId = taskModalId;
-	}
-
 	public String getComment() {
 		return comment;
 	}
@@ -80,10 +75,26 @@ public class TaskList extends BaseEntity {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "TaskList [task=" + task + ", completed=" + completed + ", taskEntityId=" + taskEntityId
-				+ ", taskModalId=" + taskModalId + ", comment=" + comment + ", status=" + status + "]";
+	public String getAdditionalField1() {
+		return additionalField1;
 	}
 
+	public void setAdditionalField1(String additionalField1) {
+		this.additionalField1 = additionalField1;
+	}
+
+	public String getAdditionalField2() {
+		return additionalField2;
+	}
+
+	public void setAdditionalField2(String additionalField2) {
+		this.additionalField2 = additionalField2;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [masterTask=" + masterTask + ", completed=" + completed + ", taskEntityId=" + taskEntityId
+				+ ", comment=" + comment + ", status=" + status + ", additionalField1=" + additionalField1
+				+ ", additionalField2=" + additionalField2 + "]";
+	}
 }

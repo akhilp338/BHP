@@ -25,7 +25,7 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -178,8 +178,8 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserTasks", method = RequestMethod.GET)
-	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
-		ResponseEntity<List<TaskList>> tasks = baseService.getCurrentUserTasks();
+	public ResponseEntity<List<Task>> getCurrentUserTasks() {
+		ResponseEntity<List<Task>> tasks = baseService.getCurrentUserTasks();
 		return tasks;
 	}
 

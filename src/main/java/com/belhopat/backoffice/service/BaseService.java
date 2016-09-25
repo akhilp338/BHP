@@ -22,7 +22,7 @@ import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.Task;
 import com.itextpdf.text.DocumentException;
 
 @Service
@@ -42,24 +42,24 @@ public interface BaseService {
 
 	public Map<String, List<?>> getEmployeeDropdowns();
 
-	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
+	public ResponseEntity<List<Task>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException;
 
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException;
 
-	public ResponseEntity<List<TaskList>> getCurrentUserTasks();
+	public ResponseEntity<List<Task>> getCurrentUserTasks();
 
 	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade);
 	
-	public List<TaskList> updateTaskList(String taskName) ;
+	public List<Task> updateTaskList(String taskName) ;
 	
-	public TaskList createNewTaskList(String taskName);
+	public Task createNewTaskList(String taskName);
 
 	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
 	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException;
 
-	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input);
+	public DataTablesOutput<Task> getUserTasks(DataTablesInput input);
 
 	public OfficialInfoDTO getOfficialInfo(Candidate candidate) throws ParseException;
 

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "MST_TASK")
-public class MasterTasks {
+public class MasterTask {
 
 	@Id
 	@GeneratedValue

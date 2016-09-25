@@ -4,18 +4,18 @@ import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.belhopat.backoffice.model.MasterTasks;
+import com.belhopat.backoffice.model.MasterTask;
 
 /**
  * @author BHP_DEV Data repository for employee entity
  *
  */
 @Repository
-public interface MasterTasksRepository extends JpaRepository<MasterTasks, Long>, DataTablesRepository<MasterTasks, Long> {
+public interface MasterTaskRepository extends JpaRepository<MasterTask, Long>, DataTablesRepository<MasterTask, Long> {
 
-	MasterTasks findByTaskKey(String taskName);
+	MasterTask findByTaskKey(String taskName);
 
-	MasterTasks findById(Long nextTaskId);
+	MasterTask findById(Long nextTaskId);
 
 
 

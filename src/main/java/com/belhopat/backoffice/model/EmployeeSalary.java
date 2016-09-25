@@ -81,7 +81,7 @@ public class EmployeeSalary extends BaseEntity {
 
 	@OneToOne
 	@JoinColumn(name = "CUR_TSK_ID")
-	private TaskList currentTask;
+	private Task currentTask;
 
 	public Candidate getCandidate() {
 		return candidate;
@@ -259,11 +259,11 @@ public class EmployeeSalary extends BaseEntity {
 		this.offerLetterFileName = offerLetterFileName;
 	}
 
-	public TaskList getCurrentTask() {
+	public Task getCurrentTask() {
 		return currentTask;
 	}
 
-	public void setCurrentTask(TaskList currentTask) {
+	public void setCurrentTask(Task currentTask) {
 		this.currentTask = currentTask;
 	}
 

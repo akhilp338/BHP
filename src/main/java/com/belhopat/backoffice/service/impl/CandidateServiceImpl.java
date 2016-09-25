@@ -29,7 +29,7 @@ import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
@@ -462,7 +462,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary) {
-		TaskList currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);

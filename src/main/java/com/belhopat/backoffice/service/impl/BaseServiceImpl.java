@@ -36,13 +36,13 @@ import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.MasterRole;
-import com.belhopat.backoffice.model.MasterTasks;
+import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.ReimburseSequence;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
@@ -55,12 +55,12 @@ import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
-import com.belhopat.backoffice.repository.MasterTasksRepository;
+import com.belhopat.backoffice.repository.MasterTaskRepository;
 import com.belhopat.backoffice.repository.ReimburseSequenceRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
-import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
@@ -112,10 +112,10 @@ public class BaseServiceImpl implements BaseService {
 	ReimburseSequenceRepository reimburseSequenceRepository;
 
 	@Autowired
-	MasterTasksRepository masterTasksRepository;
+	MasterTaskRepository masterTaskRepository;
 
 	@Autowired
-	TaskListRepository taskListRepository;
+	TaskRepository taskRepository;
 
 	@Autowired
 	SalaryGradeRepository salaryGradeRepository;
@@ -305,7 +305,7 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<List<TaskList>> createOfferLetter(RequestObject requestObject)
+	public ResponseEntity<List<Task>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		EmployeeSalary employeeSalary = new EmployeeSalary();
 		pdfService.generateOfferLetterPDF(employeeSalary);
@@ -313,33 +313,33 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public TaskList createNewTaskList(String taskName) {
+	public Task createNewTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
-		TaskList currentTaskRow = new TaskList();
-		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
+		Task currentTaskRow = new Task();
+		MasterTask currentTask = masterTaskRepository.findByTaskKey(taskName);
 		currentTaskRow.setBaseAttributes(currentUser);
 		currentTaskRow.setCompleted(true);
-		currentTaskRow.setTask(currentTask);
+		currentTaskRow.setMasterTask(currentTask);
 		currentTaskRow.setStatus(TaskConstants.CREATED);
-		MasterTasks nextTask = masterTasksRepository.findById(currentTask.getNextTaskId());
-		taskListRepository.save(currentTaskRow);
+		MasterTask nextTask = masterTaskRepository.findById(currentTask.getNextTaskId());
+		taskRepository.save(currentTaskRow);
 		if (nextTask != null) {
-			TaskList newTaskRow = new TaskList();
-			newTaskRow.setTask(nextTask);
+			Task newTaskRow = new Task();
+			newTaskRow.setMasterTask(nextTask);
 			newTaskRow.setBaseAttributes(currentUser);
-			newTaskRow = taskListRepository.save(newTaskRow);
+			newTaskRow = taskRepository.save(newTaskRow);
 			return newTaskRow;
 		}
 		return currentTaskRow;
 	}
 
 	@Override
-	public List<TaskList> updateTaskList(String taskName) {
+	public List<Task> updateTaskList(String taskName) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
-		MasterTasks currentTask = masterTasksRepository.findByTaskKey(taskName);
-		TaskList taskList = taskListRepository.findByTask(currentTask);
-		List<TaskList> newTasks = new ArrayList<TaskList>();
-		TaskList newTaskRow = new TaskList();
+		MasterTask currentTask = masterTaskRepository.findByTaskKey(taskName);
+		Task taskList = taskRepository.findByMasterTask(currentTask);
+		List<Task> newTasks = new ArrayList<Task>();
+		Task newTaskRow = new Task();
 		taskList.setUpdateAttributes(currentUser);
 		taskList.setCompleted(true);
 		taskList.setStatus(TaskConstants.CREATED);// status to be chnaged
@@ -347,7 +347,7 @@ public class BaseServiceImpl implements BaseService {
 		newTaskRow.setBaseAttributes(currentUser);
 		newTasks.add(taskList);
 		newTasks.add(newTaskRow);
-		taskListRepository.save(newTasks);
+		taskRepository.save(newTasks);
 		return null;
 	}
 
@@ -426,12 +426,12 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<List<TaskList>> getCurrentUserTasks() {
+	public ResponseEntity<List<Task>> getCurrentUserTasks() {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		List<String> userRoles = getAllUserRoles(currentUser.getId());
 		if (!userRoles.isEmpty()) {
-			List<TaskList> taskLists = taskListRepository.findByTaskOwner(userRoles);
-			return new ResponseEntity<List<TaskList>>(taskLists, HttpStatus.OK);
+			List<Task> taskLists = taskRepository.findByTaskOwner(userRoles);
+			return new ResponseEntity<List<Task>>(taskLists, HttpStatus.OK);
 		}
 		return null;
 	}
@@ -476,8 +476,8 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public DataTablesOutput<TaskList> getUserTasks(DataTablesInput input) {
-		return taskListRepository.findAll(input);
+	public DataTablesOutput<Task> getUserTasks(DataTablesInput input) {
+		return taskRepository.findAll(input);
 	}
 
 	@Override

@@ -3,12 +3,11 @@ package com.belhopat.backoffice.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.belhopat.backoffice.model.MasterTasks;
-import com.belhopat.backoffice.model.Reimburse;
-import com.belhopat.backoffice.model.TaskList;
+import com.belhopat.backoffice.model.MasterTask;
+import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
-import com.belhopat.backoffice.repository.MasterTasksRepository;
-import com.belhopat.backoffice.repository.TaskListRepository;
+import com.belhopat.backoffice.repository.MasterTaskRepository;
+import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.service.TaskService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.TaskConstants;
@@ -21,35 +20,22 @@ import com.belhopat.backoffice.util.TaskConstants;
 public class TaskServiceImpl implements TaskService {
 
 	@Autowired
-	TaskListRepository taskListRepository;
+	TaskRepository taskRepository;
 
 	@Autowired
-	MasterTasksRepository masterTasksRepository;
+	MasterTaskRepository masterTaskRepository;
 
 	@Override
-	public void createReimburseVerificationTask(Reimburse reimburse) {
+	public void createReimburseTask(Long reimburseId, String mstTaskKey) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
-		TaskList verificationTask = new TaskList();
-		MasterTasks task = masterTasksRepository.findByTaskKey(TaskConstants.REIMBURSE_VERIF);
-		verificationTask.setBaseAttributes(currentUser);
-		verificationTask.setCompleted(false);
-		verificationTask.setTask(task);
-		verificationTask.setTaskEntityId(reimburse.getId());
-		verificationTask.setStatus(TaskConstants.CREATED);
-		taskListRepository.save(verificationTask);
-	}
-
-	@Override
-	public void createReimburseApprovalTask(Reimburse reimburse) {
-		User currentUser = SessionManager.getCurrentUserAsEntity();
-		TaskList approvalTask = new TaskList();
-		MasterTasks task = masterTasksRepository.findByTaskKey(TaskConstants.REIMBURSE_APPR);
-		approvalTask.setBaseAttributes(currentUser);
-		approvalTask.setCompleted(false);
-		approvalTask.setTask(task);
-		approvalTask.setTaskEntityId(reimburse.getId());
-		approvalTask.setStatus(TaskConstants.CREATED);
-		taskListRepository.save(approvalTask);
+		Task task = new Task();
+		MasterTask mstTask = masterTaskRepository.findByTaskKey(mstTaskKey);
+		task.setBaseAttributes(currentUser);
+		task.setCompleted(false);
+		task.setMasterTask(mstTask);
+		task.setTaskEntityId(reimburseId);
+		task.setStatus(TaskConstants.CREATED);
+		taskRepository.save(task);
 	}
 
 }
