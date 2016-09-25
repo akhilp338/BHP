@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.ReimburseService;
 
 /**
@@ -28,9 +29,13 @@ public class ReimburseController {
 	@Autowired
 	ReimburseService reimburseService;
 
+	@Autowired
+	EmployeeService employeeService;
+
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateReimburse", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, String>> saveOrUpdateCandidate(@RequestBody Reimburse reimburse) {
 		return reimburseService.saveOrUpdateReimburse(reimburse);
 	}
+
 }

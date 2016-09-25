@@ -25,4 +25,6 @@ public interface EmployeeService {
 
 	public ResponseEntity<EmployeeViewDTO> getEmployeeView(Long id) throws ParseException;
 
+	public ResponseEntity<Employee> getloggedInEmployee();
+
 }

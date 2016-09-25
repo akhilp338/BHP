@@ -34,6 +34,7 @@ import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.MailService;
@@ -68,6 +69,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	MailService mailService;
+
+	@Autowired
+	UserRepository userRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -199,10 +203,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee reportingMngr = employeeRepository.findOne(employee.getReportingManager().getId());
 		Employee hrManager = employeeRepository.findOne(employee.getHrManager().getId());
 		Employee accountManager = employeeRepository.findOne(employee.getAccountManager().getId());
-//		LookupDetail businessUnit = lookupDetailRepository.findOne(employee.getBusinessUnit().getId());
-//		if (employee == null) {
-//			return null;
-//		}
+		// LookupDetail businessUnit =
+		// lookupDetailRepository.findOne(employee.getBusinessUnit().getId());
+		// if (employee == null) {
+		// return null;
+		// }
 		EmployeeViewDTO employeeView = new EmployeeViewDTO();
 		employeeView.setEmployeeId(employeeView.getEmployeeId());
 		employeeView.setAccountManager(accountManager.getEmployeeId());
@@ -223,4 +228,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO candidateView.setFamily(familyInfo);
 		return employeeView;
 	}
-}
+
+	@Override
+	public ResponseEntity<Employee> getloggedInEmployee() {
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		User user = userRepository.findById(loggedInUser.getId());
+		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
+		if(loggedInEmployee != null){
+			return new ResponseEntity<Employee>(loggedInEmployee, HttpStatus.OK);
+		}
+	return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
+}}

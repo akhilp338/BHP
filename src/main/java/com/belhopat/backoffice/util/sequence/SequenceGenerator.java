@@ -67,5 +67,21 @@ public class SequenceGenerator {
         Long sequence = BASE_GENERATOR + increment;
         return sequence;
     }
+    
+    /**
+     * @param increment
+     * @return Employee-ID
+     * Generates sequence for listing of Employees
+     */
+    public static String generateReimburseId( Long increment) {
+
+        String yy = DateUtil.getYearYY(new Date());
+        String mm = DateUtil.getYMonthMM(new Date());
+        String reimburseId = "REIM" + yy + mm;
+        Long sequence = getSequenceNumber( increment );
+        reimburseId = reimburseId + sequence;
+        return reimburseId;
+
+    }
 
 }

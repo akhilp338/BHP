@@ -72,6 +72,12 @@ public class EmployeeController {
 		return employeeService.getAnEmployee(requestObject.getId());
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/getloggedInEmployee", method = RequestMethod.POST)
+	public ResponseEntity<Employee> getReimburseEmployee() {
+		return employeeService.getloggedInEmployee();
+	}
+	
 	/**
 	 * @param requestObject
 	 * @return Candidate For edit candidate , gets the id and fetches the

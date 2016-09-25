@@ -37,6 +37,8 @@ import com.belhopat.backoffice.model.EmployeeSequence;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.MasterRole;
 import com.belhopat.backoffice.model.MasterTasks;
+import com.belhopat.backoffice.model.Reimburse;
+import com.belhopat.backoffice.model.ReimburseSequence;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
@@ -54,6 +56,7 @@ import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.MasterTasksRepository;
+import com.belhopat.backoffice.repository.ReimburseSequenceRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
@@ -104,6 +107,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ClientSequenceRepository clientSequenceRepository;
+
+	@Autowired
+	ReimburseSequenceRepository reimburseSequenceRepository;
 
 	@Autowired
 	MasterTasksRepository masterTasksRepository;
@@ -254,6 +260,7 @@ public class BaseServiceImpl implements BaseService {
 	 */
 	@Override
 	public <T> Long getSequenceIncrement(Class<T> clazz) {
+
 		Long increment = null;
 		if (clazz.equals(Candidate.class)) {
 			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
@@ -272,6 +279,9 @@ public class BaseServiceImpl implements BaseService {
 		} else if (clazz.equals(Client.class)) {
 			ClientSequence clientSequence = clientSequenceRepository.save(new ClientSequence());
 			increment = clientSequence.getId();
+		} else if (clazz.equals(Reimburse.class)) {
+			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save(new ReimburseSequence());
+			increment = reimburseSequence.getId();
 		}
 		return increment;
 	}
@@ -400,8 +410,8 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-//				byte[] offerLetter = 
-						pdfService.generateOfferLetterPDF(employeeSalary);
+				// byte[] offerLetter =
+				pdfService.generateOfferLetterPDF(employeeSalary);
 				// String document =
 				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 				employeeSalary

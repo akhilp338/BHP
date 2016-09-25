@@ -42,6 +42,9 @@ public class User {
 	@JoinColumn(name = "DSGNTN_ID", nullable = false)
 	private LookupDetail designation;
 
+	@Column(name = "EMP_ID", nullable = false)
+	private Long employeeId;
+
 	@JsonIgnore
 	@Column(name = "SALT")
 	private Byte[] salt;
@@ -124,6 +127,14 @@ public class User {
 
 	public void setDesignation(LookupDetail designation) {
 		this.designation = designation;
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public Byte[] getSalt() {
