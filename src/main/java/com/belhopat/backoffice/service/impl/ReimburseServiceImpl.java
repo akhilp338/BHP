@@ -53,4 +53,14 @@ public class ReimburseServiceImpl implements ReimburseService {
 		mailService.sendReimburseVerificationMail(reimburse);
 	}
 
+	@Override
+	public ResponseEntity<Reimburse> getReimburse(Long reimburseId) {
+
+		if (reimburseId != null) {
+			Reimburse reimburse = reimburseRepository.findById(reimburseId);
+			return new ResponseEntity<Reimburse>(reimburse, HttpStatus.OK);
+		}
+		return new ResponseEntity<Reimburse>(HttpStatus.NO_CONTENT);
+	}
+
 }

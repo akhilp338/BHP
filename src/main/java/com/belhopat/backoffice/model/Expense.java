@@ -85,7 +85,7 @@ public class Expense {
 
 	@Override
 	public String toString() {
-		return "Expense [id=" + id + ", date=" + date + ", description=" + description
-				+ ", currency=" + currency + ", amount=" + amount + ", remarks=" + remarks + "]";
+		return "Expense [id=" + id + ", date=" + date + ", description=" + description + ", currency=" + currency
+				+ ", amount=" + amount + ", remarks=" + remarks + "]";
 	}
 }

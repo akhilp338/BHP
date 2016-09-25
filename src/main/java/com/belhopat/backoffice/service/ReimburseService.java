@@ -12,4 +12,6 @@ public interface ReimburseService {
 
 	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(Reimburse reimburse);
 
+	public ResponseEntity<Reimburse> getReimburse(Long reimburseId);
+
 }

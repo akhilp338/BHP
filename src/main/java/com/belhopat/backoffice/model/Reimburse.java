@@ -22,6 +22,9 @@ public class Reimburse extends BaseEntity {
 	@JoinColumn(name = "EMP_ID")
 	private Employee employee;
 
+	@Column(name = "ELG_AMNT")
+	private Double eligibleAmount;
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Expense> expenses;
 
@@ -41,6 +44,14 @@ public class Reimburse extends BaseEntity {
 		this.employee = employee;
 	}
 
+	public Double getEligibleAmount() {
+		return eligibleAmount;
+	}
+
+	public void setEligibleAmount(Double eligibleAmount) {
+		this.eligibleAmount = eligibleAmount;
+	}
+
 	public List<Expense> getExpenses() {
 		return expenses;
 	}
@@ -48,10 +59,4 @@ public class Reimburse extends BaseEntity {
 	public void setExpenses(List<Expense> expenses) {
 		this.expenses = expenses;
 	}
-
-	@Override
-	public String toString() {
-		return "Reimburse [reimburseId=" + reimburseId + ", employee=" + employee + ", expenses=" + expenses + "]";
-	}
-
 }

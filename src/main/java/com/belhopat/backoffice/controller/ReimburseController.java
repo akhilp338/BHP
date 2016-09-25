@@ -38,4 +38,10 @@ public class ReimburseController {
 		return reimburseService.saveOrUpdateReimburse(reimburse);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getReimburse", method = RequestMethod.POST)
+	public ResponseEntity<Reimburse> saveOrUpdateCandidate(@RequestBody Long reimburseId) {
+		return reimburseService.getReimburse(reimburseId);
+	}
+
 }
