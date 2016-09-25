@@ -24,10 +24,12 @@ public class TaskConstants {
 	/* status constants */
 	public static final String CREATED = "CREATED";
 	public static final String AH_APPROVED = "AH_APPROVED";
+	public static final String APPROVED = "APPROVED";
+	public static final Object REJECTED = "REJECTED";
 
 	/* event management constants */
 	public static final String GENERAL_TASK = "GEN_EVENT_TASK";
 
 	/* Employee creation task */
 	public static final String CREATE_OFFICIAL_EMAIL_ID = "CREATE_OFFICIAL_EMAIL_ID";
-}
+	}

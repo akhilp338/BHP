@@ -34,4 +34,8 @@ public interface MailService {
 
 	public void sendReimburseVerificationMail(Reimburse reimburse);
 
+	public void sendReimburseApprovalMail(Reimburse reimburse);
+
+	public void sendReimburseRejectionMail(Reimburse reimburse);
+
 }

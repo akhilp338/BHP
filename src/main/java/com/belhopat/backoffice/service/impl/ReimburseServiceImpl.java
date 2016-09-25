@@ -79,6 +79,17 @@ public class ReimburseServiceImpl implements ReimburseService {
 			task.setStatus(taskDTO.getAction());
 			task.setUpdateAttributes(currentUser);
 			taskRepository.save(task);
+			Reimburse reimburse = reimburseRepository.findById(task.getTaskEntityId());
+			if (taskDTO.getAction().equals(TaskConstants.REJECTED)) {
+				mailService.sendReimburseRejectionMail(reimburse);
+			}
+			if (taskDTO.getAmount() != null) {
+				reimburse.setEligibleAmount(taskDTO.getAmount());
+				reimburseRepository.save(reimburse);
+			}
+			if (task.getMasterTask().getTaskKey().equals(TaskConstants.REIMBURSE_BU_APPR)) {
+				mailService.sendReimburseApprovalMail(reimburse);
+			}
 			createNextReimburseTask(task);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
@@ -116,7 +127,7 @@ public class ReimburseServiceImpl implements ReimburseService {
 
 	private void createNextReimburseTask(Task task) {
 		Long taskId = task.getMasterTask().getNextTaskId();
-		if (taskId != null) {
+		if (taskId != null && task.getStatus() == TaskConstants.APPROVED) {
 			MasterTask mstTask = masterTaskRepository.findById(taskId);
 			if (mstTask.getTaskKey().equals(TaskConstants.REIMBURSE_BU_APPR)) {
 				Reimburse reimburse = reimburseRepository.findById(task.getTaskEntityId());

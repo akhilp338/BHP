@@ -346,11 +346,29 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendReimburseRequestMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
+		// System emails this reimbursement request to user with the reference
+		// no.
 	}
 
 	@Override
 	public void sendReimburseVerificationMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
+		// System emails HR Manager for verification and approval.
+	}
+
+	@Override
+	public void sendReimburseApprovalMail(Reimburse reimburse) {
+		// TODO Auto-generated method stub
+		// System emails user, HR Manager, Finance Manager & BU Head the
+		// approved reimbursement request details
+	}
+
+	@Override
+	public void sendReimburseRejectionMail(Reimburse reimburse) {
+		// TODO Auto-generated method stub
+		// System emails the employee with the comments that your Reimbursement
+		// Request
+		// ref # ---- has been rejected and displays all the details.
 		
 	}
 
