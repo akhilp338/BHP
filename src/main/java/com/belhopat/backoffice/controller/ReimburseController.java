@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.belhopat.backoffice.model.Expense;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
@@ -34,8 +36,8 @@ public class ReimburseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/saveOrUpdateReimburse", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, String>> saveOrUpdateCandidate(@RequestBody Reimburse reimburse) {
-		return reimburseService.saveOrUpdateReimburse(reimburse);
+	public ResponseEntity<Map<String, String>> saveOrUpdateCandidate(@RequestBody List<Expense> expences) {
+		return reimburseService.saveOrUpdateReimburse(expences);
 	}
 
 	@ResponseBody
