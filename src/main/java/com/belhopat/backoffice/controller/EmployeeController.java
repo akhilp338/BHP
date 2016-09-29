@@ -73,7 +73,7 @@ public class EmployeeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getloggedInEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "/getloggedInEmployee", method = RequestMethod.GET)
 	public ResponseEntity<Employee> getReimburseEmployee() {
 		return employeeService.getloggedInEmployee();
 	}
