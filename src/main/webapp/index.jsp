@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <link rel="shortcut icon" href="/BelhopatBackOffice/app/assets/images/B-Icon.ico">
-        <title>Belhopat Global Services Pvt Ltd</title>
+        <title>Belhopat Global Services Pvt Ltd</title>        
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/bootstrap.min.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/font-awesome.min.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/awesome-checkbox.css">
