@@ -6,11 +6,12 @@
             {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate",isOptional:false},
             {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee",isOptional:false},
             {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client",isOptional:false},
-            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-users",state:"coreuser.offerletterhome",isOptional:false},
+            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-envelope",state:"coreuser.offerletterhome",isOptional:false},
             {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event",isOptional:false},
             {name:"consultant",label: "Consultant Management", icon: "fa-gift",state:"coreuser.consultant",isOptional:false},
             {name:"vendor",label: "Vendor Management", icon: "fa-gift",state:"coreuser.vendor",isOptional:false},
-            {name:"bankacc",label: "Bank Account Management", icon: "fa-gift",state:"coreuser.bankacc",isOptional:false}
+            //{name:"bankacc",label: "Bank Account Management", icon: "fa-gift",state:"coreuser.bankacc",isOptional:false},
+            {name:"reimbursement",label: "Reimbursement", icon: "fa-suitcase",state:"coreuser.reimbursement",isOptional:false}
         ];
         $rootScope.isLogin = false;
         vm.showMenu = function (e) {

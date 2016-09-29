@@ -2280,3 +2280,18 @@ a.spec-link{
 .small-drop.controls select {
     padding: 0;
 }
+#reim-table.dataTable tbody tr td {
+    padding: 10px!important;
+}
+#reim-table.dataTable tbody tr td input {
+    height: 30px;
+}
+#reim-table tr {
+    background-color: #ebecec;
+}
+.reim-form .back {
+    margin-right: 0;
+}
+.reim-form .data-main-container {
+    width: 100%;
+}

@@ -259,7 +259,7 @@
                         }
                     }
                 })
-                
+
                 //consultant states routing
                 .state('coreuser.consultant', {
                     url: urlConfig.root_path + 'consultant',
@@ -295,8 +295,8 @@
                 }
             }
         })
-        
-        //vendor states routing
+
+                //vendor states routing
                 .state('coreuser.vendor', {
                     url: urlConfig.root_path + 'vendor',
                     views: {
@@ -331,8 +331,8 @@
                 }
             }
         })
-        
-        //Bank Account states routing
+
+                //Bank Account states routing
                 .state('coreuser.bankacc', {
                     url: urlConfig.root_path + 'bankacc',
                     views: {
@@ -366,7 +366,18 @@
                     controllerAs: 'vm'
                 }
             }
-        });
+        })
+            //Bank Account states routing
+            .state('coreuser.reimbursement', {
+                url: urlConfig.root_path + 'reimbursement',
+                views: {
+                    'content@': {
+                        templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reimbursement.html',
+                        controller: 'Reimbursement_Ctrl',
+                        controllerAs: 'vm'
+                    }
+                }
+            });
     };
     angular.module('coreModule').config(Core_Routes);
 })();
