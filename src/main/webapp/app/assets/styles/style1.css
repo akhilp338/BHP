@@ -1520,13 +1520,25 @@ fieldset.scheduler-border legend {
     text-decoration: none;
 }
 
-.candidate-form .data-outer, .client-form .data-outer, .client-form {
+.candidate-form .data-outer,
+.client-form .data-outer,
+.client-form,
+.consultant-form .data-outer,
+.consultant-form,
+.vendor-form .data-outer,
+.vendor-form,
+.bankacc-form .data-outer,
+.bankacc-form {
     border-radius: 0;
     border: none !important;
 }
 
-.candidate-form .data-main-container, .client-form .data-main-container
-{    width: 98%;
+.candidate-form .data-main-container,
+.client-form .data-main-container,
+.consultant-form .data-main-container,
+.vendor-form .data-main-container,
+.bankacc-form .data-main-container {    
+    width: 98%;
     margin: 10px auto;
     border-radius: 7px;
     border: 1px solid #DDDDDD;
