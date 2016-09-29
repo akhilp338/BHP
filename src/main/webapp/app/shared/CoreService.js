@@ -467,7 +467,7 @@
         
         service.getCurrency = function () {
             var deferred = $q.defer();
-            Core_HttpRequest.get("/api/getCurrenciese")
+            Core_HttpRequest.get("/api/getCurrencies")
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

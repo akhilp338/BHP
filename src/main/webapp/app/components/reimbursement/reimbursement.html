@@ -39,7 +39,7 @@
                     <label class="control-label" for="division">Division/BU</label>
                     <div class="controls">
                         <input type="text" name="division" id="division"
-                               ng-model="vm.reimn.division"
+                               ng-model="vm.reim.division"
                                class="form-input width-100"
                                placeholder="Division/BU"
                                readonly/>
@@ -80,14 +80,7 @@
             </button>
         </div>
         <table id="reim-table" class="display" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Currency</th>
-                    <th>Amount</th>
-                    <th>Remarks</th>
-                </tr>                    
+            <thead>                    
             </thead>
             <tbody>
 
@@ -95,7 +88,12 @@
             <form name="reim-addForm" id="reim-addForm">
                 <td><input validation="required:alt=Required field" type="text" id="reim-date" name="reim-date" ></td>
                 <td><input validation="required:alt=Required field"type="text" id="reim-desc" name="reim-desc" ></td>
-                <td><input validation="required:alt=Required field"type="text" id="reim-currency" name="reim-currency" ></td>
+                <td><select name="reim-currency" ng-model="vm.reim.currency.code"
+                                        class="form-input width-100" 
+                                        ng-options="currency.code as ( currency.description) for currency in vm.currency"
+                                        >
+                                        <option value="">-SELECT-</option>
+                                    </select> </td>
                 <td><input validation="required:alt=Required field" type="text" id="reim-amount" name="reim-amount" ></td>
                 <td><input validation="required:alt=Required field" type="text" id="reim-remarks" name="reim-remarks" ></td>
             </form>
