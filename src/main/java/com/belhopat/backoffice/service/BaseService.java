@@ -19,6 +19,7 @@ import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.City;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
@@ -66,4 +67,6 @@ public interface BaseService {
 	public EmploymentInfoDTO getEmploymentInfo(Candidate candidate) throws ParseException;
 
 	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException;
+
+	public List<Currency> getCurrencies();
 }

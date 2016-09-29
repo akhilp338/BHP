@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.City;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
@@ -73,10 +74,10 @@ public class BaseController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.createOfferLetter(requestObject);
 	}
-	
-	
+
 	/**
 	 * Method to download document from cloud
+	 * 
 	 * @param requestObject
 	 * @return responseEntity Returns the document from cloud
 	 * @throws IOException
@@ -86,33 +87,42 @@ public class BaseController {
 	public void downloadDocument(@RequestParam Long empSalId, HttpServletResponse response) throws IOException {
 		baseService.getFileByNameAndCategory(empSalId, response);
 	}
-	
-	
+
 	/**
-	 * Method to preview document from 
+	 * Method to preview document from
+	 * 
 	 * @param requestObject
 	 * @return responseEntity Returns the document from cloud
 	 * @throws IOException
-	 * @throws ParseException 
-	 * @throws DocumentException 
+	 * @throws ParseException
+	 * @throws DocumentException
 	 */
 	@RequestMapping(value = "/previewOfferLetter", method = RequestMethod.GET)
 	@ResponseBody
-	public void previewOfferLetter(@RequestParam Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException {
+	public void previewOfferLetter(@RequestParam Long empSalId, HttpServletResponse response)
+			throws IOException, DocumentException, ParseException {
 		baseService.previewOfferLetter(empSalId, response);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getUserTasks", method = RequestMethod.GET)
 	public DataTablesOutput<Task> getUserTasks(@Valid DataTablesInput input)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.getUserTasks(input);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
 	public User getUserName() {
-		User currentUser=SessionManager.getCurrentUserAsEntity();
+		User currentUser = SessionManager.getCurrentUserAsEntity();
 		return currentUser;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getCurrencies", method = RequestMethod.GET)
+	public List<Currency> getCurrencies() {
+		List<Currency> currencies = baseService.getCurrencies();
+		return currencies;
 	}
 
 }

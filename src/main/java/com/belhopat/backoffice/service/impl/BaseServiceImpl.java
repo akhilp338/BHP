@@ -31,6 +31,7 @@ import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.ClientSequence;
 import com.belhopat.backoffice.model.Country;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.EmployeeSequence;
@@ -51,6 +52,7 @@ import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.ClientRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
+import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
@@ -83,6 +85,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	CountryRepository countryRepository;
+
+	@Autowired
+	CurrencyRepository currencyRepository;
 
 	@Autowired
 	EmployeeRepository employeeRepository;
@@ -563,6 +568,12 @@ public class BaseServiceImpl implements BaseService {
 		officialInfo.setForexCardNo(candidate.getOfficialDetails().getForexCardNo());
 		officialInfo.setForexCardAgency(candidate.getOfficialDetails().getForexCardAgency());
 		return officialInfo;
+	}
+
+	@Override
+	public List<Currency> getCurrencies() {
+		List<Currency> currencies = currencyRepository.findAll();
+		return currencies;
 	}
 
 }
