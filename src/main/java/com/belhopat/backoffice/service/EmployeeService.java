@@ -27,4 +27,6 @@ public interface EmployeeService {
 
 	public ResponseEntity<Employee> getloggedInEmployee();
 
+	public Employee getloggedInEmployeeAsEnity();
+
 }

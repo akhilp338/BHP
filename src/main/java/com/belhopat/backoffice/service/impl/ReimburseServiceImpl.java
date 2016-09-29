@@ -1,6 +1,7 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.TaskDTO;
 import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.Expense;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.Task;
@@ -18,6 +20,7 @@ import com.belhopat.backoffice.repository.MasterTaskRepository;
 import com.belhopat.backoffice.repository.ReimburseRepository;
 import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.ReimburseService;
 import com.belhopat.backoffice.service.TaskService;
@@ -41,6 +44,9 @@ public class ReimburseServiceImpl implements ReimburseService {
 	TaskService taskService;
 
 	@Autowired
+	EmployeeService employeeService;
+
+	@Autowired
 	TaskRepository taskRepository;
 
 	@Autowired
@@ -50,11 +56,17 @@ public class ReimburseServiceImpl implements ReimburseService {
 	ReimburseRepository reimburseRepository;
 
 	@Override
-	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(Reimburse reimburse) {
+	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(List<Expense> expenses) {
 		Map<String, String> responseMap = new HashMap<>();
+		Employee loggedInEmployee = employeeService.getloggedInEmployeeAsEnity();
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Reimburse reimburse = new Reimburse();
 		Long increment = baseService.getSequenceIncrement(Employee.class);
 		String reimburseId = SequenceGenerator.generateReimburseId(increment);
 		reimburse.setReimburseId(reimburseId);
+		reimburse.setExpenses(expenses);
+		reimburse.setEmployee(loggedInEmployee);
+		reimburse.setBaseAttributes(loggedInUser);
 		reimburseRepository.save(reimburse);
 		sendReimburseVerificationRequest(reimburse);
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
