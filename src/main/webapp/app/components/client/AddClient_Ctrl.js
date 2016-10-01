@@ -2,8 +2,7 @@
     var AddClient_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
         $rootScope.showLoader = true;
-        vm.registration = {};
-        
+        vm.registration = {};        
         vs = new validationService({
             controllerAs: vm
         });
@@ -34,6 +33,7 @@
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;
+                    console.log(vm.lookups.CLSTATS); 
                 }, function (error) {
 
                 });

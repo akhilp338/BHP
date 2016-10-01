@@ -4,11 +4,17 @@
         var vm = this;
         vm.reim = {};
         vm.reimDetails = [];
-        vm.reimSet = {};
-
         vs = new validationService({
             controllerAs: vm
         });
+
+        Core_Service.getCurrency().then(function (res) {
+            vm.currency = res;
+
+        }, function (err) {
+            console.log(err)
+        });
+
         vs.setGlobalOptions({
             debounce: 1500,
             scope: $scope,
@@ -27,11 +33,6 @@
             console.log(err)
         });
 
-        Core_Service.getCurrency().then(function (res) {
-            vm.currency = res;
-        }, function (err) {
-            console.log(err)
-        });
         angular.element(document).ready(function () {
             vm.reimTable = $('#reim-table').DataTable(
                     {
@@ -45,39 +46,76 @@
                             infoEmpty: '',
                             infoFiltered: ''
                         },
-                        aoColumns: [ {
-                    	visible : false
-                	},{
-                        title: "Description",
-                        data: 'description',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    }, {
-                        title: "Currency",
-                        data: 'currency',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    }, {
-                        title: "Amount",
-                        data: 'amount',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    }, {
-                        title: "Remarks",
-                        data: 'remarks',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    }]
+                        aoColumns: [{
+                                title: "Date",
+                                data: 'date',
+                                render: function (data) {
+                                    return data == null ? "" : data;
+                                }
+                            }, {
+                                title: "Description",
+                                data: 'description',
+                                render: function (data) {
+                                    return data == null ? "" : data;
+                                }
+                            },
+                            {
+                                title: "Currency",
+                                data: 'currency',
+                                render: function (data) {
+                                    return data == null ? "" : data;
+                                }
+                            }, {
+                                title: "Amount",
+                                data: 'amount',
+                                render: function (data) {
+                                    return data == null ? "" : data;
+                                }
+                            }, {
+                                title: "Remarks",
+                                data: 'remarks',
+                                render: function (data) {
+                                    return data == null ? "" : data;
+                                }
+                            }, {
+                                data: 'id',
+                                bSortable: false,
+                                sClass: "button-column",
+                                render: function (data) {
+                                    $rootScope.showLoader = false;
+                                    return '<div class="action-buttons">' +
+                                            '<span  class="actions action-delete fa-stack fa-lg pull-left" title="View">' +
+                                            '<i class="fa fa-remove" aria-hidden="true"></i></span></div>'
+                                }
+                            }]
                     }
             );
         });
 
+        $('#reim-table tbody').on('click', '.action-delete', function () {
+            //Core_Service.sweetAlertWithConfirm("Delete ???", "Are you sure to delete this details?", "warning", function(){
+            var index = angular.element(this).parents('tr').index() + 1;
+            vm.reimDetails.splice(index,1);
+            console.log(vm.reimDetails)
+            vm.reimTable.row(angular.element(this).parents('tr'))
+                    .remove()
+                    .draw(true);
+            //});            
+        });
+
         vm.addToTable = function (evt) {
-            vm.reimTable.rows.add({"description": "dsfd","currency": "dsfd","amount": "dsfd","remarks": "dsfd"})
+            var arr = [];
+            vm.reimSet = {
+                date: angular.element("#reim-date").val(),
+                description: angular.element("#reim-description").val(),
+                currency: angular.element("#reim-currency").val(),
+                amount: angular.element("#reim-amount").val(),
+                remarks: angular.element("#reim-remarks").val()
+            };
+            arr.push(vm.reimSet);
+            vm.reimDetails.push(vm.reimSet);
+            console.log(vm.reimDetails)
+            vm.reimTable.rows.add(arr).draw(false);
         };
         vm.back = function () {
             $state.go("coreuser.dashboard");
