@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <link rel="shortcut icon" href="/BelhopatBackOffice/app/assets/images/B-Icon.ico">
-        <title>Belhopat Global Services Pvt Ltd</title>
+        <title>Belhopat Global Services Pvt Ltd</title>        
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/bootstrap.min.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/font-awesome.min.css">
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/awesome-checkbox.css">
@@ -110,8 +110,16 @@
         <script src="/BelhopatBackOffice/app/components/offerletter/Offer_Letter_Home_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/fileUpload/FileUpload_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/client/ViewClient_Ctrl.js"></script>
-
-
+        <script src="/BelhopatBackOffice/app/components/consultant/AddConsultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/consultant/Consultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/consultant/ViewConsultant_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/AddVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/Vendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/bankacc/AddbankAcc_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/bankacc/BankAcc_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/reimbursement/Reimbursement_Ctrl.js"></script>
         <style>
             [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
                 display: none !important;

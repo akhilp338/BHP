@@ -1,8 +1,9 @@
 (function () {
-    var AddClient_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
+    var AddVendor_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
         $rootScope.showLoader = true;
-        vm.registration = {};        
+        vm.registration = {};
+        
         vs = new validationService({
             controllerAs: vm
         });
@@ -27,13 +28,12 @@
             });
         }
         vm.back = function (){
-            $state.go('coreuser.client');
+            $state.go('coreuser.vendor');
         };
         vm.urlForLookups = "api/client/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;
-                    console.log(vm.lookups.CLSTATS); 
                 }, function (error) {
 
                 });
@@ -108,7 +108,7 @@
         $rootScope.showLoader = false;
     };
 
-    AddClient_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];
+    AddVendor_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];
     angular.module('coreModule')
-            .controller('AddClient_Ctrl', AddClient_Ctrl);
+            .controller('AddVendor_Ctrl', AddVendor_Ctrl);
 })();
