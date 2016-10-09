@@ -12,6 +12,11 @@ public class TaskConstants {
 	public static final String REIMBURSE_HRM_APPR = "REIMBURSE_HRM_APPR";
 	public static final String REIMBURSE_FM_APPR = "REIMBURSE_FM_APPR";
 	public static final String REIMBURSE_BU_APPR = "REIMBURSE_BU_APPR";
+	
+	/* Vendor Mgt constants */
+	public static final String APPRVD_BY_CFO = "APPROVED_BY_CFO";
+	public static final String PENDING_APPRVL_BY_CFO = "PENDING_APPRVL_BY_CFO";
+	public static final String RJCTD_BY_CFO = "RJCTD_BY_CFO";
 
 	/* salary process constants */
 	public static final String BLOOD_GROUP = "BG";
