@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="coreModule" class="theme4">
+<html ng-app="coreModule" class="theme4" ng-class="{'dashboard-page':isDashBoard}">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <link rel="shortcut icon" href="/BelhopatBackOffice/app/assets/images/B-Icon.ico">
@@ -127,7 +127,7 @@
         </style>
     </head>
 
-    <body ng-class="{'login-page':isLogin,'loader-visible': showLoader,'inner-page':addPage}" ng-cloak>
+    <body ng-class="{'login-page':isLogin,'loader-visible': showLoader,'inner-page':addPage, 'dashboard-page':isDashBoard}" ng-cloak>
         <div id="errorUser">${error}</div>
         <div id="successUser">${user}</div>     
         <div class="response-loader" ng-show="showLoader"></div>

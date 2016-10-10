@@ -1931,9 +1931,8 @@ ul[rn-carousel]>li {
 }
 .tasklist table.dataTable tbody td{
     margin: 10px;
-    padding: 11px !important;
     background: rgb(251, 222, 144);
-    border-bottom: 20px solid #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
 }
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
     background-color: rgb(255, 136, 20);
@@ -2307,4 +2306,49 @@ a.spec-link{
 }
 .action-delete {
     color: red;
+}
+#reimburse-button {
+    margin-right: 10px!important;
+}
+.inner-text {
+    font-size: 18px;
+    padding-left: 10px;
+}
+.huge {
+    padding-top: 10px;
+}
+@media (min-width: 768px){
+    .indication-panel {
+        margin-bottom: 10px;
+    }
+}
+.circle {
+    border-radius: 50%;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    height: 40px;
+    font-weight: bold;
+    width: 40px;
+    display: table;
+    margin: 20px auto;
+}
+.circle p {
+    vertical-align: middle;
+    display: table-cell;
+}
+.theme4 #tasksList.dataTable thead tr, 
+.theme4 #tasksList.dataTable tfoot tr{
+ background: #eceff4!important;
+}
+
+.theme4 #tasksList.dataTable thead th, 
+.theme4 #tasksList.dataTable tfoot th{
+  color: black!important;  
+}
+.dashboard-page,
+.tasklist table.dataTable tbody td,
+table #tasksList.stripe tbody tr.odd,
+table #tasksList.display tbody tr.odd{
+    background-color: white!important;
 }
