@@ -13,185 +13,198 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "EMPLOYEE")
+@Table( name = "EMPLOYEE" )
 public class Employee extends BaseEntity {
 
-	@Column(name = "EMP_ID", unique = true, nullable = false, length = 15)
-	private String employeeId;
+    @Column( name = "EMP_ID", unique = true, nullable = false, length = 15 )
+    private String employeeId;
 
-	@OneToOne
-	@JoinColumn(name = "EMP_USR_ID")
-	private User employeeUser;
+    @OneToOne
+    @JoinColumn( name = "EMP_USR_ID" )
+    private User employeeUser;
 
-	// @Temporal(TemporalType.DATE)
-	@Column(name = "JOIN_DATE")
-	private Date joiningDate;
+    // @Temporal(TemporalType.DATE)
+    @Column( name = "JOIN_DATE" )
+    private Date joiningDate;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CNDT_ID")
-	private Candidate employeeMaster;
+    @OneToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "CNDT_ID" )
+    private Candidate employeeMaster;
 
-	@Column(name = "OFC_EMAIL", length = 50)
-	private String officialEmail;
+    @Column( name = "OFC_EMAIL", length = 50 )
+    private String officialEmail;
 
-	@ManyToOne
-	@JoinColumn(name = "BUS_UNT_ID")
-	private LookupDetail businessUnit;
+    @ManyToOne
+    @JoinColumn( name = "BUS_UNT_ID" )
+    private LookupDetail businessUnit;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ACC_MNGR_ID")
-	private Employee accountManager;
+    @JsonIgnore
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "ACC_MNGR_ID" )
+    private Employee accountManager;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "HR_RCTR_ID")
-	private Employee hrRecruiter;
+    @JsonIgnore
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "HR_RCTR_ID" )
+    private Employee hrRecruiter;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "HR_MNGR_ID")
-	private Employee hrManager;
+    @JsonIgnore
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "HR_MNGR_ID" )
+    private Employee hrManager;
 
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "RPTNG_MNGR_ID")
-	private Employee reportingManager;
+    @JsonIgnore
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "RPTNG_MNGR_ID" )
+    private Employee reportingManager;
 
-	@ManyToOne
-	@JoinColumn(name = "WRK_LCTN_ID")
-	private Country workLocation;
+    @ManyToOne
+    @JoinColumn( name = "WRK_LCTN_ID" )
+    private Country workLocation;
 
-	@ManyToOne
-	@JoinColumn(name = "BASE_LOC_ID")
-	private Country baseLocation;
+    @ManyToOne
+    @JoinColumn( name = "BASE_LOC_ID" )
+    private Country baseLocation;
 
-	@ManyToOne
-	@JoinColumn(name = "TIME_ZONE_ID")
-	private TimeZone timeZone;
+    @ManyToOne
+    @JoinColumn( name = "TIME_ZONE_ID" )
+    private TimeZone timeZone;
 
-	@Column(name = "BHP_DSGNATN")
-	private String belhopatDesignation;
+    @Column( name = "BHP_DSGNATN" )
+    private String belhopatDesignation;
 
-	public String getBelhopatDesignation() {
-		return belhopatDesignation;
-	}
+    public Employee( Long employeeId ) {
+        super();
+        this.setId( employeeId );
+    }
 
-	public void setBelhopatDesignation(String belhopatDesignation) {
-		this.belhopatDesignation = belhopatDesignation;
-	}
+    public Employee() {
+        super();
+    }
 
-	public String getEmployeeId() {
-		return employeeId;
-	}
+    public String getBelhopatDesignation() {
+        return belhopatDesignation;
+    }
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
+    public void setBelhopatDesignation( String belhopatDesignation ) {
+        this.belhopatDesignation = belhopatDesignation;
+    }
 
-	public User getEmployeeUser() {
-		return employeeUser;
-	}
+    public String getEmployeeId() {
+        return employeeId;
+    }
 
-	public void setEmployeeUser(User employeeUser) {
-		this.employeeUser = employeeUser;
-	}
+    public void setEmployeeId( String employeeId ) {
+        this.employeeId = employeeId;
+    }
 
-	public Date getJoiningDate() {
-		return joiningDate;
-	}
+    public User getEmployeeUser() {
+        return employeeUser;
+    }
 
-	public void setJoiningDate(Date joiningDate) {
-		this.joiningDate = joiningDate;
-	}
+    public void setEmployeeUser( User employeeUser ) {
+        this.employeeUser = employeeUser;
+    }
 
-	public Candidate getEmployeeMaster() {
-		return employeeMaster;
-	}
+    public Date getJoiningDate() {
+        return joiningDate;
+    }
 
-	public void setEmployeeMaster(Candidate employeeMaster) {
-		this.employeeMaster = employeeMaster;
-	}
+    public void setJoiningDate( Date joiningDate ) {
+        this.joiningDate = joiningDate;
+    }
 
-	public String getOfficialEmail() {
-		return officialEmail;
-	}
+    public Candidate getEmployeeMaster() {
+        return employeeMaster;
+    }
 
-	public void setOfficialEmail(String officialEmail) {
-		this.officialEmail = officialEmail;
-	}
+    public void setEmployeeMaster( Candidate employeeMaster ) {
+        this.employeeMaster = employeeMaster;
+    }
 
-	public LookupDetail getBusinessUnit() {
-		return businessUnit;
-	}
+    public String getOfficialEmail() {
+        return officialEmail;
+    }
 
-	public void setBusinessUnit(LookupDetail businessUnit) {
-		this.businessUnit = businessUnit;
-	}
+    public void setOfficialEmail( String officialEmail ) {
+        this.officialEmail = officialEmail;
+    }
 
-	public Employee getAccountManager() {
-		return accountManager;
-	}
+    public LookupDetail getBusinessUnit() {
+        return businessUnit;
+    }
 
-	public void setAccountManager(Employee accountManager) {
-		this.accountManager = accountManager;
-	}
+    public void setBusinessUnit( LookupDetail businessUnit ) {
+        this.businessUnit = businessUnit;
+    }
 
-	public Employee getHrRecruiter() {
-		return hrRecruiter;
-	}
+    public Employee getAccountManager() {
+        return accountManager;
+    }
 
-	public void setHrRecruiter(Employee hrRecruiter) {
-		this.hrRecruiter = hrRecruiter;
-	}
+    public void setAccountManager( Employee accountManager ) {
+        this.accountManager = accountManager;
+    }
 
-	public Employee getHrManager() {
-		return hrManager;
-	}
+    public Employee getHrRecruiter() {
+        return hrRecruiter;
+    }
 
-	public void setHrManager(Employee hrManager) {
-		this.hrManager = hrManager;
-	}
+    public void setHrRecruiter( Employee hrRecruiter ) {
+        this.hrRecruiter = hrRecruiter;
+    }
 
-	public Employee getReportingManager() {
-		return reportingManager;
-	}
+    public Employee getHrManager() {
+        return hrManager;
+    }
 
-	public void setReportingManager(Employee reportingManager) {
-		this.reportingManager = reportingManager;
-	}
+    public void setHrManager( Employee hrManager ) {
+        this.hrManager = hrManager;
+    }
 
-	public Country getWorkLocation() {
-		return workLocation;
-	}
+    public Employee getReportingManager() {
+        return reportingManager;
+    }
 
-	public void setWorkLocation(Country workLocation) {
-		this.workLocation = workLocation;
-	}
+    public void setReportingManager( Employee reportingManager ) {
+        this.reportingManager = reportingManager;
+    }
 
-	public Country getBaseLocation() {
-		return baseLocation;
-	}
+    public Country getWorkLocation() {
+        return workLocation;
+    }
 
-	public void setBaseLocation(Country baseLocation) {
-		this.baseLocation = baseLocation;
-	}
+    public void setWorkLocation( Country workLocation ) {
+        this.workLocation = workLocation;
+    }
 
-	public TimeZone getTimeZone() {
-		return timeZone;
-	}
+    public Country getBaseLocation() {
+        return baseLocation;
+    }
 
-	public void setTimeZone(TimeZone timeZone) {
-		this.timeZone = timeZone;
-	}
+    public void setBaseLocation( Country baseLocation ) {
+        this.baseLocation = baseLocation;
+    }
 
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", employeeUser=" + employeeUser + ", joiningDate=" + joiningDate
-				+ ", employeeMaster=" + employeeMaster + ", officialEmail=" + officialEmail + ", businessUnit="
-				+ businessUnit + ", accountManager=" + accountManager + ", hrRecruiter=" + hrRecruiter + ", hrManager="
-				+ hrManager + ", reportingManager=" + reportingManager + ", workLocation=" + workLocation
-				+ ", baseLocation=" + baseLocation + ", timeZone=" + timeZone + "]";
-	}
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone( TimeZone timeZone ) {
+        this.timeZone = timeZone;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [employeeId=" + employeeId + ", employeeUser=" + employeeUser
+            + ", joiningDate=" + joiningDate
+            + ", employeeMaster=" + employeeMaster + ", officialEmail=" + officialEmail
+            + ", businessUnit="
+            + businessUnit + ", accountManager=" + accountManager + ", hrRecruiter=" + hrRecruiter
+            + ", hrManager="
+            + hrManager + ", reportingManager=" + reportingManager + ", workLocation="
+            + workLocation
+            + ", baseLocation=" + baseLocation + ", timeZone=" + timeZone + "]";
+    }
 
 }

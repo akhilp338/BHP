@@ -69,4 +69,6 @@ public interface BaseService {
 	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException;
 
 	public List<Currency> getCurrencies();
+
+	public Map< String, Long > getEmployeeIdAndCodeMap();
 }

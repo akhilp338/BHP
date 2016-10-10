@@ -38,6 +38,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 	Employee findByEmployeeId(String employeeId);
 
 	@Query("select e.employeeId,e.id " + "from Employee e")
-	List<Object> findAllIdsAndCodes();
+	List<ResponseObject> findAllIdsAndCodes();
 
 }
