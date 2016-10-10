@@ -2,7 +2,6 @@ package com.belhopat.backoffice.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import com.belhopat.backoffice.repository.AttendanceRepository;
 import com.belhopat.backoffice.service.AttendanceService;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.ExcelService;
-import com.belhopat.backoffice.util.DateUtil;
 
 @Component
 public class ExcelServiceImpl implements ExcelService {
@@ -90,12 +88,9 @@ public class ExcelServiceImpl implements ExcelService {
     private UploadResponse uploadLiquidityLimitsExcel( HSSFWorkbook workBook ) throws IOException {
         UploadResponse response = getErrorResponse();
         Map< String, Long > employeeMap = baseService.getEmployeeIdAndCodeMap();
-        int year = 2016;
-        int month = 9;
-        Date date = DateUtil.getDate( month, year );
         try {
             AttendanceExcelParser excelParser =
-                new AttendanceExcelParser( workBook, attendanceRepository, employeeMap, date );
+                new AttendanceExcelParser( workBook, attendanceRepository, employeeMap );
             response = excelParser.getParsedData();
             if ( response.isActionStatus() ) {
                 List< Attendance > attendances = ( List< Attendance > ) response.getList();

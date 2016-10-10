@@ -18,14 +18,12 @@ public class AttendanceExcelParser extends BaseExcelParser {
 
     AttendanceRepository attendanceRepository;
     Map< String, Long > employeeMap;
-    Date date;
 
     public AttendanceExcelParser( HSSFWorkbook workBook,
-        AttendanceRepository attendanceRepository, Map< String, Long > employeeMap, Date date ) {
+        AttendanceRepository attendanceRepository, Map< String, Long > employeeMap ) {
         this.workbook = workBook;
         this.attendanceRepository = attendanceRepository;
         this.employeeMap = employeeMap;
-        this.date = date;
     }
 
     public UploadResponse getParsedData() {

@@ -24,7 +24,7 @@ public class PoiReadExcelFile {
     public static void main( String[] args ) throws ParseException {
         try {
             FileInputStream fileInputStream =
-                new FileInputStream( "/home/sujith/Desktop/Sep_2015.xls" );
+                new FileInputStream( "/home/sujith/Desktop/2015_Sep.xls" );
             HSSFWorkbook workbook = new HSSFWorkbook( fileInputStream );
             // int month = getMonthIndex( "Mar" );
             getEmployeeCodes( workbook );
@@ -59,9 +59,10 @@ public class PoiReadExcelFile {
         return codes;
     }
 
-    private static List< Attendance > getAttendances( HSSFWorkbook workbook ) {
+    private static List< Attendance > getAttendances( HSSFWorkbook workbook ) throws ParseException {
         List< Attendance > attendances = new ArrayList< >();
         Sheet sheet = workbook.getSheetAt( 0 );
+        Date date = getAttendanceMonth( sheet );
         int rowNum = 4;
         while ( rowNum < sheet.getLastRowNum() ) {
             Row row = sheet.getRow( rowNum );
@@ -74,7 +75,6 @@ public class PoiReadExcelFile {
                 Row attendanceRow = sheet.getRow( rowNum + 4 );
                 for ( int cellNum = 1; cellNum <= 30; cellNum++ ) {
                     Attendance attendance = new Attendance();
-                    Date date = getDate( 9, 2016 );
                     Cell cell = attendanceRow.getCell( cellNum );
                     String value = cell.getStringCellValue();
                     String lines[] = value.split( "\\r?\\n" );
@@ -92,6 +92,19 @@ public class PoiReadExcelFile {
             rowNum = rowNum + 6;
         }
         return attendances;
+    }
+
+    private static Date getAttendanceMonth( Sheet sheet ) throws ParseException {
+        Row row = sheet.getRow( 1 );
+        Cell cell = row.getCell( 0 );
+        String value = cell.getStringCellValue();
+        String attendanceMonthAndYear = value.split( ":" )[ 1 ];
+        String monthString = attendanceMonthAndYear.split( "-" )[ 0 ].trim();
+        String yearString = attendanceMonthAndYear.split( "-" )[ 1 ].trim();
+        int month = getMonthIndex( monthString );
+        int year = Integer.valueOf( yearString );
+        Date date = getDate( month, year );
+        return date;
     }
 
     private static void setAttendanceDetails( Row row, Attendance attendance ) {
