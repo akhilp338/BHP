@@ -13,7 +13,7 @@
 		}
 		angular.element(document).ready(function () {
             dashBoardTable = angular.element('#tasksList').DataTable({
-            ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "getUserTasks",
+            ajax: urlConfig.http + window.location.host + "/dashboard/api/getDashboardTasks",
             serverSide: true,
             bDestroy: true,
             processing: true,

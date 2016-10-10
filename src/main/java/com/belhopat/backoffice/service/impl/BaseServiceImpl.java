@@ -575,5 +575,13 @@ public class BaseServiceImpl implements BaseService {
 		List<Currency> currencies = currencyRepository.findAll();
 		return currencies;
 	}
+	
+	public Map<String,Long> getEmployeeIdAndCodeMap(){
+		List<ResponseObject> idAndCodeList = employeeRepository.findAllIdsAndCodes();
+		for (ResponseObject responseObject : idAndCodeList) {
+			
+		}
+		return map;
+	}
 
 }

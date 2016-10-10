@@ -26,6 +26,7 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Task;
+import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.PDFService;
@@ -48,6 +49,9 @@ public class CandidateController {
 	@Autowired
 	PDFService pdfService;
 
+	@Autowired
+	EmployeeRepository employeeRepository;
+
 	/**
 	 * @param datatablesinput
 	 * @return list of candidates fetches the datatable output for candidates.
@@ -62,8 +66,8 @@ public class CandidateController {
 
 	public DataTablesOutput<Candidate> getCandidates(@Valid DataTablesInput input, @RequestParam boolean employee)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-//		EmployeeSalary salary = new EmployeeSalary();
-//		pdfService.generateOfferLetterPDF(salary);
+		// EmployeeSalary salary = new EmployeeSalary();
+		// pdfService.generateOfferLetterPDF(salary);
 		return candidateService.getCandidates(input, employee);
 	}
 
@@ -150,7 +154,7 @@ public class CandidateController {
 	public List<SalaryGrade> getSalaryGrades() {
 		return candidateService.getSalaryGrades();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/requestForApproval", method = RequestMethod.POST)
 	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
@@ -159,7 +163,8 @@ public class CandidateController {
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(@RequestBody EmployeeSalary employeeSalary)
+			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return baseService.saveSalaryAndOfferLetter(employeeSalary);
 	}
 
