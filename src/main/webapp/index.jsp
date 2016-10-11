@@ -119,6 +119,7 @@
         <script src="/BelhopatBackOffice/app/components/bankacc/AddbankAcc_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/bankacc/BankAcc_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/Attendance/AttendanceMgmtCtrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/reimbursement/Reimbursement_Ctrl.js"></script>
         <style>
             [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

@@ -377,7 +377,18 @@
                         controllerAs: 'vm'
                     }
                 }
-            });
+            })
+            //Attendance States Routing
+                .state('coreuser.attendance', {
+                    url: urlConfig.root_path + 'attendance',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/Attendance/attendance.html',
+                            controller: 'AttendanceMgmtCtrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                });
     };
     angular.module('coreModule').config(Core_Routes);
 })();
