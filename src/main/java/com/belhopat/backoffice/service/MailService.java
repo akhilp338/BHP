@@ -10,6 +10,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 
 public interface MailService {
@@ -37,5 +38,7 @@ public interface MailService {
 	public void sendReimburseApprovalMail(Reimburse reimburse);
 
 	public void sendReimburseRejectionMail(Reimburse reimburse);
+
+	public void sendVendorApprRejectMail(Vendor vendor,String status) throws MessagingException;
 
 }

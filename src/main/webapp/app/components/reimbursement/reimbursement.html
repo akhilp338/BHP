@@ -77,6 +77,13 @@
                         class="fa fa-plus" aria-hidden="true"></i></span>
                 <span class="text">Add data to table</span>              
             </button>
+            
+            <button ng-click="vm.reimburse()" id="reimburse-button"
+                class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
+            <span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="text">Reimburse</span>              
+        </button>
         </div>
         <table id="reim-table" class="display cell-border" cellspacing="0" width="100%">
             <thead>                    
@@ -85,7 +92,7 @@
 
                 <tr class="input-row">    
             <!--<form name="reim-addForm" id="reim-addForm">-->
-                <td><input validation="required:alt=Required field" type="text" id="reim-date" ng-model="vm.reim.reimSet.date" id="reim-date" name="reim-date" ></td>
+                <td><input validation="required:alt=Required field"type="text"  id="reim-date" ng-model="vm.reim.reimSet.date" id="reim-date" name="reim-date" ></td>
                 <td><input validation="required:alt=Required field"type="text"  id="reim-description" ng-model="vm.reim.reimSet.description" id="reim-desc" name="reim-desc" ></td>
                 <td><select name="currency"  id="reim-currency"
                                     class="form-input width-100"
@@ -101,14 +108,6 @@
 
             </tbody>
         </table>            
-    </div>
-    <div class="bottom-button-liner">        
-        <button ng-click="vm.reimburse()"
-                class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
-            <span class="fa-stack fa-lg pull-left"><i
-                    class="fa fa-check" aria-hidden="true"></i></span>
-            <span class="text">Reimburse</span>              
-        </button>
     </div>
 </div>
 

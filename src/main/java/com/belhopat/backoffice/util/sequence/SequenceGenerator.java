@@ -83,5 +83,18 @@ public class SequenceGenerator {
         return reimburseId;
 
     }
+    
+    /**
+     * @param increment
+     * @return Vendor-ID
+     * Generates sequence for listing of Vendors
+     */
+    public static String generateVendorId( Long increment ) {
+        String vendorId = "BHP-V-";
+        Long sequence = getSequenceNumber( increment );
+        vendorId = vendorId + sequence;
+        return vendorId;
+
+    }
 
 }

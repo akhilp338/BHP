@@ -14,7 +14,7 @@ import org.apache.velocity.tools.generic.DateTool;
  * @author BHP_DEV A util file for date format conversion
  */
 public class DateUtil extends DateTool {
-
+	
 	public static String getCurrentDateInGivenFormat(String givenDateFormat) throws ParseException {
 		SimpleDateFormat localDateFormat = new SimpleDateFormat(givenDateFormat);
 		return localDateFormat.format(new Date());
@@ -237,6 +237,14 @@ public class DateUtil extends DateTool {
 		DateFormat df = new SimpleDateFormat("MM");
 		String mm = df.format(Calendar.getInstance().getTime());
 		return mm;
+	}
+	
+	public static int getFiscalYear() {
+		int    FIRST_FISCAL_MONTH  = Calendar.MARCH;
+		Calendar calendarDate = Calendar.getInstance();
+		int month = calendarDate.get(Calendar.MONTH);
+		int year = calendarDate.get(Calendar.YEAR);
+		return (month >= FIRST_FISCAL_MONTH) ? year : year - 1;
 	}
 
 	public static Date getDate(int month, int year) {
