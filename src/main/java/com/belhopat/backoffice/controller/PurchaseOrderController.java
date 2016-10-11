@@ -20,9 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.State;
-import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.service.BaseService;
+import com.belhopat.backoffice.service.PurchaseOrderService;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -35,6 +36,9 @@ public class PurchaseOrderController {
 
 	@Autowired
 	BaseService baseService;
+	
+	@Autowired
+	PurchaseOrderService purchaseOrderService;
 
 	/**
 	 * @param requestObject
@@ -57,45 +61,44 @@ public class PurchaseOrderController {
 	@ResponseBody
 	@RequestMapping(value = "/getAllPurchaseOrders", method = RequestMethod.GET)
 
-	public DataTablesOutput<Vendor> getAllPurchaseOrders(@Valid DataTablesInput input)
+	public DataTablesOutput<PurchaseOrder> getAllPurchaseOrders(@Valid DataTablesInput input)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
-		return vendorService.getApprovedVendors(input);
+		return purchaseOrderService.getAllPurchaseOrders(input);
 	}
 	
 	/**
 	 * @param requestObject
-	 * @return Vendor For edit vendor , gets the id and fetches the
-	 *         vendor from database
+	 * @return PurchaseOrder For edit PurchaseOrder , gets the id and fetches the
+	 *         PurchaseOrder from database
 	 * @throws ParseException
 	 * @throws IOException
 	 * @throws DocumentException
 	 * @throws MalformedURLException
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getVendor", method = RequestMethod.POST)
-
-	public ResponseEntity<Vendor> getVendor(@RequestBody RequestObject requestObject) {
-		return vendorService.getVendorById(requestObject.getId());
+	@RequestMapping(value = "/getPurchaseOrder", method = RequestMethod.POST)
+	public ResponseEntity<PurchaseOrder> getPurchaseOrder(@RequestBody RequestObject requestObject) {
+		return purchaseOrderService.getPurchaseOrderById(requestObject.getId());
 	}
 	
 
 	/**
-	 * @param vendor
-	 * @return responseString To save the vendor after edit or add
+	 * @param PurchaseOrder
+	 * @return responseString To save the PurchaseOrder after edit or add
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/saveOrUpdateVendor", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, String>> saveOrUpdateVendor(@RequestBody Vendor vendor) {
-		return vendorService.saveOrUpdateVendor(vendor);
+	@RequestMapping(value = "/saveOrUpdatePurchaseOrder", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, String>> saveOrUpdatePurchaseOrder(@RequestBody PurchaseOrder purchaseOrder) {
+		return purchaseOrderService.saveOrUpdatePurchaseOrder(purchaseOrder);
 	}
 	
 	/**
-	 * @param vendor
-	 * @return responseString To save the vendor after edit or add
+	 * @param PurchaseOrder
+	 * @return responseString To save the PurchaseOrder after edit or add
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/approveOrRejectVendor", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, String>> approveOrRejectVendor(@RequestBody ResponseObject requestObject) {
-		return vendorService.approveOrRejectVendor(requestObject);
+	@RequestMapping(value = "/approveOrRejectPurchaseOrder", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, String>> approveOrRejectPurchaseOrder(@RequestBody ResponseObject requestObject) {
+		return purchaseOrderService.approveOrRejectPurchaseOrder(requestObject);
 	}
 }
