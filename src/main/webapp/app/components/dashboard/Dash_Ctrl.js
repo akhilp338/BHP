@@ -36,19 +36,21 @@
             }];
 
         $rootScope.active = 'dashboard';
-        vm.init = function () {
-            vm.url = "api/candidate/getCurrentUserTasks";
-            Core_Service.getUserTasks(vm.url).then(function (response) {
-                console.log(response.data)
-
-            }, function (error) {
-                console.log(error)
-            });
-        }
+//        vm.init = function () {
+//            vm.url = "api/dashboard/getDashboardTasks";
+//            debugger;
+//            Core_Service.getUserTasks(vm.url).then(function (response) {
+//                console.log(response.data)
+//
+//            }, function (error) {
+//                console.log(error)
+//            });
+//        }
         angular.element(document).ready(function () {
             dashBoardTable = angular.element('#tasksList').DataTable({
-                data: taskList,
-                serverSide: false,
+//                data: taskList,
+                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "dashboard/getDashboardTasks",
+                serverSide: true,
                 bDestroy: true,
                 processing: true,
                 responsive: true,
@@ -64,28 +66,26 @@
                 },
                 order: [[0, "desc"]],
                 aoColumns: [{
-                        data: 'id',
-                        visible: false
-                    }, {
                         title: "#",
                         data: 'id',
                         sClass: "task-label-container",
                         render: function (data, type, row) {
                             var className;
-                                className = row.task.status.toLowerCase() == 'completed' ? 'label-success' : 'label-warning'
+                                className = row.status.toLowerCase() == 'completed' ? 'label-success' : 'label-warning'
                             $rootScope.showLoader = false;
-                            return '<div class="circle '+ className +'"><p>'+data+'</p></div>'
+                            return '<div class="circle '+ className +'"><p>T'+data+'</p></div>'
                         }
                     }, {
                         title: "Task",
-                        data: 'task.taskDesc',
+                        data: 'masterTask.taskDesc',
                         render: function (data, type, row) {
-                            return '<div class="data-task-container"><h4 class="col-md-12 col-lg-12">'+row.task.taskName+'</h4><p class="col-md-12 col-lg-12">'+data+'</p></div>'
+                            return '<div class="data-task-container"><h4 class="col-md-12 col-lg-12">'
+                            +data+'</h4><p class="col-md-12 col-lg-12">'+data+'</p></div>'
                             //return data == null ? "" : data;
                         }
                     }, {
-                        data: 'task.status',
-                        title: "Status",
+                    	title: "Status",
+                        data: 'status',
                         bSortable: true,
                         sClass: "button-column",
                         render: function (data) {

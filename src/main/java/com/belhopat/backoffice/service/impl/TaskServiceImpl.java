@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.data.jpa.domain.Specification;
@@ -24,6 +25,7 @@ import com.belhopat.backoffice.session.SessionManager;
 @Component
 public class TaskServiceImpl implements TaskService {
 
+	@Autowired
 	TaskRepository taskRepository;
 
 	@Override

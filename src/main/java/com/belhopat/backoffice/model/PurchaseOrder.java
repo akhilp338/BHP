@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +15,7 @@ public class PurchaseOrder extends BaseEntity {
 	private String purchaseOrderNo;
 
 	@Column(name = "PO_DATE")
-	private Address poDate;
+	private Date poDate;
 
 	@Column(name = "CURNCY")
 	private String Currency;
@@ -32,10 +31,10 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "STATUS", length = 100)
 	private String status;
-	
+
 	@Column(name = "VNDR_NAME", length = 100)
 	private String vendorName;
-	
+
 	@Column(name = "PO_DESC", length = 200)
 	private String poDesc;
 
@@ -47,11 +46,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.purchaseOrderNo = purchaseOrderNo;
 	}
 
-	public Address getPoDate() {
+	public Date getPoDate() {
 		return poDate;
 	}
 
-	public void setPoDate(Address poDate) {
+	public void setPoDate(Date poDate) {
 		this.poDate = poDate;
 	}
 
@@ -110,6 +109,5 @@ public class PurchaseOrder extends BaseEntity {
 	public void setPoDesc(String poDesc) {
 		this.poDesc = poDesc;
 	}
-
 
 }

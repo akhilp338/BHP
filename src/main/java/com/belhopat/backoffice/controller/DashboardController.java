@@ -29,7 +29,7 @@ import com.itextpdf.text.DocumentException;
  *
  */
 @Controller
-@RequestMapping("/dashboard/api")
+@RequestMapping("/api/dashboard")
 public class DashboardController {
 
 	@Autowired
