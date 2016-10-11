@@ -46,19 +46,21 @@ public interface BaseService {
 	public ResponseEntity<List<Task>> createOfferLetter(RequestObject requestObject)
 			throws MalformedURLException, DocumentException, IOException, ParseException;
 
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws MalformedURLException, DocumentException, IOException, ParseException;
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary)
+			throws MalformedURLException, DocumentException, IOException, ParseException;
 
 	public ResponseEntity<List<Task>> getCurrentUserTasks();
 
 	public ResponseEntity<EmployeeSalary> getSalarySplit(Double grossSalary, String grade);
-	
-	public List<Task> updateTaskList(String taskName) ;
-	
+
+	public List<Task> updateTaskList(String taskName);
+
 	public Task createNewTaskList(String taskName);
 
 	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
-	public void previewOfferLetter(Long empSalId, HttpServletResponse response) throws IOException, DocumentException, ParseException;
+	public void previewOfferLetter(Long empSalId, HttpServletResponse response)
+			throws IOException, DocumentException, ParseException;
 
 	public DataTablesOutput<Task> getUserTasks(DataTablesInput input);
 
@@ -68,7 +70,7 @@ public interface BaseService {
 
 	public PersonalInfoDTO getPersonalInfo(Candidate candidate) throws ParseException;
 
-	public List<Currency> getCurrencies();
+	public ResponseEntity<List<Currency>> getCurrencies();
 
-	public Map< String, Long > getEmployeeIdAndCodeMap();
+	public Map<String, Long> getEmployeeIdAndCodeMap();
 }
