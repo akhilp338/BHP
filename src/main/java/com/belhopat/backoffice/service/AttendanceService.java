@@ -10,5 +10,5 @@ import com.belhopat.backoffice.model.Attendance;
 @Service
 public interface AttendanceService {
 
-    public UploadResponse saveAttendances( List< Attendance > attendances );
+	public UploadResponse saveAttendances(List<Attendance> attendances);
 }

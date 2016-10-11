@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.excel;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,211 +13,158 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Attendance;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.repository.AttendanceRepository;
+import com.belhopat.backoffice.util.DateUtil;
 
 public class AttendanceExcelParser extends BaseExcelParser {
 
-    AttendanceRepository attendanceRepository;
-    Map< String, Long > employeeMap;
+	AttendanceRepository attendanceRepository;
+	Map<String, Long> employeeMap;
 
-    public AttendanceExcelParser( HSSFWorkbook workBook,
-        AttendanceRepository attendanceRepository, Map< String, Long > employeeMap ) {
-        this.workbook = workBook;
-        this.attendanceRepository = attendanceRepository;
-        this.employeeMap = employeeMap;
-    }
+	public AttendanceExcelParser(HSSFWorkbook workBook, AttendanceRepository attendanceRepository,
+			Map<String, Long> employeeMap) {
+		this.workbook = workBook;
+		this.attendanceRepository = attendanceRepository;
+		this.employeeMap = employeeMap;
+	}
 
-    public UploadResponse getParsedData() {
-        UploadResponse response = getErrorResponse();
-        List< String > employeeCodes = getEmployeeCodes();
-        boolean containsDuplicates = containsDuplicates( employeeCodes );
-        if ( containsDuplicates ) {
-            response.setStatusMessage( "as" );
-            return response;
-        }
-        boolean isNoOfColumsValid = isNoOfColumsValid();
-        if ( !isNoOfColumsValid ) {
-            response.setStatusMessage( "sda" );
-            return response;
-        }
-        List< Attendance > attendances = attendanceRepository.findAll();
-        // response = getLiquiditySourcesLimits(days, liquiditySourcesLimits);
-        return response;
-    }
+	public UploadResponse getParsedData() throws ParseException {
+		UploadResponse response = getErrorResponse();
+		List<String> employeeCodes = getEmployeeCodes();
+		if (employeeCodes.isEmpty()) {
+			response.setStatusMessage("File contains wrong data. Please retry");
+			return response;
+		}
+		boolean containsDuplicates = containsDuplicates(employeeCodes);
+		if (containsDuplicates) {
+			response.setStatusMessage("Duplicate employee codes exists");
+			return response;
+		}
+		boolean isDataAlreadyExistForMonth = isDataAlreadyExistForMonth();
+		if (isDataAlreadyExistForMonth) {
+			response.setStatusMessage("File for this month is already uploaded");
+			return response;
+		}
+		List<Attendance> attendances = getAttendances();
+		if (attendances.isEmpty()) {
+			response.setStatusMessage("File contains wrong data. Please retry");
+			return response;
+		}
+		boolean isFileContailsPartialData = isFileContailsPartialData();
+		if (isFileContailsPartialData) {
+			response.setStatusMessage("File contains partial data. Please retry");
+			return response;
+		}
+		response = getSuccessResponse();
+		response.setList(attendances);
+		return response;
+	}
 
-    // private UploadResponse getLiquiditySourcesLimits(int days,
-    // List<LiquiditySourcesLimitViewEntity> liquiditySourcesLimits) {
-    // List<LiquiditySourcesLimitViewEntity> lsLimits = new ArrayList<>();
-    // UploadResponse response = getErrorResponse();
-    // Sheet firstSheet = workbook.getSheetAt(0);
-    // for (Row row : firstSheet) {
-    // if (row != null && row.getRowNum() > 0) {
-    // LiquiditySourcesLimitViewEntity lsLimit = null;
-    // lsLimit = getLiquiditySourcesLimit(row, liquiditySourcesLimits);
-    // if (lsLimit == null) {
-    // response.setStatusMessage(Constants.WRONG_DATA_TYPE_ACNT_CODE);
-    // return response;
-    // }
-    // response = setAvailabilityLimit(row, lsLimit);
-    // if (!response.isActionStatus()) {
-    // return response;
-    // }
-    // response = setDayNumbers(row, lsLimit, days);
-    // if (!response.isActionStatus()) {
-    // return response;
-    // }
-    // lsLimits.add(lsLimit);
-    // }
-    // if (!lsLimits.isEmpty()) {
-    // response = getSuccessResponse();
-    // response.setList(lsLimits);
-    // }
-    // }
-    // return response;
-    // }
+	private boolean isFileContailsPartialData() {
+		return false;
+	}
 
-    private List< String > getEmployeeCodes() {
-        Sheet sheet = workbook.getSheetAt( 0 );
-        int rowNum = 1;
-        while ( rowNum < sheet.getLastRowNum() ) {
+	private List<String> getEmployeeCodes() {
+		List<String> codes = new ArrayList<>();
+		Sheet sheet = workbook.getSheetAt(0);
+		int rowNum = 4;
+		while (rowNum < sheet.getLastRowNum()) {
+			Row row = sheet.getRow(rowNum);
+			Cell employeeCodeCell = row.getCell(0);
+			boolean isCompleted = isParsingCompleted(employeeCodeCell);
+			if (isCompleted) {
+				break;
+			}
+			String code = getEmployeeCode(employeeCodeCell);
+			if (code == null) {
+				break;
+			}
+			codes.add(code);
+			rowNum = rowNum + 6;
+		}
+		return codes;
+	}
 
-        }
-        return null;
-    }
+	private List<Attendance> getAttendances() throws ParseException {
+		List<Attendance> attendances = new ArrayList<>();
+		Sheet sheet = workbook.getSheetAt(0);
+		Date date = getAttendanceMonth(sheet);
+		int rowNum = 4;
+		while (rowNum < sheet.getLastRowNum()) {
+			Row row = sheet.getRow(rowNum);
+			Cell employeeCodeCell = row.getCell(0);
+			boolean isCompleted = isParsingCompleted(employeeCodeCell);
+			if (isCompleted) {
+				return attendances;
+			} else if (employeeCodeCell.getCellType() == Cell.CELL_TYPE_STRING) {
+				Row attendanceRow = sheet.getRow(rowNum + 4);
+				for (int cellNum = 1; cellNum <= 30; cellNum++) {
+					Attendance attendance = new Attendance();
+					Cell cell = attendanceRow.getCell(cellNum);
+					String value = cell.getStringCellValue();
+					String lines[] = value.split("\\r?\\n");
+					setEmployee(employeeCodeCell, attendance);
+					attendance.setDate(DateUtil.setDayOfMonth(date, cellNum));
+					attendance.setInTime(lines[0]);
+					attendance.setOutTime(lines[1]);
+					attendance.setLateMinutes(Integer.valueOf(lines[2]));
+					attendance.setEarlyMinutes(Integer.valueOf(lines[3]));
+					attendance.setWorkHours(lines[4]);
+					attendance.setStatus(lines[5]);
+					attendances.add(attendance);
+				}
+			}
+			rowNum = rowNum + 6;
+		}
+		return attendances;
+	}
 
-    private boolean isNoOfDaysFieldValid( int days ) {
-        Sheet sheet = workbook.getSheetAt( 0 );
-        double value = 0;
-        for ( int rowNum = 1; rowNum < sheet.getLastRowNum() + 1; rowNum++ ) {
-            Row row = sheet.getRow( rowNum );
-            if ( row != null ) {
-                Cell cell = row.getCell( 3 );
-                if ( cell != null ) {
-                    if ( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) {
-                        value = cell.getNumericCellValue();
-                    }
-                    else if ( cell.getCellType() == Cell.CELL_TYPE_STRING ) {
-                        String stringValue = cell.getStringCellValue();
-                        value = Double.valueOf( stringValue );
-                    }
-                }
-                if ( value > 0 && value < days ) {
-                    break;
-                }
-                else {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+	private Date getAttendanceMonth(Sheet sheet) throws ParseException {
+		Row row = sheet.getRow(1);
+		Cell cell = row.getCell(0);
+		String value = cell.getStringCellValue();
+		String attendanceMonthAndYear = value.split(":")[1];
+		String monthString = attendanceMonthAndYear.split("-")[0].trim();
+		String yearString = attendanceMonthAndYear.split("-")[1].trim();
+		int month = DateUtil.getMonthIndex(monthString);
+		int year = Integer.valueOf(yearString);
+		Date date = DateUtil.getDate(month, year);
+		return date;
+	}
 
-    private boolean isNoOfColumsValid() {
-        int noOfColumns = getNoOfColumns();
-        if ( noOfColumns == 4 ) {
-            return true;
-        }
-        return false;
-    }
+	private void setEmployee(Cell employeeCodeCell, Attendance attendance) {
+		String code = getEmployeeCode(employeeCodeCell);
+		if (code != null) {
+			attendance.setEmployee(new Employee(employeeMap.get(code)));
+		}
+	}
 
-    // private LiquiditySourcesLimitViewEntity getLiquiditySourcesLimit(Row row,
-    // List<LiquiditySourcesLimitViewEntity> liquiditySourcesLimits) {
-    // if (row != null) {
-    // UserEntity loggedInUser = SessionManager.getCurrentUserAsEntity();
-    // Cell cell = row.getCell(0);
-    // if (cell != null) {
-    // String sourceName = null;
-    // if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-    // double value = cell.getNumericCellValue();
-    // sourceName = String.valueOf(value).split("\\.")[0];
-    // } else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
-    // sourceName = cell.getStringCellValue();
-    // }
-    // if (sourceName != null) {
-    // for (LiquiditySourcesLimitViewEntity lsLimit : liquiditySourcesLimits) {
-    // if (lsLimit.getSourceName().equals(sourceName)
-    // && lsLimit.getInstance().getId().equals(loggedInUser.getInstance().getId())) {
-    // return lsLimit;
-    // }
-    // }
-    // return getNewLiquiditySourcesLimit(sourceName);
-    // }
-    // }
-    // }
-    // return null;
-    // }
-    //
-    // private LiquiditySourcesLimitViewEntity getNewLiquiditySourcesLimit(String sourceName) {
-    // LiquiditySourcesLimitViewEntity lsLimit = new LiquiditySourcesLimitViewEntity();
-    // lsLimit.setSourceName(sourceName);
-    // return lsLimit;
-    // }
-    //
-    // private UploadResponse setAvailabilityLimit(Row row, LiquiditySourcesLimitViewEntity lsLimit)
-    // {
-    // UploadResponse response = getErrorResponse();
-    // if (row != null) {
-    // Cell cell = row.getCell(2);
-    // if (cell != null) {
-    // Double value = null;
-    // if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-    // value = cell.getNumericCellValue();
-    // } else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
-    // String stringValue = cell.getStringCellValue();
-    // value = Double.valueOf(stringValue);
-    // } else {
-    // response.setStatusMessage(Constants.WRONG_DATA_TYPE_NOT_CAP);
-    // return response;
-    // }
-    // lsLimit.setAvailabilityLimit(BigDecimal.valueOf(value));
-    // response.setActionStatus(true);
-    // }
-    // }
-    // return response;
-    // }
-    //
-    // private UploadResponse setDayNumbers(Row row, LiquiditySourcesLimitViewEntity lsLimit, int
-    // days) {
-    // UploadResponse response = getErrorResponse();
-    // Double noOfDays = null;
-    // if (row != null) {
-    // String dayNumbers = "";
-    // Cell cell = row.getCell(3);
-    // if (cell != null) {
-    // noOfDays = getDoubleCellValue(cell);
-    // if (!(noOfDays != null && noOfDays > 0)) {
-    // return response;
-    // }
-    // }
-    // for (int cellNum = 0; cellNum < noOfDays; cellNum++) {
-    // dayNumbers = dayNumbers.isEmpty() ? dayNumbers : dayNumbers + ",";
-    // dayNumbers = dayNumbers + String.valueOf(cellNum);
-    // }
-    // lsLimit.setDayNumbers(dayNumbers);
-    // response.setActionStatus(true);
-    // }
-    // return response;
-    // }
+	private String getEmployeeCode(Cell employeeCodeCell) {
+		String code = null;
+		if (employeeCodeCell.getCellType() == Cell.CELL_TYPE_STRING) {
+			String value = employeeCodeCell.getStringCellValue();
+			code = value.split(":")[1].trim();
+		}
+		return code;
+	}
 
-    private List< String > getFundingSources() {
-        Sheet sheet = workbook.getSheetAt( 0 );
-        List< String > fundingSources = new ArrayList< >();
-        for ( int rowNum = 1; rowNum < sheet.getLastRowNum() + 1; rowNum++ ) {
-            Row row = sheet.getRow( rowNum );
-            if ( row != null ) {
-                Cell cell = row.getCell( 0 );
-                if ( cell != null ) {
-                    if ( cell.getCellType() == Cell.CELL_TYPE_NUMERIC ) {
-                        double value = cell.getNumericCellValue();
-                        String stringValue = String.valueOf( value ).split( "\\." )[ 0 ];
-                        fundingSources.add( stringValue );
-                    }
-                    else if ( cell.getCellType() == Cell.CELL_TYPE_STRING ) {
-                        fundingSources.add( cell.getStringCellValue() );
-                    }
-                }
-            }
-        }
-        return fundingSources;
-    }
+	private boolean isParsingCompleted(Cell employeeCodeCell) {
+		if (employeeCodeCell == null || employeeCodeCell.getCellType() == Cell.CELL_TYPE_BLANK) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isDataAlreadyExistForMonth() throws ParseException {
+		Sheet sheet = workbook.getSheetAt(0);
+		Date date = getAttendanceMonth(sheet);
+		Date startDate = DateUtil.getStartDateOfMonth(date);
+		Date endDate = DateUtil.getEndDateOfMonth(date);
+		Integer attendanceCountByMonth = attendanceRepository.findCountByDate(startDate, endDate);
+		if (attendanceCountByMonth > 0) {
+			return true;
+		}
+		return false;
+	}
 }

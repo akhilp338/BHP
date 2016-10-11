@@ -22,7 +22,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public UploadResponse saveAttendances( List< Attendance > attendances ) {
         UploadResponse response = new UploadResponse();
-        if ( attendances != null && attendances.isEmpty() ) {
+        if ( attendances != null && !attendances.isEmpty() ) {
             attendanceRepository.save( attendances );
         }
         return response;

@@ -29,6 +29,7 @@ import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
+import com.belhopat.backoffice.service.ExcelService;
 import com.belhopat.backoffice.service.PDFService;
 import com.itextpdf.text.DocumentException;
 
@@ -50,6 +51,9 @@ public class CandidateController {
 	PDFService pdfService;
 
 	@Autowired
+	ExcelService excelService;
+
+	@Autowired
 	EmployeeRepository employeeRepository;
 
 	/**
@@ -68,6 +72,7 @@ public class CandidateController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		// EmployeeSalary salary = new EmployeeSalary();
 		// pdfService.generateOfferLetterPDF(salary);
+//		excelService.uploadExcel("ATNDNCE", null);
 		return candidateService.getCandidates(input, employee);
 	}
 
