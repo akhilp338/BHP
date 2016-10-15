@@ -15,7 +15,7 @@
 		<spring-data-jpa-datatables.version>2.1</spring-data-jpa-datatables.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 
-		<spring.security.version>4.0.2.RELEASE</spring.security.version>
+		<spring.security.version>4.1.1.RELEASE</spring.security.version>
 		<javassist.version>3.18.1-GA</javassist.version>
 		<!-- persistence -->
 		<hibernate.version>4.3.5.Final</hibernate.version>

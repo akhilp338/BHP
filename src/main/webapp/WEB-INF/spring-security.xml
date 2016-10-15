@@ -7,17 +7,14 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
 
-	<http auto-config="true">
+	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/api/**" access="hasRole('ROLE_USER')" />
 		<form-login 
-		    login-page="/login" 
+		     login-processing-url="/login"
 		   always-use-default-target="true" authentication-failure-url="/loginerror"
 			default-target-url="/dashboard" />
 		<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true"  />
 		<csrf disabled="true"/>
-		<session-management >
-		<concurrency-control max-sessions="1000" error-if-maximum-exceeded="true"/>
-		</session-management>
 	</http>
 
 	<authentication-manager>
