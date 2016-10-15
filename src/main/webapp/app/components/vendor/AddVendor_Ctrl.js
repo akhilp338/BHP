@@ -2,8 +2,7 @@
     var AddVendor_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
         $rootScope.showLoader = true;
-        vm.registration = {};
-        
+        vm.registration = {};        
         vs = new validationService({
             controllerAs: vm
         });
@@ -43,13 +42,13 @@
         vm.vendorRegister = function () {
             vm.registerUrl = "api/vendor/saveOrUpdateVendor";
 //            if(vs.checkFormValidity($scope.regForm)){
-                Core_Service.sweetAlertWithConfirm("Client details filled!", "Are you sure to register this Client?", "warning", function(){
+                Core_Service.sweetAlertWithConfirm("Vendor details filled!", "Are you sure to register this Vendor?", "warning", function(){
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
-                    	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.client");
+                    	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.vendor");
                     }, function (error) {
                     	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
-                    			"error","coreuser.client");
+                    			"error","coreuser.vendor");
                     });
                 });
 //            }

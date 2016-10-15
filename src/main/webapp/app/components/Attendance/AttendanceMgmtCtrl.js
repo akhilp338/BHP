@@ -4,13 +4,13 @@
         vm.attendance = {};
         $rootScope.active = 'attendance';
         Core_Service.getAttendanceDropDownData().then(function (res) {
-    		vm.attendance.lookups = res;
-	    }, function (err) {
-	    	console.log(err)
-	    });
+            vm.attendance.lookups = res;
+        }, function (err) {
+            console.log(err)
+        });
         angular.element(document).ready(function () {
             attendanceTable = angular.element('#attendanceTable').DataTable({
-            	ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
+                ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
                 serverSide: true,
                 bDestroy: true,
                 processing: true,
@@ -26,13 +26,13 @@
                 aoColumns: [{
                         data: 'id',
                         visible: false
-                    },{
+                    }, {
                         title: "Date",
                         data: 'date',
-                        render: function (data,row,display) {
-                        	var date =  new Date(data);
-                        	var datestring = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-                        	return datestring;
+                        render: function (data, row, display) {
+                            var date = new Date(data);
+                            var datestring = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                            return datestring;
                         }
                     }, {
                         title: "Employee Code",
@@ -40,31 +40,35 @@
                     }, {
                         title: "Employee Name",
                         data: 'employee.employeeMaster',
-                        render: function (data,row,display) {
-                        	return data.firstName+" "+data.lastName;
+                        render: function (data, row, display) {
+                            return data.firstName + " " + data.lastName;
                         }
-                    },{
+                    }, {
                         title: "In Time",
                         data: 'inTime',
                     }, {
                         title: "Out Time",
                         data: 'outTime',
-                    },{
+                    }, {
                         title: "Late Minutes",
                         data: 'lateMinutes',
                     }, {
                         title: "Early Departure",
                         data: 'earlyMinutes',
-                    },{
+                    }, {
                         title: "Work Hours",
                         data: 'workHours',
                     }, {
                         title: "Status",
                         data: 'status',
                     }]
+
             });
-            
+
         });
+        vm.filterChange = function () {
+
+        }
 
     };
 

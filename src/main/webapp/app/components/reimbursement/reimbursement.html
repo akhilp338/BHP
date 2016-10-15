@@ -1,6 +1,6 @@
 <div class="form-horizontal reim-form" name="reim-form">
 
-     <div class="top-main-head pull-left width-100">
+    <div class="top-main-head pull-left width-100">
         <h4 class="pull-left">Fill Reimbursement Form</h4>	
         <button ng-click="vm.back()"
                 class="logout-button back pull-right add-button" title="Back Button">
@@ -9,9 +9,9 @@
             <span class="text">Back</span>              
         </button>
     </div>
-    
+
     <div class="row">        
-        <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">                        
+        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">                        
             <div class="data-main-container">
                 <header class="data-main-container-header">Basic Information</header>
 
@@ -68,49 +68,96 @@
                 </div>
             </div>
         </div>
-    </div>        
- 
+        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">                        
+            <div class="data-main-container">
+                <header class="data-main-container-header">Add details to Table</header>
+
+                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    <label class="control-label" for="date">Date</label>
+                    <div class="controls">
+                        <p class="input-group">
+                            <input type="text"
+                                   name="date"
+                                   show-button-bar ="false"
+                                   class="form-input date-form"                                           
+                                   ng-model="vm.tableData.date"
+                                   is-open="vm.isDobPickerOpen"
+                                   uib-datepicker-popup="dd-MMM-yyyy"
+                                   datepicker-options="vm.dobDateOptions" 
+                                   readonly/>
+                            <span class="input-group-btn custom-datepick">
+                                <button type="button" 
+                                        class="btn btn-default" 
+                                        ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    <label class="control-label" for="desc">Description</label>
+                    <div class="controls">
+                        <input type="text" name="desc" id="desc"
+                               ng-model="vm.tableData.description" class="form-input width-100"
+                               placeholder="Description"
+                               />
+                    </div>
+                </div>
+
+                <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                    <label class="control-label" for="currency">Currency</label>
+                    <div class="controls">
+                        <select name="currency" ng-model="vm.tableData.currency" validation="required:alt=required"
+                                class="form-input width-100" ng-options="currency.id as (currency.code) for currency in vm.reim.currency">                   
+                            <option value="">--SELECT--</option>
+                        </select>
+                    </div>
+                </div>
+                <div
+                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    <label class="control-label" for="amt">Amount</label>
+                    <div class="controls">
+                        <input type="text" name="amt" id="amt"
+                               ng-model="vm.tableData.amount" class="form-input width-100"
+                               placeholder="Amount"
+                               />
+                    </div>
+                </div>
+                <div
+                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    <label class="control-label" for="remarks">Remarks</label>
+                    <div class="controls">
+                        <input type="text" name="remarks" id="remarks"
+                               ng-model="vm.tableData.remarks" class="form-input width-100"
+                               placeholder="Remarks"
+                               />
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 add-btn-cntnr">
+                    <button ng-click="vm.addToTable($event)"
+                            class="col-lg-6 col-md-6 col-sm-12 col-xs-12 logout-button pull-right add-button confirm-btn" title="Confirm and Register">
+                        <span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-plus" aria-hidden="true"></i></span>
+                        <span class="text">Add data to table</span>              
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>   
+
     <div>
-        <div class="bottom-button-liner">        
-            <button ng-click="vm.addToTable($event)"
-                    class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
-                <span class="fa-stack fa-lg pull-left"><i
-                        class="fa fa-plus" aria-hidden="true"></i></span>
-                <span class="text">Add data to table</span>              
-            </button>
-            
-            <button ng-click="vm.reimburse()" id="reimburse-button"
+        <table  id="reim-table" class="display cell-border" cellspacing="0" width="100%"></table>   
+    </div> 
+    <div class="bottom-button-liner">        
+        <button ng-click="vm.reimburse()" id="reimburse-button"
                 class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
             <span class="fa-stack fa-lg pull-left"><i
                     class="fa fa-check" aria-hidden="true"></i></span>
             <span class="text">Reimburse</span>              
         </button>
-        </div>
-        <table  id="reim-table" class="display cell-border" cellspacing="0" width="100%">
-            <thead>                    
-            </thead>
-            <tbody>
-
-                <tr class="input-row">    
-            <form name="reim-addForm" id="reim-addForm">
-                <td><input validation="required:alt=Required field"type="text"  id="reim-date" ng-model="vm.reim.reimSet.date" id="reim-date" name="reim-date" ></td>
-                <td><input validation="required:alt=Required field"type="text"  id="reim-description" ng-model="vm.reim.reimSet.description" id="reim-desc" name="reim-desc" ></td>
-                <td><select ng-model="vm.reim.reimSet.currency" name="currency"  id="reim-currency" class="form-input width-100">
-<!--                 			ng-options="currency.id as (currency.description) for currency in vm.reim.lookups.CURRENCY"> -->
-                      <option value="">--SELECT--</option>
-                       <option value="1">Indian Rupee</option>
-                        <option value="2">US Dollar</option>
-                    </select>
-                </td>
-                <td><input id="reim-amount" validation="required:alt=Required field" ng-model="vm.reim.reimSet.amount" type="text" id="reim-amount" name="reim-amount" ></td>
-                <td><input id="reim-remarks" validation="required:alt=Required field" ng-model="vm.reim.reimSet.remarks" type="text" id="reim-remarks" name="reim-remarks" ></td>
-                <td></td>
-            </form>
-            </tr>
-
-            </tbody>
-        </table>   
-    </div> 
+    </div>
 </div>
 
 

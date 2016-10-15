@@ -1528,7 +1528,9 @@ fieldset.scheduler-border legend {
 .vendor-form .data-outer,
 .vendor-form,
 .bankacc-form .data-outer,
-.bankacc-form {
+.bankacc-form,
+.reim-form .data-outer,
+.reim-form {
     border-radius: 0;
     border: none !important;
 }
@@ -1537,7 +1539,8 @@ fieldset.scheduler-border legend {
 .client-form .data-main-container,
 .consultant-form .data-main-container,
 .vendor-form .data-main-container,
-.bankacc-form .data-main-container {    
+.bankacc-form .data-main-container,
+.reim-form .data-main-container{    
     width: 98%;
     margin: 10px auto;
     border-radius: 7px;
@@ -2286,20 +2289,12 @@ a.spec-link{
     height: 30px;
     width: 100%;
 }
-#reim-table tr:first-child {
-    background-color: #fcd468;
-}
+
 #reim-table.dataTable tbody tr:not(:first-child) {
     background-color: #FFF;
 }
 .reim-form .back {
     margin-right: 0;
-}
-.reim-form .data-main-container {
-    width: 100%;
-}
-#reim-table tr:first-child .action-delete {
-    display: none;
 }
 #reim-table tr td {
     text-align: center;
@@ -2322,6 +2317,9 @@ a.spec-link{
         margin-bottom: 10px;
     }
 }
+.add-btn-cntnr .add-button{
+   margin-bottom: 20px; 
+}    
 .circle {
     border-radius: 50%;
     font-size: 12px;
