@@ -18,4 +18,6 @@ public interface ReimburseService {
 	public ResponseEntity<Reimburse> getReimburse(Long reimburseId);
 
 	public ResponseEntity<String> approveOrRejectReimburseTask(TaskDTO taskDTO);
+
+	public ResponseEntity<Map<String, List<?>>> getDropDownData();
 }

@@ -10,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.TaskDTO;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Expense;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.MasterTaskRepository;
 import com.belhopat.backoffice.repository.ReimburseRepository;
 import com.belhopat.backoffice.repository.TaskRepository;
@@ -25,6 +27,7 @@ import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.ReimburseService;
 import com.belhopat.backoffice.service.TaskService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
@@ -55,6 +58,9 @@ public class ReimburseServiceImpl implements ReimburseService {
 	@Autowired
 	ReimburseRepository reimburseRepository;
 
+	@Autowired
+	CurrencyRepository currencyRepository;
+
 	@Override
 	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(List<Expense> expenses) {
 		Map<String, String> responseMap = new HashMap<>();
@@ -70,6 +76,14 @@ public class ReimburseServiceImpl implements ReimburseService {
 		reimburseRepository.save(reimburse);
 		sendReimburseVerificationRequest(reimburse);
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		List<Currency> currencies = currencyRepository.findAll();
+		dropDownMap.put(Constants.CURRENCY, currencies);
+		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
 	@Override

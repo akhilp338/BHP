@@ -10,11 +10,12 @@ $rootScope.active = 'reimbursement';
         vm.setDpOpenStatus = function (id) {
         vm[id] = true
         };
-        Core_Service.getCurrency().then(function (res) {
-vm.currency = res;
-}, function (err) {
-console.log(err)
-});
+        Core_Service.getReimburseDropDownData().then(function (res) {
+        	debugger;
+        		vm.reim.lookups = res;
+        }, function (err) {
+        	console.log(err)
+        });
         vs.setGlobalOptions({
         debounce: 1500,
                 scope: $scope,
