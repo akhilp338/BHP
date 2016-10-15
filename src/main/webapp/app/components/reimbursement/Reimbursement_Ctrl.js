@@ -11,7 +11,6 @@ $rootScope.active = 'reimbursement';
         vm[id] = true
         };
         Core_Service.getReimburseDropDownData().then(function (res) {
-        	debugger;
         		vm.reim.lookups = res;
         }, function (err) {
         	console.log(err)
@@ -24,11 +23,11 @@ $rootScope.active = 'reimbursement';
                 displayOnlyLastErrorMsg: true
         });
         Core_Service.getLoggedInUserDetails().then(function (res) {
-vm.reim.empno = res.employeeId;
-        vm.reim.empname = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
-        vm.reim.division = res.employeeMaster.division.description;
-        vm.reim.currDate = moment().format("MM-HH-YYYY");
-        vm.reim.manager = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
+        	vm.reim.empno = res.employeeId;
+        	vm.reim.empname = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
+        	vm.reim.division = res.employeeMaster.division.description;
+        	vm.reim.currDate = moment().format("MM-HH-YYYY");
+        	vm.reim.manager = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
 }, function (err) {
 console.log(err)
 });

@@ -60,7 +60,7 @@ public class AttendanceController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.GET)
 
 	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
 		return attendanceService.getDropDownData();
