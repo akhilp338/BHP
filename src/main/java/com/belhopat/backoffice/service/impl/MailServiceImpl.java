@@ -28,6 +28,7 @@ import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.pdf.PDFConstants;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.MailService;
@@ -344,32 +345,49 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
+	public void sendVendorApprRejectMail(Vendor vendor,String status) throws MessagingException {
+		MailMessageObject mailObject = null;
+		String mailSubject = null;
+		String mailTemplate = null;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put(Constants.VENDOR, vendor);
+		mailSubject = status;
+		mailTemplate = Constants.CAND_REG_EMAIL_TEMPLATE;
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(mailTemplate, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+
+		InternetAddress[] forDebugEmail = getTempEmailMailingList(null);
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC(null);
+
+		mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM, mailSubject, emailHtmlBody,
+				logoResourcePath, mailSender);
+		sendMail(mailObject);
+
+	}
+
+	@Override
 	public void sendReimburseRequestMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
-		// System emails this reimbursement request to user with the reference
-		// no.
+		
 	}
 
 	@Override
 	public void sendReimburseVerificationMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
-		// System emails HR Manager for verification and approval.
+		
 	}
 
 	@Override
 	public void sendReimburseApprovalMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
-		// System emails user, HR Manager, Finance Manager & BU Head the
-		// approved reimbursement request details
+		
 	}
 
 	@Override
 	public void sendReimburseRejectionMail(Reimburse reimburse) {
 		// TODO Auto-generated method stub
-		// System emails the employee with the comments that your Reimbursement
-		// Request
-		// ref # ---- has been rejected and displays all the details.
 		
 	}
+	
 
 }

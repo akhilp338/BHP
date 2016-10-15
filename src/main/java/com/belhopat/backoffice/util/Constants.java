@@ -44,6 +44,7 @@ public class Constants {
 	public static final String EVENT_INV_EMAIL_TEMPLATE = "/employee-invitation-email-template.vm";
 	public static final String EVENT_REG_EMAIL_TEMPLATE = "/event-reg-email-template.vm";
 	public static final String CAND_REG_EMAIL_TEMPLATE = "/candidate-reg-email-template.vm";
+	public static final String VENDOR_APP_REJECT_EMAIL_TEMPLATE = "/vendor-reg-email-template.vm";
 	public static final String USER_CREATED_EMAIL_TEMPLATE = "/user-created-email-template.vm";
 	public static final String CREATE_OFFICIAL_EMAIL_TEMPLATE = "/create-officialEmail-email-template.vm";
 
@@ -82,6 +83,7 @@ public class Constants {
 	public static final String TIMEZONE = "TIMEZONE";
 	public static final String CLIENTS = "CLIENT";
 	public static final String SOURCED_BY = "SOURCEDBY";
+	public static final String STATUS = "STATUS";
 
 
 	/* lookup detail code */
@@ -115,5 +117,6 @@ public class Constants {
 	public static final String PDF_CONTENT_TYPE = "application/pdf";
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 	public static final String ATTACHMENT = "attachment; filename=";
+	public static final String VENDOR = "vendor";
 	
 }

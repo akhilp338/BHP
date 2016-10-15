@@ -41,9 +41,16 @@ public class ReimburseController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/getReimburse", method = RequestMethod.POST)
+	@RequestMapping(value = "/getReimburse", method = RequestMethod.GET)
 	public ResponseEntity<Reimburse> saveOrUpdateCandidate(@RequestBody Long reimburseId) {
 		return reimburseService.getReimburse(reimburseId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		return baseService.getCandidateDropDownData();
 	}
 
 }

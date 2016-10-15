@@ -10,7 +10,7 @@
             {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event",isOptional:false},
             {name:"consultant",label: "Consultant Management", icon: "fa-gift",state:"coreuser.consultant",isOptional:false},
             {name:"vendor",label: "Vendor Management", icon: "fa-gift",state:"coreuser.vendor",isOptional:false},
-            //{name:"bankacc",label: "Bank Account Management", icon: "fa-gift",state:"coreuser.bankacc",isOptional:false},
+            {name:"attendance",label: "Attendance Details", icon: "fa-gift",state:"coreuser.attendance",isOptional:false},
             {name:"reimbursement",label: "Reimbursement", icon: "fa-suitcase",state:"coreuser.reimbursement",isOptional:false}
         ];
         $rootScope.isLogin = false;

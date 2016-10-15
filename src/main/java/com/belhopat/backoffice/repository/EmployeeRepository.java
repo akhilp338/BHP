@@ -28,12 +28,16 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 	@Query("select e from Employee e where e.employeeMaster.designation.code=:designation")
 	List<Employee> findByDesignation(@Param("designation") String designation);
 
-	@Query("select e.employeeUser.id,CONCAT(e.employeeMaster.firstName,' ( ' ,e.employeeMaster.officialEmail, ' )') as data " + "from Employee e where e.employeeUser is not null")
+	@Query("select e.employeeUser.id,CONCAT(e.employeeMaster.firstName,' ( ' ,e.employeeMaster.officialEmail, ' )') as data "
+			+ "from Employee e where e.employeeUser is not null")
 	List<ResponseObject> getEmployeeNameAndEmailData();
-	
+
 	@Query("select e.id,e.employeeMaster.firstName as data " + "from Employee e")
 	List<ResponseObject> getEmployeesDropDown();
 
 	Employee findByEmployeeId(String employeeId);
+
+	@Query("select e.employeeId,e.id " + "from Employee e")
+	List<ResponseObject> findAllIdsAndCodes();
 
 }

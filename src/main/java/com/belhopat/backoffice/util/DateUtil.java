@@ -12,10 +12,9 @@ import org.apache.velocity.tools.generic.DateTool;
 
 /**
  * @author BHP_DEV A util file for date format conversion
- *
  */
 public class DateUtil extends DateTool {
-
+	
 	public static String getCurrentDateInGivenFormat(String givenDateFormat) throws ParseException {
 		SimpleDateFormat localDateFormat = new SimpleDateFormat(givenDateFormat);
 		return localDateFormat.format(new Date());
@@ -238,6 +237,51 @@ public class DateUtil extends DateTool {
 		DateFormat df = new SimpleDateFormat("MM");
 		String mm = df.format(Calendar.getInstance().getTime());
 		return mm;
+	}
+	
+	public static int getFiscalYear() {
+		int    FIRST_FISCAL_MONTH  = Calendar.MARCH;
+		Calendar calendarDate = Calendar.getInstance();
+		int month = calendarDate.get(Calendar.MONTH);
+		int year = calendarDate.get(Calendar.YEAR);
+		return (month >= FIRST_FISCAL_MONTH) ? year : year - 1;
+	}
+
+	public static Date getDate(int month, int year) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.YEAR, year);
+		Date date = calendar.getTime();
+		return date;
+	}
+
+	public static Date setDayOfMonth(Date date, int day) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		return calendar.getTime();
+	}
+
+	public static int getMonthIndex(String monthName) throws ParseException {
+		Date date = new SimpleDateFormat("MMMM").parse(monthName);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.MONTH);
+	}
+
+	public static Date getStartDateOfMonth(Date date) {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(date);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		return cal.getTime();
+	}
+
+	public static Date getEndDateOfMonth(Date date) {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(date);
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		return cal.getTime();
 	}
 
 }

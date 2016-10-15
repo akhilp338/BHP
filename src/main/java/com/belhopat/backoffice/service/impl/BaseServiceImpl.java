@@ -75,7 +75,6 @@ import com.itextpdf.text.DocumentException;
 
 /**
  * @author BHP_DEV service implementation for general functionalities
- *
  */
 @Component
 public class BaseServiceImpl implements BaseService {
@@ -571,9 +570,20 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public List<Currency> getCurrencies() {
+	public ResponseEntity<List<Currency>> getCurrencies() {
 		List<Currency> currencies = currencyRepository.findAll();
-		return currencies;
+		return new ResponseEntity<List<Currency>>(currencies, HttpStatus.OK);
+	}
+
+	@Override
+	public Map<String, Long> getEmployeeIdAndCodeMap() {
+		Map<String, Long> map = new HashMap<>();
+		// List<ResponseObject> idAndCodeList =
+		// employeeRepository.findAllIdsAndCodes();
+		// for (ResponseObject object : idAndCodeList) {
+		// map.put("C0001", 1L);
+		// }
+		return map;
 	}
 
 }

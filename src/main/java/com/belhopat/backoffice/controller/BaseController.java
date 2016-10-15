@@ -120,8 +120,8 @@ public class BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getCurrencies", method = RequestMethod.GET)
-	public List<Currency> getCurrencies() {
-		List<Currency> currencies = baseService.getCurrencies();
+	public ResponseEntity<List<Currency>> getCurrencies() {
+		ResponseEntity<List<Currency>> currencies = baseService.getCurrencies();
 		return currencies;
 	}
 
