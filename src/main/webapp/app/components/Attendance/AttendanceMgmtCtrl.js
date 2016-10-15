@@ -52,8 +52,9 @@
         $rootScope.active = 'attendance';
         angular.element(document).ready(function () {
             attendanceTable = angular.element('#attendanceTable').DataTable({
-                data: attendanceDetails,
-                serverSide: false,
+//                data: attendanceDetails,
+            	ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
+                serverSide: true,
                 bDestroy: true,
                 processing: true,
                 responsive: true,
@@ -68,12 +69,23 @@
                 aoColumns: [{
                         data: 'id',
                         visible: false
+                    },{
+                        title: "Date",
+                        data: 'date',
+                        render: function (data,row,display) {
+                        	var date =  new Date(data);
+                        	var datestring = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                        	return datestring;
+                        }
                     }, {
                         title: "Employee Code",
-                        data: 'empCode',
+                        data: 'employee.employeeId',
                     }, {
                         title: "Employee Name",
-                        data: 'empName',
+                        data: 'employee.employeeMaster',
+                        render: function (data,row,display) {
+                        	return data.firstName+" "+data.lastName;
+                        }
                     },{
                         title: "In Time",
                         data: 'inTime',
@@ -85,7 +97,7 @@
                         data: 'lateMinutes',
                     }, {
                         title: "Early Departure",
-                        data: 'earlyDepTime',
+                        data: 'earlyMinutes',
                     },{
                         title: "Work Hours",
                         data: 'workHours',
