@@ -1,59 +1,17 @@
 (function () {
     var AttendanceMgmtCtrl = function ($scope, $rootScope, Core_Service, Core_ModalService, urlConfig) {
         var vm = this, attendanceTable;
-        var attendanceDetails = [{
-                "empCode": "T12",
-                "empName": "Surya",
-                "inTime": "10:30 AM",
-                "outTime": "10:30 PM",
-                "lateMinutes": "60",
-                "earlyDepTime": "11:00 AM",
-                "workHours": "10",
-                "status": "empty"
-            },
-            {
-                "empCode": "T12",
-                "empName": "Arun",
-                "inTime": "10:30 AM",
-                "outTime": "10:30 PM",
-                "lateMinutes": "60",
-                "earlyDepTime": "11:00 AM",
-                "workHours": "10",
-                "status": "empty"
-            },{
-                "empCode": "T12",
-                "empName": "Susy",
-                "inTime": "10:30 AM",
-                "outTime": "10:30 PM",
-                "lateMinutes": "60",
-                "earlyDepTime": "11:00 AM",
-                "workHours": "10",
-                "status": "empty"
-            },{
-                "empCode": "T345",
-                "empName": "Shitinto",
-                "inTime": "10:30 AM",
-                "outTime": "10:30 PM",
-                "lateMinutes": "60",
-                "earlyDepTime": "11:00 AM",
-                "workHours": "10",
-                "status": "empty"
-            },{
-                "empCode": "T093",
-                "empName": "Pattu mon",
-                "inTime": "10:30 AM",
-                "outTime": "10:30 PM",
-                "lateMinutes": "60",
-                "earlyDepTime": "11:00 AM",
-                "workHours": "10",
-                "status": "empty"
-            }];
-
+        vm.attendance = {};
         $rootScope.active = 'attendance';
+        Core_Service.getAttendanceDropDownData().then(function (res) {
+    		vm.attendance.lookups = res;
+	    }, function (err) {
+	    	console.log(err)
+	    });
         angular.element(document).ready(function () {
             attendanceTable = angular.element('#attendanceTable').DataTable({
-                data: attendanceDetails,
-                serverSide: false,
+            	ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
+                serverSide: true,
                 bDestroy: true,
                 processing: true,
                 responsive: true,
@@ -68,12 +26,23 @@
                 aoColumns: [{
                         data: 'id',
                         visible: false
+                    },{
+                        title: "Date",
+                        data: 'date',
+                        render: function (data,row,display) {
+                        	var date =  new Date(data);
+                        	var datestring = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+                        	return datestring;
+                        }
                     }, {
                         title: "Employee Code",
-                        data: 'empCode',
+                        data: 'employee.employeeId',
                     }, {
                         title: "Employee Name",
-                        data: 'empName',
+                        data: 'employee.employeeMaster',
+                        render: function (data,row,display) {
+                        	return data.firstName+" "+data.lastName;
+                        }
                     },{
                         title: "In Time",
                         data: 'inTime',
@@ -85,7 +54,7 @@
                         data: 'lateMinutes',
                     }, {
                         title: "Early Departure",
-                        data: 'earlyDepTime',
+                        data: 'earlyMinutes',
                     },{
                         title: "Work Hours",
                         data: 'workHours',

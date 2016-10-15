@@ -578,10 +578,11 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public Map<String, Long> getEmployeeIdAndCodeMap() {
 		Map<String, Long> map = new HashMap<>();
-		List<ResponseObject> idAndCodeList = employeeRepository.findAllIdsAndCodes();
-		for (ResponseObject object : idAndCodeList) {
-			map.put("C0001", 1L);
-		}
+		// List<ResponseObject> idAndCodeList =
+		// employeeRepository.findAllIdsAndCodes();
+		// for (ResponseObject object : idAndCodeList) {
+		// map.put("C0001", 1L);
+		// }
 		return map;
 	}
 

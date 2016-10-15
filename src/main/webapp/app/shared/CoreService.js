@@ -465,9 +465,24 @@
             return deferred.promise;
         };
         
-        service.getCurrency = function () {
+        service.getReimburseDropDownData = function () {
             var deferred = $q.defer();
-            Core_HttpRequest.get("/api/getCurrencies")
+            Core_HttpRequest.get("/api/reimburse/getDropDownData")
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
+        
+        service.getAttendanceDropDownData = function () {
+            var deferred = $q.defer();
+            Core_HttpRequest.get("/api/attendance/getDropDownData")
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

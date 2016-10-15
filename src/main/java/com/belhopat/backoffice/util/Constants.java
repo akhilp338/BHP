@@ -20,8 +20,8 @@ public class Constants {
 	public static final String PASS_CHANGE_SUCC_MSG = "Your password has been changed successfully";
 	public static final String PASS_CHANGE_FAIL_MSG = "Invalid credentials entered. Please try again."
 			+ " Please try again after some time";
-	
-	/* Welcome mail msg constants*/
+
+	/* Welcome mail msg constants */
 	public static final String WEL_MAIL_SUCC = "Mail has been sent successfully.";
 	public static final String WEL_MAIL_FAIL = "An unexpected error occurred. Please try again after some time.";
 
@@ -35,7 +35,7 @@ public class Constants {
 	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
 	public static final String EMPLOYEE_PORTAL_CREDENTIALS = "Belhopat Employee Portal Credentials";
 	public static final String CREATE_OFFICIAL_EMAIL = "Action Required - Create Official Email for Registered Employee";
-	
+
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
@@ -83,7 +83,8 @@ public class Constants {
 	public static final String TIMEZONE = "TIMEZONE";
 	public static final String CLIENTS = "CLIENT";
 	public static final String SOURCED_BY = "SOURCEDBY";
-
+	public static final String STATUS = "STATUS";
+	public static final String CURRENCY = "CURRENCY";
 
 	/* lookup detail code */
 	public static final String EMP_DESIG_HRM = "HRM";
@@ -117,5 +118,5 @@ public class Constants {
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 	public static final String ATTACHMENT = "attachment; filename=";
 	public static final String VENDOR = "vendor";
-	
+
 }

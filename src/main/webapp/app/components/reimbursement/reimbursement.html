@@ -1,5 +1,6 @@
 <div class="form-horizontal reim-form" name="reim-form">
-    <div class="top-main-head pull-left width-100">
+
+     <div class="top-main-head pull-left width-100">
         <h4 class="pull-left">Fill Reimbursement Form</h4>	
         <button ng-click="vm.back()"
                 class="logout-button back pull-right add-button" title="Back Button">
@@ -85,30 +86,31 @@
             <span class="text">Reimburse</span>              
         </button>
         </div>
-        <table id="reim-table" class="display cell-border" cellspacing="0" width="100%">
+        <table  id="reim-table" class="display cell-border" cellspacing="0" width="100%">
             <thead>                    
             </thead>
             <tbody>
 
                 <tr class="input-row">    
-            <!--<form name="reim-addForm" id="reim-addForm">-->
+            <form name="reim-addForm" id="reim-addForm">
                 <td><input validation="required:alt=Required field"type="text"  id="reim-date" ng-model="vm.reim.reimSet.date" id="reim-date" name="reim-date" ></td>
                 <td><input validation="required:alt=Required field"type="text"  id="reim-description" ng-model="vm.reim.reimSet.description" id="reim-desc" name="reim-desc" ></td>
-                <td><select name="currency"  id="reim-currency"
-                                    class="form-input width-100"
-                                    >
-                                <option value="">--SELECT--</option>
-                                <option ng-repeat="currency in vm.currency" value="{{currency.id}}">{{currency.decription}}</option>
-                            </select></td>
+                <td><select ng-model="vm.reim.reimSet.currency" name="currency"  id="reim-currency" class="form-input width-100">
+<!--                 			ng-options="currency.id as (currency.description) for currency in vm.reim.lookups.CURRENCY"> -->
+                      <option value="">--SELECT--</option>
+                       <option value="1">Indian Rupee</option>
+                        <option value="2">US Dollar</option>
+                    </select>
+                </td>
                 <td><input id="reim-amount" validation="required:alt=Required field" ng-model="vm.reim.reimSet.amount" type="text" id="reim-amount" name="reim-amount" ></td>
                 <td><input id="reim-remarks" validation="required:alt=Required field" ng-model="vm.reim.reimSet.remarks" type="text" id="reim-remarks" name="reim-remarks" ></td>
                 <td></td>
-            <!--</form>-->
+            </form>
             </tr>
 
             </tbody>
-        </table>            
-    </div>
+        </table>   
+    </div> 
 </div>
 
 

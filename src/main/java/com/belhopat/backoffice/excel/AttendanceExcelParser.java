@@ -14,7 +14,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Attendance;
 import com.belhopat.backoffice.model.Employee;
+import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.AttendanceRepository;
+import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.DateUtil;
 
 public class AttendanceExcelParser extends BaseExcelParser {
@@ -90,6 +92,7 @@ public class AttendanceExcelParser extends BaseExcelParser {
 		List<Attendance> attendances = new ArrayList<>();
 		Sheet sheet = workbook.getSheetAt(0);
 		Date date = getAttendanceMonth(sheet);
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		int rowNum = 4;
 		while (rowNum < sheet.getLastRowNum()) {
 			Row row = sheet.getRow(rowNum);
@@ -112,6 +115,7 @@ public class AttendanceExcelParser extends BaseExcelParser {
 					attendance.setEarlyMinutes(Integer.valueOf(lines[3]));
 					attendance.setWorkHours(lines[4]);
 					attendance.setStatus(lines[5]);
+					attendance.setBaseAttributes(loggedInUser);
 					attendances.add(attendance);
 				}
 			}

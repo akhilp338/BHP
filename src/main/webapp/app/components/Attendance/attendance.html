@@ -2,21 +2,19 @@
 
     <div class="row">
         <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-            <label class="control-label" for="gender">Filter Results</label>
+            <label class="control-label" for="gender">Employee name</label>
             <div class="controls">
-                <select name="filter" class="form-input width-100">                   
-                    <option value="">--SELECT--</option>
-                    <option value="Name">Employee Name</option>
-                    <option value="MY">Month And Year</option>
-                    
+                <select name="employee_name" ng-model="vm.attendance.emplyee.id" class="form-input width-100" 
+                	ng-options="employee[0] as (employee[1]) for employee in vm.attendance.lookups.EMPLOYEES" validation="required:alt=required">
+                        <option value="">--SELECT--</option>
                 </select>
             </div>
         </div>
         <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-            <label class="control-label" for="gender">Gender</label>
+            <label class="control-label" for="gender">Status</label>
             <div class="controls">
-                <select name="gender" ng-model="vm.registration.gender.id" validation="required:alt=required"
-                        class="form-input width-100" ng-options="gender.id as (gender.code) for gender in vm.lookups.GENDER">                   
+                <select name="attendance_status" ng-model="vm.attendance.status.id" validation="required:alt=required"
+                        class="form-input width-100" ng-options="status as status for status in vm.attendance.lookups.STATUS">                   
                     <option value="">--SELECT--</option>
                 </select>
             </div>
