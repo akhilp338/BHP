@@ -58,11 +58,11 @@
                                   toState.name == "coreuser.vendor.add" ||
                                   toState.name == "coreuser.bankacc.edit" ||
                                   toState.name == "coreuser.bankacc.add") ? true : false;
-                           //$rootScope.showLoader = false;
+            $rootScope.showLoader = toState.name != "coreuser.dashboard" ?  false : true;
             $rootScope.spinnerActive =false;
-           $timeout(function(){
+            $timeout(function(){
                //$rootScope.showLoader = false;
-           },500);            
+            },500);            
         });
     };
     angular.module('coreModule')

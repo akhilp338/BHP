@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Table(name = "VENDOR")
 public class Vendor extends BaseEntity {
 
+        @Column(name = "VNDR_CODE", length = 50)
+	private String vendorCode;    
+    
 	@Column(name = "VNDR_NAME", length = 50)
 	private String vendorName;
 
@@ -60,6 +63,14 @@ public class Vendor extends BaseEntity {
 	@JoinColumn(name = "PONT_OF_CONT_ID")
 	private PointOfContact poc;
 
+        public String getVendorCode() {
+		return vendorCode;
+	}
+
+	public void setVendorCode(String vendorCode) {
+		this.vendorCode = vendorCode;
+	}
+        
 	public String getVendorName() {
 		return vendorName;
 	}

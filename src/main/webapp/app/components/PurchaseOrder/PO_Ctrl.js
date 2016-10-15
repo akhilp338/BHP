@@ -1,27 +1,27 @@
 (function() {
-	var Vendor_Ctrl = function($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
-		var vm = this, clientAddTable;
-		$rootScope.active = 'vendor';
-		vm.addVendor = function() {
-                    $state.go("coreuser.vendor.add");
+	var PO_Ctrl = function($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
+		var vm = this, poAddTable;
+		$rootScope.active = 'po';
+		vm.addPO = function() {
+			$state.go("coreuser.po.add");
 		};
-		vm.getClient = function(data){
-                    vm.getClientUrl = "api/vendor/getVendor";
-                    Core_Service.getCandidateImpl(vm.getClientUrl,data.id)
-                    .then( function(response) {
-                       vm.viewClient(data);
-                    },function(error){
-
-                    });
-                };        
+		//vm.getClient = function(data){
+        	//vm.getClientUrl = "api/client/getClient";
+//            Core_Servic/etCandidateImpl(vm.getClientUrl,id)
+//            .then( function(response) {
+               vm.viewClient(data);
+//            },function(error){
+//            	
+//            });
+        //};        
         
-        vm.viewClient = function (data) {
-            Core_ModalService.openViewClientModal(data);
+        vm.viewPO = function (data) {
+            
         };
 		angular.element(document).ready(
 		function() {
-	                    clientAddTable = angular.element('#clientList').DataTable({
-	                        ajax:urlConfig.http+ window.location.host+ urlConfig.api_root_path+ "vendor/getApprovedVendors",
+	                    poAddTable = angular.element('#clientList').DataTable({
+	                        ajax:urlConfig.http+ window.location.host+ urlConfig.api_root_path+ "client/getClients",
 	                        serverSide: true,
 	                        bDestroy: true,
 	                        processing: true,
@@ -44,38 +44,52 @@
                                                     visible : false
                                             },
                                             {
-                                                    title : "Vendor Code",
-                                                    data : 'vendorCode',
+                                                    title : "Client ID",
+                                                    data : 'clientId',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
                                             },
                                             {
                                                     title : "Name",
-                                                    data : 'vendorName',
+                                                    data : 'clientName',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "Category",
-                                                    data : 'category',
+                                                    title : "Email",
+                                                    data : 'email',
                                                     render: function (data) {
-                                    return data == null? "-":data.description;
+                                    return data == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "Description",
-                                                    data : 'description',
+                                                    title : "contactNo",
+                                                    data : 'contactNo.number',
                                                     render: function (data,display,row) {
-                                    return data== null? "":data;
+                                    return row.contactNo == null? "":row.contactNo.number == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "Contact Number",
-                                                    data : 'phoneNo',
+                                                    title : "Revenue",
+                                                    data : 'revenue',
                                                     render: function (data) {
                                     return data == null? "":data;
+                            }
+                                            },
+                                            {
+                                                    title : "POC Name",
+                                                    data : 'poc.pocName',
+                                                    render: function (data,display,row) {
+                                    return row.poc == null? "":row.poc.pocName == null? "":data;
+                            }
+                                            },
+                                            {
+                                                    title : "Bussiness Unit",
+                                                    data : 'businessUnit.description',
+                                                    render: function (data,display,row) {
+                                    return row.businessUnit == null? "":row.businessUnit.description == null? "":data;
                             }
                                             },
                                             {
@@ -108,8 +122,8 @@
                 vm.getClient(data);
             });
 
-		});
+		})
 	};
-	Vendor_Ctrl.$inject = [ "$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', 'Core_ModalService', 'validationService' ];
-	angular.module('coreModule').controller('Vendor_Ctrl', Vendor_Ctrl);
+	PO_Ctrl.$inject = [ "$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', 'Core_ModalService', 'validationService' ];
+	angular.module('coreModule').controller('PO_Ctrl', PO_Ctrl);
 })();

@@ -23,6 +23,7 @@ import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.VendorRepository;
+import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.VendorService;
@@ -47,6 +48,10 @@ public class VendorServiceImpl implements VendorService {
 
 	@Autowired
 	MailService mailService;
+        
+        @Autowired
+        UserRepository userRepository;
+        
 	
 	
 
@@ -58,6 +63,7 @@ public class VendorServiceImpl implements VendorService {
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isApprovedByCFO = null;
 				User loggedInUser = SessionManager.getCurrentUserAsEntity();
+                                loggedInUser = userRepository.findOne(loggedInUser.getId());
 				if(loggedInUser.getPrimaryRole().equals("FM")){
 					isApprovedByCFO = criteriaBuilder.equal(root.get("status").get("code"), TaskConstants.APPRVD_BY_CFO);
 				}else{
@@ -66,7 +72,7 @@ public class VendorServiceImpl implements VendorService {
 				return criteriaBuilder.and(isApprovedByCFO);
 			}
 		};
-		DataTablesOutput<Vendor> dataTablesOutput = vendorRepository.findAll(input, specification);
+		DataTablesOutput<Vendor> dataTablesOutput = vendorRepository.findAll(input);
 		return dataTablesOutput;
 	}
 

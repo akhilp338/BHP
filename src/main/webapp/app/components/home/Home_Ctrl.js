@@ -2,16 +2,17 @@
     var Home_Ctrl = function ($scope, $state, $rootScope, Core_Service) {
         var vm = this;
         vm.services = [
-            {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard",isOptional:false},
-            {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate",isOptional:false},
-            {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee",isOptional:false},
-            {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client",isOptional:false},
-            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-envelope",state:"coreuser.offerletterhome",isOptional:false},
-            {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event",isOptional:false},
-            {name:"consultant",label: "Consultant Management", icon: "fa-gift",state:"coreuser.consultant",isOptional:false},
-            {name:"vendor",label: "Vendor Management", icon: "fa-gift",state:"coreuser.vendor",isOptional:false},
-            {name:"attendance",label: "Attendance Details", icon: "fa-gift",state:"coreuser.attendance",isOptional:false},
-            {name:"reimbursement",label: "Reimbursement", icon: "fa-suitcase",state:"coreuser.reimbursement",isOptional:false}
+            {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard", title:'Dashboard'},
+            {name:"candidate",label: "Candidate Management", icon: "fa-briefcase",state:"coreuser.candidate", title:'Candidate Management'},
+            {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee", title:'Employee Management'},
+            {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client", title:'Client Management'},
+            {name:"offerletter",label: "Offer Letter Processing", icon: "fa-envelope",state:"coreuser.offerletterhome", title:'Offerletter Processing'},
+            {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event", title:'Event Management'},
+            {name:"consultant",label: "Consultant Management", icon: "fa-gift",state:"coreuser.consultant", title:'Consultant Management'},
+            {name:"vendor",label: "Vendor Management", icon: "fa-gift",state:"coreuser.vendor", title:'Vendor Management'},
+            {name:"attendance",label: "Attendance Details", icon: "fa-gift",state:"coreuser.attendance", title:'Attendance Management'},
+            {name:"reimbursement",label: "Reimbursement", icon: "fa-suitcase",state:"coreuser.reimbursement", title:'Reimbursement Processing'},
+            {name:"po",label: "PO Management", icon: "fa-suitcase",state:"coreuser.reimbursement", title:'Purchase order Management'}
         ];
         $rootScope.isLogin = false;
         vm.showMenu = function (e) {
