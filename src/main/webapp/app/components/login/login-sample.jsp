@@ -1,4 +1,4 @@
-		<form name='loginForm' action="/BelhopatBackOffice/login" class="loginForm" method='POST'>
+		<form name='loginForm' action="<c:url value='/BelhopatBackOffice/login'/>" class="loginForm" method='POST'>
 	<div class="login-container">
 	<div class="login-form">
 	    <div class="form-group">

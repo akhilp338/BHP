@@ -8,7 +8,7 @@
 
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/api/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/api/**" access="hasRole('ROLE_GENERAL')" />
 		<form-login 
 		     login-processing-url="/login"
 		   always-use-default-target="true" authentication-failure-url="/loginerror"

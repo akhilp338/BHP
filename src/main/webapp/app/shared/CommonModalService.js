@@ -2,7 +2,7 @@
     var Core_ModalService = function (Core_Modal) {        
         var service = this;
         service.openForgotModal = function (data) {
-            return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/login/forgotPassword.html', 'ForgotPassword_Ctrl', 'vm', data);
+            return Core_Modal.modalOpen('forgot-modal', '/BelhopatBackOffice/app/components/login/forgotPassword.jsp ', 'ForgotPassword_Ctrl', 'vm', data);
         }; 
         service.openViewCandidateModal = function (data) {
             return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/candidate/viewCandidate.html', 'ViewCandidate_Ctrl', 'vm', data);

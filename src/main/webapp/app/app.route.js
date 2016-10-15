@@ -12,12 +12,12 @@
                     abstract: true,
                     views: {
                         'header': {
-                            templateUrl: '/BelhopatBackOffice/app/components/common/innerHeader.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/common/innerHeader.jsp',
                             controller: 'Header_Ctrl',
                             controllerAs: 'vm'
                         },
                         'sidebar': {
-                            templateUrl: '/BelhopatBackOffice/app/components/common/sidebar.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/common/sidebar.jsp',
                             controller: 'Home_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -27,7 +27,7 @@
                     url: urlConfig.root_path,
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/login/login-sample.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/login/login-sample.jsp',
                             controller: 'Login_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -37,7 +37,7 @@
                     url: urlConfig.root_path + 'changePassword/:token',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/login/changePassword.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/login/changePassword.jsp',
                             controller: 'ChangePassword_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -47,10 +47,10 @@
                     url: urlConfig.root_path + 'upload',
                     views: {
                         'sidebar@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                            templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                         },
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/fileUpload/fileUpload.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/fileUpload/fileUpload.jsp',
                             controller: 'FileUpload_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -60,7 +60,7 @@
                     url: urlConfig.root_path + 'dashboard',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.jsp',
                             controller: 'Dash_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -69,7 +69,7 @@
             url: urlConfig.root_path + 'loginSuccess',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/dashboard/dashboard.jsp',
                     controller: 'Dash_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -78,7 +78,7 @@
             url: urlConfig.root_path + 'loginerror',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/login/login.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/login/login.jsp',
                     controller: 'Login_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -89,7 +89,7 @@
                     url: urlConfig.root_path + 'candidate',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/candidate/candidate.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/candidate/candidate.jsp',
                             controller: 'Candidate_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -98,10 +98,10 @@
             url: '^/BelhopatBackOffice/candidate/add',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/candidate/candidateAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/candidate/candidateAdd.jsp',
                     controller: 'AddCandidate_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -110,10 +110,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/candidate/candidateAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/candidate/candidateAdd.jsp',
                     controller: 'AddCandidate_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -122,7 +122,7 @@
             url: urlConfig.root_path + 'offerletter',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletter.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletter.jsp',
                     controller: 'Offerletter_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -132,7 +132,7 @@
                     url: urlConfig.root_path + 'offerletterhome',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerletterhome.jsp',
                             controller: 'Offer_Letter_Home_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -141,7 +141,7 @@
             url: '/offerletter/verify/:verifyId/:grade',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.jsp',
                     controller: 'Offerletter_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -152,7 +152,7 @@
                     url: urlConfig.root_path + 'employee',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/employee/employee.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/employee/employee.jsp',
                             controller: 'Employee_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -161,10 +161,10 @@
             url: '/addEmployee',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAdd.jsp',
                     controller: 'AddEmployee_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -173,10 +173,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.jsp',
                     controller: 'AddEmployee_Ctrl_Final',
                     controllerAs: 'vm'
                 }
@@ -185,7 +185,7 @@
             url: urlConfig.root_path + 'addEmployeeFinal/:id:candId',
             views: {
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.jsp',
                     controller: 'AddEmployee_Ctrl_Final',
                     controllerAs: 'vm'
                 }
@@ -196,7 +196,7 @@
                     url: urlConfig.root_path + 'client',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/client/client.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/client/client.jsp',
                             controller: 'Client_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -205,10 +205,10 @@
             url: '^/BelhopatBackOffice/client/add',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/client/clientAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/client/clientAdd.jsp',
                     controller: 'AddClient_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -217,10 +217,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/client/clientAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/client/clientAdd.jsp',
                     controller: 'AddClient_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -231,7 +231,7 @@
                     url: urlConfig.root_path + 'opportunity',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/opportunity/opportunity.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/opportunity/opportunity.jsp',
                             controller: 'Opp_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -242,7 +242,7 @@
                     url: urlConfig.root_path + 'holiday',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/holiday/holiday.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/holiday/holiday.jsp',
                             controller: 'Holiday_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -253,7 +253,7 @@
                     url: urlConfig.root_path + 'event',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/event/event.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/event/event.jsp',
                             controller: 'EventManagement_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -265,7 +265,7 @@
                     url: urlConfig.root_path + 'consultant',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/consultant/consultant.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/consultant/consultant.jsp',
                             controller: 'Consultant_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -274,10 +274,10 @@
             url: '^/BelhopatBackOffice/consultant/add',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.jsp',
                     controller: 'AddConsultant_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -286,10 +286,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/consultant/consultantAdd.jsp',
                     controller: 'AddConsultant_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -301,7 +301,7 @@
                     url: urlConfig.root_path + 'vendor',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/vendor/vendor.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/vendor/vendor.jsp',
                             controller: 'Vendor_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -310,10 +310,10 @@
             url: '^/BelhopatBackOffice/vendor/add',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.jsp',
                     controller: 'AddVendor_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -322,10 +322,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/vendor/vendorAdd.jsp',
                     controller: 'AddVendor_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -337,7 +337,7 @@
                     url: urlConfig.root_path + 'bankacc',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankacc.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankacc.jsp',
                             controller: 'BankAcc_Ctrl',
                             controllerAs: 'vm'
                         }
@@ -346,10 +346,10 @@
             url: '^/BelhopatBackOffice/bankacc/add',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.jsp',
                     controller: 'AddbankAcc_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -358,10 +358,10 @@
             url: '/edit/:id',
             views: {
                 'sidebar@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.jsp'
                 },
                 'content@': {
-                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.html',
+                    templateUrl: '/BelhopatBackOffice/app/components/bankacc/bankaccAdd.jsp',
                     controller: 'AddbankAcc_Ctrl',
                     controllerAs: 'vm'
                 }
@@ -372,7 +372,7 @@
                 url: urlConfig.root_path + 'reimbursement',
                 views: {
                     'content@': {
-                        templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reimbursement.html',
+                        templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reimbursement.jsp',
                         controller: 'Reimbursement_Ctrl',
                         controllerAs: 'vm'
                     }
@@ -383,7 +383,7 @@
                     url: urlConfig.root_path + 'attendance',
                     views: {
                         'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/Attendance/attendance.html',
+                            templateUrl: '/BelhopatBackOffice/app/components/Attendance/attendance.jsp',
                             controller: 'AttendanceMgmtCtrl',
                             controllerAs: 'vm'
                         }
