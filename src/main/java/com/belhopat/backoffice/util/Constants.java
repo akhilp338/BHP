@@ -83,6 +83,7 @@ public class Constants {
 	public static final String TIMEZONE = "TIMEZONE";
 	public static final String CLIENTS = "CLIENT";
 	public static final String SOURCED_BY = "SOURCEDBY";
+	public static final String STATUS = "STATUS";
 
 
 	/* lookup detail code */

@@ -46,4 +46,11 @@ public class ReimburseController {
 		return reimburseService.getReimburse(reimburseId);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		return baseService.getCandidateDropDownData();
+	}
+
 }
