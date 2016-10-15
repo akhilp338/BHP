@@ -1,0 +1,30 @@
+<div class="sub-content attendance">
+
+    <div class="row">
+        <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+            <label class="control-label" for="gender">Filter Results</label>
+            <div class="controls">
+                <select name="filter" class="form-input width-100">                   
+                    <option value="">--SELECT--</option>
+                    <option value="Name">Employee Name</option>
+                    <option value="MY">Month And Year</option>
+                    
+                </select>
+            </div>
+        </div>
+        <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+            <label class="control-label" for="gender">Gender</label>
+            <div class="controls">
+                <select name="gender" ng-model="vm.registration.gender.id" validation="required:alt=required"
+                        class="form-input width-100" ng-options="gender.id as (gender.code) for gender in vm.lookups.GENDER">                   
+                    <option value="">--SELECT--</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row attendanceTable">
+        <table id="attendanceTable" class="display"></table>
+    </div>
+
+</div>
+
