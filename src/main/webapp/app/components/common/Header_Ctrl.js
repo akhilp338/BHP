@@ -16,7 +16,6 @@
         	   vm.sessionCheck();
        	 Core_Service.getCurrentUser(data).then(function (res){
        		$rootScope.currentUser=res;
-       		debugger;
             },function (error){
             }); 
        	
