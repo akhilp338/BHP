@@ -12,7 +12,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-repeat="service in vm.services track by $index" ng-class="{'active':service.name == active}" ng-click="vm.menuClick($event)"><a title = "{{service.title}}" ui-sref= "{{service.state}}">{{service.label}}<span class="fa-stack fa-lg pull-right"><i class="fa {{service.icon}} fa-stack-1x "></i></span></a></li>
+                <li ng-repeat="service in tabServices track by $index" ng-class="{'active':service.name == active}" ng-click="vm.menuClick($event)"><a title = "{{service.title}}" ui-sref= "{{service.state}}">{{service.label}}<span class="fa-stack fa-lg pull-right"><i class="fa {{service.icon}} fa-stack-1x "></i></span></a></li>
             </ul>
         </div>
     </div>
