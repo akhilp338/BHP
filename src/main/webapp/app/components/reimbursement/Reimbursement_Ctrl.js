@@ -55,7 +55,7 @@
                                 title: "Date",
                                 data: 'date',
                                 render: function (data) {
-                                    return data == null ? "" : data;
+                                    return data == null ? "" : moment(data).format("DD MMM YYYY");
                                 }
                             }, {
                                 title: "Description",
@@ -107,7 +107,7 @@
         });
         vm.addToTable = function (evt) {
             var arr = [];
-            vm.tableData.date = moment(vm.tableData.date).format("DD MMM YYYY");
+//            vm.tableData.date = moment(vm.tableData.date).format("DD MMM YYYY");
             arr.push(vm.tableData);
             vm.reimDetails.push(vm.tableData);
             vm.reimTable.rows.add(arr).draw(false);
@@ -117,6 +117,22 @@
             $state.go("coreuser.dashboard");
         };
         vm.reimburse = function () {
+
+            var data = vm.reimDetails
+            Core_Service.saveReimburse(data).then(function (res) {
+                if (res) {
+                    Core_Service.sweetAlert("Reimburse successfully sent for approval!", "data", "success", "coreuser.reimbursement");
+                } else {
+                    Core_Service.sweetAlert("Oops!", "data", "error", "coreuser.reimbursement");
+                }
+                $uibModalInstance.close(res);
+            },
+                    function (error) {
+                        Core_Service.sweetAlertWithConfirm("Done!", "error", "success");
+                    });
+        
+        	
+        	
             console.log(vm.reimDetails);
         };
     };

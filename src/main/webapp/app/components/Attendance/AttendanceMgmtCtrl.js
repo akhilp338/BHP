@@ -33,9 +33,7 @@
                         title: "Date",
                         data: 'date',
                         render: function (data,display,row) {
-                            var date = new Date(data);
-                            var datestring = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-                            return datestring;
+                            return data == null ? "" : moment(data).format("DD MMM YYYY");;
                         }
                     }, {
                         title: "Employee Code",

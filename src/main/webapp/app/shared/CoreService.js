@@ -494,6 +494,21 @@
                     });
             return deferred.promise;
         };
+        
+        service.saveReimburse = function (expences) {
+            var deferred = $q.defer();
+            debugger;
+            Core_HttpRequest.post("api/reimburse/saveOrUpdateReimburse",expences)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
 
 
     };
