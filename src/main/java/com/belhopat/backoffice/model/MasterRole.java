@@ -1,7 +1,7 @@
 package com.belhopat.backoffice.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,9 +26,9 @@ public class MasterRole {
 	private String roleName;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "USER_ID") })
-	private Set<User> users = new HashSet<User>();
+	@JoinTable(name = "ROLE_MODULE_TAB", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "MODULE_TAB_ID") })
+	private List<ModuleTab> moduleTabs = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -46,9 +46,16 @@ public class MasterRole {
 		this.roleName = roleName;
 	}
 
-	@Override
-	public String toString() {
-		return "MasterRoles [id=" + id + ", roleName=" + roleName + ", users=" + users + "]";
+	public List<ModuleTab> getModuleTabs() {
+		return moduleTabs;
 	}
 
+	public void setModuleTabs(List<ModuleTab> moduleTabs) {
+		this.moduleTabs = moduleTabs;
+	}
+
+	@Override
+	public String toString() {
+		return "MasterRole [id=" + id + ", roleName=" + roleName + ", moduleTabs=" + moduleTabs + "]";
+	}
 }

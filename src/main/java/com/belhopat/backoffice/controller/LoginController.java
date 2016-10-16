@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.dto.UserDTO;
-import com.belhopat.backoffice.model.RoleTab;
+import com.belhopat.backoffice.model.ModuleTab;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.LoginService;
 import com.belhopat.backoffice.service.UserService;
@@ -142,8 +142,8 @@ public class LoginController {
 
 	@ResponseBody
 	@RequestMapping(value = "api/getUserTabs", method = RequestMethod.POST)
-	public List<RoleTab> getUserTabs() {
-		List<RoleTab> userTabs = loginService.getUserTabs();
+	public List<ModuleTab> getUserTabs() {
+		List<ModuleTab> userTabs = loginService.getUserTabs();
 		return userTabs;
 	}
 
