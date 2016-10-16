@@ -76,4 +76,6 @@ public interface BaseService {
 	public Map<String, Long> getEmployeeIdAndCodeMap();
 
 	public User getCurrentUser();
+
+	void saveImageIntoUser() throws IOException;
 }

@@ -1,5 +1,9 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
@@ -9,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -591,6 +596,19 @@ public class BaseServiceImpl implements BaseService {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		User currentUser = userRepository.findById(loggedInUser.getId());
 		return currentUser;
+	}
+
+	@Override
+	public void saveImageIntoUser() throws IOException {
+		File imgPath = new File("/home/sujith/Desktop/rafique.jpg");
+		BufferedImage bufferedImage = ImageIO.read(imgPath);
+		WritableRaster raster = bufferedImage.getRaster();
+		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+		List<User> users = userRepository.findAll();
+		for (User user : users) {
+			user.setUserImage(data.getData());
+		}
+		userRepository.save(users);
 	}
 
 }

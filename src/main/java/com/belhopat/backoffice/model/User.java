@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -44,6 +45,10 @@ public class User {
 
 	@Column(name = "EMP_ID", nullable = false)
 	private Long employeeId;
+
+	@Lob
+	@Column(name = "USR_IMG", nullable = true)
+	byte[] userImage;
 
 	@JsonIgnore
 	@Column(name = "SALT")
@@ -134,6 +139,14 @@ public class User {
 
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
+	}
+
+	public byte[] getUserImage() {
+		return userImage;
+	}
+
+	public void setUserImage(byte[] userImage) {
+		this.userImage = userImage;
 	}
 
 	public Byte[] getSalt() {
