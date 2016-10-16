@@ -7,12 +7,12 @@
             {name:"employee",label: "Employee Management", icon: "fa-users",state:"coreuser.employee", title:'Employee Management'},
             {name:"client",label: "Client Management", icon: "fa-flag",state:"coreuser.client", title:'Client Management'},
             {name:"offerletter",label: "Offer Letter Processing", icon: "fa-envelope",state:"coreuser.offerletterhome", title:'Offerletter Processing'},
-            {name:"event",label: "Event Management", icon: "fa-gift",state:"coreuser.event", title:'Event Management'},
-            {name:"consultant",label: "Consultant Management", icon: "fa-gift",state:"coreuser.consultant", title:'Consultant Management'},
-            {name:"vendor",label: "Vendor Management", icon: "fa-gift",state:"coreuser.vendor", title:'Vendor Management'},
+            {name:"event",label: "Event Management", icon: "fa-calendar",state:"coreuser.event", title:'Event Management'},
+            {name:"consultant",label: "Consultant Management", icon: "fa-user-md",state:"coreuser.consultant", title:'Consultant Management'},
+            {name:"vendor",label: "Vendor Management", icon: "fa-suitcase",state:"coreuser.vendor", title:'Vendor Management'},
             {name:"attendance",label: "Attendance Details", icon: "fa-gift",state:"coreuser.attendance", title:'Attendance Management'},
-            {name:"reimbursement",label: "Reimbursement", icon: "fa-suitcase",state:"coreuser.reimbursement", title:'Reimbursement Processing'},
-            {name:"po",label: "PO Management", icon: "fa-suitcase",state:"coreuser.reimbursement", title:'Purchase order Management'}
+            {name:"reimbursement",label: "Reimbursement", icon: "fa-credit-card",state:"coreuser.reimbursement", title:'Reimbursement Processing'},
+            {name:"po",label: "PO Management", icon: " fa-paypal",state:"coreuser.reimbursement", title:'Purchase order Management'}
         ];
         $rootScope.isLogin = false;
         vm.showMenu = function (e) {

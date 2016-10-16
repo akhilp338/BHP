@@ -110,7 +110,7 @@
                     <label class="control-label" for="currency">Currency</label>
                     <div class="controls">
                         <select name="currency" ng-model="vm.tableData.currency" validation="required:alt=required"
-                                class="form-input width-100" ng-options="currency.id as (currency.code) for currency in vm.reim.currency">                   
+                                class="form-input width-100" ng-options="currency.id as (currency.code) for currency in vm.reim.lookups.currency">                   
                             <option value="">--SELECT--</option>
                         </select>
                     </div>

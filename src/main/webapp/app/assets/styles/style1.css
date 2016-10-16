@@ -2350,3 +2350,6 @@ table #tasksList.stripe tbody tr.odd,
 table #tasksList.display tbody tr.odd{
     background-color: white!important;
 }
+#attendanceTable{
+    width: 100%!important;
+}

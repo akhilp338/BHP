@@ -9,6 +9,8 @@
         };
         vm.add = {};
         vm.registration = {};
+        vm.attendance = {};
+        vm.attendance.filter = {};
         vm.registration.skillSet = [];
         vm.back = function () {
             $state.go('coreuser.candidate');

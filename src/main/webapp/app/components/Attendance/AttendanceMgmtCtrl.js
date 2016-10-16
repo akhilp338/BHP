@@ -8,6 +8,9 @@
         }, function (err) {
             console.log(err)
         });
+        vm.setDpOpenStatus = function (id) {
+            vm[id] = true;
+        };
         angular.element(document).ready(function () {
             attendanceTable = angular.element('#attendanceTable').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
@@ -67,8 +70,8 @@
 
         });
         vm.filterChange = function () {
-
-        }
+            console.log(vm.attendance.filter)
+        };
 
     };
 
