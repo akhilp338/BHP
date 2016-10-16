@@ -57,7 +57,6 @@ public class User {
 	@Column(name = "FRGT_PSWD_TKN", length = 200)
 	private String forgotPasswordToken;
 
-	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MST_ROLE")
 	private MasterRole primaryRole;

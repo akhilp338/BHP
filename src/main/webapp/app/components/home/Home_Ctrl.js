@@ -1,6 +1,7 @@
 (function () {
     var Home_Ctrl = function ($scope, $state, $rootScope, Core_Service) {
         var vm = this;
+        debugger;
         console.log($rootScope)
         vm.services = [
             {name:"dashboard",label: "Dashboard", icon: "fa-dashboard",state:"coreuser.dashboard", title:'Dashboard'},
