@@ -26,7 +26,7 @@ public class PurchaseOrder extends BaseEntity {
 	@Column(name = "PO_VALUE")
 	private BigDecimal poValue;
 
-	@Column(name = "EXPRY DTE")
+	@Column(name = "EXPRY_DATE")
 	private Date expiry;
 
 	@Column(name = "STATUS", length = 100)

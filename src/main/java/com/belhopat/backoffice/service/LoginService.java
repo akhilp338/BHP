@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.belhopat.backoffice.model.RoleTab;
+import com.belhopat.backoffice.model.ModuleTab;
 
 @Service
 public interface LoginService {
 
-	public List<RoleTab> getUserTabs();
+	public List<ModuleTab> getUserTabs();
 
 	public void logout(HttpServletRequest request) throws ServletException;
 

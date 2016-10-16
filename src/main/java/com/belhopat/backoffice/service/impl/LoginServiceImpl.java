@@ -16,9 +16,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import com.belhopat.backoffice.model.RoleTab;
+import com.belhopat.backoffice.model.MasterRole;
+import com.belhopat.backoffice.model.ModuleTab;
 import com.belhopat.backoffice.model.User;
-import com.belhopat.backoffice.repository.RoleTabRepository;
+import com.belhopat.backoffice.repository.MasterRoleRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.LoginService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -34,7 +35,7 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 	UserRepository userRepo;
 
 	@Autowired
-	RoleTabRepository roleTabRepository;
+	MasterRoleRepository MasterRoleRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -80,11 +81,11 @@ public class LoginServiceImpl implements UserDetailsService, LoginService {
 	}
 
 	@Override
-	public List<RoleTab> getUserTabs() {
+	public List<ModuleTab> getUserTabs() {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Long roleId = loggedInUser.getPrimaryRole().getId();
-		List<RoleTab> userTabs = roleTabRepository.getUserTabsByRole(roleId);
-		return userTabs;
+		MasterRole masterRole = MasterRoleRepository.findById(roleId);
+		return masterRole.getModuleTabs();
 	}
 
 	@Override
