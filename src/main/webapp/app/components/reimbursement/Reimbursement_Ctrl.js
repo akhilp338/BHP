@@ -66,7 +66,7 @@
                             },
                             {
                                 title: "Currency",
-                                data: 'currency',
+                                data: 'currency.description',
                                 render: function (data) {
                                     return data == null ? "" : data;
                                 }
@@ -100,7 +100,6 @@
 //Core_Service.sweetAlertWithConfirm("Delete ???", "Are you sure to delete this details?", "warning", function(){
             var index = angular.element(this).parents('tr').index() + 1;
             vm.reimDetails.splice(index, 1);
-            console.log(vm.reimDetails)
             vm.reimTable.row(angular.element(this).parents('tr'))
                     .remove()
                     .draw(true);
@@ -110,8 +109,9 @@
             var arr = [];
             vm.tableData.date = moment(vm.tableData.date).format("DD MMM YYYY");
             arr.push(vm.tableData);
-            vm.reimDetails.push(vm.reimSet);
+            vm.reimDetails.push(vm.tableData);
             vm.reimTable.rows.add(arr).draw(false);
+            vm.tableData = {};
         };
         vm.back = function () {
             $state.go("coreuser.dashboard");

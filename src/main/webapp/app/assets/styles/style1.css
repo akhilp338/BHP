@@ -2296,9 +2296,6 @@ a.spec-link{
 .reim-form .back {
     margin-right: 0;
 }
-#reim-table tr td {
-    text-align: center;
-}
 .action-delete {
     color: red;
 }
