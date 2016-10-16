@@ -40,9 +40,9 @@
 
         $rootScope.active = 'client';
         
-        vm.clientRegister = function () {
-            vm.registerUrl = "api/client/saveOrUpdateClient";
-            if(vs.checkFormValidity($scope.regForm)){
+        vm.vendorRegister = function () {
+            vm.registerUrl = "api/vendor/saveOrUpdateVendor";
+//            if(vs.checkFormValidity($scope.regForm)){
                 Core_Service.sweetAlertWithConfirm("Client details filled!", "Are you sure to register this Client?", "warning", function(){
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
@@ -52,7 +52,7 @@
                     			"error","coreuser.client");
                     });
                 });
-            }
+//            }
         };
         vm.getPocList=function(poc){
         	var array = [];
