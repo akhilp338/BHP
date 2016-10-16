@@ -32,7 +32,7 @@
                     }, {
                         title: "Date",
                         data: 'date',
-                        render: function (data, row, display) {
+                        render: function (data,display,row) {
                             var date = new Date(data);
                             var datestring = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
                             return datestring;
@@ -42,9 +42,10 @@
                         data: 'employee.employeeId',
                     }, {
                         title: "Employee Name",
-                        data: 'employee.employeeMaster',
-                        render: function (data, row, display) {
-                            return data.firstName + " " + data.lastName;
+                        data: 'employee.id',
+                        render: function (data,display,row) {
+                        	debugger;
+                            return row.employee.employeeMaster.firstName + " " + row.employee.employeeMaster.lastName;
                         }
                     }, {
                         title: "In Time",
@@ -70,7 +71,22 @@
 
         });
         vm.filterChange = function () {
-            console.log(vm.attendance.filter)
+        	debugger;
+        	vm.attendance.filter
+//        	var filters;
+//    		if(vm.attendance.filter.emplyee == undefined || tradeFrom==''){
+//    			tradeFrom = "01-01-1010";
+//    		}
+//    		if(vm.attendance.filter.status == undefined || tradeFrom==''){
+//    			tradeTo = "31-12-2999";
+//    		}
+//    		filters=attendanceTable.columns(3).search(vm.attendance.filter.employee);
+//    		filters=attendanceTable.columns(9).search("@"+tradeFrom+"@"+tradeTo.split(" ")[0]);
+//    		
+//    		if(filters) 
+//                filters.draw();
+//        	attendanceTable.column( $(this).data('index') ).search( this.value ).draw();
+//            console.log(vm.attendance.filter)
         };
 
     };
