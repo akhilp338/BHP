@@ -15,9 +15,19 @@ public class ModuleTab {
 	@Column(name = "ID", nullable = false)
 	private Long id;
 
-	@Column(name = "TAB_CODE", length = 25)
-	private String tabCode;
+	@Column(name = "TAB_NAME", length = 50)
+	private String name;
 
-	@Column(name = "TAB_DESC", length = 50)
-	private String tabDescription;
+	@Column(name = "TAB_LABEL", length = 50)
+	private String label;
+
+	@Column(name = "TAB_ICON", length = 50)
+	private String icon;
+
+	@Column(name = "TAB_STATE", length = 50)
+	private String state;
+
+	@Column(name = "TAB_TITLE", length = 25)
+	private String title;
+
 }

@@ -26,7 +26,6 @@ import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.service.BaseService;
-import com.belhopat.backoffice.session.SessionManager;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -114,7 +113,7 @@ public class BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
 	public User getUserName() {
-		User currentUser = SessionManager.getCurrentUserAsEntity();
+		User currentUser = baseService.getCurrentUser();
 		return currentUser;
 	}
 
