@@ -24,6 +24,7 @@ import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
+import com.belhopat.backoffice.model.User;
 import com.itextpdf.text.DocumentException;
 
 @Service
@@ -73,4 +74,6 @@ public interface BaseService {
 	public ResponseEntity<List<Currency>> getCurrencies();
 
 	public Map<String, Long> getEmployeeIdAndCodeMap();
+
+	public User getCurrentUser();
 }

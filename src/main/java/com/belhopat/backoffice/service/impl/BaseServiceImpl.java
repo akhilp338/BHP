@@ -586,4 +586,11 @@ public class BaseServiceImpl implements BaseService {
 		return map;
 	}
 
+	@Override
+	public User getCurrentUser() {
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		User currentUser = userRepository.findById(loggedInUser.getId());
+		return currentUser;
+	}
+
 }
