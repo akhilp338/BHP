@@ -20,6 +20,7 @@ import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Currency;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
@@ -77,5 +78,7 @@ public interface BaseService {
 
 	public User getCurrentUser();
 
-	void saveImageIntoUser() throws IOException;
+	public void saveImageIntoUser() throws IOException;
+
+	public Employee getloggedInEmployee();
 }

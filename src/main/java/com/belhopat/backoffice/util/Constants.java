@@ -119,4 +119,8 @@ public class Constants {
 	public static final String ATTACHMENT = "attachment; filename=";
 	public static final String VENDOR = "vendor";
 
+	/* Amazon S3 Constant Names */
+	public static final String BUCKET_NAME = "BHP";
+	public static final String REIMBURSE_FILE = "Reimburse";
+
 }

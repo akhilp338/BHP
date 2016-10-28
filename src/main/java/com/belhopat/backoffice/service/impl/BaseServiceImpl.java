@@ -611,4 +611,12 @@ public class BaseServiceImpl implements BaseService {
 		userRepository.save(users);
 	}
 
+	@Override
+	public Employee getloggedInEmployee() {
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		User user = userRepository.findById(loggedInUser.getId());
+		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
+		return loggedInEmployee;
+	}
+
 }

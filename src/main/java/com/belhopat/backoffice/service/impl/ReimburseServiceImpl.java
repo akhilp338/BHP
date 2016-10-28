@@ -1,5 +1,7 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,23 +10,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.belhopat.backoffice.dto.TaskDTO;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Expense;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.MasterTaskRepository;
 import com.belhopat.backoffice.repository.ReimburseRepository;
+import com.belhopat.backoffice.repository.S3BucketFileRepository;
 import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.ReimburseService;
+import com.belhopat.backoffice.service.S3BucketCoreService;
 import com.belhopat.backoffice.service.TaskService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
@@ -61,10 +68,16 @@ public class ReimburseServiceImpl implements ReimburseService {
 	@Autowired
 	CurrencyRepository currencyRepository;
 
+	@Autowired
+	S3BucketFileRepository s3BucketFileRepository;
+
+	@Autowired
+	S3BucketCoreService s3BucketCoreService;
+
 	@Override
 	public ResponseEntity<Map<String, String>> saveOrUpdateReimburse(List<Expense> expenses) {
 		Map<String, String> responseMap = new HashMap<>();
-		Employee loggedInEmployee = employeeService.getloggedInEmployeeAsEnity();
+		Employee loggedInEmployee = baseService.getloggedInEmployee();
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Reimburse reimburse = new Reimburse();
 		Long increment = baseService.getSequenceIncrement(Employee.class);
@@ -164,5 +177,35 @@ public class ReimburseServiceImpl implements ReimburseService {
 				createReimburseTask(task.getTaskEntityId(), mstTask);
 			}
 		}
+	}
+
+	@Override
+	public UploadResponse uploadReimburseFile(MultipartFile file, Long reimburseId) throws Exception {
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Employee loggedInEmployee = baseService.getloggedInEmployee();
+		ByteArrayInputStream byteContent = new ByteArrayInputStream(file.getBytes());
+		S3BucketFile s3BucketFile = new S3BucketFile();
+		s3BucketFile.setBaseAttributes(loggedInUser);
+		s3BucketFile.setBucketName(Constants.BUCKET_NAME);
+		s3BucketFile.setUserId(loggedInEmployee.getEmployeeId());
+		s3BucketFile.setFileType(Constants.REIMBURSE_FILE);
+		String contentType = file.getOriginalFilename().split("\\.")[1];
+		s3BucketFile.setContentType(contentType);
+		String fileName = s3BucketFileRepository.getLatestFileName(Constants.BUCKET_NAME,
+				loggedInEmployee.getEmployeeId(), Constants.REIMBURSE_FILE, contentType);
+		if (fileName == null) {
+			fileName = Constants.REIMBURSE_FILE + "_0";
+		} else {
+			String fileNameNum = file.getOriginalFilename().split("\\_")[1];
+			Integer num = Integer.valueOf(fileNameNum);
+			num = num + 1;
+			fileName = Constants.REIMBURSE_FILE + "_" + String.valueOf(num);
+		}
+		s3BucketFile.setFileName(fileName);
+		boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
+		if (status) {
+			s3BucketFileRepository.save(s3BucketFile);
+		}
+		return null;
 	}
 }
