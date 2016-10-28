@@ -633,7 +633,7 @@ public class BaseServiceImpl implements BaseService {
 		AmazonS3 s3Client = new AmazonS3Client(credentials);
 		try {
 			File file = new File("/home/sujith/Desktop/rafique.jpg");
-			s3Client.putObject(new PutObjectRequest(Constants.BUCKET_NAME, "/sujith", file));
+			s3Client.putObject(new PutObjectRequest(Constants.BUCKET_NAME, "/sujith/rafique.jpg", file));
 			s3Client.setObjectAcl(Constants.BUCKET_NAME, "/sujith", CannedAccessControlList.PublicRead);
 		} catch (AmazonServiceException ase) {
 			System.out.println("Caught an AmazonServiceException, which " + "means your request made it "
