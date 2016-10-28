@@ -23,6 +23,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.belhopat.backoffice.alfresco.main.AlfrescoUploadService;
 import com.belhopat.backoffice.dto.AddressDTO;
 import com.belhopat.backoffice.dto.EmploymentInfoDTO;
@@ -617,6 +625,30 @@ public class BaseServiceImpl implements BaseService {
 		User user = userRepository.findById(loggedInUser.getId());
 		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
 		return loggedInEmployee;
+	}
+
+	@Override
+	public void upload() {
+		AWSCredentials credentials = new BasicAWSCredentials(Constants.AWS_ACCEESS_KEY_ID, Constants.AWS_SECRET_KEY);
+		AmazonS3 s3Client = new AmazonS3Client(credentials);
+		try {
+			File file = new File("/home/sujith/Desktop/rafique.jpg");
+			s3Client.putObject(new PutObjectRequest(Constants.BUCKET_NAME, "/sujith", file));
+			s3Client.setObjectAcl(Constants.BUCKET_NAME, "/sujith", CannedAccessControlList.PublicRead);
+		} catch (AmazonServiceException ase) {
+			System.out.println("Caught an AmazonServiceException, which " + "means your request made it "
+					+ "to Amazon S3, but was rejected with an error response" + " for some reason.");
+			System.out.println("Error Message:    " + ase.getMessage());
+			System.out.println("HTTP Status Code: " + ase.getStatusCode());
+			System.out.println("AWS Error Code:   " + ase.getErrorCode());
+			System.out.println("Error Type:       " + ase.getErrorType());
+			System.out.println("Request ID:       " + ase.getRequestId());
+		} catch (AmazonClientException ace) {
+			System.out.println("Caught an AmazonClientException, which " + "means the client encountered "
+					+ "an internal error while trying to " + "communicate with S3, "
+					+ "such as not being able to access the network.");
+			System.out.println("Error Message: " + ace.getMessage());
+		}
 	}
 
 }

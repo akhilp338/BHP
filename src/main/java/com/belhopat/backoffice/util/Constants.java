@@ -120,7 +120,8 @@ public class Constants {
 	public static final String VENDOR = "vendor";
 
 	/* Amazon S3 Constant Names */
-	public static final String BUCKET_NAME = "BHP";
+	public static final String BUCKET_NAME = "belhopatbackoffice";
 	public static final String REIMBURSE_FILE = "Reimburse";
-
+	public static final String AWS_ACCEESS_KEY_ID = "AKIAJRCCXXN3JYGSMH6A";
+	public static final String AWS_SECRET_KEY = "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";
 }

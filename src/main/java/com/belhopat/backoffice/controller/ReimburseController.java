@@ -53,7 +53,7 @@ public class ReimburseController {
 	@ResponseBody
 	@RequestMapping(value = "/uploadReimburseFile", method = RequestMethod.POST)
 	public UploadResponse uploadReimburseFile(@RequestParam("file") MultipartFile file, @RequestParam Long reimburseId)
-			throws IOException {
+			throws IllegalStateException, Exception {
 		UploadResponse response = reimburseService.uploadReimburseFile(file, reimburseId);
 		return response;
 	}

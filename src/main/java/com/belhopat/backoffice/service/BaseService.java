@@ -81,4 +81,6 @@ public interface BaseService {
 	public void saveImageIntoUser() throws IOException;
 
 	public Employee getloggedInEmployee();
+
+	public void upload();
 }
