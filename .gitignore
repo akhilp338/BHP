@@ -1,4 +1,4 @@
-
+*~
 /target/*
 .classpath
 .project
@@ -21,3 +21,4 @@ target
 /src/main/webapp/triangular/.tmp/
 /src/main/webapp/triangular/bower_components/
 /src/main/webapp/triangular/node_modules/
+hs_err_pid_*.log
