@@ -180,9 +180,13 @@ public class ReimburseServiceImpl implements ReimburseService {
 
 	@Override
 	public UploadResponse uploadReimburseFile(MultipartFile file, Long reimburseId) throws Exception {
+		UploadResponse response = baseService.getErrorResponse();
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Employee loggedInEmployee = baseService.getloggedInEmployee();
 		ByteArrayInputStream byteContent = new ByteArrayInputStream(file.getBytes());
+
+		/* save details of file into database for future uses */
+
 		S3BucketFile s3BucketFile = new S3BucketFile();
 		s3BucketFile.setBaseAttributes(loggedInUser);
 		s3BucketFile.setBucketName(Constants.BUCKET_NAME);
@@ -203,8 +207,9 @@ public class ReimburseServiceImpl implements ReimburseService {
 		s3BucketFile.setFileName(fileName);
 		boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
 		if (status) {
+			response = baseService.getSuccessResponse();
 			s3BucketFileRepository.save(s3BucketFile);
 		}
-		return null;
+		return response;
 	}
 }

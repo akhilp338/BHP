@@ -38,6 +38,7 @@ import com.belhopat.backoffice.dto.OfficialInfoDTO;
 import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.CandidateSequence;
 import com.belhopat.backoffice.model.City;
@@ -638,6 +639,23 @@ public class BaseServiceImpl implements BaseService {
 		output.flush();
 		response.flushBuffer();
 		output.close();
+	}
+
+	@Override
+	public UploadResponse getSuccessResponse() {
+		UploadResponse response = new UploadResponse();
+		response.setStatus("success");
+		response.setActionStatus(true);
+		return response;
+	}
+
+	@Override
+	public UploadResponse getErrorResponse() {
+		UploadResponse response = new UploadResponse();
+		response.setStatusMessage("Unexpected Error");
+		response.setStatus("error");
+		response.setActionStatus(false);
+		return response;
 	}
 
 	@Override

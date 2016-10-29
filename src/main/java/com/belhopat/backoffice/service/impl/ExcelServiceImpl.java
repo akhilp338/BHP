@@ -36,15 +36,15 @@ public class ExcelServiceImpl implements ExcelService {
 	public UploadResponse uploadExcel(String type, MultipartFile file) throws IOException {
 		UploadResponse response = new UploadResponse();
 		response = validateExcelFile(file);
-//		if (!response.isActionStatus()) {
-//			return response;
-//		}
-//		HSSFWorkbook workBook = getHSSFWorkbook(file);
-//		if (workBook == null) {
-//			response = getErrorResponse();
-//			return response;
-//		}
-		HSSFWorkbook workBook =null;
+		// if (!response.isActionStatus()) {
+		// return response;
+		// }
+		// HSSFWorkbook workBook = getHSSFWorkbook(file);
+		// if (workBook == null) {
+		// response = getErrorResponse();
+		// return response;
+		// }
+		HSSFWorkbook workBook = null;
 		switch (type) {
 		case "ATNDNCE":
 			response = uploadAttendanceExcel(workBook);
@@ -72,10 +72,10 @@ public class ExcelServiceImpl implements ExcelService {
 	}
 
 	private UploadResponse validateExcelFile(MultipartFile multipartFile) throws IOException {
-		UploadResponse response = getErrorResponse();
+		UploadResponse response = baseService.getErrorResponse();
 		if (multipartFile != null && !multipartFile.isEmpty()) {
 			if (multipartFile.getOriginalFilename().endsWith("XLS")) {
-				response = getSuccessResponse();
+				response = baseService.getSuccessResponse();
 			} else {
 				response.setStatusMessage("Select XLS File");
 			}
@@ -89,7 +89,7 @@ public class ExcelServiceImpl implements ExcelService {
 	private UploadResponse uploadAttendanceExcel(HSSFWorkbook workBook) throws IOException {
 		FileInputStream fileInputStream = new FileInputStream("/home/sujith/Desktop/2015_Sep.xls");
 		HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
-		UploadResponse response = getErrorResponse();
+		UploadResponse response = baseService.getErrorResponse();
 		Map<String, Long> employeeMap = getMap();
 		try {
 			AttendanceExcelParser excelParser = new AttendanceExcelParser(workbook, attendanceRepository, employeeMap);
@@ -116,20 +116,4 @@ public class ExcelServiceImpl implements ExcelService {
 		employeeMap.put("C1505005", 2L);
 		return employeeMap;
 	}
-
-	private UploadResponse getSuccessResponse() {
-		UploadResponse response = new UploadResponse();
-		response.setStatus("success");
-		response.setActionStatus(true);
-		return response;
-	}
-
-	private UploadResponse getErrorResponse() {
-		UploadResponse response = new UploadResponse();
-		response.setStatusMessage("Unexpected Error");
-		response.setStatus("error");
-		response.setActionStatus(false);
-		return response;
-	}
-
 }
