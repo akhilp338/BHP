@@ -1,7 +1,6 @@
 package com.belhopat.backoffice.service;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,5 @@ public interface S3BucketCoreService {
 	public byte[] downloadFile(S3BucketFileDTO s3BucketFile) throws Exception;
 
 	public boolean deleteFile(S3BucketFileDTO s3BucketFile);
-
-	public File getFile(S3BucketFileDTO s3BucketFile) throws Exception;
 
 }

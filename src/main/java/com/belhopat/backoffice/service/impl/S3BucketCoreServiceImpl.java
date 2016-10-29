@@ -2,7 +2,6 @@ package com.belhopat.backoffice.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -14,7 +13,6 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -43,6 +41,7 @@ public class S3BucketCoreServiceImpl implements S3BucketCoreService {
 					s3BucketFile.getContent(), new ObjectMetadata()));
 			s3Client.setObjectAcl(s3BucketFile.getBucketName(), s3BucketFile.getKey(),
 					CannedAccessControlList.PublicRead);
+			return true;
 		} catch (AmazonServiceException ase) {
 			System.out.println("Caught an AmazonServiceException, which " + "means your request made it "
 					+ "to Amazon S3, but was rejected with an error response" + " for some reason.");
@@ -57,7 +56,7 @@ public class S3BucketCoreServiceImpl implements S3BucketCoreService {
 					+ "such as not being able to access the network.");
 			System.out.println("Error Message: " + ace.getMessage());
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -74,52 +73,36 @@ public class S3BucketCoreServiceImpl implements S3BucketCoreService {
 
 	@Override
 	public byte[] downloadFile(S3BucketFileDTO s3BucketFile) throws Exception {
-		AmazonS3 s3Client = new AmazonS3Client();
+		AWSCredentials credentials = new BasicAWSCredentials(Constants.AWS_ACCEESS_KEY_ID, Constants.AWS_SECRET_KEY);
+		AmazonS3 s3Client = new AmazonS3Client(credentials);
 		byte[] bytes = null;
-		S3Object s3object = s3Client
-				.getObject(new GetObjectRequest(s3BucketFile.getBucketName(), s3BucketFile.getKey()));
 		try {
-
+			GetObjectRequest getObject = new GetObjectRequest(s3BucketFile.getBucketName(), s3BucketFile.getKey());
+			S3Object s3object = s3Client.getObject(getObject);
 			bytes = IOUtils.toByteArray(s3object.getObjectContent());
 			FileUtils.writeByteArrayToFile(new File("/home"), bytes);
 
-		} catch (IOException e) {
-			LOGGER.info("fileDownload in S3BucketService :" + e.getStackTrace());
-			throw e;
-
-		} catch (AmazonS3Exception amazonS3Exception) {
-			LOGGER.info("fileDownload in S3BucketService :" + amazonS3Exception.getStackTrace());
-			throw amazonS3Exception;
+		} catch (AmazonServiceException ase) {
+			System.out.println("Caught an AmazonServiceException, which " + "means your request made it "
+					+ "to Amazon S3, but was rejected with an error response" + " for some reason.");
+			System.out.println("Error Message:    " + ase.getMessage());
+			System.out.println("HTTP Status Code: " + ase.getStatusCode());
+			System.out.println("AWS Error Code:   " + ase.getErrorCode());
+			System.out.println("Error Type:       " + ase.getErrorType());
+			System.out.println("Request ID:       " + ase.getRequestId());
+		} catch (AmazonClientException ace) {
+			System.out.println("Caught an AmazonClientException, which " + "means the client encountered "
+					+ "an internal error while trying to " + "communicate with S3, "
+					+ "such as not being able to access the network.");
+			System.out.println("Error Message: " + ace.getMessage());
 		}
 		return bytes;
 	}
 
 	@Override
-	public File getFile(S3BucketFileDTO s3BucketFile) throws Exception {
-		AmazonS3 s3Client = new AmazonS3Client();
-		File file = new File("/home");
-		byte[] bytes = null;
-		S3Object s3object = s3Client
-				.getObject(new GetObjectRequest(s3BucketFile.getBucketName(), s3BucketFile.getKey()));
-		try {
-
-			bytes = IOUtils.toByteArray(s3object.getObjectContent());
-			FileUtils.writeByteArrayToFile(file, bytes);
-
-		} catch (IOException e) {
-			LOGGER.info("fileDownload in S3BucketService :" + e.getStackTrace());
-			throw e;
-
-		} catch (AmazonS3Exception amazonS3Exception) {
-			LOGGER.info("fileDownload in S3BucketService :" + amazonS3Exception.getStackTrace());
-			throw amazonS3Exception;
-		}
-		return file;
-	}
-
-	@Override
 	public boolean deleteFile(S3BucketFileDTO s3BucketFile) {
-		AmazonS3 s3Client = new AmazonS3Client();
+		AWSCredentials credentials = new BasicAWSCredentials(Constants.AWS_ACCEESS_KEY_ID, Constants.AWS_SECRET_KEY);
+		AmazonS3 s3Client = new AmazonS3Client(credentials);
 		boolean success = false;
 		if (s3BucketFile.getKey() != "" || s3BucketFile.getKey() != null) {
 			s3Client.deleteObject(s3BucketFile.getBucketName(), s3BucketFile.getKey());
