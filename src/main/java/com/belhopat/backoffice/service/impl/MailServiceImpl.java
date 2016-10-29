@@ -24,6 +24,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
+import com.belhopat.backoffice.model.Consultant;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.Reimburse;
@@ -123,6 +124,29 @@ public class MailServiceImpl implements MailService {
 		String emailHtmlBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, templateName,
 				Constants.UTF_8, model);
 		return emailHtmlBody;
+	}
+	
+	@Override
+	public void sendConsultantRegMail( Consultant consultant ) throws MessagingException {
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put(Constants.CONSULTANT, consultant);
+		String emailHtmlBody = generateEmailBodyFromVelocityTemplate(Constants.CONS_REG_EMAIL_TEMPLATE, model);
+		String logoResourcePath = "/pdf-resources/" + PDFConstants.LOGO_JPG;
+
+		List<String> clientRegNotificationList = new ArrayList<String>(1);
+		// TODO GET CEO mail id here
+		clientRegNotificationList.add("bhptestreceiver@gmail.com");
+		clientRegNotificationList.add(consultant.getBussUnitHead().getOfficialEmail() != null
+				? consultant.getBussUnitHead().getOfficialEmail() : null);
+
+		InternetAddress[] forDebugEmail = getTempEmailMailingList(clientRegNotificationList);
+		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC(null);
+
+		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM,
+				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, logoResourcePath, mailSender);
+		sendMail(mailObject);
+
 	}
 
 	/*

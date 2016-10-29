@@ -22,7 +22,6 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.User;
-import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.PurchaseOrderRepository;
 import com.belhopat.backoffice.service.BaseService;

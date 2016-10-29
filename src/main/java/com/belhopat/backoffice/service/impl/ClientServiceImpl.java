@@ -117,10 +117,10 @@ public class ClientServiceImpl implements ClientService {
 	 */
 	private Client registerNewClient(User loggedInUser, Client clientObj) throws MessagingException {
 		clientObj.setBaseAttributes(loggedInUser);
-		Long increment = baseService.getSequenceIncrement(Client.class);
+		Long increment = baseService.getSequenceIncrement( clientObj.getClass() );
 		String clientId = SequenceGenerator.generateClientId(increment);
 		clientObj.setClientId(clientId);
-		Client persisted = clientRepository.save(clientObj);
+		Client persisted = clientRepository.save( clientObj );
 
 		// TODO make this generic
 

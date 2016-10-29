@@ -1,21 +1,17 @@
 package com.belhopat.backoffice.model;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CANDIDATE")
-public class Candidate extends BaseEntity {
+public class Candidate extends BasicDetailsEntity {
 
 	@Column(name = "CAND_ID", unique = true, nullable = false, length = 15)
 	private String candidateId;
@@ -29,24 +25,9 @@ public class Candidate extends BaseEntity {
 	@Column(name = "LST_NAME", length = 50)
 	private String lastName;
 
-	// @Temporal(TemporalType.DATE)
-	@Column(name = "DOB")
-	private Date dob;
-
-	@ManyToOne
-	@JoinColumn(name = "GNDR_ID", nullable = false)
-	private LookupDetail gender;
-
 	@ManyToOne
 	@JoinColumn(name = "BLD_GRP_ID")
 	private LookupDetail bloodGroup;
-
-	@Column(name = "PER_EMAIL", length = 50)
-	private String personalEmail;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PER_CONT_NO_ID")
-	private Phone personalContactNo;
 
 	@Column(name = "OFC_EMAIL", length = 50)
 	private String officialEmail;
@@ -54,21 +35,6 @@ public class Candidate extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "OFC_CONT_NO_ID")
 	private Phone officialContactNo;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FAM_CONT_NO1_ID")
-	private Phone familyContact1;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FAM_CONT_NO2_ID")
-	private Phone familyContact2;
-
-	@Column(name = "FAM_EMAIL", length = 50)
-	private String familyEmail;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ONST_CONT_NO_ID")
-	private Phone onsiteContactNo;
 
 	@Column(name = "FATR_NAME", length = 50)
 	private String fathersName;
@@ -86,27 +52,6 @@ public class Candidate extends BaseEntity {
 	@JoinColumn(name = "EMP_SALARY_ID")
 	private EmployeeSalary salary;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CURR_ADRS_ID")
-	private Address currentAddress;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PERM_ADRS_ID")
-	private Address permanentAddress;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ONST_ADRS_ID")
-	private Address onsiteAddress;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Skill> skillSet;
-
-	@Column(name = "PRIR_EXP_YR")
-	private Integer priorExperienceYear;
-
-	@Column(name = "PRIR_EXP_MNT")
-	private Integer priorExperienceMonth;
-
 	@ManyToOne
 	@JoinColumn(name = "CNTY_OF_ORG_ID")
 	private Country countryOfOrigin;
@@ -119,35 +64,16 @@ public class Candidate extends BaseEntity {
 	@JoinColumn(name = "CLNT_ID")
 	private Client client;
 
-	@Column(name = "SRCD_BY", length = 50)
-	private String sourcedBy;
-
 	@Column(name = "PARTNER", length = 50)
 	private String partner;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "BNK_ACC_ID")
-	private BankAccount bankAccount;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PASSPORT_ID")
-	private Passport passport;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "OFC_DTLS_ID")
 	private OfficialCards officialDetails;
 
-	// @Temporal(TemporalType.DATE)
-	@Column(name = "DOJ")
-	private Date doj;
-
 	@ManyToOne
 	@JoinColumn(name = "DVSN_ID")
 	private LookupDetail division;
-
-	@ManyToOne
-	@JoinColumn(name = "DSGNT_ID")
-	private LookupDetail designation;
 
 	@ManyToOne
 	@JoinColumn(name = "PRPUS_ID")
@@ -199,44 +125,12 @@ public class Candidate extends BaseEntity {
 		this.lastName = lastName;
 	}
 
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-	public LookupDetail getGender() {
-		return gender;
-	}
-
-	public void setGender(LookupDetail gender) {
-		this.gender = gender;
-	}
-
 	public LookupDetail getBloodGroup() {
 		return bloodGroup;
 	}
 
 	public void setBloodGroup(LookupDetail bloodGroup) {
 		this.bloodGroup = bloodGroup;
-	}
-
-	public String getPersonalEmail() {
-		return personalEmail;
-	}
-
-	public void setPersonalEmail(String personalEmail) {
-		this.personalEmail = personalEmail;
-	}
-
-	public Phone getPersonalContactNo() {
-		return personalContactNo;
-	}
-
-	public void setPersonalContactNo(Phone personalContactNo) {
-		this.personalContactNo = personalContactNo;
 	}
 
 	public String getOfficialEmail() {
@@ -253,38 +147,6 @@ public class Candidate extends BaseEntity {
 
 	public void setOfficialContactNo(Phone officialContactNo) {
 		this.officialContactNo = officialContactNo;
-	}
-
-	public Phone getFamilyContact1() {
-		return familyContact1;
-	}
-
-	public void setFamilyContact1(Phone familyContact1) {
-		this.familyContact1 = familyContact1;
-	}
-
-	public Phone getFamilyContact2() {
-		return familyContact2;
-	}
-
-	public void setFamilyContact2(Phone familyContact2) {
-		this.familyContact2 = familyContact2;
-	}
-
-	public String getFamilyEmail() {
-		return familyEmail;
-	}
-
-	public void setFamilyEmail(String familyEmail) {
-		this.familyEmail = familyEmail;
-	}
-
-	public Phone getOnsiteContactNo() {
-		return onsiteContactNo;
-	}
-
-	public void setOnsiteContactNo(Phone onsiteContactNo) {
-		this.onsiteContactNo = onsiteContactNo;
 	}
 
 	public String getFathersName() {
@@ -327,54 +189,6 @@ public class Candidate extends BaseEntity {
 		this.salary = salary;
 	}
 
-	public Address getCurrentAddress() {
-		return currentAddress;
-	}
-
-	public void setCurrentAddress(Address currentAddress) {
-		this.currentAddress = currentAddress;
-	}
-
-	public Address getPermanentAddress() {
-		return permanentAddress;
-	}
-
-	public void setPermanentAddress(Address permanentAddress) {
-		this.permanentAddress = permanentAddress;
-	}
-
-	public Address getOnsiteAddress() {
-		return onsiteAddress;
-	}
-
-	public void setOnsiteAddress(Address onsiteAddress) {
-		this.onsiteAddress = onsiteAddress;
-	}
-
-	public List<Skill> getSkillSet() {
-		return skillSet;
-	}
-
-	public void setSkillSet(List<Skill> skillSet) {
-		this.skillSet = skillSet;
-	}
-
-	public Integer getPriorExperienceYear() {
-		return priorExperienceYear;
-	}
-
-	public void setPriorExperienceYear(Integer priorExperienceYear) {
-		this.priorExperienceYear = priorExperienceYear;
-	}
-
-	public Integer getPriorExperienceMonth() {
-		return priorExperienceMonth;
-	}
-
-	public void setPriorExperienceMonth(Integer priorExperienceMonth) {
-		this.priorExperienceMonth = priorExperienceMonth;
-	}
-
 	public Country getCountryOfOrigin() {
 		return countryOfOrigin;
 	}
@@ -399,36 +213,12 @@ public class Candidate extends BaseEntity {
 		this.client = client;
 	}
 
-	public String getSourcedBy() {
-		return sourcedBy;
-	}
-
-	public void setSourcedBy(String sourcedBy) {
-		this.sourcedBy = sourcedBy;
-	}
-
 	public String getPartner() {
 		return partner;
 	}
 
 	public void setPartner(String partner) {
 		this.partner = partner;
-	}
-
-	public BankAccount getBankAccount() {
-		return bankAccount;
-	}
-
-	public void setBankAccount(BankAccount bankAccount) {
-		this.bankAccount = bankAccount;
-	}
-
-	public Passport getPassport() {
-		return passport;
-	}
-
-	public void setPassport(Passport passport) {
-		this.passport = passport;
 	}
 
 	public OfficialCards getOfficialDetails() {
@@ -439,28 +229,12 @@ public class Candidate extends BaseEntity {
 		this.officialDetails = officialDetails;
 	}
 
-	public Date getDoj() {
-		return doj;
-	}
-
-	public void setDoj(Date doj) {
-		this.doj = doj;
-	}
-
 	public LookupDetail getDivision() {
 		return division;
 	}
 
 	public void setDivision(LookupDetail division) {
 		this.division = division;
-	}
-
-	public LookupDetail getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(LookupDetail designation) {
-		this.designation = designation;
 	}
 
 	public LookupDetail getPurpose() {
@@ -506,20 +280,14 @@ public class Candidate extends BaseEntity {
 	@Override
 	public String toString() {
 		return "Candidate [candidateId=" + candidateId + ", firstName=" + firstName + ", middleName=" + middleName
-				+ ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender + ", bloodGroup=" + bloodGroup
-				+ ", personalEmail=" + personalEmail + ", personalContactNo=" + personalContactNo + ", officialEmail="
-				+ officialEmail + ", officialContactNo=" + officialContactNo + ", familyContact1=" + familyContact1
-				+ ", familyContact2=" + familyContact2 + ", familyEmail=" + familyEmail + ", onsiteContactNo="
-				+ onsiteContactNo + ", fathersName=" + fathersName + ", mothersName=" + mothersName + ", childName="
-				+ childName + ", spouseName=" + spouseName + ", salary=" + salary + ", currentAddress=" + currentAddress
-				+ ", permanentAddress=" + permanentAddress + ", onsiteAddress=" + onsiteAddress + ", skillSet="
-				+ skillSet + ", priorExperienceYear=" + priorExperienceYear + ", priorExperienceMonth="
-				+ priorExperienceMonth + ", countryOfOrigin=" + countryOfOrigin + ", countryToVisit=" + countryToVisit
-				+ ", client=" + client + ", sourcedBy=" + sourcedBy + ", partner=" + partner + ", bankAccount="
-				+ bankAccount + ", passport=" + passport + ", officialDetails=" + officialDetails + ", doj=" + doj
-				+ ", division=" + division + ", designation=" + designation + ", purpose=" + purpose
-				+ ", employmentStatus=" + employmentStatus + ", registrationStatus=" + registrationStatus
-				+ ", employee=" + employee + "]";
+				+ ", lastName=" + lastName + ", bloodGroup=" + bloodGroup + ", officialEmail=" + officialEmail
+				+ ", officialContactNo=" + officialContactNo + ", fathersName=" + fathersName + ", mothersName="
+				+ mothersName + ", childName=" + childName + ", spouseName=" + spouseName + ", salary=" + salary
+				+ ", countryOfOrigin=" + countryOfOrigin + ", countryToVisit=" + countryToVisit + ", client=" + client
+				+ ", partner=" + partner + ", officialDetails=" + officialDetails + ", division=" + division
+				+ ", purpose=" + purpose + ", employmentStatus=" + employmentStatus + ", registrationStatus="
+				+ registrationStatus + ", employee=" + employee + ", offerletterStatus=" + offerletterStatus + "]";
 	}
 
+	
 }
