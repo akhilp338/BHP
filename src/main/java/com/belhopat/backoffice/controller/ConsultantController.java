@@ -15,7 +15,7 @@ import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.service.BaseService;
 
 /**
- * @author Belhopat dev team Serves as a webservice handler class
+ * @author Belhopat dev team Handler for all consultant related service calls
  *
  */
 @Controller
@@ -25,13 +25,6 @@ public class ConsultantController {
 	@Autowired
 	BaseService baseService;
 
-	/**
-	 * @param requestObject
-	 * @return response entity Lookup method fetches states for a country
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/getStatesByCountry", method = RequestMethod.POST)
-	public ResponseEntity<List<State>> getStatesByCountry(@RequestBody RequestObject requestObject) {
-		return baseService.getStatesByCountry(requestObject.getId());
-	}
+
+
 }

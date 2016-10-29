@@ -26,11 +26,8 @@ import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Task;
-import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
-import com.belhopat.backoffice.service.ExcelService;
-import com.belhopat.backoffice.service.PDFService;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -46,15 +43,6 @@ public class CandidateController {
 
 	@Autowired
 	CandidateService candidateService;
-
-	@Autowired
-	PDFService pdfService;
-
-	@Autowired
-	ExcelService excelService;
-
-	@Autowired
-	EmployeeRepository employeeRepository;
 
 	/**
 	 * @param datatablesinput

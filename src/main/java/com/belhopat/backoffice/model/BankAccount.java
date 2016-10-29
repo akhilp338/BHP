@@ -36,6 +36,12 @@ public class BankAccount {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "BNK_ADRS_ID")
 	private Address bankAddress;
+	
+	@Column(name = "SWIFT_CODE", length = 25)
+	private String swiftCode;
+	
+	@Column(name = "IBAN", length = 50)
+	private String InternationalBankAccountNo;
 
 	public Long getId() {
 		return id;
@@ -93,11 +99,27 @@ public class BankAccount {
 		this.bankAddress = bankAddress;
 	}
 
+	public String getSwiftCode() {
+		return swiftCode;
+	}
+
+	public void setSwiftCode(String swiftCode) {
+		this.swiftCode = swiftCode;
+	}
+
+	public String getInternationalBankAccountNo() {
+		return InternationalBankAccountNo;
+	}
+
+	public void setInternationalBankAccountNo(String internationalBankAccountNo) {
+		InternationalBankAccountNo = internationalBankAccountNo;
+	}
+
 	@Override
 	public String toString() {
 		return "BankAccount [id=" + id + ", accountNo=" + accountNo + ", IFSCCode=" + IFSCCode + ", accountHolderName="
 				+ accountHolderName + ", bankName=" + bankName + ", branch=" + branch + ", bankAddress=" + bankAddress
-				+ "]";
+				+ ", swiftCode=" + swiftCode + ", InternationalBankAccountNo=" + InternationalBankAccountNo + "]";
 	}
 
 }
