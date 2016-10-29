@@ -62,6 +62,7 @@ public class CandidateController {
 		// pdfService.generateOfferLetterPDF(salary);
 //		excelService.uploadExcel("ATNDNCE", null);
 //		baseService.saveImageIntoUser();
+//		baseService.upload();
 		return candidateService.getCandidates(input, employee);
 	}
 

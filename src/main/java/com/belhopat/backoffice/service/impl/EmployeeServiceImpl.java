@@ -240,12 +240,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
 	}
 
-	@Override
-	public Employee getloggedInEmployeeAsEnity() {
-		User loggedInUser = SessionManager.getCurrentUserAsEntity();
-		User user = userRepository.findById(loggedInUser.getId());
-		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
-		return loggedInEmployee;
-	}
-
 }

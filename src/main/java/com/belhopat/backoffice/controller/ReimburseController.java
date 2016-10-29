@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Expense;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.service.BaseService;
@@ -42,8 +45,16 @@ public class ReimburseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getReimburse", method = RequestMethod.GET)
-	public ResponseEntity<Reimburse> saveOrUpdateCandidate(@RequestBody Long reimburseId) {
+	public ResponseEntity<Reimburse> getReimburse(@RequestBody Long reimburseId) {
 		return reimburseService.getReimburse(reimburseId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/uploadReimburseFile", method = RequestMethod.POST)
+	public UploadResponse uploadReimburseFile(@RequestParam("file") MultipartFile file, @RequestParam Long reimburseId)
+			throws IllegalStateException, Exception {
+		UploadResponse response = reimburseService.uploadReimburseFile(file, reimburseId);
+		return response;
 	}
 
 	@ResponseBody
