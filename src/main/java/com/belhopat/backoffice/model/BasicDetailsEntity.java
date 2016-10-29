@@ -205,5 +205,48 @@ public class BasicDetailsEntity extends BaseEntity {
 	public void setPermanentAddress(Address permanentAddress) {
 		this.permanentAddress = permanentAddress;
 	}
+
+	public Date getDoj() {
+		return doj;
+	}
+
+	public void setDoj(Date doj) {
+		this.doj = doj;
+	}
+
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public Phone getOnsiteContactNo() {
+		return onsiteContactNo;
+	}
+
+	public void setOnsiteContactNo(Phone onsiteContactNo) {
+		this.onsiteContactNo = onsiteContactNo;
+	}
+
+	public Address getOnsiteAddress() {
+		return onsiteAddress;
+	}
+
+	public void setOnsiteAddress(Address onsiteAddress) {
+		this.onsiteAddress = onsiteAddress;
+	}
+
+	@Override
+	public String toString() {
+		return "BasicDetailsEntity [dob=" + dob + ", doj=" + doj + ", gender=" + gender + ", personalEmail="
+				+ personalEmail + ", personalContactNo=" + personalContactNo + ", skillSet=" + skillSet
+				+ ", priorExperienceYear=" + priorExperienceYear + ", priorExperienceMonth=" + priorExperienceMonth
+				+ ", designation=" + designation + ", passport=" + passport + ", familyContact1=" + familyContact1
+				+ ", familyContact2=" + familyContact2 + ", familyEmail=" + familyEmail + ", sourcedBy=" + sourcedBy
+				+ ", currentAddress=" + currentAddress + ", permanentAddress=" + permanentAddress + ", bankAccount="
+				+ bankAccount + ", onsiteContactNo=" + onsiteContactNo + ", onsiteAddress=" + onsiteAddress + "]";
+	}
 	
 }

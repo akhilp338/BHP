@@ -67,7 +67,7 @@ public class ReimburseServiceImpl implements ReimburseService {
 		Employee loggedInEmployee = employeeService.getloggedInEmployeeAsEnity();
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Reimburse reimburse = new Reimburse();
-		Long increment = baseService.getSequenceIncrement(Employee.class);
+		Long increment = baseService.getSequenceIncrement( reimburse.getClass() );
 		String reimburseId = SequenceGenerator.generateReimburseId(increment);
 		reimburse.setReimburseId(reimburseId);
 		reimburse.setExpenses(expenses);

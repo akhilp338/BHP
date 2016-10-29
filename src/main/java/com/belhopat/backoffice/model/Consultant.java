@@ -28,9 +28,10 @@ public class Consultant extends BasicDetailsEntity {
     @JoinColumn( name = "ACC_MNGR_ID" )
     private Employee accountManager;
     
-    @ManyToOne
-    @JoinColumn( name = "BUS_UNT_ID" )
-    private LookupDetail businessUnit;
+    @JsonIgnore
+    @ManyToOne( fetch = FetchType.LAZY )
+	@JoinColumn(name = "BUS_UNT_HED_ID")
+	private Employee bussUnitHead;
     
     @ManyToOne
     @JoinColumn( name = "STATUS_ID" )
@@ -63,17 +64,17 @@ public class Consultant extends BasicDetailsEntity {
 	public Employee getAccountManager() {
 		return accountManager;
 	}
+	
+	public Employee getBussUnitHead() {
+		return bussUnitHead;
+	}
+
+	public void setBussUnitHead(Employee bussUnitHead) {
+		this.bussUnitHead = bussUnitHead;
+	}
 
 	public void setAccountManager(Employee accountManager) {
 		this.accountManager = accountManager;
-	}
-
-	public LookupDetail getBusinessUnit() {
-		return businessUnit;
-	}
-
-	public void setBusinessUnit(LookupDetail businessUnit) {
-		this.businessUnit = businessUnit;
 	}
 
 	public LookupDetail getStatus() {
@@ -87,7 +88,7 @@ public class Consultant extends BasicDetailsEntity {
 	@Override
 	public String toString() {
 		return "Consultant [consultantId=" + consultantId + ", fullName=" + fullName + ", workLocation=" + workLocation
-				+ ", accountManager=" + accountManager + ", businessUnit=" + businessUnit + ", status=" + status + "]";
+				+ ", accountManager=" + accountManager + ", bussUnitHead=" + bussUnitHead + ", status=" + status + "]";
 	}
     
 }

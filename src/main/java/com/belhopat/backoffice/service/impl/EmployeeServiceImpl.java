@@ -95,7 +95,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employeeDto.getId() == null) {
 			employee = new Employee();
 			employee.setBaseAttributes(loggedInUser);
-			Long increment = baseService.getSequenceIncrement(Employee.class);
+			Long increment = baseService.getSequenceIncrement( employee.getClass() );
 			String employeeId = SequenceGenerator.generateEmployeeId(increment, employeeMaster.getDivision().getCode());
 			employee.setEmployeeId(employeeId);
 		} else {

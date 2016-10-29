@@ -11,6 +11,7 @@ public class Constants {
 	public static final String FAMILY_MEMBER = "FAMMEM";
 	public static final String CLIENT_STATUS = "CLSTATS";
 	public static final String GENDER = "GENDER";
+	public static final String JOINED = "JOINED";
 
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";
@@ -32,6 +33,7 @@ public class Constants {
 	public static final String CAND_REG_SUCC_MAIL_SUB = "New Candidate has been added.";
 	public static final String CLIENT_REG_SUCC_MAIL_SUB = "New Client has been added.";
 	public static final String EMP_REG_SUCC_MAIL_SUB = "New Employee has been added.";
+	public static final String CONS_REG_SUCC_MAIL_SUB = "New Consultant has been added.";
 	public static final String EVENT_REG_SUCC_MAIL_SUB = "New Event has been added.";
 	public static final String EMPLOYEE_PORTAL_CREDENTIALS = "Belhopat Employee Portal Credentials";
 	public static final String CREATE_OFFICIAL_EMAIL = "Action Required - Create Official Email for Registered Employee";
@@ -39,6 +41,7 @@ public class Constants {
 	/* mail templates */
 	public static final String DEFAULT_EMAIL_TEMPLATE = "/default-email-template.vm";
 	public static final String PASSWORD_RESET_TEMPLATE = "/password-reset-template.vm";
+	public static final String CONS_REG_EMAIL_TEMPLATE = "/consultant-reg-email-template.vm";
 	public static final String CLIENT_REG_EMAIL_TEMPLATE = "/client-reg-email-template.vm";
 	public static final String EMP_REG_EMAIL_TEMPLATE = "/employee-reg-email-template.vm";
 	public static final String EVENT_INV_EMAIL_TEMPLATE = "/employee-invitation-email-template.vm";
@@ -55,6 +58,7 @@ public class Constants {
 	public static final String LOGIN_URL = "loginUrl";
 	public static final String USERNAME = "username";
 	public static final String FULL_NAME = "fullName";
+	public static final String CONSULTANT = "consultant";
 	public static final String CLIENT = "client";
 	public static final String EMPLOYEE = "employee";
 	public static final String CANDIDATE = "candidate";

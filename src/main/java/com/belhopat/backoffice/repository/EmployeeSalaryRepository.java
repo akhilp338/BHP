@@ -14,8 +14,6 @@ import com.belhopat.backoffice.model.EmployeeSalary;
 @Repository
 public interface EmployeeSalaryRepository extends JpaRepository<EmployeeSalary, Long> , DataTablesRepository<EmployeeSalary, Long> {
 
-	EmployeeSalary findByCandidate(Long candidateId);
-
 	EmployeeSalary findById(Long empSalId);
 	
 

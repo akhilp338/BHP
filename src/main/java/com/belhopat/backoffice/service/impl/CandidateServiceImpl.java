@@ -367,7 +367,7 @@ public class CandidateServiceImpl implements CandidateService {
 	 */
 	private Candidate addCandidate(User loggedInUser, Candidate candidate) {
 		candidate.setBaseAttributes(loggedInUser);
-		Long increment = baseService.getSequenceIncrement(Candidate.class);
+		Long increment = baseService.getSequenceIncrement( candidate.getClass() );
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
 		candidate.setCandidateId(candidateId);
 		Candidate persisted = candidateRepository.save(candidate);
