@@ -497,7 +497,6 @@
         
         service.saveReimburse = function (expences) {
             var deferred = $q.defer();
-            debugger;
             Core_HttpRequest.post("api/reimburse/saveOrUpdateReimburse",expences)
                     .then(function (response) {
                         if (response.status == 200) {
@@ -509,7 +508,20 @@
                     });
             return deferred.promise;
         };
-
+        
+        service.saveReimFile = function (file) {
+            var deferred = $q.defer();
+            Core_HttpRequest.formPost("api/reimburse/saveOrUpdateReimburse",file)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
 
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];

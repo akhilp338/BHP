@@ -96,4 +96,32 @@ window.app.
       element.bind('change', onChangeFunc);
     }
   };
-});
+}).directive('fileModel',["$parse", function($parse) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var model = $parse(attrs.fileModel),
+          modelSetter = model.assign;
+      element.bind('change', function(){
+          scope.$apply(function(){
+              modelSetter(scope,element[0].files[0])
+          });
+      });
+    }
+  };
+}]).filter('unique', function() {
+   return function(collection, keyname) {
+      var output = [], 
+          keys = [];
+
+      angular.forEach(collection, function(item) {
+          var key = item[keyname];
+          if(keys.indexOf(key) === -1) {
+              keys.push(key);
+              output.push(item);
+          }
+      });
+
+      return output;
+   };
+});;

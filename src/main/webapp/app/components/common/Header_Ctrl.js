@@ -16,8 +16,6 @@
         	   vm.sessionCheck();
        	 Core_Service.getCurrentUser(data).then(function (res){
        		$rootScope.currentUser=res;
-       		$rootScope.tabServices = res.primaryRole.moduleTabs;
-            $rootScope.currentUser.userImage = $rootScope.currentUser.userImage;
             },function (error){
                 console.log(error)
             }); 

@@ -1,5 +1,5 @@
 (function () {
-    var Reimbursement_Ctrl = function ($scope, $state, $rootScope, Core_Service, validationService) {
+    var Reimbursement_Ctrl = function ($scope, $state, $rootScope, Core_Service, validationService, $timeout) {
         $rootScope.active = 'reimbursement';
         var vm = this;
         vm.reim = {};
@@ -118,25 +118,36 @@
         };
         vm.reimburse = function () {
 
-            var data = vm.reimDetails
-            Core_Service.saveReimburse(data).then(function (res) {
-                if (res) {
-                    Core_Service.sweetAlert("Reimburse successfully sent for approval!", "data", "success", "coreuser.reimbursement");
-                } else {
-                    Core_Service.sweetAlert("Oops!", "data", "error", "coreuser.reimbursement");
-                }
-                $uibModalInstance.close(res);
-            },
-                    function (error) {
-                        Core_Service.sweetAlertWithConfirm("Done!", "error", "success");
-                    });
-        
-        	
-        	
+            var data = vm.reimDetails;
+
+            Core_Service.sweetAlertWithConfirm("Reimburse details filled!", "Are you sure to submite?", "warning", function () {
+//               
+                Core_Service.saveReimburse(data).then(function (res) {
+                    if (res) {
+                        Core_Service.sweetAlertWithConfirm("Reimburse successfully sent for approval!", "Do You want to upload supporting Docs?", "success", function (isConfirm) {
+                            if (isConfirm) {
+                                $rootScope.isReimDocs = true;
+                                $rootScope.isEmpDocs = false;
+                                $state.go("coreuser.reimbursement.upload");
+                            } else {
+                                $timeout(function () {
+                                    Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.reimbursement");
+                                }, 200);
+
+                            }
+                        });
+                    } else {
+                        Core_Service.sweetAlert("Oops!", "data", "error", "coreuser.reimbursement");
+                    }
+                },
+                        function (error) {
+                            Core_Service.sweetAlertWithConfirm("Done!", "error", "success");
+                        });
+            });
             console.log(vm.reimDetails);
         };
     };
-    Reimbursement_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'validationService'];
+    Reimbursement_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'validationService','$timeout'];
     angular.module('coreModule')
             .controller('Reimbursement_Ctrl', Reimbursement_Ctrl);
 })();

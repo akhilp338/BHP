@@ -1,7 +1,7 @@
 <div class="container">
     <div class="top-main-head pull-left width-100">
         <h4 class="pull-left">Upload Scanned Docs</h4>
-        <button ng-click="vm.redirect()"
+        <button ng-click="vm.redirect('candidate')"
                 class="logout-button pull-right next-upload add-button" title="Next">
             <span class="fa-stack fa-lg pull-left"><i
                     class="fa fa-arrow-right" aria-hidden="true"></i></span>
@@ -9,7 +9,7 @@
         </button>
     </div>
     <uib-accordion close-others="oneAtATime">
-        <div ng-if="!isEmpDocs" uib-accordion-group class="panel-default" is-open="status.bankOpen">
+        <div uib-accordion-group class="panel-default" is-open="status.bankOpen">
             <uib-accordion-heading>
                 Upload Bank details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.bankOpen, 'glyphicon-chevron-right': !status.bankOpen}"></i>
             </uib-accordion-heading>
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div ng-if="!isEmpDocs" uib-accordion-group class="panel-default" is-open="status.passportOpen">
+        <div uib-accordion-group class="panel-default" is-open="status.passportOpen">
             <uib-accordion-heading>
                 Upload Passport details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.passportOpen, 'glyphicon-chevron-right': !status.passportOpen}"></i>
             </uib-accordion-heading>
@@ -112,7 +112,7 @@
             </div>
         </div>
 
-        <div ng-if="!isEmpDocs" uib-accordion-group class="panel-default" is-open="status.licenceOpen">
+        <div uib-accordion-group class="panel-default" is-open="status.licenceOpen">
             <uib-accordion-heading>
                 Upload Driving Licence<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.licenceOpen, 'glyphicon-chevron-right': !status.licenceOpen}"></i>
             </uib-accordion-heading>
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        <div ng-if="!isEmpDocs" uib-accordion-group class="panel-default" is-open="status.panOpen">
+        <div uib-accordion-group class="panel-default" is-open="status.panOpen">
             <uib-accordion-heading>
                 Upload PAN details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.panOpen, 'glyphicon-chevron-right': !status.panOpen}"></i>
             </uib-accordion-heading>
@@ -214,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div ng-if="!isEmpDocs" uib-accordion-group class="panel-default" is-open="status.forexOpen">
+        <div uib-accordion-group class="panel-default" is-open="status.forexOpen">
             <uib-accordion-heading>
                 Upload Forex Card details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.forexOpen, 'glyphicon-chevron-right': !status.forexOpen}"></i>
             </uib-accordion-heading>
@@ -259,56 +259,6 @@
                         <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                     </button>
                     <button type="button" class="btn btn-danger btn-s" ng-click="forexUploader.clearQueue()" ng-disabled="!forexUploader.queue.length">
-                        <span class="glyphicon glyphicon-trash"></span> Remove all
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div ng-if="isEmpDocs" uib-accordion-group class="panel-default" is-open="status.empOpen">
-            <uib-accordion-heading>
-                Upload Docs<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.empOpen, 'glyphicon-chevron-right': !status.empOpen}"></i>
-            </uib-accordion-heading>
-            <div class="row">
-<div class="fileUpload btn">
-                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                    <span class="up-text">Upload</span>                    
-                    <input type="file" class="file-uploader upload" nv-file-select="" uploader="employeeDocsUploader" multiple />
-                </div>
-                <p class="doc-count">Number of Docs: {{ employeeDocsUploader.queue.length}}</p>
-
-                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <div class="preview-container col-md-3 col-lg-3 col-sm-6 col-xs-6" ng-repeat="item in employeeDocsUploader.queue">
-                        <div class="preview-td">
-                            <strong class="preview-name">{{ item.file.name}}</strong>
-                            <div ng-show="employeeDocsUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                        </div>
-
-                        <div class="text-center image-preview">
-                            <span ng-show="item.isSuccess"><i class="upload-success glyphicon glyphicon-ok"></i></span>
-                            <span ng-show="item.isError"><i class="upload-error glyphicon glyphicon-remove"></i></span>
-                        </div>
-                        <div nowrap>
-                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                <span class="glyphicon glyphicon-trash"></span> Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        Upload Progress:
-                        <div class="progress" style="">
-                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': employeeDocsUploader.progress + '%' }"></div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-success btn-s" ng-click="employeeDocsUploader.uploadAll()" ng-disabled="!employeeDocsUploader.getNotUploadedItems().length">
-                        <span class="glyphicon glyphicon-upload"></span> Upload all
-                    </button>
-                    <button type="button" class="btn btn-warning btn-s" ng-click="employeeDocsUploader.cancelAll()" ng-disabled="!employeeDocsUploader.isUploading">
-                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                    </button>
-                    <button type="button" class="btn btn-danger btn-s" ng-click="employeeDocsUploader.clearQueue()" ng-disabled="!employeeDocsUploader.queue.length">
                         <span class="glyphicon glyphicon-trash"></span> Remove all
                     </button>
                 </div>

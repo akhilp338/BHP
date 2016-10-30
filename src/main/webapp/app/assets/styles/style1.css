@@ -2381,3 +2381,6 @@ table #tasksList.display tbody tr.odd{
 .row.bottom-margin-20 {
     margin-bottom: 20px;
 }
+.progress-bar {
+    background-color: #ff850f;
+}

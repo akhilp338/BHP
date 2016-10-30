@@ -207,8 +207,7 @@
                         .then(function (response) {                            
                             Core_Service.sweetAlertWithConfirm("Candidate Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
                                  if (isConfirm) {
-                                     $rootScope.isEmpDocs = false;
-                                     $state.go("coreuser.upload");
+                                     $state.go("coreuser.candidate.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.candidate");

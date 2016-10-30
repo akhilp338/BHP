@@ -43,19 +43,7 @@
                         }
                     }
                 })
-                .state('coreuser.upload', {
-                    url: urlConfig.root_path + 'upload',
-                    views: {
-                        'sidebar@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
-                        },
-                        'content@': {
-                            templateUrl: '/BelhopatBackOffice/app/components/fileUpload/fileUpload.html',
-                            controller: 'FileUpload_Ctrl',
-                            controllerAs: 'vm'
-                        }
-                    }
-                })
+
                 .state('coreuser.dashboard', {
                     url: urlConfig.root_path + 'dashboard',
                     views: {
@@ -115,6 +103,18 @@
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/candidate/candidateAdd.html',
                     controller: 'AddCandidate_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.candidate.upload', {
+            url: urlConfig.root_path + 'upload',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/fileUpload/candidateDocs.html',
+                    controller: 'FileUpload_Ctrl',
                     controllerAs: 'vm'
                 }
             }
@@ -187,6 +187,18 @@
                 'content@': {
                     templateUrl: '/BelhopatBackOffice/app/components/employee/employeeAddFinal.html',
                     controller: 'AddEmployee_Ctrl_Final',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.employee.upload', {
+            url: urlConfig.root_path + 'upload',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/fileUpload/empDocs.html',
+                    controller: 'FileUpload_Ctrl',
                     controllerAs: 'vm'
                 }
             }
@@ -367,18 +379,30 @@
                 }
             }
         })
-            //Bank Account states routing
-            .state('coreuser.reimbursement', {
-                url: urlConfig.root_path + 'reimbursement',
-                views: {
-                    'content@': {
-                        templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reimbursement.html',
-                        controller: 'Reimbursement_Ctrl',
-                        controllerAs: 'vm'
+                //Bank Account states routing
+                .state('coreuser.reimbursement', {
+                    url: urlConfig.root_path + 'reimbursement',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reimbursement.html',
+                            controller: 'Reimbursement_Ctrl',
+                            controllerAs: 'vm'
+                        }
                     }
+                }).state('coreuser.reimbursement.upload', {
+            url: urlConfig.root_path + 'upload',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/fileUpload/reimDocs.html',
+                    controller: 'FileUpload_Ctrl',
+                    controllerAs: 'vm'
                 }
-            })
-            //Attendance States Routing
+            }
+        })
+                //Attendance States Routing
                 .state('coreuser.attendance', {
                     url: urlConfig.root_path + 'attendance',
                     views: {

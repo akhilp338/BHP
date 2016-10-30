@@ -13,9 +13,17 @@
         };
 
         angular.element(document).ready(function () {
-            vm.uploadFile = function (data) {
-               console.log(data.currentTarget.files[0])
-            };
+                $scope.$watchCollection('vm.reimFile', function() {
+                if(vm.reimFile){
+                   var fd = new FormData();
+                       fd.append('file', vm.reimFile); 
+                Core_Service.saveReimFile(fd).then(function (res) {
+                    console.log(res);
+                }, function (err) {
+                    console.log(err)
+                });
+                }
+            });
             attendanceTable = angular.element('#attendanceTable').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
                 serverSide: true,
