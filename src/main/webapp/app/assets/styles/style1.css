@@ -2315,7 +2315,7 @@ a.spec-link{
     }
 }
 .add-btn-cntnr .add-button{
-   margin-bottom: 20px; 
+    margin-bottom: 20px; 
 }    
 .circle {
     border-radius: 50%;
@@ -2334,12 +2334,12 @@ a.spec-link{
 }
 .theme4 #tasksList.dataTable thead tr, 
 .theme4 #tasksList.dataTable tfoot tr{
- background: #eceff4!important;
+    background: #eceff4!important;
 }
 
 .theme4 #tasksList.dataTable thead th, 
 .theme4 #tasksList.dataTable tfoot th{
-  color: black!important;  
+    color: black!important;  
 }
 .dashboard-page,
 .tasklist table.dataTable tbody td,
@@ -2386,21 +2386,27 @@ table #tasksList.display tbody tr.odd{
     background-color: #ff850f;
 }
 
- .background-toggle{
-        background: #F00;
+.background-toggle{
+    background: #F00;
 }
 
-  .panel-heading{
-       padding: 0;
-    }
-    .no-padding{
-        padding: 0;
-    }
-    .upload-panel .panel-title{
-        padding: 15px!important;
-    }
+.panel-heading{
+    padding: 0;
+}
+.no-padding{
+    padding: 0;
+}
+.upload-panel .panel-title{
+    padding: 15px!important;
+}
 .form-horizontal form.reimTableData-form{
-        float: left;
+    float: left;
     padding-top: 0;
     border: none;
-    }
+}
+
+.file-name.ng-binding {
+    display: inline;
+    font-weight: bold;
+    color: #ff9023;
+}
