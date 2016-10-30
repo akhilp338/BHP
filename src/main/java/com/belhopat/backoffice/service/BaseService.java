@@ -80,8 +80,6 @@ public interface BaseService {
 
 	public User getCurrentUser();
 
-	public void saveImageIntoUser() throws IOException;
-
 	public Employee getloggedInEmployee();
 
 	public void upload();

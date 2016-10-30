@@ -1,5 +1,5 @@
 (function () {
-    var Header_Ctrl = function ($scope, $state, $rootScope, Core_Service, PROFILE_PIC) {
+    var Header_Ctrl = function ($scope, $state, $rootScope, Core_Service) {
         var vm = this;
         vm.getUserName = localStorage["userName"] || "Rafique";
         vm.logout = function () {
@@ -17,7 +17,7 @@
        	 Core_Service.getCurrentUser(data).then(function (res){
        		$rootScope.currentUser=res;
        		$rootScope.tabServices = res.primaryRole.moduleTabs;
-                $rootScope.currentUser.userImage = PROFILE_PIC.pic[$rootScope.currentUser.id];
+            $rootScope.currentUser.userImage = $rootScope.currentUser.userImage;
             },function (error){
                 console.log(error)
             }); 
@@ -38,7 +38,7 @@
 
         
     };    
-    Header_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'PROFILE_PIC'];
+    Header_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service'];
     angular.module('coreModule')
             .controller('Header_Ctrl', Header_Ctrl);
 })();

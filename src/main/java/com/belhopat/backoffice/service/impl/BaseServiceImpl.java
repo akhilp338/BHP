@@ -610,19 +610,6 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public void saveImageIntoUser() throws IOException {
-		File imgPath = new File("/home/sujith/Desktop/rafique.jpg");
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-		WritableRaster raster = bufferedImage.getRaster();
-		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-		List<User> users = userRepository.findAll();
-		for (User user : users) {
-			user.setUserImage(data.getData());
-		}
-		userRepository.save(users);
-	}
-
-	@Override
 	public Employee getloggedInEmployee() {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		User user = userRepository.findById(loggedInUser.getId());
