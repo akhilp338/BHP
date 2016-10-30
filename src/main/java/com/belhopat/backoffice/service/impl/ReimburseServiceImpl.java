@@ -79,7 +79,7 @@ public class ReimburseServiceImpl implements ReimburseService {
 		Employee loggedInEmployee = baseService.getloggedInEmployee();
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		Reimburse reimburse = new Reimburse();
-		Long increment = baseService.getSequenceIncrement( reimburse.getClass() );
+		Long increment = baseService.getSequenceIncrement(reimburse.getClass());
 		String reimburseId = SequenceGenerator.generateReimburseId(increment);
 		reimburse.setReimburseId(reimburseId);
 		reimburse.setExpenses(expenses);
@@ -192,10 +192,10 @@ public class ReimburseServiceImpl implements ReimburseService {
 		s3BucketFile.setBucketName(Constants.BUCKET_NAME);
 		s3BucketFile.setUserId(loggedInEmployee.getEmployeeId());
 		s3BucketFile.setFileType(Constants.REIMBURSE_FILE);
+		s3BucketFile.setFileEntityId(reimburseId);
 		String contentType = file.getOriginalFilename().split("\\.")[1];
 		s3BucketFile.setContentType(contentType);
-		String fileName = s3BucketFileRepository.getLatestFileName(Constants.BUCKET_NAME,
-				loggedInEmployee.getEmployeeId(), Constants.REIMBURSE_FILE, contentType);
+		String fileName = s3BucketFileRepository.getLatestFileName(Constants.REIMBURSE_FILE, contentType, reimburseId);
 		if (fileName == null) {
 			fileName = Constants.REIMBURSE_FILE + "_0";
 		} else {
@@ -211,5 +211,18 @@ public class ReimburseServiceImpl implements ReimburseService {
 			s3BucketFileRepository.save(s3BucketFile);
 		}
 		return response;
+	}
+
+	@Override
+	public Map<String, Object> getReimburseTask(Long taskId) {
+		Map<String, Object> map = new HashMap<>();
+		Task task = taskRepository.findById(taskId);
+		Long reimburseId = task.getTaskEntityId();
+		Reimburse reimburse = reimburseRepository.findById(reimburseId);
+		map.put("reimburse", reimburse);
+		List<S3BucketFile> files = s3BucketFileRepository.findByFileTypeAndFileEntityId(Constants.REIMBURSE_FILE,
+				reimburseId);
+		map.put("files", files);
+		return map;
 	}
 }
