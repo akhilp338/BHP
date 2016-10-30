@@ -44,6 +44,8 @@ import com.belhopat.backoffice.model.CandidateSequence;
 import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Client;
 import com.belhopat.backoffice.model.ClientSequence;
+import com.belhopat.backoffice.model.Consultant;
+import com.belhopat.backoffice.model.ConsultantSequence;
 import com.belhopat.backoffice.model.Country;
 import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
@@ -66,6 +68,7 @@ import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
 import com.belhopat.backoffice.repository.ClientRepository;
 import com.belhopat.backoffice.repository.ClientSequenceRepository;
+import com.belhopat.backoffice.repository.ConsultantSequenceRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
@@ -129,6 +132,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ReimburseSequenceRepository reimburseSequenceRepository;
+	
+	@Autowired
+	ConsultantSequenceRepository consultantSequenceRepository;
 
 	@Autowired
 	MasterTaskRepository masterTaskRepository;
@@ -278,29 +284,24 @@ public class BaseServiceImpl implements BaseService {
 	 * lang.Class) creates and increments the sequence
 	 */
 	@Override
-	public <T> Long getSequenceIncrement(Class<T> clazz) {
-
+	public <T> Long getSequenceIncrement( Class<T> clazz ) {
 		Long increment = null;
-		if (clazz.equals(Candidate.class)) {
-			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
+		if( clazz.equals( Candidate.class )) {
+			CandidateSequence candidateSequence = candidateSequenceRepository.save( new CandidateSequence() );
 			increment = candidateSequence.getId();
-		} else if (clazz.equals(Employee.class)) {
-			// Date latestDate = employeeSequenceRepository.getLatestDate();
-			// if ((latestDate != null)) {
-			// if (DateUtil.getDayOfMonth(new Date()) == 1 &&
-			// DateUtil.isToday(latestDate)
-			// || DateUtil.isPreviousMonth(latestDate)) {
-			// employeeSequenceRepository.truncate();
-			// }
-			// }
-			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
+		} else if( clazz.equals( Employee.class )) {
+			EmployeeSequence employeeSequence = employeeSequenceRepository.save( new EmployeeSequence() );
 			increment = employeeSequence.getId();
-		} else if (clazz.equals(Client.class)) {
-			ClientSequence clientSequence = clientSequenceRepository.save(new ClientSequence());
+		} else if( clazz.equals( Client.class )) {
+			ClientSequence clientSequence = clientSequenceRepository.save( new ClientSequence() );
 			increment = clientSequence.getId();
-		} else if (clazz.equals(Reimburse.class)) {
-			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save(new ReimburseSequence());
+		} else if( clazz.equals( Reimburse.class )) {
+			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save( new ReimburseSequence() );
 			increment = reimburseSequence.getId();
+		}
+		else if( clazz.equals( Consultant.class )) {
+			ConsultantSequence consultantSequence = consultantSequenceRepository.save( new ConsultantSequence() );
+			increment = consultantSequence.getId();
 		}
 		return increment;
 	}

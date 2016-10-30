@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Client;
+import com.belhopat.backoffice.model.Consultant;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.Event;
 import com.belhopat.backoffice.model.Reimburse;
@@ -15,30 +16,32 @@ import com.belhopat.backoffice.service.session.MailMessageObject;
 
 public interface MailService {
 
-	public void sendMail(MailMessageObject mailObj);
+	public void sendMail( MailMessageObject mailObj );
 
-	public void sendPasswordResetMail(User user) throws MessagingException;
+	public void sendPasswordResetMail( User user ) throws MessagingException;
 
-	public void sendCandidateRegMail(Candidate candidate) throws MessagingException;
+	public void sendCandidateRegMail( Candidate candidate ) throws MessagingException;
 
-	public void sendEmployeeRegMail(Employee employee) throws MessagingException;
+	public void sendEmployeeRegMail( Employee employee ) throws MessagingException;
 
-	public void sendClientRegMail(Client client) throws MessagingException;
+	public void sendClientRegMail( Client client ) throws MessagingException;
 
-	public void sendEventInvitationMail(Event event) throws MessagingException, ParseException, Exception;
+	public void sendEventInvitationMail( Event event ) throws MessagingException, ParseException, Exception;
 
-	public void sendWelcomeMail(Employee employee) throws MessagingException;
+	public void sendWelcomeMail( Employee employee ) throws MessagingException;
 
-	public void sendCreateOfficialEmail(Employee employee) throws MessagingException;
+	public void sendCreateOfficialEmail( Employee employee ) throws MessagingException;
 
-	public void sendReimburseRequestMail(Reimburse reimburse);
+	public void sendReimburseRequestMail( Reimburse reimburse );
 
-	public void sendReimburseVerificationMail(Reimburse reimburse);
+	public void sendReimburseVerificationMail( Reimburse reimburse );
 
-	public void sendReimburseApprovalMail(Reimburse reimburse);
+	public void sendReimburseApprovalMail( Reimburse reimburse );
 
-	public void sendReimburseRejectionMail(Reimburse reimburse);
+	public void sendReimburseRejectionMail( Reimburse reimburse );
 
-	public void sendVendorApprRejectMail(Vendor vendor,String status) throws MessagingException;
+	public void sendVendorApprRejectMail( Vendor vendor,String status ) throws MessagingException;
+	
+	public void sendConsultantRegMail( Consultant consultant ) throws MessagingException;
 
 }

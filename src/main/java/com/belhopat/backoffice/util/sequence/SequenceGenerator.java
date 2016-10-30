@@ -47,7 +47,7 @@ public class SequenceGenerator {
     /**
      * @param increment
      * @return Client-ID
-     * Generates sequence for listing of Cients
+     * Generates sequence for listing of Clients
      */
     public static String generateClientId( Long increment ) {
 
@@ -97,4 +97,17 @@ public class SequenceGenerator {
 
     }
 
+    /**
+     * @param increment
+     * @return Consultant-ID
+     * Generates sequence for listing of Consultants
+     */
+    public static String generateConsultantId( Long increment ) {
+        String consultantId = "BHP-CONS-";
+        Long sequence = getSequenceNumber( increment );
+        consultantId = consultantId + sequence;
+        return consultantId;
+
+    }
+    
 }

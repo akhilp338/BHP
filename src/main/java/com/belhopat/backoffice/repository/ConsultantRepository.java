@@ -4,18 +4,14 @@ import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.Consultant;
 
 /**
  * @author BHP_DEV
- * Data repository for EmployeeSalary entity 
+ * Data repository for candidate entity 
  *
  */
 @Repository
-public interface EmployeeSalaryRepository extends JpaRepository<EmployeeSalary, Long> , DataTablesRepository<EmployeeSalary, Long> {
-
-	EmployeeSalary findById(Long empSalId);
-	
-
+public interface ConsultantRepository extends JpaRepository<Consultant, Long>, DataTablesRepository<Consultant, Long> {
 
 }
