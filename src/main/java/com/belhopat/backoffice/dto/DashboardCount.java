@@ -2,50 +2,60 @@ package com.belhopat.backoffice.dto;
 
 public class DashboardCount {
 
-	private Integer completed;
+	private Long completed;
 
-	private Integer critical;
+	private Long pending;
 
-	private Integer nonCritical;
+	private Long critical;
 
-	private Integer mediumCritical;
+	private Long nonCritical;
 
-	public Integer getCompleted() {
+	private Long mediumCritical;
+
+	public Long getCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(Integer completed) {
+	public void setCompleted(Long completed) {
 		this.completed = completed;
 	}
 
-	public Integer getCritical() {
+	public Long getPending() {
+		return pending;
+	}
+
+	public void setPending(Long pending) {
+		this.pending = pending;
+	}
+
+	public Long getCritical() {
 		return critical;
 	}
 
-	public void setCritical(Integer critical) {
+	public void setCritical(Long critical) {
 		this.critical = critical;
 	}
 
-	public Integer getNonCritical() {
+	public Long getNonCritical() {
 		return nonCritical;
 	}
 
-	public void setNonCritical(Integer nonCritical) {
+	public void setNonCritical(Long nonCritical) {
 		this.nonCritical = nonCritical;
 	}
 
-	public Integer getMediumCritical() {
+	public Long getMediumCritical() {
 		return mediumCritical;
 	}
 
-	public void setMediumCritical(Integer mediumCritical) {
+	public void setMediumCritical(Long mediumCritical) {
 		this.mediumCritical = mediumCritical;
 	}
 
 	@Override
 	public String toString() {
-		return "DashboardCount [completed=" + completed + ", critical=" + critical + ", nonCritical=" + nonCritical
-				+ ", mediumCritical=" + mediumCritical + "]";
+		return "DashboardCount [completed=" + completed + ", pending=" + pending + ", critical=" + critical
+				+ ", nonCritical=" + nonCritical + ", mediumCritical=" + mediumCritical + "]";
 	}
 
 }
