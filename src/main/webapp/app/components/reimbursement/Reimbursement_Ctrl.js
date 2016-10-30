@@ -106,12 +106,15 @@
             //});            
         });
         vm.addToTable = function (evt) {
-            var arr = [];
+            if(vs.checkFormValidity($scope.tableDataForm)){
+                var arr = [];
 //            vm.tableData.date = moment(vm.tableData.date).format("DD MMM YYYY");
             arr.push(vm.tableData);
             vm.reimDetails.push(vm.tableData);
             vm.reimTable.rows.add(arr).draw(false);
             vm.tableData = {};
+            }
+            
         };
         vm.back = function () {
             $state.go("coreuser.dashboard");
@@ -120,7 +123,7 @@
 
             var data = vm.reimDetails;
 
-            Core_Service.sweetAlertWithConfirm("Reimburse details filled!", "Are you sure to submite?", "warning", function () {
+            Core_Service.sweetAlertWithConfirm("Reimburse details filled!", "Are you sure to submit?", "warning", function () {
 //               
                 Core_Service.saveReimburse(data).then(function (res) {
                     if (res) {

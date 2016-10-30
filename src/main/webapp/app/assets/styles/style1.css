@@ -1846,6 +1846,7 @@ td.fc-widget-content {
 }
 
 .dashboard .panel {
+    cursor: pointer;
     border-radius: 3px;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
@@ -2384,3 +2385,22 @@ table #tasksList.display tbody tr.odd{
 .progress-bar {
     background-color: #ff850f;
 }
+
+ .background-toggle{
+        background: #F00;
+}
+
+  .panel-heading{
+       padding: 0;
+    }
+    .no-padding{
+        padding: 0;
+    }
+    .upload-panel .panel-title{
+        padding: 15px!important;
+    }
+.form-horizontal form.reimTableData-form{
+        float: left;
+    padding-top: 0;
+    border: none;
+    }

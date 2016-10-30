@@ -1,52 +1,30 @@
 (function () {
     var Dash_Ctrl = function ($scope, $rootScope, Core_Service, Core_ModalService, urlConfig) {
         var vm = this, dashBoardTable;
-        $rootScope.isDashBoard = true; 
-        var taskList = [{
-                "id": "T12",
-                "task": {
-                    "taskDesc": "This is the first task",
-                    "status": "pending",
-                    "taskName": "First"
-                }
-            },
-            {
-                "id": "T156",
-                "task": {
-                    "taskDesc": "This is the second task",
-                    "status": "pending",
-                    "taskName": "Second"
-                }
-            },
-            {
-                "id": "T122",
-                "task": {
-                    "taskDesc": "This is the third task",
-                    "status": "Completed",
-                    "taskName": "Third"
-                }
-            },
-            {
-                "id": "T152",
-                "task": {
-                    "taskDesc": "This is the fourth task",
-                    "status": "pending",
-                    "taskName": "Fourth"
-                }
-            }];
+        $rootScope.isDashBoard = true;
+        vm.taskStatus = [];
+        var panelStyle = ["success","primary","danger","info","warning"];
+        var fontIcon = ["fa-check-circle","fa-exclamation-circle","fa-times-circle","fa-check-circle","fa-exclamation-circle"];
+        Core_Service.getDashCount().then(function (response) {
+            var count = 0,colors;
+            for(var key in response){
+                var obj = {
+                    name:key,
+                    count:response[key] ? response[key] : 0,
+                    panelClass:panelStyle[count],
+                    fontIcon:fontIcon[count]
+                };
+                count++;
+                vm.taskStatus.push(obj);
+            }
+        }, function (error) {
+            console.log(error)
+        });
+        
 
         $rootScope.active = 'dashboard';
-//        vm.init = function () {
-//            vm.url = "api/dashboard/getDashboardTasks";
-//            debugger;
-//            Core_Service.getUserTasks(vm.url).then(function (response) {
-//                console.log(response.data)
-//
-//            }, function (error) {
-//                console.log(error)
-//            });
-//        }
         angular.element(document).ready(function () {
+            
             dashBoardTable = angular.element('#tasksList').DataTable({
 //                data: taskList,
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "dashboard/getDashboardTasks",
@@ -54,13 +32,12 @@
                 bDestroy: true,
                 processing: true,
                 responsive: true,
+                bFilter:false,
                 fnDrawCallback: function (settings, ajax) {
 
                 },
                 language: {
                     zeroRecords: 'No data to display',
-                    searchPlaceholder: 'Search Your Tasks',
-                    search: '',
                     infoEmpty: '',
                     infoFiltered: ''
                 },
@@ -96,6 +73,35 @@
                         }
                     }]
             });
+            vm.selectFilter = function(filter){
+            var filters;
+            switch(filter){
+                case 'completed':{
+                    filters = dashBoardTable.columns(3).search('PENDING');
+                }
+                break;
+                case 'pending':{
+                        
+                }
+                break;
+                case 'critical':{
+                        
+                }
+                break;
+                case 'nonCritical':{
+                        
+                }
+                break;
+                case 'mediumCritical':{
+                        
+                }
+                break;
+            default:             
+                
+            }
+            if (filters)
+                filters.draw();
+        };
             $('#tasksList').on('click', '.action-view', function () {
                 var data = dashBoardTable.data()[$(this).parents("tr").index()];
                 vm.showAdvanced(data);

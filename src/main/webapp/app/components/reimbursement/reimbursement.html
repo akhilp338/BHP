@@ -68,7 +68,8 @@
                 </div>
             </div>
         </div>
-        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">                        
+        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <form name='tableDataForm' class="reimTableData-form" novalidate>
             <div class="data-main-container">
                 <header class="data-main-container-header">Add details to Table</header>
 
@@ -84,6 +85,7 @@
                                    is-open="vm.isDobPickerOpen"
                                    uib-datepicker-popup="dd-MMM-yyyy"
                                    datepicker-options="vm.dobDateOptions" 
+                                   validation="required:alt=required"
                                    readonly/>
                             <span class="input-group-btn custom-datepick">
                                 <button type="button" 
@@ -101,7 +103,7 @@
                     <div class="controls">
                         <input type="text" name="desc" id="desc"
                                ng-model="vm.tableData.description" class="form-input width-100"
-                               placeholder="Description"
+                               placeholder="Description" validation="required:alt=required"
                                />
                     </div>
                 </div>
@@ -122,6 +124,7 @@
                         <input type="text" name="amt" id="amt"
                                ng-model="vm.tableData.amount" class="form-input width-100"
                                placeholder="Amount"
+                               validation="numeric:alt=Number only | required:alt=required"
                                />
                     </div>
                 </div>
@@ -132,6 +135,7 @@
                         <input type="text" name="remarks" id="remarks"
                                ng-model="vm.tableData.remarks" class="form-input width-100"
                                placeholder="Remarks"
+                               validation="required:alt=required"
                                />
                     </div>
                 </div>
@@ -144,6 +148,7 @@
                     </button>
                 </div>
             </div>
+                </form>
         </div>
     </div>   
 

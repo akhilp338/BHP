@@ -30,6 +30,8 @@
                 bDestroy: true,
                 processing: true,
                 responsive: true,
+                bFilter:false,
+                bLengthChange:false,
                 fnDrawCallback: function (settings, ajax) {
 
                 },
