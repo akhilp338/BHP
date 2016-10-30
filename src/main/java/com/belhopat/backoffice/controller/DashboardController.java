@@ -3,6 +3,7 @@ package com.belhopat.backoffice.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -40,6 +41,12 @@ public class DashboardController {
 
 	@Autowired
 	ReimburseService reimburseService;
+
+	@ResponseBody
+	@RequestMapping(value = "/getReimburseTask", method = RequestMethod.GET)
+	public Map<String, Object> getReimburseTask(@RequestBody Long taskId) {
+		return reimburseService.getReimburseTask(taskId);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/approveOrRejectReimburse", method = RequestMethod.POST)

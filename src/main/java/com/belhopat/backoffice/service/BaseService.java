@@ -23,7 +23,6 @@ import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
-import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
@@ -84,7 +83,7 @@ public interface BaseService {
 
 	public void upload();
 
-	UploadResponse getSuccessResponse();
+	public UploadResponse getSuccessResponse();
 
-	UploadResponse getErrorResponse();
+	public UploadResponse getErrorResponse();
 }

@@ -1,8 +1,5 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +52,6 @@ import com.belhopat.backoffice.model.MasterRole;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.ReimburseSequence;
-import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
@@ -132,7 +127,7 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ReimburseSequenceRepository reimburseSequenceRepository;
-	
+
 	@Autowired
 	ConsultantSequenceRepository consultantSequenceRepository;
 
@@ -284,23 +279,22 @@ public class BaseServiceImpl implements BaseService {
 	 * lang.Class) creates and increments the sequence
 	 */
 	@Override
-	public <T> Long getSequenceIncrement( Class<T> clazz ) {
+	public <T> Long getSequenceIncrement(Class<T> clazz) {
 		Long increment = null;
-		if( clazz.equals( Candidate.class )) {
-			CandidateSequence candidateSequence = candidateSequenceRepository.save( new CandidateSequence() );
+		if (clazz.equals(Candidate.class)) {
+			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
 			increment = candidateSequence.getId();
-		} else if( clazz.equals( Employee.class )) {
-			EmployeeSequence employeeSequence = employeeSequenceRepository.save( new EmployeeSequence() );
+		} else if (clazz.equals(Employee.class)) {
+			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
-		} else if( clazz.equals( Client.class )) {
-			ClientSequence clientSequence = clientSequenceRepository.save( new ClientSequence() );
+		} else if (clazz.equals(Client.class)) {
+			ClientSequence clientSequence = clientSequenceRepository.save(new ClientSequence());
 			increment = clientSequence.getId();
-		} else if( clazz.equals( Reimburse.class )) {
-			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save( new ReimburseSequence() );
+		} else if (clazz.equals(Reimburse.class)) {
+			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save(new ReimburseSequence());
 			increment = reimburseSequence.getId();
-		}
-		else if( clazz.equals( Consultant.class )) {
-			ConsultantSequence consultantSequence = consultantSequenceRepository.save( new ConsultantSequence() );
+		} else if (clazz.equals(Consultant.class)) {
+			ConsultantSequence consultantSequence = consultantSequenceRepository.save(new ConsultantSequence());
 			increment = consultantSequence.getId();
 		}
 		return increment;

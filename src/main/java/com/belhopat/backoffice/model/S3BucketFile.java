@@ -24,6 +24,9 @@ public class S3BucketFile extends BaseEntity {
 	@Column(name = "FILE_NAME")
 	private String fileName;
 
+	@Column(name = "FILE_ENT_ID")
+	private Long fileEntityId;
+
 	@Transient
 	private byte[] bytes;
 
@@ -65,6 +68,14 @@ public class S3BucketFile extends BaseEntity {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public Long getFileEntityId() {
+		return fileEntityId;
+	}
+
+	public void setFileEntityId(Long fileEntityId) {
+		this.fileEntityId = fileEntityId;
 	}
 
 	public byte[] getBytes() {

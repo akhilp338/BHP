@@ -26,4 +26,6 @@ public interface ReimburseService {
 
 	public UploadResponse uploadReimburseFile(MultipartFile file, Long reimburseId)
 			throws IllegalStateException, IOException, Exception;
+
+	public Map<String, Object> getReimburseTask(Long taskId);
 }
