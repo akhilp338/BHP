@@ -11,7 +11,11 @@
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
+
         angular.element(document).ready(function () {
+            vm.uploadFile = function (data) {
+               console.log(data.currentTarget.files[0])
+            };
             attendanceTable = angular.element('#attendanceTable').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "attendance/getAttendances",
                 serverSide: true,
@@ -32,8 +36,9 @@
                     }, {
                         title: "Date",
                         data: 'date',
-                        render: function (data,display,row) {
-                            return data == null ? "" : moment(data).format("DD MMM YYYY");;
+                        render: function (data, display, row) {
+                            return data == null ? "" : moment(data).format("DD MMM YYYY");
+                            ;
                         }
                     }, {
                         title: "Employee Code",
@@ -41,7 +46,7 @@
                     }, {
                         title: "Employee Name",
                         data: 'employee.id',
-                        render: function (data,display,row) {
+                        render: function (data, display, row) {
                             return row.employee.employeeMaster.firstName + " " + row.employee.employeeMaster.lastName;
                         }
                     }, {
@@ -68,16 +73,16 @@
 
         });
         vm.filterChange = function () {
-        	debugger;
-        	vm.attendance.filter
-        	var filters;
-    		if(vm.attendance.filter.emplyee != undefined){
-    			filters=attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
-    		}
-    		if(vm.attendance.filter.status != undefined){
-    			filters=attendanceTable.columns(9).search(vm.attendance.filter.status.id);
-    		}
-    		if(filters) 
+            debugger;
+            vm.attendance.filter
+            var filters;
+            if (vm.attendance.filter.emplyee != undefined) {
+                filters = attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
+            }
+            if (vm.attendance.filter.status != undefined) {
+                filters = attendanceTable.columns(9).search(vm.attendance.filter.status.id);
+            }
+            if (filters)
                 filters.draw();
             console.log(vm.attendance.filter)
         };

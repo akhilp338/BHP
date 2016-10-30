@@ -2349,3 +2349,35 @@ table #tasksList.display tbody tr.odd{
 #attendanceTable{
     width: 100%!important;
 }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    padding: 0;
+    background-color: #CC2727;
+    border-color: #CC2727;
+    color: white;
+}
+.fileUpload.btn:hover {
+    color: white;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.up-text {
+    padding: 10px;
+    margin-top: 10px;
+    line-height: 42px;
+}
+.row.bottom-margin-20 {
+    margin-bottom: 20px;
+}
