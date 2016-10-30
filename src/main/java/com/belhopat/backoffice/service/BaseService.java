@@ -80,13 +80,9 @@ public interface BaseService {
 
 	public User getCurrentUser();
 
-	public void saveImageIntoUser() throws IOException;
-
 	public Employee getloggedInEmployee();
 
 	public void upload();
-
-	void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response) throws IOException;
 
 	UploadResponse getSuccessResponse();
 

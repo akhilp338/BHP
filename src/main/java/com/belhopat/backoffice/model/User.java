@@ -48,7 +48,7 @@ public class User {
 
 	@Lob
 	@Column(name = "USR_IMG", nullable = true)
-	byte[] userImage;
+	String userImage;
 
 	@JsonIgnore
 	@Column(name = "SALT")
@@ -141,11 +141,11 @@ public class User {
 		this.employeeId = employeeId;
 	}
 
-	public byte[] getUserImage() {
+	public String getUserImage() {
 		return userImage;
 	}
 
-	public void setUserImage(byte[] userImage) {
+	public void setUserImage(String userImage) {
 		this.userImage = userImage;
 	}
 

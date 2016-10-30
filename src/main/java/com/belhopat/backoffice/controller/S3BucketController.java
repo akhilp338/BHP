@@ -1,16 +1,17 @@
 package com.belhopat.backoffice.controller;
 
-import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.S3BucketService;
 
@@ -25,17 +26,15 @@ public class S3BucketController {
 	S3BucketService s3BucketService;
 
 	@ResponseBody
-	@RequestMapping(value = "/uploadAttendanceExcel", method = RequestMethod.POST)
-	public UploadResponse uploadAttendanceExcel(@RequestParam("file") MultipartFile file) throws IOException {
-		UploadResponse response = new UploadResponse();
-		return response;
+	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
+	public void downloadFile(@RequestParam Long s3BucketFileId, HttpServletResponse response) throws Exception {
+		s3BucketService.downloadFile(s3BucketFileId, response);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/uploadReimburseFile", method = RequestMethod.POST)
-	public UploadResponse uploadReimburseFile(@RequestParam("file") MultipartFile file) throws IOException {
-		UploadResponse response = new UploadResponse();
-		return response;
+	@RequestMapping(value = "/downloadFiles", method = RequestMethod.POST)
+	public void downloadFiles(@RequestBody List<Long> s3BucketFileIds, HttpServletResponse response) throws Exception {
+		s3BucketService.downloadFiles(s3BucketFileIds, response);
 	}
 
 }

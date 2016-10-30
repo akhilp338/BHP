@@ -610,36 +610,11 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public void saveImageIntoUser() throws IOException {
-		File imgPath = new File("/home/sujith/Desktop/rafique.jpg");
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-		WritableRaster raster = bufferedImage.getRaster();
-		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-		List<User> users = userRepository.findAll();
-		for (User user : users) {
-			user.setUserImage(data.getData());
-		}
-		userRepository.save(users);
-	}
-
-	@Override
 	public Employee getloggedInEmployee() {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		User user = userRepository.findById(loggedInUser.getId());
 		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
 		return loggedInEmployee;
-	}
-
-	@Override
-	public void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response)
-			throws IOException {
-		OutputStream output = response.getOutputStream();
-		response.setContentType(s3BucketFile.getContentType());
-		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + s3BucketFile.getFileName());
-		output.write(bytes);
-		output.flush();
-		response.flushBuffer();
-		output.close();
 	}
 
 	@Override
