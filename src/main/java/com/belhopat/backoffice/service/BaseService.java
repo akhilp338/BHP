@@ -86,8 +86,6 @@ public interface BaseService {
 
 	public void upload();
 
-	void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response) throws IOException;
-
 	UploadResponse getSuccessResponse();
 
 	UploadResponse getErrorResponse();

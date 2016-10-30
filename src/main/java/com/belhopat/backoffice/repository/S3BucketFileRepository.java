@@ -21,4 +21,6 @@ public interface S3BucketFileRepository
 	String getLatestFileName(@Param("bucketName") String bucketName, @Param("userId") String userId,
 			@Param("fileType") String fileType, @Param("contentType") String contentType);
 
+	S3BucketFile findById(Long s3BucketFileId);
+
 }

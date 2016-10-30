@@ -630,18 +630,6 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response)
-			throws IOException {
-		OutputStream output = response.getOutputStream();
-		response.setContentType(s3BucketFile.getContentType());
-		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + s3BucketFile.getFileName());
-		output.write(bytes);
-		output.flush();
-		response.flushBuffer();
-		output.close();
-	}
-
-	@Override
 	public UploadResponse getSuccessResponse() {
 		UploadResponse response = new UploadResponse();
 		response.setStatus("success");
