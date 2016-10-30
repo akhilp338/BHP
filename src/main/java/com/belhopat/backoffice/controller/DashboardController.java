@@ -43,18 +43,6 @@ public class DashboardController {
 	ReimburseService reimburseService;
 
 	@ResponseBody
-	@RequestMapping(value = "/getReimburseTask", method = RequestMethod.GET)
-	public Map<String, Object> getReimburseTask(@RequestBody Long taskId) {
-		return reimburseService.getReimburseTask(taskId);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/approveOrRejectReimburse", method = RequestMethod.POST)
-	public ResponseEntity<String> approveOrRejectReimburseTask(@RequestBody TaskDTO task) {
-		return reimburseService.approveOrRejectReimburseTask(task);
-	}
-
-	@ResponseBody
 	@RequestMapping(value = "/getDashboardTasks", method = RequestMethod.GET)
 	public DataTablesOutput<Task> getDashboardTasks(@Valid DataTablesInput input)
 			throws MalformedURLException, DocumentException, IOException, ParseException {
@@ -65,6 +53,18 @@ public class DashboardController {
 	@RequestMapping(value = "/getDashboardCount", method = RequestMethod.GET)
 	public DashboardCount getDashboardCount() {
 		return taskService.getDashboardCount();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getReimburseTask", method = RequestMethod.GET)
+	public Map<String, Object> getReimburseTask(@RequestBody Long taskId) {
+		return reimburseService.getReimburseTask(taskId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/approveOrRejectReimburse", method = RequestMethod.POST)
+	public ResponseEntity<String> approveOrRejectReimburseTask(@RequestBody TaskDTO task) {
+		return reimburseService.approveOrRejectReimburseTask(task);
 	}
 
 }
