@@ -32,7 +32,7 @@ public class S3BucketController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
+	@RequestMapping(value = "/downloadFiles", method = RequestMethod.POST)
 	public void downloadFiles(@RequestBody List<Long> s3BucketFileIds, HttpServletResponse response) throws Exception {
 		s3BucketService.downloadFiles(s3BucketFileIds, response);
 	}
