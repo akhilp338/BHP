@@ -1,7 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -36,15 +35,14 @@ public class ExcelServiceImpl implements ExcelService {
 	public UploadResponse uploadExcel(String type, MultipartFile file) throws IOException {
 		UploadResponse response = new UploadResponse();
 		response = validateExcelFile(file);
-		// if (!response.isActionStatus()) {
-		// return response;
-		// }
-		// HSSFWorkbook workBook = getHSSFWorkbook(file);
-		// if (workBook == null) {
-		// response = getErrorResponse();
-		// return response;
-		// }
-		HSSFWorkbook workBook = null;
+		if (!response.isActionStatus()) {
+			return response;
+		}
+		HSSFWorkbook workBook = getHSSFWorkbook(file);
+		if (workBook == null) {
+			response = baseService.getErrorResponse();
+			return response;
+		}
 		switch (type) {
 		case "ATNDNCE":
 			response = uploadAttendanceExcel(workBook);
@@ -74,7 +72,8 @@ public class ExcelServiceImpl implements ExcelService {
 	private UploadResponse validateExcelFile(MultipartFile multipartFile) throws IOException {
 		UploadResponse response = baseService.getErrorResponse();
 		if (multipartFile != null && !multipartFile.isEmpty()) {
-			if (multipartFile.getOriginalFilename().endsWith("XLS")) {
+			if (multipartFile.getOriginalFilename().endsWith("xls")
+					|| multipartFile.getOriginalFilename().endsWith("XLS")) {
 				response = baseService.getSuccessResponse();
 			} else {
 				response.setStatusMessage("Select XLS File");
@@ -86,9 +85,10 @@ public class ExcelServiceImpl implements ExcelService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private UploadResponse uploadAttendanceExcel(HSSFWorkbook workBook) throws IOException {
-		FileInputStream fileInputStream = new FileInputStream("/home/sujith/Desktop/2015_Sep.xls");
-		HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+	private UploadResponse uploadAttendanceExcel(HSSFWorkbook workbook) throws IOException {
+		// FileInputStream fileInputStream = new
+		// FileInputStream("/home/sujith/Desktop/2015_Sep.xls");
+		// HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 		UploadResponse response = baseService.getErrorResponse();
 		Map<String, Long> employeeMap = getMap();
 		try {
