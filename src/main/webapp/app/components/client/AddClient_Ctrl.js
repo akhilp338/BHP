@@ -1,7 +1,7 @@
 (function () {
     var AddClient_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.registration = {};        
         vs = new validationService({
             controllerAs: vm

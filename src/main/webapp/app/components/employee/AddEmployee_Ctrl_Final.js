@@ -2,7 +2,7 @@
 (function () {
     var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service,$timeout) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.candidateId = localStorage["selectedCandidate"] ? localStorage["selectedCandidate"] : "";
         vm.candId = localStorage["selectedCandidateId"] ? localStorage["selectedCandidateId"] : "";
         vm.display = {};

@@ -1,6 +1,7 @@
 (function () {
     var EventManagement_Ctrl = function ($state, Core_Service, $rootScope, Core_ModalService) {
         var vm = this;
+        $rootScope.isShowLoader = true;
         vm.eventData = {};
         vm.updateEvents = function (event) {
             var start = new Date(event.start.format()),

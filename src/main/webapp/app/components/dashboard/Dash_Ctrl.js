@@ -49,7 +49,6 @@
                         render: function (data, type, row) {
                             var className;
                                 className = row.status.toLowerCase() == 'completed' ? 'label-success' : 'label-warning'
-                            $rootScope.isShowLoader = false;
                             return '<div class="circle '+ className +'"><p>T'+data+'</p></div>'
                         }
                     }, {
@@ -68,7 +67,6 @@
                         render: function (data) {
                             var className;
                                 className = data.toLowerCase() == 'completed' ? 'btn-success' : 'btn-warning'
-                            $rootScope.isShowLoader = false;
                             return '<button type="button" class="btn ' +className+ '">' +data+ '</button>'
                         }
                     }]

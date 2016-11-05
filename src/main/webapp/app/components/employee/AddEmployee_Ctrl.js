@@ -2,7 +2,7 @@ var addEmployeeTable
 (function () {
     var AddEmployee_Ctrl = function ($scope, $state, $rootScope, Core_Service,urlConfig, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.registration = {};
         vm.employeeSummary = {};
         vm.isInit = true;

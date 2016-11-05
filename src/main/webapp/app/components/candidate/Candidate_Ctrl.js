@@ -1,7 +1,7 @@
 var candidatesListTable;
 (function () {
     var Candidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
-        $rootScope.showLoader = true;        
+        $rootScope.isShowLoader = true;        
         var vm = this,
                 vs = new validationService({
                     controllerAs: vm
@@ -213,7 +213,7 @@ var candidatesListTable;
                 vm.getCandidate(this.getAttribute('value'));
             });
             $('#candidatesList').on('click', '.action-edit', function () {
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.candidate.edit', {id: $rootScope.id});
             });

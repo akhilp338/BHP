@@ -113,7 +113,7 @@
 					});
 			
             $('#clientList').on('click', '.action-edit', function () {
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.client.edit', {id: $rootScope.id});
             });
