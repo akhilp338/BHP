@@ -12,7 +12,7 @@ var addEmployeeTable
                 vm.registration = res.data;               
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
             }, function (err) {
                 vm.registration = {};
             });
@@ -157,7 +157,7 @@ var addEmployeeTable
                  vm.registration = res.data;               
                  vm.isCheckboxEnable = true;
                  vm.isChecked = true;
-                 $rootScope.showLoader = false;
+                 $rootScope.isShowLoader = false;
              }, function (err) {
                  vm.registration = {};
              });
@@ -166,7 +166,7 @@ var addEmployeeTable
         });
         
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddEmployee_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service','urlConfig', '$stateParams', 'Core_HttpRequest', 'validationService'];

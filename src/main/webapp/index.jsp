@@ -15,7 +15,7 @@
         <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
         <link href='/BelhopatBackOffice/app/assets/libs/css/jquery.datepick.css' rel='stylesheet' type='text/css'> 
-        <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
+        <link href="/BelhopatBackOffice/AddPO_Ctrlapp/assets/libs/css/nvd3/axis.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/boxplot.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bullet.css" rel="stylesheet">
@@ -121,6 +121,9 @@
         <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/Attendance/AttendanceMgmtCtrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/reimbursement/Reimbursement_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/PurchaseOrder/PO_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/PurchaseOrder/AddPO_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/PurchaseOrder/ViewPO_Ctrl.js"></script>
         <style>
             [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
                 display: none !important;
@@ -128,14 +131,16 @@
         </style>
     </head>
 
-    <body ng-class="{'login-page':isLogin,'loader-visible': showLoader,'inner-page':addPage, 'dashboard-page':isDashBoard}" ng-cloak>
+    <body ng-class="{'login-page':isLogin,'loader-visible': isShowLoader,'inner-page':addPage, 'dashboard-page':isDashBoard}" ng-cloak>
+        <div ng-if="isShowLoader" class="loader-container"></div>
         <div id="errorUser">${error}</div>
         <div id="successUser">${user}</div>     
-        <div class="response-loader" ng-show="showLoader"></div>
+        <div class="response-loader" ng-show="!showLoader"></div>
         <img src="/BelhopatBackOffice/app/assets/images/loader-img.gif" class="loader-img loader-language" ng-if="languageSwitching" alt="loader">
         <header ui-view="header" class="header-div"></header>
         <span us-spinner="{radius:30, width:8, length: 16}"></span>
         <div ui-view="sidebar" class="page-side-bar"></div>
-        <div ui-view="content" class="main"></div>
+        <div ui-view="content" class="main">
+        </div>
         <footer ui-view="footer" class="footer-div"></footer>
 </html>

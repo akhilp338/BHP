@@ -3,13 +3,16 @@
 		var vm = this, poAddTable;
 		$rootScope.active = 'po';
 		vm.addPO = function() {
-			$state.go("coreuser.po.add");
+                    $state.go("coreuser.po.add");
+		};
+                vm.back = function() {
+                    $state.go("coreuser.po");
 		};
 		//vm.getClient = function(data){
         	//vm.getClientUrl = "api/client/getClient";
 //            Core_Servic/etCandidateImpl(vm.getClientUrl,id)
 //            .then( function(response) {
-               vm.viewClient(data);
+               //vm.viewClient(data);
 //            },function(error){
 //            	
 //            });
@@ -97,7 +100,7 @@
                                                     bSortable : false,
                                                     sClass : "button-column",
                                                     render : function(data) {
-                                                            $rootScope.showLoader = false;
+                                                            $rootScope.isShowLoader = false;
                                                             return data != null ?
                                                              '<div class="action-buttons">'
                                                                             + '<span  value="'
@@ -113,7 +116,7 @@
 					});
 			
             $('#clientList').on('click', '.action-edit', function () {
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.client.edit', {id: $rootScope.id});
             });

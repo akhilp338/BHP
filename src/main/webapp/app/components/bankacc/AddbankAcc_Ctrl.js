@@ -22,7 +22,7 @@
                 vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
             }, function (err) {
                 vm.registration = {};
             });
@@ -105,7 +105,7 @@
         };
 
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddbankAcc_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];

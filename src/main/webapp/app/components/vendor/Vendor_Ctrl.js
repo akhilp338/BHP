@@ -83,7 +83,7 @@
                                                     bSortable : false,
                                                     sClass : "button-column",
                                                     render : function(data) {
-                                                            $rootScope.showLoader = false;
+                                                            $rootScope.isShowLoader = false;
                                                             return data != null ?
                                                              '<div class="action-buttons">'
                                                                             + '<span  value="'

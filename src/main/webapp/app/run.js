@@ -2,7 +2,6 @@
     'use strict';
     var Core_Run = function ($rootScope, $state, $cookieStore, $timeout, Core_Service, $http,Idle) {
         $rootScope.globals = $cookieStore.get('globals') || {};
-        $rootScope.showLoader = false;
         Idle.watch();
         var userName = angular.element("#successUser").text(),
             errorText = angular.element("#erorUser").text()
@@ -20,13 +19,7 @@
 
         });
 
-        $rootScope.$on('moduleRunLoaded', function (e) {
-             alert("sda run")
-        });
-
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {            
-            $rootScope.showLoader = true;
-            $rootScope.spinnerActive =true;
+         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {            
             var parts = toState.name.split(".");
             if(toState.name == "coreuser.offerletter.verify" && fromState.name == ""){                
                 $state.go("coreuser.offerletter")
@@ -52,6 +45,8 @@
                                   toState.name == "coreuser.employee.edit"||
                                   toState.name == "coreuser.client.edit" ||
                                   toState.name == "coreuser.client.add" ||
+                                  toState.name == "coreuser.po.edit" ||
+                                  toState.name == "coreuser.po.add" ||
                                   toState.name == "coreuser.consultant.edit" ||
                                   toState.name == "coreuser.consultant.add" ||
                                   toState.name == "coreuser.vendor.edit" ||
@@ -61,7 +56,7 @@
             $rootScope.showLoader = toState.name != "coreuser.dashboard" ?  false : true;
             $rootScope.spinnerActive =false;
             $timeout(function(){
-               //$rootScope.showLoader = false;
+            $rootScope.isShowLoader = false;
             },500);            
         });
     };

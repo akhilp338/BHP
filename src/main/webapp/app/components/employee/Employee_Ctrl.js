@@ -123,7 +123,7 @@
                         bSortable: false,
                         sClass: "button-column",
                         render: function (data) {
-                            $rootScope.showLoader = false;
+                            $rootScope.isShowLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span  value="' + data + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'+
                                     '<i class="fa fa-eye" aria-hidden="true"></i></span>' +

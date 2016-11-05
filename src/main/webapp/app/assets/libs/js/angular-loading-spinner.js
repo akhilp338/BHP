@@ -10,7 +10,7 @@
                     return $http.pendingRequests.length > 0;
                 };
 
-                scope.$watch(scope.isLoading, function (loading)
+                scope.$watch(scope.isShowLoader, function (loading)
                 {
                     $rootScope.spinnerActive = loading;
                     if(loading){

@@ -13,7 +13,7 @@
             Core_Service.getCandidateImpl("api/employee/getAnEmployee", vm.candId).then(function (res) {
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
                 vm.registration.id=res.data.id;
                 vm.registration.hrManager=res.data.hrManager;
                 vm.registration.accountManager=res.data.accountManager;
@@ -74,7 +74,7 @@
      
         $scope.candidateId=$rootScope.id;
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service','$timeout'];

@@ -311,7 +311,16 @@ body, html {
     background-position: left center;
     background-size: 170px;
     height: 70px;
+    padding-left: 0;
 }
+.logo-link{
+    position: relative;
+    float: left;
+    width: 170px;
+    height: 70px;
+    cursor: pointer;
+}
+
 .user-details-container{
     height: 70px;
 }
@@ -323,7 +332,9 @@ body, html {
     width: 84%;
     position: absolute;
 }
-
+.page-section-header-att {
+    padding-left: 10px;
+}
 .header-divx:not(.login-page)
 {
     height:80px;
@@ -817,7 +828,6 @@ span.user-list-head {
 }
 
 .form-horizontal form {
-    background-color: #f6f6f6;
     padding-top: 10px;
     border: 1px solid #DDDDDD;
 }
@@ -1315,7 +1325,9 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-image: -webkit-linear-gradient(left, #FBDF93 0%, #FCCD4D 100%);
     background-image: linear-gradient(to right, #FBDF93 0%, #FCCD4D 100%);
 }
-
+.navbar-header{
+    background-color: #ff8209;
+}
 .theme4 .logout-button {
     background-color: #CC2727;;
 }
@@ -2409,4 +2421,21 @@ table #tasksList.display tbody tr.odd{
     display: inline;
     font-weight: bold;
     color: #ff9023;
+}
+
+div.loader-container {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-image: url("../images/loader-img.gif");
+    background-repeat: no-repeat;
+    background-position: 58% center;
+}
+
+:not(.form-horizontal) .top-main-head .page-section-header{
+    padding-left: 20px;
 }

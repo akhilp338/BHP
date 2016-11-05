@@ -412,7 +412,43 @@
                             controllerAs: 'vm'
                         }
                     }
-                });
+                })
+                
+                //Attendance States Routing
+                .state('coreuser.po', {
+                    url: urlConfig.root_path + 'po',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/PurchaseOrder/po.html',
+                            controller: 'PO_Ctrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                }).state('coreuser.po.add', {
+            url: '/add',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/PurchaseOrder/poAdd.html',
+                    controller: 'AddPO_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('coreuser.po.edit', {
+            url: '/edit/:id',
+            views: {
+                'sidebar@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'
+                },
+                'content@': {
+                    templateUrl: '/BelhopatBackOffice/app/components/PurchaseOrder/poAdd.html',
+                    controller: 'AddPO_Ctrl',
+                    controllerAs: 'vm'
+                }
+            }
+        });
     };
     angular.module('coreModule').config(Core_Routes);
 })();

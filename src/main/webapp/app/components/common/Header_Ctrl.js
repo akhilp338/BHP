@@ -1,5 +1,5 @@
 (function () {
-    var Header_Ctrl = function ($scope, $state, $rootScope, Core_Service) {
+    var Header_Ctrl = function ($timeout, $state, $rootScope, Core_Service) {
         var vm = this;
         vm.getUserName = localStorage["userName"] || "Rafique";
         vm.logout = function () {
@@ -11,6 +11,13 @@
             localStorage.clear();
             vm.logout();
             angular.element(".link-btn").trigger("click");
+        };
+        vm.goHome = function(){
+            $state.go('coreuser.dashboard');
+            $rootScope.isShowLoader = true;
+            $timeout(function(){
+                $rootScope.isShowLoader = false;
+            },1000)
         };
         vm.getUserName= function(data){
         	   vm.sessionCheck();

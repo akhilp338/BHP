@@ -1,7 +1,8 @@
 (function (angular) {
     var Core_Service = function ($rootScope, Core_HttpRequest, Base64, $state, $cookieStore, $sessionStorage, $http, $q, $timeout) {
         var service = this;
-
+        
+        
         service.login = function (data) {
             var deferred = $q.defer();
             var user = {};
