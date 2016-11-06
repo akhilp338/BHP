@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Candidate-Test-Case</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Candidate-Test-Case</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/BelhopatBackOffice/candidate/add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firstName</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=middleName</td>
+	<td>TestAbc</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=lastName</td>
+	<td>Test2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=dob</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[10]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=gender</td>
+	<td>label=MALE</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;number:36&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=bloodGroup</td>
+	<td>label=B+</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;number:5&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=countryOfOrigin</td>
+	<td>label=American Samoa</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=select[name=&quot;countryOfOrigin&quot;] &gt; option[value=&quot;number:4&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_line1</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=permanentAddress_address_line2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=permanentAddress_address_line2</td>
+	<td>Test1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=permanentAddress_country</td>
+	<td>label=India</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=select[name=&quot;permanentAddress_country&quot;] &gt; option[value=&quot;number:101&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=permanentAddress_state</td>
+	<td>label=Kerala</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=permanentAddress_city</td>
+	<td>label=Alappuzha</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=zip_code</td>
+	<td>4567891</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=personal_country_code</td>
+	<td>label=India - +91</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=personal_contact</td>
+	<td>9874584521</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>abc@fgafdsjl.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=ofc_email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ofc_email</td>
+	<td>fhdskjlahk@fjalsdjfl.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=ofc_contact_country_code</td>
+	<td>label=India - +91</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=ofc_contact</td>
+	<td>789321456</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=checkbox1</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
