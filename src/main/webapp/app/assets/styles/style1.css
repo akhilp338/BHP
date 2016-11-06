@@ -625,7 +625,7 @@ button.link-btn {
     border-radius: 4px;
 }
 
-#candidatesList, #employeeList, #clientList, #offerLetterList {
+#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList {
     border-collapse: separate;
     border: 1px solid #ddd;
     margin: 0;
@@ -734,7 +734,7 @@ span.text-danger {
 }
 
 .form-horizontal, #candidatesList_wrapper, #employeeList_wrapper,
-#clientList_wrapper, #offerLetterList_wrapper {
+#consultantList_wrapper, #clientList_wrapper, #offerLetterList_wrapper {
     padding: 0 20px 0 20px;
 }
 
@@ -769,13 +769,20 @@ span.sub-section {
     height: 25px !important;
 }
 
-#candidatesList tbody tr.odd {
+#candidatesList tbody tr.odd,
+#consultantList tbody tr.odd {
     background-color: #F1F1F1;
 }
 
 #candidatesList tbody tr td:not(:last-child),
 #candidatesList thead tr th:not(:last-child),
-#candidatesList tfoot tr th:not(:last-child){
+#candidatesList tfoot tr th:not(:last-child),
+#consultantList tbody tr td:not(:last-child),
+#consultantList thead tr th:not(:last-child),
+#consultantList tfoot tr th:not(:last-child),
+#clientList tbody tr td:not(:last-child),
+#clientList thead tr th:not(:last-child),
+#clientList tfoot tr th:not(:last-child){
     border-right:1px solid #DDD;
 }
 table.dataTable thead th, table.dataTable tfoot th {
@@ -1099,7 +1106,9 @@ button {
     outline: none !important;
 }
 
-#candidatesList tbody tr {
+#candidatesList tbody tr,
+#clientList tbody tr,
+#consultantList tbody tr {
     cursor: pointer;
     height: 35px !important;
 }
@@ -1397,7 +1406,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 .theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd, .theme4 #employeeList tbody tr.odd, .theme4 #offerLetterList tbody tr.odd,
-.theme4 #clientList tbody tr.odd {
+.theme4 #clientList tbody tr.odd, .theme4 #consultantList tbody tr.odd {
     background-color: #FBDF92;
 }
 
@@ -1458,13 +1467,17 @@ fieldset.scheduler-border legend {
 }
 
 .theme4 .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
-.theme4 #candidatesList_previous:hover, .theme4 #employeeList_previous:hover
+.theme4 #candidatesList_previous:hover, .theme4 #employeeList_previous:hover,
+.theme4 #clientList_previous:hover, .theme4 #consultantList_previous:hover
 {
     border: none !important;
     background: #CC2727 !important;
 }
 
-.theme4 a#candidatesList_previous:hover, .theme4 #employeeList_previous:hover
+.theme4 #employeeList_previous:hover,
+.theme4 a#consultantList_previous:hover,
+.theme4 a#candidatesList_previous:hover,
+.theme4 a#clientList_previous:hover
 {
     color: white !important;
 }
@@ -1475,8 +1488,10 @@ fieldset.scheduler-border legend {
     color: white !important;
 }
 
-.theme4 a#employeeList_next, .theme4 a#employeeList_previous, .theme4 a#candidatesList_next,
-.theme4 a#candidatesList_previous {
+.theme4 a#employeeList_next, .theme4 a#employeeList_previous, 
+.theme4 a#candidatesList_next, .theme4 a#candidatesList_previous 
+.theme4 a#clientList_next, .theme4 a#clientList_previous,
+.theme4 a#consultantList_next, .theme4 a#consultantList_previous{
     padding: 0 5px;
 }
 /*them 4 end*/
