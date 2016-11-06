@@ -88,7 +88,6 @@
                         bSortable: false,
                         sClass: "button-column",
                         render: function (data) {
-                            $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span value="' + data + '" class="actions action-download fa-stack fa-lg pull-left" title="Edit">'+
                                     '<i class="fa fa-cloud-download" aria-hidden="true"></i></i></span></div>'

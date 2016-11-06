@@ -52,7 +52,6 @@ public class AttendanceController {
 		return attendanceService.getAttendances(input);
 	}
 
-	@ResponseBody
 	@RequestMapping(value = "/uploadAttendanceExcel", method = RequestMethod.POST)
 	public UploadResponse uploadAttendanceExcel(@RequestParam("file") MultipartFile file) throws IOException {
 		UploadResponse response = excelService.uploadExcel("ATNDNCE", file);

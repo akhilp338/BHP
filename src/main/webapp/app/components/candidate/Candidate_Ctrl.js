@@ -1,7 +1,7 @@
 var candidatesListTable;
 (function () {
     var Candidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
-        $rootScope.showLoader = true;        
+        $rootScope.isShowLoader = true;        
         var vm = this,
                 vs = new validationService({
                     controllerAs: vm
@@ -200,7 +200,7 @@ var candidatesListTable;
                         bSortable: false,
                         sClass: "button-column",
                         render: function (data) {
-                            $rootScope.showLoader = false;
+                            $rootScope.isShowLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span  value="' + data + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'+
                                     '<i class="fa fa-eye" aria-hidden="true"></i></span>' +
@@ -213,7 +213,7 @@ var candidatesListTable;
                 vm.getCandidate(this.getAttribute('value'));
             });
             $('#candidatesList').on('click', '.action-edit', function () {
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.candidate.edit', {id: $rootScope.id});
             });

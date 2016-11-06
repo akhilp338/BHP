@@ -102,4 +102,14 @@ public class VendorController {
 	public ResponseEntity<Map<String, String>> approveOrRejectVendor(@RequestBody ResponseObject requestObject) {
 		return vendorService.approveOrRejectVendor(requestObject);
 	}
+	
+	/**
+	 * @return Map of dropdown data
+	 * gets a key value pair list of drop down data
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	public Map<String, List<?>> getDropDownData() {
+		return vendorService.getDropDownData();
+	}
 }

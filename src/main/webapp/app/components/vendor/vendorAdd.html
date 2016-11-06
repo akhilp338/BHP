@@ -1,6 +1,6 @@
 <div class="form-horizontal vendor-add" name="vendor_reg_form">
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left">Fill Vendor Details</h4>	
+        <h4 class="pull-left page-section-header">Fill Vendor Details</h4>	
         <button ng-click="vm.back()"
 			class="logout-button pull-right add-button" title="Back To Home Screen">
 			<span class="fa-stack fa-lg pull-left"><i
@@ -28,29 +28,41 @@
                         class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
                         <label class="control-label" for="vendorCat">Vendor Category</label>
                         <div class="controls">
-                            <input type="text" name="vendorCat" id="revenue"
-                                   ng-model="vm.registration.vendorCat" class="form-input width-100"
-                                   placeholder="Vendor category"
-                                   validation="required:alt=Required field" />
+                            <select name="vendorCategory"
+                                    ng-model="vm.registration.category.id"
+                                    class="form-input width-100"
+                                    ng-options="vendorCategory.id as (vendorCategory.description) for vendorCategory in vm.lookups.VNDR_CAT"
+                                    validation="required:alt=required">
+                                <option value="">--SELECT--</option>
+                            </select>
                         </div>
                     </div>
                      <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
-                            <label class="control-label" for="contact_code">Code</label>
+                            <label class="control-label" for="tds_cat">TDS Category</label>
                                 <div class="controls small-drop">
-                                    <select name="contact_code" ng-model="vm.registration.contactNo.country.id"
+                                    <select name="tdsCategory" ng-model="vm.registration.tdsCategory.id"
                                         class="form-input width-100" 
-                                        ng-options="country.id as ( country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
-										onselect = "country.id as (country.phoneCode)"
-                                        >
+                                        ng-options="tdsCategory.id as (tdsCategory.description) for tdsCategory in vm.lookups.TDS_CAT"
+                                    validation="required:alt=required">
                                         <option value="">-SELECT-</option>
                                     </select>                                    
                                 </div>
                             </div>
                     <div class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
+                        <label class="control-label" for="description">Description</label>
+                        <div class="controls">
+                            <input type="text" name="description" id="description"
+                                   ng-model="vm.registration.description"
+                                   class="form-input width-100"
+                                   placeholder="Description"
+                                   validation="required:alt=Required field" />
+                        </div>
+                    </div>
+                    <div class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
                         <label class="control-label" for="contactNo">Contact no</label>
                         <div class="controls">
                             <input type="text" name="contactNo" id="contactNo"
-                                   ng-model="vm.registration.contactNo.number"
+                                   ng-model="vm.registration.phoneNo.number"
                                    class="form-input width-100"
                                    placeholder="Contact No"
                                    validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"
@@ -78,13 +90,25 @@
                     </div>
                     <div
                         class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                        <label class="control-label" for="vendorStatus">Client
-                            Status</label>
+                        <label class="control-label" for="vendorStatus">Status</label>
                         <div class="controls">
                             <select name="vendorStatus"
-                                    ng-model="vm.registration.vendorStatus.id"
+                                    ng-model="vm.registration.status.id"
                                     class="form-input width-100"
-                                    ng-options="vendorStatus.id as (vendorStatus.description) for vendorStatus in vm.lookups.CLSTATS"
+                                    ng-options="vendorStatus.id as (vendorStatus.description) for vendorStatus in vm.lookups.VNDR_STATS"
+                                    validation="required:alt=required">
+                                <option value="">--SELECT--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="vendorRating">Rating</label>
+                        <div class="controls">
+                            <select name="vendorRating"
+                                    ng-model="vm.registration.rating.id"
+                                    class="form-input width-100"
+                                    ng-options="vendorRating.id as (vendorRating.description) for vendorRating in vm.lookups.VNDR_RATING"
                                     validation="required:alt=required">
                                 <option value="">--SELECT--</option>
                             </select>
@@ -101,7 +125,7 @@
                                         Line 1</label>
                                     <div class="controls">
                                         <input type="text" name="permanentAddress_address_line1" id="address_line1"
-                                               ng-model="vm.registration.vendorAddress.address1"
+                                               ng-model="vm.registration.address.address1"
                                                class="form-input width-100" placeholder="Address Line 1"
                                                validation="required:alt=Required" />
                                     </div>
@@ -111,7 +135,7 @@
                                         Line 2</label>
                                     <div class="controls">
                                         <input type="text" name="permanentAddress_address_line2" id="address_line1"
-                                               ng-model="vm.registration.vendorAddress.address2"
+                                               ng-model="vm.registration.address.address2"
                                                class="form-input width-100" placeholder="Address Line 2"
                                                ng-change="vm.checkAddress()" />
                                     </div>
@@ -119,8 +143,8 @@
                                 <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                     <label class="control-label" for="permanentAddress_country">Country</label>
                                     <div class="controls">
-                                        <select name="permanentAddress_country" ng-model="vm.registration.permanentAddress.city.state.country.id"
-                                                ng-change="vm.getStatesByCountry(vm.registration.vendorAddress.city.state.country.id, 'permenant')"
+                                        <select name="permanentAddress_country" ng-model="vm.registration.address.city.state.country.id"
+                                                ng-change="vm.getStatesByCountry(vm.registration.address.city.state.country.id, 'permenant')"
                                                 class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                                 validation="required:alt=required">
                                             <option value="">--SELECT--</option>
@@ -130,9 +154,9 @@
                                 <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                     <label class="control-label" for="permanentAddress_state">State</label>
                                     <div class="controls">
-                                        <select name="permanentAddress_state" ng-model="vm.registration.permanentAddress.city.state.id"
-                                                ng-change="vm.getCitiesByStates(vm.registration.vendorAddress.city.state.id, 'permenant')"
-                                                class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
+                                        <select name="permanentAddress_state" ng-model="vm.registration.address.city.state.id"
+                                                ng-change="vm.getCitiesByStates(vm.registration.address.city.state.id, 'permenant')"
+                                                class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesVendor"
                                                 validation="required:alt=required">
                                             <option value="">--SELECT--</option>
                                         </select>
@@ -141,8 +165,8 @@
                                 <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                     <label class="control-label" for="permanentAddress_city">City</label>
                                     <div class="controls">
-                                        <select name="permanentAddress_city" ng-model="vm.registration.vendorAddress.city.id"
-                                                class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
+                                        <select name="permanentAddress_city" ng-model="vm.registration.address.city.id"
+                                                class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesVendor">
                                             <option value="">--SELECT--</option>   
                                         </select> 
 
@@ -152,7 +176,7 @@
                                     <label class="control-label" for="zip_code">ZIP Code</label>
                                     <div class="controls">
                                         <input type="text" name="permanentAddress_zip_code" id="zip_code"
-                                               ng-model="vm.registration.vendorAddress.zipCode"
+                                               ng-model="vm.registration.address.zipCode"
                                                class="form-input width-100" placeholder="ZIP Code"
                                                validation="max_len:7:alt=max. 7 digits|numeric:alt=Number only|required:alt=Required"
                                                ng-change="vm.checkAddress()" maxlength="7"/>                                    
@@ -182,33 +206,10 @@
                                 <label class="control-label" for="designation">Designation</label>
                                 <div class="controls">
                                     <select name="designation" ng-model="vm.registration.poc.pocDesignation.id"
-                                            class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.DESIG"
+                                            class="form-input width-100" ng-options="designation.id as (designation.description) for designation in vm.lookups.POC_DESGN"
                                             validation="required:alt=required">
                                         <option value="">--SELECT--</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div 
-                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="country">Country</label>
-                                <div class="controls">
-                                    <select name="onsiteAddress_country" ng-model="vm.registration.poc.pocCountry.id"
-                                            class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
-                                            validation="required:alt=required">
-                                        <option value="">--SELECT--</option>
-                                    </select> 
-                                </div>
-                            </div>
-                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-4 pull-left">
-                            <label class="control-label" for="poc_country_code">Code</label>
-                                <div class="controls small-drop">
-                                    <select name="poc_country_code" ng-model="vm.registration.poc.contactNo.country.id"
-                                        class="form-input width-100" 
-                                        ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
-										onselect = "country.id as (country.phoneCode)"
-                                        >
-                                        <option value="">-SELECT-</option>
-                                    </select>                                    
                                 </div>
                             </div>
                             <div
@@ -219,30 +220,6 @@
                                            ng-model="vm.registration.poc.contactNo.number"
                                            class="form-input width-100"
                                            placeholder="Contact No"
-                                           validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"
-                                           maxlength="10"/>
-                                </div>
-                            </div>
-                            <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-4 pull-left">
-                            <label class="control-label" for="poc_mob_country_code">Code</label>
-                                <div class="controls small-drop">
-                                    <select name="poc_mob_country_code" ng-model="vm.registration.poc.mobNo.country.id"
-                                        class="form-input width-100" 
-                                        ng-options="country.id as (country.description  + ' - ' + '+' + country.phoneCode) for country in vm.lookups.COUNTRY"
-										onselect = "country.id as (country.phoneCode)"
-                                        >
-                                        <option value="">-SELECT-</option>
-                                    </select>                                    
-                                </div>
-                            </div>
-                            <div
-                                class="control-group col-lg-4 col-md-4 col-sm-4 col-xs-8 pull-left">
-                                <label class="control-label" for="contactNo">Mobile no</label>
-                                <div class="controls">
-                                    <input type="text" name="poc.mobNo" id="poc.mobNo"
-                                           ng-model="vm.registration.poc.mobNo.number"
-                                           class="form-input width-100"
-                                           placeholder="Mobile No"
                                            validation="max_len:10:alt=max. 10 digits|numeric:alt=Number only|required:alt=Required field"
                                            maxlength="10"/>
                                 </div>

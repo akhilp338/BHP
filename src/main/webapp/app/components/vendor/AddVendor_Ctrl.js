@@ -1,7 +1,7 @@
 (function () {
     var AddVendor_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.registration = {};        
         vs = new validationService({
             controllerAs: vm
@@ -15,13 +15,13 @@
         });
         
         if ($stateParams.id) {
-            Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
+            Core_Service.getCandidateImpl("api/vendor/getVendor", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
-                vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id, "client");
-                vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");
+                vm.getStatesByCountry(vm.registration.address.city.state.country.id, "vendor");
+                vm.getCitiesByStates(vm.registration.address.city.state.id, "vendor");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
             }, function (err) {
                 vm.registration = {};
             });
@@ -29,7 +29,7 @@
         vm.back = function (){
             $state.go('coreuser.vendor');
         };
-        vm.urlForLookups = "api/client/getDropDownData";
+        vm.urlForLookups = "api/vendor/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;
@@ -75,13 +75,7 @@
             vm.apiUrl = "api/getStatesByCountry";
             Core_Service.defaultApiByIdAndUrlImpl(vm.apiUrl, data)
                     .then(function (response) {
-                        switch (flag) {
-                            case "client":
-                                vm.statesClient = response.data;
-                                break;
-                            default:
-                                break;
-                        }
+                    	vm.statesVendor = response.data;
                     }, function (error) {
                         console.log(error)
                     });
@@ -91,20 +85,14 @@
             vm.apiUrl = "api/getCitiesByState";
             Core_Service.defaultApiByIdAndUrlImpl(vm.apiUrl, data)
                     .then(function (response) {
-                        switch (flag) {
-                            case "client":
-                                vm.citiesClient = response.data;
-                                break;
-                            default:
-                                break;
-                        }
+                    	vm.citiesVendor = response.data;
                     }, function (error) {
                         console.log(error)
                     });
         };
 
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddVendor_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];

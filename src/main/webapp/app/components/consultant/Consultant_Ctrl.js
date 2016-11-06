@@ -130,7 +130,6 @@ var consultantListTable;
         vm.deleteConsultant = function (data) {
             Core_ModalService.opendeleteConsultantModal(data);
         };
-        
         angular.element(document).ready(function () {
                 consultantListTable = angular.element('#consultantList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "consultant/getConsultants",

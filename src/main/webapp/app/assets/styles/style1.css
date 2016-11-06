@@ -311,7 +311,16 @@ body, html {
     background-position: left center;
     background-size: 170px;
     height: 70px;
+    padding-left: 0;
 }
+.logo-link{
+    position: relative;
+    float: left;
+    width: 170px;
+    height: 70px;
+    cursor: pointer;
+}
+
 .user-details-container{
     height: 70px;
 }
@@ -323,7 +332,9 @@ body, html {
     width: 84%;
     position: absolute;
 }
-
+.page-section-header-att {
+    padding-left: 10px;
+}
 .header-divx:not(.login-page)
 {
     height:80px;
@@ -824,7 +835,6 @@ span.user-list-head {
 }
 
 .form-horizontal form {
-    background-color: #f6f6f6;
     padding-top: 10px;
     border: 1px solid #DDDDDD;
 }
@@ -1324,7 +1334,9 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-image: -webkit-linear-gradient(left, #FBDF93 0%, #FCCD4D 100%);
     background-image: linear-gradient(to right, #FBDF93 0%, #FCCD4D 100%);
 }
-
+.navbar-header{
+    background-color: #ff8209;
+}
 .theme4 .logout-button {
     background-color: #CC2727;;
 }
@@ -1861,6 +1873,7 @@ td.fc-widget-content {
 }
 
 .dashboard .panel {
+    cursor: pointer;
     border-radius: 3px;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
@@ -2162,12 +2175,11 @@ md-chips-wrap.md-chips {
     height: 50px;
     width: 50px;
     border: 1px solid #fcd366;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAE+0lEQVRoQ+2ZW2icVRDHZ2Y/timUpmpDFVMvIFYp2vgmaCAVvETNft/ZZR9MRStCEaUaL2CpYOODVgXRKniJFxRtpW73nLO7xofoQ0VtfbOp2lKst1BbqIpCjZHut3PkyEbSzZfd/U42uAXnKZAz/5nfuc2cbxFOc8PTPH9YEIAgCC4gol5m7kZENsZ8j4i7lVLHWz1hLQVIp9NXGmOeAIC1tYkyc4WIZKVS2VwsFg+3CqRlAEEQbDHGPEpEVC85Zp5CxA1a63daAdESACHEMwDwQMyENiilXo3pM2v4vAGEELcBwFsOiYSI2Cul/NzB91+XeQEIIc4CALuflzkmccDzvMtzuVzF0X9+t5AQ4nEA2Owa3Poh4jop5Q5XDecVGB4epvHx8aMAsMI1eNXvY6VUn6uGM0D1ytzrGnjaj5k5DMPlo6Ojv7loOQMEQXAfIj7nEjTC5zql1IcuWvMBeB4RN7oErfVBxLuklK+4aDkDCCHeBIDbXYJG+GxSSj3louUMkE6nXzPG3OkSNGIFHpJS2mIY25wBhBBPAsDDsSNGO6xXSrkUQ/c6IIS4AwDeaAUAM19VKBT2uGg5r0Amk1nNzF+5BJ3pw8zlqampM8bGxiZdtJwBbDAhxBEAONcl8AyfT5VSva4a8wIIguBZRBxyDW79jDFDWuttrhrzAhBCXAoAX9uWxiUBZv6LiLqVUr+6+Fsfp8Azg6XTaWWMCVwSMMa8qLW+x8V32scJIJ1ODyLiwXw+/4UQ4mJm/pKIkjETOYGIq6SUx4IgWI+Ih5RSsXurWADZbPbscrm8HRGvYebRQqFwc/UwbwKArXEAjDF3a61fGhgYWE5Eh4loKSK+nEgkhnK53MlmtZoGyGQyVzBzaeatQ0Q35fP5D6qt9S57MTUTmJm3FwqFW6vwbwPAP39XbW8YhqlSqfRLM1pNAfi+fxkA7CaiM2tEj3qe15PL5X7u7+9f1NHRsRMA/AaBd3V1dQ2OjIyU6zxH9xlj1mqtf28E0RDAPhuZeZ+9LaLEEHFPuVy+tlQq/WkvBSHEg8y8hYiW1BSsP4joMaWU7XmMEOIGZi7MdXaMMR/19PRcPzw8zPUgmgEoAECqnggzf5ZMJoVdCTsum812lstlu53WIKKNsd8YI6dnVAixDgBeB4BFdZNDfERKab8zzWl1AYQQdjvoRsto/8/MxxKJxP1SyvfsDEf5pFKpFYlE4mkAsF8yGpqtE57nrc7n89/NNXhOgOrBPAAAqxpGOnXAIQDYSUS2OTvCzGiMWYWINzLzLUS0OKbeu0qpwdgAcWY/ZkKxhttPkrZeaK2/jTyDc6n5vv++vSZjRVugwYi4VUoZ+fkmcgsFQbAMEe2B9BYop1iyxpgJrfX5Ta9AEAQZRLSFqW2MiNbk8/n9tQlFroDv+9uI6N62yb5O2x0JIIT4BACubjOAHVprWz9OsUiAVCp1PJFIdLUTQKVSGS8Wiz0NAbLZ7OIwDG1b0G52Qim1tCGA7/sriWii3bK3+UxOTi6pffzP2kKZTOYSZj7YjgCe53XncrmfZuY2C6D6zrUtRNuZMeZCrfUPdQGy2ex5YRj+2HbZ26razAr09fV5nZ2dE0R0TjtB2G43mUyurP05KvIateegUqlsRMSLAMA+1hu+GxYI1rblJ5n5G2PMC8Vi0Xa6jevAAiWzILL/1cy2DOZ/gJZNpaPQ3+4S40CbvLJlAAAAAElFTkSuQmCC)
-        no-repeat
-        left center;
     cursor: pointer;
     padding: 0;
     margin: 10px 0;
+    background-repeat: no-repeat;
+    background-position: center center;
     list-style-type: none;
 }
 
@@ -2330,7 +2342,7 @@ a.spec-link{
     }
 }
 .add-btn-cntnr .add-button{
-   margin-bottom: 20px; 
+    margin-bottom: 20px; 
 }    
 .circle {
     border-radius: 50%;
@@ -2349,12 +2361,12 @@ a.spec-link{
 }
 .theme4 #tasksList.dataTable thead tr, 
 .theme4 #tasksList.dataTable tfoot tr{
- background: #eceff4!important;
+    background: #eceff4!important;
 }
 
 .theme4 #tasksList.dataTable thead th, 
 .theme4 #tasksList.dataTable tfoot th{
-  color: black!important;  
+    color: black!important;  
 }
 .dashboard-page,
 .tasklist table.dataTable tbody td,
@@ -2364,4 +2376,81 @@ table #tasksList.display tbody tr.odd{
 }
 #attendanceTable{
     width: 100%!important;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    padding: 0;
+    background-color: #CC2727;
+    border-color: #CC2727;
+    color: white;
+}
+.fileUpload.btn:hover {
+    color: white;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.up-text {
+    padding: 10px;
+    margin-top: 10px;
+    line-height: 42px;
+}
+.row.bottom-margin-20 {
+    margin-bottom: 20px;
+}
+.progress-bar {
+    background-color: #ff850f;
+}
+
+.background-toggle{
+    background: #F00;
+}
+
+.panel-heading{
+    padding: 0;
+}
+.no-padding{
+    padding: 0;
+}
+.upload-panel .panel-title{
+    padding: 15px!important;
+}
+.form-horizontal form.reimTableData-form{
+    float: left;
+    padding-top: 0;
+    border: none;
+}
+
+.file-name.ng-binding {
+    display: inline;
+    font-weight: bold;
+    color: #ff9023;
+}
+
+div.loader-container {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-image: url("../images/loader-img.gif");
+    background-repeat: no-repeat;
+    background-position: 58% center;
+}
+
+:not(.form-horizontal) .top-main-head .page-section-header{
+    padding-left: 20px;
 }

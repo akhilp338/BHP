@@ -1,7 +1,7 @@
 (function () {
     var AddClient_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.registration = {};        
         vs = new validationService({
             controllerAs: vm
@@ -21,7 +21,7 @@
                 vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
             }, function (err) {
                 vm.registration = {};
             });
@@ -105,7 +105,7 @@
         };
 
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddClient_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];

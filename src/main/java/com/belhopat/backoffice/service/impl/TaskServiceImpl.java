@@ -13,10 +13,8 @@ import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.DashboardCount;
 import com.belhopat.backoffice.model.Task;
-import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.service.TaskService;
-import com.belhopat.backoffice.session.SessionManager;
 
 /**
  * @author BHP_DEV service implementation for dashboard task functionalities
@@ -30,26 +28,34 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public DataTablesOutput<Task> getDashboardTasks(DataTablesInput input) {
-		User loggerinUser = SessionManager.getCurrentUserAsEntity();
+		// Specification<Task> specification = getDashboardTaskSpecs(null);
+		DataTablesOutput<Task> tasks = taskRepository.findAll(input);
+		return tasks;
+	}
+
+	private Specification<Task> getDashboardTaskSpecs(Boolean completed) {
 		Specification<Task> specification = new Specification<Task>() {
 			@Override
 			public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> criteriaQuery,
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
+				if (completed != null) {
+					Predicate isCompleted = criteriaBuilder.equal(root.get("completed"), completed);
+					return criteriaBuilder.and(isNotDeleted, isCompleted);
+				}
 				return criteriaBuilder.and(isNotDeleted);
 			}
 		};
-		DataTablesOutput<Task> tasks = taskRepository.findAll(input);
-		return tasks;
+		return specification;
 	}
 
 	@Override
 	public DashboardCount getDashboardCount() {
+		Long completed = taskRepository.count(getDashboardTaskSpecs(true));
+		Long pending = taskRepository.count(getDashboardTaskSpecs(false));
 		DashboardCount dashboardCount = new DashboardCount();
-		dashboardCount.setCompleted(10);
-		dashboardCount.setCritical(15);
-		dashboardCount.setMediumCritical(9);
-		dashboardCount.setNonCritical(50);
+		dashboardCount.setCompleted(completed);
+		dashboardCount.setPending(pending);
 		return dashboardCount;
 	}
 

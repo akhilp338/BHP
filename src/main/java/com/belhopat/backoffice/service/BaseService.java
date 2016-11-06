@@ -23,7 +23,6 @@ import com.belhopat.backoffice.model.City;
 import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
-import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
@@ -78,17 +77,14 @@ public interface BaseService {
 
 	public User getCurrentUser();
 
-	public void saveImageIntoUser() throws IOException;
-
 	public Employee getloggedInEmployee();
 
 	public void upload();
 
-	void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response) throws IOException;
+	public UploadResponse getSuccessResponse();
 
-	UploadResponse getSuccessResponse();
-
-	UploadResponse getErrorResponse();
+	public UploadResponse getErrorResponse();
 
 	ResponseEntity<Map<String, List<?>>> getConsultantDropDownData();
+	
 }

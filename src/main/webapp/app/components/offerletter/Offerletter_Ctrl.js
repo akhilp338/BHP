@@ -174,7 +174,7 @@
                     vm.registration = res.data;
                     vm.isCheckboxEnable = true;
                     vm.isChecked = true;
-                    $rootScope.showLoader = false;
+                    $rootScope.isShowLoader = false;
                 }, function (err) {
                     vm.registration = {};
                 });

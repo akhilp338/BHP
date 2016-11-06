@@ -2,7 +2,7 @@
     var AddCandidate_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, $timeout, validationService, $mdConstant) {
         var vm = this;
         vm.isFileInput = false;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         var countryType = ["permenant", "current", "onsite", "bank"];
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
@@ -36,7 +36,7 @@
                 }
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
             }, function (err) {
                 vm.registration = {};
             });
@@ -207,8 +207,7 @@
                         .then(function (response) {                            
                             Core_Service.sweetAlertWithConfirm("Candidate Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
                                  if (isConfirm) {
-                                     $rootScope.isEmpDocs = false;
-                                     $state.go("coreuser.upload");
+                                     $state.go("coreuser.candidate.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.candidate");

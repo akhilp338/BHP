@@ -8,6 +8,7 @@
             vm[id] = true
         };
         vm.add = {};
+        $rootScope.isShowLoader = true;
         vm.registration = {};
         vm.attendance = {};
         vm.attendance.filter = {};
@@ -52,8 +53,7 @@
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-
-
+        
         vm.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
         // Any key code can be used to create a custom separator
         var semicolon = 186;
@@ -286,6 +286,8 @@
                     });
         };
 
+        Core_Service.calculateSidebarHeight();
+        $rootScope.isShowLoader = false;
     };
 
     AddConsultant_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', '$timeout', 'validationService', '$mdConstant'];

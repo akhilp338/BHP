@@ -3,6 +3,7 @@ package com.belhopat.backoffice.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "S3_BUCKET_FILE")
@@ -22,6 +23,12 @@ public class S3BucketFile extends BaseEntity {
 
 	@Column(name = "FILE_NAME")
 	private String fileName;
+
+	@Column(name = "FILE_ENT_ID")
+	private Long fileEntityId;
+
+	@Transient
+	private byte[] bytes;
 
 	public String getBucketName() {
 		return bucketName;
@@ -61,6 +68,28 @@ public class S3BucketFile extends BaseEntity {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public Long getFileEntityId() {
+		return fileEntityId;
+	}
+
+	public void setFileEntityId(Long fileEntityId) {
+		this.fileEntityId = fileEntityId;
+	}
+
+	public byte[] getBytes() {
+		return bytes;
+	}
+
+	public void setBytes(byte[] bytes) {
+		this.bytes = bytes;
+	}
+
+	public String getKey() {
+		String key = getUserId() + "/" + getFileType() + "/" + getContentType() + "/" + getFileName() + "."
+				+ getContentType();
+		return key;
 	}
 
 }

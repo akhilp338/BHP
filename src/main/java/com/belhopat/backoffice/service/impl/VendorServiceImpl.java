@@ -1,6 +1,7 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -21,14 +22,18 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
+import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
+import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.VendorRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.VendorService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
+import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
  * @author BHP_DEV service implementation for general functionalities
@@ -49,8 +54,14 @@ public class VendorServiceImpl implements VendorService {
 	@Autowired
 	MailService mailService;
         
-        @Autowired
-        UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
+    
+	@Autowired
+	CountryRepository countryRepository;
+	
+	@Autowired
+	TimeZoneRepository timezoneRepository;
         
 	
 	
@@ -117,9 +128,12 @@ public class VendorServiceImpl implements VendorService {
 
 
 	private Vendor addNewVendor(User loggedInUser, Vendor vendorObj) {
-		vendorObj.setBaseAttributes(loggedInUser);
-		LookupDetail statusLookup = lookupDetailRepository.findByLookupKey("PENDING_APPROVAL").get(0);
+		Long increment = baseService.getSequenceIncrement( vendorObj.getClass() );
+		String vendorCode = SequenceGenerator.generateVendorId(increment);
+		LookupDetail statusLookup = lookupDetailRepository.findByLookupKey("PNDNG_APPRVL").get(0);
+		vendorObj.setVendorCode(vendorCode);
 		vendorObj.setStatus(statusLookup);
+		vendorObj.setBaseAttributes(loggedInUser);
 		Vendor persisted = vendorRepository.save(vendorObj);
 		return persisted;
 	}
@@ -151,6 +165,21 @@ public class VendorServiceImpl implements VendorService {
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public Map<String, List<?>> getDropDownData() {
+		Map <String,List<?>> dropDownMaps = new HashMap<String,List<?>>(); 
+		dropDownMaps.put(Constants.COUNTRY, countryRepository.findAll());
+		dropDownMaps.put(Constants.TIMEZONE, timezoneRepository.findAll());
+		dropDownMaps.put(Constants.VENDOR_CATEGORY, lookupDetailRepository.findByLookupKey(Constants.VENDOR_CATEGORY));
+		dropDownMaps.put(Constants.VENDOR_STATUS, lookupDetailRepository.findByLookupKey(Constants.VENDOR_STATUS));
+		dropDownMaps.put(Constants.VENDOR_RATING, lookupDetailRepository.findByLookupKey(Constants.VENDOR_RATING));
+		dropDownMaps.put(Constants.TDS_CATEGORY, lookupDetailRepository.findByLookupKey(Constants.TDS_CATEGORY));
+		dropDownMaps.put(Constants.POC_DESGN, lookupDetailRepository.findByLookupKey(Constants.POC_DESGN));
+		return dropDownMaps;
 	}
 	
 }

@@ -2,7 +2,7 @@
 (function () {
     var AddEmployee_Ctrl_Final = function ($scope, $state, $rootScope, Core_Service,$timeout) {
         var vm = this;
-        $rootScope.showLoader = true;
+        $rootScope.isShowLoader = true;
         vm.candidateId = localStorage["selectedCandidate"] ? localStorage["selectedCandidate"] : "";
         vm.candId = localStorage["selectedCandidateId"] ? localStorage["selectedCandidateId"] : "";
         vm.display = {};
@@ -13,7 +13,7 @@
             Core_Service.getCandidateImpl("api/employee/getAnEmployee", vm.candId).then(function (res) {
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
-                $rootScope.showLoader = false;
+                $rootScope.isShowLoader = false;
                 vm.registration.id=res.data.id;
                 vm.registration.hrManager=res.data.hrManager;
                 vm.registration.accountManager=res.data.accountManager;
@@ -58,8 +58,7 @@
                     .then(function (response) {
                          Core_Service.sweetAlertWithConfirm("Employee Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
                                  if (isConfirm) {
-                                     $rootScope.isEmpDocs = true;
-                                     $state.go("coreuser.upload");
+                                     $state.go("coreuser.employee.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.employee");
@@ -75,7 +74,7 @@
      
         $scope.candidateId=$rootScope.id;
         Core_Service.calculateSidebarHeight();
-        $rootScope.showLoader = false;
+        $rootScope.isShowLoader = false;
     };
 
     AddEmployee_Ctrl_Final.$inject = ["$scope", '$state', '$rootScope', 'Core_Service','$timeout'];

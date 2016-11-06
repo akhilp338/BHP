@@ -1,8 +1,5 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +52,13 @@ import com.belhopat.backoffice.model.MasterRole;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.ReimburseSequence;
-import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.model.Vendor;
+import com.belhopat.backoffice.model.VendorSequence;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
@@ -82,6 +79,7 @@ import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
+import com.belhopat.backoffice.repository.VendorSequenceRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -131,7 +129,7 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ReimburseSequenceRepository reimburseSequenceRepository;
-	
+
 	@Autowired
 	ConsultantSequenceRepository consultantSequenceRepository;
 
@@ -161,6 +159,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ClientRepository clientRepository;
+	
+	@Autowired
+	VendorSequenceRepository vendorSequenceRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -290,24 +291,26 @@ public class BaseServiceImpl implements BaseService {
 	 * lang.Class) creates and increments the sequence
 	 */
 	@Override
-	public <T> Long getSequenceIncrement( Class<T> clazz ) {
+	public <T> Long getSequenceIncrement(Class<T> clazz) {
 		Long increment = null;
-		if( clazz.equals( Candidate.class )) {
-			CandidateSequence candidateSequence = candidateSequenceRepository.save( new CandidateSequence() );
+		if (clazz.equals(Candidate.class)) {
+			CandidateSequence candidateSequence = candidateSequenceRepository.save(new CandidateSequence());
 			increment = candidateSequence.getId();
-		} else if( clazz.equals( Employee.class )) {
-			EmployeeSequence employeeSequence = employeeSequenceRepository.save( new EmployeeSequence() );
+		} else if (clazz.equals(Employee.class)) {
+			EmployeeSequence employeeSequence = employeeSequenceRepository.save(new EmployeeSequence());
 			increment = employeeSequence.getId();
-		} else if( clazz.equals( Client.class )) {
-			ClientSequence clientSequence = clientSequenceRepository.save( new ClientSequence() );
+		} else if (clazz.equals(Client.class)) {
+			ClientSequence clientSequence = clientSequenceRepository.save(new ClientSequence());
 			increment = clientSequence.getId();
-		} else if( clazz.equals( Reimburse.class )) {
-			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save( new ReimburseSequence() );
+		} else if (clazz.equals(Reimburse.class)) {
+			ReimburseSequence reimburseSequence = reimburseSequenceRepository.save(new ReimburseSequence());
 			increment = reimburseSequence.getId();
-		}
-		else if( clazz.equals( Consultant.class )) {
-			ConsultantSequence consultantSequence = consultantSequenceRepository.save( new ConsultantSequence() );
+		} else if (clazz.equals(Consultant.class)) {
+			ConsultantSequence consultantSequence = consultantSequenceRepository.save(new ConsultantSequence());
 			increment = consultantSequence.getId();
+		}else if (clazz.equals(Vendor.class)) {
+			VendorSequence vendorSequence = vendorSequenceRepository.save(new VendorSequence());
+			increment = vendorSequence.getId();
 		}
 		return increment;
 	}
@@ -598,36 +601,11 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public void saveImageIntoUser() throws IOException {
-		File imgPath = new File("/home/sujith/Desktop/rafique.jpg");
-		BufferedImage bufferedImage = ImageIO.read(imgPath);
-		WritableRaster raster = bufferedImage.getRaster();
-		DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-		List<User> users = userRepository.findAll();
-		for (User user : users) {
-			user.setUserImage(data.getData());
-		}
-		userRepository.save(users);
-	}
-
-	@Override
 	public Employee getloggedInEmployee() {
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
 		User user = userRepository.findById(loggedInUser.getId());
 		Employee loggedInEmployee = employeeRepository.findById(user.getEmployeeId());
 		return loggedInEmployee;
-	}
-
-	@Override
-	public void generateDownloadLink(S3BucketFile s3BucketFile, byte[] bytes, HttpServletResponse response)
-			throws IOException {
-		OutputStream output = response.getOutputStream();
-		response.setContentType(s3BucketFile.getContentType());
-		response.addHeader(Constants.CONTENT_DISPOSITION, Constants.ATTACHMENT + s3BucketFile.getFileName());
-		output.write(bytes);
-		output.flush();
-		response.flushBuffer();
-		output.close();
 	}
 
 	@Override

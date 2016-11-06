@@ -73,7 +73,7 @@
                                             },
                                             {
                                                     title : "Contact Number",
-                                                    data : 'phoneNo',
+                                                    data : 'phoneNo.number',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
@@ -83,7 +83,6 @@
                                                     bSortable : false,
                                                     sClass : "button-column",
                                                     render : function(data) {
-                                                            $rootScope.showLoader = false;
                                                             return data != null ?
                                                              '<div class="action-buttons">'
                                                                             + '<span  value="'
@@ -99,7 +98,7 @@
 					});
 			
             $('#clientList').on('click', '.action-edit', function () {
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
                 $state.go('coreuser.client.edit', {id: $rootScope.id});
             });

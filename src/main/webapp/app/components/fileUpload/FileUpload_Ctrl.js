@@ -1,8 +1,24 @@
 (function () {
     var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, Core_Service) {
         var vm = this;
-    	vm.redirect = function (){
-            $state.go('coreuser.candidate');
+    	vm.redirect = function (stateName){ 
+            var state;
+            switch(stateName){
+                case 'candidate':{
+                   state = 'coreuser.candidate';
+                }
+                break
+                case 'employee':{
+                   state = 'coreuser.employee'; 
+                }
+                break
+                case 'reimburse':{
+                   state = 'coreuser.reimbursement';     
+                }
+                break
+            default:
+            }
+            $state.go(state);
         };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
             url: 'upload.php'
@@ -22,12 +38,16 @@
         var employeeDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
             url: 'upload.php'
         });
+        var reimDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
+            url: '/api/attendance/uploadAttendanceExcel'
+        });
         uploadManager(bankDetailsUploader);
         uploadManager(passportUploader);
         uploadManager(licenceUploader);
         uploadManager(panUploader);
         uploadManager(forexUploader);
         uploadManager(employeeDocsUploader);
+        uploadManager(reimDocsUploader);
         $scope.oneAtATime = true;
         $scope.showbtn = false;
         $scope.status = {
@@ -42,8 +62,7 @@
         uploader.filters.push({
             name: 'imageFilter',
             fn: function (item /*{File|FileLikeObject}*/, options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                return this.queue.length < 10;
             }
         });
 

@@ -1,7 +1,7 @@
 (function () {
     var DeleteCandidate_Ctrl = function ($scope, $uibModalInstance, Core_Service, candidateDetails) {
         var vm = this;
-        vm.delete = function () {          
+        vm.del = function () {          
           $uibModalInstance.dismiss('cancel');
         };
         vm.cancel = function () {

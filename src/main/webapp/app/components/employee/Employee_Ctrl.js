@@ -123,13 +123,15 @@
                         bSortable: false,
                         sClass: "button-column",
                         render: function (data) {
-                            $rootScope.showLoader = false;
                             return '<div class="action-buttons">' +
                                     '<span  value="' + data + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'+
                                     '<i class="fa fa-eye" aria-hidden="true"></i></span>' +
                                     '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
                                     '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
-                        }
+                        },
+                        initComplete: function( settings, json ) {
+                            $rootScope.isShowLoading = false;
+                         }
                     }]
             });
             $('#employeeList').on('click', '.action-view', function () {
@@ -141,7 +143,7 @@
                 localStorage["selectedCandidate"] = data.employeeId;
                 localStorage["selectedCandidateName"] = vm.getEmpFullName(data);
                 localStorage["selectedCandidateId"] =  data.employeeMaster.id;
-                $rootScope.showLoader = true;
+                $rootScope.isShowLoader = true;
                 var empId = this.getAttribute('value');
                 $state.go('coreuser.employee.edit', {id: empId});
             });
@@ -163,7 +165,7 @@
             	}else{
                     Core_Service.sweetAlert("Hey!", "Please select atleast one candidate", "warning");
                 }
-            	$rootScope.showLoader = true;
+            	$rootScope.isShowLoader = true;
             	
             });
         })
