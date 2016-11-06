@@ -14,10 +14,10 @@
 		   always-use-default-target="true" authentication-failure-url="/loginerror"
 			default-target-url="/dashboard" />
 		<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true"  />
-		<csrf disabled="true"/>
+		<csrf/>
 	</http>
 
-	<authentication-manager>
+	<authentication-manager >
 		 <authentication-provider user-service-ref="loginService" /> 
 	</authentication-manager>
 

@@ -8,9 +8,9 @@
             <li>
                 <ul id="user_spot_links">
                     <li><form action="/BelhopatBackOffice/logout" method="post" class="logout-link">
-                            <button type="submit" class="link-btn" value="Log out" ></button>
-                            <a class="link logout" href="#" ng-click="vm.triggerButton($event)">Log out
-                                <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                            <button type="submit" class="link-btn" value="Log out" >LOg out</button>
+                            <!-- <a class="link logout" href="#" >Log ou
+                                <i class="fa fa-sign-out" aria-hidden="true"></i></a> -->
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form></li>
                         <li><a ui-sref="changePassword" class="spec-link" href="#">Change password
