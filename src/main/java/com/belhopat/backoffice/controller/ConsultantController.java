@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -67,6 +68,16 @@ public class ConsultantController {
 	@RequestMapping(value = "/saveOrUpdateConsultant", method = RequestMethod.POST)
 	public ResponseEntity< Map< String, String >> saveOrUpdateConsultant( @RequestBody Consultant consultant ) {
 		return consultantService.saveOrUpdateConsultant( consultant );
+	}
+	
+	/**
+	 * @return Map of dropdown data gets a key value pair list of drop down data
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		return baseService.getConsultantDropDownData();
 	}
 
 }
