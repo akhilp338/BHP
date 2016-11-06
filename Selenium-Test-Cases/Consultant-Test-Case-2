@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Consultant-Test-Case-2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Consultant-Test-Case-2</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>//li/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=experience</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>document.regForm.experience[1]</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[29]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=clientStatus</td>
+	<td>label=ACTIVE</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;number:33&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=workLocation</td>
+	<td>label=India</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=sourcedBy</td>
+	<td>label=Test</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;string:Test&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=designation</td>
+	<td>label=Belhopat Consultant</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=select[name=&quot;designation&quot;] &gt; option[value=&quot;number:15&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=skill</td>
+	<td>Java</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=expYr</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=expMnth</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='form_0']/div/div/div/div/div/div[11]/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_line1</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=address_line2</td>
+	<td>Test1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=onsiteAddress_country</td>
+	<td>label=India</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=onsiteAddress_state</td>
+	<td>label=Kerala</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=onsiteAddress_city</td>
+	<td>label=Aluva</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=option[value=&quot;number:17400&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=zip_code</td>
+	<td>682144</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=onsite_country_code</td>
+	<td>label=India - +91</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=onsiteContactNo</td>
+	<td>9744581107</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=accountManager</td>
+	<td>label=Biju BHP</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=select[name=&quot;accountManager&quot;] &gt; option[value=&quot;number:6&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=division</td>
+	<td>label=Consulting</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=select[name=&quot;division&quot;] &gt; option[value=&quot;number:12&quot;]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

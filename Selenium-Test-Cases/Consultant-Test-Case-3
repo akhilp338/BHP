@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Consultant-Test-Case-3</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Consultant-Test-Case-3</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>//li/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=bankAccount</td>
+	<td>457854587458445</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=IFSCCode</td>
+	<td>SCBLN003698</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nameAsPerBank</td>
+	<td>Standard Chartered</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=bankName</td>
+	<td>Standard Chartered Bank</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=branch</td>
+	<td>Kochi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=IBAN</td>
+	<td>JDKL456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=swiftCode</td>
+	<td>ABKCKLADFHS</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=passportNo</td>
+	<td>DKSCKC32</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=passport_country</td>
+	<td>label=India</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address_line1</td>
+	<td>kOCHI</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=address_line2</td>
+	<td>Kochi</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=bankAccount_country</td>
+	<td>label=India</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=bankAccount_state</td>
+	<td>label=Kerala</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=bankAccount_city</td>
+	<td>label=Kochi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=zip_code</td>
+	<td>682002</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[37]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
