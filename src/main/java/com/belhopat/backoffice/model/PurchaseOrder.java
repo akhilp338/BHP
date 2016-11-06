@@ -18,7 +18,7 @@ public class PurchaseOrder extends BaseEntity {
 	private Date poDate;
 
 	@Column(name = "CURNCY")
-	private String Currency;
+	private String currency;
 
 	@Column(name = "MNTHLY_RTE")
 	private Double monthlyRate;
@@ -55,11 +55,11 @@ public class PurchaseOrder extends BaseEntity {
 	}
 
 	public String getCurrency() {
-		return Currency;
+		return currency;
 	}
 
 	public void setCurrency(String currency) {
-		Currency = currency;
+		currency = currency;
 	}
 
 	public Double getMonthlyRate() {
