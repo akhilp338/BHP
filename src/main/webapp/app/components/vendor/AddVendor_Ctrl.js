@@ -17,8 +17,8 @@
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/vendor/getVendor", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
-                vm.getStatesByCountry(vm.registration.vendortAddress.city.state.country.id, "vendor");
-                vm.getCitiesByStates(vm.registration.vendorAddress.city.state.id, "vendor");
+                vm.getStatesByCountry(vm.registration.address.city.state.country.id, "vendor");
+                vm.getCitiesByStates(vm.registration.address.city.state.id, "vendor");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.isShowLoader = false;
@@ -75,13 +75,7 @@
             vm.apiUrl = "api/getStatesByCountry";
             Core_Service.defaultApiByIdAndUrlImpl(vm.apiUrl, data)
                     .then(function (response) {
-                        switch (flag) {
-                            case "client":
-                                vm.statesClient = response.data;
-                                break;
-                            default:
-                                break;
-                        }
+                    	vm.statesVendor = response.data;
                     }, function (error) {
                         console.log(error)
                     });
@@ -91,13 +85,7 @@
             vm.apiUrl = "api/getCitiesByState";
             Core_Service.defaultApiByIdAndUrlImpl(vm.apiUrl, data)
                     .then(function (response) {
-                        switch (flag) {
-                            case "client":
-                                vm.citiesClient = response.data;
-                                break;
-                            default:
-                                break;
-                        }
+                    	vm.citiesVendor = response.data;
                     }, function (error) {
                         console.log(error)
                     });

@@ -143,7 +143,7 @@
                                 <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                     <label class="control-label" for="permanentAddress_country">Country</label>
                                     <div class="controls">
-                                        <select name="permanentAddress_country" ng-model="vm.registration.permanentAddress.city.state.country.id"
+                                        <select name="permanentAddress_country" ng-model="vm.registration.address.city.state.country.id"
                                                 ng-change="vm.getStatesByCountry(vm.registration.address.city.state.country.id, 'permenant')"
                                                 class="form-input width-100" ng-options="country.id as (country.description) for country in vm.lookups.COUNTRY"
                                                 validation="required:alt=required">
@@ -154,9 +154,9 @@
                                 <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
                                     <label class="control-label" for="permanentAddress_state">State</label>
                                     <div class="controls">
-                                        <select name="permanentAddress_state" ng-model="vm.registration.permanentAddress.city.state.id"
+                                        <select name="permanentAddress_state" ng-model="vm.registration.address.city.state.id"
                                                 ng-change="vm.getCitiesByStates(vm.registration.address.city.state.id, 'permenant')"
-                                                class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesPerm"
+                                                class="form-input width-100" ng-options="states.id as (states.description) for states in vm.statesVendor"
                                                 validation="required:alt=required">
                                             <option value="">--SELECT--</option>
                                         </select>
@@ -166,7 +166,7 @@
                                     <label class="control-label" for="permanentAddress_city">City</label>
                                     <div class="controls">
                                         <select name="permanentAddress_city" ng-model="vm.registration.address.city.id"
-                                                class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesPerm">
+                                                class="form-input width-100" ng-options="city.id as (city.description) for city in vm.citiesVendor">
                                             <option value="">--SELECT--</option>   
                                         </select> 
 

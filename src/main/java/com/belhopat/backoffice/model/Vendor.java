@@ -19,7 +19,7 @@ public class Vendor extends BaseEntity {
 	@Column(name = "VNDR_NAME", length = 50)
 	private String vendorName;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "VNDR_ADRS")
 	private Address address;
 
