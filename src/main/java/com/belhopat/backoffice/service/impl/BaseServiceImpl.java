@@ -61,7 +61,6 @@ import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
-import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
@@ -172,63 +171,70 @@ public class BaseServiceImpl implements BaseService {
 	 */
 	@Override
 	public ResponseEntity<Map<String, List<?>>> getCandidateDropDownData() {
-		List<LookupDetail> divisions = lookupDetailRepository.findByLookupKey(Constants.DIVISION);
-		List<LookupDetail> designations = lookupDetailRepository.findByLookupKey(Constants.DESIGNATION);
 		List<LookupDetail> purposes = lookupDetailRepository.findByLookupKey(Constants.PURPOSE);
 		List<LookupDetail> bloodGroups = lookupDetailRepository.findByLookupKey(Constants.BLOOD_GROUP);
 		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
 		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
-		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
 		List<ResponseObject> clients = clientRepository.getClientDropdownData();
-		List<ResponseObject> employees = employeeRepository.getEmployeesDropDown();
-		List<Skill> skills = skillRepository.findAll();
-		List<Country> countries = countryRepository.findAll();
 		Map<String, List<?>> dropDownMap = new HashMap<>();
-		dropDownMap.put(Constants.DIVISION, divisions);
-		dropDownMap.put(Constants.DESIGNATION, designations);
 		dropDownMap.put(Constants.PURPOSE, purposes);
 		dropDownMap.put(Constants.BLOOD_GROUP, bloodGroups);
 		dropDownMap.put(Constants.EMPLOYMENT_STATUS, employmentStatuses);
 		dropDownMap.put(Constants.FAMILY_MEMBER, familyMembers);
-		dropDownMap.put(Constants.SKILL, skills);
-		dropDownMap.put(Constants.COUNTRY, countries);
-		dropDownMap.put(Constants.GENDER, gender);
 		dropDownMap.put(Constants.CLIENTS, clients);
-		dropDownMap.put(Constants.EMPLOYEES, employees);
+		dropDownMap.putAll(getCandidateConsultantCommonDropDownData());
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.belhopat.backoffice.service.BaseService#getEmployeeDropDownData()
-	 * gets employee dropdown data and creates a map out of it.
-	 */
 	@Override
-	public ResponseEntity<Map<String, List<?>>> getEmployeeDropDownData() {
+	public Map<String, List<?>> getEmployeeDropdowns() {
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		dropDownMap.put(Constants.EMP_DESIG_HRM, employeeRepository.findByDesignation(Constants.EMP_DESIG_HRM));
+		dropDownMap.put(Constants.EMP_DESIG_HRR, employeeRepository.findByDesignation(Constants.EMP_DESIG_HRR));
+		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
+		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
+		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
+		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
+		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());
+		dropDownMap.put(Constants.DIVISION, lookupDetailRepository.findByLookupKey(Constants.DIVISION));
+		dropDownMap.putAll( getEmployeeConsultantCommonDropDownData() ); 
+		return dropDownMap;
+	}
+	
+	public Map<String, List<?>> getEmployeeConsultantCommonDropDownData(){
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
+		dropDownMap.put(Constants.DESIGNATION, lookupDetailRepository.findByLookupKey(Constants.DESIGNATION));
+		dropDownMap.put(Constants.EMP_DESIG_AM, employeeRepository.findByDesignation(Constants.EMP_DESIG_AM));
+		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
+		return dropDownMap;
+	}
+	
+	public Map<String, List<?>> getCandidateConsultantCommonDropDownData(){
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		List<Skill> skills = skillRepository.findAll();
+		List<Country> countries = countryRepository.findAll();
 		List<LookupDetail> divisions = lookupDetailRepository.findByLookupKey(Constants.DIVISION);
 		List<LookupDetail> designations = lookupDetailRepository.findByLookupKey(Constants.DESIGNATION);
-		List<LookupDetail> purposes = lookupDetailRepository.findByLookupKey(Constants.PURPOSE);
-		List<LookupDetail> bloodGroups = lookupDetailRepository.findByLookupKey(Constants.BLOOD_GROUP);
-		List<LookupDetail> employmentStatuses = lookupDetailRepository.findByLookupKey(Constants.EMPLOYMENT_STATUS);
-		List<LookupDetail> familyMembers = lookupDetailRepository.findByLookupKey(Constants.FAMILY_MEMBER);
-
-		List<Skill> skills = skillRepository.findAll();
-		List<Country> countries = countryRepository.findAll();
-		List<TimeZone> timezones = timezoneRepository.findAll();
-		Map<String, List<?>> dropDownMap = new HashMap<>();
-		dropDownMap.put(Constants.DIVISION, divisions);
-		dropDownMap.put(Constants.DESIGNATION, designations);
-		dropDownMap.put(Constants.PURPOSE, purposes);
-		dropDownMap.put(Constants.BLOOD_GROUP, bloodGroups);
-		dropDownMap.put(Constants.EMPLOYMENT_STATUS, employmentStatuses);
-		dropDownMap.put(Constants.FAMILY_MEMBER, familyMembers);
+		List<LookupDetail> gender = lookupDetailRepository.findByLookupKey(Constants.GENDER);
+		List<ResponseObject> employees = employeeRepository.getEmployeesDropDown();
 		dropDownMap.put(Constants.SKILL, skills);
 		dropDownMap.put(Constants.COUNTRY, countries);
-		dropDownMap.put(Constants.TIMEZONE, timezones);
+		dropDownMap.put(Constants.DESIGNATION, designations);
+		dropDownMap.put(Constants.GENDER, gender);
+		dropDownMap.put(Constants.EMPLOYEES, employees);
+		dropDownMap.put(Constants.DIVISION, divisions);
+		return dropDownMap;
+	}
+
+	@Override
+	public ResponseEntity<Map<String, List<?>>> getConsultantDropDownData() {
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		dropDownMap.putAll( getEmployeeConsultantCommonDropDownData() ); 
+		dropDownMap.putAll( getCandidateConsultantCommonDropDownData() ); 
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -304,24 +310,6 @@ public class BaseServiceImpl implements BaseService {
 			increment = consultantSequence.getId();
 		}
 		return increment;
-	}
-
-	@Override
-	public Map<String, List<?>> getEmployeeDropdowns() {
-		Map<String, List<?>> dropDownMap = new HashMap<>();
-		dropDownMap.put(Constants.EMP_DESIG_HRM, employeeRepository.findByDesignation(Constants.EMP_DESIG_HRM));
-		dropDownMap.put(Constants.EMP_DESIG_HRR, employeeRepository.findByDesignation(Constants.EMP_DESIG_HRR));
-		dropDownMap.put(Constants.EMP_DESIG_AM, employeeRepository.findByDesignation(Constants.EMP_DESIG_AM));
-		dropDownMap.put(Constants.EMP_DESIG_FM, employeeRepository.findByDesignation(Constants.EMP_DESIG_FM));
-		dropDownMap.put(Constants.EMP_DESIG_CEO, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
-		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
-		dropDownMap.put(Constants.EMP_DESIG_BDM, employeeRepository.findByDesignation(Constants.EMP_DESIG_CEO));
-		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
-		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
-		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());
-		dropDownMap.put(Constants.DESIGNATION, lookupDetailRepository.findByLookupKey(Constants.DESIGNATION));
-		dropDownMap.put(Constants.DIVISION, lookupDetailRepository.findByLookupKey(Constants.DIVISION));
-		return dropDownMap;
 	}
 
 	@Override

@@ -43,8 +43,6 @@ public interface BaseService {
 
 	public List<Skill> getUnselectedSkillSet(List<Skill> selectedSkillSet);
 
-	ResponseEntity<Map<String, List<?>>> getEmployeeDropDownData();
-
 	public Map<String, List<?>> getEmployeeDropdowns();
 
 	public ResponseEntity<List<Task>> createOfferLetter(RequestObject requestObject)
@@ -91,4 +89,6 @@ public interface BaseService {
 	UploadResponse getSuccessResponse();
 
 	UploadResponse getErrorResponse();
+
+	ResponseEntity<Map<String, List<?>>> getConsultantDropDownData();
 }
