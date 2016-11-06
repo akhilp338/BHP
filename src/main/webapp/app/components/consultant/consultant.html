@@ -1,4 +1,4 @@
-<div class="sub-content">
+<section class="sub-content">
     <div class="top-main-head pull-left width-100">
         <h4 class="pull-left">Consultant Management</h4>        
 	<button ng-click="vm.addConsultant()"
@@ -7,7 +7,7 @@
 			class="fa fa-plus" aria-hidden="true"></i></span>
                         <span class="text">Add</span>              
 	</button>
-        <table id="clientList" class="display"></table>
     </div>
     <div class="error-container" ng-if="vm.errorAlert">{{vm.errorMessage}}</div>
-</div>
+    <table id="consultantList" class="display"></table>
+</section>
