@@ -65,7 +65,7 @@
                             }
                                             },
                                             {
-                                                    title : "contactNo",
+                                                    title : "Contact No",
                                                     data : 'contactNo.number',
                                                     render: function (data,display,row) {
                                     return row.contactNo == null? "":row.contactNo.number == null? "":data;
@@ -121,6 +121,15 @@
                 var data = clientAddTable.data()[$(this).parents("tr").index()];
                 vm.getClient(data);
             });
+            $('#clientList tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                	clientAddTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            } );
 
 		})
 	};
