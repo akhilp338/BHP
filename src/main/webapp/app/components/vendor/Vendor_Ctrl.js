@@ -73,7 +73,7 @@
                                             },
                                             {
                                                     title : "Contact Number",
-                                                    data : 'phoneNo',
+                                                    data : 'phoneNo.number',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }

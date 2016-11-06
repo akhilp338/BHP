@@ -15,10 +15,10 @@
         });
         
         if ($stateParams.id) {
-            Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
+            Core_Service.getCandidateImpl("api/vendor/getVendor", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
-                vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id, "client");
-                vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");
+                vm.getStatesByCountry(vm.registration.vendortAddress.city.state.country.id, "vendor");
+                vm.getCitiesByStates(vm.registration.vendorAddress.city.state.id, "vendor");
                 vm.isCheckboxEnable = true;
                 vm.isChecked = true;
                 $rootScope.isShowLoader = false;
@@ -29,7 +29,7 @@
         vm.back = function (){
             $state.go('coreuser.vendor');
         };
-        vm.urlForLookups = "api/client/getDropDownData";
+        vm.urlForLookups = "api/vendor/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
                     vm.lookups = response.data;

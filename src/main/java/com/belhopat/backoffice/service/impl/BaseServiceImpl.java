@@ -58,6 +58,8 @@ import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.TimeZone;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.model.Vendor;
+import com.belhopat.backoffice.model.VendorSequence;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CandidateSequenceRepository;
 import com.belhopat.backoffice.repository.CityRepository;
@@ -78,6 +80,7 @@ import com.belhopat.backoffice.repository.StateRepository;
 import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
+import com.belhopat.backoffice.repository.VendorSequenceRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PDFService;
 import com.belhopat.backoffice.session.SessionManager;
@@ -157,6 +160,9 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ClientRepository clientRepository;
+	
+	@Autowired
+	VendorSequenceRepository vendorSequenceRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -296,6 +302,9 @@ public class BaseServiceImpl implements BaseService {
 		} else if (clazz.equals(Consultant.class)) {
 			ConsultantSequence consultantSequence = consultantSequenceRepository.save(new ConsultantSequence());
 			increment = consultantSequence.getId();
+		}else if (clazz.equals(Vendor.class)) {
+			VendorSequence vendorSequence = vendorSequenceRepository.save(new VendorSequence());
+			increment = vendorSequence.getId();
 		}
 		return increment;
 	}

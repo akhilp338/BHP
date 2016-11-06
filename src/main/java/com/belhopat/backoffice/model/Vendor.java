@@ -30,7 +30,7 @@ public class Vendor extends BaseEntity {
 	@JoinColumn(name = "VNDR_CNTRY")
 	private Country country;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "VNDR_CTGRY")
 	private LookupDetail category;
 
@@ -63,8 +63,8 @@ public class Vendor extends BaseEntity {
 	@JoinColumn(name = "PONT_OF_CONT_ID")
 	private PointOfContact poc;
 
-        public String getVendorCode() {
-		return vendorCode;
+    public String getVendorCode() {
+    	return vendorCode;
 	}
 
 	public void setVendorCode(String vendorCode) {

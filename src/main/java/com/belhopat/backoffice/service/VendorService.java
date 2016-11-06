@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -20,6 +21,8 @@ public interface VendorService {
 	public ResponseEntity<Map<String, String>> saveOrUpdateVendor(Vendor vendor);
 
 	public ResponseEntity<Map<String, String>> approveOrRejectVendor(ResponseObject requestObject);
+
+	public Map<String, List<?>> getDropDownData();
 	
 	
 }
