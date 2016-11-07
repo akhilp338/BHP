@@ -34,7 +34,7 @@
                 responsive: true,
                 bFilter:false,
                 fnDrawCallback: function (settings, ajax) {
-
+                    console.log(settings)
                 },
                 language: {
                     zeroRecords: 'No data to display',
@@ -63,7 +63,7 @@
                     	title: "Status",
                         data: 'status',
                         bSortable: true,
-                        sClass: "button-column",
+                        sClass: "button-column action-view",
                         render: function (data) {
                             var className;
                                 className = data.toLowerCase() == 'completed' ? 'btn-success' : 'btn-warning'
@@ -102,16 +102,14 @@
         };
             $('#tasksList').on('click', '.action-view', function () {
                 var data = dashBoardTable.data()[$(this).parents("tr").index()];
-                vm.showAdvanced(data);
-            });
-            $('#tasksList tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                } else {
-                    dashBoardTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+                var id = {id:data.taskEntityId}
+                Core_Service.getTaskReviewDetails(id).then(function(res){
+                    console.log(res)
+                },function(err){
+                     console.log(err)
+                })
+                console.log(data)
+            });            
 
         });
         $scope.close = function () {
@@ -120,7 +118,6 @@
         vm.showAdvanced = function (data) {
             Core_ModalService.openTaskDetails(data);
         };
-
     };
 
     Dash_Ctrl.$inject = ["$scope", '$rootScope', 'Core_Service', 'Core_ModalService', 'urlConfig'];

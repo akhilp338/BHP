@@ -1158,6 +1158,7 @@ button {
     position: relative;
     float: left;
     width: 100%;
+    padding-right: 20px;
 }
 
 /* .next-btn {
@@ -2438,4 +2439,16 @@ div.loader-container {
 
 :not(.form-horizontal) .top-main-head .page-section-header{
     padding-left: 20px;
+}
+
+.top-main-head .page-section-header.no-padding-left {
+   padding-left: 0; 
+}
+
+.add-button.no-margin-right {
+    margin-right: 0;
+}
+
+.bottom-button-liner.no-padding-right{
+    padding-right: 0;
 }

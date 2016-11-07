@@ -1,21 +1,22 @@
 <div class="form-horizontal consultant-add" name="po_reg_form">
+    
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left page-section-header">Fill Purchase Order Details</h4>	
+        <h4 class="pull-left page-section-header-po">Fill Purchase Order Details</h4>
         <button ng-click="vm.back()"
-			class="logout-button pull-right add-button" title="Back Button">
-			<span class="fa-stack fa-lg pull-left"><i
-				class="fa fa-arrow-left" aria-hidden="true"></i></span>
-	                        <span class="text">Back</span>              
-		</button>
+                class="logout-button pull-right add-button" title="Back Button">
+            <span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-arrow-left" aria-hidden="true"></i></span>
+            <span class="text">Back</span>              
+        </button>
     </div>
     <form name="regForm" class="consultant-form" id="form_1" novalidate>
         <div class="row">
-            <div class="data-outer col-md-6 col-lg-6 col-sm-6 col-xs-12">                        
+            <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">                        
                 <div class="data-main-container">
                     <header class="data-main-container-header">Basic Information</header>
 
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poNo">PO Number</label>
                         <div class="controls">
                             <input type="text" name="poNo" id="poNo"
@@ -25,16 +26,31 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poDate">PO Date</label>
                         <div class="controls">
-                            <input type="text" name="poDate" id="poDate"
-                                   ng-model="vm.registration.poDate" class="form-input width-100"
-                                   placeholder="PO Date"
-                                   validation="required:alt=Required field" />
-                        </div>
+                                    <p class="input-group">
+                                        <input type="text"
+                                               name="poDate"
+                                               show-button-bar ="false"
+                                               class="form-input date-form"                                           
+                                               ng-model="vm.registration.poDate"
+                                               is-open="vm.isDobPickerOpen"
+                                               uib-datepicker-popup="dd-MMM-yyyy"
+                                               placeholder="PO Date"
+                                               validation="required:alt=Required field" 
+                                               readonly/>
+                                        <span class="input-group-btn custom-datepick">
+                                            <button type="button" 
+                                                    class="btn btn-default" 
+                                                    ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
+                                </div>                 
                     </div>
-                     <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
+                     <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                             <label class="control-label" for="currency">Currency</label>
                                 <div class="controls small-drop">
                                     <input type="text" name="currency" id="currency"
@@ -43,7 +59,7 @@
                                    validation="required:alt=Required field" />                                  
                                 </div>
                             </div>
-                    <div class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
+                    <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="monthlyRate">Monthly Rate</label>
                         <div class="controls">
                             <input type="text" name="monthlyRate" id="monthlyRate"
@@ -55,7 +71,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poValue">PO Value</label>
                         <div class="controls">
                             <input type="text" name="poValue" id="poValue"
@@ -64,17 +80,32 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="expiry">Expiry Date</label>
                         <div class="controls">
-                            <input type="text" name="expiry" id="expiry"
-                                   ng-model="vm.registration.expiry" class="form-input width-100"
-                                   placeholder="Expiry Date"
-                                   validation="required:alt=Required field" />
+                            <p class="input-group">
+                                        <input type="text"
+                                               name="expiry"
+                                               show-button-bar ="false"
+                                               class="form-input date-form"                                           
+                                               ng-model="vm.registration.expiry"
+                                               is-open="vm.isDobPickerOpen1"
+                                               uib-datepicker-popup="dd-MMM-yyyy"
+                                               placeholder="Expiry Date"
+                                               validation="required:alt=Required field" 
+                                               readonly/>
+                                        <span class="input-group-btn custom-datepick">
+                                            <button type="button" 
+                                                    class="btn btn-default" 
+                                                    ng-click="vm.setDpOpenStatus('isDobPickerOpen1')">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </p>
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="status">Status</label>
                         <div class="controls">
                             <select name="status"
@@ -87,7 +118,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poDesc">PO Description</label>
                         <div class="controls">
                             <input type="text" name="poDesc" id="poDesc"
@@ -96,7 +127,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poDoc">Doc Uploaded</label>
                         <div class="controls">
                             <input type="text" name="poDoc" id="poDoc"

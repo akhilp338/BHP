@@ -84,7 +84,9 @@ nav.sidebar, .main{
         margin-left: 40px;
         float: right;
     }
-
+    .attendance-page .main{
+        padding-left: 30px;
+    }
     /*lets nav bar to be showed on mouseover*/
     nav.sidebar:hover + .main{
         margin-left: 200px;

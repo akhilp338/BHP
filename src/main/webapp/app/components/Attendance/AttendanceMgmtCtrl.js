@@ -1,6 +1,7 @@
 (function () {
     var AttendanceMgmtCtrl = function ($scope, $rootScope, Core_Service, Core_ModalService, urlConfig) {
         var vm = this, attendanceTable;
+        $rootScope.isAttendance = true;
         vm.attendance = {};
         $rootScope.active = 'attendance';
         Core_Service.getAttendanceDropDownData().then(function (res) {
@@ -30,6 +31,7 @@
                 bDestroy: true,
                 processing: true,
                 responsive: true,
+                sScrollX: '100%', 
                 bFilter:false,
                 bLengthChange:false,
                 fnDrawCallback: function (settings, ajax) {

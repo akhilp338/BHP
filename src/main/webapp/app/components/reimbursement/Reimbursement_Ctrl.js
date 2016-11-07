@@ -115,9 +115,6 @@
             }
             
         };
-        vm.back = function () {
-            $state.go("coreuser.dashboard");
-        };
         vm.reimburse = function () {
 
             var data = vm.reimDetails;

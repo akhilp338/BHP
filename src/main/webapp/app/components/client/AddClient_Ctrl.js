@@ -27,6 +27,7 @@
             });
         }
         vm.back = function (){
+            $rootScope.isShowLoader = true;
             $state.go('coreuser.client');
         };
         vm.urlForLookups = "api/client/getDropDownData";
