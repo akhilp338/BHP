@@ -17,6 +17,7 @@ public class Constants {
 	public static final String TDS_CATEGORY = "TDS_CAT";
 	public static final String VENDOR_RATING = "VNDR_RATING";
 	public static final String POC_DESGN = "POC_DESGN";
+	public static final String PO_STATUS = "PO_STATUS";
 
 	/* password reset msg constants */
 	public static final String PASS_RESET_SUCC_MSG = "New password has been sent to your registered email.";

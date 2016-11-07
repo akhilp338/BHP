@@ -1,26 +1,26 @@
 (function() {
 	var Vendor_Ctrl = function($scope, $state, $rootScope, Core_Service, urlConfig, Core_ModalService, validationService) {
-		var vm = this, clientAddTable;
+		var vm = this, vendorAddTable;
 		$rootScope.active = 'vendor';
 		vm.addVendor = function() {
                     $state.go("coreuser.vendor.add");
 		};
-		vm.getClient = function(data){
-                    vm.getClientUrl = "api/vendor/getVendor";
-                    Core_Service.getCandidateImpl(vm.getClientUrl,data.id)
+		vm.getVendor = function(data){
+                    vm.getVendorUrl = "api/vendor/getVendor";
+                    Core_Service.getCandidateImpl(vm.getVendorUrl,data.id)
                     .then( function(response) {
-                       vm.viewClient(data);
+                       vm.viewVendor(data);
                     },function(error){
 
                     });
                 };        
         
-        vm.viewClient = function (data) {
+        vm.viewVendor = function (data) {
             Core_ModalService.openViewClientModal(data);
         };
 		angular.element(document).ready(
 		function() {
-	                    clientAddTable = angular.element('#clientList').DataTable({
+	                    vendorAddTable = angular.element('#clientList').DataTable({
 	                        ajax:urlConfig.http+ window.location.host+ urlConfig.api_root_path+ "vendor/getApprovedVendors",
 	                        serverSide: true,
 	                        bDestroy: true,
@@ -100,11 +100,11 @@
             $('#clientList').on('click', '.action-edit', function () {
                 $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
-                $state.go('coreuser.client.edit', {id: $rootScope.id});
+                $state.go('coreuser.vendor.edit', {id: $rootScope.id});
             });
             $('#clientList').on('click', '.action-view', function () {
-                var data = clientAddTable.data()[$(this).parents("tr").index()];
-                vm.getClient(data);
+                var data = vendorAddTable.data()[$(this).parents("tr").index()];
+                vm.getVendor(data);
             });
 
 		});

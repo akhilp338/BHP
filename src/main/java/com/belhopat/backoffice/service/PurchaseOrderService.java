@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
@@ -8,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
+import com.belhopat.backoffice.model.Vendor;
 
 @Service
 public interface PurchaseOrderService {
@@ -20,6 +23,10 @@ public interface PurchaseOrderService {
 	public ResponseEntity<Map<String, String>> saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrder);
 
 	public ResponseEntity<Map<String, String>> approveOrRejectPurchaseOrder(ResponseObject requestObject);
+
+	public List<LookupDetail> getDropDownData() ;
+
+	public List<Vendor> getVendors(String vendorName) ;
 	
 	
 }

@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.State;
+import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PurchaseOrderService;
 import com.itextpdf.text.DocumentException;
@@ -100,5 +102,25 @@ public class PurchaseOrderController {
 	@RequestMapping(value = "/approveOrRejectPurchaseOrder", method = RequestMethod.POST)
 	public ResponseEntity<Map<String, String>> approveOrRejectPurchaseOrder(@RequestBody ResponseObject requestObject) {
 		return purchaseOrderService.approveOrRejectPurchaseOrder(requestObject);
+	}
+	
+	/**
+	 * @param requestObject
+	 * @return response entity Lookup method fetches states for a country
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	public List<LookupDetail> getDropDownData() {
+		return purchaseOrderService.getDropDownData();
+	}
+	
+	/**
+	 * @param requestObject
+	 * @return response entity Lookup method fetches states for a country
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getVendors", method = RequestMethod.POST)
+	public List<Vendor> getVendors(@RequestBody String vendorName) {
+		return purchaseOrderService.getVendors(vendorName);
 	}
 }

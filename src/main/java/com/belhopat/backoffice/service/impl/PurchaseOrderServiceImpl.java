@@ -1,19 +1,15 @@
 package com.belhopat.backoffice.service.impl;
 
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,13 +18,15 @@ import com.belhopat.backoffice.dto.ResponseObject;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.User;
+import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.PurchaseOrderRepository;
+import com.belhopat.backoffice.repository.VendorRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.PurchaseOrderService;
 import com.belhopat.backoffice.session.SessionManager;
-import com.belhopat.backoffice.util.DateUtil;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
 
 /**
@@ -50,19 +48,22 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	@Autowired
 	MailService mailService;
 	
+	@Autowired
+	VendorRepository vendorRepository;
+	
 
 	@Override
 	public DataTablesOutput<PurchaseOrder> getAllPurchaseOrders(DataTablesInput input) {
-		Specification<PurchaseOrder> specification = new Specification<PurchaseOrder>() {
-			@Override
-			public Predicate toPredicate(Root<PurchaseOrder> root, CriteriaQuery<?> criteriaQuery,
-					CriteriaBuilder criteriaBuilder) {
-				Predicate inCurFinYear = criteriaBuilder.greaterThan(
-			            root.< Date > get( "poDate" ), new Date(DateUtil.getFiscalYear()) );
-				return criteriaBuilder.and(inCurFinYear);
-			}
-		};
-		DataTablesOutput<PurchaseOrder> dataTablesOutput = purchaseOrderRepository.findAll(input, specification);
+//		Specification<PurchaseOrder> specification = new Specification<PurchaseOrder>() {
+//			@Override
+//			public Predicate toPredicate(Root<PurchaseOrder> root, CriteriaQuery<?> criteriaQuery,
+//					CriteriaBuilder criteriaBuilder) {
+//				Predicate inCurFinYear = criteriaBuilder.greaterThan(
+//			            root.< Date > get( "poDate" ), new Date(DateUtil.getFiscalYear()) );
+//				return criteriaBuilder.and(inCurFinYear);
+//			}
+//		};
+		DataTablesOutput<PurchaseOrder> dataTablesOutput = purchaseOrderRepository.findAll(input/*, specification*/);
 		return dataTablesOutput;
 	}
 
@@ -91,7 +92,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO);
 		if (purchaseOrder != null) {
-			responseMap.put("Message", purchaseOrder.getVendorName());
+			responseMap.put("Message", purchaseOrder.getVendorName().getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);
@@ -109,6 +110,8 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	private PurchaseOrder addNewPurchaseOrder(User loggedInUser, PurchaseOrder purchaseOrderObj) {
 		purchaseOrderObj.setBaseAttributes(loggedInUser);
 		purchaseOrderObj.setStatus("PENDING_APPROVAL");
+		purchaseOrderObj.setBalanceAmount(purchaseOrderObj.getPoValue());
+		purchaseOrderObj.setBilledAmount(BigDecimal.ZERO);
 		PurchaseOrder persisted = purchaseOrderRepository.save(purchaseOrderObj);
 		return persisted;
 	}
@@ -138,6 +141,20 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public List<LookupDetail> getDropDownData() {
+		return lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
+	}
+
+
+
+	@Override
+	public List<Vendor> getVendors(String vendorName) {
+		return vendorRepository.findByVendorName(vendorName);
 	}
 	
 }

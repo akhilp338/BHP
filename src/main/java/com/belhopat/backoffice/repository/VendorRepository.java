@@ -19,5 +19,7 @@ public interface VendorRepository extends JpaRepository<Vendor, Long>, DataTable
 	Vendor findById(Long vendorId);
 
 	List<Vendor> findByIdIn(List<Long> vendorIds);
+	
+	List<Vendor> findByVendorName(String vendorName);
 
 }

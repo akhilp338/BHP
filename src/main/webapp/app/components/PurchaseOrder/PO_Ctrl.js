@@ -3,10 +3,10 @@
 		var vm = this, poAddTable;
 		$rootScope.active = 'po';
 		vm.addPO = function() {
-                    $state.go("coreuser.po.add");
+            $state.go("coreuser.po.add");
 		};
-                vm.back = function() {
-                    $state.go("coreuser.po");
+        vm.back = function() {
+            $state.go("coreuser.po");
 		};
 		//vm.getClient = function(data){
         	//vm.getClientUrl = "api/client/getClient";
@@ -23,8 +23,8 @@
         };
 		angular.element(document).ready(
 		function() {
-	                    poAddTable = angular.element('#clientList').DataTable({
-	                        ajax:urlConfig.http+ window.location.host+ urlConfig.api_root_path+ "client/getClients",
+	                    poAddTable = angular.element('#poList').DataTable({
+	                        ajax:urlConfig.http+ window.location.host+ urlConfig.api_root_path+ "purchaseOrder/getAllPurchaseOrders",
 	                        serverSide: true,
 	                        bDestroy: true,
 	                        processing: true,
@@ -47,54 +47,96 @@
                                                     visible : false
                                             },
                                             {
-                                                    title : "Client ID",
-                                                    data : 'clientId',
+                                                    title : "PO No",
+                                                    data : 'purchaseOrderNo',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "Name",
-                                                    data : 'clientName',
+                                                    title : "PO Date",
+                                                    data : 'poDate',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "Email",
-                                                    data : 'email',
+                                                    title : "Monthly Rate",
+                                                    data : 'monthlyRate',
                                                     render: function (data) {
                                     return data == null? "":data;
                             }
                                             },
                                             {
-                                                    title : "contactNo",
-                                                    data : 'contactNo.number',
+                                                    title : "PO Value",
+                                                    data : 'poValue',
                                                     render: function (data,display,row) {
-                                    return row.contactNo == null? "":row.contactNo.number == null? "":data;
-                            }
+                                                    	return data;
+                                                    }
                                             },
                                             {
-                                                    title : "Revenue",
-                                                    data : 'revenue',
+                                                    title : "Currency",
+                                                    data : 'currency',
                                                     render: function (data) {
-                                    return data == null? "":data;
-                            }
+                                                    	return data == null? "":data;
+                                                	}
                                             },
                                             {
-                                                    title : "POC Name",
-                                                    data : 'poc.pocName',
+                                                    title : "Billed Amount",
+                                                    data : 'billedAmount',
                                                     render: function (data,display,row) {
-                                    return row.poc == null? "":row.poc.pocName == null? "":data;
-                            }
+                                                    	return data;
+                                                    }
                                             },
                                             {
-                                                    title : "Bussiness Unit",
-                                                    data : 'businessUnit.description',
+                                                    title : "Balance Amount",
+                                                    data : 'balanceAmount',
                                                     render: function (data,display,row) {
-                                    return row.businessUnit == null? "":row.businessUnit.description == null? "":data;
-                            }
+                                                    	return data;
+                                                    }
                                             },
+                                            {
+                                                    title : "Expiry Date",
+                                                    data : 'expiry',
+                                                    render: function (data,display,row) {
+                                                		return data;
+                                                	}
+                                            },
+                                            {
+                                                title : "Status",
+                                                data : 'status',
+                                                render: function (data,display,row) {
+                                                	return data;
+                                                }
+                                        },
+                                        {
+                                            title : "Vendor No",
+                                            data : 'vendorName.vendorCode',
+                                            render: function (data,display,row) {
+                                            	return data;
+                                            }
+                                    },
+                                    {
+                                        title : "Name",
+                                        data : 'vendorName.vendorName',
+                                        render: function (data,display,row) {
+                                        	return null;
+                                    	}
+                                },
+                                {
+                                    title : "Description",
+                                    data : 'poDesc',
+                                    render: function (data,display,row) {
+                                    	return null;
+                                	}
+                            },
+                            {
+                                title : "Doc Uploaded",
+                                data : 'poDesc',
+                                render: function (data,display,row) {
+                                	return null;
+                            	}
+                        },
                                             {
                                                     data : 'id',
                                                     bSortable : false,

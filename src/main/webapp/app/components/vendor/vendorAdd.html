@@ -1,6 +1,6 @@
 <div class="form-horizontal vendor-add" name="vendor_reg_form">
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left page-section-header">Fill Vendor Details</h4>	
+        <h4 class="pull-left page-section-header no-padding-left">Fill Vendor Details</h4>	
         <button ng-click="vm.back()"
 			class="logout-button pull-right add-button" title="Back To Home Screen">
 			<span class="fa-stack fa-lg pull-left"><i
@@ -15,7 +15,7 @@
                     <header class="data-main-container-header">Basic Vendor Details</header>
 
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="vendorName">Vendor Name</label>
                         <div class="controls">
                             <input type="text" name="vendorName" id="vendorName"
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="vendorCat">Vendor Category</label>
                         <div class="controls">
                             <select name="vendorCategory"
@@ -37,7 +37,7 @@
                             </select>
                         </div>
                     </div>
-                     <div class="control-group col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left">
+                     <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                             <label class="control-label" for="tds_cat">TDS Category</label>
                                 <div class="controls small-drop">
                                     <select name="tdsCategory" ng-model="vm.registration.tdsCategory.id"
@@ -48,7 +48,7 @@
                                     </select>                                    
                                 </div>
                             </div>
-                    <div class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
+                    <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="description">Description</label>
                         <div class="controls">
                             <input type="text" name="description" id="description"
@@ -58,7 +58,7 @@
                                    validation="required:alt=Required field" />
                         </div>
                     </div>
-                    <div class="control-group col-lg-3 col-md-3 col-sm-4 col-xs-4 pull-left">
+                    <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="contactNo">Contact no</label>
                         <div class="controls">
                             <input type="text" name="contactNo" id="contactNo"
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="email">Email</label>
                         <div class="controls">
                             <input type="text" name="email" id="email"
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="webUrl">Website URL</label>
                         <div class="controls">
                             <input type="text" name="webUrl" id="webUrl"
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="vendorStatus">Status</label>
                         <div class="controls">
                             <select name="vendorStatus"
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div
-                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="vendorRating">Rating</label>
                         <div class="controls">
                             <select name="vendorRating"
@@ -120,7 +120,7 @@
             <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">                        
                             <div class="data-main-container">     
                                 <header class="data-main-container-header">Vendor Address</header>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="permanentAddress_address_line1">Address
                                         Line 1</label>
                                     <div class="controls">
@@ -130,7 +130,7 @@
                                                validation="required:alt=Required" />
                                     </div>
                                 </div>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="address_line2">Address
                                         Line 2</label>
                                     <div class="controls">
@@ -140,7 +140,7 @@
                                                ng-change="vm.checkAddress()" />
                                     </div>
                                 </div>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="permanentAddress_country">Country</label>
                                     <div class="controls">
                                         <select name="permanentAddress_country" ng-model="vm.registration.address.city.state.country.id"
@@ -151,7 +151,7 @@
                                         </select>                                   
                                     </div>
                                 </div>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="permanentAddress_state">State</label>
                                     <div class="controls">
                                         <select name="permanentAddress_state" ng-model="vm.registration.address.city.state.id"
@@ -162,7 +162,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="permanentAddress_city">City</label>
                                     <div class="controls">
                                         <select name="permanentAddress_city" ng-model="vm.registration.address.city.id"
@@ -172,7 +172,7 @@
 
                                     </div>
                                 </div>
-                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                     <label class="control-label" for="zip_code">ZIP Code</label>
                                     <div class="controls">
                                         <input type="text" name="permanentAddress_zip_code" id="zip_code"
@@ -192,7 +192,7 @@
                         <header class="data-main-container-header">Vendor Point Of Contact Details</header>
                         <div class="poc-section">
                             <div
-                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                 <label class="control-label" for="pocName">POC Name</label>
                                 <div class="controls">
                                     <input type="text" name="pocName" id="pocName"
@@ -202,7 +202,7 @@
                                 </div>
                             </div>
                             <div 
-                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                 <label class="control-label" for="designation">Designation</label>
                                 <div class="controls">
                                     <select name="designation" ng-model="vm.registration.poc.pocDesignation.id"
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                             <div
-                                class="control-group col-lg-4 col-md-4 col-sm-4 col-xs-8 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                 <label class="control-label" for="contactNo">Contact no</label>
                                 <div class="controls">
                                     <input type="text" name="poc.contactNo" id="poc.contactNo"
@@ -225,7 +225,7 @@
                                 </div>
                             </div>
                             <div
-                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                                class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-12 pull-left">
                                 <label class="control-label" for="areaOfWork">Area Of Work</label>
                                 <div class="controls">
                                     <input type="text" name="areaOfWork" id="areaOfWork"
