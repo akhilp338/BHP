@@ -25,6 +25,12 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "PO_VALUE")
 	private BigDecimal poValue;
+	
+	@Column(name = "BLNCE_AMT")
+	private BigDecimal balanceAmount;
+	
+	@Column(name = "BILL_AMT")
+	private BigDecimal billedAmount;
 
 	@Column(name = "EXPRY_DATE")
 	private Date expiry;
@@ -59,7 +65,7 @@ public class PurchaseOrder extends BaseEntity {
 	}
 
 	public void setCurrency(String currency) {
-		currency = currency;
+		this.currency = currency;
 	}
 
 	public Double getMonthlyRate() {
@@ -108,6 +114,22 @@ public class PurchaseOrder extends BaseEntity {
 
 	public void setPoDesc(String poDesc) {
 		this.poDesc = poDesc;
+	}
+
+	public BigDecimal getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(BigDecimal balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+	public BigDecimal getBilledAmount() {
+		return billedAmount;
+	}
+
+	public void setBilledAmount(BigDecimal billedAmount) {
+		this.billedAmount = billedAmount;
 	}
 
 }

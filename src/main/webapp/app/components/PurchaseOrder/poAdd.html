@@ -78,12 +78,21 @@
                         <label class="control-label" for="status">Status</label>
                         <div class="controls">
                             <select name="status"
-                                    ng-model="vm.registration.status.description"
+                                    ng-model="vm.registration.status"
                                     class="form-input width-100"
                                     ng-options="poStatus.id as (poStatus.description) for poStatus in vm.poStatus"
                                     validation="required:alt=required">
                                 <option value="">--SELECT--</option>
                             </select>
+                        </div>
+                    </div>
+                    <div
+                        class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                        <label class="control-label" for="vendorName">Vendor Name</label>
+                        <div class="controls">
+                            <input type="text" name="vendorName" id="vendorName"
+                                   ng-model="vm.registration.vendorName" class="form-input width-100"
+                                   placeholder="PO Value" validation="required:alt=Required field" />
                         </div>
                     </div>
                     <div
