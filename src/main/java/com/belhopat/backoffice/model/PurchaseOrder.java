@@ -39,7 +39,7 @@ public class PurchaseOrder extends BaseEntity {
 	private String status;
 
 	@Column(name = "VNDR_NAME", length = 100)
-	private String vendorName;
+	private Vendor vendorName;
 
 	@Column(name = "PO_DESC", length = 200)
 	private String poDesc;
@@ -100,11 +100,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.status = status;
 	}
 
-	public String getVendorName() {
+	public Vendor getVendorName() {
 		return vendorName;
 	}
 
-	public void setVendorName(String vendorName) {
+	public void setVendorName(Vendor vendorName) {
 		this.vendorName = vendorName;
 	}
 
