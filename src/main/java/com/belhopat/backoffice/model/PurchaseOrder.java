@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,8 +39,9 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "STATUS", length = 100)
 	private String status;
-
-	@Column(name = "VNDR_NAME", length = 100)
+	
+	@ManyToOne
+	@JoinColumn(name = "VNDR_NAME")
 	private Vendor vendorName;
 
 	@Column(name = "PO_DESC", length = 200)
