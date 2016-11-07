@@ -83,14 +83,14 @@
                                             },
                                             {
                                                     title : "Billed Amount",
-                                                    data : 'currency',
+                                                    data : 'billedAmount',
                                                     render: function (data,display,row) {
                                                     	return data;
                                                     }
                                             },
                                             {
                                                     title : "Balance Amount",
-                                                    data : 'currency',
+                                                    data : 'balanceAmount',
                                                     render: function (data,display,row) {
                                                     	return data;
                                                     }
@@ -111,14 +111,14 @@
                                         },
                                         {
                                             title : "Vendor No",
-                                            data : 'vendorName',
+                                            data : 'vendorName.vendorCode',
                                             render: function (data,display,row) {
                                             	return data;
                                             }
                                     },
                                     {
                                         title : "Name",
-                                        data : 'vendorName',
+                                        data : 'vendorName.vendorName',
                                         render: function (data,display,row) {
                                         	return null;
                                     	}

@@ -18,6 +18,21 @@
 
         $rootScope.active = 'po';
         
+        vm.addPO = function () {
+            vm.registerUrl = "api/purchaseOrder/saveOrUpdatePurchaseOrder";
+//            if(vs.checkFormValidity($scope.regForm)){
+                Core_Service.sweetAlertWithConfirm("PO Details filled!", "Are you sure to add this PO?", "warning", function(){
+            Core_Service.registerImpl(vm.registerUrl, vm.registration)
+                    .then(function (response) {
+                    	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.po");
+                    }, function (error) {
+                    	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.",
+                    			"error","coreuser.po");
+                    });
+                });
+//            }
+        };
+        
     };
            
     AddPO_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', '$stateParams', 'Core_HttpRequest', 'validationService'];

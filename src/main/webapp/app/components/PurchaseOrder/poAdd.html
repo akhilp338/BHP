@@ -109,7 +109,7 @@
                         <label class="control-label" for="status">Status</label>
                         <div class="controls">
                             <select name="status"
-                                    ng-model="vm.registration.status.description"
+                                    ng-model="vm.registration.status"
                                     class="form-input width-100"
                                     ng-options="poStatus.id as (poStatus.description) for poStatus in vm.poStatus"
                                     validation="required:alt=required">
@@ -140,11 +140,11 @@
         </div>
     </form>
      <div class="bottom-button-liner">        
-        <button ng-click="vm.consultantRegister()"
-		class="logout-button pull-right add-button confirm-btn" title="Confirm and Register">
+        <button ng-click="vm.addPO()"
+		class="logout-button pull-right add-button confirm-btn" title="Add PO">
 		<span class="fa-stack fa-lg pull-left"><i
 			class="fa fa-check" aria-hidden="true"></i></span>
-                        <span class="text">Confirm and Register</span>              
+                        <span class="text">Add PO</span>              
 	</button>
         </div>
 </div>

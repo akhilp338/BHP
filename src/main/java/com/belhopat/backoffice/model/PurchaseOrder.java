@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,15 +27,22 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "PO_VALUE")
 	private BigDecimal poValue;
+	
+	@Column(name = "BLNCE_AMT")
+	private BigDecimal balanceAmount;
+	
+	@Column(name = "BILL_AMT")
+	private BigDecimal billedAmount;
 
 	@Column(name = "EXPRY_DATE")
 	private Date expiry;
 
 	@Column(name = "STATUS", length = 100)
 	private String status;
-
-	@Column(name = "VNDR_NAME", length = 100)
-	private String vendorName;
+	
+	@ManyToOne
+	@JoinColumn(name = "VNDR_NAME")
+	private Vendor vendorName;
 
 	@Column(name = "PO_DESC", length = 200)
 	private String poDesc;
@@ -59,7 +68,7 @@ public class PurchaseOrder extends BaseEntity {
 	}
 
 	public void setCurrency(String currency) {
-		currency = currency;
+		this.currency = currency;
 	}
 
 	public Double getMonthlyRate() {
@@ -94,11 +103,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.status = status;
 	}
 
-	public String getVendorName() {
+	public Vendor getVendorName() {
 		return vendorName;
 	}
 
-	public void setVendorName(String vendorName) {
+	public void setVendorName(Vendor vendorName) {
 		this.vendorName = vendorName;
 	}
 
@@ -108,6 +117,22 @@ public class PurchaseOrder extends BaseEntity {
 
 	public void setPoDesc(String poDesc) {
 		this.poDesc = poDesc;
+	}
+
+	public BigDecimal getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(BigDecimal balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+	public BigDecimal getBilledAmount() {
+		return billedAmount;
+	}
+
+	public void setBilledAmount(BigDecimal billedAmount) {
+		this.billedAmount = billedAmount;
 	}
 
 }
