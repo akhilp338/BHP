@@ -2,6 +2,7 @@ package com.belhopat.backoffice.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -28,6 +29,7 @@ import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.PurchaseOrderService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.DateUtil;
 import com.belhopat.backoffice.util.TaskConstants;
 
@@ -138,6 +140,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public List<LookupDetail> getDropDownData() {
+		return lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
 	}
 	
 }

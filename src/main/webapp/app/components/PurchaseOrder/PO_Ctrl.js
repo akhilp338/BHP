@@ -3,10 +3,10 @@
 		var vm = this, poAddTable;
 		$rootScope.active = 'po';
 		vm.addPO = function() {
-                    $state.go("coreuser.po.add");
+            $state.go("coreuser.po.add");
 		};
-                vm.back = function() {
-                    $state.go("coreuser.po");
+        vm.back = function() {
+            $state.go("coreuser.po");
 		};
 		//vm.getClient = function(data){
         	//vm.getClientUrl = "api/client/getClient";
