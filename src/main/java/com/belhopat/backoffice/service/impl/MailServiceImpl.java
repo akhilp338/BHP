@@ -137,14 +137,14 @@ public class MailServiceImpl implements MailService {
 		List<String> clientRegNotificationList = new ArrayList<String>(1);
 		// TODO GET CEO mail id here
 		clientRegNotificationList.add("bhptestreceiver@gmail.com");
-		clientRegNotificationList.add(consultant.getBussUnitHead().getOfficialEmail() != null
-				? consultant.getBussUnitHead().getOfficialEmail() : null);
+		clientRegNotificationList.add(consultant.getAccountManager().getOfficialEmail() != null
+				? consultant.getAccountManager().getOfficialEmail() : null);
 
 		InternetAddress[] forDebugEmail = getTempEmailMailingList(clientRegNotificationList);
 		InternetAddress[] forDebugEmailCC = getTempEmailMailingListForCC(null);
 
 		MailMessageObject mailObject = new MailMessageObject(forDebugEmail, forDebugEmailCC, MAIL_FROM,
-				Constants.CLIENT_REG_SUCC_MAIL_SUB, emailHtmlBody, logoResourcePath, mailSender);
+				Constants.CONS_REG_SUCC_MAIL_SUB, emailHtmlBody, logoResourcePath, mailSender);
 		sendMail(mailObject);
 
 	}
@@ -268,7 +268,9 @@ public class MailServiceImpl implements MailService {
 		}
 		if (receiverEmail != null) {
 			for (String email : receiverEmail) {
-				forDebugList.add(new InternetAddress(email));
+				if(email!=null){
+					forDebugList.add(new InternetAddress(email));
+				}
 			}
 		}
 		InternetAddress[] forDebugEmail = new InternetAddress[forDebugList.size()];

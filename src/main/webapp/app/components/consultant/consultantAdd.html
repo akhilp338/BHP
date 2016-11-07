@@ -308,10 +308,10 @@
                                 </div>
                             </div>
                             <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-		                        <label class="control-label" for="clientStatus">Status</label>
+		                        <label class="control-label" for="status">Status</label>
 		                        <div class="controls">
 		                            <select name="clientStatus"
-		                                    ng-model="vm.registration.clientStatus.id"
+		                                    ng-model="vm.registration.status.id"
 		                                    class="form-input width-100"
 		                                    ng-options="clientStatus.id as (clientStatus.description) for clientStatus in vm.lookups.CLSTATS"
 		                                    validation="required:alt=required">

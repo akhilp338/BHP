@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table( name = "CONSULTANT" )
 public class Consultant extends BasicDetailsEntity {
@@ -23,17 +21,27 @@ public class Consultant extends BasicDetailsEntity {
     @JoinColumn( name = "WRK_LCTN_ID" )
     private Country workLocation;
     
-    @JsonIgnore
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "ACC_MNGR_ID" )
     private Employee accountManager;
     
-    @JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "BUS_UNT_ID")
+	private LookupDetail businessUnit;
+    
     @ManyToOne( fetch = FetchType.LAZY )
 	@JoinColumn(name = "BUS_UNT_HED_ID")
 	private Employee bussUnitHead;
     
-    @ManyToOne
+    public LookupDetail getBusinessUnit() {
+		return businessUnit;
+	}
+
+	public void setBusinessUnit(LookupDetail businessUnit) {
+		this.businessUnit = businessUnit;
+	}
+
+	@ManyToOne
     @JoinColumn( name = "STATUS_ID" )
     private LookupDetail status;
 
@@ -88,7 +96,8 @@ public class Consultant extends BasicDetailsEntity {
 	@Override
 	public String toString() {
 		return "Consultant [consultantId=" + consultantId + ", fullName=" + fullName + ", workLocation=" + workLocation
-				+ ", accountManager=" + accountManager + ", bussUnitHead=" + bussUnitHead + ", status=" + status + "]";
+				+ ", accountManager=" + accountManager + ", businessUnit=" + businessUnit + ", bussUnitHead="
+				+ bussUnitHead + ", status=" + status + "]";
 	}
     
 }
