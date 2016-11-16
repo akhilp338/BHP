@@ -5,6 +5,8 @@
         vm.reim = {};
         vm.tableData = {};
         vm.reimDetails = [];
+        vm.basicInfoObj = {};
+        vm.basicInfo = '';
         vs = new validationService({
             controllerAs: vm
         });
@@ -23,28 +25,32 @@
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-            vm.basicInfoObj = {};
+            
             vm.basicInfoObj['Employee No.'] = 'EMP-10-10'; 
             vm.basicInfoObj['Employee Name'] = 'Rajesh Kumar';
             vm.basicInfoObj['Division'] = 'HRMS';
-            vm.basicInfoObj['Employee No'] = moment().format("MM-HH-YYYY");
-            vm.basicInfoObj['Manager'] = 'Rafique';
-            vm.basicInfo = '';
+            vm.basicInfoObj['Current Date'] = moment().format("MM-HH-YYYY");
+            vm.basicInfoObj['Manager'] = 'Rafique';            
             for (var key in vm.basicInfoObj) {
                     vm.basicInfo += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                             '<label class="item-label">' + key +
                             '</label><p class="item-label-desc"> :   ' + vm.basicInfoObj[key] +
                             '</p></div>';
             }
-            //$(".candidate-summary").html(vm.basicInfo);
         Core_Service.getLoggedInUserDetails().then(function (res) {
-            vm.reim.empno = res.employeeId;
-            vm.reim.empname = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
-            vm.reim.division = res.employeeMaster.division.description;
-            vm.reim.currDate = moment().format("MM-HH-YYYY");
-            vm.reim.manager = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
-            vm.basicInfo  = angular.copy(vm.reim);
-            delete vm.basicInfo.lookups;
+            /*service is not working now, When service is active remove the above hardcoded section and uncomment this*/
+            
+            // vm.basicInfoObj['Employee No.'] = res.employeeId;
+            // vm.basicInfoObj['Employee Name'] = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
+            // vm.basicInfoObj['Division'] = res.employeeMaster.division.description;
+            // vm.basicInfoObj['Current Date'] = moment().format("MM-HH-YYYY");
+            // vm.basicInfoObj['Manager'] = res.employeeMaster.firstName + " " + res.employeeMaster.lastName;
+            // for (var key in vm.basicInfoObj) {
+            //         vm.basicInfo += '<div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+            //                 '<label class="item-label">' + key +
+            //                 '</label><p class="item-label-desc"> :   ' + vm.basicInfoObj[key] +
+            //                 '</p></div>';
+            // }
         }, function (err) {
             console.log(err)
         });
