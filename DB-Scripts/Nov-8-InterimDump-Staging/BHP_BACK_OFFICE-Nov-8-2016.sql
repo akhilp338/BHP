@@ -48967,12 +48967,12 @@ INSERT INTO `MODULE_TAB` (`ID`, `TAB_ICON`, `TAB_LABEL`, `TAB_NAME`, `TAB_STATE`
 (3, 'fa-users', 'Employee Management', 'employee', 'coreuser.employee', 'Employee Management'),
 (4, 'fa-flag', 'Client Management', 'client', 'coreuser.client', 'Client Management'),
 (5, 'fa-envelope', 'Offer Letter Processing', 'offerletter', 'coreuser.offerletterhome', 'Offer Letter Processing'),
-(6, 'fa-gift', 'Event Management', 'event', 'coreuser.event', 'Event Management'),
-(7, 'fa-gift', 'Consultant Management', 'consultant', 'coreuser.consultant', 'Consultant Management'),
-(8, 'fa-gift', 'Vendor Management', 'vendor', 'coreuser.vendor', 'Vendor Management'),
+(6, 'fa-calendar', 'Event Management', 'event', 'coreuser.event', 'Event Management'),
+(7, 'fa-user-md', 'Consultant Management', 'consultant', 'coreuser.consultant', 'Consultant Management'),
+(8, 'fa-suitcase', 'Vendor Management', 'vendor', 'coreuser.vendor', 'Vendor Management'),
 (9, 'fa-gift', 'Attendance Details', 'attendance', 'coreuser.attendance', 'Attendance Details'),
-(10, 'fa-suitcase', 'Reimbursement', 'reimbursement', 'coreuser.reimbursement', 'Reimbursement'),
-(11, 'fa-suitcase', 'PO Management', 'po', 'coreuser.reimbursement', 'PO Management');
+(10, 'fa-credit-card', 'Reimbursement', 'reimbursement', 'coreuser.reimbursement', 'Reimbursement'),
+(11, 'fa-paypal', 'PO Management', 'po', 'coreuser.po', 'PO Management');
 
 -- --------------------------------------------------------
 

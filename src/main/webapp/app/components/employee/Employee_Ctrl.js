@@ -43,7 +43,7 @@
                 bDestroy: true,
                 processing: true,
                 responsive: true,
-                sScrollX: '100%',                
+                sScrollX: true,                
                 fnDrawCallback: function (settings, ajax) {
                     Core_Service.calculateSidebarHeight();
                 },
@@ -64,18 +64,21 @@
                 	},{
                         title: "Employee ID",
                         data: 'employeeId',
+                        width: '110px',
                         render : function (data) {
                         	return vm.nullCheck(data);
                         }
                     }, {
                         title: "Full Name",
                         data: 'employeeMaster.id',
+                        width: '140px',
                         render: function (data, type, row) {
                         	return vm.getEmpFullName(row);
                         }
                     },  {
                         title: "First Name",
                         data: 'employeeMaster.firstName',
+                        width: '200px',
                         visible: false,
                         render : function (data) {
                         	return vm.nullCheck(data);
@@ -83,12 +86,14 @@
                     },  {
                         title: "Last Name",
                         data: 'employeeMaster.lastName',
+                        width: '200px',
                         visible: false,
                         render : function (data) {
                         	return vm.nullCheck(data);
                         }
                     },  {
                         title: "Designation",
+                        width: '200px',
                         data: 'employeeMaster.designation.description',
                         render : function (data) {
                         	return vm.nullCheck(data);
@@ -96,24 +101,28 @@
 
                     }, {
                         title: "Location",
+                        width: '100px',
                         data: 'workLocation.description',
                         render : function (data) {
                         	return vm.nullCheck(data);
                         }
                     },{
                         title: "BU",
+                        width: '100px',
                         data: 'businessUnit.description',
                         render : function (data) {
                         	return vm.nullCheck(data);
                         }
                     },{
                         title: "Official Email ID",
+                        width: '180px',
                         data: 'employeeMaster.officialEmail',
                         render : function (data) {
                         	return vm.nullCheck(data);
                         }
                     },{
                         title: "Employment Status",
+                        width: '110px',
                         data: 'employeeMaster.employmentStatus.description',
                         render : function (data) {
                         	return vm.nullCheck(data);
@@ -121,6 +130,7 @@
                     },{
                         data: 'id',
                         bSortable: false,
+                        width: '60px',
                         sClass: "button-column",
                         render: function (data) {
                             return '<div class="action-buttons">' +

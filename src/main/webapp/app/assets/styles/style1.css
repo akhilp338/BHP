@@ -793,7 +793,10 @@ span.sub-section {
 #consultantList tfoot tr th:not(:last-child),
 #clientList tbody tr td:not(:last-child),
 #clientList thead tr th:not(:last-child),
-#clientList tfoot tr th:not(:last-child){
+#clientList tfoot tr th:not(:last-child),
+#employeeList tbody tr td:not(:last-child),
+#employeeList thead tr th:not(:last-child),
+#employeeList tfoot tr th:not(:last-child){
     border-right:1px solid #DDD;
 }
 table.dataTable thead th, table.dataTable tfoot th {
@@ -1118,7 +1121,8 @@ button {
 
 #candidatesList tbody tr,
 #clientList tbody tr,
-#consultantList tbody tr {
+#consultantList tbody tr,
+#employeeList tbody tr{
     cursor: pointer;
     height: 35px !important;
 }
@@ -1270,11 +1274,33 @@ span.catagory {
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 0px 10px !important;
 }
-
+table.dataTable tbody td.button-column {
+    padding: 0 !important;
+}
+table.dataTable tbody td.button-column .action-buttons span{
+    margin-left: 0;
+}
 .date-form {
     margin: 0px !important;
 }
-
+table{
+     margin: 0 auto;
+     width: 100%;
+     clear: both;
+     border-collapse: collapse;
+     table-layout: fixed;
+     word-wrap:break-word;
+}
+.add-btn-cntnr .add-button.reim-btn {
+    margin-top: 22px;
+}
+.reim-form .data-main-container{
+    width:100%!important;
+}
+.candidate-summary.reim-summary{
+  width: 100%;
+  margin:0;  
+}
 .custom-datepick {
     position: absolute;
     right: 16px;

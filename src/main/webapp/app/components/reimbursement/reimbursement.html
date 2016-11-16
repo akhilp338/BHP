@@ -9,71 +9,16 @@
             <span class="text">Back</span>              
         </button>
     </div>
-
+    <div class="candidate-summary reim-summary col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-class="{init:vm.isInit}" ng-bind-html="vm.basicInfo | trusted">
+    </div>
     <div class="row">        
-        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">                        
-            <div class="data-main-container">
-                <header class="data-main-container-header">Basic Information</header>
-
-                <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                    <label class="control-label" for="empno">Employee Number</label>
-                    <div class="controls">
-                        <input type="text" name="empno" id="empno"
-                               ng-model="vm.reim.empno"
-                               class="form-input width-100" placeholder="Employee Number"
-                               readonly/>
-                    </div>
-                </div>
-                <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                    <label class="control-label" for="empname">Employee Name</label>
-                    <div class="controls">
-                        <input type="text" name="empname" id="empname"
-                               ng-model="vm.reim.empname" class="form-input width-100"
-                               placeholder="Employee Name"
-                               readonly />
-                    </div>
-                </div>
-
-                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                    <label class="control-label" for="division">Division/BU</label>
-                    <div class="controls">
-                        <input type="text" name="division" id="division"
-                               ng-model="vm.reim.division"
-                               class="form-input width-100"
-                               placeholder="Division/BU"
-                               readonly/>
-                    </div>
-                </div>
-                <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                    <label class="control-label" for="currDate">Current Date</label>
-                    <div class="controls">
-                        <input type="text" name="currDate" id="currDate"
-                               ng-model="vm.reim.currDate" class="form-input width-100"
-                               placeholder="Current Date"
-                               readonly/>
-                    </div>
-                </div>
-                <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
-                    <label class="control-label" for="webUrl">Reporting manager</label>
-                    <div class="controls">
-                        <input type="text" name="manager" id="manager"
-                               ng-model="vm.reim.manager" class="form-input width-100"
-                               placeholder="Reporting manager"
-                               readonly/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="data-outer col-md-6 col-lg-6 col-sm-12 col-xs-12">
+        
+        <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <form name='tableDataForm' class="reimTableData-form" novalidate>
             <div class="data-main-container">
                 <header class="data-main-container-header">Add details to Table</header>
 
-                <div class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                     <label class="control-label" for="date">Date</label>
                     <div class="controls">
                         <p class="input-group">
@@ -98,7 +43,7 @@
                     </div>
                 </div>
                 <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                     <label class="control-label" for="desc">Description</label>
                     <div class="controls">
                         <input type="text" name="desc" id="desc"
@@ -108,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                     <label class="control-label" for="currency">Currency</label>
                     <div class="controls">
                         <select name="currency" ng-model="vm.tableData.currency" validation="required:alt=required"
@@ -118,7 +63,7 @@
                     </div>
                 </div>
                 <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                     <label class="control-label" for="amt">Amount</label>
                     <div class="controls">
                         <input type="text" name="amt" id="amt"
@@ -129,7 +74,7 @@
                     </div>
                 </div>
                 <div
-                    class="control-group col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-left">
+                    class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                     <label class="control-label" for="remarks">Remarks</label>
                     <div class="controls">
                         <input type="text" name="remarks" id="remarks"
@@ -139,9 +84,9 @@
                                />
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 add-btn-cntnr">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 add-btn-cntnr">
                     <button ng-click="vm.addToTable($event)"
-                            class="col-lg-6 col-md-6 col-sm-12 col-xs-12 logout-button pull-right add-button confirm-btn" title="Confirm and Register">
+                            class="col-lg-6 col-md-6 col-sm-12 col-xs-12 logout-button add-button confirm-btn reim-btn" title="Confirm and Register">
                         <span class="fa-stack fa-lg pull-left"><i
                                 class="fa fa-plus" aria-hidden="true"></i></span>
                         <span class="text">Add data to table</span>              
@@ -151,9 +96,9 @@
                 </form>
         </div>
     </div>   
-
+      <table  id="reim-table" class="display cell-border" cellspacing="0" width="100%"></table>   
     <div>
-        <table  id="reim-table" class="display cell-border" cellspacing="0" width="100%"></table>   
+        
     </div> 
     <div class="bottom-button-liner no-padding-right">        
         <button ng-click="vm.reimburse()" id="reimburse-button"
