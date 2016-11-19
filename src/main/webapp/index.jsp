@@ -15,7 +15,7 @@
         <link href='/BelhopatBackOffice/app/assets/libs/css/angular-carousel.css' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" ng-href="/BelhopatBackOffice/app/assets/libs/css/jquery.dataTables.min.css">
         <link href='/BelhopatBackOffice/app/assets/libs/css/jquery.datepick.css' rel='stylesheet' type='text/css'> 
-        <link href="/BelhopatBackOffice/AddPO_Ctrlapp/assets/libs/css/nvd3/axis.css" rel="stylesheet">
+        <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/axis.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bars.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/boxplot.css" rel="stylesheet">
         <link href="/BelhopatBackOffice/app/assets/libs/css/nvd3/bullet.css" rel="stylesheet">
