@@ -15,10 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
+import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.PurchaseOrderRepository;
 import com.belhopat.backoffice.repository.VendorRepository;
@@ -50,6 +52,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
 	@Autowired
 	VendorRepository vendorRepository;
+
+	@Autowired
+	CurrencyRepository currencyRepository;
 
 	@Override
 	public DataTablesOutput<PurchaseOrder> getAllPurchaseOrders(DataTablesInput input) {
@@ -140,8 +145,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	}
 
 	@Override
-	public List<LookupDetail> getDropDownData() {
-		return lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		List<Currency> currencies = currencyRepository.findAll();
+		List<LookupDetail> poStatus = lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
+		dropDownMap.put(Constants.CURRENCY, currencies);
+		dropDownMap.put(Constants.PO_STATUS, poStatus);
+		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
 
 	@Override

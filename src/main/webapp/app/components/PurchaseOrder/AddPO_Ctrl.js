@@ -8,10 +8,20 @@
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
+        
+        vm.purchaseOrder = {};
+		 Core_Service.getPODropDownData().then(function (res) {
+	            vm.purchaseOrder.lookups = res;
+	        }, function (err) {
+	            console.log(err)
+	        });
+		 
+		vm.purchaseOrder = {};
         vm.urlForLookups = "api/purchaseOrder/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                    vm.poStatus = response.data;
+                	debugger;
+                    vm.purchaseOrder.lookups = response;
                 }, function (error) {
 
                 });

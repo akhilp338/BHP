@@ -52,12 +52,10 @@
                     </div>
                      <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                             <label class="control-label" for="currency">Currency</label>
-                                <div class="controls small-drop">
-                                    <input type="text" name="currency" id="currency"
-                                   ng-model="vm.registration.currency" class="form-input width-100"
-                                   placeholder="Currency"
-                                   validation="required:alt=Required field" />                                  
-                                </div>
+                               	<select name="currency" ng-model="vm.registration.currency.id" validation="required:alt=required"
+                                class="form-input width-100" ng-options="currency as (currency.description) for currency in vm.purchaseOrder.lookups.CURRENCY">                   
+                            		<option value="">--SELECT--</option>
+                       		 	</select>
                             </div>
                     <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="monthlyRate">Monthly Rate</label>
@@ -111,7 +109,7 @@
                             <select name="status"
                                     ng-model="vm.registration.status"
                                     class="form-input width-100"
-                                    ng-options="poStatus.id as (poStatus.description) for poStatus in vm.poStatus"
+                                    ng-options="poStatus.id as (poStatus.description) for poStatus in vm.purchaseOrder.lookups.PO_STATUS"
                                     validation="required:alt=required">
                                 <option value="">--SELECT--</option>
                             </select>
