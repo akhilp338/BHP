@@ -14,18 +14,18 @@
         <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
             <label class="control-label" for="gender">Employee name</label>
             <div class="controls">
-                <select ng-change="vm.filterChange()" name="employee_name" ng-model="vm.attendance.filter.emplyee.id" class="form-input width-100" 
-                	ng-options="employee[0] as (employee[1]) for employee in vm.attendance.lookups.EMPLOYEES" validation="required:alt=required">
-                        <option value="">--SELECT--</option>
+                <select ng-change="vm.filterChange()" name="employee_name" ng-model="vm.attendance.filter.emplyee.id" 
+                	class="form-input width-100" ng-options="employee[0] as (employee[1]) for employee in vm.attendance.lookups.EMPLOYEES">
+                        <option value="">All Employees</option>
                 </select>
             </div>
         </div>
         <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
             <label class="control-label" for="gender">Status</label>
             <div class="controls">
-                <select ng-change="vm.filterChange()" name="attendance_status" ng-model="vm.attendance.filter.status.id" validation="required:alt=required"
+                <select ng-change="vm.filterChange()" name="attendance_status" ng-model="vm.attendance.filter.status.id"
                         class="form-input width-100" ng-options="status as status for status in vm.attendance.lookups.STATUS">                   
-                    <option value="">--SELECT--</option>
+                    <option value="">All Status</option>
                 </select>
             </div>
         </div>

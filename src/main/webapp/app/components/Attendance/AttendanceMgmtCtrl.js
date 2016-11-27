@@ -32,7 +32,6 @@
                 processing: true,
                 responsive: true,
                 sScrollX: '100%', 
-                bFilter:false,
                 bLengthChange:false,
                 fnDrawCallback: function (settings, ajax) {
 
@@ -86,16 +85,23 @@
         });
         vm.filterChange = function () {
             debugger;
-            vm.attendance.filter
             var filters;
-            if (vm.attendance.filter.emplyee != undefined) {
-                filters = attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
+            if ( vm.attendance.filter.emplyee != undefined ) {
+            	if( vm.attendance.filter.emplyee.id == null )
+            		filters = attendanceTable.columns(3).search('');
+            	else
+            		filters = attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
             }
-            if (vm.attendance.filter.status != undefined) {
-                filters = attendanceTable.columns(9).search(vm.attendance.filter.status.id);
+            if ( vm.attendance.filter.status != undefined ) {
+            	if( vm.attendance.filter.status.id == null )
+            		filters = attendanceTable.columns(9).search('');
+            	else
+            		filters = attendanceTable.columns(9).search(vm.attendance.filter.status.id);
             }
             if (filters)
                 filters.draw();
+            else
+            	attendanceTable.search( '' ).columns().search( '' ).draw();
             console.log(vm.attendance.filter)
         };
 

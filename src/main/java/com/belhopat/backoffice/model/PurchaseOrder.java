@@ -27,10 +27,10 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "PO_VALUE")
 	private BigDecimal poValue;
-	
+
 	@Column(name = "BLNCE_AMT")
 	private BigDecimal balanceAmount;
-	
+
 	@Column(name = "BILL_AMT")
 	private BigDecimal billedAmount;
 
@@ -39,10 +39,10 @@ public class PurchaseOrder extends BaseEntity {
 
 	@Column(name = "STATUS", length = 100)
 	private String status;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "VNDR_NAME")
-	private Vendor vendorName;
+	@JoinColumn(name = "VNDR_ID")
+	private Vendor vendor;
 
 	@Column(name = "PO_DESC", length = 200)
 	private String poDesc;
@@ -103,12 +103,12 @@ public class PurchaseOrder extends BaseEntity {
 		this.status = status;
 	}
 
-	public Vendor getVendorName() {
-		return vendorName;
+	public Vendor getVendor() {
+		return vendor;
 	}
 
-	public void setVendorName(Vendor vendorName) {
-		this.vendorName = vendorName;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 	public String getPoDesc() {
