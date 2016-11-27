@@ -95,7 +95,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO);
 		if (purchaseOrder != null) {
-			responseMap.put("Message", purchaseOrder.getVendor().getVendorName());
+			responseMap.put("Message", purchaseOrder.getVendor()==null?"":purchaseOrder.getVendor().getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);

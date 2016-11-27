@@ -39,7 +39,7 @@ public class PurchaseOrder extends BaseEntity {
 	private Date expiry;
 
 	@ManyToOne
-	@JoinColumn(name = "DVSN_ID")
+	@JoinColumn(name = "PO_STS_ID")
 	private LookupDetail status;
 
 	@ManyToOne

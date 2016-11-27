@@ -53,7 +53,7 @@
                      <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                             <label class="control-label" for="currency">Currency</label>
                                	<select name="currency" ng-model="vm.registration.currency.id" validation="required:alt=required"
-                                class="form-input width-100" ng-options="currency as (currency.description) for currency in vm.purchaseOrder.lookups.CURRENCY">                   
+                                class="form-input width-100" ng-options="currency.id as (currency.description) for currency in vm.purchaseOrder.lookups.CURRENCY">                   
                             		<option value="">--SELECT--</option>
                        		 	</select>
                             </div>
