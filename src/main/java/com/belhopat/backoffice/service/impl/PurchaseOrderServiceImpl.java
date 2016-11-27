@@ -110,7 +110,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
 	private PurchaseOrder addNewPurchaseOrder(User loggedInUser, PurchaseOrder purchaseOrderObj) {
 		purchaseOrderObj.setBaseAttributes(loggedInUser);
-		purchaseOrderObj.setStatus("PENDING_APPROVAL");
+		purchaseOrderObj.setStatus(purchaseOrderObj.getStatus());
 		purchaseOrderObj.setBalanceAmount(purchaseOrderObj.getPoValue());
 		purchaseOrderObj.setBilledAmount(BigDecimal.ZERO);
 		PurchaseOrder persisted = purchaseOrderRepository.save(purchaseOrderObj);

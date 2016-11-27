@@ -38,8 +38,9 @@ public class PurchaseOrder extends BaseEntity {
 	@Column(name = "EXPRY_DATE")
 	private Date expiry;
 
-	@Column(name = "STATUS", length = 100)
-	private String status;
+	@ManyToOne
+	@JoinColumn(name = "DVSN_ID")
+	private LookupDetail status;
 
 	@ManyToOne
 	@JoinColumn(name = "VNDR_ID")
@@ -112,11 +113,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.expiry = expiry;
 	}
 
-	public String getStatus() {
+	public LookupDetail getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(LookupDetail status) {
 		this.status = status;
 	}
 

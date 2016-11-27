@@ -29,9 +29,12 @@
         $rootScope.active = 'po';
         
         vm.addPO = function () {
+        	debugger;
             vm.registerUrl = "api/purchaseOrder/saveOrUpdatePurchaseOrder";
 //            if(vs.checkFormValidity($scope.regForm)){
                 Core_Service.sweetAlertWithConfirm("PO Details filled!", "Are you sure to add this PO?", "warning", function(){
+                	vm.registration.expiry = new Date();
+                	vm.registration.poDate = new Date();
             Core_Service.registerImpl(vm.registerUrl, vm.registration)
                     .then(function (response) {
                     	Core_Service.sweetAlert("Done!",response.data["message "],"success","coreuser.po");
