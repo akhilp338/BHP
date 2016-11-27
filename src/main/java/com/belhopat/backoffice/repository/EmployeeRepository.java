@@ -40,4 +40,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, DataT
 	@Query("select e.employeeId,e.id " + "from Employee e")
 	List<ResponseObject> findAllIdsAndCodes();
 
+	@Query("select e.id,e.employeeId as data from Employee e")
+	List<Object[]> findAllEmployeeIdsAndCodes();
+
 }

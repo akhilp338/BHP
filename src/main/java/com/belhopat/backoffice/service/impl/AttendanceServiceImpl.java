@@ -18,6 +18,7 @@ import com.belhopat.backoffice.model.Attendance;
 import com.belhopat.backoffice.repository.AttendanceRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.service.AttendanceService;
+import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.util.Constants;
 
 /**
@@ -32,9 +33,13 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
+	@Autowired
+	BaseService baseService;
+
 	@Override
 	public UploadResponse saveAttendances(List<Attendance> attendances) {
-		UploadResponse response = new UploadResponse();
+		UploadResponse response = baseService.getSuccessResponse();
+		response.setStatusMessage("Attendence File Uploaded Succesfully.");
 		if (attendances != null && !attendances.isEmpty()) {
 			attendanceRepository.save(attendances);
 		}

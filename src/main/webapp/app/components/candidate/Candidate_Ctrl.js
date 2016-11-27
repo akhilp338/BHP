@@ -162,8 +162,11 @@ var candidatesListTable;
                     }, {
                         title: "Name",
                         data: 'firstName',
-                        render: function (data) {
-                        	return data == null? "":data;
+                        render: function (data, display, row) {
+                            return (row.firstName==null? " ":row.firstName) 
+                            	+ " " +(row.middleName==null? " ":row.middleName)
+                            	+ " " +(row.lastName==null? " ":row.lastName);
+                            ;
                         }
                     }, {
                         title: "Contact No",

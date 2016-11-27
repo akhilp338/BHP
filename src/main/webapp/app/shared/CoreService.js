@@ -512,7 +512,7 @@
         
         service.saveReimFile = function (file) {
             var deferred = $q.defer();
-            Core_HttpRequest.uploadPost("api/attendance/uploadAttendanceExcel",file)
+            Core_HttpRequest.formPost("api/attendance/uploadAttendanceExcel",file)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

@@ -14,14 +14,16 @@
         };
 
         angular.element(document).ready(function () {
+        	
                 $scope.$watchCollection('vm.reimFile', function() {
                 if(vm.reimFile){
                    var fd = new FormData();
                        fd.append('file', vm.reimFile); 
-                Core_Service.saveReimFile(fd).then(function (res) {
-                    console.log(res);
-                }, function (err) {
-                    console.log(err)
+                Core_Service.saveReimFile(fd).then(function (response) {
+                	debugger;
+                	Core_Service.sweetAlert(response.actionStatus?"Done!":"Oops!",response.statusMessage,response.status,"coreuser.attendance");
+                }, function (error) {
+                	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.","error","coreuser.attendance");
                 });
                 }
             });
@@ -32,7 +34,7 @@
                 processing: true,
                 responsive: true,
                 sScrollX: '100%', 
-                bLengthChange:false,
+//                bLengthChange:false,
                 fnDrawCallback: function (settings, ajax) {
 
                 },
