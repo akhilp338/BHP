@@ -13,12 +13,10 @@
 		    login-page="/login" 
 		   always-use-default-target="true" authentication-failure-url="/loginerror"
 			default-target-url="/dashboard" />
-		<logout logout-success-url="/" delete-cookies="JSESSIONID" invalidate-session="true"  />
+		<logout logout-url="/logout"  invalidate-session="true" delete-cookies="JSESSIONID" success-handler-ref="customLogoutSuccessHandler" />
 		<csrf disabled="true"/>
-		<session-management >
-		<concurrency-control max-sessions="1000" error-if-maximum-exceeded="true"/>
-		</session-management>
 	</http>
+	<beans:bean id="customLogoutSuccessHandler" class="com.belhopat.backoffice.session.CustomLogoutSuccessHandler" />
 
 	<authentication-manager>
 		 <authentication-provider user-service-ref="loginService" /> 

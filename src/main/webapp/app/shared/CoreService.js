@@ -1,5 +1,5 @@
 (function (angular) {
-    var Core_Service = function ($rootScope, Core_HttpRequest, Base64, $state, $cookieStore, $sessionStorage, $http, $q, $timeout) {
+    var Core_Service = function ($rootScope, Core_HttpRequest, Base64, $state, $sessionStorage, $http, $q, $timeout) {
         var service = this;
         
         
@@ -122,7 +122,7 @@
             };
             $sessionStorage.auth = username;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+//            $cookieStore.put('globals', $rootScope.globals);
         };
 
         service.ClearCredentials = function () {
@@ -137,7 +137,7 @@
                         response.data = false;
                         deferred.reject(response.data);
                     });
-            $cookieStore.remove('globals');
+//            $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
 
@@ -550,7 +550,7 @@
             return deferred.promise;
         };
     };
-    Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];
+    Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
             .service('Core_Service', Core_Service);
 })(angular);
