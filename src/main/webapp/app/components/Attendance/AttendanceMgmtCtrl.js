@@ -14,14 +14,16 @@
         };
 
         angular.element(document).ready(function () {
+        	
                 $scope.$watchCollection('vm.reimFile', function() {
                 if(vm.reimFile){
                    var fd = new FormData();
                        fd.append('file', vm.reimFile); 
-                Core_Service.saveReimFile(fd).then(function (res) {
-                    console.log(res);
-                }, function (err) {
-                    console.log(err)
+                Core_Service.saveReimFile(fd).then(function (response) {
+                	debugger;
+                	Core_Service.sweetAlert(response.actionStatus?"Done!":"Oops!",response.statusMessage,response.status,"coreuser.attendance");
+                }, function (error) {
+                	Core_Service.sweetAlert("Oops!","An internal error occcured.Please try after some time.","error","coreuser.attendance");
                 });
                 }
             });
@@ -32,8 +34,7 @@
                 processing: true,
                 responsive: true,
                 sScrollX: '100%', 
-                bFilter:false,
-                bLengthChange:false,
+//                bLengthChange:false,
                 fnDrawCallback: function (settings, ajax) {
 
                 },
@@ -86,16 +87,23 @@
         });
         vm.filterChange = function () {
             debugger;
-            vm.attendance.filter
             var filters;
-            if (vm.attendance.filter.emplyee != undefined) {
-                filters = attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
+            if ( vm.attendance.filter.emplyee != undefined ) {
+            	if( vm.attendance.filter.emplyee.id == null )
+            		filters = attendanceTable.columns(3).search('');
+            	else
+            		filters = attendanceTable.columns(3).search(vm.attendance.filter.emplyee.id);
             }
-            if (vm.attendance.filter.status != undefined) {
-                filters = attendanceTable.columns(9).search(vm.attendance.filter.status.id);
+            if ( vm.attendance.filter.status != undefined ) {
+            	if( vm.attendance.filter.status.id == null )
+            		filters = attendanceTable.columns(9).search('');
+            	else
+            		filters = attendanceTable.columns(9).search(vm.attendance.filter.status.id);
             }
             if (filters)
                 filters.draw();
+            else
+            	attendanceTable.search( '' ).columns().search( '' ).draw();
             console.log(vm.attendance.filter)
         };
 

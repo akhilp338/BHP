@@ -15,10 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.Currency;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
+import com.belhopat.backoffice.repository.CurrencyRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.PurchaseOrderRepository;
 import com.belhopat.backoffice.repository.VendorRepository;
@@ -35,39 +37,42 @@ import com.belhopat.backoffice.util.TaskConstants;
  */
 @Component
 public class PurchaseOrderServiceImpl implements PurchaseOrderService {
-	
+
 	@Autowired
 	PurchaseOrderRepository purchaseOrderRepository;
-	
+
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
-	
+
 	@Autowired
 	BaseService baseService;
 
 	@Autowired
 	MailService mailService;
-	
+
 	@Autowired
 	VendorRepository vendorRepository;
-	
+
+	@Autowired
+	CurrencyRepository currencyRepository;
 
 	@Override
 	public DataTablesOutput<PurchaseOrder> getAllPurchaseOrders(DataTablesInput input) {
-//		Specification<PurchaseOrder> specification = new Specification<PurchaseOrder>() {
-//			@Override
-//			public Predicate toPredicate(Root<PurchaseOrder> root, CriteriaQuery<?> criteriaQuery,
-//					CriteriaBuilder criteriaBuilder) {
-//				Predicate inCurFinYear = criteriaBuilder.greaterThan(
-//			            root.< Date > get( "poDate" ), new Date(DateUtil.getFiscalYear()) );
-//				return criteriaBuilder.and(inCurFinYear);
-//			}
-//		};
-		DataTablesOutput<PurchaseOrder> dataTablesOutput = purchaseOrderRepository.findAll(input/*, specification*/);
+		// Specification<PurchaseOrder> specification = new
+		// Specification<PurchaseOrder>() {
+		// @Override
+		// public Predicate toPredicate(Root<PurchaseOrder> root,
+		// CriteriaQuery<?> criteriaQuery,
+		// CriteriaBuilder criteriaBuilder) {
+		// Predicate inCurFinYear = criteriaBuilder.greaterThan(
+		// root.< Date > get( "poDate" ), new Date(DateUtil.getFiscalYear()) );
+		// return criteriaBuilder.and(inCurFinYear);
+		// }
+		// };
+		DataTablesOutput<PurchaseOrder> dataTablesOutput = purchaseOrderRepository
+				.findAll(input/* , specification */);
 		return dataTablesOutput;
 	}
-
-
 
 	@Override
 	public ResponseEntity<PurchaseOrder> getPurchaseOrderById(Long id) {
@@ -77,8 +82,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		return new ResponseEntity<PurchaseOrder>(HttpStatus.NO_CONTENT);
 	}
-
-
 
 	@Override
 	public ResponseEntity<Map<String, String>> saveOrUpdatePurchaseOrder(PurchaseOrder purchaseOrderObj) {
@@ -92,7 +95,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		}
 		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO);
 		if (purchaseOrder != null) {
-			responseMap.put("Message", purchaseOrder.getVendorName().getVendorName());
+			responseMap.put("Message", purchaseOrder.getVendor()==null?"":purchaseOrder.getVendor().getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);
@@ -105,11 +108,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		return persisted;
 	}
 
-
-
 	private PurchaseOrder addNewPurchaseOrder(User loggedInUser, PurchaseOrder purchaseOrderObj) {
 		purchaseOrderObj.setBaseAttributes(loggedInUser);
-		purchaseOrderObj.setStatus("PENDING_APPROVAL");
+		purchaseOrderObj.setStatus(purchaseOrderObj.getStatus());
 		purchaseOrderObj.setBalanceAmount(purchaseOrderObj.getPoValue());
 		purchaseOrderObj.setBilledAmount(BigDecimal.ZERO);
 		PurchaseOrder persisted = purchaseOrderRepository.save(purchaseOrderObj);
@@ -128,7 +129,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 			} else {
 				statusLookup = lookupDetailRepository.findByLookupKey(TaskConstants.RJCTD_BY_CFO).get(0);
 			}
-//			purchaseOrder.setStatus(statusLookup);
+			// purchaseOrder.setStatus(statusLookup);
 			purchaseOrder.setUpdateAttributes(loggedInUser);
 			PurchaseOrder persisted = purchaseOrderRepository.saveAndFlush(purchaseOrder);
 			try {
@@ -143,18 +144,19 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		return null;
 	}
 
-
-
 	@Override
-	public List<LookupDetail> getDropDownData() {
-		return lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
+		Map<String, List<?>> dropDownMap = new HashMap<>();
+		List<Currency> currencies = currencyRepository.findAll();
+		List<LookupDetail> poStatus = lookupDetailRepository.findByLookupKey(Constants.PO_STATUS);
+		dropDownMap.put(Constants.CURRENCY, currencies);
+		dropDownMap.put(Constants.PO_STATUS, poStatus);
+		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
-
-
 
 	@Override
 	public List<Vendor> getVendors(String vendorName) {
 		return vendorRepository.findByVendorName(vendorName);
 	}
-	
+
 }
