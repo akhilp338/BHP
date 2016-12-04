@@ -134,8 +134,8 @@ var consultantListTable;
                 consultantListTable = angular.element('#consultantList').DataTable({
                 ajax: urlConfig.http + window.location.host + urlConfig.api_root_path + "consultant/getConsultants",
                 serverSide: true,
-                bDestroy: true,
-                processing: true,
+//                bDestroy: true,
+//                processing: true,
                 responsive: true,
                 sScrollX: '100%',                
                 fnDrawCallback: function (settings, ajax) {
@@ -152,13 +152,14 @@ var consultantListTable;
                 aoColumns: [ {
                     	data: 'id',
                     	visible : false
-                	},{
+                	}
+                ,{
                         title: "Consultant ID",
                         data: 'consultantId',
                         render: function (data) {
                         	return data == null? "":data;
                         }
-                    }, {
+                    },{
                         title: "Name",
                         data: 'fullName',
                         render: function (data) {
@@ -166,35 +167,23 @@ var consultantListTable;
                         }
                     }, {
                         title: "Contact No",
-                        data: 'officialContactNo.number',
+                        data: 'personalContactNo.number',
                         render: function (data) {
                         	return data == null? "":data;
                         }
                     }, {
-                        title: "Country To Visit",
-                        data: 'countryToVisit.description',
+                        title: "Business Unit",
+                        data: 'businessUnit.description',
                         render: function (data) {
                         	return data == null? "":data;
                         }
                     }, {
-                        title: "Division",
-                        data: 'division.description',
+                        title: "Date Of Joining",
+                        data: 'doj',
                         render: function (data) {
-                        	return data == null? "":data;
+                        	return data == null? "":Core_Service.getFormattedDate(data);
                         }
                     }, {
-                        title: "Role",
-                        data: 'designation.code',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    }, {
-                        title: "Employment Status",
-                        data: 'employmentStatus.description',
-                        render: function (data) {
-                        	return data == null? "":data;
-                        }
-                    },{
                         data: 'id',
                         bSortable: false,
                         sClass: "button-column",
@@ -206,7 +195,8 @@ var consultantListTable;
                                     '<span value="' + data + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'+
                                     '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
                         }
-                    }]
+                    }
+        ]
             });
             $('#consultantList').on('click', '.action-view', function () {
                 vm.getConsultant(this.getAttribute('value'));

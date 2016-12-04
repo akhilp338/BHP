@@ -137,11 +137,6 @@
 	<td>label=Rafique</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=option[value=&quot;string:Test&quot;]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>name=designation</td>
 	<td>label=Belhopat Consultant</td>
@@ -236,7 +231,6 @@
 	<td>css=select[name=&quot;division&quot;] &gt; option[value=&quot;number:12&quot;]</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

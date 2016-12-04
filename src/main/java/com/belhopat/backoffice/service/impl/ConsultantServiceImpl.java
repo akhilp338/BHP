@@ -57,8 +57,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 			public Predicate toPredicate(Root<Consultant> root, CriteriaQuery<?> criteriaQuery,
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isNotDeleted = criteriaBuilder.equal( root.get("deleted"), false );
-				Predicate isJoinedStatus = criteriaBuilder.equal( root.get("status"), Constants.JOINED );
-				return criteriaBuilder.and( isNotDeleted, isJoinedStatus );
+				return criteriaBuilder.and( isNotDeleted );
 			}
 		};
 		DataTablesOutput<Consultant> dataTablesOutput = consultantRepository.findAll(input, specification);
