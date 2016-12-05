@@ -19,30 +19,32 @@ public class PurchaseOrder extends BaseEntity {
 	@Column(name = "PO_DATE")
 	private Date poDate;
 
-	@Column(name = "CURNCY")
-	private String currency;
+	@ManyToOne
+	@JoinColumn(name = "CURR_ID")
+	private Currency currency;
 
 	@Column(name = "MNTHLY_RTE")
 	private Double monthlyRate;
 
 	@Column(name = "PO_VALUE")
 	private BigDecimal poValue;
-	
+
 	@Column(name = "BLNCE_AMT")
 	private BigDecimal balanceAmount;
-	
+
 	@Column(name = "BILL_AMT")
 	private BigDecimal billedAmount;
 
 	@Column(name = "EXPRY_DATE")
 	private Date expiry;
 
-	@Column(name = "STATUS", length = 100)
-	private String status;
-	
 	@ManyToOne
-	@JoinColumn(name = "VNDR_NAME")
-	private Vendor vendorName;
+	@JoinColumn(name = "PO_STS_ID")
+	private LookupDetail status;
+
+	@ManyToOne
+	@JoinColumn(name = "VNDR_ID")
+	private Vendor vendor;
 
 	@Column(name = "PO_DESC", length = 200)
 	private String poDesc;
@@ -63,11 +65,11 @@ public class PurchaseOrder extends BaseEntity {
 		this.poDate = poDate;
 	}
 
-	public String getCurrency() {
+	public Currency getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(String currency) {
+	public void setCurrency(Currency currency) {
 		this.currency = currency;
 	}
 
@@ -87,38 +89,6 @@ public class PurchaseOrder extends BaseEntity {
 		this.poValue = poValue;
 	}
 
-	public Date getExpiry() {
-		return expiry;
-	}
-
-	public void setExpiry(Date expiry) {
-		this.expiry = expiry;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Vendor getVendorName() {
-		return vendorName;
-	}
-
-	public void setVendorName(Vendor vendorName) {
-		this.vendorName = vendorName;
-	}
-
-	public String getPoDesc() {
-		return poDesc;
-	}
-
-	public void setPoDesc(String poDesc) {
-		this.poDesc = poDesc;
-	}
-
 	public BigDecimal getBalanceAmount() {
 		return balanceAmount;
 	}
@@ -133,6 +103,46 @@ public class PurchaseOrder extends BaseEntity {
 
 	public void setBilledAmount(BigDecimal billedAmount) {
 		this.billedAmount = billedAmount;
+	}
+
+	public Date getExpiry() {
+		return expiry;
+	}
+
+	public void setExpiry(Date expiry) {
+		this.expiry = expiry;
+	}
+
+	public LookupDetail getStatus() {
+		return status;
+	}
+
+	public void setStatus(LookupDetail status) {
+		this.status = status;
+	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
+	public String getPoDesc() {
+		return poDesc;
+	}
+
+	public void setPoDesc(String poDesc) {
+		this.poDesc = poDesc;
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseOrder [purchaseOrderNo=" + purchaseOrderNo + ", poDate=" + poDate + ", currency=" + currency
+				+ ", monthlyRate=" + monthlyRate + ", poValue=" + poValue + ", balanceAmount=" + balanceAmount
+				+ ", billedAmount=" + billedAmount + ", expiry=" + expiry + ", status=" + status + ", vendor=" + vendor
+				+ ", poDesc=" + poDesc + "]";
 	}
 
 }

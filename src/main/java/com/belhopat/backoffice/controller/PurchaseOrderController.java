@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
-import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.State;
 import com.belhopat.backoffice.model.Vendor;
@@ -38,7 +37,7 @@ public class PurchaseOrderController {
 
 	@Autowired
 	BaseService baseService;
-	
+
 	@Autowired
 	PurchaseOrderService purchaseOrderService;
 
@@ -51,10 +50,10 @@ public class PurchaseOrderController {
 	public ResponseEntity<List<State>> getStatesByCountry(@RequestBody RequestObject requestObject) {
 		return baseService.getStatesByCountry(requestObject.getId());
 	}
-	
+
 	/**
 	 * @param datatablesinput
-	 * @return list of Purchase orders for this year 
+	 * @return list of Purchase orders for this year
 	 * @throws ParseException
 	 * @throws IOException
 	 * @throws DocumentException
@@ -67,11 +66,11 @@ public class PurchaseOrderController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		return purchaseOrderService.getAllPurchaseOrders(input);
 	}
-	
+
 	/**
 	 * @param requestObject
-	 * @return PurchaseOrder For edit PurchaseOrder , gets the id and fetches the
-	 *         PurchaseOrder from database
+	 * @return PurchaseOrder For edit PurchaseOrder , gets the id and fetches
+	 *         the PurchaseOrder from database
 	 * @throws ParseException
 	 * @throws IOException
 	 * @throws DocumentException
@@ -82,7 +81,6 @@ public class PurchaseOrderController {
 	public ResponseEntity<PurchaseOrder> getPurchaseOrder(@RequestBody RequestObject requestObject) {
 		return purchaseOrderService.getPurchaseOrderById(requestObject.getId());
 	}
-	
 
 	/**
 	 * @param PurchaseOrder
@@ -93,7 +91,7 @@ public class PurchaseOrderController {
 	public ResponseEntity<Map<String, String>> saveOrUpdatePurchaseOrder(@RequestBody PurchaseOrder purchaseOrder) {
 		return purchaseOrderService.saveOrUpdatePurchaseOrder(purchaseOrder);
 	}
-	
+
 	/**
 	 * @param PurchaseOrder
 	 * @return responseString To save the PurchaseOrder after edit or add
@@ -103,17 +101,17 @@ public class PurchaseOrderController {
 	public ResponseEntity<Map<String, String>> approveOrRejectPurchaseOrder(@RequestBody ResponseObject requestObject) {
 		return purchaseOrderService.approveOrRejectPurchaseOrder(requestObject);
 	}
-	
+
 	/**
 	 * @param requestObject
 	 * @return response entity Lookup method fetches states for a country
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
-	public List<LookupDetail> getDropDownData() {
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
 		return purchaseOrderService.getDropDownData();
 	}
-	
+
 	/**
 	 * @param requestObject
 	 * @return response entity Lookup method fetches states for a country

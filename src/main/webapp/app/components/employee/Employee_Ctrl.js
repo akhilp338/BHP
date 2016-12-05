@@ -21,9 +21,9 @@
         
         vm.getEmpFullName = function( rowData ){
             if(rowData.employeeMaster){
-        	var firstName = rowData.employeeMaster.firstName != null ? rowData.employeeMaster.firstName : '',
-        		lastName = rowData.employeeMaster.lastName != null ? rowData.employeeMaster.lastName : ' - ',
-        		name = rowData != null ? firstName + " " + lastName : '-';
+                    return (rowData.employeeMaster.firstName==null? " ":rowData.employeeMaster.firstName) 
+                    	+ " " +(rowData.employeeMaster.middleName==null? " ":rowData.employeeMaster.middleName)
+                    	+ " " +(rowData.employeeMaster.lastName==null? " ":rowData.employeeMaster.lastName);
             }
             else{
                 name = "";
@@ -71,7 +71,7 @@
                     }, {
                         title: "Full Name",
                         data: 'employeeMaster.id',
-                        width: '140px',
+                        width: '200px',
                         render: function (data, type, row) {
                         	return vm.getEmpFullName(row);
                         }

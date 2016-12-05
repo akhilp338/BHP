@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.belhopat.backoffice.dto.ResponseObject;
-import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.PurchaseOrder;
 import com.belhopat.backoffice.model.Vendor;
 
@@ -24,9 +23,8 @@ public interface PurchaseOrderService {
 
 	public ResponseEntity<Map<String, String>> approveOrRejectPurchaseOrder(ResponseObject requestObject);
 
-	public List<LookupDetail> getDropDownData() ;
+	public ResponseEntity<Map<String, List<?>>> getDropDownData();
 
-	public List<Vendor> getVendors(String vendorName) ;
-	
-	
+	public List<Vendor> getVendors(String vendorName);
+
 }

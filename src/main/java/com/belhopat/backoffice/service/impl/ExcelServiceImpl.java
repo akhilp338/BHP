@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.excel.AttendanceExcelParser;
 import com.belhopat.backoffice.model.Attendance;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.repository.AttendanceRepository;
+import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.service.AttendanceService;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.ExcelService;
@@ -30,6 +32,9 @@ public class ExcelServiceImpl implements ExcelService {
 
 	@Autowired
 	AttendanceRepository attendanceRepository;
+
+	@Autowired
+	EmployeeRepository employeeRepository;
 
 	@Override
 	public UploadResponse uploadExcel(String type, MultipartFile file) throws IOException {
@@ -106,14 +111,10 @@ public class ExcelServiceImpl implements ExcelService {
 
 	private Map<String, Long> getMap() {
 		Map<String, Long> employeeMap = new HashMap<>();
-		employeeMap.put("C1404001", 1L);
-		employeeMap.put("C1407001", 2L);
-		employeeMap.put("C1411003", 3L);
-		employeeMap.put("C1411004", 1L);
-		employeeMap.put("C1501001", 5L);
-		employeeMap.put("C1503001", 6L);
-		employeeMap.put("C1504001", 1L);
-		employeeMap.put("C1505005", 2L);
+		List<Employee> employees = employeeRepository.findAll();
+		for (Employee employee : employees) {
+			employeeMap.put(employee.getEmployeeId(), employee.getId());
+		}
 		return employeeMap;
 	}
 }
