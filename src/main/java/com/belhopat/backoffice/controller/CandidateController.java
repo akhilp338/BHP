@@ -132,7 +132,7 @@ public class CandidateController {
 	 * @return Map of dropdown data gets a key value pair list of drop down data
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.GET)
 
 	public ResponseEntity<Map<String, List<?>>> getDropDownData() {
 		return baseService.getCandidateDropDownData();

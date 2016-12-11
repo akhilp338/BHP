@@ -1,5 +1,5 @@
 (function (angular) {
-    var Core_Service = function ($rootScope, Core_HttpRequest, Base64, $state, $cookieStore, $sessionStorage, $http, $q, $timeout) {
+    var Core_Service = function ($rootScope, Core_HttpRequest, Base64, $state, $sessionStorage, $http, $q, $timeout) {
         var service = this;
         
         
@@ -20,6 +20,24 @@
                     });
             return deferred.promise;
         };
+        
+        service.forceExit = function () {
+            var deferred = $q.defer();
+            var user = {};
+            Core_HttpRequest.get("/forceLogout")
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
+        
+        
         service.getCurrentUser = function () {
             var deferred = $q.defer();
             var user = {};
@@ -122,7 +140,7 @@
             };
             $sessionStorage.auth = username;
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+//            $cookieStore.put('globals', $rootScope.globals);
         };
 
         service.ClearCredentials = function () {
@@ -137,7 +155,7 @@
                         response.data = false;
                         deferred.reject(response.data);
                     });
-            $cookieStore.remove('globals');
+//            $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
 
@@ -566,7 +584,7 @@
             return deferred.promise;
         };
     };
-    Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$cookieStore', '$sessionStorage', '$http', '$q', '$timeout'];
+    Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
             .service('Core_Service', Core_Service);
 })(angular);

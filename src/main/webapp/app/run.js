@@ -1,7 +1,7 @@
 (function () {
     'use strict';
-    var Core_Run = function ($rootScope, $state, $cookieStore, $timeout, Core_Service, $http,Idle) {
-        $rootScope.globals = $cookieStore.get('globals') || {};
+    var Core_Run = function ($rootScope, $state, $timeout, Core_Service, $http,Idle,$window) {
+//        $rootScope.globals = $cookieStore.get('globals') || {};
         Idle.watch();
         var userName = angular.element("#successUser").text(),
             errorText = angular.element("#erorUser").text()
@@ -12,9 +12,10 @@
         else{
         	$state.go("login");  
         }
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
-        }
+       
+//        if ($rootScope.globals.currentUser) {
+//            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+//        }
         $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
 
         });

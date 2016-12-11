@@ -98,7 +98,7 @@ public class EmployeeController {
 	 * gets dropdown data
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.GET)
 	public Map<String, List<?>> getEmployeeDropdowns() {
 		return baseService.getEmployeeDropdowns();
 	}
