@@ -25,7 +25,6 @@ import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.ConsultantService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.session.SessionManager;
-import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
 /**
@@ -145,7 +144,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 		if(consultantObj.getPermanentAddress() != null) {
 			newConsultant.setPermanentAddress(consultantObj.getPermanentAddress());
 		}
-		if(consultantObj.getSkillSet() != null && !consultantObj.getSkillSet().isEmpty()) {
+		if(consultantObj.getSkillSet() != null ) {
 			newConsultant.setSkillSet(consultantObj.getSkillSet());
 		}
 		newConsultant.setUpdateAttributes( loggedInUser );
@@ -177,6 +176,7 @@ public class ConsultantServiceImpl implements ConsultantService {
 		newConsultant.setBussUnitHead( consultantObj.getBussUnitHead() );
 		newConsultant.setStatus( consultantObj.getStatus() );
 		newConsultant.setWorkLocation( consultantObj.getWorkLocation() );
+		newConsultant.setCountryOfOrigin( consultantObj.getCountryOfOrigin() );
 		return newConsultant;
 	}
 	

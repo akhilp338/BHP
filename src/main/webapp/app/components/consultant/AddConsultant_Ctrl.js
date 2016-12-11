@@ -204,12 +204,11 @@
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/consultant/saveOrUpdateConsultant";
                 Core_Service.sweetAlertWithConfirm("Consultant details filled!", "Are you sure to register this Consultant?", "warning", function(){
-                Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
+                Core_Service.registerImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {                            
                             Core_Service.sweetAlertWithConfirm("Consultant Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
                                  if (isConfirm) {
-                                     $rootScope.isEmpDocs = false;
-                                     $state.go("coreuser.upload");
+                                     $state.go("coreuser.consultant.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.consultant");

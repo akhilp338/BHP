@@ -1,7 +1,7 @@
 package com.belhopat.backoffice.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,7 +35,7 @@ public class BasicDetailsEntity extends BaseEntity {
 	private Phone personalContactNo;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Skill> skillSet;
+	private Set<Skill> skillSet;
 	
 	@Column(name = "PRIR_EXP_YR")
 	private Integer priorExperienceYear;
@@ -84,7 +84,10 @@ public class BasicDetailsEntity extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ONST_ADRS_ID")
 	private Address onsiteAddress;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "CNTY_OF_ORG_ID")
+	private Country countryOfOrigin;
 	
 	public Date getDob() {
 		return dob;
@@ -118,11 +121,11 @@ public class BasicDetailsEntity extends BaseEntity {
 		this.personalContactNo = personalContactNo;
 	}
 
-	public List<Skill> getSkillSet() {
+	public Set<Skill> getSkillSet() {
 		return skillSet;
 	}
 
-	public void setSkillSet(List<Skill> skillSet) {
+	public void setSkillSet(Set<Skill> skillSet) {
 		this.skillSet = skillSet;
 	}
 	
@@ -238,6 +241,14 @@ public class BasicDetailsEntity extends BaseEntity {
 		this.onsiteAddress = onsiteAddress;
 	}
 
+	public Country getCountryOfOrigin() {
+		return countryOfOrigin;
+	}
+
+	public void setCountryOfOrigin(Country countryOfOrigin) {
+		this.countryOfOrigin = countryOfOrigin;
+	}
+
 	@Override
 	public String toString() {
 		return "BasicDetailsEntity [dob=" + dob + ", doj=" + doj + ", gender=" + gender + ", personalEmail="
@@ -246,7 +257,8 @@ public class BasicDetailsEntity extends BaseEntity {
 				+ ", designation=" + designation + ", passport=" + passport + ", familyContact1=" + familyContact1
 				+ ", familyContact2=" + familyContact2 + ", familyEmail=" + familyEmail + ", sourcedBy=" + sourcedBy
 				+ ", currentAddress=" + currentAddress + ", permanentAddress=" + permanentAddress + ", bankAccount="
-				+ bankAccount + ", onsiteContactNo=" + onsiteContactNo + ", onsiteAddress=" + onsiteAddress + "]";
+				+ bankAccount + ", onsiteContactNo=" + onsiteContactNo + ", onsiteAddress=" + onsiteAddress
+				+ ", countryOfOrigin=" + countryOfOrigin + "]";
 	}
 	
 }

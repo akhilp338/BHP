@@ -189,7 +189,6 @@
 
         /*employee Register-start*/
         service.registerImpl = function (url, postData) {
-        	debugger;
             var deferred = $q.defer();
             Core_HttpRequest.post(url, postData)
                     .then(function (response) {

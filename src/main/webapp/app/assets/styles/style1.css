@@ -1197,7 +1197,8 @@ button {
     margin-left: -7px;
 }
 
-.candidate-form.form-horizontal form {
+.candidate-form.form-horizontal form,
+.consultant-form.form-horizontal form {
     border: none;
 }
 
