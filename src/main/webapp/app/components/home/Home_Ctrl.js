@@ -16,15 +16,6 @@
                 vm.showMenu();
             }
         }; 
-        $(window).unload(function() {
-            var timeSpentMilliseconds = new Date().getTime() - startTime;
-            var t = timeSpentMilliseconds / 1000 / 60;
-            $.ajax({
-                type: 'GET',
-                async: false,
-                url: '/BelhopatBackOffice/forceLogout',
-            });
-        });
 
     };
 

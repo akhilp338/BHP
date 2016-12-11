@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var Core_Run = function ($rootScope, $state, $timeout, Core_Service, $http,Idle) {
+    var Core_Run = function ($rootScope, $state, $timeout, Core_Service, $http,Idle,$window) {
 //        $rootScope.globals = $cookieStore.get('globals') || {};
         Idle.watch();
         var userName = angular.element("#successUser").text(),
@@ -12,6 +12,7 @@
         else{
         	$state.go("login");  
         }
+       
 //        if ($rootScope.globals.currentUser) {
 //            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
 //        }

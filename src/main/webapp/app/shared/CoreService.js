@@ -20,6 +20,24 @@
                     });
             return deferred.promise;
         };
+        
+        service.forceExit = function () {
+            var deferred = $q.defer();
+            var user = {};
+            Core_HttpRequest.get("/forceLogout")
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
+        
+        
         service.getCurrentUser = function () {
             var deferred = $q.defer();
             var user = {};

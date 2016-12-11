@@ -143,4 +143,6 @@
         <div ui-view="content" class="main">
         </div>
         <footer ui-view="footer" class="footer-div"></footer>
+        <script type="text/javascript">
+        </script>
 </html>
