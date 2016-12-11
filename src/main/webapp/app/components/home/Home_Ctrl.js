@@ -15,7 +15,8 @@
             if(angular.element(".navbar-toggle").css("display") != "none"){
                 vm.showMenu();
             }
-        };       
+        }; 
+
     };
 
     Home_Ctrl.$inject = ["$scope", '$state', '$rootScope', '$timeout'];

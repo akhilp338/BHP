@@ -75,7 +75,7 @@ public class ClientController {
 	 * gets a key value pair list of drop down data
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getDropDownData", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDropDownData", method = RequestMethod.GET)
 	public Map<String, List<?>> getDropDownData() {
 		return baseService.getEmployeeDropdowns();
 	}
