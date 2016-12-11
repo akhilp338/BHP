@@ -220,7 +220,7 @@ var consultantListTable;
         
         vm.getConsultant = function(id){
         	vm.getConsultantUrl = "api/consultant/getConsultant";
-            Core_Service.getConsultantImpl(vm.getConsultantUrl,id)
+            Core_Service.getCandidateImpl(vm.getConsultantUrl,id)
             .then( function(response) {
                vm.viewConsultant(response.data);
             },function(error){
