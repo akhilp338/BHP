@@ -63,7 +63,6 @@
                             angular.extend(vm.offerletter, params);
                             angular.extend(vm.offerletter, response.data);
                             vm.offerletter.hra = parseFloat(vm.offerletter.hra).toFixed(2);
-                            vm.offerletter.display.grade = vm.offerletter.grade;
                         }, function (error) {
                             console.log(error)
                         });
@@ -149,6 +148,7 @@
             });
 
             $('#candidatesList').on('click', '.action-view', function () {
+                console.log(this.getAttribute('value'));
                 vm.getCandidate(this.getAttribute('value'));
             });
             $('#candidatesList tbody').on('click', 'tr', function () {
@@ -174,7 +174,7 @@
                     vm.registration = res.data;
                     vm.isCheckboxEnable = true;
                     vm.isChecked = true;
-                    $rootScope.isShowLoader = false;
+                    $rootScope.showLoader = false;
                 }, function (err) {
                     vm.registration = {};
                 });
@@ -208,7 +208,7 @@
             vm.generateOfferLetter = function () {
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
-                vm.offerletter.display.grade = vm.offerletter.grade.grade;
+                vm.offerletter.gradeUi = vm.offerletter.grade.grade;
                 vm.generateOfferLetterUrl = "api/candidate/saveSalaryAndOfferLetter";
                 delete vm.offerletter.selectedGrade;
                 Core_Service.generateOfferLetterImpl(vm.generateOfferLetterUrl, vm.offerletter)
@@ -244,9 +244,10 @@
         
         vm.requestForApproval = function(){
         	vm.offerletter.candidate=$rootScope.selectedCandidate;
-        	vm.offerletter.grade = vm.getGrade($stateParams.grade,vm.offerletter.grades);
-        	vm.offerletter.gradeUi = vm.offerletter.grade.grade;
+        	vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
+            vm.offerletter.gradeUi = vm.offerletter.grade.grade;
             vm.requestForApprovalUrl = "api/candidate/requestForApproval";
+            delete vm.offerletter.selectedGrade;
             Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
                     .then(function (response) {
                     	Core_Service.sweetAlert("Request sent for approval!",response.data.data,"success","coreuser.offerletter"); 
