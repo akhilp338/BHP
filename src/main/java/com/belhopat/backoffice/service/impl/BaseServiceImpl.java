@@ -325,11 +325,10 @@ public class BaseServiceImpl implements BaseService {
 
 	@Override
 	public Task createNewTaskList(String taskName) {
-		//some issues when creating a new employee
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		Task currentTaskRow = new Task();
 		MasterTask currentTask = masterTaskRepository.findByTaskKey(taskName);
-		if(currentTask!=null){
+		if (currentTask != null) {
 			currentTaskRow.setBaseAttributes(currentUser);
 			currentTaskRow.setCompleted(true);
 			currentTaskRow.setMasterTask(currentTask);
@@ -340,6 +339,7 @@ public class BaseServiceImpl implements BaseService {
 				Task newTaskRow = new Task();
 				newTaskRow.setMasterTask(nextTask);
 				newTaskRow.setBaseAttributes(currentUser);
+				newTaskRow.setCompleted(false);
 				newTaskRow = taskRepository.save(newTaskRow);
 				return newTaskRow;
 			}
