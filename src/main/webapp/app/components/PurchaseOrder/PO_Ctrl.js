@@ -42,119 +42,99 @@
                             },
                             order : [ [ 0, "desc" ] ],
                             aoColumns : [
-                                            {
-                                                    data : 'id',
-                                                    visible : false
-                                            },
-                                            {
-                                                    title : "PO No",
-                                                    data : 'purchaseOrderNo',
-                                                    render: function (data) {
+                            {
+                                    data : 'id',
+                                    visible : false
+                            },
+                            {
+                                    title : "PO No",
+                                    data : 'purchaseOrderNo',
+                                    render: function (data) {
+	                            return data == null? "":data;
+                            }
+                            },
+                            {
+                                    title : "PO Date",
+                                    data : 'poDate',
+                                    render: function (data) {
+                                    	return data == null ? "" : moment(data).format("DD MMM YYYY");
+                            }
+                            },
+                            {
+                                    title : "Monthly Rate",
+                                    data : 'monthlyRate',
+                                    render: function (data) {
                                     return data == null? "":data;
                             }
-                                            },
-                                            {
-                                                    title : "PO Date",
-                                                    data : 'poDate',
-                                                    render: function (data) {
-                                    return data == null? "":data;
-                            }
-                                            },
-                                            {
-                                                    title : "Monthly Rate",
-                                                    data : 'monthlyRate',
-                                                    render: function (data) {
-                                    return data == null? "":data;
-                            }
-                                            },
-                                            {
-                                                    title : "PO Value",
-                                                    data : 'poValue',
-                                                    render: function (data,display,row) {
-                                                    	return data;
-                                                    }
-                                            },
-                                            {
-                                                    title : "Currency",
-                                                    data : 'currency',
-                                                    render: function (data) {
-                                                    	return data == null? "":data;
-                                                	}
-                                            },
-                                            {
-                                                    title : "Billed Amount",
-                                                    data : 'billedAmount',
-                                                    render: function (data,display,row) {
-                                                    	return data;
-                                                    }
-                                            },
-                                            {
-                                                    title : "Balance Amount",
-                                                    data : 'balanceAmount',
-                                                    render: function (data,display,row) {
-                                                    	return data;
-                                                    }
-                                            },
-                                            {
-                                                    title : "Expiry Date",
-                                                    data : 'expiry',
-                                                    render: function (data,display,row) {
-                                                		return data;
-                                                	}
-                                            },
-                                            {
-                                                title : "Status",
-                                                data : 'status',
-                                                render: function (data,display,row) {
-                                                	return data;
-                                                }
-                                        },
-                                        {
-                                            title : "Vendor No",
-                                            data : 'vendorName.vendorCode',
-                                            render: function (data,display,row) {
-                                            	return data;
-                                            }
-                                    },
-                                    {
-                                        title : "Name",
-                                        data : 'vendorName.vendorName',
-                                        render: function (data,display,row) {
-                                        	return null;
-                                    	}
-                                },
-                                {
-                                    title : "Description",
-                                    data : 'poDesc',
+                            },
+                            {
+                                    title : "PO Value",
+                                    data : 'poValue',
                                     render: function (data,display,row) {
-                                    	return null;
+                                    	return data;
+                                    }
+                            },
+                            {
+                                    title : "Currency",
+                                    data : 'currency.description',
+                                    render: function (data) {
+                                    	return data == null? "":data;
                                 	}
                             },
                             {
-                                title : "Doc Uploaded",
-                                data : 'poDesc',
-                                render: function (data,display,row) {
-                                	return null;
-                            	}
-                        },
-                                            {
-                                                    data : 'id',
-                                                    bSortable : false,
-                                                    sClass : "button-column",
-                                                    render : function(data) {
-                                                            $rootScope.isShowLoader = false;
-                                                            return data != null ?
-                                                             '<div class="action-buttons">'
-                                                                            + '<span  value="'
-                                                                            + data
-                                                                            + '" class="actions action-view fa-stack fa-lg pull-left" title="View">'
-                                                                            + '<i class="fa fa-eye" aria-hidden="true"></i></span>'
-                                                                            + '<span value="'
-                                                                            + data
-                                                                            + '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'
-                                                                            + '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>' : ""
-                                                    }
-                                            }],
+                                    title : "Billed Amount",
+                                    data : 'billedAmount',
+                                    render: function (data,display,row) {
+                                    	return data;
+                                    }
+                            },
+                            {
+                                    title : "Balance Amount",
+                                    data : 'balanceAmount',
+                                    render: function (data,display,row) {
+                                    	return data;
+                                    }
+                            },
+                            {
+                                    title : "Expiry Date",
+                                    data : 'expiry',
+                                    render: function (data,display,row) {
+                                    	return data == null ? "" : moment(data).format("DD MMM YYYY");
+                                	}
+                            },
+                            {
+                                    title : "Status",
+                                    data : 'status.description',
+                                    render: function (data,display,row) {
+                                    	return data;
+                                    }
+                            },
+	                        {
+	                            title : "Description",
+	                            data : 'poDesc',
+	                            render: function (data,display,row) {
+	                            	return null;
+	                        	}
+							},
+							{
+								data : 'id',
+								bSortable : false,
+								sClass : "button-column",
+								render : function(
+										data) {
+									$rootScope.isShowLoader = false;
+									return data != null ? '<div class="action-buttons">'
+											+ '<span  value="'
+											+ data
+											+ '" class="actions action-view fa-stack fa-lg pull-left" title="View">'
+											+ '<i class="fa fa-eye" aria-hidden="true"></i></span>'
+											+ '<span value="'
+											+ data
+											+ '" class="actions action-edit fa-stack fa-lg pull-left" title="Edit">'
+											+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></i></span></div>'
+											: ""
+								}
+						}],
 					});
 			
             $('#clientList').on('click', '.action-edit', function () {

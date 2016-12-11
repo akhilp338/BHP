@@ -143,9 +143,9 @@
 
         service.getAllLookupValues = function (url) {
             var deferred = $q.defer();
-            Core_HttpRequest.post(url)
+            Core_HttpRequest.get(url)
                     .then(function (response) {
-                        deferred.resolve(response)
+                        deferred.resolve(response.data)
                     }, function (error) {
                         deferred.reject(error)
                     });
@@ -171,6 +171,7 @@
 
         /*employee Register-start*/
         service.registerImpl = function (url, postData) {
+        	debugger;
             var deferred = $q.defer();
             Core_HttpRequest.post(url, postData)
                     .then(function (response) {
@@ -481,6 +482,21 @@
             return deferred.promise;
         };
         
+        service.getPODropDownData = function () {
+            var deferred = $q.defer();
+            Core_HttpRequest.get("/api/purchaseOrder/getDropDownData")
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
+        
         service.getAttendanceDropDownData = function () {
             var deferred = $q.defer();
             Core_HttpRequest.get("/api/attendance/getDropDownData")
@@ -512,7 +528,7 @@
         
         service.saveReimFile = function (file) {
             var deferred = $q.defer();
-            Core_HttpRequest.uploadPost("api/attendance/uploadAttendanceExcel",file)
+            Core_HttpRequest.formPost("api/attendance/uploadAttendanceExcel",file)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);
