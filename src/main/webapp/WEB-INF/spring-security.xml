@@ -1,25 +1,40 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
-
 	<http auto-config="true">
 		<intercept-url pattern="/api/**" access="hasRole('ROLE_USER')" />
-		<form-login 
-		    login-page="/login" 
-		   always-use-default-target="true" authentication-failure-url="/loginerror"
-			default-target-url="/dashboard" />
-		<logout logout-url="/logout"  invalidate-session="true" delete-cookies="JSESSIONID" success-handler-ref="customLogoutSuccessHandler" />
-		<csrf disabled="true"/>
+		<form-login login-page="/login" always-use-default-target="true"
+			authentication-failure-url="/loginerror" default-target-url="/dashboard" />
+		<logout logout-url="/logout" invalidate-session="true"
+			delete-cookies="JSESSIONID" success-handler-ref="customLogoutSuccessHandler" />
+		<csrf disabled="true" />
+		<http-basic/>
 	</http>
-	<beans:bean id="customLogoutSuccessHandler" class="com.belhopat.backoffice.session.CustomLogoutSuccessHandler" />
-
+	<beans:bean id="customLogoutSuccessHandler"
+		class="com.belhopat.backoffice.session.CustomLogoutSuccessHandler" />
 	<authentication-manager>
-		 <authentication-provider user-service-ref="loginService" /> 
+		<authentication-provider user-service-ref="loginService" />
 	</authentication-manager>
 
+	<!-- SPRING SECURITY SETUP -->
+	<!-- <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"> 
+		<beans:constructor-arg value="${app.secret}" /> </beans:bean> <authentication-manager 
+		id="authenticationManager"> <authentication-provider user-service-ref="userService"> 
+		<password-encoder ref="passwordEncoder"></password-encoder> </authentication-provider> 
+		</authentication-manager> <http entry-point-ref="unauthorizedEntryPoint" 
+		authentication-manager-ref="authenticationManager" create-session="stateless"> 
+		<csrf disabled="true" /> <custom-filter ref="authenticationTokenProcessingFilter" 
+		position="PRE_AUTH_FILTER" /> <intercept-url pattern="/rest/user/authenticate" 
+		access="permitAll" /> <intercept-url method="GET" pattern="/rest/blogposts/**" 
+		access="hasRole('USER')" /> <intercept-url method="PUT" pattern="/rest/blogposts/**" 
+		access="hasRole('ADMIN')" /> <intercept-url method="POST" pattern="/rest/blogposts/**" 
+		access="hasRole('ADMIN')" /> <intercept-url method="DELETE" pattern="/rest/blogposts/**" 
+		access="hasRole('ADMIN')" /> </http> <beans:bean id="unauthorizedEntryPoint" 
+		class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.UnauthorizedEntryPoint" 
+		/> <beans:bean id="authenticationTokenProcessingFilter" class="net.dontdrinkandroot.example.angularrestspringsecurity.rest.AuthenticationTokenProcessingFilter"> 
+		<beans:constructor-arg ref="userService" /> </beans:bean> -->
 </beans:beans>

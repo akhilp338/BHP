@@ -65,7 +65,7 @@
         vm.urlForLookups = "api/consultant/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                    vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response.data);
+                    vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response);
                     if (!$stateParams.id)
                         vm.mainSkillList = vm.lookups.SKILL;
                 }, function (error) {
