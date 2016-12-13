@@ -23,6 +23,7 @@
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/consultant/getConsultant", $stateParams.id).then(function (res) {
                 vm.registration = res.data;
+                debugger;
                 for (var i = 0; i < countryType.length; i++) {
                     vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id, countryType[i]);
                     vm.getCitiesByStates(vm.registration.permanentAddress.city.state.id, countryType[i]);
@@ -65,7 +66,7 @@
         vm.urlForLookups = "api/consultant/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                    vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response.data);
+                    vm.lookups = Core_Service.processDateObjects(['dob', 'doj'], response);
                     if (!$stateParams.id)
                         vm.mainSkillList = vm.lookups.SKILL;
                 }, function (error) {
@@ -203,12 +204,11 @@
             if (vs.checkFormValidity($scope["regForm"])) {
                 vm.registerUrl = "api/consultant/saveOrUpdateConsultant";
                 Core_Service.sweetAlertWithConfirm("Consultant details filled!", "Are you sure to register this Consultant?", "warning", function(){
-                Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
+                Core_Service.registerImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {                            
                             Core_Service.sweetAlertWithConfirm("Consultant Registered successfully...", "Do you want to upload any documents?", "warning", function(isConfirm){
                                  if (isConfirm) {
-                                     $rootScope.isEmpDocs = false;
-                                     $state.go("coreuser.upload");
+                                     $state.go("coreuser.consultant.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.consultant");

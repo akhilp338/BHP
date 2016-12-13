@@ -53,10 +53,6 @@ public class Candidate extends BasicDetailsEntity {
 	private EmployeeSalary salary;
 
 	@ManyToOne
-	@JoinColumn(name = "CNTY_OF_ORG_ID")
-	private Country countryOfOrigin;
-
-	@ManyToOne
 	@JoinColumn(name = "CNTY_TO_VST_ID")
 	private Country countryToVisit;
 
@@ -189,14 +185,6 @@ public class Candidate extends BasicDetailsEntity {
 		this.salary = salary;
 	}
 
-	public Country getCountryOfOrigin() {
-		return countryOfOrigin;
-	}
-
-	public void setCountryOfOrigin(Country countryOfOrigin) {
-		this.countryOfOrigin = countryOfOrigin;
-	}
-
 	public Country getCountryToVisit() {
 		return countryToVisit;
 	}
@@ -283,10 +271,10 @@ public class Candidate extends BasicDetailsEntity {
 				+ ", lastName=" + lastName + ", bloodGroup=" + bloodGroup + ", officialEmail=" + officialEmail
 				+ ", officialContactNo=" + officialContactNo + ", fathersName=" + fathersName + ", mothersName="
 				+ mothersName + ", childName=" + childName + ", spouseName=" + spouseName + ", salary=" + salary
-				+ ", countryOfOrigin=" + countryOfOrigin + ", countryToVisit=" + countryToVisit + ", client=" + client
-				+ ", partner=" + partner + ", officialDetails=" + officialDetails + ", division=" + division
-				+ ", purpose=" + purpose + ", employmentStatus=" + employmentStatus + ", registrationStatus="
-				+ registrationStatus + ", employee=" + employee + ", offerletterStatus=" + offerletterStatus + "]";
+				+ ", countryToVisit=" + countryToVisit + ", client=" + client + ", partner=" + partner
+				+ ", officialDetails=" + officialDetails + ", division=" + division + ", purpose=" + purpose
+				+ ", employmentStatus=" + employmentStatus + ", registrationStatus=" + registrationStatus
+				+ ", employee=" + employee + ", offerletterStatus=" + offerletterStatus + "]";
 	}
 
 	

@@ -27,7 +27,10 @@
         };
         service.openTaskDetails = function (data) {
             return Core_Modal.modalOpen('task-modal', '/BelhopatBackOffice/app/components/dashboard/taskDialogue.html', 'DashModal_Ctrl', 'vm', data);
-        }; 
+        };
+        service.openViewConsultantModal = function (data) {
+            return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/consultant/viewConsultant.html', 'ViewConsultant_Ctrl', 'vm', data);
+        };
     };
     angular.module('app.common')
         .service('Core_ModalService', Core_ModalService);

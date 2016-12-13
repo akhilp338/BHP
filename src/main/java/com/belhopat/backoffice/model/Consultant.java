@@ -2,7 +2,6 @@ package com.belhopat.backoffice.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +20,7 @@ public class Consultant extends BasicDetailsEntity {
     @JoinColumn( name = "WRK_LCTN_ID" )
     private Country workLocation;
     
-    @ManyToOne( fetch = FetchType.LAZY )
+    @ManyToOne
     @JoinColumn( name = "ACC_MNGR_ID" )
     private Employee accountManager;
     
@@ -29,7 +28,7 @@ public class Consultant extends BasicDetailsEntity {
 	@JoinColumn(name = "BUS_UNT_ID")
 	private LookupDetail businessUnit;
     
-    @ManyToOne( fetch = FetchType.LAZY )
+    @ManyToOne
 	@JoinColumn(name = "BUS_UNT_HED_ID")
 	private Employee bussUnitHead;
     

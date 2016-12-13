@@ -13,7 +13,7 @@
         'pascalprecht.translate',
         'ghiscoding.validation',
         'oitozero.ngSweetAlert',
-        'ngCookies',
+//        'ngCookies',
         'ngStorage',
         'ngAria',
         'ngMaterial',

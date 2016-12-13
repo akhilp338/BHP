@@ -1,11 +1,13 @@
 package com.belhopat.backoffice.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +102,28 @@ public class LoginController {
 			session.invalidate();
 		}
 		loginService.logout(request);
+	}
+
+	@RequestMapping(value = "/forceLogout", method = RequestMethod.GET)
+	public void forceLogout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+			Authentication authentication) throws ServletException, IOException {
+		if (authentication != null && authentication.getDetails() != null) {
+			try {
+				httpServletRequest.getSession().invalidate();
+				SecurityContextHolder.clearContext();
+				httpServletRequest.logout();
+				System.out.println("User Successfully Logout");
+				// you can add more codes here when the user successfully logs
+				// out,
+				// such as updating the database for last active.
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+		// redirect to login
+		httpServletResponse.sendRedirect("/BelhopatBackOffice");
 	}
 
 	@RequestMapping(value = "/sessioncheck", method = RequestMethod.GET)

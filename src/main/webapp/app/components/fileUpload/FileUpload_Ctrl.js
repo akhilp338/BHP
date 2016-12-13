@@ -1,7 +1,7 @@
 (function () {
     var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, Core_Service) {
         var vm = this;
-    	vm.redirect = function (stateName){ 
+    	vm.redirect = function( stateName ){
             var state;
             switch(stateName){
                 case 'candidate':{
@@ -15,6 +15,10 @@
                 case 'reimburse':{
                    state = 'coreuser.reimbursement';     
                 }
+                break;
+                case 'consultant':{
+                    state = 'coreuser.consultant';     
+                 }
                 break
             default:
             }
@@ -106,7 +110,7 @@
     }
     
       vm.uploadDocs = function(){
-          var state = $rootScope.isEmpDocs ? "coreuser.employee" : "coreuser.candidate";
+          var state = "coreuser."+$rootScope.active;
           Core_Service.sweetAlert("Done!", "Docs uploaded successfully", "success", state);
       };  
     };

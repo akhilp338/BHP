@@ -19,7 +19,7 @@
 <tr>
 	<td>type</td>
 	<td>id=fullName</td>
-	<td>Test</td>
+	<td>Test Abc</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -101,7 +101,6 @@
 	<td>id=checkbox1</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

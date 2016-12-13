@@ -105,6 +105,7 @@ public class Constants {
 	public static final String EMP_DESIG_CEO = "CEO";
 	public static final String EMP_DESIG_BDM = "BDM";
 	public static final String EMP_STS_INACTIVE = "INACTIVE";
+	public static final String EMP_STS_ACTIVE = "ACTIVE";
 
 	/* AOP CONSTANTS */
 	public static final String WEBSERVICE_MODULE = "Controller";

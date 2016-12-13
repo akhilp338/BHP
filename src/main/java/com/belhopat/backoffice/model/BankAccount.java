@@ -41,7 +41,7 @@ public class BankAccount {
 	private String swiftCode;
 	
 	@Column(name = "IBAN", length = 50)
-	private String InternationalBankAccountNo;
+	private String internationalBankAccountNo;
 
 	public Long getId() {
 		return id;
@@ -108,18 +108,18 @@ public class BankAccount {
 	}
 
 	public String getInternationalBankAccountNo() {
-		return InternationalBankAccountNo;
+		return internationalBankAccountNo;
 	}
 
 	public void setInternationalBankAccountNo(String internationalBankAccountNo) {
-		InternationalBankAccountNo = internationalBankAccountNo;
+		this.internationalBankAccountNo = internationalBankAccountNo;
 	}
 
 	@Override
 	public String toString() {
 		return "BankAccount [id=" + id + ", accountNo=" + accountNo + ", IFSCCode=" + IFSCCode + ", accountHolderName="
 				+ accountHolderName + ", bankName=" + bankName + ", branch=" + branch + ", bankAddress=" + bankAddress
-				+ ", swiftCode=" + swiftCode + ", InternationalBankAccountNo=" + InternationalBankAccountNo + "]";
+				+ ", swiftCode=" + swiftCode + ", internationalBankAccountNo=" + internationalBankAccountNo + "]";
 	}
 
 }

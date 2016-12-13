@@ -300,7 +300,7 @@ public class CandidateServiceImpl implements CandidateService {
 		if (candidateObj.getRegistrationStatus() != null) {
 			newCandidate.setRegistrationStatus(candidateObj.getRegistrationStatus());
 		}
-		if (candidateObj.getSkillSet() != null && !candidateObj.getSkillSet().isEmpty()) {
+		if (candidateObj.getSkillSet() != null ) {
 			newCandidate.setSkillSet(candidateObj.getSkillSet());
 		}
 		newCandidate.setUpdateAttributes(loggedInUser);
