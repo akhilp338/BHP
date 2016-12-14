@@ -48,7 +48,7 @@
                         sClass: "task-label-container",
                         render: function (data, type, row) {
                             var className;
-                                className = row.status.toLowerCase() == 'completed' ? 'label-success' : 'label-warning'
+                                className = row.status == 'completed' ? 'label-success' : 'label-warning'
                             return '<div class="circle '+ className +'"><p>T'+data+'</p></div>'
                         }
                     }, {
@@ -66,7 +66,7 @@
                         sClass: "button-column action-view",
                         render: function (data) {
                             var className;
-                                className = data.toLowerCase() == 'completed' ? 'btn-success' : 'btn-warning'
+                                className = data == 'completed' ? 'btn-success' : 'btn-warning'
                             return '<button type="button" class="btn ' +className+ '">' +data+ '</button>'
                         }
                     }]

@@ -1,84 +1,45 @@
 <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left page-section-header-att">Attendance Details</h4>	
+	<h4 class="pull-left page-section-header-att">Attendance Details</h4>
 
-    </div>
+</div>
 <div class="sub-content attendance">
-    <div class="row bottom-margin-20"><div class="fileUpload btn">
-                    <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                    <span class="up-text">Upload Attendance Log file</span>                    
-                    <input type="file" class="file-uploader upload" file-model="vm.reimFile" />
-                </div>
-        <div class="file-name">{{vm.reimFile.name}}</div>
-</div>
-    <div class="row">
-        <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-            <label class="control-label" for="gender">Employee name</label>
-            <div class="controls">
-                <select ng-change="vm.filterChange()" name="employee_name" ng-model="vm.attendance.filter.emplyee.id" 
-                	class="form-input width-100" ng-options="employee[0] as (employee[1]) for employee in vm.attendance.lookups.EMPLOYEES">
-                        <option value="">All Employees</option>
-                </select>
-            </div>
-        </div>
-        <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-            <label class="control-label" for="gender">Status</label>
-            <div class="controls">
-                <select ng-change="vm.filterChange()" name="attendance_status" ng-model="vm.attendance.filter.status.id"
-                        class="form-input width-100" ng-options="status as status for status in vm.attendance.lookups.STATUS">                   
-                    <option value="">All Status</option>
-                </select>
-            </div>
-        </div>
-        <!-- <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="dateFrom">Date From</label>
-                                <div class="controls">
-                                    <p class="input-group">
-                                        <input ng-change="vm.filterChange()" type="text"
-                                               name="dateFrom"
-                                               show-button-bar ="false"
-                                               class="form-input date-form"                                           
-                                               ng-model="vm.attendance.filter.dateFrom"
-                                               is-open="vm.isDobPickerOpen1"
-                                               uib-datepicker-popup="dd-MMM-yyyy"
-                                               datepicker-options="vm.dobDateOptions" 
-                                               readonly/>
-                                        <span class="input-group-btn custom-datepick">
-                                            <button type="button" 
-                                                    class="btn btn-default" 
-                                                    ng-click="vm.setDpOpenStatus('isDobPickerOpen1')">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-        <div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-                                <label class="control-label" for="dateTo">Date To</label>
-                                <div class="controls">
-                                    <p class="input-group">
-                                        <input ng-change="vm.filterChange()" type="text"
-                                               name="dateTo"
-                                               show-button-bar ="false"
-                                               class="form-input date-form"                                           
-                                               ng-model="vm.attendance.filter.dateTo"
-                                               is-open="vm.isDobPickerOpen"
-                                               uib-datepicker-popup="dd-MMM-yyyy"
-                                               datepicker-options="vm.dobDateOptions" 
-                                               readonly/>
-                                        <span class="input-group-btn custom-datepick">
-                                            <button type="button" 
-                                                    class="btn btn-default" 
-                                                    ng-click="vm.setDpOpenStatus('isDobPickerOpen')">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-    </div> -->
-    <div class="row attendanceTable">
-        <table id="attendanceTable" class="display"></table>
-    </div>
+	<div class="row bottom-margin-20 col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+		<div class="fileUpload btn">
+			<span class="fa-stack fa-lg pull-left"><i class="fa fa-upload"
+				aria-hidden="true"></i></span> <span class="up-text">Upload
+				Attendance Log file</span> <input type="file" class="file-uploader upload"
+				file-model="vm.reimFile" />
+		</div>
+		<div class="file-name">{{vm.reimFile.name}}</div>
+	</div>
+	<div
+		class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+		<label class="control-label" for="gender">Employee name</label>
+		<div class="controls">
+			<select ng-change="vm.filterChange()" name="employee_name"
+				ng-model="vm.attendance.filter.emplyee.id"
+				class="form-input width-100"
+				ng-options="employee[0] as (employee[1]) for employee in vm.attendance.lookups.EMPLOYEES">
+				<option value="">All Employees</option>
+			</select>
+		</div>
+	</div>
+	<div
+		class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+		<label class="control-label" for="gender">Status</label>
+		<div class="controls">
+			<select ng-change="vm.filterChange()" name="attendance_status"
+				ng-model="vm.attendance.filter.status.id"
+				class="form-input width-100"
+				ng-options="status as status for status in vm.attendance.lookups.STATUS">
+				<option value="">All Status</option>
+			</select>
+		</div>
+	</div>
 
+	<div class="row">
+				<div class="row attendanceTable">
+			<table id="attendanceTable" class="display"></table>
+		</div>
 </div>
-
+	</div>
