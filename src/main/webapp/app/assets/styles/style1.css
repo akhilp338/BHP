@@ -22,7 +22,7 @@ body, html {
 
 .main {
     margin-top: 85px;
-    width: 81.5%;
+    width: 98%;
     float: right;
 }
 
@@ -636,7 +636,7 @@ button.link-btn {
     border-radius: 4px;
 }
 
-#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList {
+#poList,#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList  {
     border-collapse: separate;
     border: 1px solid #ddd;
     margin: 0;
@@ -744,8 +744,8 @@ span.text-danger {
     display: block;
 }
 
-.form-horizontal, #candidatesList_wrapper, #employeeList_wrapper,
-#consultantList_wrapper, #clientList_wrapper, #offerLetterList_wrapper {
+.form-horizontal,#poList_wrapper, #candidatesList_wrapper, #employeeList_wrapper,
+#consultantList_wrapper, #clientList_wrapper, #offerLetterList_wrapper ,#attendanceTable_wrapper{
     padding: 0 20px 0 20px;
 }
 
@@ -780,10 +780,19 @@ span.sub-section {
     height: 25px !important;
 }
 
+#poList tbody tr.odd,
 #candidatesList tbody tr.odd,
 #consultantList tbody tr.odd {
     background-color: #F1F1F1;
 }
+
+
+#poList tbody tr td:not(:last-child),
+#poList thead tr th:not(:last-child),
+#poList tfoot tr th:not(:last-child),
+#poList tbody tr td:not(:last-child),
+#poList thead tr th:not(:last-child),
+#poList tfoot tr th:not(:last-child),
 
 #candidatesList tbody tr td:not(:last-child),
 #candidatesList thead tr th:not(:last-child),
@@ -1076,7 +1085,7 @@ div#candidatesList_length, div#employeeList_length, div#clientList_length
     margin-top: 10px;
 }
 
-div#candidatesList_length select, div#employeeList_length select, div#clientList_length select
+div#candidatesList_length select, div#employeeList_length select, div#clientList_length select ,  div#poList_length select
 {
     width: 70px;
     height: 25px;
@@ -1119,8 +1128,10 @@ button {
     outline: none !important;
 }
 
+#poList tbody tr,
 #candidatesList tbody tr,
 #clientList tbody tr,
+#attendanceTable tbody tr,
 #consultantList tbody tr,
 #employeeList tbody tr{
     cursor: pointer;
@@ -1445,7 +1456,7 @@ table{
     color: white;
 }
 
-.theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd, .theme4 #employeeList tbody tr.odd, .theme4 #offerLetterList tbody tr.odd,
+.theme4 #attendanceTable tbody tr.odd, .theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd, .theme4 #employeeList tbody tr.odd, .theme4 #offerLetterList tbody tr.odd,
 .theme4 #clientList tbody tr.odd, .theme4 #consultantList tbody tr.odd {
     background-color: #FBDF92;
 }
