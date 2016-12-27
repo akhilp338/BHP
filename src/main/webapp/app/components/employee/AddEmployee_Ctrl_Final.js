@@ -10,25 +10,32 @@
         vm.display.candidateId = vm.candidateId;
         vm.registration = {};
         if (vm.candId) {
-            Core_Service.getCandidateImpl("api/employee/getAnEmployee", vm.candId).then(function (res) {
-                vm.isCheckboxEnable = true;
-                vm.isChecked = true;
-                $rootScope.isShowLoader = false;
-                vm.registration.id=res.data.id;
-                vm.registration.hrManager=res.data.hrManager;
-                vm.registration.accountManager=res.data.accountManager;
-                vm.registration.businessUnit= res.data.businessUnit;
-                vm.registration.joiningDate= res.data.joiningDate;
-                vm.registration.employeeMasterId=res.data.employeeMasterId;
-                vm.registration.workLocation= res.data.workLocation;
-                vm.registration.timeZone=res.data.timeZone;
-                vm.registration.hrRecruiter= res.data.hrRecruiter;
-                vm.registration.reportingManager=res.data.reportingManager;
-                vm.registration.baseLocation =res.data.baseLocation;
-                vm.registration.belhopatDesignation=res.vm.belhopatDesignation;
-            }, function (err) {
-                vm.registration = {};
-            });
+            vm.urlForLookups = "api/employee/getDropDownData";
+            Core_Service.getAllLookupValues(vm.urlForLookups)
+                .then(function (response) {
+                    vm.lookups =response;
+                     Core_Service.getCandidateImpl("api/employee/getAnEmployee", vm.candId).then(function (res) {
+                            vm.isCheckboxEnable = true;
+                            vm.isChecked = true;
+                            $rootScope.isShowLoader = false;
+                            vm.registration.id=res.data.id;
+                            vm.registration.hrManager=res.data.hrManager;
+                            vm.registration.accountManager=res.data.accountManager;
+                            vm.registration.businessUnit= res.data.businessUnit;
+                            vm.registration.joiningDate= res.data.joiningDate;
+                            vm.registration.employeeMasterId=res.data.employeeMasterId;
+                            vm.registration.workLocation= res.data.workLocation;
+                            vm.registration.timeZone=res.data.timeZone;
+                            vm.registration.hrRecruiter= res.data.hrRecruiter;
+                            vm.registration.reportingManager=res.data.reportingManager;
+                            vm.registration.baseLocation =res.data.baseLocation;
+                            vm.registration.belhopatDesignation=res.data.belhopatDesignation;
+                        }, function (err) {
+                            vm.registration = {};
+                        });
+                }, function (error) {
+                });
+           
         }
                 
         vm.back = function (){
@@ -37,14 +44,7 @@
         
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
-        };	
-        vm.urlForLookups = "api/employee/getDropDownData";
-        Core_Service.getAllLookupValues(vm.urlForLookups)
-                .then(function (response) {
-                    vm.lookups = response.data;	
-                }, function (error) {
-
-                });
+        };
         $rootScope.active = 'employee';
         vm.cancelRegisteration = function (){
             $state.go("coreuser.employee")

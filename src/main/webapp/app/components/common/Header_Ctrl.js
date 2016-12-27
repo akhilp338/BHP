@@ -43,7 +43,7 @@
 
         
     };    
-    Header_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service'];
+    Header_Ctrl.$inject = ['$timeout', '$state', '$rootScope', 'Core_Service'];
     angular.module('coreModule')
             .controller('Header_Ctrl', Header_Ctrl);
 })();

@@ -33,7 +33,7 @@
         vm.urlForLookups = "api/client/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                    vm.lookups = response.data;
+                    vm.lookups = response;
                     console.log(vm.lookups.CLSTATS); 
                 }, function (error) {
 

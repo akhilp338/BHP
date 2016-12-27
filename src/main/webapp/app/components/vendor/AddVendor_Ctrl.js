@@ -1,6 +1,13 @@
 (function () {
     var AddVendor_Ctrl = function ($scope, $state, $rootScope, Core_Service, $stateParams, Core_HttpRequest, validationService) {
         var vm = this;
+        vm.urlForLookups = "api/vendor/getDropDownData";
+        Core_Service.getAllLookupValues(vm.urlForLookups)
+                .then(function (response) {
+                    vm.lookups = response;
+                }, function (error) {
+
+        });
         $rootScope.isShowLoader = true;
         vm.registration = {};        
         vs = new validationService({
@@ -29,13 +36,7 @@
         vm.back = function (){
             $state.go('coreuser.vendor');
         };
-        vm.urlForLookups = "api/vendor/getDropDownData";
-        Core_Service.getAllLookupValues(vm.urlForLookups)
-                .then(function (response) {
-                    vm.lookups = response.data;
-                }, function (error) {
-
-                });
+        
 
         $rootScope.active = 'client';
         
