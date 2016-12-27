@@ -9,56 +9,83 @@
             })
             .constant('CANDIDATE', {
                 "fieldMapping": {
-                    "id":"ID",
-                    "employeeId":"Employee ID",
+                    "candidateId":"Candidate Id",
+                    "name":"Name",
+                    "dob":"D.O.B",
+                    "gender":{
+                        "label":"Gender",
+                        "valueKey":"description"
+                    }, 
+                    "bloodGroup":{
+                        "label": "Blood Group",
+                        "valueKey": "code"
+                    },
+                    "personalEmail":"Personal Email",
+                    "personalContactNo":{
+                        "label":"Personal Contact No.",
+                        "valueKey": "number"
+                    },
                     "createdDate":"Created Date",
                     "updatedDate":"Updated Date",
-                    "deletedDate":"Deleted Date",
-                    "createdBy":"Created By",
-                    "updatedBy":"Updated By",
-                    "deletedBy":"Deleted By",
-                    "deleted":"Deleted",
-                    "candidateId":"Candidate Id",
-                    "firstName":"First Name",
-                    "middleName":"Middle Name", 
-                    "lastName":"Last Name",
-                    "dob":"D.O.B",
-                    "gender":"Gender", 
-                    "bloodGroup":"Blood Group",
-                    "personalEmail":"Personal Email",
-                    "personalContactNo":"Personal Contact No.",
+                    "createdBy":{
+                        "label":"Created By",
+                        "valueKey": "email"
+                    },
+                    "updatedBy":{
+                        "label":"Updated By",
+                        "valueKey": "email"
+                    },  
                     "officialEmail":"Official Email", 
-                    "officialContactNo":"Official Contact No.",
-                    "familyContact1":"Family Contact 1",
-                    "familyContact2":"Family Contact 2",
-                    "familyEmail":"Family Email",
-                    "onsiteContactNo":"Onsite Contact No.", 
-                    "currentAddress":"Current Address",
-                    "permanentAddress":"Permanent Address",
-                    "onsiteAddress":"Onsite Address",
+                    "officialContactNo":{
+                        "label":"Official Contact No.",
+                        "valueKey": "number"
+                    },
+                    "onsiteContactNo":{
+                        "label":"Onsite Contact No.",
+                        "valueKey": "number"
+                    }, 
+                    "currentAddress":{
+                        "label":"Current Address"
+                    }, 
+                    "permanentAddress":{
+                        "label":"Permanent Address"
+                    },
+                    "onsiteAddress":{
+                        "label":"Onsite Address"
+                    },
                     "priorExperienceYear":"Prior Experience Years",
                     "priorExperienceMonth":"Prior Experience In Months", 
-                    "countryOfOrigin":"Country Of Origin",
-                    "countryToVisit":"Country To Visit",
-                    "client":"Client",
+                    "countryOfOrigin":{
+                        "label":"Country Of Origin",
+                        "valueKey": "description"
+                    }, 
+                    "countryToVisit":{
+                        "label":"Country To Visit",
+                        "valueKey": "description"
+                    }, 
+                    "client":{
+                        "label":"Client",
+                        "valueKey": "clientName"
+                    }, 
                     "partner":"Partner",
-                    "bankAccount":"Bank Account",
-                    "passport":"Passport",
-                    "officialDetails":"Official Details",
+                    "passport":{
+                        "label":"Passport"
+                    },
                     "doj":"D.O.J",
-                    "division":"Division",
-                    "designation":"Designation",
-                    "purpose":"Purpose", 
-                    "employmentStatus":"Employment Status",
-                    "registrationStatus":"Registration Status",
+                    "division":{
+                        "label": "Division",
+                        "valueKey": "description"
+                    },
+                    "designation":{
+                        "label": "Designation",
+                        "valueKey": "description"
+                    },
                     "sourcedBy":"Sourced By",
-                    "drivingLicenceNo":" Driving License No.",
-                    "forexCardNo":"Forex Card No.",
-                    "forexCardAgency":"Forex Card Agency",
                     "panno":"PAN No.",
                     "esino":"ESI No.",
                     "pfno":"PF No."
                 }
+                
             })
             .constant('CLIENT', {
                 "fieldMapping": {
@@ -66,11 +93,8 @@
                     "clientId":"Client ID",
                     "createdDate":"Created Date",
                     "updatedDate":"Updated Date",
-                    "deletedDate":"Deleted Date",
                     "createdBy":"Created By",
                     "updatedBy":"Updated By",
-                    "deletedBy":"Deleted By",
-                    "deleted":"Deleted",
                     "clientName":"Client Name",
                     "revenue":"Revenue",
                     "clientAddress":"Client Address", 
