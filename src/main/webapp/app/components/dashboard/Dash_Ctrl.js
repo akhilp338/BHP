@@ -1,6 +1,7 @@
+var dashBoardTable;
 (function () {
-    var Dash_Ctrl = function ($scope, $rootScope, Core_Service, Core_ModalService, urlConfig) {
-        var vm = this, dashBoardTable;
+    var Dash_Ctrl = function ($scope, $state, $rootScope, Core_Service, Core_ModalService, urlConfig) {
+        var vm = this;
         $rootScope.isDashBoard = true;
         vm.taskStatus = [];
         var panelStyle = ["success","primary","danger","info","warning"];
@@ -108,7 +109,7 @@
                 },function(err){
                      console.log(err)
                 })
-                console.log(data)
+                $state.go(data.masterTask.taskRoute)
             });            
 
         });
@@ -120,6 +121,6 @@
         };
     };
 
-    Dash_Ctrl.$inject = ["$scope", '$rootScope', 'Core_Service', 'Core_ModalService', 'urlConfig'];
+    Dash_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'Core_ModalService', 'urlConfig'];
     angular.module('coreModule').controller('Dash_Ctrl', Dash_Ctrl);
 })();

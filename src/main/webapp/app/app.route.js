@@ -152,7 +152,17 @@
 		                    controllerAs: 'vm'
 		                }
 		            }
-		        })
+		})
+                .state('coreuser.offerletter.review', {
+		            url: '/offerletter/review',
+		            views: {
+		                'content@': {
+		                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',
+		                    controller: 'Offerletter_Ctrl',
+		                    controllerAs: 'vm'
+		                }
+		            }
+		})
                 //Employee States Routing
                 .state('coreuser.employee', {
                     url: urlConfig.root_path + 'employee',
@@ -430,7 +440,17 @@
 		                    controllerAs: 'vm'
 		                }
 		            }
-		        })
+		})
+                .state('coreuser.reimbursement.review', {
+		            url: urlConfig.root_path + 'reimbursement/review',
+		            views: {
+		                'content@': {
+		                    templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reim-review.html',
+		                    controller: 'Reim_Review_Ctrl',
+		                    controllerAs: 'vm'
+		                }
+		            }
+		})
                 //Attendance States Routing
                 .state('coreuser.attendance', {
                     url: urlConfig.root_path + 'attendance',

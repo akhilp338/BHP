@@ -2505,3 +2505,10 @@ div.loader-container {
 .bottom-button-liner.no-padding-right{
     padding-right: 0;
 }
+ul.uib-datepicker-popup.dropdown-menu {
+    border: 1px solid #dddddd;
+    padding: 10px;
+}
+table.uib-daypicker {
+    table-layout: auto;
+}
