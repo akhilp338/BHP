@@ -72,8 +72,10 @@ var dashBoardTable;
                         }
                     }]
             });
-            vm.selectFilter = function(filter){
+            vm.selectFilter = function(filter,event){
             var filters;
+            angular.element('.dashboard .panel').removeClass('selected');
+            angular.element(event.currentTarget).addClass('selected');
             switch(filter){
                 case 'completed':{
                     filters = dashBoardTable.columns(3).search('PENDING');

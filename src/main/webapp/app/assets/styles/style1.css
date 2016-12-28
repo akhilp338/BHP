@@ -6,6 +6,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     font-family: Verdana, Geneva, sans-serif;
+    outline: 0;
 }
 
 md-content {
@@ -1918,7 +1919,9 @@ td.fc-widget-content {
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 }
-
+.dashboard .panel.selected {
+        border: 3px inset #31c131
+}
 .dashboard .panel-body {
     box-shadow: none;
     border-radius: 3px;
