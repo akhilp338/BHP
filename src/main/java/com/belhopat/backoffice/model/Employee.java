@@ -53,6 +53,7 @@ public class Employee extends BaseEntity {
     @JoinColumn( name = "HR_MNGR_ID" )
     private Employee hrManager;
 
+    @JsonIgnore
     @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "RPTNG_MNGR_ID" )
     private Employee reportingManager;
