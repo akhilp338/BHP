@@ -47,6 +47,7 @@ var dashBoardTable;
                         title: "#",
                         data: 'id',
                         sClass: "task-label-container",
+                        "sWidth": "10%",
                         render: function (data, type, row) {
                             var className;
                                 className = row.status == 'completed' ? 'label-success' : 'label-warning'
@@ -54,6 +55,7 @@ var dashBoardTable;
                         }
                     }, {
                         title: "Task",
+                        "sWidth": "60%",
                         data: 'masterTask.taskDesc',
                         render: function (data, type, row) {
                             return '<div class="data-task-container"><h4 class="col-md-12 col-lg-12">'
@@ -63,6 +65,7 @@ var dashBoardTable;
                     }, {
                     	title: "Status",
                         data: 'status',
+                        "sWidth": "30%",
                         bSortable: true,
                         sClass: "button-column action-view",
                         render: function (data) {

@@ -637,11 +637,17 @@ button.link-btn {
     border-radius: 4px;
 }
 
-#poList,#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList  {
+#poList,#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList,
+#reim-review {
     border-collapse: separate;
     border: 1px solid #ddd;
     margin: 0;
     width: 100% !important;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-box-shadow: -4px 4px 11px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -4px 4px 11px -5px rgba(0,0,0,0.75);
+    box-shadow: -4px 4px 11px -5px rgba(0,0,0,0.75);
 }
 /*Temp css ends here*/
 
@@ -794,7 +800,6 @@ span.sub-section {
 #poList tbody tr td:not(:last-child),
 #poList thead tr th:not(:last-child),
 #poList tfoot tr th:not(:last-child),
-
 #candidatesList tbody tr td:not(:last-child),
 #candidatesList thead tr th:not(:last-child),
 #candidatesList tfoot tr th:not(:last-child),
@@ -806,7 +811,10 @@ span.sub-section {
 #clientList tfoot tr th:not(:last-child),
 #employeeList tbody tr td:not(:last-child),
 #employeeList thead tr th:not(:last-child),
-#employeeList tfoot tr th:not(:last-child){
+#employeeList tfoot tr th:not(:last-child),
+#reim-review tbody tr td:not(:last-child),
+#reim-review thead tr th:not(:last-child),
+#reim-review tfoot tr th:not(:last-child){
     border-right:1px solid #DDD;
 }
 table.dataTable thead th, table.dataTable tfoot th {
@@ -1134,7 +1142,8 @@ button {
 #clientList tbody tr,
 #attendanceTable tbody tr,
 #consultantList tbody tr,
-#employeeList tbody tr{
+#employeeList tbody tr,
+#reim-review tbody tr{
     cursor: pointer;
     height: 35px !important;
 }
@@ -1458,7 +1467,7 @@ table{
 }
 
 .theme4 #attendanceTable tbody tr.odd, .theme4 #candidatesList tbody tr.odd, .theme4 #clientList tbody tr.odd, .theme4 #employeeList tbody tr.odd, .theme4 #offerLetterList tbody tr.odd,
-.theme4 #clientList tbody tr.odd, .theme4 #consultantList tbody tr.odd {
+.theme4 #clientList tbody tr.odd, .theme4 #consultantList tbody tr.odd, .theme4 #reim-review tbody tr.odd {
     background-color: #FBDF92;
 }
 
@@ -1994,10 +2003,8 @@ ul[rn-carousel]>li {
 }
 
 .tasklist {
-    margin: 15px !important;
-    margin-top: 20px !important;
-    /* border-top: 2px solid red; */
-    /* border: 1px solid #ddd; */
+    width: 81%;
+    margin: 0 auto!important;
 }
 #tasksList_length,#tasksList_wrapper .dataTables_scrollHead,#tasksList_info	{
     display:none;
@@ -2469,11 +2476,23 @@ table #tasksList.display tbody tr.odd{
     padding: 15px!important;
 }
 .form-horizontal form.reimTableData-form{
-    float: left;
     padding-top: 0;
     border: none;
 }
 
+.candidate-summary.reim-summary {
+    margin-bottom: 20px;
+}
+.reim-review.container {
+   margin: 0 20px;
+       width: 97.5%;
+}
+.label-bold {
+    font-weight: bold;
+} 
+.reim-review .no-padding-left{
+    padding-left: 0!important;
+}
 .file-name.ng-binding {
     display: inline;
     font-weight: bold;
@@ -2514,4 +2533,24 @@ ul.uib-datepicker-popup.dropdown-menu {
 }
 table.uib-daypicker {
     table-layout: auto;
+}
+.hand-cursor {
+    cursor: pointer;
+}
+
+.reim-fields .inline input:focus {
+    margin:0!important;
+}
+span.dld-doc {
+    font-size: 50px;
+    color: #CC2727;
+    cursor: pointer;
+}
+.dld-label{
+    top: 25px;
+    position: absolute;
+    padding-left: 30px;
+}
+.reim-reject{
+    margin-right: 20px!important;
 }
