@@ -571,7 +571,7 @@
         };
         service.getTaskReviewDetails = function(data){
             var deferred = $q.defer();
-            Core_HttpRequest.post("api/reimburse/getReimburseTask",data)
+            Core_HttpRequest.get("/api/reimburse/getReimburse?reimburseId="+data)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

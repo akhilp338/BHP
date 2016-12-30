@@ -103,15 +103,10 @@ var dashBoardTable;
             if (filters)
                 filters.draw();
         };
-            $('#tasksList').on('click', '.action-view', function () {
+            $('#tasksList').on('click', 'td.action-view', function () {
                 var data = dashBoardTable.data()[$(this).parents("tr").index()];
-                var id = {id:data.taskEntityId}
-                Core_Service.getTaskReviewDetails(id).then(function(res){
-                    console.log(res)
-                },function(err){
-                     console.log(err)
-                })
-                $state.go(data.masterTask.taskRoute)
+                var id = data.taskEntityId;
+                $state.go(data.masterTask.taskRoute,{id:id});
             });            
 
         });

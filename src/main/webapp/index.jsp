@@ -121,6 +121,7 @@
         <script src="/BelhopatBackOffice/app/components/vendor/ViewVendor_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/Attendance/AttendanceMgmtCtrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/reimbursement/Reimbursement_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/reimbursement/Reim_Review_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/PO_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/AddPO_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/ViewPO_Ctrl.js"></script>

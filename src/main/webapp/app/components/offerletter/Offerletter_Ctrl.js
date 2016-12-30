@@ -84,11 +84,15 @@
                 fnDrawCallback: function (settings, ajax) {
 
                 },
+                oLanguage: {
+                    "sEmptyTable":     "My Custom Message On Empty Table"
+                },
                 language: {
                     zeroRecords: 'No data to display',
+                    infoEmpty: "No data to display",
+                    emptyTable: "No data to display",
                     searchPlaceholder: 'Search',
                     search: '',
-                    infoEmpty: '',
                     infoFiltered: ''
                 },
                 order: [[0, "desc"]],
