@@ -45,7 +45,7 @@ public class ReimburseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getReimburse", method = RequestMethod.GET)
-	public ResponseEntity<Reimburse> getReimburse(@RequestBody Long reimburseId) {
+	public ResponseEntity<Reimburse> getReimburse(@RequestParam Long reimburseId) {
 		return reimburseService.getReimburse(reimburseId);
 	}
 
