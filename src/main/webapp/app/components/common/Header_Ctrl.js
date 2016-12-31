@@ -5,6 +5,7 @@
         vm.logout = function () {
             Core_Service.ClearCredentials();
             $state.go('login');
+            window.location.href="BelhopatBackOffice/logout";
         }
         vm.triggerButton = function (event) {
             event.preventDefault();
@@ -31,6 +32,7 @@
         vm.sessionCheck= function(){
         	 Core_Service.sessionCheck().then(function (res){
         		if(res.data.startsWith("<!DOC")){
+        			window.location.href="BelhopatBackOffice/logout";
                    Core_Service.sweetAlert("No Session!", "Please login again", "success", "login");
                    
           		}

@@ -34,6 +34,7 @@ var dashBoardTable;
                 processing: true,
                 responsive: true,
                 bFilter:false,
+                iDisplayLength: 4,
                 fnDrawCallback: function (settings, ajax) {
                     console.log(settings)
                 },
