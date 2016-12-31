@@ -133,7 +133,7 @@
     </head>
 
     <body ng-class="{'login-page':isLogin,'loader-visible': isShowLoader,'inner-page':addPage, 'dashboard-page':isDashBoard, 'attendance-page':isAttendance}" ng-cloak>
-        <div ng-if="isShowLoader" class="loader-container"></div>
+        <div ng-if="isShowLoader || isDataLoader" class="loader-container"></div>
         <div id="errorUser">${error}</div>
         <div id="successUser">${user}</div>     
         <div class="response-loader" ng-show="!showLoader"></div>

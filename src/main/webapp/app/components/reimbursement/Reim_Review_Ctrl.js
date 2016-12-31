@@ -1,5 +1,5 @@
 (function () {
-    var Reim_Review_Ctrl = function ($scope, $state, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService, Core_HttpRequest) {
+    var Reim_Review_Ctrl = function ($scope, $timeout, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService, Core_HttpRequest) {
         var vm = this;
         vm.isInit = true;
         vm.reimSummary = {};
@@ -17,6 +17,7 @@
         
         vm.Reimtemplate = 'No Data fetched';
         angular.element(document).ready(function() {
+                $rootScope.isDataLoader = true;
                 vm.reimReviewTable = angular.element('#reim-review').DataTable({
                                 serverSide: false,
                                 "autoWidth": false,
@@ -78,6 +79,7 @@
             });
           
              });
+        
         if ($stateParams.id) {
         Core_Service.getTaskReviewDetails($stateParams.id).then(function(res){
             console.log(vm.reimReviewTable)
@@ -100,13 +102,20 @@
             }
             vm.Reimtemplate += '</div>';
                angular.element(".reim-summary").html(vm.Reimtemplate);
-               
+           $timeout(function(){
+               $rootScope.isDataLoader = false;  
+           },1000);     
         },function(err){
              console.log(err);
         });
     }
+    vm.approve = function(){
+        if(vs.checkFormValidity($scope)){
+            
+        }
+    };
 };
-    Reim_Review_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
+    Reim_Review_Ctrl.$inject = ["$scope", '$timeout', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
     angular.module('coreModule')
             .controller('Reim_Review_Ctrl', Reim_Review_Ctrl);
 })();

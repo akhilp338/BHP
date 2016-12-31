@@ -361,8 +361,10 @@ body, html {
 }
 
 button.link-btn {
+    color: white;
     background: transparent;
     border: none;
+    padding-left: 12px;
 }
 
 .logout-button {
@@ -2509,7 +2511,7 @@ div.loader-container {
     position: fixed;
     background-image: url("../images/loader-img.gif");
     background-repeat: no-repeat;
-    background-position: 58% center;
+    background-position: 50% center;
 }
 
 :not(.form-horizontal) .top-main-head .page-section-header{
