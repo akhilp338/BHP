@@ -439,7 +439,7 @@ public class BaseServiceImpl implements BaseService {
 				s3BucketFile.setBucketName(Constants.BUCKET_NAME);
 				s3BucketFile.setUserId(candidate.getCandidateId());
 				s3BucketFile.setFileType(Constants.OFR_LTR_FILE);
-				s3BucketFile.setContentType(Constants.PDF_CONTENT_TYPE);
+				s3BucketFile.setContentType("pdf");
 				s3BucketFile.setFileName(candidate.getCandidateId() + "_" + candidate.getFirstName());
 				// s3BucketFile.setFileEntityId(reimburseId);
 				ByteArrayInputStream byteContent = new ByteArrayInputStream(offerLetter);
