@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -52,6 +53,7 @@ import com.belhopat.backoffice.model.MasterRole;
 import com.belhopat.backoffice.model.MasterTask;
 import com.belhopat.backoffice.model.Reimburse;
 import com.belhopat.backoffice.model.ReimburseSequence;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Skill;
 import com.belhopat.backoffice.model.State;
@@ -73,6 +75,7 @@ import com.belhopat.backoffice.repository.EmployeeSequenceRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
 import com.belhopat.backoffice.repository.MasterTaskRepository;
 import com.belhopat.backoffice.repository.ReimburseSequenceRepository;
+import com.belhopat.backoffice.repository.S3BucketFileRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.repository.SkillRepository;
 import com.belhopat.backoffice.repository.StateRepository;
@@ -82,6 +85,7 @@ import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.repository.VendorSequenceRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.PDFService;
+import com.belhopat.backoffice.service.S3BucketCoreService;
 import com.belhopat.backoffice.session.SessionManager;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.DateUtil;
@@ -93,6 +97,9 @@ import com.itextpdf.text.DocumentException;
  */
 @Component
 public class BaseServiceImpl implements BaseService {
+
+	@Autowired
+	S3BucketFileRepository s3BucketFileRepository;
 
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
@@ -159,9 +166,12 @@ public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	ClientRepository clientRepository;
-	
+
 	@Autowired
 	VendorSequenceRepository vendorSequenceRepository;
+
+	@Autowired
+	S3BucketCoreService s3BucketCoreService;
 
 	/*
 	 * (non-Javadoc)
@@ -198,11 +208,11 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.COUNTRY, countryRepository.findAll());
 		dropDownMap.put(Constants.TIMEZONE, timezoneRepository.findAll());
 		dropDownMap.put(Constants.DIVISION, lookupDetailRepository.findByLookupKey(Constants.DIVISION));
-		dropDownMap.putAll( getEmployeeConsultantCommonDropDownData() ); 
+		dropDownMap.putAll(getEmployeeConsultantCommonDropDownData());
 		return dropDownMap;
 	}
-	
-	public Map<String, List<?>> getEmployeeConsultantCommonDropDownData(){
+
+	public Map<String, List<?>> getEmployeeConsultantCommonDropDownData() {
 		Map<String, List<?>> dropDownMap = new HashMap<>();
 		dropDownMap.put(Constants.CLIENT_STATUS, lookupDetailRepository.findByLookupKey(Constants.CLIENT_STATUS));
 		dropDownMap.put(Constants.DESIGNATION, lookupDetailRepository.findByLookupKey(Constants.DESIGNATION));
@@ -210,8 +220,8 @@ public class BaseServiceImpl implements BaseService {
 		dropDownMap.put(Constants.EMP_DESIG_BUH, employeeRepository.findByDesignation(Constants.EMP_DESIG_BUH));
 		return dropDownMap;
 	}
-	
-	public Map<String, List<?>> getCandidateConsultantCommonDropDownData(){
+
+	public Map<String, List<?>> getCandidateConsultantCommonDropDownData() {
 		Map<String, List<?>> dropDownMap = new HashMap<>();
 		List<Skill> skills = skillRepository.findAll();
 		List<Country> countries = countryRepository.findAll();
@@ -231,11 +241,10 @@ public class BaseServiceImpl implements BaseService {
 	@Override
 	public ResponseEntity<Map<String, List<?>>> getConsultantDropDownData() {
 		Map<String, List<?>> dropDownMap = new HashMap<>();
-		dropDownMap.putAll( getEmployeeConsultantCommonDropDownData() ); 
-		dropDownMap.putAll( getCandidateConsultantCommonDropDownData() ); 
+		dropDownMap.putAll(getEmployeeConsultantCommonDropDownData());
+		dropDownMap.putAll(getCandidateConsultantCommonDropDownData());
 		return new ResponseEntity<Map<String, List<?>>>(dropDownMap, HttpStatus.OK);
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -308,7 +317,7 @@ public class BaseServiceImpl implements BaseService {
 		} else if (clazz.equals(Consultant.class)) {
 			ConsultantSequence consultantSequence = consultantSequenceRepository.save(new ConsultantSequence());
 			increment = consultantSequence.getId();
-		}else if (clazz.equals(Vendor.class)) {
+		} else if (clazz.equals(Vendor.class)) {
 			VendorSequence vendorSequence = vendorSequenceRepository.save(new VendorSequence());
 			increment = vendorSequence.getId();
 		}
@@ -415,8 +424,7 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary)
-			throws MalformedURLException, DocumentException, IOException, ParseException {
+	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary) throws Exception {
 		if (employeeSalary != null) {
 			if (employeeSalary.getCandidate() != null) {
 				Candidate candidate = candidateRepository.findById(employeeSalary.getCandidate().getId());
@@ -424,8 +432,21 @@ public class BaseServiceImpl implements BaseService {
 				employeeSalary.setStatus(Constants.GENERATED);
 				employeeSalary.setBaseAttributes(currentUser);
 				employeeSalary.setUpdateAttributes(currentUser);
-				// byte[] offerLetter =
-				pdfService.generateOfferLetterPDF(employeeSalary);
+				byte[] offerLetter = pdfService.generateOfferLetterPDF(employeeSalary);
+				User loggedInUser = SessionManager.getCurrentUserAsEntity();
+				S3BucketFile s3BucketFile = new S3BucketFile();
+				s3BucketFile.setBaseAttributes(loggedInUser);
+				s3BucketFile.setBucketName(Constants.BUCKET_NAME);
+				s3BucketFile.setUserId(candidate.getCandidateId());
+				s3BucketFile.setFileType(Constants.OFR_LTR_FILE);
+				s3BucketFile.setContentType(Constants.PDF_CONTENT_TYPE);
+				s3BucketFile.setFileName(candidate.getCandidateId() + "_" + candidate.getFirstName());
+				// s3BucketFile.setFileEntityId(reimburseId);
+				ByteArrayInputStream byteContent = new ByteArrayInputStream(offerLetter);
+				boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
+				if (status) {
+					s3BucketFileRepository.save(s3BucketFile);
+				}
 				// String document =
 				// alfrescoUploadService.uploadFileByCategory(offerLetter,employeeSalary,Constants.OFFER_LETTERS);
 				employeeSalary

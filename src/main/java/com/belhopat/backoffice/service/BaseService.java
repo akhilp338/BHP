@@ -48,7 +48,7 @@ public interface BaseService {
 			throws MalformedURLException, DocumentException, IOException, ParseException;
 
 	public ResponseEntity<EmployeeSalary> saveSalaryAndOfferLetter(EmployeeSalary employeeSalary)
-			throws MalformedURLException, DocumentException, IOException, ParseException;
+			throws MalformedURLException, DocumentException, IOException, ParseException, Exception;
 
 	public ResponseEntity<List<Task>> getCurrentUserTasks();
 

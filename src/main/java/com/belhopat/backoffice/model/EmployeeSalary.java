@@ -76,7 +76,7 @@ public class EmployeeSalary extends BaseEntity {
 	@Column(name = "[STATUS]", length = 15)
 	private String status;
 
-	@Column(name = "OFR_LTR_FL_NAME", length = 15)
+	@Column(name = "OFR_LTR_FL_NAME", length = 40)
 	private String offerLetterFileName;
 
 	@OneToOne
