@@ -70,8 +70,13 @@ var dashBoardTable;
                         bSortable: true,
                         sClass: "button-column action-view",
                         render: function (data) {
+                            var classMap = {
+                                'APPROVED':'btn-success',
+                                'CREATED':'btn-warning',
+                                'REJECTED':'btn-danger'
+                            };
                             var className;
-                                className = data == 'completed' ? 'btn-success' : 'btn-warning'
+                                className = classMap[data]
                             return '<button type="button" class="btn ' +className+ '">' +data+ '</button>'
                         }
                     }]

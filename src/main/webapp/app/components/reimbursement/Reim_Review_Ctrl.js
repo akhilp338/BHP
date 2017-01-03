@@ -1,5 +1,5 @@
 (function () {
-    var Reim_Review_Ctrl = function ($scope, $timeout, $rootScope, Core_Service, urlConfig, $stateParams, $window, validationService, Core_HttpRequest) {
+    var Reim_Review_Ctrl = function ($scope, $timeout, $rootScope, Core_Service, $state, $stateParams, $window, validationService, Core_HttpRequest) {
         var vm = this;
         vm.isInit = true;
         vm.reimSummary = {};
@@ -27,7 +27,7 @@
                                 "info": false,
                                 "bFilter": false,
 	                        processing: true,
-	                        responsive: true,                
+	                        responsive: true,
 	                        fnDrawCallback: function (settings, ajax) {
 	                        	Core_Service.calculateSidebarHeight();
 	                        },
@@ -47,7 +47,8 @@
                                                 "mDataProp": null,
                                                 "sWidth": "10px",
                                                 "sDefaultContent": "<input type='checkbox' class='hand-cursor data-check'></input>",
-                                                "bSortable": false
+                                                "bSortable": false,
+                                                "visible": false
                                             },
                                             {
                                                 "sTitle": "Date",
@@ -109,13 +110,23 @@
              console.log(err);
         });
     }
-    vm.approve = function(){
+    vm.approveOrReject = function(isApprove){
+        var action = isApprove ? 'APPROVED' : 'REJECTED',
+                data = {taskId:$stateParams.id,
+                        comment:vm.reimReviewData.remarks,
+                        amount: vm.reimReviewData.amountApproved,
+                        action: action};
         if(vs.checkFormValidity($scope)){
-            
+            Core_Service.approveOrRejectReimburse(data).then(function(res){
+               $state.go('coreuser.dashboard'); 
+            },function(error){
+               console.log(error);  
+            });
         }
     };
+    
 };
-    Reim_Review_Ctrl.$inject = ["$scope", '$timeout', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
+    Reim_Review_Ctrl.$inject = ["$scope", '$timeout', '$rootScope', 'Core_Service', '$state', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];
     angular.module('coreModule')
             .controller('Reim_Review_Ctrl', Reim_Review_Ctrl);
 })();
