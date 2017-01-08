@@ -640,7 +640,7 @@ button.link-btn {
 }
 
 #poList,#candidatesList, #employeeList, #clientList, #offerLetterList, #consultantList,
-#reim-review {
+#reim-review, #tasksList {
     border-collapse: separate;
     border: 1px solid #ddd;
     margin: 0;
@@ -2005,7 +2005,7 @@ ul[rn-carousel]>li {
 }
 
 .tasklist {
-    width: 81%;
+    width: 92%;
     margin: 0 auto!important;
 }
 #tasksList_length,#tasksList_wrapper .dataTables_scrollHead,#tasksList_info	{
@@ -2555,4 +2555,19 @@ span.dld-doc {
 }
 .reim-reject{
     margin-right: 20px!important;
+}
+button.logout-link:hover{
+    text-decoration: underline;
+}
+#tasksList.dataTable {
+ display: block;
+ margin-top: 30px;
+}
+
+#tasksList.dataTable.row-border tbody th,
+#tasksList.dataTable.row-border tbody td,
+#tasksList.dataTable.display tbody th,
+#tasksList.dataTable.display tbody td {
+    border-top: 1px solid #eceff4;
+    border-right: 1px solid #eceff4;
 }

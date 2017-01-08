@@ -582,6 +582,22 @@
                     });
             return deferred.promise;
         };
+        
+        service.approveOrRejectReimburse = function (reimData) {
+            var deferred = $q.defer();
+            var user = {};
+            Core_HttpRequest.post("/api/dashboard/approveOrRejectReimburse",reimData)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
