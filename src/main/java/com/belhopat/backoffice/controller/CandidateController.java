@@ -13,6 +13,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UploadDTO;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
@@ -60,9 +63,9 @@ public class CandidateController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		// EmployeeSalary salary = new EmployeeSalary();
 		// pdfService.generateOfferLetterPDF(salary);
-//		excelService.uploadExcel("ATNDNCE", null);
-//		baseService.saveImageIntoUser();
-//		baseService.upload();
+		// excelService.uploadExcel("ATNDNCE", null);
+		// baseService.saveImageIntoUser();
+		// baseService.upload();
 		return candidateService.getCandidates(input, employee);
 	}
 
@@ -181,6 +184,13 @@ public class CandidateController {
 	public ResponseEntity<List<Task>> getCurrentUserTasks() {
 		ResponseEntity<List<Task>> tasks = baseService.getCurrentUserTasks();
 		return tasks;
+	}
+
+	@ResponseBody
+	@RequestMapping("/uploadFiles")
+	public UploadResponse uploadResources(@ModelAttribute UploadDTO uploadDTO) throws IOException, Exception {
+		UploadResponse response = candidateService.uploadFiles(uploadDTO);
+		return response;
 	}
 
 }

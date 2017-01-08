@@ -1,6 +1,9 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.belhopat.backoffice.dto.AddressDTO;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
@@ -25,19 +29,26 @@ import com.belhopat.backoffice.dto.EmploymentInfoDTO;
 import com.belhopat.backoffice.dto.OfficialInfoDTO;
 import com.belhopat.backoffice.dto.PersonalInfoDTO;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UploadDTO;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
+import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
+import com.belhopat.backoffice.repository.S3BucketFileRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.MailService;
+import com.belhopat.backoffice.service.S3BucketCoreService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.DateUtil;
 import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
@@ -61,7 +72,13 @@ public class CandidateServiceImpl implements CandidateService {
 	EmployeeSalaryRepository employeeSalaryRepository;
 
 	@Autowired
+	S3BucketFileRepository s3BucketFileRepository;
+
+	@Autowired
 	MailService mailService;
+
+	@Autowired
+	S3BucketCoreService s3BucketCoreService;
 
 	/*
 	 * (non-Javadoc)
@@ -300,7 +317,7 @@ public class CandidateServiceImpl implements CandidateService {
 		if (candidateObj.getRegistrationStatus() != null) {
 			newCandidate.setRegistrationStatus(candidateObj.getRegistrationStatus());
 		}
-		if (candidateObj.getSkillSet() != null ) {
+		if (candidateObj.getSkillSet() != null) {
 			newCandidate.setSkillSet(candidateObj.getSkillSet());
 		}
 		newCandidate.setUpdateAttributes(loggedInUser);
@@ -367,13 +384,13 @@ public class CandidateServiceImpl implements CandidateService {
 	 */
 	private Candidate addCandidate(User loggedInUser, Candidate candidate) {
 		candidate.setBaseAttributes(loggedInUser);
-		Long increment = baseService.getSequenceIncrement( candidate.getClass() );
+		Long increment = baseService.getSequenceIncrement(candidate.getClass());
 		String candidateId = SequenceGenerator.generateCandidateId(increment);
 		candidate.setCandidateId(candidateId);
 		Candidate persisted = candidateRepository.save(candidate);
-		try{
-			mailService.sendCandidateRegMail( persisted );
-		}catch(MessagingException e){
+		try {
+			mailService.sendCandidateRegMail(persisted);
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		return persisted;
@@ -430,14 +447,17 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public DataTablesOutput<EmployeeSalary> getOfferLetters(DataTablesInput input) {
-//		Specification<EmployeeSalary> specification = new Specification<EmployeeSalary>() {
-//			@Override
-//			public Predicate toPredicate(Root<EmployeeSalary> root, CriteriaQuery<?> criteriaQuery,
-//					CriteriaBuilder criteriaBuilder) {
-//				Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"), false);
-//				return criteriaBuilder.and(isNotDeleted);
-//			}
-//		};
+		// Specification<EmployeeSalary> specification = new
+		// Specification<EmployeeSalary>() {
+		// @Override
+		// public Predicate toPredicate(Root<EmployeeSalary> root,
+		// CriteriaQuery<?> criteriaQuery,
+		// CriteriaBuilder criteriaBuilder) {
+		// Predicate isNotDeleted = criteriaBuilder.equal(root.get("deleted"),
+		// false);
+		// return criteriaBuilder.and(isNotDeleted);
+		// }
+		// };
 		DataTablesOutput<EmployeeSalary> dataTablesOutput = employeeSalaryRepository
 				.findAll(input/* , specification */);
 		return dataTablesOutput;
@@ -466,6 +486,36 @@ public class CandidateServiceImpl implements CandidateService {
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+	}
+
+	@Override
+	public UploadResponse uploadFiles(UploadDTO uploadDTO) throws Exception {
+		UploadResponse response = baseService.getErrorResponse();
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Employee loggedInEmployee = baseService.getloggedInEmployee();
+		if (uploadDTO.getFiles() == null || uploadDTO.getFiles().isEmpty()) {
+			return response;
+		}
+		List<S3BucketFile> s3BucketFiles = new ArrayList<>();
+		for (MultipartFile file : uploadDTO.getFiles()) {
+			S3BucketFile s3BucketFile = new S3BucketFile();
+			s3BucketFile.setBaseAttributes(loggedInUser);
+			s3BucketFile.setBucketName(Constants.BUCKET_NAME);
+			s3BucketFile.setUserId(loggedInEmployee.getEmployeeId());
+			s3BucketFile.setFileType(uploadDTO.getName());
+			String contentType = file.getOriginalFilename().split("\\.")[1];
+			s3BucketFile.setContentType(contentType);
+			s3BucketFile.setFileName(file.getOriginalFilename());
+			s3BucketFiles.add(s3BucketFile);
+			ByteArrayInputStream byteContent = new ByteArrayInputStream(file.getBytes());
+			boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
+			if(!status){
+				return response;
+			}
+		}
+		s3BucketFileRepository.save(s3BucketFiles);
+		response = baseService.getSuccessResponse();
+		return response;
 	}
 
 }
