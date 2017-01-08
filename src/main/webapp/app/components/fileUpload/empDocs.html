@@ -17,8 +17,8 @@
             <div class="row">
 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                    <span class="up-text">Upload</span>                    
-                    <input type="file" class="file-uploader upload" nv-file-select="" uploader="employeeDocsUploader" multiple />
+                    <span class="up-text">Choose files</span>                    
+                    <input type="file" class="file-uploader upload" nv-file-select="" uploader="employeeDocsUploader" multiple accept="application/pdf, image/*"/>
                 </div>
                 <p class="doc-count">Number of Docs: {{ employeeDocsUploader.queue.length}}</p>
 
@@ -63,7 +63,7 @@
     </uib-accordion>    
     <div class="bottom-button-liner">        
         <button ng-click="vm.uploadDocs()"
-                class="logout-button pull-right add-button upload-docs-btn" title="Add Employee">
+                class="logout-button pull-right add-button upload-docs-btn" title="Upload Docs">
             <span class="fa-stack fa-lg pull-left"><i
                     class="fa fa-upload" aria-hidden="true"></i></span>
             <span class="text">Upload Docs</span>              
