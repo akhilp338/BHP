@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
@@ -64,6 +66,13 @@ public class CandidateController {
 //		baseService.saveImageIntoUser();
 //		baseService.upload();
 		return candidateService.getCandidates(input, employee);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
+	public UploadResponse uploadAttendanceExcel(@RequestParam("file") List<MultipartFile>  file) throws IOException {
+//		UploadResponse response = excelService.uploadExcel("ATNDNCE", file);
+		return null;
 	}
 
 	/**

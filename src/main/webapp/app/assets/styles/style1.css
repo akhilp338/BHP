@@ -2532,6 +2532,7 @@ div.loader-container {
 ul.uib-datepicker-popup.dropdown-menu {
     border: 1px solid #dddddd;
     padding: 10px;
+        width: 346px;
 }
 table.uib-daypicker {
     table-layout: auto;
