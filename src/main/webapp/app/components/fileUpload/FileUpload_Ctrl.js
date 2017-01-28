@@ -25,7 +25,8 @@
             $state.go(state);
         };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: 'upload.php'
+            url: 'upload.php',
+            name: 'bank'
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
             url: 'upload.php'

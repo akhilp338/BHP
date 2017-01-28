@@ -114,7 +114,7 @@ var dashBoardTable;
         };
             $('#tasksList').on('click', 'td.action-view', function () {
                 var data = dashBoardTable.data()[$(this).parents("tr").index()];
-                var id = data.taskEntityId;
+                var id = data.id;
                 $state.go(data.masterTask.taskRoute,{id:id});
             });            
 
