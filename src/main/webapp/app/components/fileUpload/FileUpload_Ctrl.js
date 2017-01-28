@@ -25,7 +25,10 @@
             $state.go(state);
         };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: 'upload.php'
+            	
+            url: '/BelhopatBackOffice/api/candidate/uploadTest', 
+            type:'post',
+            success:function(resp){ console.log(resp); } 
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
             url: 'upload.php'
