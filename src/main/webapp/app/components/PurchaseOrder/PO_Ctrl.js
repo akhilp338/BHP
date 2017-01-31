@@ -7,16 +7,7 @@
 		};
         vm.back = function() {
             $state.go("coreuser.po");
-		};
-		//vm.getClient = function(data){
-        	//vm.getClientUrl = "api/client/getClient";
-//            Core_Servic/etCandidateImpl(vm.getClientUrl,id)
-//            .then( function(response) {
-               //vm.viewClient(data);
-//            },function(error){
-//            	
-//            });
-        //};        
+		};      
         
         vm.viewPO = function (data) {
             
@@ -137,14 +128,14 @@
 						}],
 					});
 			
-            $('#clientList').on('click', '.action-edit', function () {
+            $('#poList').on('click', '.action-edit', function () {
                 $rootScope.isShowLoader = true;
                 $rootScope.id = this.getAttribute('value');
-                $state.go('coreuser.client.edit', {id: $rootScope.id});
+                $state.go('coreuser.po.edit', {id: $rootScope.id});
             });
-            $('#clientList').on('click', '.action-view', function () {
-                var data = clientAddTable.data()[$(this).parents("tr").index()];
-                vm.getClient(data);
+            $('#poList').on('click', '.action-view', function () {
+                var data = poAddTable.data()[$(this).parents("tr").index()];
+                console.log(data);
             });
 
 		})

@@ -12,25 +12,13 @@
         else{
         	$state.go("login");  
         }
-       
-//        if ($rootScope.globals.currentUser) {
-//            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
-//        }
+
         $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
 
         });
-        $rootScope.datePickerValidation=function(date){
-        	var selectedDate = new Date(date);
-        	var currentDate = new Date();
-        	var timeDiff = Math.abs(currentDate.getTime() - selectedDate.getTime());
-        	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-        	if (diffDays<18){
-        		alert("Age should be above 18 years")
-        		return false;
-        	}
-        		
-        	
-        }
+        $rootScope.dobValidation=function(date){
+        	return Math.floor(moment().diff(moment(new Date(date).toUTCString()),'years',true)) >=18 ? true : false;
+        };
          $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {            
             var parts = toState.name.split(".");
             if(toState.name == "coreuser.offerletter.verify" && fromState.name == ""){                

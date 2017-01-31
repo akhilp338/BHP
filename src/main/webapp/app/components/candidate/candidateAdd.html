@@ -54,15 +54,15 @@
                                 <div class="controls">
                                     <p class="input-group">
                                         <input 
-                                               ng-change="datePickerValidation(vm.registration.dob)"
-                                        	   type="text"
+                                            uib-datepicker
+                                               validation="custom:dobValidation(vm.registration.dob):alt=You should have atleast 18 years old|required:alt=Required"
+                                               type="text"
                                                name="dob"
                                                show-button-bar ="false"
                                                class="form-input date-form"                                           
                                                ng-model="vm.registration.dob"
                                                is-open="vm.isDobPickerOpen"
-                                               uib-datepicker-popup="dd-MMM-yyyy"
-                                               datepicker-options="vm.dobDateOptions" 
+                                               uib-datepicker-popup="dd-MMM-yyyy"                                               
                                                readonly/>
                                         <span class="input-group-btn custom-datepick">
                                             <button type="button" 
@@ -356,6 +356,7 @@
                                                ng-model="vm.registration.doj"
                                                is-open="vm.isDojPickerOpen"
                                                uib-datepicker-popup="dd-MMM-yyyy"
+                                               min-date="vm.minDate" 
                                                readonly/>
                                         <span class="input-group-btn custom-datepick">
                                             <button type="button" 
