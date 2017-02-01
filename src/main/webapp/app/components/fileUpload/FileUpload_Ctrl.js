@@ -25,7 +25,7 @@
             $state.go(state);
         };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile', 
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="Sujith"&userId=1', 
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
