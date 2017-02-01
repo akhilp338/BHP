@@ -1,9 +1,7 @@
 package com.belhopat.backoffice.service.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +19,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.belhopat.backoffice.dto.AddressDTO;
 import com.belhopat.backoffice.dto.CandidateViewDTO;
@@ -33,7 +30,6 @@ import com.belhopat.backoffice.dto.UploadDTO;
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.BankAccount;
 import com.belhopat.backoffice.model.Candidate;
-import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
@@ -489,31 +485,27 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public UploadResponse uploadFiles(UploadDTO uploadDTO) throws Exception {
+	public UploadResponse uploadFile(UploadDTO uploadDTO) throws Exception {
 		UploadResponse response = baseService.getErrorResponse();
 		User loggedInUser = SessionManager.getCurrentUserAsEntity();
-		Employee loggedInEmployee = baseService.getloggedInEmployee();
-		if (uploadDTO.getFiles() == null || uploadDTO.getFiles().isEmpty()) {
+		Candidate candidate = candidateRepository.findById(uploadDTO.getUserId());
+		if (uploadDTO.getFile() == null || uploadDTO.getFile().isEmpty()) {
 			return response;
 		}
-		List<S3BucketFile> s3BucketFiles = new ArrayList<>();
-		for (MultipartFile file : uploadDTO.getFiles()) {
-			S3BucketFile s3BucketFile = new S3BucketFile();
-			s3BucketFile.setBaseAttributes(loggedInUser);
-			s3BucketFile.setBucketName(Constants.BUCKET_NAME);
-			s3BucketFile.setUserId(loggedInEmployee.getEmployeeId());
-			s3BucketFile.setFileType(uploadDTO.getName());
-			String contentType = file.getOriginalFilename().split("\\.")[1];
-			s3BucketFile.setContentType(contentType);
-			s3BucketFile.setFileName(file.getOriginalFilename());
-			s3BucketFiles.add(s3BucketFile);
-			ByteArrayInputStream byteContent = new ByteArrayInputStream(file.getBytes());
-			boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
-			if(!status){
-				return response;
-			}
+		S3BucketFile s3BucketFile = new S3BucketFile();
+		s3BucketFile.setBaseAttributes(loggedInUser);
+		s3BucketFile.setBucketName(Constants.BUCKET_NAME);
+		s3BucketFile.setUserId(candidate.getCandidateId());
+		s3BucketFile.setFileType(uploadDTO.getType());
+		String contentType = uploadDTO.getFile().getOriginalFilename().split("\\.")[1];
+		s3BucketFile.setContentType(contentType);
+		s3BucketFile.setFileName(uploadDTO.getFile().getOriginalFilename());
+		ByteArrayInputStream byteContent = new ByteArrayInputStream(uploadDTO.getFile().getBytes());
+		boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
+		if (!status) {
+			return response;
 		}
-		s3BucketFileRepository.save(s3BucketFiles);
+		s3BucketFileRepository.save(s3BucketFile);
 		response = baseService.getSuccessResponse();
 		return response;
 	}

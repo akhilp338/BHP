@@ -41,6 +41,6 @@ public interface CandidateService {
 
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary);
 
-	public UploadResponse uploadFiles(UploadDTO uploadDTO) throws IOException, Exception;
+	public UploadResponse uploadFile(UploadDTO uploadDTO) throws IOException, Exception;
 
 }

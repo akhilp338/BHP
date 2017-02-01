@@ -1,33 +1,41 @@
 package com.belhopat.backoffice.dto;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadDTO {
 
-	private List<MultipartFile> files;
+	private MultipartFile file;
 
-	private String name;
+	private String type;
 
-	public List<MultipartFile> getFiles() {
-		return files;
+	private Long userId;
+
+	public MultipartFile getFile() {
+		return file;
 	}
 
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "UploadDTO [files=" + files + ", name=" + name + "]";
+		return "UploadDTO [file=" + file + ", type=" + type + ", userId=" + userId + "]";
 	}
 }
