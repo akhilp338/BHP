@@ -467,5 +467,13 @@ public class CandidateServiceImpl implements CandidateService {
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
+	
+	@Override
+	public ResponseEntity<EmployeeSalary> requestForAHApproval(EmployeeSalary employeeSalary) {
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_AH_APPROVAL);
+		employeeSalary.setCurrentTask(currentTask);
+		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
+	}
 
 }
