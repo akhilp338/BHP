@@ -2514,7 +2514,8 @@ div.loader-container {
     background-position: 50% center;
 }
 
-:not(.form-horizontal) .top-main-head .page-section-header{
+:not(.form-horizontal) .top-main-head .page-section-header,
+.PO-Section-head{
     padding-left: 20px;
 }
 

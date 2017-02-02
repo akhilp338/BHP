@@ -109,6 +109,35 @@
                     "businessUnit":"Business Unit",
                 }
             
+            }).constant('PO', {
+                "fieldMapping": {
+                    'balanceAmount': 'Balance Amount',
+                    'billedAmount': 'Billed Amount',
+                    'createdBy': {
+                        "label":'Created By',
+                        "valueKey": "email"
+                    },
+                    'createdDate': 'Created Date',
+                    'currency': {
+                        "label":"Currency Used",
+                        "valueKey": "description"
+                    },
+                    'monthlyRate': 'Monthly Rate',
+                    'poDate': 'PO Date',
+                    'poDesc': 'PO Description',
+                    'poValue':'PO Value',
+                    'purchaseOrderNo':'PO Number',
+                    'status':{
+                        "label":"PO Status",
+                        "valueKey": "description"
+                    },
+                    'updatedBy':{
+                        "label":'Updated By',
+                        "valueKey": "email"
+                    },
+                    'updatedDate':'Updated Date'
+                }
+            
             });
 
 })();
