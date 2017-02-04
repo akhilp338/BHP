@@ -40,6 +40,8 @@ public interface CandidateService {
 	public DataTablesOutput<Candidate> getUnProcessedCandidates(DataTablesInput input, boolean employee);
 
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary);
+	
+	public ResponseEntity<EmployeeSalary> requestForAHApproval(EmployeeSalary employeeSalary);
 
 	public UploadResponse uploadFile(UploadDTO uploadDTO) throws IOException, Exception;
 

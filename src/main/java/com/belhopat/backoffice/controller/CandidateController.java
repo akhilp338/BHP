@@ -166,6 +166,12 @@ public class CandidateController {
 	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
 		return candidateService.requestForApproval(employeeSalary);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/requestForAHApproval", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> requestForAHApproval(@RequestBody EmployeeSalary employeeSalary) {
+		return candidateService.requestForAHApproval(employeeSalary);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
