@@ -96,7 +96,7 @@ import com.itextpdf.text.DocumentException;
  * @author BHP_DEV service implementation for general functionalities
  */
 @Component
-public class BaseServiceImpl implements BaseService {
+public abstract class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	S3BucketFileRepository s3BucketFileRepository;
@@ -333,7 +333,7 @@ public class BaseServiceImpl implements BaseService {
 	}
 
 	@Override
-	public Task createNewTaskList(String taskName) {
+	public Task createNewTaskList(String taskName,Long taskId) {
 		User currentUser = SessionManager.getCurrentUserAsEntity();
 		Task currentTaskRow = new Task();
 		MasterTask currentTask = masterTaskRepository.findByTaskKey(taskName);
@@ -341,6 +341,7 @@ public class BaseServiceImpl implements BaseService {
 			currentTaskRow.setBaseAttributes(currentUser);
 			currentTaskRow.setCompleted(true);
 			currentTaskRow.setMasterTask(currentTask);
+			currentTaskRow.setTaskEntityId(taskId);
 			currentTaskRow.setStatus(TaskConstants.CREATED);
 			MasterTask nextTask = masterTaskRepository.findById(currentTask.getNextTaskId());
 			taskRepository.save(currentTaskRow);
@@ -671,6 +672,12 @@ public class BaseServiceImpl implements BaseService {
 					+ "such as not being able to access the network.");
 			System.out.println("Error Message: " + ace.getMessage());
 		}
+	}
+
+	@Override
+	public ResponseEntity<EmployeeSalary> getOfferLetterDetails(Long id) {
+		EmployeeSalary salary = employeeSalaryRepository.getOne(id);
+		return new ResponseEntity<EmployeeSalary>(salary, HttpStatus.OK);
 	}
 
 }

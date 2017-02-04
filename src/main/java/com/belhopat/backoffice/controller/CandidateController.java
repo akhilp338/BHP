@@ -201,6 +201,14 @@ public class CandidateController {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/getOfferLetterDetails", method = RequestMethod.GET)
+	public ResponseEntity<EmployeeSalary> getOfferLetterDetails(Long offerLetterId) {
+		ResponseEntity<EmployeeSalary> salary = baseService.getOfferLetterDetails(offerLetterId);
+		return salary;
+	}
+
+	
+	@ResponseBody
 	@RequestMapping("/uploadFile")
 	public UploadResponse uploadResources(@ModelAttribute UploadDTO uploadDTO) throws IOException, Exception {
 		UploadResponse response = candidateService.uploadFile(uploadDTO);
