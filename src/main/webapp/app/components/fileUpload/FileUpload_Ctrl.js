@@ -25,24 +25,24 @@
             $state.go(state);
         };    	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadTest', 
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="Sujith"&userId=1', 
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
-            url: 'upload.php'
+            url: '/BelhopatBackOffice/api/candidate/uploadFile'
         });
         var licenceUploader = $scope.licenceUploader = new FileUploader({
-            url: 'upload.php'
+            url: '/BelhopatBackOffice/api/candidate/uploadFile'
         });
         var panUploader =  $scope.panUploader = new FileUploader({
-            url: 'upload.php'
+            url: '/BelhopatBackOffice/api/candidate/uploadFile'
         });
         var forexUploader =  $scope.forexUploader = new FileUploader({
-            url: 'upload.php'
+            url: '/BelhopatBackOffice/api/candidate/uploadFile'
         });
         var employeeDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
-            url: 'upload.php'
+            url: '/BelhopatBackOffice/api/candidate/uploadFile'
         });
         var reimDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
             url: '/api/attendance/uploadAttendanceExcel'

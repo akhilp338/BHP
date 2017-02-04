@@ -442,7 +442,7 @@
 		            }
 		})
                 .state('coreuser.reimbursement.review', {
-		            url: urlConfig.root_path + 'reimbursement/review/:id',
+		            url: urlConfig.root_path + 'reimbursement/review/:taskId/:id',
 		            views: {
 		                'content@': {
 		                    templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reim-review.html',
