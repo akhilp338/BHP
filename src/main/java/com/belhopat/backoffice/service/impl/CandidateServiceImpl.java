@@ -478,7 +478,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary) {
-		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION);
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION,employeeSalary.getId());
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
@@ -486,7 +486,7 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	@Override
 	public ResponseEntity<EmployeeSalary> requestForAHApproval(EmployeeSalary employeeSalary) {
-		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_AH_APPROVAL);
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_AH_APPROVAL,employeeSalary.getId());
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
