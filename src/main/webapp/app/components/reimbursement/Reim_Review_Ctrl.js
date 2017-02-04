@@ -81,8 +81,8 @@
           
              });
         
-        if ($stateParams.id) {
-        Core_Service.getTaskReviewDetails($stateParams.id).then(function(res){
+        if ($stateParams.taskId) {
+        Core_Service.getTaskReviewDetails($stateParams.taskId).then(function(res){
             console.log(vm.reimReviewTable)
             vm.reimReviewTable.rows.add(res.expenses).draw();
             vm.Reimtemplate = "<div class='reim-summary-container col-md-10 col-lg-10 col-sm-10 col-xs-12'>";
