@@ -93,7 +93,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 		} else {
 			purchaseOrder = updatePurchaseOrder(loggedInUser, purchaseOrderObj);
 		}
-		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO);
+		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO,null);
 		if (purchaseOrder != null) {
 			responseMap.put("Message", purchaseOrder.getVendor()==null?"":purchaseOrder.getVendor().getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);

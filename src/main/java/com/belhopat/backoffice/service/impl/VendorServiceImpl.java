@@ -110,7 +110,7 @@ public class VendorServiceImpl implements VendorService {
 		} else {
 			vendor = updateVendor(loggedInUser, vendorObj);
 		}
-		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO);
+		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO,null);
 		if (vendor != null) {
 			responseMap.put("Message", vendor.getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
