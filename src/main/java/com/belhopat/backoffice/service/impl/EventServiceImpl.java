@@ -36,7 +36,7 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	BaseService baseService;
 
@@ -56,16 +56,10 @@ public class EventServiceImpl implements EventService {
 		User loggedInUser = SessionManager.getCurrentUser();
 		event.setBaseAttributes(loggedInUser);
 		event = eventRepository.save(event);
-		baseService.createNewTaskList(TaskConstants.GENERAL_TASK);
-//		mailService.sendEventInvitaionMail(event);
-		if (event != null) {
-			return new ResponseEntity<Event>(event, HttpStatus.OK);
-		}else{
-			
-			return new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
-		}
+		baseService.createNewTaskList(TaskConstants.GENERAL_TASK, event.getId());
+		// mailService.sendEventInvitaionMail(event);
+		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
-
 
 	@Override
 	public ResponseEntity<Event> updateEvent(Event editedEvent) {

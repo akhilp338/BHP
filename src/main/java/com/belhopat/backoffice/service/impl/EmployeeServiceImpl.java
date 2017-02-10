@@ -114,7 +114,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee.setBelhopatDesignation(employeeDto.getBelhopatDesignation());
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
-		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID);
+		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID,employee.getId());
 		if (employee != null) {
 			Map<String, String> responseMap = new HashMap<>();
 			Candidate candidate = candidateRepository.findById(employeeDto.getEmployeeMasterId());
