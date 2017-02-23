@@ -31,6 +31,9 @@
         service.openViewConsultantModal = function (data) {
             return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/consultant/viewConsultant.html', 'ViewConsultant_Ctrl', 'vm', data);
         };
+        service.openViewPOModal = function (data) {
+            return Core_Modal.modalOpen('view-modal', '/BelhopatBackOffice/app/components/PurchaseOrder/viewPO.html', 'ViewPO_Ctrl', 'vm', data);
+        };
     };
     angular.module('app.common')
         .service('Core_ModalService', Core_ModalService);

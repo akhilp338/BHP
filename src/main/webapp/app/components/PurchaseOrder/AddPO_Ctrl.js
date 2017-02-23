@@ -9,18 +9,35 @@
             vm[id] = true;
         };
         
-        vm.purchaseOrder = {};
+        vm.purchaseOrder = {}; 
 		 Core_Service.getPODropDownData().then(function (res) {
 	            vm.purchaseOrder.lookups = res;
 	        }, function (err) {
 	            console.log(err)
 	        });
-		 
-		vm.purchaseOrder = {};
+        vs = new validationService({
+            controllerAs: vm
+        });
+        vs.setGlobalOptions({
+            debounce: 1500,
+            scope: $scope,
+            isolatedScope: $scope,
+            preValidateFormElements: false,
+            displayOnlyLastErrorMsg: true
+        });
+        
+        if ($stateParams.id) {
+            Core_Service.getPOImpl("api/purchaseOrder/getPurchaseOrder", $stateParams.id).then(function (data) {
+                vm.registration = data;                
+                $rootScope.isShowLoader = false;
+            }, function (err) {
+                vm.registration = {};
+            });
+        }
+        
         vm.urlForLookups = "api/purchaseOrder/getDropDownData";
         Core_Service.getAllLookupValues(vm.urlForLookups)
                 .then(function (response) {
-                	debugger;
                     vm.purchaseOrder.lookups = response;
                 }, function (error) {
 
@@ -29,9 +46,8 @@
         $rootScope.active = 'po';
         
         vm.addPO = function () {
-        	debugger;
             vm.registerUrl = "api/purchaseOrder/saveOrUpdatePurchaseOrder";
-//            if(vs.checkFormValidity($scope.regForm)){
+           if(vs.checkFormValidity($scope.regForm)){
                 Core_Service.sweetAlertWithConfirm("PO Details filled!", "Are you sure to add this PO?", "warning", function(){
                 	vm.registration.expiry = new Date();
                 	vm.registration.poDate = new Date();
@@ -43,7 +59,7 @@
                     			"error","coreuser.po");
                     });
                 });
-//            }
+            }
         };
         
     };

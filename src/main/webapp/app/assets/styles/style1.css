@@ -2514,7 +2514,8 @@ div.loader-container {
     background-position: 50% center;
 }
 
-:not(.form-horizontal) .top-main-head .page-section-header{
+:not(.form-horizontal) .top-main-head .page-section-header,
+.PO-Section-head{
     padding-left: 20px;
 }
 
@@ -2532,6 +2533,7 @@ div.loader-container {
 ul.uib-datepicker-popup.dropdown-menu {
     border: 1px solid #dddddd;
     padding: 10px;
+        width: 346px;
 }
 table.uib-daypicker {
     table-layout: auto;

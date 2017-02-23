@@ -33,7 +33,6 @@
         	 Core_Service.sessionCheck().then(function (res){
         		if(res.data.startsWith("<!DOC")){
         			window.location.href="BelhopatBackOffice/logout";
-                   Core_Service.sweetAlert("No Session!", "Please login again", "success", "login");
                    
           		}
              },function (error){

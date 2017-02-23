@@ -16,7 +16,7 @@ var candidatesListTable;
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-        
+        vm.minDate = new Date();
         vm.isCheckboxEnable = false;
         $scope.steps = [
             'Step 1: Personal Information',

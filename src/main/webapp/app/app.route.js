@@ -157,8 +157,8 @@
 		            url: '/offerletter/review',
 		            views: {
 		                'content@': {
-		                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offerVerify.html',
-		                    controller: 'Offerletter_Ctrl',
+		                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offer-review.html',
+		                    controller: 'Offer_Review_Ctrl',
 		                    controllerAs: 'vm'
 		                }
 		            }
@@ -442,7 +442,7 @@
 		            }
 		})
                 .state('coreuser.reimbursement.review', {
-		            url: urlConfig.root_path + 'reimbursement/review/:id',
+		            url: urlConfig.root_path + 'reimbursement/review/:taskId/:id',
 		            views: {
 		                'content@': {
 		                    templateUrl: '/BelhopatBackOffice/app/components/reimbursement/reim-review.html',

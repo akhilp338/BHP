@@ -56,7 +56,7 @@ public interface BaseService {
 
 	public List<Task> updateTaskList(String taskName);
 
-	public Task createNewTaskList(String taskName);
+	public Task createNewTaskList(String taskName, Long long1);
 
 	public void getFileByNameAndCategory(Long empSalId, HttpServletResponse response) throws IOException;
 
@@ -86,5 +86,7 @@ public interface BaseService {
 	public UploadResponse getErrorResponse();
 
 	ResponseEntity<Map<String, List<?>>> getConsultantDropDownData();
+
+	public ResponseEntity<EmployeeSalary> getOfferLetterDetails(Long offerLetterId);
 	
 }

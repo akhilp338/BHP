@@ -13,15 +13,19 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.belhopat.backoffice.dto.CandidateViewDTO;
 import com.belhopat.backoffice.dto.RequestObject;
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.UploadDTO;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
 import com.belhopat.backoffice.model.SalaryGrade;
@@ -60,10 +64,17 @@ public class CandidateController {
 			throws MalformedURLException, DocumentException, IOException, ParseException {
 		// EmployeeSalary salary = new EmployeeSalary();
 		// pdfService.generateOfferLetterPDF(salary);
-//		excelService.uploadExcel("ATNDNCE", null);
-//		baseService.saveImageIntoUser();
-//		baseService.upload();
+		// excelService.uploadExcel("ATNDNCE", null);
+		// baseService.saveImageIntoUser();
+		// baseService.upload();
 		return candidateService.getCandidates(input, employee);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
+	public UploadResponse uploadAttendanceExcel(@RequestParam("file") List<MultipartFile> file) throws IOException {
+		// UploadResponse response = excelService.uploadExcel("ATNDNCE", file);
+		return null;
 	}
 
 	/**
@@ -155,6 +166,12 @@ public class CandidateController {
 	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
 		return candidateService.requestForApproval(employeeSalary);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/requestForAHApproval", method = RequestMethod.POST)
+	public ResponseEntity<EmployeeSalary> requestForAHApproval(@RequestBody EmployeeSalary employeeSalary) {
+		return candidateService.requestForAHApproval(employeeSalary);
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/saveSalaryAndOfferLetter", method = RequestMethod.POST)
@@ -181,6 +198,21 @@ public class CandidateController {
 	public ResponseEntity<List<Task>> getCurrentUserTasks() {
 		ResponseEntity<List<Task>> tasks = baseService.getCurrentUserTasks();
 		return tasks;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getOfferLetterDetails", method = RequestMethod.GET)
+	public ResponseEntity<EmployeeSalary> getOfferLetterDetails(Long offerLetterId) {
+		ResponseEntity<EmployeeSalary> salary = baseService.getOfferLetterDetails(offerLetterId);
+		return salary;
+	}
+
+	
+	@ResponseBody
+	@RequestMapping("/uploadFile")
+	public UploadResponse uploadResources(@ModelAttribute UploadDTO uploadDTO) throws IOException, Exception {
+		UploadResponse response = candidateService.uploadFile(uploadDTO);
+		return response;
 	}
 
 }

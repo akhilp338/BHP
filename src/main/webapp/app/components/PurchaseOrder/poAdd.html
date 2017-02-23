@@ -1,7 +1,7 @@
 <div class="form-horizontal consultant-add" name="po_reg_form">
     
     <div class="top-main-head pull-left width-100">
-        <h4 class="pull-left page-section-header-po">Fill Purchase Order Details</h4>
+        <h4 class="pull-left page-section-header-po">Purchase Order Details</h4>
         <button ng-click="vm.back()"
 			class="logout-button pull-right add-button" title="Back To Home Screen">
 			<span class="fa-stack fa-lg pull-left"><i
@@ -14,7 +14,7 @@
             <div class="data-outer col-md-12 col-lg-12 col-sm-12 col-xs-12">                        
                 <div class="data-main-container">
                     <header class="data-main-container-header">Basic Information</header>
-
+                    <div class="row">        
                     <div
                         class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poNo">PO Number</label>
@@ -68,6 +68,8 @@
                                    maxlength="10" />
                         </div>
                     </div>
+                    </div>
+                    <div class="row">
                     <div
                         class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left">
                         <label class="control-label" for="poValue">PO Value</label>
@@ -123,6 +125,7 @@
                                    ng-model="vm.registration.poDesc" class="form-input width-100"
                                    placeholder="PO Value" validation="required:alt=Required field" />
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

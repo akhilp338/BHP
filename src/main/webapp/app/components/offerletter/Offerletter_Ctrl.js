@@ -26,7 +26,7 @@
         }, function (err) {
             vm.registration = {};
         });
-
+        vm.offerletter.display.grade = $stateParams.grade;
         vm.verifyOfferLetter = function () {
             $rootScope.verifyParams = {
                 fixed: vm.offerletter.grossSalary,

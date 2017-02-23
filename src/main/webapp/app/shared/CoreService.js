@@ -598,6 +598,23 @@
                     });
             return deferred.promise;
         };
+        
+        service.getPOImpl = function (url,id) {
+            var data = {},deferred;
+            deferred = $q.defer();
+            data.id = id;
+            Core_HttpRequest.post(url,data)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+            return deferred.promise;
+        };
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
