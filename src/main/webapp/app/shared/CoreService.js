@@ -46,6 +46,8 @@
                         if (response.status == 200) {
                             deferred.resolve(response.data);
 
+                        }else if(response.status == 403){
+                        	windows.location.href == "logout";
                         }
                     }, function (response) {
                         response.data = false;

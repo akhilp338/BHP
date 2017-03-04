@@ -96,7 +96,7 @@ import com.itextpdf.text.DocumentException;
  * @author BHP_DEV service implementation for general functionalities
  */
 @Component
-public abstract class BaseServiceImpl implements BaseService {
+public class BaseServiceImpl implements BaseService {
 
 	@Autowired
 	S3BucketFileRepository s3BucketFileRepository;
