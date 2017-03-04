@@ -16,6 +16,7 @@ import com.belhopat.backoffice.dto.UploadDTO;
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 
 @Service
@@ -40,9 +41,11 @@ public interface CandidateService {
 	public DataTablesOutput<Candidate> getUnProcessedCandidates(DataTablesInput input, boolean employee);
 
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary);
-	
+
 	public ResponseEntity<EmployeeSalary> requestForAHApproval(EmployeeSalary employeeSalary);
 
 	public UploadResponse uploadFile(UploadDTO uploadDTO) throws IOException, Exception;
+
+	public List<S3BucketFile> getFiles(Long candidateId) throws Exception;
 
 }

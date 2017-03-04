@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,12 @@ import com.belhopat.backoffice.dto.UploadDTO;
 import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.EmployeeSalary;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.SalaryGrade;
 import com.belhopat.backoffice.model.Task;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
+import com.belhopat.backoffice.service.S3BucketService;
 import com.itextpdf.text.DocumentException;
 
 /**
@@ -47,6 +50,9 @@ public class CandidateController {
 
 	@Autowired
 	CandidateService candidateService;
+
+	@Autowired
+	S3BucketService S3BucketService;
 
 	/**
 	 * @param datatablesinput
@@ -166,7 +172,7 @@ public class CandidateController {
 	public ResponseEntity<EmployeeSalary> requestForApproval(@RequestBody EmployeeSalary employeeSalary) {
 		return candidateService.requestForApproval(employeeSalary);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/requestForAHApproval", method = RequestMethod.POST)
 	public ResponseEntity<EmployeeSalary> requestForAHApproval(@RequestBody EmployeeSalary employeeSalary) {
@@ -207,12 +213,25 @@ public class CandidateController {
 		return salary;
 	}
 
-	
 	@ResponseBody
 	@RequestMapping("/uploadFile")
 	public UploadResponse uploadResources(@ModelAttribute UploadDTO uploadDTO) throws IOException, Exception {
 		UploadResponse response = candidateService.uploadFile(uploadDTO);
 		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping("/getS3Files")
+	public List<S3BucketFile> getS3Files(@RequestParam Long candidateId) throws IOException, Exception {
+		List<S3BucketFile> s3Files = candidateService.getFiles(candidateId);
+		return s3Files;
+	}
+
+	@ResponseBody
+	@RequestMapping("/getS3File")
+	public void getS3File(@RequestParam Long S3BucketFileId, HttpServletResponse response)
+			throws IOException, Exception {
+		S3BucketService.downloadFile(S3BucketFileId, response);
 	}
 
 }
