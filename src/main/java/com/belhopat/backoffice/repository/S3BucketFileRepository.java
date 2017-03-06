@@ -27,4 +27,6 @@ public interface S3BucketFileRepository
 
 	List<S3BucketFile> findByFileTypeAndFileEntityId(String reimburseFile, Long reimburseId);
 
+	List<S3BucketFile> findByUserId(Long candidateId);
+
 }

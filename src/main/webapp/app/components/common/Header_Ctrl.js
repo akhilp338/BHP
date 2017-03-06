@@ -4,7 +4,6 @@
         vm.getUserName = localStorage["userName"] || "Rafique";
         vm.logout = function () {
             Core_Service.ClearCredentials();
-            $state.go('login');
             window.location.href="BelhopatBackOffice/logout";
         }
         vm.triggerButton = function (event) {
@@ -32,12 +31,11 @@
         vm.sessionCheck= function(){
         	 Core_Service.sessionCheck().then(function (res){
         		if(res.data.startsWith("<!DOC")){
-        			window.location.href="BelhopatBackOffice/logout";
+        			window.location.href="logout";
                    
           		}
              },function (error){
-           	  /*Core_Service.sweetAlert("Session already Exists!", "Please login again", "success", "login");
-           	  vm.logout();*/
+//            	 window.location.href="logout";
              }); 
         	
         }

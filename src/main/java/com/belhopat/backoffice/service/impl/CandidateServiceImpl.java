@@ -2,6 +2,7 @@ package com.belhopat.backoffice.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -478,15 +479,16 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	public ResponseEntity<EmployeeSalary> requestForApproval(EmployeeSalary employeeSalary) {
-		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION,employeeSalary.getId());
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION, employeeSalary.getId());
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
-	
+
 	@Override
 	public ResponseEntity<EmployeeSalary> requestForAHApproval(EmployeeSalary employeeSalary) {
-		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_AH_APPROVAL,employeeSalary.getId());
+		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_AH_APPROVAL,
+				employeeSalary.getId());
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
@@ -516,6 +518,13 @@ public class CandidateServiceImpl implements CandidateService {
 		s3BucketFileRepository.save(s3BucketFile);
 		response = baseService.getSuccessResponse();
 		return response;
+	}
+
+	@Override
+	public List<S3BucketFile> getFiles(Long candidateId) throws Exception {
+		List<S3BucketFile> files = new ArrayList<>();
+		s3BucketFileRepository.findByUserId(candidateId);
+		return files;
 	}
 
 }
