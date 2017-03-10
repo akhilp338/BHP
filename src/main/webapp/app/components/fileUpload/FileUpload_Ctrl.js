@@ -1,6 +1,11 @@
 (function () {
-    var FileUpload_Ctrl = function ($scope, $state,$rootScope, FileUploader, $scope, Core_Service) {
+    var FileUpload_Ctrl = function ($scope, $state, $stateParams, $rootScope, FileUploader, $scope, Core_Service) {
         var vm = this;
+        Core_Service.getCandidateFiles($stateParams.candidateId).then(function(res){
+            console.log(res);
+        },function(err){
+            console.log(err);
+        })
     	vm.redirect = function( stateName ){
             var state;
             switch(stateName){
@@ -116,7 +121,7 @@
           Core_Service.sweetAlert("Done!", "Docs uploaded successfully", "success", state);
       };  
     };
-    FileUpload_Ctrl.$inject = ["$scope", '$state','$rootScope', 'FileUploader', '$scope', 'Core_Service'];
+    FileUpload_Ctrl.$inject = ["$scope", '$state', '$stateParams', '$rootScope', 'FileUploader', '$scope', 'Core_Service'];
     angular.module('coreModule')
             .controller('FileUpload_Ctrl', FileUpload_Ctrl);
 })();

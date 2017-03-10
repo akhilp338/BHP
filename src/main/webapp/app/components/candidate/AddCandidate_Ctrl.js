@@ -206,8 +206,12 @@
                 Core_Service.candidateRegisterImpl(vm.registerUrl, vm.registration)
                         .then(function (response) {                            
                             Core_Service.sweetAlertWithConfirm("Candidate Registration Successful", "Do you want to upload any documents?", "success", function(isConfirm){
+                                 
                                  if (isConfirm) {
-                                     $state.go("coreuser.candidate.upload");
+                                    if($stateParams.id)
+                                        $state.go('coreuser.candidate.upload', {candidateId: $stateParams.id});
+                                     else
+                                        $state.go("coreuser.candidate.upload");
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.candidate");
