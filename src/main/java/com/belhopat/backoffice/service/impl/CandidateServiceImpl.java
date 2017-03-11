@@ -523,7 +523,8 @@ public class CandidateServiceImpl implements CandidateService {
 	@Override
 	public List<S3BucketFile> getFiles(Long candidateId) throws Exception {
 		List<S3BucketFile> files = new ArrayList<>();
-		s3BucketFileRepository.findByUserId(candidateId);
+		Candidate candidate = candidateRepository.findById(candidateId);
+		s3BucketFileRepository.findByUserId(candidate.getCandidateId());
 		return files;
 	}
 
