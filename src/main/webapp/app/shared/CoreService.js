@@ -633,10 +633,10 @@
                     });
             return deferred.promise;
         };
-        service.getCandidateFiles = function (id) {
+        service.getCandidateFiles = function (id,type) {
             var data = {},deferred;
             deferred = $q.defer();
-            Core_HttpRequest.get("api/candidate/getS3Files?candidateId="+id)
+            Core_HttpRequest.get("api/candidate/getS3Files?type="+type+"&candidateId="+id)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

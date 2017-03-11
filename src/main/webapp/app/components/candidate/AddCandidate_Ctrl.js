@@ -208,10 +208,7 @@
                             Core_Service.sweetAlertWithConfirm("Candidate Registration Successful", "Do you want to upload any documents?", "success", function(isConfirm){
                                  
                                  if (isConfirm) {
-                                    if($stateParams.id)
-                                        $state.go('coreuser.candidate.upload', {candidateId: $stateParams.id});
-                                     else
-                                        $state.go("coreuser.candidate.upload");
+                                        $state.go('coreuser.candidate.upload', {candidateUploadId: $stateParams.id});
                                  } else { 
                                      $timeout(function(){
                                          Core_Service.sweetAlert("Done!", "No Docs Uploaded", "success", "coreuser.candidate");
