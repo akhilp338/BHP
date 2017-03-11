@@ -1,7 +1,10 @@
 package com.belhopat.backoffice.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -24,21 +27,27 @@ import com.belhopat.backoffice.dto.EmployeeViewDTO;
 import com.belhopat.backoffice.dto.EmploymentInfoDTO;
 import com.belhopat.backoffice.dto.OfficialInfoDTO;
 import com.belhopat.backoffice.dto.PersonalInfoDTO;
+import com.belhopat.backoffice.dto.UploadDTO;
+import com.belhopat.backoffice.dto.UploadResponse;
 import com.belhopat.backoffice.model.Candidate;
 import com.belhopat.backoffice.model.Country;
 import com.belhopat.backoffice.model.Employee;
 import com.belhopat.backoffice.model.LookupDetail;
+import com.belhopat.backoffice.model.S3BucketFile;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.EmployeeRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
+import com.belhopat.backoffice.repository.S3BucketFileRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
 import com.belhopat.backoffice.repository.UserRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.EmployeeService;
 import com.belhopat.backoffice.service.MailService;
+import com.belhopat.backoffice.service.S3BucketCoreService;
 import com.belhopat.backoffice.session.SessionManager;
+import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.TaskConstants;
 import com.belhopat.backoffice.util.sequence.SequenceGenerator;
 
@@ -73,6 +82,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	S3BucketFileRepository s3BucketFileRepository;
+
+	@Autowired
+	S3BucketCoreService s3BucketCoreService;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -95,7 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employeeDto.getId() == null) {
 			employee = new Employee();
 			employee.setBaseAttributes(loggedInUser);
-			Long increment = baseService.getSequenceIncrement( employee.getClass() );
+			Long increment = baseService.getSequenceIncrement(employee.getClass());
 			String employeeId = SequenceGenerator.generateEmployeeId(increment, employeeMaster.getDivision().getCode());
 			employee.setEmployeeId(employeeId);
 		} else {
@@ -114,7 +129,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee.setBelhopatDesignation(employeeDto.getBelhopatDesignation());
 		employee.setJoiningDate(employeeDto.getJoiningDate());
 		employee = employeeRepository.save(employee);
-		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID,employee.getId());
+		baseService.createNewTaskList(TaskConstants.CREATE_OFFICIAL_EMAIL_ID, employee.getId());
 		if (employee != null) {
 			Map<String, String> responseMap = new HashMap<>();
 			Candidate candidate = candidateRepository.findById(employeeDto.getEmployeeMasterId());
@@ -238,6 +253,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return new ResponseEntity<Employee>(loggedInEmployee, HttpStatus.OK);
 		}
 		return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
+	}
+
+	@Override
+	public UploadResponse uploadFile(UploadDTO uploadDTO) throws Exception {
+		UploadResponse response = baseService.getErrorResponse();
+		User loggedInUser = SessionManager.getCurrentUserAsEntity();
+		Employee employee = employeeRepository.findById(uploadDTO.getUserId());
+		if (uploadDTO.getFile() == null || uploadDTO.getFile().isEmpty()) {
+			return response;
+		}
+		S3BucketFile s3BucketFile = new S3BucketFile();
+		s3BucketFile.setBaseAttributes(loggedInUser);
+		s3BucketFile.setBucketName(Constants.BUCKET_NAME);
+		s3BucketFile.setUserId(employee.getEmployeeId());
+		s3BucketFile.setFileType(uploadDTO.getType());
+		String contentType = uploadDTO.getFile().getOriginalFilename().split("\\.")[1];
+		s3BucketFile.setContentType(contentType);
+		s3BucketFile.setFileName(uploadDTO.getFile().getOriginalFilename());
+		ByteArrayInputStream byteContent = new ByteArrayInputStream(uploadDTO.getFile().getBytes());
+		boolean status = s3BucketCoreService.uploadFile(s3BucketFile, byteContent);
+		if (!status) {
+			return response;
+		}
+		s3BucketFileRepository.save(s3BucketFile);
+		response = baseService.getSuccessResponse();
+		return response;
+	}
+
+	@Override
+	public List<S3BucketFile> getFiles(Long employeeId) throws Exception {
+		List<S3BucketFile> files = new ArrayList<>();
+		Employee employee = employeeRepository.findById(employeeId);
+		s3BucketFileRepository.findByUserId(employee.getEmployeeId());
+		return files;
 	}
 
 }
