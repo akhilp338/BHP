@@ -285,7 +285,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<S3BucketFile> getFiles(Long employeeId) throws Exception {
 		List<S3BucketFile> files = new ArrayList<>();
 		Employee employee = employeeRepository.findById(employeeId);
-		s3BucketFileRepository.findByUserId(employee.getEmployeeId());
+		files = s3BucketFileRepository.findByUserId(employee.getEmployeeId());
 		return files;
 	}
 

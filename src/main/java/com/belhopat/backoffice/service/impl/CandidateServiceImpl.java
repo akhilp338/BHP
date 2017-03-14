@@ -524,7 +524,7 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<S3BucketFile> getFiles(Long candidateId) throws Exception {
 		List<S3BucketFile> files = new ArrayList<>();
 		Candidate candidate = candidateRepository.findById(candidateId);
-		s3BucketFileRepository.findByUserId(candidate.getCandidateId());
+		files = s3BucketFileRepository.findByUserId(candidate.getCandidateId());
 		return files;
 	}
 
