@@ -217,7 +217,7 @@
                                  } 
                             });
                         }, function (error) { 
-                            Core_Service.sweetAlert("Ouch!", "Something went wrong", "error", "coreuser.candidate");
+                            Core_Service.sweetAlert("Ouch!", "Something went wrong", "error", "");
                         });
                     });
             }

@@ -2573,3 +2573,13 @@ button.logout-link:hover{
     border-top: 1px solid #eceff4;
     border-right: 1px solid #eceff4;
 }
+
+ul.uploaded_files li {
+    margin-bottom: 8px;
+    color: #fd7c00;
+    text-decoration: underline;
+    cursor: pointer;
+}
+ul.uploaded_files li:hover {
+    color: #ffb364;
+}

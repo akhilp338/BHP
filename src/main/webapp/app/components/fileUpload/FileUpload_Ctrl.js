@@ -1,11 +1,7 @@
 (function () {
     var FileUpload_Ctrl = function ($scope, $state, $stateParams, $rootScope, FileUploader, $scope, Core_Service) {
         var vm = this;
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'bank').then(function(res){
-            console.log(res);
-        },function(err){
-            console.log(err);
-        })
+        
     	vm.redirect = function( stateName ){
             var state;
             switch(stateName){
@@ -28,11 +24,20 @@
             default:
             }
             $state.go(state);
-        };    	
+        }; 
+        vm.getFileFromS3 = function(id){
+            Core_Service.getS3File(id).then(function(res){
+                        console.log(res);
+                },function(err){
+                        console.log(err);
+            });
+        }   	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
             url: '/BelhopatBackOffice/api/candidate/uploadFile?type="bank"&userId='+$stateParams.candidateUploadId, 
             type:'post',
-            success:function(resp){ console.log(resp); } 
+            success:function(resp){ 
+                    console.log(resp);
+            } 
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
             url: '/BelhopatBackOffice/api/candidate/uploadFile?type="passport"&userId='+$stateParams.candidateUploadId,
@@ -123,7 +128,35 @@
             console.info('onCompleteAll');
         };
 
-        console.info('uploader', uploader);
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'bank').then(function(res){
+                            vm.s3Bankfiles = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
+
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'passport').then(function(res){
+                            vm.s3Passportfiles = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
+
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'licence').then(function(res){
+                            vm.s3Licencefiles = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
+
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'pan').then(function(res){
+                            vm.s3Panfiles = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'forex').then(function(res){
+                            vm.s3Forexfiles = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
+        
     }
     
       vm.uploadDocs = function(){

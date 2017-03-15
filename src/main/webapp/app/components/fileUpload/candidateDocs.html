@@ -13,7 +13,10 @@
             <uib-accordion-heading>
                 Upload Bank details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.bankOpen, 'glyphicon-chevron-right': !status.bankOpen}"></i>
             </uib-accordion-heading>
-            <div class="row">                
+            <div class="row"> 
+                <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3Bankfiles" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>              
                 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
@@ -66,6 +69,9 @@
                 Upload Passport details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.passportOpen, 'glyphicon-chevron-right': !status.passportOpen}"></i>
             </uib-accordion-heading>
             <div class="row">
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3Passportfiles" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>
                 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
@@ -117,6 +123,9 @@
                 Upload Driving Licence<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.licenceOpen, 'glyphicon-chevron-right': !status.licenceOpen}"></i>
             </uib-accordion-heading>
             <div class="row">
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3Licencefiles" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>
                 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
@@ -168,6 +177,9 @@
                 Upload PAN details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.panOpen, 'glyphicon-chevron-right': !status.panOpen}"></i>
             </uib-accordion-heading>
             <div class="row">
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3Panfiles" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>
 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
@@ -219,6 +231,9 @@
                 Upload Forex Card details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.forexOpen, 'glyphicon-chevron-right': !status.forexOpen}"></i>
             </uib-accordion-heading>
             <div class="row">
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3Forexfiles" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>
 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    

@@ -648,6 +648,21 @@
           
             return deferred.promise;
         };
+        service.getS3File = function (id) {
+            var data = {},deferred;
+            deferred = $q.defer();
+            Core_HttpRequest.get("api/candidate/getS3File?S3BucketFileId="+id)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+          
+            return deferred.promise;
+        };
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
