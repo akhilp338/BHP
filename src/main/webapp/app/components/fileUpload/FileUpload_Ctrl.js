@@ -128,38 +128,17 @@
             console.info('onCompleteAll');
         };
 
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'bank').then(function(res){
-                            vm.s3Bankfiles = res;                            
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId).then(function(res){
+                            vm.s3files = res;                            
                         },function(err){
                             console.log(err);
                     });
 
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'passport').then(function(res){
-                            vm.s3Passportfiles = res;                            
-                        },function(err){
-                            console.log(err);
-                    });
-
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'licence').then(function(res){
-                            vm.s3Licencefiles = res;                            
-                        },function(err){
-                            console.log(err);
-                    });
-
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'pan').then(function(res){
-                            vm.s3Panfiles = res;                            
-                        },function(err){
-                            console.log(err);
-                    });
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'forex').then(function(res){
-                            vm.s3Forexfiles = res;                            
-                        },function(err){
-                            console.log(err);
-                    });
+        
         
     }
     
-      vm.uploadDocs = function(){
+      vm.uploadDocs = function(){        
           var state = "coreuser."+$rootScope.active;
           Core_Service.sweetAlert("Done!", "Docs uploaded successfully", "success", state);
       };  
