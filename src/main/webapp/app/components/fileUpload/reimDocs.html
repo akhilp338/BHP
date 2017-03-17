@@ -18,15 +18,15 @@
 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
-                    <input type="file" class="file-uploader upload" nv-file-select="" uploader="employeeDocsUploader" multiple accept="application/pdf, image/*"/>
+                    <input type="file" class="file-uploader upload" nv-file-select="" uploader="reimDocsUploader" multiple accept="application/pdf, image/*"/>
                 </div>
-                <p class="doc-count">Number of Docs: {{ employeeDocsUploader.queue.length}}</p>
+                <p class="doc-count">Number of Docs: {{ reimDocsUploader.queue.length}}</p>
 
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <div class="preview-container col-md-3 col-lg-3 col-sm-6 col-xs-6" ng-repeat="item in employeeDocsUploader.queue">
+                    <div class="preview-container col-md-3 col-lg-3 col-sm-6 col-xs-6" ng-repeat="item in reimDocsUploader.queue">
                         <div class="preview-td">
                             <strong class="preview-name">{{ item.file.name}}</strong>
-                            <div ng-show="employeeDocsUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                            <div ng-show="reimDocsUploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
                         </div>
 
                         <div class="text-center image-preview">
@@ -45,16 +45,16 @@
                     <div>
                         Upload Progress:
                         <div class="progress" style="">
-                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': employeeDocsUploader.progress + '%' }"></div>
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': reimDocsUploader.progress + '%' }"></div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success btn-s" ng-click="employeeDocsUploader.uploadAll()" ng-disabled="!employeeDocsUploader.getNotUploadedItems().length">
+                    <button type="button" class="btn btn-success btn-s" ng-click="reimDocsUploader.uploadAll()" ng-disabled="!reimDocsUploader.getNotUploadedItems().length">
                         <span class="glyphicon glyphicon-upload"></span> Upload all
                     </button>
-                    <button type="button" class="btn btn-warning btn-s" ng-click="employeeDocsUploader.cancelAll()" ng-disabled="!employeeDocsUploader.isUploading">
+                    <button type="button" class="btn btn-warning btn-s" ng-click="reimDocsUploader.cancelAll()" ng-disabled="!reimDocsUploader.isUploading">
                         <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                     </button>
-                    <button type="button" class="btn btn-danger btn-s" ng-click="employeeDocsUploader.clearQueue()" ng-disabled="!employeeDocsUploader.queue.length">
+                    <button type="button" class="btn btn-danger btn-s" ng-click="reimDocsUploader.clearQueue()" ng-disabled="!reimDocsUploader.queue.length">
                         <span class="glyphicon glyphicon-trash"></span> Remove all
                     </button>
                 </div>

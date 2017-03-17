@@ -1,5 +1,5 @@
 (function () {
-    var FileUpload_Ctrl = function ($scope, $state, $stateParams, $rootScope, FileUploader, $scope, Core_Service) {
+    var FileUpload_Ctrl = function ($scope, $state, $stateParams, $rootScope, FileUploader, $scope, Core_Service, urlConfig) {
         var vm = this;
         
     	vm.redirect = function( stateName ){
@@ -26,45 +26,42 @@
             $state.go(state);
         }; 
         vm.getFileFromS3 = function(id){
-            Core_Service.getS3File(id).then(function(res){
-                        console.log(res);
-                },function(err){
-                        console.log(err);
-            });
+            var win = window.open(urlConfig.root_path + "api/candidate/getS3File?S3BucketFileId=" + id,"_blank");
+            win.focus();
         }   	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="bank"&userId='+$stateParams.candidateUploadId, 
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="bank"&userId='+$stateParams.uploadId, 
             type:'post',
             success:function(resp){ 
                     console.log(resp);
             } 
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="passport"&userId='+$stateParams.candidateUploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="passport"&userId='+$stateParams.uploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var licenceUploader = $scope.licenceUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="licence"&userId='+$stateParams.candidateUploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="licence"&userId='+$stateParams.uploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var panUploader =  $scope.panUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="pan"&userId='+$stateParams.candidateUploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="pan"&userId='+$stateParams.uploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var forexUploader =  $scope.forexUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="forex"&userId='+$stateParams.candidateUploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="forex"&userId='+$stateParams.uploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var employeeDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="emp"&userId='+$stateParams.employeeUploadId,
+            url: '/BelhopatBackOffice/api/employee/uploadFile?type="emp"&userId='+$stateParams.uploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
-        var reimDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
+        var reimDocsUploader =  $scope.reimDocsUploader = new FileUploader({
             url: '/api/attendance/uploadAttendanceExcel'
         });
         uploadManager(bankDetailsUploader);
@@ -128,14 +125,16 @@
             console.info('onCompleteAll');
         };
 
-        Core_Service.getCandidateFiles($stateParams.candidateUploadId).then(function(res){
+        Core_Service.getCandidateFiles($stateParams.candidateUploadId,'bank').then(function(res){
                             vm.s3files = res;                            
                         },function(err){
                             console.log(err);
                     });
-
-        
-        
+        Core_Service.getEmployeeFiles($stateParams.employeeUploadId,'emp').then(function(res){
+                            vm.s3files = res;                            
+                        },function(err){
+                            console.log(err);
+                    });
     }
     
       vm.uploadDocs = function(){        
@@ -143,7 +142,7 @@
           Core_Service.sweetAlert("Done!", "Docs uploaded successfully", "success", state);
       };  
     };
-    FileUpload_Ctrl.$inject = ["$scope", '$state', '$stateParams', '$rootScope', 'FileUploader', '$scope', 'Core_Service'];
+    FileUpload_Ctrl.$inject = ["$scope", '$state', '$stateParams', '$rootScope', 'FileUploader', '$scope', 'Core_Service','urlConfig'];
     angular.module('coreModule')
             .controller('FileUpload_Ctrl', FileUpload_Ctrl);
 })();

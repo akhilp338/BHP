@@ -648,10 +648,10 @@
           
             return deferred.promise;
         };
-        service.getS3File = function (id) {
+        service.getEmployeeFiles = function (id,type) {
             var data = {},deferred;
             deferred = $q.defer();
-            Core_HttpRequest.get("api/candidate/getS3File?S3BucketFileId="+id)
+            Core_HttpRequest.get("api/employee/getS3Files?type="+type+"&candidateId="+id)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);

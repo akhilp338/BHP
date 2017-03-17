@@ -211,7 +211,7 @@
 		            }
 		        })
 		        .state('coreuser.employee.upload', {
-		            url: urlConfig.root_path + 'upload',
+		            url: urlConfig.root_path + 'upload/:employeeUploadId',
 		            views: {
 		                'sidebar@': {
 		                    templateUrl: '/BelhopatBackOffice/app/components/common/defaultTemplate.html'

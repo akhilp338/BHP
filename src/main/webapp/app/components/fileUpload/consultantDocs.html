@@ -13,7 +13,10 @@
             <uib-accordion-heading>
                 Upload Bank details<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.bankOpen, 'glyphicon-chevron-right': !status.bankOpen}"></i>
             </uib-accordion-heading>
-            <div class="row">                
+            <div class="row"> 
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3files | filter: { fileType: 'bank' }" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>                 
                 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    
