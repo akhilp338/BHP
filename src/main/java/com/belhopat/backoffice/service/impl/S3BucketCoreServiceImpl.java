@@ -68,7 +68,7 @@ public class S3BucketCoreServiceImpl implements S3BucketCoreService {
 			GetObjectRequest getObject = new GetObjectRequest(s3BucketFile.getBucketName(), s3BucketFile.getKey());
 			S3Object s3object = s3Client.getObject(getObject);
 			bytes = IOUtils.toByteArray(s3object.getObjectContent());
-			FileUtils.writeByteArrayToFile(new File("/home"), bytes);
+//			FileUtils.writeByteArrayToFile(new File("/home"), bytes);
 
 		} catch (AmazonServiceException ase) {
 			System.out.println("Caught an AmazonServiceException, which " + "means your request made it "
