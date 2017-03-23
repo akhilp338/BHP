@@ -1,7 +1,7 @@
 (function () {
     var FileUpload_Ctrl = function ($scope, $state, $stateParams, $rootScope, FileUploader, $scope, Core_Service, urlConfig) {
         var vm = this;
-        
+        console.log($stateParams)
     	vm.redirect = function( stateName ){
             var state;
             switch(stateName){
@@ -30,34 +30,34 @@
             win.focus();
         }   	
         var bankDetailsUploader = $scope.bankDetailsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="bank"&userId='+$stateParams.uploadId, 
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="bank"&userId='+$stateParams.candidateUploadId, 
             type:'post',
             success:function(resp){ 
                     console.log(resp);
             } 
         });
         var passportUploader =  $scope.passportUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="passport"&userId='+$stateParams.uploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="passport"&userId='+$stateParams.candidateUploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var licenceUploader = $scope.licenceUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="licence"&userId='+$stateParams.uploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="licence"&userId='+$stateParams.candidateUploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var panUploader =  $scope.panUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="pan"&userId='+$stateParams.uploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="pan"&userId='+$stateParams.candidateUploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var forexUploader =  $scope.forexUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="forex"&userId='+$stateParams.uploadId,
+            url: '/BelhopatBackOffice/api/candidate/uploadFile?type="forex"&userId='+$stateParams.candidateUploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
         var employeeDocsUploader =  $scope.employeeDocsUploader = new FileUploader({
-            url: '/BelhopatBackOffice/api/employee/uploadFile?type="emp"&userId='+$stateParams.uploadId,
+            url: '/BelhopatBackOffice/api/employee/uploadFile?type="emp"&userId='+$stateParams.employeeUploadId,
             type:'post',
             success:function(resp){ console.log(resp); } 
         });
