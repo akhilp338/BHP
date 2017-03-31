@@ -35,15 +35,18 @@ var dashBoardTable;
                 responsive: true,
                 bFilter:false,
                 iDisplayLength: 4,
-                fnDrawCallback: function (settings, ajax) {
-                    console.log(settings)
-                },
                 language: {
                     zeroRecords: 'No data to display',
                     infoEmpty: '',
                     infoFiltered: ''
                 },
                 order: [[0, "desc"]],
+                rowCallback: function( row, data, index ) {
+                    console.log(data)
+                    if ( !data.status ) {
+                      row.style.display = 'none';
+                    }
+                  },
                 aoColumns: [{
                         title: "#",
                         data: 'id',
