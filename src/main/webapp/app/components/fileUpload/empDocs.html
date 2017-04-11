@@ -15,6 +15,9 @@
                 Upload Employee Docs<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.empOpen, 'glyphicon-chevron-right': !status.empOpen}"></i>
             </uib-accordion-heading>
             <div class="row">
+            <ul class='uploaded_files'>
+                    <li ng-repeat="file in vm.s3files | filter: { fileType: 'emp' }" ng-click="vm.getFileFromS3(file.id)">{{file.fileName}}</li>
+                </ul>  
 <div class="fileUpload btn">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-upload" aria-hidden="true"></i></span>
                     <span class="up-text">Choose files</span>                    

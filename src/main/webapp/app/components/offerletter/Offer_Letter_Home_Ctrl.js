@@ -93,7 +93,7 @@
                         sClass: "button-column",
                         render: function (data) {
                             return '<div class="action-buttons">' +
-                                    '<span value="' + data + '" class="actions action-download fa-stack fa-lg pull-left" title="Edit">'+
+                                    '<span value="' + data + '" class="actions action-download fa-stack fa-lg pull-left" title="Download">'+
                                     '<i class="fa fa-cloud-download" aria-hidden="true"></i></i></span></div>'
                         }
                     }]
