@@ -110,7 +110,7 @@
                                 sClass: "button-column",
                                 render: function (data) {
                                     return '<div class="action-buttons">' +
-                                            '<span  class="actions action-delete fa-stack fa-lg pull-left" title="View">' +
+                                            '<span  class="actions action-delete fa-stack fa-lg pull-left" title="Remove">' +
                                             '<i class="fa fa-remove" aria-hidden="true"></i></span></div>'
                                 }
                             }]
