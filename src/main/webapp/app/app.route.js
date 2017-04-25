@@ -43,6 +43,21 @@
                         }
                     }
                 })
+                .state('settings', {
+                    url: urlConfig.root_path + 'settings',
+                    views: {
+                        'content@': {
+                            templateUrl: '/BelhopatBackOffice/app/components/General/settings.html',
+                            controller: 'Settings_Ctrl',
+                            controllerAs: 'vm'
+                        },
+                        'header': {
+                            templateUrl: '/BelhopatBackOffice/app/components/common/innerHeader.html',
+                            controller: 'Header_Ctrl',
+                            controllerAs: 'vm'
+                        }
+                    }
+                })
                 .state('coreuser.dashboard', {
                     url: urlConfig.root_path + 'dashboard',
                     views: {

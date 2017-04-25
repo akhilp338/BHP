@@ -2583,3 +2583,25 @@ ul.uploaded_files li {
 ul.uploaded_files li:hover {
     color: #ffb364;
 }
+.settings {
+    background-image: url(../images/settings.png);
+    background-position: 60% center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.settings-main .main {
+    margin-left: 0;
+}
+.settings-main .page-side-bar {
+    display: none;
+}
+md-switch.ng-touched.ng-valid{
+    border: none;
+}
+.settings-page md-switch{
+    margin: 16px 0;
+}
+.settings-button.row {
+    text-align: center;
+}

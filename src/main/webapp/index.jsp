@@ -31,7 +31,7 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/moment.js"></script> 
         <script src="/BelhopatBackOffice/app/assets/libs/js/fullcalendar.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/gcal.js"></script>
-        <script src="/BelhopatBackOffice/app/components/common/sidebar.js"></script>
+        <script src="/BelhopatBackOffice/app/components/common/sidebar.js"></script>        
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-ui-router.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-cookies.js"></script>
@@ -62,7 +62,7 @@
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-spinner.min.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-loading-spinner.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/waterbubble.js"></script>
-        <script src="/BelhopatBackOffice/app/assets/libs/js/ngUpload.js"></script>
+        <script src="/BelhopatBackOffice/app/assets/libs/js/ngUpload.js"></script>        
         <script src="/BelhopatBackOffice/app/assets/libs/js/ngUploadShim.js"></script>
         <script src="/BelhopatBackOffice/app/assets/libs/js/angular-touch.min.js"></script>
          <script src="/BelhopatBackOffice/app/assets/libs/js/ui-bootstrap-1.3.3.js"></script>
@@ -126,6 +126,7 @@
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/PO_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/AddPO_Ctrl.js"></script>
         <script src="/BelhopatBackOffice/app/components/PurchaseOrder/ViewPO_Ctrl.js"></script>
+        <script src="/BelhopatBackOffice/app/components/General/SettingsCtrl.js"></script>
         <style>
             [ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
                 display: none !important;
@@ -133,7 +134,7 @@
         </style>
     </head>
 
-    <body ng-class="{'login-page':isLogin,'loader-visible': isShowLoader,'inner-page':addPage, 'dashboard-page':isDashBoard, 'attendance-page':isAttendance}" ng-cloak>
+    <body ng-class="{'login-page':isLogin,'loader-visible': isShowLoader,'inner-page':addPage,'settings-main':isSettings, 'dashboard-page':isDashBoard, 'attendance-page':isAttendance}" ng-cloak>
         <div ng-if="isShowLoader || isDataLoader" class="loader-container"></div>
         <div id="errorUser">${error}</div>
         <div id="successUser">${user}</div>     
