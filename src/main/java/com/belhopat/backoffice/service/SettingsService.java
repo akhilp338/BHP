@@ -1,13 +1,11 @@
 package com.belhopat.backoffice.service;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
-
-import com.belhopat.backoffice.model.MasterRole;
 
 @Service
 public interface SettingsService {
 
-	public List<MasterRole> getMasterRoles();
+	public Map<String, ?> getMasterRoles();
 }
