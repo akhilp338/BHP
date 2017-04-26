@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.dto.RoleTabDTO;
 import com.belhopat.backoffice.model.ModuleTab;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.SettingsService;
@@ -37,6 +39,12 @@ public class SettingsController {
 	@RequestMapping(value = "/getRoleTabs", method = RequestMethod.GET)
 	public List<ModuleTab> getRoleTabs(Long masterRoleId) {
 		return settingsService.getRoleTabs(masterRoleId);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/saveActiveTabs", method = RequestMethod.POST)
+	public ResponseObject saveActiveTabs(RoleTabDTO RoleTab) {
+		return settingsService.saveActiveTabs(RoleTab);
 	}
 
 }
