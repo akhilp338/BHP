@@ -2605,3 +2605,18 @@ md-switch.ng-touched.ng-valid{
 .settings-button.row {
     text-align: center;
 }
+md-switch ._md-label b {
+    text-transform: capitalize;
+    color: #ff830c;
+}
+
+@media (max-width: 767px){
+    .settings-page .add-button{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.settings-page .add-button:last-child{
+    margin-bottom: 20px;
+}
+}

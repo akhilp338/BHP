@@ -13,6 +13,11 @@
             angular.element(".link-btn").trigger("click");
         };
         vm.goHome = function(){
+            $rootScope.isLogin = false;
+            $rootScope.addPage = false;
+            $rootScope.isSettings = false;
+            $rootScope.isAttendance = false;
+            $rootScope.isDashBoard = true;
             $state.go('coreuser.dashboard');
             $rootScope.isShowLoader = true;
             $timeout(function(){
