@@ -1,5 +1,6 @@
 package com.belhopat.backoffice.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.belhopat.backoffice.model.ModuleTab;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.SettingsService;
 
@@ -29,6 +31,12 @@ public class SettingsController {
 	@RequestMapping(value = "/getMasterRoles", method = RequestMethod.GET)
 	public Map<String, ?> getMasterRoles() {
 		return settingsService.getMasterRoles();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getRoleTabs", method = RequestMethod.GET)
+	public List<ModuleTab> getRoleTabs(Long masterRoleId) {
+		return settingsService.getRoleTabs(masterRoleId);
 	}
 
 }
