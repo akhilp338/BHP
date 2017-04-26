@@ -1,0 +1,37 @@
+
+<div class="sub-content settings-page">
+<div class="row">
+	<div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+	    <label class="control-label" for="roles"><b>Roles</b></label>
+	    <div class="controls">
+	        <select name="roles" ng-model="vm.selectedRole.id" validation="required:alt=required"
+	                class="form-input width-100" ng-options="role.id as (role.roleName) for role in vm.settingsData.roles">                   
+	            <option value="">--SELECT--</option>
+	        </select>
+	    </div>
+	</div>
+</div>
+	<div class="row" ng-if="vm.selectedRole.id"><md-switch class='col-lg-2 col-md-3 col-sm-4 col-xs-6 md-warn' ng-repeat='settings in vm.settingsData.tabs' ng-init = 'settings.value="inactive"' ng-model="settings.value" aria-label="Switch 2" ng-true-value="'active'" ng-false-value="'inactive'" class="md-warn">
+    <b>{{settings.name}}</b>
+  </md-switch></div>
+  <div class="settings-button row">
+  <button ng-click="vm.back()"
+        class="logout-button add-button" title="Back To Home Screen">
+    <span class="fa-stack fa-lg pull-left"><i
+            class="fa fa-arrow-left" aria-hidden="true"></i></span>
+    <span class="text">Back</span>              
+  </button>
+  <button ng-click="vm.apply()"
+		class="logout-button add-button" title="Add New Candidate">
+		<span class="fa-stack fa-lg pull-left"><i
+			class="fa fa-plus" aria-hidden="true"></i></span>
+                        <span class="text">Apply</span>              
+	</button>
+
+<button ng-click="vm.clear()"
+        class="logout-button add-button" title="Back To Home Screen">
+    <span class="fa-stack fa-lg pull-left"><i class="fa fa-eraser" aria-hidden="true"></i></span>
+    <span class="text">Clear</span>              
+  </button>
+  </div>
+</div>
