@@ -16,8 +16,11 @@
             $state.go('coreuser.candidate');
         };
         vm.dobDateOptions = {
-            maxDate: new Date().getTime()
-        };
+            maxDate: new Date(moment().subtract(18, 'years')).getTime(),
+            startingDay:1
+        };     
+        
+
         vm.dobMax = new Date().getTime();
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/candidate/getCandidate", $stateParams.id).then(function (res) {

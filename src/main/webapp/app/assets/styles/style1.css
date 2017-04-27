@@ -2620,3 +2620,6 @@ md-switch ._md-label b {
     margin-bottom: 20px;
 }
 }
+.uib-datepicker .btn-default[disabled] {
+    color: lightgray;
+}

@@ -4,7 +4,7 @@
 	<div class="control-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
 	    <label class="control-label" for="roles"><b>Roles</b></label>
 	    <div class="controls">
-	        <select name="roles" ng-model="vm.selectedRole.id" validation="required:alt=required"
+	        <select ng-change="vm.getRoleBasedTabs()" name="roles" ng-model="vm.selectedRole.id" validation="required:alt=required"
 	                class="form-input width-100" ng-options="role.id as (role.roleName) for role in vm.settingsData.roles">                   
 	            <option value="">--SELECT--</option>
 	        </select>
