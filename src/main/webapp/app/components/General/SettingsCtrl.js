@@ -14,15 +14,27 @@
                     console,log(err)
                 });
             };
-            vm.apply = function(){
-                console.log(vm.settingsData);
+            vm.clear = function(){
+                for (var i=0; i < vm.settingsData.length; i++){
+                    vm.settingsData[i].activeStatus = 'inactive'
+                }
             };
             vm.back = function(){
                 $rootScope.isSettings = false;
                 $state.go('coreuser.dashboard');
             };
-            vm.processSelection = function(tabs,selectedTabs){
-
+            vm.setRoleBasedTabs = function(){
+                var activeTabs = [];
+                for (var i=0; i < vm.settingsData.length; i++){
+                    if(vm.settingsData[i].activeStatus == 'active'){
+                        activeTabs.push(vm.settingsData[i].id)
+                    }
+                }
+                Core_Service.setRoleBasedTabs(vm.selectedRole.id,activeTabs).then(function(res){
+                    vm.settingsData = res;
+                },function(err){
+                    console,log(err)
+                });
             };
 }
     Settings_Ctrl.$inject = ["$scope", '$rootScope', '$state', 'Core_Service', 'Core_ModalService', 'urlConfig'];

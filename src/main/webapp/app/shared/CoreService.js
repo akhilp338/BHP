@@ -694,6 +694,24 @@
             return deferred.promise;
         };
 
+        service.setRoleBasedTabs = function (id,activeTabs) {
+            var deferred,data={};
+            deferred = $q.defer();
+            data.masterRoleId = id;
+            data.activeTabIds = activeTabs;
+            Core_HttpRequest.post("api/settings/saveActiveTabs",data)
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            deferred.resolve(response.data);
+                        }
+                    }, function (response) {
+                        response.data = false;
+                        deferred.reject(response.data);
+                    });
+          
+            return deferred.promise;
+        };
+
     };
     Core_Service.$inject = ['$rootScope', 'Core_HttpRequest', 'Base64', '$state', '$sessionStorage', '$http', '$q', '$timeout'];
     angular.module('app.common')
