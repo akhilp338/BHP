@@ -14,5 +14,4 @@ import com.belhopat.backoffice.model.ModuleTab;
 @Repository
 public interface ModuleTabRepository extends JpaRepository<ModuleTab, Long> {
 
-	public List<ModuleTab> findByIds(List<Long> activeTabIds);
 }

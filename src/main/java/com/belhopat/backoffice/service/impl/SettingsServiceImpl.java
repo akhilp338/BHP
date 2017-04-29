@@ -54,7 +54,7 @@ public class SettingsServiceImpl implements SettingsService {
 		response.setSuccess(true);
 		response.setData("Role Tabs Successfully Updated");
 		MasterRole masterRole = masterRoleRepository.findById(roleTab.getMasterRoleId());
-		List<ModuleTab> moduleTabs = moduleTabRepository.findByIds(roleTab.getActiveTabIds());
+		List<ModuleTab> moduleTabs = moduleTabRepository.findAll(roleTab.getActiveTabIds());
 		masterRole.setModuleTabs(moduleTabs);
 		masterRoleRepository.save(masterRole);
 		return response;
