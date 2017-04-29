@@ -32,7 +32,7 @@ public class ModuleTab {
 	private String title;
 
 	@Transient
-	private boolean active;
+	private String activeStatus = "inactive";
 
 	public Long getId() {
 		return id;
@@ -82,12 +82,12 @@ public class ModuleTab {
 		this.title = title;
 	}
 
-	public boolean getActive() {
-		return active;
+	public String getActiveStatus() {
+		return activeStatus;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setActiveStatus(String activeStatus) {
+		this.activeStatus = activeStatus;
 	}
 	
 	@Override
@@ -124,6 +124,6 @@ public class ModuleTab {
 	@Override
 	public String toString() {
 		return "ModuleTab [id=" + id + ", name=" + name + ", label=" + label + ", icon=" + icon + ", state=" + state
-				+ ", title=" + title + ", active=" + active + "]";
+				+ ", title=" + title + ", activeStatus=" + activeStatus + "]";
 	}
 }

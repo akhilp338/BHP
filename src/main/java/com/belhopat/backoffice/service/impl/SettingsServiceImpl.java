@@ -42,7 +42,9 @@ public class SettingsServiceImpl implements SettingsService {
 		for (ModuleTab activeTab : activeTabs) {
 			int index = tabs.indexOf(activeTab);
 			if (index != -1) {
-				tabs.get(index).setActive(true);
+				tabs.get(index).setActiveStatus("active");
+			}else{
+				
 			}
 		}
 		return tabs;
