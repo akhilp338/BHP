@@ -5,13 +5,13 @@
 	    <label class="control-label" for="roles"><b>Roles</b></label>
 	    <div class="controls">
 	        <select ng-change="vm.getRoleBasedTabs()" name="roles" ng-model="vm.selectedRole.id" validation="required:alt=required"
-	                class="form-input width-100" ng-options="role.id as (role.roleName) for role in vm.settingsData.roles">                   
+	                class="form-input width-100" ng-options="role.id as (role.roleName) for role in vm.roleData.roles">                   
 	            <option value="">--SELECT--</option>
 	        </select>
 	    </div>
 	</div>
 </div>
-	<div class="row" ng-if="vm.selectedRole.id"><md-switch class='col-lg-2 col-md-3 col-sm-4 col-xs-6 md-warn' ng-repeat='settings in vm.settingsData.tabs' ng-init = 'settings.value="inactive"' ng-model="settings.value" aria-label="Switch 2" ng-true-value="'active'" ng-false-value="'inactive'" class="md-warn">
+	<div class="row" ng-if="vm.selectedRole.id"><md-switch class='col-lg-2 col-md-3 col-sm-4 col-xs-6 md-warn' ng-repeat='settings in vm.settingsData' ng-model="settings.activeStatus" aria-label="Switch 2" ng-true-value="'active'" ng-false-value="'inactive'" class="md-warn">
     <b>{{settings.name}}</b>
   </md-switch></div>
   <div class="settings-button row">

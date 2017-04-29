@@ -3,13 +3,13 @@
         var vm = this, attendanceTable;
             $rootScope.isSettings = true;
             Core_Service.getRolesForSettings().then(function(res){
-                vm.settingsData = res;
+                vm.roleData = res;
             },function(err){
                 console,log(err)
             });
             vm.getRoleBasedTabs = function(){
                 Core_Service.getRoleBasedTabs(vm.selectedRole.id).then(function(res){
-                    console.log(res)
+                    vm.settingsData = res;
                 },function(err){
                     console,log(err)
                 });
