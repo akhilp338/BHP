@@ -19,14 +19,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.ResponseObject;
+import com.belhopat.backoffice.model.Lookup;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
 import com.belhopat.backoffice.repository.CountryRepository;
 import com.belhopat.backoffice.repository.LookupDetailRepository;
+import com.belhopat.backoffice.repository.LookupRepository;
 import com.belhopat.backoffice.repository.TimeZoneRepository;
-import com.belhopat.backoffice.repository.VendorRepository;
 import com.belhopat.backoffice.repository.UserRepository;
+import com.belhopat.backoffice.repository.VendorRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.VendorService;
@@ -47,6 +49,9 @@ public class VendorServiceImpl implements VendorService {
 	
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
+	
+	@Autowired
+	LookupRepository lookupRepository;
 	
 	@Autowired
 	BaseService baseService;
@@ -174,6 +179,8 @@ public class VendorServiceImpl implements VendorService {
 		Map <String,List<?>> dropDownMaps = new HashMap<String,List<?>>(); 
 		dropDownMaps.put(Constants.COUNTRY, countryRepository.findAll());
 		dropDownMaps.put(Constants.TIMEZONE, timezoneRepository.findAll());
+//		Lookup vendorLkup = lookupRepository.findByLookupKey(Constants.VENDOR_CATEGORY);
+//		dropDownMaps.put(Constants.VENDOR_CATEGORY, lookupDetailRepository.findByLookup(vendorLkup));
 		dropDownMaps.put(Constants.VENDOR_CATEGORY, lookupDetailRepository.findByLookupKey(Constants.VENDOR_CATEGORY));
 		dropDownMaps.put(Constants.VENDOR_STATUS, lookupDetailRepository.findByLookupKey(Constants.VENDOR_STATUS));
 		dropDownMaps.put(Constants.VENDOR_RATING, lookupDetailRepository.findByLookupKey(Constants.VENDOR_RATING));

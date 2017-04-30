@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.belhopat.backoffice.model.Lookup;
 import com.belhopat.backoffice.model.LookupDetail;
 /**
  * @author BHP_DEV
@@ -18,5 +19,7 @@ public interface LookupDetailRepository extends JpaRepository<LookupDetail, Long
 
 	@Query("select l from LookupDetail l where l.lookup.lookupKey=:lookupKey ")
 	List<LookupDetail> findByLookupKey(@Param("lookupKey") String lookupKey);
+	
+	List<LookupDetail> findByLookup(Lookup lookup);
 	
 }
