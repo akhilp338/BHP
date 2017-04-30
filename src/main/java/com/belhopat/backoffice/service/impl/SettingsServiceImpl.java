@@ -43,15 +43,15 @@ public class SettingsServiceImpl implements SettingsService {
 			int index = tabs.indexOf(activeTab);
 			if (index != -1) {
 				tabs.get(index).setActiveStatus("active");
-			}else{
-				
+			} else {
+
 			}
 		}
 		return tabs;
 	}
 
 	@Override
-	public ResponseObject saveActiveTabs(RoleTabDTO roleTab) {
+	public List<ModuleTab> saveActiveTabs(RoleTabDTO roleTab) {
 		ResponseObject response = new ResponseObject();
 		response.setSuccess(true);
 		response.setData("Role Tabs Successfully Updated");
@@ -59,7 +59,8 @@ public class SettingsServiceImpl implements SettingsService {
 		List<ModuleTab> moduleTabs = moduleTabRepository.findAll(roleTab.getActiveTabIds());
 		masterRole.setModuleTabs(moduleTabs);
 		masterRoleRepository.save(masterRole);
-		return response;
+		List<ModuleTab> activeTabs = getRoleTabs(roleTab.getMasterRoleId());
+		return activeTabs;
 	}
 
 }

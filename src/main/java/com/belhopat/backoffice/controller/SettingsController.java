@@ -44,7 +44,7 @@ public class SettingsController {
 
 	@ResponseBody
 	@RequestMapping(value = "/saveActiveTabs", method = RequestMethod.POST)
-	public ResponseObject saveActiveTabs(@RequestBody RoleTabDTO RoleTab) {
+	public List<ModuleTab> saveActiveTabs(@RequestBody RoleTabDTO RoleTab) {
 		return settingsService.saveActiveTabs(RoleTab);
 	}
 
