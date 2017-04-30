@@ -2612,13 +2612,18 @@ md-switch ._md-label b {
 
 @media (max-width: 767px){
     .settings-page .add-button{
-    width: 100%;
-    margin-top: 10px;
-}
+        width: 100%;
+        margin-top: 10px;
+    }
 
-.settings-page .add-button:last-child{
-    margin-bottom: 20px;
+    .settings-page .add-button:last-child{
+        margin-bottom: 20px;
+    }
 }
+@media (min-width: 768px){
+    .settings-button.row {
+        margin-top: 70px;
+    }
 }
 .uib-datepicker .btn-default[disabled] {
     color: lightgray;

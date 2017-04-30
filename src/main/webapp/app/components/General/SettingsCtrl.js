@@ -32,6 +32,7 @@
                 }
                 Core_Service.setRoleBasedTabs(vm.selectedRole.id,activeTabs).then(function(res){
                     vm.settingsData = res;
+                    Core_Service.sweetAlert("Done!", "Settings Changed", "success");
                 },function(err){
                     console,log(err)
                 });
