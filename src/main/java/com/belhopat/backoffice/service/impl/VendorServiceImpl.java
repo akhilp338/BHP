@@ -43,13 +43,13 @@ import com.belhopat.backoffice.util.sequence.SequenceGenerator;
  */
 @Component
 public class VendorServiceImpl implements VendorService {
-	
+
 	@Autowired
 	VendorRepository vendorRepository;
-	
+
 	@Autowired
 	LookupDetailRepository lookupDetailRepository;
-	
+
 	@Autowired
 	LookupRepository lookupRepository;
 	
@@ -58,18 +58,15 @@ public class VendorServiceImpl implements VendorService {
 
 	@Autowired
 	MailService mailService;
-        
-    @Autowired
-    UserRepository userRepository;
-    
+
+	@Autowired
+	UserRepository userRepository;
+
 	@Autowired
 	CountryRepository countryRepository;
-	
+
 	@Autowired
 	TimeZoneRepository timezoneRepository;
-        
-	
-	
 
 	@Override
 	public DataTablesOutput<Vendor> getApprovedVendors(DataTablesInput input) {
@@ -79,10 +76,11 @@ public class VendorServiceImpl implements VendorService {
 					CriteriaBuilder criteriaBuilder) {
 				Predicate isApprovedByCFO = null;
 				User loggedInUser = SessionManager.getCurrentUserAsEntity();
-                                loggedInUser = userRepository.findOne(loggedInUser.getId());
-				if(loggedInUser.getPrimaryRole().equals("FM")){
-					isApprovedByCFO = criteriaBuilder.equal(root.get("status").get("code"), TaskConstants.APPRVD_BY_CFO);
-				}else{
+				loggedInUser = userRepository.findOne(loggedInUser.getId());
+				if (loggedInUser.getPrimaryRole().equals("FM")) {
+					isApprovedByCFO = criteriaBuilder.equal(root.get("status").get("code"),
+							TaskConstants.APPRVD_BY_CFO);
+				} else {
 					isApprovedByCFO = criteriaBuilder.equal(root.get("status").get("code"), "PENDING_APPROVAL");
 				}
 				return criteriaBuilder.and(isApprovedByCFO);
@@ -92,8 +90,6 @@ public class VendorServiceImpl implements VendorService {
 		return dataTablesOutput;
 	}
 
-
-
 	@Override
 	public ResponseEntity<Vendor> getVendorById(Long id) {
 		Vendor vendor = vendorRepository.findById(id);
@@ -102,8 +98,6 @@ public class VendorServiceImpl implements VendorService {
 		}
 		return new ResponseEntity<Vendor>(HttpStatus.NO_CONTENT);
 	}
-
-
 
 	@Override
 	public ResponseEntity<Map<String, String>> saveOrUpdateVendor(Vendor vendorObj) {
@@ -115,14 +109,14 @@ public class VendorServiceImpl implements VendorService {
 		} else {
 			vendor = updateVendor(loggedInUser, vendorObj);
 		}
-		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO,null);
+		baseService.createNewTaskList(TaskConstants.PENDING_APPRVL_BY_CFO, null);
 		if (vendor != null) {
 			responseMap.put("Message", vendor.getVendorName());
 			return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String, String>>(responseMap, HttpStatus.NO_CONTENT);
 	}
-	
+
 	private Vendor updateVendor(User loggedInUser, Vendor vendorObj) {
 		Vendor vendor = vendorRepository.findById(vendorObj.getId());
 		vendor.setUpdateAttributes(loggedInUser);
@@ -130,20 +124,20 @@ public class VendorServiceImpl implements VendorService {
 		return persisted;
 	}
 
-
-
 	private Vendor addNewVendor(User loggedInUser, Vendor vendorObj) {
 		Long increment = baseService.getSequenceIncrement( vendorObj.getClass() );
 		String vendorCode = SequenceGenerator.generateVendorId(increment);
-		LookupDetail statusLookup = lookupDetailRepository.findByLookupKey("PNDNG_APPRVL").get(0);
+		LookupDetail statusLookup = null;
+		if(lookupDetailRepository.findByLookupKey("PNDNG_APPRVL")!=null
+					&& !lookupDetailRepository.findByLookupKey("PNDNG_APPRVL").isEmpty()){
+			statusLookup = lookupDetailRepository.findByLookupKey("PNDNG_APPRVL").get(0);
+		}
 		vendorObj.setVendorCode(vendorCode);
 		vendorObj.setStatus(statusLookup);
 		vendorObj.setBaseAttributes(loggedInUser);
 		Vendor persisted = vendorRepository.save(vendorObj);
 		return persisted;
 	}
-
-
 
 	@Override
 	public ResponseEntity<Map<String, String>> approveOrRejectVendor(ResponseObject requestObject) {
@@ -172,11 +166,9 @@ public class VendorServiceImpl implements VendorService {
 		return null;
 	}
 
-
-
 	@Override
 	public Map<String, List<?>> getDropDownData() {
-		Map <String,List<?>> dropDownMaps = new HashMap<String,List<?>>(); 
+		Map<String, List<?>> dropDownMaps = new HashMap<String, List<?>>();
 		dropDownMaps.put(Constants.COUNTRY, countryRepository.findAll());
 		dropDownMaps.put(Constants.TIMEZONE, timezoneRepository.findAll());
 //		Lookup vendorLkup = lookupRepository.findByLookupKey(Constants.VENDOR_CATEGORY);
@@ -188,5 +180,5 @@ public class VendorServiceImpl implements VendorService {
 		dropDownMaps.put(Constants.POC_DESGN, lookupDetailRepository.findByLookupKey(Constants.POC_DESGN));
 		return dropDownMaps;
 	}
-	
+
 }

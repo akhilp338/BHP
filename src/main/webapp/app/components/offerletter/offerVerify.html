@@ -116,11 +116,11 @@
     </div>
 
     <div class="salary bottom-button-liner">        
-        <button ng-click="vm.requestForApproval()"
+        <button ng-disabled="vm.requestSent" ng-click="vm.requestForApproval()"
                 class="logout-button pull-right add-button request-btn" title="Request For Approval">
             <span class="fa-stack fa-lg pull-left"><i
                     class="fa fa-paper-plane" aria-hidden="true"></i></span>
-            <span class="text">Request For Approval</span>              
+            <span class="text">{{vm.requestSentText}}</span>              
         </button>
         <button  ng-click="vm.downloadOfferLetter()"
                 class="logout-button pull-right add-button download-btn" title="Download Offer Letter" ng-disabled="!vm.offerletter.id">

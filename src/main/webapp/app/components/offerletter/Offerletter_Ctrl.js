@@ -4,6 +4,7 @@
         vs = new validationService({
             controllerAs: vm
         });
+        vm.requestSentText = "Request For Approval";
         $scope.Math = $window.Math;
         vm.isCandidateSelected = false;
         vm.offerletter = {};
@@ -70,6 +71,9 @@
         ($stateParams.verifyId && $rootScope.verifyParams) ? vm.getSalarySplits($rootScope.verifyParams) : $state.go("coreuser.offerletter");
         vm.back = function () {
             $state.go("coreuser.offerletter");
+        };
+        vm.backMain = function () {
+            $state.go("coreuser.offerletterhome");
         };
         $rootScope.active = 'offerletter';
         angular.element(document).ready(function () {
@@ -208,8 +212,8 @@
                 }
                 $(".candidate-summary").html(vm.Employeetemplate);
             }
-
-            vm.generateOfferLetter = function () {
+            
+            vm.generateOfferLetter = function () {                
                 vm.offerletter.candidate = $rootScope.selectedCandidate;
                 vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
                 vm.offerletter.gradeUi = vm.offerletter.grade.grade;
@@ -227,8 +231,10 @@
                                  });      
                                }
                                
-                        }, function (error) {
-
+                        }, function (error) {                           
+                               Core_Service.sweetAlert("Oops!","An internal error occcured.Can't Generate offer letter now Please try after some time.",
+                    			"error","coreuser.offerletter");
+                                   
                         });
             };
             vm.getGrade = function (grade, gradeList) {
@@ -247,6 +253,7 @@
         });
         
         vm.requestForApproval = function(){
+            vm.requestSentText = "Request Sending ...";
         	vm.offerletter.candidate=$rootScope.selectedCandidate;
         	vm.offerletter.grade = vm.getGrade($stateParams.grade, vm.offerletter.grades);
             vm.offerletter.gradeUi = vm.offerletter.grade.grade;
@@ -254,9 +261,13 @@
             delete vm.offerletter.selectedGrade;
             Core_Service.requestForApproval(vm.requestForApprovalUrl,vm.offerletter)
                     .then(function (response) {
+                        vm.requestSentText = "Request For Approval";
+                        vm.requestSent = true;
                     	Core_Service.sweetAlert("Request sent for approval!",response.data.data,"success","coreuser.offerletter"); 
                     }, function (error) {
-
+                        vm.requestSentText = "Request For Approval";
+                        Core_Service.sweetAlert("Oops!","An internal error occcured.Can't send Request Please try after some time.",
+                    			"error");
                     });
         }
         
