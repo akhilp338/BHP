@@ -102,9 +102,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 	}
 
 	private PurchaseOrder updatePurchaseOrder(User loggedInUser, PurchaseOrder purchaseOrderObj) {
-		PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(purchaseOrderObj.getId());
-		purchaseOrder.setUpdateAttributes(loggedInUser);
-		PurchaseOrder persisted = purchaseOrderRepository.save(purchaseOrder);
+		//PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(purchaseOrderObj.getId());
+		purchaseOrderObj.setUpdateAttributes(loggedInUser);
+		PurchaseOrder persisted = purchaseOrderRepository.save(purchaseOrderObj);
 		return persisted;
 	}
 
