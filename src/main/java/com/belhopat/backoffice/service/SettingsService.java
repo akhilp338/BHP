@@ -16,5 +16,5 @@ public interface SettingsService {
 
 	public List<ModuleTab> getRoleTabs(Long masterRoleId);
 
-	public ResponseObject saveActiveTabs(RoleTabDTO roleTab);
+	public List<ModuleTab> saveActiveTabs(RoleTabDTO roleTab);
 }

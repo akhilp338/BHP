@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +44,7 @@ public class SettingsController {
 
 	@ResponseBody
 	@RequestMapping(value = "/saveActiveTabs", method = RequestMethod.POST)
-	public ResponseObject saveActiveTabs(RoleTabDTO RoleTab) {
+	public List<ModuleTab> saveActiveTabs(@RequestBody RoleTabDTO RoleTab) {
 		return settingsService.saveActiveTabs(RoleTab);
 	}
 
