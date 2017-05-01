@@ -13,9 +13,10 @@
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-        
+        vm.clientAddText = "Add Client";
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/client/getClient", $stateParams.id).then(function (res) {
+                vm.clientAddText = "Add Client";
                 vm.registration = res.data;
                 vm.getStatesByCountry(vm.registration.clientAddress.city.state.country.id, "client");
                 vm.getCitiesByStates(vm.registration.clientAddress.city.state.id, "client");

@@ -4,6 +4,7 @@
         vm.isFileInput = false;
         $rootScope.isShowLoader = true;
         var countryType = ["permenant", "current", "onsite", "bank"];
+        vm.candidateButtonText = "Add Candidate";
         vm.setDpOpenStatus = function (id) {
             vm[id] = true
         };
@@ -24,6 +25,7 @@
         vm.dobMax = new Date().getTime();
         if ($stateParams.id) {
             Core_Service.getCandidateImpl("api/candidate/getCandidate", $stateParams.id).then(function (res) {
+                vm.candidateButtonText = "Update Candidate";                
                 vm.registration = res.data;
                 for (var i = 0; i < countryType.length; i++) {
                     vm.getStatesByCountry(vm.registration.permanentAddress.city.state.country.id, countryType[i]);

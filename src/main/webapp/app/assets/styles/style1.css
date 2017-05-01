@@ -2628,3 +2628,6 @@ md-switch ._md-label b {
 .uib-datepicker .btn-default[disabled] {
     color: lightgray;
 }
+.nav>li>a{
+    padding: 0 10px!important;
+}

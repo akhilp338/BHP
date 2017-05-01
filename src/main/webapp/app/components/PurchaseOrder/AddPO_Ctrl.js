@@ -8,7 +8,7 @@
         vm.setDpOpenStatus = function (id) {
             vm[id] = true;
         };
-        
+        vm.poButtonText = "Add PO";
         vm.purchaseOrder = {}; 
 		 Core_Service.getPODropDownData().then(function (res) {
 	            vm.purchaseOrder.lookups = res;
@@ -28,6 +28,7 @@
         
         if ($stateParams.id) {
             Core_Service.getPOImpl("api/purchaseOrder/getPurchaseOrder", $stateParams.id).then(function (data) {
+                vm.poButtonText = "Update PO";
                 vm.registration = data;                
                 $rootScope.isShowLoader = false;
             }, function (err) {

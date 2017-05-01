@@ -16,7 +16,7 @@ var consultantListTable;
             preValidateFormElements: false,
             displayOnlyLastErrorMsg: true
         });
-        
+        vm.consultantAddText = "Add Consultant";
         vm.isCheckboxEnable = false;
         $scope.steps = [
             'Step 1: Personal Information',
