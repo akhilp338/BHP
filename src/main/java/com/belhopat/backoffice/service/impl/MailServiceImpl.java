@@ -36,7 +36,6 @@ import com.belhopat.backoffice.service.MailService;
 import com.belhopat.backoffice.service.session.MailMessageObject;
 import com.belhopat.backoffice.util.Constants;
 import com.belhopat.backoffice.util.DateUtil;
-import com.belhopat.backoffice.util.servlet.BelhopatServletContextInfo;
 
 /**
  * @author Sreekesh Service for sending and syncing mails
@@ -48,6 +47,9 @@ public class MailServiceImpl implements MailService {
 
 	@Value("#{emailConfiguration['mail.smtp.username']}")
 	private String MAIL_FROM;
+	
+    @Value("#{emailConfiguration['mail.deployURL']}")
+    private String DEPLOY_URL ;
 
 	@Autowired
 	JavaMailSender mailSender;
@@ -96,7 +98,7 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendPasswordResetMail(User user) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
-		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() + Constants.CHANGE_PASSWORD_API + "/"
+		String passwordResetURL = DEPLOY_URL + Constants.CHANGE_PASSWORD_API + "/"
 				+ user.getForgotPasswordToken();
 		model.put(Constants.GENERATED_PASSWORD, user.getPassword());
 		model.put(Constants.PASSWORD_RESET_URL, passwordResetURL);
@@ -317,7 +319,7 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendWelcomeMail(Employee employee) throws MessagingException {
 		Map<String, Object> model = new HashMap<String, Object>();
-		String passwordResetURL = BelhopatServletContextInfo.getDeployURL() + Constants.CHANGE_PASSWORD_API + "/"
+		String passwordResetURL = DEPLOY_URL + Constants.CHANGE_PASSWORD_API + "/"
 				+ employee.getEmployeeUser().getForgotPasswordToken();
 		String fullName = (employee.getEmployeeMaster().getFirstName() != null
 				? employee.getEmployeeMaster().getFirstName() + " " : " ")
@@ -351,7 +353,7 @@ public class MailServiceImpl implements MailService {
 				? employee.getEmployeeMaster().getFirstName() + " " : " ")
 				+ (employee.getEmployeeMaster().getLastName() != null ? employee.getEmployeeMaster().getLastName()
 						: "");
-		String loginUrl = BelhopatServletContextInfo.getDeployURL();
+		String loginUrl = DEPLOY_URL;
 		Map<String, Object> model = new HashMap<String, Object>();
 		mailSubject = Constants.CREATE_OFFICIAL_EMAIL;
 		mailTemplate = Constants.CREATE_OFFICIAL_EMAIL_TEMPLATE;

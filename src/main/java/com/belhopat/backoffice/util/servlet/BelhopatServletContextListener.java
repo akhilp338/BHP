@@ -19,7 +19,6 @@ public class BelhopatServletContextListener implements ServletContextListener {
 			BelhopatServletContextInfo.setRealPath( event.getServletContext().getRealPath( File.separator ));
 			BelhopatServletContextInfo.setContext( event.getServletContext() );
 			BelhopatServletContextInfo.setHostname( null );
-			BelhopatServletContextInfo.setDeployURL( null );
 		} catch ( Exception e) {
 			e.printStackTrace();
 		}

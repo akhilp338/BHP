@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.belhopat.backoffice.dto.ResponseObject;
-import com.belhopat.backoffice.model.Lookup;
 import com.belhopat.backoffice.model.LookupDetail;
 import com.belhopat.backoffice.model.User;
 import com.belhopat.backoffice.model.Vendor;
