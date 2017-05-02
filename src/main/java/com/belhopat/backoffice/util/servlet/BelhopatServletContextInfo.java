@@ -5,6 +5,9 @@ import java.net.UnknownHostException;
 
 import javax.servlet.ServletContext;
 
+import org.springframework.context.annotation.PropertySource;
+
+@PropertySource("classpath:email.properties")
 public class BelhopatServletContextInfo {
 
     private static String contextPath;
@@ -13,7 +16,6 @@ public class BelhopatServletContextInfo {
     private static String hostname;
     private static String servletHostname;
     private static String portNo = "8080";
-    private static String deployURL ;
 
 	public static String getRealPath() {
         return realPath;
@@ -23,7 +25,7 @@ public class BelhopatServletContextInfo {
         BelhopatServletContextInfo.realPath = realPath;
     }
 
-    public static String getContextPath() {
+	public static String getContextPath() {
         return contextPath;
     }
 
@@ -64,23 +66,6 @@ public class BelhopatServletContextInfo {
 
 	public static void setPortNo(String portNo) {
 		BelhopatServletContextInfo.portNo = portNo;
-	}
-
-	public static String getDeployURL() {
-		return deployURL;
-	}
-
-	public static void setDeployURL(String deployURL) {
-		
-		//TODO Hardcoded for the moment - BHP STAGING
-//		BelhopatServletContextInfo.deployURL = "http://ec2-52-77-242-52.ap-southeast-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
-
-		//TODO Hardcoded for the moment - BHP PRODUCTION
-//		BelhopatServletContextInfo.deployURL = "http://ec2-52-66-84-91.ap-south-1.compute.amazonaws.com:8080/BelhopatBackOffice/";
-
-		//TODO LOCAL ENV
-		BelhopatServletContextInfo.deployURL = "http://" + BelhopatServletContextInfo.getHostname() + ":"
-		+ BelhopatServletContextInfo.getPortNo() + BelhopatServletContextInfo.getContext().getContextPath();
 	}
 	
 }

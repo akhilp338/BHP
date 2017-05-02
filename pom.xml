@@ -54,9 +54,45 @@
 		<!-- AspectJ -->
 		<aspectj.version>1.7.4</aspectj.version>
 
-
-
 	</properties>
+
+	<profiles>
+	
+		<profile>
+			<id>bhp-local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- BHP properties -->
+				<log.level>INFO</log.level>
+				<env>local</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>bhp-qa</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- BHP properties -->
+				<log.level>INFO</log.level>
+				<env>qa</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>bhp-production</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- BHP properties -->
+				<log.level>INFO</log.level>
+				<env>production</env>
+			</properties>
+		</profile>
+		
+	</profiles>
 
 	<dependencies>
 
@@ -434,6 +470,20 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>src/main/resources/${env}/*.*</include>
+					<include>src/main/resources/email-templates/*.*</include>
+					<include>src/main/resources/pdf-resources/*.*</include>
+				</includes>
+				<excludes>
+					<exclude></exclude>
+				</excludes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
@@ -493,10 +543,24 @@
 								<outputDirectory>${project.build.directory}/classes</outputDirectory>
 								<resources>
 									<resource>
-										<directory>src/main/resources</directory>
+										<directory>src/main/resources/</directory>
 										<includes>
-											<include>**/*.*</include>
-										</includes>
+											<include>**/*.properties</include>
+											<include>email-templates/*.*</include>
+											<include>pdf-resources/*.*</include>
+										</includes> 
+										<excludes>
+											<exclude>local/*.*</exclude>
+											<exclude>qa/*.*</exclude>
+											<exclude>production/*.*</exclude>
+										</excludes>
+										<filtering>true</filtering>
+									</resource>
+									<resource>
+										<directory>src/main/resources/${env}/</directory>
+										<includes>
+											<include>**/*.properties</include>
+										</includes> 
 										<filtering>true</filtering>
 									</resource>
 								</resources>
