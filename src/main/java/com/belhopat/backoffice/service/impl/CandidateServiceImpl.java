@@ -40,6 +40,7 @@ import com.belhopat.backoffice.repository.CandidateRepository;
 import com.belhopat.backoffice.repository.EmployeeSalaryRepository;
 import com.belhopat.backoffice.repository.S3BucketFileRepository;
 import com.belhopat.backoffice.repository.SalaryGradeRepository;
+import com.belhopat.backoffice.repository.TaskRepository;
 import com.belhopat.backoffice.service.BaseService;
 import com.belhopat.backoffice.service.CandidateService;
 import com.belhopat.backoffice.service.MailService;
@@ -76,6 +77,9 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	S3BucketCoreService s3BucketCoreService;
+	
+	@Autowired
+	TaskRepository taskRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -482,6 +486,8 @@ public class CandidateServiceImpl implements CandidateService {
 		Task currentTask = baseService.createNewTaskList(TaskConstants.OFFER_LETTER_CREATION, employeeSalary.getId());
 		employeeSalary.setCurrentTask(currentTask);
 		EmployeeSalary empSal = employeeSalaryRepository.saveAndFlush(employeeSalary);
+		currentTask.setTaskEntityId(empSal.getId());
+		taskRepository.saveAndFlush(currentTask);
 		return new ResponseEntity<EmployeeSalary>(empSal, HttpStatus.OK);
 	}
 
