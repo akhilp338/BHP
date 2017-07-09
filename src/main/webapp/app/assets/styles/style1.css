@@ -2631,3 +2631,7 @@ md-switch ._md-label b {
 .nav>li>a{
     padding: 0 10px!important;
 }
+
+.offer-details{
+    margin-top: 10px;
+}

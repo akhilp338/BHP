@@ -16,9 +16,9 @@
         
         if ($stateParams.taskId) {
             
-        Core_Service.getOfferReviewDetails($stateParams.id).then(function(res){
-            
-        });
+        //Core_Service.getOfferReviewDetails($stateParams.taskId).then(function(res){
+           // console.log(res);
+        //});
     }
 };
     Offer_Review_Ctrl.$inject = ["$scope", '$state', '$rootScope', 'Core_Service', 'urlConfig', '$stateParams', '$window', 'validationService', 'Core_HttpRequest'];

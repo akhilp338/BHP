@@ -1,37 +1,93 @@
 
         <div class="container reim-review">
             <div class="top-main-head pull-left width-100">
-                <h4 class="pull-left page-section-header no-padding-left">Reimbursement Request</h4>
+                <h4 class="pull-left page-section-header">Offer Letter Approval Request</h4>
             </div>
-            <div id='' class="candidate-summary reim-summary col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-class="{init:vm.isInit}">
-
-            </div>
-            <table id="reim-review" class="display"></table>
-            <form name="reimReviewForm" class="vendor-form" id="reimReviewForm" novalidate>
-            <div class='no-padding-left col-lg-8 col-md-8 col-sm-8 col-xs-12'>
-                <div class='reim-fields no-padding-left col-lg-8 col-md-8 col-sm-8 col-xs-12'>
-                     <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <label class="label-bold control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="amountApproved">Amount Approved :</label>
-                        <input only-digits type="text" name="amountApproved" id="amountApproved"
-                               ng-model="vm.reimReviewData.amountApproved"
-                               class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="Amount"
-                               validation="numeric:alt=Number only | required:alt=Required field" />
-                    </div>
-                     <div class="inline col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <label class="label-bold control-label col-md-6 col-lg-6 col-sm-6 col-xs-6" for="remarks">Remarks :</label>
-                        <input type="text" name="remarks" id="remarks"
-                               ng-model="vm.reimReviewData.remarks"
-                               class="col-md-6 col-lg-6 col-sm-6 col-xs-6 form-input" placeholder="remarks"
-                               validation="required:alt=Required field" />
-                    </div>
+            <div class="candidate-summary offer-details col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Name</label>
+                    <p class="item-label-desc"> :   Veena Balakrishnan</p>
                 </div>
-                <div class='col-lg-2 col-md-2 col-sm-2 col-xs-12'>
-                    <span class='dld-doc'><i class="fa fa-download" aria-hidden="true"></i></span>
-                    <label class='dld-label'>Download documents</label>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Candidate Id</label>
+                    <p class="item-label-desc"> :   BHP-C-1007</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Country</label>
+                    <p class="item-label-desc"> :   India</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">DOB</label>
+                    <p class="item-label-desc"> :   30 Dec 2001 12:00 am</p>
+                </div><div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Designation</label>
+                    <p class="item-label-desc"> :   Belhopat Employee</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Passport</label>
+                    <p class="item-label-desc"> :   12312312</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Email Id</label>
+                    <p class="item-label-desc"> :   veeana@belhopat.com</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Country Code</label>
+                    <p class="item-label-desc"> :   +91</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Contact No</label>
+                    <p class="item-label-desc"> :   9746228805</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Skillset</label>
+                    <p class="item-label-desc"> :   Java</p>
                 </div>
             </div>
             
-             <div class="bottom-button-liner">       
+            <div class="candidate-summary offer-details col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Name</label>
+                    <p class="item-label-desc"> :   Veena Balakrishnan</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Candidate Id</label>
+                    <p class="item-label-desc"> :   BHP-C-1007</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Country</label>
+                    <p class="item-label-desc"> :   India</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">DOB</label>
+                    <p class="item-label-desc"> :   30 Dec 2001 12:00 am</p>
+                </div><div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Designation</label>
+                    <p class="item-label-desc"> :   Belhopat Employee</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Passport</label>
+                    <p class="item-label-desc"> :   12312312</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Email Id</label>
+                    <p class="item-label-desc"> :   veeana@belhopat.com</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Country Code</label>
+                    <p class="item-label-desc"> :   +91</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Contact No</label>
+                    <p class="item-label-desc"> :   9746228805</p>
+                </div>
+                <div class="item col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                    <label class="item-label">Skillset</label>
+                    <p class="item-label-desc"> :   Java</p>
+                </div>
+            </div>
+
+ <div class="bottom-button-liner">       
                 
                  <button class="logout-button pull-right add-button confirm-btn" title="Approve" ng-click='vm.approveOrReject(true)'>
                         <span class="fa-stack fa-lg pull-left"><i
@@ -45,5 +101,6 @@
                 </button>
                     
         </div>
-                </form>
         </div>
+
+

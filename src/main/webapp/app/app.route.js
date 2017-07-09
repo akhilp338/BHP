@@ -168,8 +168,8 @@
 		                }
 		            }
 		})
-                .state('coreuser.offerletter.review', {
-		            url: '/offerletter/review',
+                .state('coreuser.offerletter.review', {                    
+		            url: urlConfig.root_path + 'offerletter/review/:taskId/:id',
 		            views: {
 		                'content@': {
 		                    templateUrl: '/BelhopatBackOffice/app/components/offerletter/offer-review.html',

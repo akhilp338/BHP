@@ -617,10 +617,10 @@
                     });
             return deferred.promise;
         };
-        service.getOfferReviewDetails = function (url,id) {
+        service.getOfferReviewDetails = function (id) {
             var data = {},deferred;
             deferred = $q.defer();
-            data.id = id;
+            data.offerLetterId = id;
             Core_HttpRequest.post('/api/candidate/getOfferLetterDetails',data)
                     .then(function (response) {
                         if (response.status == 200) {
