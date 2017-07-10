@@ -16,9 +16,9 @@
         
         if ($stateParams.taskId) {
             
-        //Core_Service.getOfferReviewDetails($stateParams.taskId).then(function(res){
-           // console.log(res);
-        //});
+        Core_Service.getOfferReviewDetails($stateParams.taskId).then(function(res){
+            console.log(res);
+        });
         
         vm.getDisplayTemplate = function(data, keys){
             var template = "<div class='reim-summary-container col-md-10 col-lg-10 col-sm-10 col-xs-12'>";

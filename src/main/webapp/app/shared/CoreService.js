@@ -621,7 +621,7 @@
             var data = {},deferred;
             deferred = $q.defer();
             data.offerLetterId = id;
-            Core_HttpRequest.post('/api/candidate/getOfferLetterDetails',data)
+            Core_HttpRequest.post('api/candidate/getOfferLetterDetails',data)
                     .then(function (response) {
                         if (response.status == 200) {
                             deferred.resolve(response.data);
